@@ -1,0 +1,370 @@
+Clause2tag:
+  tableName: clause2tag
+  columns:
+    clause_id:
+      type: integer(4)
+      primary: true
+    tag_id:
+      type: integer(4)
+      primary: true
+  relations:
+    Clauses:
+      local: clause_id
+      foreign: clause_id
+      type: one
+    Tags:
+      local: tag_id
+      foreign: tag_id
+      type: one
+Clauses:
+  tableName: clauses
+  columns:
+    clause_id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    name:
+      type: string(45)
+      notnull: true
+    document_id:
+      type: integer(4)
+      notnull: true
+    clause_number:
+      type: integer(4)
+      notnull: true
+    parent_clause_id: integer(4)
+    information_type: string(45)
+    operative_phrase: string(45)
+    adressee: string(45)
+    relevance: string(45)
+    significants: string(45)
+    content: string(2147483647)
+  relations:
+    Documents:
+      local: document_id
+      foreign: document_id
+      type: one
+    Clauses:
+      local: parent_clause_id
+      foreign: clause_id
+      type: one
+    Clause2tag:
+      local: clause_id
+      foreign: clause_id
+      type: many
+    Clauses_2:
+      class: Clauses
+      local: clause_id
+      foreign: parent_clause_id
+      type: many
+Document2tag:
+  tableName: document2tag
+  columns:
+    document_id:
+      type: integer(4)
+      primary: true
+    tag_id:
+      type: integer(4)
+      primary: true
+  relations:
+    Documents:
+      local: document_id
+      foreign: document_id
+      type: one
+    Tags:
+      local: tag_id
+      foreign: tag_id
+      type: one
+Documentrelations:
+  tableName: documentrelations
+  columns:
+    document_id:
+      type: integer(4)
+      primary: true
+    related_document_id:
+      type: integer(4)
+      primary: true
+    relation_type:
+      type: enum(8)
+      values: [followup, recalls, report]
+      primary: true
+  relations:
+    Documents:
+      local: document_id
+      foreign: document_id
+      type: one
+    Documents_2:
+      class: Documents
+      local: related_document_id
+      foreign: document_id
+      type: one
+Documents:
+  tableName: documents
+  columns:
+    document_id:
+      type: integer(4)
+      primary: true
+    name:
+      type: string(45)
+      notnull: true
+    date:
+      type: date(25)
+      notnull: true
+    documenttype_id:
+      type: integer(4)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    legal_value: string(45)
+    organisation_id: integer(4)
+    adoption_date: string(45)
+    code: string(45)
+    min_ratification_count: integer(4)
+    preamble: string(2147483647)
+  relations:
+    Documenttypes:
+      local: documenttype_id
+      foreign: documenttype_id
+      type: one
+    Organisations:
+      local: organisation_id
+      foreign: organisation_id
+      type: one
+    Clauses:
+      local: document_id
+      foreign: document_id
+      type: many
+    Document2tag:
+      local: document_id
+      foreign: document_id
+      type: many
+    Documentrelations:
+      local: document_id
+      foreign: document_id
+      type: many
+    Documentrelations_2:
+      class: Documentrelations
+      local: document_id
+      foreign: related_document_id
+      type: many
+    Votingrecords:
+      local: document_id
+      foreign: document_id
+      type: many
+Documenttypes:
+  tableName: documenttypes
+  columns:
+    documenttype_id:
+      type: integer(4)
+      primary: true
+    name:
+      type: string(45)
+      notnull: true
+    legal_value:
+      type: string(45)
+      notnull: true
+  relations:
+    Documents:
+      local: documenttype_id
+      foreign: documenttype_id
+      type: many
+Memberstates:
+  tableName: memberstates
+  columns:
+    memberstate_id:
+      type: integer(4)
+      primary: true
+    name:
+      type: string(45)
+      notnull: true
+  relations:
+    Memberstates2organisations:
+      local: memberstate_id
+      foreign: memberstate_id
+      type: many
+Memberstates2organisations:
+  tableName: memberstates2organisations
+  columns:
+    id:
+      type: integer(20)
+      autoincrement: true
+      primary: true
+    memberstate_id:
+      type: integer(4)
+      notnull: true
+    organsation_id:
+      type: integer(4)
+      notnull: true
+    from_date: date(25)
+    to_date: date(25)
+  relations:
+    Memberstates:
+      local: memberstate_id
+      foreign: memberstate_id
+      type: one
+    Organisations:
+      local: organsation_id
+      foreign: organisation_id
+      type: one
+Organisations:
+  tableName: organisations
+  columns:
+    organisation_id:
+      type: integer(4)
+      primary: true
+    name:
+      type: string(45)
+      notnull: true
+    parent_organisation_id: integer(4)
+  relations:
+    Organisations:
+      local: parent_organisation_id
+      foreign: organisation_id
+      type: one
+    Documents:
+      local: organisation_id
+      foreign: organisation_id
+      type: many
+    Memberstates2organisations:
+      local: organisation_id
+      foreign: organsation_id
+      type: many
+    Organisations_1:
+      class: Organisations
+      local: organisation_id
+      foreign: parent_organisation_id
+      type: many
+    Votingrecords:
+      local: organisation_id
+      foreign: memberstate_id
+      type: many
+Taghierachie2tag:
+  tableName: taghierachie2tag
+  columns:
+    taghierachie_id:
+      type: integer(4)
+      primary: true
+    tag_id:
+      type: integer(4)
+      primary: true
+  relations:
+    Taghierachies:
+      local: taghierachie_id
+      foreign: taghierarchie_id
+      type: one
+    Tags:
+      local: tag_id
+      foreign: tag_id
+      type: one
+Taghierachies:
+  tableName: taghierachies
+  columns:
+    taghierarchie_id:
+      type: integer(4)
+      primary: true
+    name:
+      type: string(45)
+      notnull: true
+    hierachie_level:
+      type: enum(7)
+      values: [area, issue, keyword]
+      notnull: true
+    parent_taghierachie_id: integer(4)
+  relations:
+    Taghierachies:
+      local: parent_taghierachie_id
+      foreign: taghierarchie_id
+      type: one
+    Taghierachie2tag:
+      local: taghierarchie_id
+      foreign: taghierachie_id
+      type: many
+    Taghierachies_1:
+      class: Taghierachies
+      local: taghierarchie_id
+      foreign: parent_taghierachie_id
+      type: many
+Tagimplications:
+  tableName: tagimplications
+  columns:
+    tag_id:
+      type: integer(4)
+      primary: true
+    implied_tag_id:
+      type: integer(4)
+      primary: true
+    implication_type:
+      type: enum(8)
+      values: [implies, suggests]
+      notnull: true
+  relations:
+    Tags:
+      local: implied_tag_id
+      foreign: tag_id
+      type: one
+    Tags_2:
+      class: Tags
+      local: tag_id
+      foreign: tag_id
+      type: one
+Tags:
+  tableName: tags
+  columns:
+    tag_id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    name:
+      type: string(45)
+      notnull: true
+    tag_type:
+      type: enum(13)
+      values: [legal_measure]
+  relations:
+    Clause2tag:
+      local: tag_id
+      foreign: tag_id
+      type: many
+    Document2tag:
+      local: tag_id
+      foreign: tag_id
+      type: many
+    Taghierachie2tag:
+      local: tag_id
+      foreign: tag_id
+      type: many
+    Tagimplications:
+      local: tag_id
+      foreign: implied_tag_id
+      type: many
+    Tagimplications_2:
+      class: Tagimplications
+      local: tag_id
+      foreign: tag_id
+      type: many
+Votingrecords:
+  tableName: votingrecords
+  columns:
+    document_id:
+      type: integer(4)
+      primary: true
+    memberstate_id:
+      type: integer(4)
+      primary: true
+    vote_type:
+      type: enum(7)
+      values: [signed, agreed, 'no', abstain, missing]
+      notnull: true
+  relations:
+    Documents:
+      local: document_id
+      foreign: document_id
+      type: one
+    Organisations:
+      local: memberstate_id
+      foreign: organisation_id
+      type: one

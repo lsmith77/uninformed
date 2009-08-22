@@ -11,11 +11,13 @@ abstract class BaseVotingrecords extends sfDoctrineRecord
         $this->hasColumn('document_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('memberstate_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('vote_type', 'enum', 7, array(

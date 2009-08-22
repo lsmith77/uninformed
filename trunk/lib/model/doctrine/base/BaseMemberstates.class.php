@@ -11,6 +11,8 @@ abstract class BaseMemberstates extends sfDoctrineRecord
         $this->hasColumn('memberstate_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'autoincrement' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('name', 'string', 45, array(

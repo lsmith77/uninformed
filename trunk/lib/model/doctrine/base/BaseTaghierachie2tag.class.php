@@ -11,11 +11,13 @@ abstract class BaseTaghierachie2tag extends sfDoctrineRecord
         $this->hasColumn('taghierachie_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('tag_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
     }

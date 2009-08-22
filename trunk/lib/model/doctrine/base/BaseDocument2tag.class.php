@@ -11,11 +11,13 @@ abstract class BaseDocument2tag extends sfDoctrineRecord
         $this->hasColumn('document_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('tag_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
     }

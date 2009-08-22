@@ -11,6 +11,8 @@ abstract class BaseOrganisations extends sfDoctrineRecord
         $this->hasColumn('organisation_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'autoincrement' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('name', 'string', 45, array(
@@ -20,6 +22,7 @@ abstract class BaseOrganisations extends sfDoctrineRecord
              ));
         $this->hasColumn('parent_organisation_id', 'integer', 4, array(
              'type' => 'integer',
+             'unsigned' => true,
              'length' => '4',
              ));
     }

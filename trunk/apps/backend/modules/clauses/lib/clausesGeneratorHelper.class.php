@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * clauses module helper.
+ *
+ * @package    docdb
+ * @subpackage clauses
+ * @author     Your name here
+ * @version    SVN: $Id: helper.php 12474 2008-10-31 10:41:27Z fabien $
+ */
+class clausesGeneratorHelper extends BaseClausesGeneratorHelper
+{
+}

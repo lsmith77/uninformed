@@ -11,11 +11,13 @@ abstract class BaseTagimplications extends sfDoctrineRecord
         $this->hasColumn('tag_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('implied_tag_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('implication_type', 'enum', 8, array(

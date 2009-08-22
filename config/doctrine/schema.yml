@@ -4,9 +4,11 @@ Clause2tag:
     clause_id:
       type: integer(4)
       primary: true
+      unsigned: true
     tag_id:
       type: integer(4)
       primary: true
+      unsigned: true
   relations:
     Clauses:
       local: clause_id
@@ -23,16 +25,20 @@ Clauses:
       type: integer(4)
       primary: true
       autoincrement: true
+      unsigned: true
     name:
       type: string(45)
       notnull: true
     document_id:
       type: integer(4)
       notnull: true
+      unsigned: true
     clause_number:
       type: integer(4)
       notnull: true
-    parent_clause_id: integer(4)
+    parent_clause_id:
+      type: integer(4)
+      unsigned: true
     information_type: string(45)
     operative_phrase: string(45)
     adressee: string(45)
@@ -63,9 +69,11 @@ Document2tag:
     document_id:
       type: integer(4)
       primary: true
+      unsigned: true
     tag_id:
       type: integer(4)
       primary: true
+      unsigned: true
   relations:
     Documents:
       local: document_id
@@ -81,9 +89,11 @@ Documentrelations:
     document_id:
       type: integer(4)
       primary: true
+      unsigned: true
     related_document_id:
       type: integer(4)
       primary: true
+      unsigned: true
     relation_type:
       type: enum(8)
       values: [followup, recalls, report]
@@ -104,6 +114,8 @@ Documents:
     document_id:
       type: integer(4)
       primary: true
+      autoincrement: true
+      unsigned: true
     name:
       type: string(45)
       notnull: true
@@ -113,6 +125,7 @@ Documents:
     documenttype_id:
       type: integer(4)
       notnull: true
+      unsigned: true
     updated_at:
       type: timestamp(25)
       notnull: true
@@ -120,7 +133,10 @@ Documents:
       type: timestamp(25)
       notnull: true
     legal_value: string(45)
-    organisation_id: integer(4)
+    organisation_id:
+      type: integer(4)
+      notnull: true
+      unsigned: true
     adoption_date: string(45)
     code: string(45)
     min_ratification_count: integer(4)
@@ -161,6 +177,8 @@ Documenttypes:
     documenttype_id:
       type: integer(4)
       primary: true
+      autoincrement: true
+      unsigned: true
     name:
       type: string(45)
       notnull: true
@@ -178,6 +196,8 @@ Memberstates:
     memberstate_id:
       type: integer(4)
       primary: true
+      autoincrement: true
+      unsigned: true
     name:
       type: string(45)
       notnull: true
@@ -190,15 +210,18 @@ Memberstates2organisations:
   tableName: memberstates2organisations
   columns:
     id:
-      type: integer(20)
+      type: integer(4)
       autoincrement: true
       primary: true
+      unsigned: true
     memberstate_id:
       type: integer(4)
       notnull: true
+      unsigned: true
     organsation_id:
       type: integer(4)
       notnull: true
+      unsigned: true
     from_date: date(25)
     to_date: date(25)
   relations:
@@ -216,10 +239,14 @@ Organisations:
     organisation_id:
       type: integer(4)
       primary: true
+      autoincrement: true
+      unsigned: true
     name:
       type: string(45)
       notnull: true
-    parent_organisation_id: integer(4)
+    parent_organisation_id:
+      type: integer(4)
+      unsigned: true
   relations:
     Organisations:
       local: parent_organisation_id
@@ -248,9 +275,11 @@ Taghierachie2tag:
     taghierachie_id:
       type: integer(4)
       primary: true
+      unsigned: true
     tag_id:
       type: integer(4)
       primary: true
+      unsigned: true
   relations:
     Taghierachies:
       local: taghierachie_id
@@ -266,6 +295,8 @@ Taghierachies:
     taghierarchie_id:
       type: integer(4)
       primary: true
+      autoincrement: true
+      unsigned: true
     name:
       type: string(45)
       notnull: true
@@ -273,7 +304,9 @@ Taghierachies:
       type: enum(7)
       values: [area, issue, keyword]
       notnull: true
-    parent_taghierachie_id: integer(4)
+    parent_taghierachie_id:
+      type: integer(4)
+      unsigned: true
   relations:
     Taghierachies:
       local: parent_taghierachie_id
@@ -294,9 +327,11 @@ Tagimplications:
     tag_id:
       type: integer(4)
       primary: true
+      unsigned: true
     implied_tag_id:
       type: integer(4)
       primary: true
+      unsigned: true
     implication_type:
       type: enum(8)
       values: [implies, suggests]
@@ -318,6 +353,7 @@ Tags:
       type: integer(4)
       primary: true
       autoincrement: true
+      unsigned: true
     name:
       type: string(45)
       notnull: true
@@ -352,9 +388,11 @@ Votingrecords:
     document_id:
       type: integer(4)
       primary: true
+      unsigned: true
     memberstate_id:
       type: integer(4)
       primary: true
+      unsigned: true
     vote_type:
       type: enum(7)
       values: [signed, agreed, 'no', abstain, missing]

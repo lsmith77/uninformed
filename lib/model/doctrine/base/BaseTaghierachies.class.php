@@ -11,6 +11,8 @@ abstract class BaseTaghierachies extends sfDoctrineRecord
         $this->hasColumn('taghierarchie_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'autoincrement' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('name', 'string', 45, array(
@@ -31,6 +33,7 @@ abstract class BaseTaghierachies extends sfDoctrineRecord
              ));
         $this->hasColumn('parent_taghierachie_id', 'integer', 4, array(
              'type' => 'integer',
+             'unsigned' => true,
              'length' => '4',
              ));
     }

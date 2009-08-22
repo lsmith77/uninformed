@@ -8,20 +8,23 @@ abstract class BaseMemberstates2organisations extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('memberstates2organisations');
-        $this->hasColumn('id', 'integer', 20, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'autoincrement' => true,
              'primary' => true,
-             'length' => '20',
+             'unsigned' => true,
+             'length' => '4',
              ));
         $this->hasColumn('memberstate_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('organsation_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('from_date', 'date', 25, array(

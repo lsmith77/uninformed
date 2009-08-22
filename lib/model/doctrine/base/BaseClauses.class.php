@@ -12,6 +12,7 @@ abstract class BaseClauses extends sfDoctrineRecord
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('name', 'string', 45, array(
@@ -22,6 +23,7 @@ abstract class BaseClauses extends sfDoctrineRecord
         $this->hasColumn('document_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('clause_number', 'integer', 4, array(
@@ -31,6 +33,7 @@ abstract class BaseClauses extends sfDoctrineRecord
              ));
         $this->hasColumn('parent_clause_id', 'integer', 4, array(
              'type' => 'integer',
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('information_type', 'string', 45, array(

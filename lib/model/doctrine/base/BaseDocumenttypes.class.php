@@ -11,6 +11,8 @@ abstract class BaseDocumenttypes extends sfDoctrineRecord
         $this->hasColumn('documenttype_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'autoincrement' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('name', 'string', 45, array(

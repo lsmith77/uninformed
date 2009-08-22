@@ -11,11 +11,13 @@ abstract class BaseDocumentrelations extends sfDoctrineRecord
         $this->hasColumn('document_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('related_document_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('relation_type', 'enum', 8, array(

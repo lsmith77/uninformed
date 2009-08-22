@@ -11,6 +11,8 @@ abstract class BaseDocuments extends sfDoctrineRecord
         $this->hasColumn('document_id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
+             'autoincrement' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('name', 'string', 45, array(
@@ -26,6 +28,7 @@ abstract class BaseDocuments extends sfDoctrineRecord
         $this->hasColumn('documenttype_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('updated_at', 'timestamp', 25, array(
@@ -44,6 +47,8 @@ abstract class BaseDocuments extends sfDoctrineRecord
              ));
         $this->hasColumn('organisation_id', 'integer', 4, array(
              'type' => 'integer',
+             'notnull' => true,
+             'unsigned' => true,
              'length' => '4',
              ));
         $this->hasColumn('adoption_date', 'string', 45, array(

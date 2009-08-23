@@ -52,10 +52,11 @@ memberstates_memberstates:
     column:               memberstate_id
     with_wildcard_routes: true
 
-# default rules
 homepage:
   url:   /
-  param: { module: default, action: index }
+  param: { module: tags, action: index }
+
+# default rules
 
 default_index:
   url:   /:module

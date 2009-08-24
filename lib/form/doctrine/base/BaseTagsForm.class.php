@@ -12,15 +12,19 @@ class BaseTagsForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'tag_id'   => new sfWidgetFormInputHidden(),
-      'name'     => new sfWidgetFormInput(),
-      'tag_type' => new sfWidgetFormChoice(array('choices' => array('legal_measure' => 'legal_measure'))),
+      'tag_id'     => new sfWidgetFormInputHidden(),
+      'name'       => new sfWidgetFormInput(),
+      'tag_type'   => new sfWidgetFormChoice(array('choices' => array('legal_measure' => 'legal_measure'))),
+      'created_at' => new sfWidgetFormDateTime(),
+      'updated_at' => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
-      'tag_id'   => new sfValidatorDoctrineChoice(array('model' => 'Tags', 'column' => 'tag_id', 'required' => false)),
-      'name'     => new sfValidatorString(array('max_length' => 45)),
-      'tag_type' => new sfValidatorChoice(array('choices' => array('legal_measure' => 'legal_measure'), 'required' => false)),
+      'tag_id'     => new sfValidatorDoctrineChoice(array('model' => 'Tags', 'column' => 'tag_id', 'required' => false)),
+      'name'       => new sfValidatorString(array('max_length' => 45)),
+      'tag_type'   => new sfValidatorChoice(array('choices' => array('legal_measure' => 'legal_measure'), 'required' => false)),
+      'created_at' => new sfValidatorDateTime(array('required' => false)),
+      'updated_at' => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('tags[%s]');

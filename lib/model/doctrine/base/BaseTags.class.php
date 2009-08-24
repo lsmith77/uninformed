@@ -51,5 +51,8 @@ abstract class BaseTags extends sfDoctrineRecord
         $this->hasMany('Tagimplications as Tagimplications_2', array(
              'local' => 'tag_id',
              'foreign' => 'tag_id'));
+
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($timestampable0);
     }
 }

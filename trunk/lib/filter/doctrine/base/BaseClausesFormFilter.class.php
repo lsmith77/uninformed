@@ -24,6 +24,8 @@ class BaseClausesFormFilter extends BaseFormFilterDoctrine
       'relevance'        => new sfWidgetFormFilterInput(),
       'significants'     => new sfWidgetFormFilterInput(),
       'content'          => new sfWidgetFormFilterInput(),
+      'created_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
+      'updated_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -37,6 +39,8 @@ class BaseClausesFormFilter extends BaseFormFilterDoctrine
       'relevance'        => new sfValidatorPass(array('required' => false)),
       'significants'     => new sfValidatorPass(array('required' => false)),
       'content'          => new sfValidatorPass(array('required' => false)),
+      'created_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'updated_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
     ));
 
     $this->widgetSchema->setNameFormat('clauses_filters[%s]');
@@ -65,6 +69,8 @@ class BaseClausesFormFilter extends BaseFormFilterDoctrine
       'relevance'        => 'Text',
       'significants'     => 'Text',
       'content'          => 'Text',
+      'created_at'       => 'Date',
+      'updated_at'       => 'Date',
     );
   }
 }

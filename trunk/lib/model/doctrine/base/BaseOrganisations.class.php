@@ -48,5 +48,8 @@ abstract class BaseOrganisations extends sfDoctrineRecord
         $this->hasMany('Votingrecords', array(
              'local' => 'organisation_id',
              'foreign' => 'memberstate_id'));
+
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($timestampable0);
     }
 }

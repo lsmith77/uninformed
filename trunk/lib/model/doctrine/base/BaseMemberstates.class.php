@@ -27,5 +27,8 @@ abstract class BaseMemberstates extends sfDoctrineRecord
         $this->hasMany('Memberstates2organisations', array(
              'local' => 'memberstate_id',
              'foreign' => 'memberstate_id'));
+
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($timestampable0);
     }
 }

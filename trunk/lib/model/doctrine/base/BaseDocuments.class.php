@@ -20,7 +20,7 @@ abstract class BaseDocuments extends sfDoctrineRecord
              'notnull' => true,
              'length' => '45',
              ));
-        $this->hasColumn('date', 'date', 25, array(
+        $this->hasColumn('publication_date', 'date', 25, array(
              'type' => 'date',
              'notnull' => true,
              'length' => '25',
@@ -30,16 +30,6 @@ abstract class BaseDocuments extends sfDoctrineRecord
              'notnull' => true,
              'unsigned' => true,
              'length' => '4',
-             ));
-        $this->hasColumn('updated_at', 'timestamp', 25, array(
-             'type' => 'timestamp',
-             'notnull' => true,
-             'length' => '25',
-             ));
-        $this->hasColumn('created_at', 'timestamp', 25, array(
-             'type' => 'timestamp',
-             'notnull' => true,
-             'length' => '25',
              ));
         $this->hasColumn('legal_value', 'string', 45, array(
              'type' => 'string',
@@ -51,9 +41,9 @@ abstract class BaseDocuments extends sfDoctrineRecord
              'unsigned' => true,
              'length' => '4',
              ));
-        $this->hasColumn('adoption_date', 'string', 45, array(
-             'type' => 'string',
-             'length' => '45',
+        $this->hasColumn('adoption_date', 'timestamp', 25, array(
+             'type' => 'timestamp',
+             'length' => '25',
              ));
         $this->hasColumn('code', 'string', 45, array(
              'type' => 'string',
@@ -98,5 +88,8 @@ abstract class BaseDocuments extends sfDoctrineRecord
         $this->hasMany('Votingrecords', array(
              'local' => 'document_id',
              'foreign' => 'document_id'));
+
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($timestampable0);
     }
 }

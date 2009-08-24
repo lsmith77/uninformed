@@ -20,6 +20,7 @@ Clause2tag:
       type: one
 Clauses:
   tableName: clauses
+  actAs: [Timestampable]
   columns:
     clause_id:
       type: integer(4)
@@ -110,6 +111,7 @@ Documentrelations:
       type: one
 Documents:
   tableName: documents
+  actAs: [Timestampable]
   columns:
     document_id:
       type: integer(4)
@@ -119,25 +121,20 @@ Documents:
     name:
       type: string(45)
       notnull: true
-    date:
+    publication_date:
       type: date(25)
       notnull: true
     documenttype_id:
       type: integer(4)
       notnull: true
       unsigned: true
-    updated_at:
-      type: timestamp(25)
-      notnull: true
-    created_at:
-      type: timestamp(25)
-      notnull: true
-    legal_value: string(45)
+    legal_value:
+      type: string(45)
     organisation_id:
       type: integer(4)
       notnull: true
       unsigned: true
-    adoption_date: string(45)
+    adoption_date: timestamp(25)
     code: string(45)
     min_ratification_count: integer(4)
     preamble: string(2147483647)
@@ -192,6 +189,7 @@ Documenttypes:
       type: many
 Memberstates:
   tableName: memberstates
+  actAs: [Timestampable]
   columns:
     memberstate_id:
       type: integer(4)
@@ -222,8 +220,10 @@ Memberstates2organisations:
       type: integer(4)
       notnull: true
       unsigned: true
-    from_date: date(25)
-    to_date: date(25)
+    from_date:
+      type: date(25)
+    to_date:
+      type: date(25)
   relations:
     Memberstates:
       local: memberstate_id
@@ -235,6 +235,7 @@ Memberstates2organisations:
       type: one
 Organisations:
   tableName: organisations
+  actAs: [Timestampable]
   columns:
     organisation_id:
       type: integer(4)
@@ -348,6 +349,7 @@ Tagimplications:
       type: one
 Tags:
   tableName: tags
+  actAs: [Timestampable]
   columns:
     tag_id:
       type: integer(4)

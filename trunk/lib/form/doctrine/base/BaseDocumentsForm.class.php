@@ -14,31 +14,31 @@ class BaseDocumentsForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'document_id'            => new sfWidgetFormInputHidden(),
       'name'                   => new sfWidgetFormInput(),
-      'date'                   => new sfWidgetFormDate(),
+      'publication_date'       => new sfWidgetFormDate(),
       'documenttype_id'        => new sfWidgetFormDoctrineChoice(array('model' => 'Documenttypes', 'add_empty' => false)),
-      'updated_at'             => new sfWidgetFormDateTime(),
-      'created_at'             => new sfWidgetFormDateTime(),
       'legal_value'            => new sfWidgetFormInput(),
       'organisation_id'        => new sfWidgetFormDoctrineChoice(array('model' => 'Organisations', 'add_empty' => false)),
-      'adoption_date'          => new sfWidgetFormInput(),
+      'adoption_date'          => new sfWidgetFormDateTime(),
       'code'                   => new sfWidgetFormInput(),
       'min_ratification_count' => new sfWidgetFormInput(),
       'preamble'               => new sfWidgetFormTextarea(),
+      'created_at'             => new sfWidgetFormDateTime(),
+      'updated_at'             => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
       'document_id'            => new sfValidatorDoctrineChoice(array('model' => 'Documents', 'column' => 'document_id', 'required' => false)),
       'name'                   => new sfValidatorString(array('max_length' => 45)),
-      'date'                   => new sfValidatorDate(),
+      'publication_date'       => new sfValidatorDate(),
       'documenttype_id'        => new sfValidatorDoctrineChoice(array('model' => 'Documenttypes')),
-      'updated_at'             => new sfValidatorDateTime(),
-      'created_at'             => new sfValidatorDateTime(),
       'legal_value'            => new sfValidatorString(array('max_length' => 45, 'required' => false)),
       'organisation_id'        => new sfValidatorDoctrineChoice(array('model' => 'Organisations')),
-      'adoption_date'          => new sfValidatorString(array('max_length' => 45, 'required' => false)),
+      'adoption_date'          => new sfValidatorDateTime(array('required' => false)),
       'code'                   => new sfValidatorString(array('max_length' => 45, 'required' => false)),
       'min_ratification_count' => new sfValidatorInteger(array('required' => false)),
       'preamble'               => new sfValidatorString(array('max_length' => 2147483647, 'required' => false)),
+      'created_at'             => new sfValidatorDateTime(array('required' => false)),
+      'updated_at'             => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('documents[%s]');

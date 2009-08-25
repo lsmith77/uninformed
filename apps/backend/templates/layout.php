@@ -21,22 +21,22 @@
       <div id="menu">
         <ul>
           <li>
-            <?php echo link_to('Tags', '@tags_tags') ?>
+            <?php echo link_to('Tags', '@tag_tags') ?>
           </li>
           <li>
-            <?php echo link_to('Document Types', '@documenttypes_documenttypes') ?>
+            <?php echo link_to('Document Types', '@documenttype_documenttypes') ?>
           </li>
           <li>
-            <?php echo link_to('Documents', '@documents_documents') ?>
+            <?php echo link_to('Documents', '@document_documents') ?>
           </li>
           <li>
-            <?php echo link_to('Clauses', '@clauses_clauses') ?>
+            <?php echo link_to('Clauses', '@clause_clauses') ?>
           </li>
           <li>
-            <?php echo link_to('Organisations', '@organisations_organisations') ?>
+            <?php echo link_to('Organisations', '@organisation_organisations') ?>
           </li>
           <li>
-            <?php echo link_to('Member States', '@memberstates_memberstates') ?>
+            <?php echo link_to('Member States', '@memberstate_memberstates') ?>
           </li>
         </ul>
       </div>

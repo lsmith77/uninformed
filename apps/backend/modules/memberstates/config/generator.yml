@@ -1,13 +1,13 @@
 generator:
   class: sfDoctrineGenerator
   param:
-    model_class:           Memberstates
+    model_class:           Memberstate
     theme:                 admin
     non_verbose_templates: true
     with_show:             false
     singular:              ~
     plural:                ~
-    route_prefix:          memberstates_memberstates
+    route_prefix:          memberstate_memberstates
     with_doctrine_route:     1
 
     config:

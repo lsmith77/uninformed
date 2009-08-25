@@ -1,55 +1,55 @@
-documenttypes_documenttypes:
+organisation_organisations:
   class: sfDoctrineRouteCollection
   options:
-    model:                Documenttypes
-    module:               documenttypes
-    prefix_path:          documenttypes
-    column:               documenttype_id
-    with_wildcard_routes: true
-
-tags_tags:
-  class: sfDoctrineRouteCollection
-  options:
-    model:                Tags
-    module:               tags
-    prefix_path:          tags
-    column:               tag_id
-    with_wildcard_routes: true
-
-organisations_organisations:
-  class: sfDoctrineRouteCollection
-  options:
-    model:                Organisations
+    model:                Organisation
     module:               organisations
     prefix_path:          organisations
     column:               organisation_id
     with_wildcard_routes: true
 
-documents_documents:
+memberstate_memberstates:
   class: sfDoctrineRouteCollection
   options:
-    model:                Documents
+    model:                Memberstate
+    module:               memberstates
+    prefix_path:          memberstates
+    column:               memberstate_id
+    with_wildcard_routes: true
+
+documenttype_documenttypes:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Documenttype
+    module:               documenttypes
+    prefix_path:          documenttypes
+    column:               documenttype_id
+    with_wildcard_routes: true
+
+document_documents:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Document
     module:               documents
     prefix_path:          documents
     column:               document_id
     with_wildcard_routes: true
 
-clauses_clauses:
+clause_clauses:
   class: sfDoctrineRouteCollection
   options:
-    model:                Clauses
+    model:                Clause
     module:               clauses
     prefix_path:          clauses
     column:               clause_id
     with_wildcard_routes: true
 
-memberstates_memberstates:
+tag_tags:
   class: sfDoctrineRouteCollection
   options:
-    model:                Memberstates
-    module:               memberstates
-    prefix_path:          memberstates
-    column:               memberstate_id
+    model:                Tag
+    module:               tags
+    prefix_path:          tags
+    column:               tag_id
     with_wildcard_routes: true
 
 homepage:

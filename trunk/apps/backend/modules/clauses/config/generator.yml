@@ -1,13 +1,13 @@
 generator:
   class: sfDoctrineGenerator
   param:
-    model_class:           Clauses
+    model_class:           Clause
     theme:                 admin
     non_verbose_templates: true
     with_show:             false
     singular:              ~
     plural:                ~
-    route_prefix:          clauses_clauses
+    route_prefix:          clause_clauses
     with_doctrine_route:     1
 
     config:

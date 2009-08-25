@@ -1,13 +1,13 @@
 generator:
   class: sfDoctrineGenerator
   param:
-    model_class:           Organisations
+    model_class:           Organisation
     theme:                 admin
     non_verbose_templates: true
     with_show:             false
     singular:              ~
     plural:                ~
-    route_prefix:          organisations_organisations
+    route_prefix:          organisation_organisations
     with_doctrine_route:     1
 
     config:

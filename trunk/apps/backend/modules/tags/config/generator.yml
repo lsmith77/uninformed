@@ -1,13 +1,13 @@
 generator:
   class: sfDoctrineGenerator
   param:
-    model_class:           Tags
+    model_class:           Tag
     theme:                 admin
     non_verbose_templates: true
     with_show:             false
     singular:              ~
     plural:                ~
-    route_prefix:          tags_tags
+    route_prefix:          tag_tags
     with_doctrine_route:     1
 
     config:

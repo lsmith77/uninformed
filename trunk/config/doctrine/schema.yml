@@ -1,4 +1,4 @@
-Clause2tag:
+ClauseTag:
   tableName: clause2tag
   columns:
     clause_id:
@@ -9,16 +9,7 @@ Clause2tag:
       type: integer(4)
       primary: true
       unsigned: true
-  relations:
-    Clauses:
-      local: clause_id
-      foreign: clause_id
-      type: one
-    Tags:
-      local: tag_id
-      foreign: tag_id
-      type: one
-Clauses:
+Clause:
   tableName: clauses
   actAs: [Timestampable]
   columns:
@@ -47,24 +38,27 @@ Clauses:
     significants: string(45)
     content: string(2147483647)
   relations:
-    Documents:
+    Document:
+      class: Document
       local: document_id
       foreign: document_id
       type: one
-    Clauses:
+    Clause:
+      class: Clause
       local: parent_clause_id
       foreign: clause_id
       type: one
-    Clause2tag:
+    Tags:
+      class: Tag
       local: clause_id
-      foreign: clause_id
-      type: many
-    Clauses_2:
-      class: Clauses
+      foreign: tag_id
+      refClass: ClauseTag
+    ParentClauses:
+      class: Clause
       local: clause_id
       foreign: parent_clause_id
       type: many
-Document2tag:
+DocumentTag:
   tableName: document2tag
   columns:
     document_id:
@@ -75,16 +69,7 @@ Document2tag:
       type: integer(4)
       primary: true
       unsigned: true
-  relations:
-    Documents:
-      local: document_id
-      foreign: document_id
-      type: one
-    Tags:
-      local: tag_id
-      foreign: tag_id
-      type: one
-Documentrelations:
+DocumentRelation:
   tableName: documentrelations
   columns:
     document_id:
@@ -100,16 +85,17 @@ Documentrelations:
       values: [followup, recalls, report]
       primary: true
   relations:
-    Documents:
+    Document:
+      class: Document
       local: document_id
       foreign: document_id
       type: one
-    Documents_2:
-      class: Documents
+    RelatedDocument:
+      class: Document
       local: related_document_id
       foreign: document_id
       type: one
-Documents:
+Document:
   tableName: documents
   actAs: [Timestampable]
   columns:
@@ -139,11 +125,12 @@ Documents:
     min_ratification_count: integer(4)
     preamble: string(2147483647)
   relations:
-    Documenttypes:
+    Documenttype:
+      class: Documenttype
       local: documenttype_id
       foreign: documenttype_id
       type: one
-    Organisations:
+    Organisation:
       local: organisation_id
       foreign: organisation_id
       type: one
@@ -151,16 +138,18 @@ Documents:
       local: document_id
       foreign: document_id
       type: many
-    Document2tag:
+    Tags:
+      class: Tag
+      local: document_id
+      foreign: tag_id
+      refClass: DocumentTag
+    DocumentRelate:
+      class: Documentrelation
       local: document_id
       foreign: document_id
       type: many
-    Documentrelations:
-      local: document_id
-      foreign: document_id
-      type: many
-    Documentrelations_2:
-      class: Documentrelations
+    DocumentRelated:
+      class: Documentrelation
       local: document_id
       foreign: related_document_id
       type: many
@@ -168,7 +157,7 @@ Documents:
       local: document_id
       foreign: document_id
       type: many
-Documenttypes:
+Documenttype:
   tableName: documenttypes
   columns:
     documenttype_id:
@@ -183,11 +172,12 @@ Documenttypes:
       type: string(45)
       notnull: true
   relations:
-    Documents:
+    Document:
+      class: Document
       local: documenttype_id
       foreign: documenttype_id
       type: many
-Memberstates:
+Memberstate:
   tableName: memberstates
   actAs: [Timestampable]
   columns:
@@ -200,40 +190,23 @@ Memberstates:
       type: string(45)
       notnull: true
   relations:
-    Memberstates2organisations:
+    Organisations:
+      class: Organisation
       local: memberstate_id
-      foreign: memberstate_id
-      type: many
-Memberstates2organisations:
+      foreign: organisation_id
+      refClass: MemberstateOrganisation
+MemberstateOrganisation:
   tableName: memberstates2organisations
   columns:
-    id:
-      type: integer(4)
-      autoincrement: true
-      primary: true
-      unsigned: true
     memberstate_id:
       type: integer(4)
-      notnull: true
+      primary: true
       unsigned: true
-    organsation_id:
+    organisation_id:
       type: integer(4)
-      notnull: true
+      primary: true
       unsigned: true
-    from_date:
-      type: date(25)
-    to_date:
-      type: date(25)
-  relations:
-    Memberstates:
-      local: memberstate_id
-      foreign: memberstate_id
-      type: one
-    Organisations:
-      local: organsation_id
-      foreign: organisation_id
-      type: one
-Organisations:
+Organisation:
   tableName: organisations
   actAs: [Timestampable]
   columns:
@@ -249,7 +222,7 @@ Organisations:
       type: integer(4)
       unsigned: true
   relations:
-    Organisations:
+    ParentOrganisation:
       local: parent_organisation_id
       foreign: organisation_id
       type: one
@@ -257,23 +230,24 @@ Organisations:
       local: organisation_id
       foreign: organisation_id
       type: many
-    Memberstates2organisations:
+    Memberstates:
+      class: Memberstate
       local: organisation_id
-      foreign: organsation_id
-      type: many
-    Organisations_1:
-      class: Organisations
+      foreign: memberstate_id
+      refClass: MemberstateOrganisation
+    ChildOrganisations:
+      class: Organisation
       local: organisation_id
       foreign: parent_organisation_id
       type: many
-    Votingrecords:
+    Votingrecord:
       local: organisation_id
       foreign: memberstate_id
       type: many
-Taghierachie2tag:
-  tableName: taghierachie2tag
+TagHierarchieTag:
+  tableName: taghierarchie2tag
   columns:
-    taghierachie_id:
+    taghierarchie_id:
       type: integer(4)
       primary: true
       unsigned: true
@@ -281,17 +255,8 @@ Taghierachie2tag:
       type: integer(4)
       primary: true
       unsigned: true
-  relations:
-    Taghierachies:
-      local: taghierachie_id
-      foreign: taghierarchie_id
-      type: one
-    Tags:
-      local: tag_id
-      foreign: tag_id
-      type: one
-Taghierachies:
-  tableName: taghierachies
+TagHierarchie:
+  tableName: taghierarchies
   columns:
     taghierarchie_id:
       type: integer(4)
@@ -305,24 +270,25 @@ Taghierachies:
       type: enum(7)
       values: [area, issue, keyword]
       notnull: true
-    parent_taghierachie_id:
+    parent_taghierarchie_id:
       type: integer(4)
       unsigned: true
   relations:
-    Taghierachies:
-      local: parent_taghierachie_id
+    ParentTagHierarchie:
+      local: parent_taghierarchie_id
       foreign: taghierarchie_id
       type: one
-    Taghierachie2tag:
+    Tags:
+      class: Tag
       local: taghierarchie_id
-      foreign: taghierachie_id
-      type: many
-    Taghierachies_1:
-      class: Taghierachies
+      foreign: tag_id
+      refClass: TagHierarchieTag
+    ChildTagHierarchies:
+      class: Taghierachie
       local: taghierarchie_id
-      foreign: parent_taghierachie_id
+      foreign: parent_taghierarchie_id
       type: many
-Tagimplications:
+TagImplication:
   tableName: tagimplications
   columns:
     tag_id:
@@ -338,16 +304,17 @@ Tagimplications:
       values: [implies, suggests]
       notnull: true
   relations:
-    Tags:
+    ImpliedTag:
+      class: Tag
       local: implied_tag_id
       foreign: tag_id
       type: one
-    Tags_2:
-      class: Tags
+    Tag:
+      class: Tag
       local: tag_id
       foreign: tag_id
       type: one
-Tags:
+Tag:
   tableName: tags
   actAs: [Timestampable]
   columns:
@@ -363,28 +330,32 @@ Tags:
       type: enum(13)
       values: [legal_measure]
   relations:
-    Clause2tag:
+    Clauses:
+      class: Clause
       local: tag_id
-      foreign: tag_id
-      type: many
-    Document2tag:
+      foreign: clause_id
+      refClass: ClauseTag
+    Documents:
+      class: Document
       local: tag_id
-      foreign: tag_id
-      type: many
-    Taghierachie2tag:
+      foreign: document_id
+      refClass: DocumentTag
+    TagHierarchies:
+      class: TagHierarchie
       local: tag_id
-      foreign: tag_id
-      type: many
-    Tagimplications:
+      foreign: taghierarchie_id
+      refClass: TagHierarchieTag
+    ImpliedTagImplications:
+      class: TagImplication
       local: tag_id
       foreign: implied_tag_id
       type: many
-    Tagimplications_2:
-      class: Tagimplications
+    Tagimplications:
+      class: TagImplication
       local: tag_id
       foreign: tag_id
       type: many
-Votingrecords:
+Votingrecord:
   tableName: votingrecords
   columns:
     document_id:
@@ -400,11 +371,11 @@ Votingrecords:
       values: [signed, agreed, 'no', abstain, missing]
       notnull: true
   relations:
-    Documents:
+    Document:
       local: document_id
       foreign: document_id
       type: one
-    Organisations:
+    Organisation:
       local: memberstate_id
       foreign: organisation_id
       type: one

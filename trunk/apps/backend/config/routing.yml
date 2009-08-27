@@ -63,7 +63,7 @@ tag_tags:
 
 homepage:
   url:   /
-  param: { module: tags, action: index }
+  param: { module: documents, action: index }
 
 # default rules
 

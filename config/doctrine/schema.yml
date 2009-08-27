@@ -341,7 +341,8 @@ Tag:
       notnull: true
     tag_type:
       type: enum(13)
-      values: [legal_measure]
+      values: ['', legal_measure]
+      notnull: true
   relations:
     Clauses:
       class: Clause

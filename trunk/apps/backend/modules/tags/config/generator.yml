@@ -12,9 +12,12 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
-      list:    ~
+      fields:
+        tag_type: { label: Type}
+      list:
+        display: [=name, tag_type]
       filter:  ~
       form:    ~
-      edit:    ~
+      edit:
+        display: [name, tag_type, created_at, updated_at]
       new:     ~

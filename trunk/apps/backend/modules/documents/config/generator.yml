@@ -12,8 +12,12 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
-      list:    ~
+      fields:
+        documenttype_id: { label: Document type}
+        organisation_id: { label: Organisation}
+        legal_value_id: { label: Legal value}
+      list:
+        display: [=name, documenttype, organisation]
       filter:  ~
       form:    ~
       edit:    ~

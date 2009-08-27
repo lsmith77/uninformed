@@ -31,12 +31,18 @@ Clause:
     parent_clause_id:
       type: integer(4)
       unsigned: true
-    information_type: string(45)
-    operative_phrase: string(45)
-    adressee: string(45)
-    relevance: string(45)
-    significants: string(45)
-    content: string(2147483647)
+    information_type:
+      type: string(45)
+    operative_phrase:
+      type: string(45)
+    adressee:
+      type: string(45)
+    relevance:
+      type: string(45)
+    significants:
+      type: string(45)
+    content:
+      type: string(60000)
   relations:
     Document:
       class: Document
@@ -107,23 +113,27 @@ Document:
     name:
       type: string(45)
       notnull: true
-    publication_date:
-      type: date(25)
-      notnull: true
     documenttype_id:
       type: integer(4)
       notnull: true
       unsigned: true
-    legal_value:
-      type: string(45)
+    publication_date:
+      type: date
+      notnull: true
+    adoption_date:
+      type: date
     organisation_id:
       type: integer(4)
       notnull: true
       unsigned: true
-    adoption_date: timestamp(25)
-    code: string(45)
-    min_ratification_count: integer(4)
-    preamble: string(2147483647)
+    code:
+      type: string(45)
+    legal_value:
+      type: string(45)
+    min_ratification_count:
+      type: integer(4)
+    preamble:
+      type: string(60000)
   relations:
     Documenttype:
       class: Documenttype
@@ -206,6 +216,9 @@ MemberstateOrganisation:
       type: integer(4)
       primary: true
       unsigned: true
+    month:
+      type: date
+      primary: true
 Organisation:
   tableName: organisations
   actAs: [Timestampable]

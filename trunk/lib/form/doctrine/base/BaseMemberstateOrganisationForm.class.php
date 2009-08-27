@@ -14,11 +14,13 @@ class BaseMemberstateOrganisationForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'memberstate_id'  => new sfWidgetFormInputHidden(),
       'organisation_id' => new sfWidgetFormInputHidden(),
+      'month'           => new sfWidgetFormInputHidden(),
     ));
 
     $this->setValidators(array(
       'memberstate_id'  => new sfValidatorDoctrineChoice(array('model' => 'MemberstateOrganisation', 'column' => 'memberstate_id', 'required' => false)),
       'organisation_id' => new sfValidatorDoctrineChoice(array('model' => 'MemberstateOrganisation', 'column' => 'organisation_id', 'required' => false)),
+      'month'           => new sfValidatorDoctrineChoice(array('model' => 'MemberstateOrganisation', 'column' => 'month', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('memberstate_organisation[%s]');

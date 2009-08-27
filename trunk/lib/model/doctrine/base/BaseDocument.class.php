@@ -20,20 +20,18 @@ abstract class BaseDocument extends sfDoctrineRecord
              'notnull' => true,
              'length' => '45',
              ));
-        $this->hasColumn('publication_date', 'date', 25, array(
-             'type' => 'date',
-             'notnull' => true,
-             'length' => '25',
-             ));
         $this->hasColumn('documenttype_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
              'unsigned' => true,
              'length' => '4',
              ));
-        $this->hasColumn('legal_value', 'string', 45, array(
-             'type' => 'string',
-             'length' => '45',
+        $this->hasColumn('publication_date', 'date', null, array(
+             'type' => 'date',
+             'notnull' => true,
+             ));
+        $this->hasColumn('adoption_date', 'date', null, array(
+             'type' => 'date',
              ));
         $this->hasColumn('organisation_id', 'integer', 4, array(
              'type' => 'integer',
@@ -41,11 +39,11 @@ abstract class BaseDocument extends sfDoctrineRecord
              'unsigned' => true,
              'length' => '4',
              ));
-        $this->hasColumn('adoption_date', 'timestamp', 25, array(
-             'type' => 'timestamp',
-             'length' => '25',
-             ));
         $this->hasColumn('code', 'string', 45, array(
+             'type' => 'string',
+             'length' => '45',
+             ));
+        $this->hasColumn('legal_value', 'string', 45, array(
              'type' => 'string',
              'length' => '45',
              ));
@@ -53,9 +51,9 @@ abstract class BaseDocument extends sfDoctrineRecord
              'type' => 'integer',
              'length' => '4',
              ));
-        $this->hasColumn('preamble', 'string', 2147483647, array(
+        $this->hasColumn('preamble', 'string', 60000, array(
              'type' => 'string',
-             'length' => '2147483647',
+             'length' => '60000',
              ));
     }
 

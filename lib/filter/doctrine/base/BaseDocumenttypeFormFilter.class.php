@@ -15,12 +15,12 @@ class BaseDocumenttypeFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'name'            => new sfWidgetFormFilterInput(),
-      'legal_value'     => new sfWidgetFormFilterInput(),
+      'legal_value_id'  => new sfWidgetFormDoctrineChoice(array('model' => 'LegalValue', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
       'name'            => new sfValidatorPass(array('required' => false)),
-      'legal_value'     => new sfValidatorPass(array('required' => false)),
+      'legal_value_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => 'LegalValue', 'column' => 'legal_value_id')),
     ));
 
     $this->widgetSchema->setNameFormat('documenttype_filters[%s]');
@@ -40,7 +40,7 @@ class BaseDocumenttypeFormFilter extends BaseFormFilterDoctrine
     return array(
       'documenttype_id' => 'Number',
       'name'            => 'Text',
-      'legal_value'     => 'Text',
+      'legal_value_id'  => 'ForeignKey',
     );
   }
 }

@@ -13,8 +13,12 @@ generator:
     config:
       actions: ~
       fields:  ~
-      list:    ~
+      list:
+        display: [=name]
       filter:  ~
       form:    ~
-      edit:    ~
+      edit:
+        display: [name, organisations_list, created_at, updated_at]
+        fields:
+          organisations_list: { label: Organisations }
       new:     ~

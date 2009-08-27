@@ -12,8 +12,13 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
-      list:    ~
+      fields:
+        document_id: { label: Document}
+        parent_clause_id: { label: Parent clause}
+        clause: { label: Parent clause}
+        legal_value_id: { label: Legal value}
+      list:
+        display: [=name, document, adressee, information_type, clause, clause_number]
       filter:  ~
       form:    ~
       edit:    ~

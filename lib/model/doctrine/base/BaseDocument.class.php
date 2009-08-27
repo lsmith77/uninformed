@@ -43,9 +43,10 @@ abstract class BaseDocument extends sfDoctrineRecord
              'type' => 'string',
              'length' => '45',
              ));
-        $this->hasColumn('legal_value', 'string', 45, array(
-             'type' => 'string',
-             'length' => '45',
+        $this->hasColumn('legal_value_id', 'integer', 4, array(
+             'type' => 'integer',
+             'unsigned' => true,
+             'length' => '4',
              ));
         $this->hasColumn('min_ratification_count', 'integer', 4, array(
              'type' => 'integer',
@@ -59,6 +60,10 @@ abstract class BaseDocument extends sfDoctrineRecord
 
     public function setUp()
     {
+        $this->hasOne('LegalValue', array(
+             'local' => 'legal_value_id',
+             'foreign' => 'legal_value_id'));
+
         $this->hasOne('Documenttype', array(
              'local' => 'documenttype_id',
              'foreign' => 'documenttype_id'));

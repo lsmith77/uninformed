@@ -12,8 +12,10 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
-      list:    ~
+      fields:
+        legal_value_id: { label: "Legal value" }
+      list:
+        display: [=name, legal_value]
       filter:  ~
       form:    ~
       edit:    ~

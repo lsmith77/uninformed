@@ -128,13 +128,19 @@ Document:
       unsigned: true
     code:
       type: string(45)
-    legal_value:
-      type: string(45)
+    legal_value_id:
+      type: integer(4)
+      unsigned: true
     min_ratification_count:
       type: integer(4)
     preamble:
       type: string(60000)
   relations:
+    LegalValue:
+      class: LegalValue
+      local: legal_value_id
+      foreign: legal_value_id
+      type: one
     Documenttype:
       class: Documenttype
       local: documenttype_id
@@ -178,10 +184,16 @@ Documenttype:
     name:
       type: string(45)
       notnull: true
-    legal_value:
-      type: string(45)
+    legal_value_id:
+      type: integer(4)
+      unsigned: true
       notnull: true
   relations:
+    LegalValue:
+      class: LegalValue
+      local: legal_value_id
+      foreign: legal_value_id
+      type: one
     Document:
       class: Document
       local: documenttype_id
@@ -205,6 +217,17 @@ Memberstate:
       local: memberstate_id
       foreign: organisation_id
       refClass: MemberstateOrganisation
+LegalValue:
+  tableName: legal_values
+  columns:
+    legal_value_id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+      unsigned: true
+    name:
+      type: string(45)
+      notnull: true
 MemberstateOrganisation:
   tableName: memberstates2organisations
   columns:

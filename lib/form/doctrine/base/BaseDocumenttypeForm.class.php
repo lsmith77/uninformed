@@ -14,13 +14,13 @@ class BaseDocumenttypeForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'documenttype_id' => new sfWidgetFormInputHidden(),
       'name'            => new sfWidgetFormInput(),
-      'legal_value'     => new sfWidgetFormInput(),
+      'legal_value_id'  => new sfWidgetFormDoctrineChoice(array('model' => 'LegalValue', 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
       'documenttype_id' => new sfValidatorDoctrineChoice(array('model' => 'Documenttype', 'column' => 'documenttype_id', 'required' => false)),
       'name'            => new sfValidatorString(array('max_length' => 45)),
-      'legal_value'     => new sfValidatorString(array('max_length' => 45)),
+      'legal_value_id'  => new sfValidatorDoctrineChoice(array('model' => 'LegalValue')),
     ));
 
     $this->widgetSchema->setNameFormat('documenttype[%s]');

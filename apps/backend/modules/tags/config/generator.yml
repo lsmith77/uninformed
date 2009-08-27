@@ -20,4 +20,5 @@ generator:
       form:    ~
       edit:
         display: [name, tag_type, created_at, updated_at]
-      new:     ~
+      new:
+        display: [name, tag_type, created_at, updated_at]

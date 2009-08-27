@@ -20,5 +20,7 @@ generator:
         display: [=name, documenttype, organisation]
       filter:  ~
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        display: [name, documenttype_id, publication_date, adoption_date, organisation_id, code, legal_value_id, min_ratification_count, preamble, tags_list, created_at, updated_at]
+      new:
+        display: [name, documenttype_id, publication_date, adoption_date, organisation_id, code, legal_value_id, min_ratification_count, preamble, tags_list]

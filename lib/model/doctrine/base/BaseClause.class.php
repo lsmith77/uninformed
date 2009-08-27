@@ -56,9 +56,9 @@ abstract class BaseClause extends sfDoctrineRecord
              'type' => 'string',
              'length' => '45',
              ));
-        $this->hasColumn('content', 'string', 2147483647, array(
+        $this->hasColumn('content', 'string', 60000, array(
              'type' => 'string',
-             'length' => '2147483647',
+             'length' => '60000',
              ));
     }
 

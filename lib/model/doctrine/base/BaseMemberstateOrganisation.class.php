@@ -20,6 +20,10 @@ abstract class BaseMemberstateOrganisation extends sfDoctrineRecord
              'unsigned' => true,
              'length' => '4',
              ));
+        $this->hasColumn('month', 'date', null, array(
+             'type' => 'date',
+             'primary' => true,
+             ));
     }
 
 }

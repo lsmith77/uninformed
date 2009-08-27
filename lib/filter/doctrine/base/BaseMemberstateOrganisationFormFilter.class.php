@@ -36,6 +36,7 @@ class BaseMemberstateOrganisationFormFilter extends BaseFormFilterDoctrine
     return array(
       'memberstate_id'  => 'Number',
       'organisation_id' => 'Number',
+      'month'           => 'Date',
     );
   }
 }

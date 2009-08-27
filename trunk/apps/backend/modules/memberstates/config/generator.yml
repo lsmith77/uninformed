@@ -18,5 +18,7 @@ generator:
         display: [=name]
       filter:  ~
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        display: [name, organisations_list, created_at, updated_at]
+      new:
+        display: [name, organisations_list]

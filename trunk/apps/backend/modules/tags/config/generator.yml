@@ -21,4 +21,4 @@ generator:
       edit:
         display: [name, tag_type, created_at, updated_at]
       new:
-        display: [name, tag_type, created_at, updated_at]
+        display: [name, tag_type]

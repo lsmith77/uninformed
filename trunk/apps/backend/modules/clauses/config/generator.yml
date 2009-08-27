@@ -21,5 +21,7 @@ generator:
         display: [=name, document, adressee, information_type, clause, clause_number]
       filter:  ~
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        display: [name, document_id, clause_number, parent_clause_id, information_type, operative_phrase, adressee, relevance, significants, content, created_at, updated_at]
+      new:
+        display: [name, document_id, clause_number, parent_clause_id, information_type, operative_phrase, adressee, relevance, significants, content]

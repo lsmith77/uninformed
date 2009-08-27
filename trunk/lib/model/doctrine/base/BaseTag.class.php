@@ -24,8 +24,10 @@ abstract class BaseTag extends sfDoctrineRecord
              'type' => 'enum',
              'values' => 
              array(
-              0 => 'legal_measure',
+              0 => '',
+              1 => 'legal_measure',
              ),
+             'notnull' => true,
              'length' => '13',
              ));
     }

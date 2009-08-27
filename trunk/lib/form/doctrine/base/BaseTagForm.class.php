@@ -14,7 +14,7 @@ class BaseTagForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'tag_id'               => new sfWidgetFormInputHidden(),
       'name'                 => new sfWidgetFormInput(),
-      'tag_type'             => new sfWidgetFormChoice(array('choices' => array('legal_measure' => 'legal_measure'))),
+      'tag_type'             => new sfWidgetFormChoice(array('choices' => array('' => '', 'legal_measure' => 'legal_measure'))),
       'created_at'           => new sfWidgetFormDateTime(),
       'updated_at'           => new sfWidgetFormDateTime(),
       'clauses_list'         => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Clause')),
@@ -25,7 +25,7 @@ class BaseTagForm extends BaseFormDoctrine
     $this->setValidators(array(
       'tag_id'               => new sfValidatorDoctrineChoice(array('model' => 'Tag', 'column' => 'tag_id', 'required' => false)),
       'name'                 => new sfValidatorString(array('max_length' => 45)),
-      'tag_type'             => new sfValidatorChoice(array('choices' => array('legal_measure' => 'legal_measure'), 'required' => false)),
+      'tag_type'             => new sfValidatorChoice(array('choices' => array('' => '', 'legal_measure' => 'legal_measure'))),
       'created_at'           => new sfValidatorDateTime(array('required' => false)),
       'updated_at'           => new sfValidatorDateTime(array('required' => false)),
       'clauses_list'         => new sfValidatorDoctrineChoiceMany(array('model' => 'Clause', 'required' => false)),

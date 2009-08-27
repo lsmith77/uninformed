@@ -7,7 +7,7 @@ CREATE TABLE documenttypes (documenttype_id INT UNSIGNED AUTO_INCREMENT, name VA
 CREATE TABLE memberstates (memberstate_id INT UNSIGNED AUTO_INCREMENT, name VARCHAR(45) NOT NULL, created_at DATETIME, updated_at DATETIME, PRIMARY KEY(memberstate_id)) ENGINE = INNODB;
 CREATE TABLE memberstates2organisations (memberstate_id INT UNSIGNED, organisation_id INT UNSIGNED, month DATE, PRIMARY KEY(memberstate_id, organisation_id, month)) ENGINE = INNODB;
 CREATE TABLE organisations (organisation_id INT UNSIGNED AUTO_INCREMENT, name VARCHAR(45) NOT NULL, parent_organisation_id INT UNSIGNED, created_at DATETIME, updated_at DATETIME, INDEX parent_organisation_id_idx (parent_organisation_id), PRIMARY KEY(organisation_id)) ENGINE = INNODB;
-CREATE TABLE tags (tag_id INT UNSIGNED AUTO_INCREMENT, name VARCHAR(45) NOT NULL, tag_type VARCHAR(13), created_at DATETIME, updated_at DATETIME, PRIMARY KEY(tag_id)) ENGINE = INNODB;
+CREATE TABLE tags (tag_id INT UNSIGNED AUTO_INCREMENT, name VARCHAR(45) NOT NULL, tag_type VARCHAR(13) NOT NULL, created_at DATETIME, updated_at DATETIME, PRIMARY KEY(tag_id)) ENGINE = INNODB;
 CREATE TABLE taghierachie2tag (taghierachie_id INT UNSIGNED, tag_id INT UNSIGNED, PRIMARY KEY(taghierachie_id, tag_id)) ENGINE = INNODB;
 CREATE TABLE taghierarchies (taghierarchie_id INT UNSIGNED AUTO_INCREMENT, name VARCHAR(45) NOT NULL, hierachie_level VARCHAR(7) NOT NULL, parent_taghierarchie_id INT UNSIGNED, PRIMARY KEY(taghierarchie_id)) ENGINE = INNODB;
 CREATE TABLE taghierarchie2tag (taghierarchie_id INT UNSIGNED, tag_id INT UNSIGNED, PRIMARY KEY(taghierarchie_id, tag_id)) ENGINE = INNODB;

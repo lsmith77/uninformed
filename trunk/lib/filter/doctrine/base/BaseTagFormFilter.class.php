@@ -25,7 +25,7 @@ class BaseTagFormFilter extends BaseFormFilterDoctrine
 
     $this->setValidators(array(
       'name'                 => new sfValidatorPass(array('required' => false)),
-      'tag_type'             => new sfValidatorChoice(array('required' => false, 'choices' => array('legal_measure' => 'legal_measure'))),
+      'tag_type'             => new sfValidatorChoice(array('required' => false, 'choices' => array('' => '', 'legal_measure' => 'legal_measure'))),
       'created_at'           => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'updated_at'           => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'clauses_list'         => new sfValidatorDoctrineChoiceMany(array('model' => 'Clause', 'required' => false)),

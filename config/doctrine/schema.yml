@@ -170,9 +170,11 @@ Document:
       foreign: related_document_id
       type: many
     Votingrecords:
+      class: Memberstate
       local: document_id
-      foreign: document_id
+      foreign: memberstate_id
       type: many
+      refClass: Votingrecord
 Documenttype:
   tableName: documenttypes
   columns:
@@ -217,6 +219,12 @@ Memberstate:
       local: memberstate_id
       foreign: organisation_id
       refClass: MemberstateOrganisation
+    Votingrecords:
+      class: Document
+      local: memberstate_id
+      foreign: document_id
+      type: many
+      refClass: Votingrecord
 LegalValue:
   tableName: legal_values
   columns:
@@ -275,10 +283,6 @@ Organisation:
       class: Organisation
       local: organisation_id
       foreign: parent_organisation_id
-      type: many
-    Votingrecord:
-      local: organisation_id
-      foreign: memberstate_id
       type: many
 TagHierarchieTag:
   tableName: taghierarchie2tag
@@ -406,13 +410,4 @@ Votingrecord:
     vote_type:
       type: enum(7)
       values: [signed, agreed, 'no', abstain, missing]
-      notnull: true
-  relations:
-    Document:
-      local: document_id
-      foreign: document_id
-      type: one
-    Organisation:
-      local: memberstate_id
-      foreign: organisation_id
-      type: one
+      primary: true

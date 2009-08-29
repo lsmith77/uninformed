@@ -1,3 +1,12 @@
+votingrecord_votingrecords:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Votingrecord
+    module:               votingrecords
+    prefix_path:          votingrecords
+    column:               Array
+    with_wildcard_routes: true
+
 legal_value_legalvalues:
   class: sfDoctrineRouteCollection
   options:

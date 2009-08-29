@@ -13,7 +13,7 @@ CREATE TABLE taghierachie2tag (taghierachie_id INT UNSIGNED, tag_id INT UNSIGNED
 CREATE TABLE taghierarchies (taghierarchie_id INT UNSIGNED AUTO_INCREMENT, name VARCHAR(45) NOT NULL, hierachie_level VARCHAR(7) NOT NULL, parent_taghierarchie_id INT UNSIGNED, PRIMARY KEY(taghierarchie_id)) ENGINE = INNODB;
 CREATE TABLE taghierarchie2tag (taghierarchie_id INT UNSIGNED, tag_id INT UNSIGNED, PRIMARY KEY(taghierarchie_id, tag_id)) ENGINE = INNODB;
 CREATE TABLE tagimplications (tag_id INT UNSIGNED, implied_tag_id INT UNSIGNED, implication_type VARCHAR(8) NOT NULL, PRIMARY KEY(tag_id, implied_tag_id)) ENGINE = INNODB;
-CREATE TABLE votingrecords (document_id INT UNSIGNED, memberstate_id INT UNSIGNED, vote_type VARCHAR(7) NOT NULL, PRIMARY KEY(document_id, memberstate_id)) ENGINE = INNODB;
+CREATE TABLE votingrecords (document_id INT UNSIGNED, memberstate_id INT UNSIGNED, vote_type VARCHAR(7), PRIMARY KEY(document_id, memberstate_id, vote_type)) ENGINE = INNODB;
 ALTER TABLE clauses ADD FOREIGN KEY (parent_clause_id) REFERENCES clauses(clause_id);
 ALTER TABLE clauses ADD FOREIGN KEY (document_id) REFERENCES documents(document_id);
 ALTER TABLE clause2tag ADD FOREIGN KEY (clause_id) REFERENCES clauses(clause_id);
@@ -31,4 +31,5 @@ ALTER TABLE taghierarchie2tag ADD FOREIGN KEY (tag_id) REFERENCES tags(tag_id);
 ALTER TABLE tagimplications ADD FOREIGN KEY (tag_id) REFERENCES tags(tag_id);
 ALTER TABLE tagimplications ADD FOREIGN KEY (implied_tag_id) REFERENCES tags(tag_id);
 ALTER TABLE votingrecords ADD FOREIGN KEY (memberstate_id) REFERENCES organisations(organisation_id);
+ALTER TABLE votingrecords ADD FOREIGN KEY (memberstate_id) REFERENCES memberstates(memberstate_id);
 ALTER TABLE votingrecords ADD FOREIGN KEY (document_id) REFERENCES documents(document_id);

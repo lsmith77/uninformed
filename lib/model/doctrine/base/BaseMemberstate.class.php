@@ -29,6 +29,11 @@ abstract class BaseMemberstate extends sfDoctrineRecord
              'local' => 'memberstate_id',
              'foreign' => 'organisation_id'));
 
+        $this->hasMany('Document as Votingrecords', array(
+             'refClass' => 'Votingrecord',
+             'local' => 'memberstate_id',
+             'foreign' => 'document_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);
     }

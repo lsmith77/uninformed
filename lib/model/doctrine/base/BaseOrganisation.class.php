@@ -38,10 +38,6 @@ abstract class BaseOrganisation extends sfDoctrineRecord
              'local' => 'organisation_id',
              'foreign' => 'parent_organisation_id'));
 
-        $this->hasMany('Votingrecord', array(
-             'local' => 'organisation_id',
-             'foreign' => 'memberstate_id'));
-
         $this->hasMany('Document', array(
              'local' => 'organisation_id',
              'foreign' => 'organisation_id'));

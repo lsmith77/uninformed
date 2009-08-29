@@ -77,15 +77,16 @@ abstract class BaseDocument extends sfDoctrineRecord
              'local' => 'document_id',
              'foreign' => 'tag_id'));
 
+        $this->hasMany('Memberstate as Votingrecords', array(
+             'refClass' => 'Votingrecord',
+             'local' => 'document_id',
+             'foreign' => 'memberstate_id'));
+
         $this->hasMany('Clause', array(
              'local' => 'document_id',
              'foreign' => 'document_id'));
 
         $this->hasMany('DocumentRelation', array(
-             'local' => 'document_id',
-             'foreign' => 'document_id'));
-
-        $this->hasMany('Votingrecord', array(
              'local' => 'document_id',
              'foreign' => 'document_id'));
 

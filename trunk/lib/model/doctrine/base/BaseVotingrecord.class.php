@@ -30,19 +30,9 @@ abstract class BaseVotingrecord extends sfDoctrineRecord
               3 => 'abstain',
               4 => 'missing',
              ),
-             'notnull' => true,
+             'primary' => true,
              'length' => '7',
              ));
     }
 
-    public function setUp()
-    {
-        $this->hasOne('Document', array(
-             'local' => 'document_id',
-             'foreign' => 'document_id'));
-
-        $this->hasOne('Organisation', array(
-             'local' => 'memberstate_id',
-             'foreign' => 'organisation_id'));
-    }
 }

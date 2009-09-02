@@ -1,10 +1,10 @@
-legal_value_legalvalues:
+legalvalue_legalvalues:
   class: sfDoctrineRouteCollection
   options:
     model:                LegalValue
     module:               legalvalues
     prefix_path:          legalvalues
-    column:               legal_value_id
+    column:               legalvalue_id
     with_wildcard_routes: true
 
 organisation_organisations:
@@ -43,6 +43,15 @@ document_documents:
     column:               document_id
     with_wildcard_routes: true
 
+documentrelation_documentrelations:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DocumentRelation
+    module:               documentrelations
+    prefix_path:          documentrelations
+    column:               id
+    with_wildcard_routes: true
+
 clause_clauses:
   class: sfDoctrineRouteCollection
   options:
@@ -59,6 +68,42 @@ tag_tags:
     module:               tags
     prefix_path:          tags
     column:               tag_id
+    with_wildcard_routes: true
+
+tagimplication_tagimplications:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TagImplication
+    module:               tagimplications
+    prefix_path:          tagimplications
+    column:               id
+    with_wildcard_routes: true
+
+taghierarchie_taghierarchies:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TagHierarchie
+    module:               taghierarchies
+    prefix_path:          taghierarchies
+    column:               taghierarchie_id
+    with_wildcard_routes: true
+
+memberstateorganisation_memberstatesorganisations:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                MemberstateOrganisation
+    module:               memberstatesorganisations
+    prefix_path:          memberstatesorganisations
+    column:               id
+    with_wildcard_routes: true
+
+vote_votes:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Vote
+    module:               votes
+    prefix_path:          votes
+    column:               vote_id
     with_wildcard_routes: true
 
 homepage:

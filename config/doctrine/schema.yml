@@ -1,373 +1,187 @@
-ClauseTag:
-  tableName: clause2tag
+actAs: [Timestampable]
+
+options:
+  collation: utf8_general_ci
+  charset: utf8
+  type: InnoDB
+
+LegalValue:
+  tableName: legalvalues
   columns:
-    clause_id:
-      type: integer(4)
-      primary: true
-      unsigned: true
-    tag_id:
-      type: integer(4)
-      primary: true
-      unsigned: true
-Clause:
-  tableName: clauses
-  actAs: [Timestampable]
-  columns:
-    clause_id:
-      type: integer(4)
+    legalvalue_id:
+      type: integer
       primary: true
       autoincrement: true
-      unsigned: true
     name:
-      type: string(45)
+      type: string(255)
       notnull: true
-    document_id:
-      type: integer(4)
-      notnull: true
-      unsigned: true
-    clause_number:
-      type: integer(4)
-      notnull: true
-    parent_clause_id:
-      type: integer(4)
-      unsigned: true
-    information_type:
-      type: string(45)
-    operative_phrase:
-      type: string(45)
-    adressee:
-      type: string(45)
-    relevance:
-      type: string(45)
-    significants:
-      type: string(45)
-    content:
-      type: string(60000)
-  relations:
-    Document:
-      class: Document
-      local: document_id
-      foreign: document_id
-      type: one
-    Clause:
-      class: Clause
-      local: parent_clause_id
-      foreign: clause_id
-      type: one
-    Tags:
-      class: Tag
-      local: clause_id
-      foreign: tag_id
-      refClass: ClauseTag
-    ParentClauses:
-      class: Clause
-      local: clause_id
-      foreign: parent_clause_id
-      type: many
-DocumentTag:
-  tableName: document2tag
+
+Organisation:
+  tableName: organisations
   columns:
-    document_id:
-      type: integer(4)
+    organisation_id:
+      type: integer
       primary: true
-      unsigned: true
-    tag_id:
-      type: integer(4)
-      primary: true
-      unsigned: true
-DocumentRelation:
-  tableName: documentrelations
-  columns:
-    document_id:
-      type: integer(4)
-      primary: true
-      unsigned: true
-    related_document_id:
-      type: integer(4)
-      primary: true
-      unsigned: true
-    relation_type:
-      type: enum(8)
-      values: [followup, recalls, report]
-      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    parent_id:
+      type: integer
   relations:
-    Document:
-      class: Document
-      local: document_id
-      foreign: document_id
-      type: one
-    RelatedDocument:
-      class: Document
-      local: related_document_id
-      foreign: document_id
-      type: one
+    Parent:
+      class: Organisation
+      local: parent_id
+      foreign: organisation_id
+      foreignAlias: Suborganisations
+
+DocumentType:
+  tableName: documenttypes
+  columns:
+    documenttype_id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    legalvalue_id:
+      type: integer
+  relations:
+    LegalValue:
+      class: LegalValue
+      local: legalvalue_id
+      foreign: legalvalue_id
+
 Document:
   tableName: documents
-  actAs: [Timestampable]
   columns:
     document_id:
-      type: integer(4)
+      type: integer
       primary: true
       autoincrement: true
-      unsigned: true
     name:
-      type: string(45)
+      type: string(255)
       notnull: true
-    documenttype_id:
-      type: integer(4)
-      notnull: true
-      unsigned: true
     publication_date:
       type: date
       notnull: true
     adoption_date:
       type: date
-    organisation_id:
-      type: integer(4)
-      notnull: true
-      unsigned: true
     code:
-      type: string(45)
-    legal_value_id:
-      type: integer(4)
-      unsigned: true
+      type: string(255)
     min_ratification_count:
       type: integer(4)
     preamble:
-      type: string(60000)
+      type: string
+    parent_id:
+      type: integer
+    organisation_id:
+      type: integer
+    documenttype_id:
+      type: integer
   relations:
-    LegalValue:
-      class: LegalValue
-      local: legal_value_id
-      foreign: legal_value_id
-      type: one
-    Documenttype:
-      class: Documenttype
-      local: documenttype_id
-      foreign: documenttype_id
-      type: one
+    Parent:
+      class: Document
+      local: parent_id
+      foreign: document_id
+      foreignAlias: Subdocuments
     Organisation:
       local: organisation_id
       foreign: organisation_id
-      type: one
-    Clauses:
-      local: document_id
-      foreign: document_id
-      type: many
+      foreignAlias: Organisations
+    DocumentType:
+      local: documenttype_id
+      foreign: documenttype_id
+      foreignAlias: Documents
     Tags:
       class: Tag
       local: document_id
       foreign: tag_id
       refClass: DocumentTag
-    DocumentRelate:
-      class: Documentrelation
-      local: document_id
-      foreign: document_id
-      type: many
-    DocumentRelated:
-      class: Documentrelation
-      local: document_id
-      foreign: related_document_id
-      type: many
-    Votingrecords:
-      class: Memberstate
-      local: document_id
-      foreign: memberstate_id
-      type: many
-      refClass: Votingrecord
-Documenttype:
-  tableName: documenttypes
+      
+DocumentRelation:
+  tableName: documentrelations
   columns:
-    documenttype_id:
-      type: integer(4)
+    id:
+      type: integer
       primary: true
       autoincrement: true
-      unsigned: true
-    name:
-      type: string(45)
+    relation_type:
+      type: enum
+      values: [followup, recalls, report]
       notnull: true
-    legal_value_id:
-      type: integer(4)
-      unsigned: true
+    document_left_hand:
+      type: integer
+      notnull: true
+    document_right_hand:
+      type: integer
       notnull: true
   relations:
-    LegalValue:
-      class: LegalValue
-      local: legal_value_id
-      foreign: legal_value_id
-      type: one
     Document:
-      class: Document
-      local: documenttype_id
-      foreign: documenttype_id
-      type: many
-Memberstate:
-  tableName: memberstates
-  actAs: [Timestampable]
-  columns:
-    memberstate_id:
-      type: integer(4)
-      primary: true
-      autoincrement: true
-      unsigned: true
-    name:
-      type: string(45)
-      notnull: true
-  relations:
-    Organisations:
-      class: Organisation
-      local: memberstate_id
-      foreign: organisation_id
-      refClass: MemberstateOrganisation
-    Votingrecords:
-      class: Document
-      local: memberstate_id
+      local: document_left_hand
       foreign: document_id
-      type: many
-      refClass: Votingrecord
-LegalValue:
-  tableName: legal_values
+    Document:
+      local: document_right_hand
+      foreign: document_id
+
+Clause:
+  tableName: clauses
   columns:
-    legal_value_id:
-      type: integer(4)
+    clause_id:
+      type: integer
       primary: true
       autoincrement: true
-      unsigned: true
     name:
-      type: string(45)
+      type: string(255)
       notnull: true
-MemberstateOrganisation:
-  tableName: memberstates2organisations
-  columns:
-    memberstate_id:
-      type: integer(4)
-      primary: true
-      unsigned: true
-    organisation_id:
-      type: integer(4)
-      primary: true
-      unsigned: true
-    month:
-      type: date
-      primary: true
-Organisation:
-  tableName: organisations
-  actAs: [Timestampable]
-  columns:
-    organisation_id:
-      type: integer(4)
-      primary: true
-      autoincrement: true
-      unsigned: true
-    name:
-      type: string(45)
+    clause_number:
+      type: string(255)
       notnull: true
-    parent_organisation_id:
-      type: integer(4)
-      unsigned: true
+    information_type:
+      type: string(255)
+    operative_phrase:
+      type: string(255)
+    adressee:
+      type: string(255)
+    relevance:
+      type: string(255)
+    significants:
+      type: string(255)
+    content:
+      type: string
+    parent_id:
+      type: integer
+    document_id:
+      type: integer
   relations:
-    ParentOrganisation:
-      local: parent_organisation_id
-      foreign: organisation_id
-      type: one
-    Documents:
-      local: organisation_id
-      foreign: organisation_id
-      type: many
-    Memberstates:
-      class: Memberstate
-      local: organisation_id
-      foreign: memberstate_id
-      refClass: MemberstateOrganisation
-    ChildOrganisations:
-      class: Organisation
-      local: organisation_id
-      foreign: parent_organisation_id
-      type: many
-TagHierarchieTag:
-  tableName: taghierarchie2tag
-  columns:
-    taghierarchie_id:
-      type: integer(4)
-      primary: true
-      unsigned: true
-    tag_id:
-      type: integer(4)
-      primary: true
-      unsigned: true
-TagHierarchie:
-  tableName: taghierarchies
-  columns:
-    taghierarchie_id:
-      type: integer(4)
-      primary: true
-      autoincrement: true
-      unsigned: true
-    name:
-      type: string(45)
-      notnull: true
-    hierachie_level:
-      type: enum(7)
-      values: [area, issue, keyword]
-      notnull: true
-    parent_taghierarchie_id:
-      type: integer(4)
-      unsigned: true
-  relations:
-    ParentTagHierarchie:
-      local: parent_taghierarchie_id
-      foreign: taghierarchie_id
-      type: one
+    Parent:
+      class: Clause
+      local: parent_id
+      foreign: clause_id
+      foreignAlias: Subclauses
+    Document:
+      local: document_id
+      foreign: document_id
+      foreignAlias: Clauses
     Tags:
       class: Tag
-      local: taghierarchie_id
+      local: clause_id
       foreign: tag_id
-      refClass: TagHierarchieTag
-    ChildTagHierarchies:
-      class: Taghierachie
-      local: taghierarchie_id
-      foreign: parent_taghierarchie_id
-      type: many
-TagImplication:
-  tableName: tagimplications
-  columns:
-    tag_id:
-      type: integer(4)
-      primary: true
-      unsigned: true
-    implied_tag_id:
-      type: integer(4)
-      primary: true
-      unsigned: true
-    implication_type:
-      type: enum(8)
-      values: [implies, suggests]
-      notnull: true
-  relations:
-    ImpliedTag:
-      class: Tag
-      local: implied_tag_id
-      foreign: tag_id
-      type: one
-    Tag:
-      class: Tag
-      local: tag_id
-      foreign: tag_id
-      type: one
+      refClass: ClauseTag
+
 Tag:
   tableName: tags
-  actAs: [Timestampable]
   columns:
     tag_id:
-      type: integer(4)
+      type: integer
       primary: true
       autoincrement: true
-      unsigned: true
     name:
-      type: string(45)
+      type: string(255)
       notnull: true
     tag_type:
-      type: enum(13)
+      type: enum
       values: ['', legal_measure]
       notnull: true
   relations:
@@ -386,28 +200,142 @@ Tag:
       local: tag_id
       foreign: taghierarchie_id
       refClass: TagHierarchieTag
-    ImpliedTagImplications:
-      class: TagImplication
-      local: tag_id
-      foreign: implied_tag_id
-      type: many
-    Tagimplications:
-      class: TagImplication
-      local: tag_id
+
+TagImplication:
+  tableName: tagimplications
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    implication_type:
+      type: enum
+      values: ['implies', 'suggests']
+      notnull: true
+    tag_left_hand:
+      type: integer
+      notnull: true
+    tag_right_hand:
+      type: integer
+      notnull: true
+  relations:
+    Tag:
+      local: tag_left_hand
       foreign: tag_id
-      type: many
-Votingrecord:
-  tableName: votingrecords
+    Tag:
+      local: tag_right_hand
+      foreign: tag_id
+
+TagHierarchie:
+  tableName: taghierarchies
+  columns:
+    taghierarchie_id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    hierarchie_level:
+      type: enum
+      values: ['area', 'issue', 'keyword']
+    parent_id:
+      type: integer
+  relations:
+    Parent:
+      class: TagHierarchie
+      local: parent_id
+      foreign: taghierarchie_id
+      foreignAlias: SubHierarchies
+    Tags:
+      class: Tag
+      local: taghierarchie_id
+      foreign: tag_id
+      refClass: TagHierarchieTag
+
+Memberstate:
+  tableName: memberstates
+  columns:
+    memberstate_id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+
+MemberstateOrganisation:
+  tableName: memberstatesorganisations
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    join_date:
+      type: date
+      notnull: true
+    leave_date:
+      type: date
+    memberstate_id:
+      type: integer
+    organisation_id:
+      type: integer
+  relations:
+    Memberstate:
+      local: memberstate_id
+      foreign: memberstate_id
+      foreignAlias: Organisations
+    Organisation:
+      local: organisation_id
+      foreign: organisation_id
+      foreignAlias: Memberstates
+
+Vote:
+  tableName: votes
+  columns:
+    vote_id:
+      type: integer
+      primary: true
+      autoincrement: true
+    label:
+      type: enum
+      values: [signed, agreed, 'no', abstain, missing]
+    document_id:
+      type: integer
+    memberstate_id:
+      type: integer
+  relations:
+    Document:
+      local: document_id
+      foreign: document_id
+      foreignAlias: Votes
+    Memberstate:
+      local: memberstate_id
+      foreign: memberstate_id
+      foreignAlias: Votes
+
+ClauseTag:
+  columns:
+    clause_id:
+      type: integer
+      primary: true
+    tag_id:
+      type: integer
+      primary: true
+
+DocumentTag:
   columns:
     document_id:
-      type: integer(4)
+      type: integer
       primary: true
-      unsigned: true
-    memberstate_id:
-      type: integer(4)
+    tag_id:
+      type: integer
       primary: true
-      unsigned: true
-    vote_type:
-      type: enum(7)
-      values: [signed, agreed, 'no', abstain, missing]
+
+TagHierarchieTag:
+  columns:
+    taghierarchie_id:
+      type: integer
+      primary: true
+    tag_id:
+      type: integer
       primary: true

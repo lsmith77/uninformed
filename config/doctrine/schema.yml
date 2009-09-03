@@ -135,13 +135,15 @@ Clause:
     name:
       type: string(255)
       notnull: true
+    clause_process:
+      type: integer
     clause_number:
       type: string(255)
       notnull: true
     information_type:
-      type: string(255)
+      type: integer
     operative_phrase:
-      type: string(255)
+      type: integer
     adressee:
       type: string(255)
     relevance:
@@ -160,6 +162,18 @@ Clause:
       local: parent_id
       foreign: clause_id
       foreignAlias: Subclauses
+    ClauseProcess:
+      local: clause_process
+      foreign: id
+      foreignAlias: Clauses
+    ClauseInformationType:
+      local: information_type
+      foreign: id
+      foreignAlias: Clauses
+    ClauseOperativePhrase:
+      local: operative_phrase
+      foreign: id
+      foreignAlias: Clauses
     Document:
       local: document_id
       foreign: document_id
@@ -169,6 +183,39 @@ Clause:
       local: clause_id
       foreign: tag_id
       refClass: ClauseTag
+
+ClauseProcess:
+  tableName: clauseprocesses
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    label:
+      type: string(255)
+      notnull: true
+
+ClauseOperativePhrase:
+  tableName: clauseoperativephrases
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    label:
+      type: string(255)
+      notnull: true
+
+ClauseInformationType:
+  tableName: clauseinformationtypes
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    label:
+      type: string(255)
+      notnull: true
 
 Tag:
   tableName: tags

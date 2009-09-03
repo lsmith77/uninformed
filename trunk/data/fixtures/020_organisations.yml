@@ -1,0 +1,20 @@
+Organisation:
+  org001:
+    name: UNO
+  org002:
+    name: WHO
+  org003:
+    name: ECOSOC
+    parent_id: 1
+  org004:
+    name: WHA
+    parent_id: 2
+  org005:
+    name: GA
+    parent_id: 1
+  org006:
+    name: DESA
+    parent_id: 1
+  org007:
+    name: Commission on Human Rights
+    parent_id: 3

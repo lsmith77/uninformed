@@ -1,0 +1,73 @@
+Memberstate:
+  state001:
+    name: United States of America
+  state002:
+    name: Canada
+  state003:
+    name: Mexico
+  state004:
+    name: Nicaragua
+  state005:
+    name: Costa Rica
+  state006:
+    name: Honduras
+  state007:
+    name: Panama
+  state008:
+    name: Columbia
+  state009:
+    name: Venezuela
+  state010:
+    name: Bolivia
+  state011:
+    name: Chile
+  state011:
+    name: Argentina
+  state012: 
+    name: Island
+  state013:
+    name: Irland
+  state014:
+    name: Great Britain
+  state015:
+    name: Norway
+  state016:
+    name: Sweden
+  state017:
+    name: Finland
+  state018:
+    name: Denmark
+  state019:
+    name: Netherlands
+  state020:
+    name: Belgium
+  state021:
+    name: Germany
+  state022:
+    name: France
+  state023:
+    name: Switzerland
+  state024:
+    name: Austria
+  state025:
+    name: Spain
+  state026:
+    name: Portugal
+  state027:
+    name: Italy
+  state028:
+    name: South Africa
+  state029:
+    name: India
+  state030:
+    name: China
+  state031:
+    name: Japon
+  state032:
+    name: Indonesia
+  state033:
+    name: Philipines
+  state034:
+    name: Australia
+  state035:
+    name: Russia

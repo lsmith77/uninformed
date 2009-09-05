@@ -5,6 +5,17 @@ options:
   charset: utf8
   type: InnoDB
 
+Addressee:
+  tableName: addressees
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    label:
+      type: string(255)
+      notnull: true
+
 LegalValue:
   tableName: legalvalues
   columns:
@@ -144,8 +155,8 @@ Clause:
       type: integer
     operative_phrase:
       type: integer
-    adressee:
-      type: string(255)
+    addressee:
+      type: integer
     relevance:
       type: string(255)
     significants:
@@ -172,6 +183,10 @@ Clause:
       foreignAlias: Clauses
     ClauseOperativePhrase:
       local: operative_phrase
+      foreign: id
+      foreignAlias: Clauses
+    Addressee:
+      local: addressee
       foreign: id
       foreignAlias: Clauses
     Document:

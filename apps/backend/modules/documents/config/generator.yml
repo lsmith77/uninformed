@@ -12,15 +12,12 @@ generator:
 
     config:
       actions: ~
-      fields:
-        documenttype_id: { label: Document type}
-        organisation_id: { label: Organisation}
-        legal_value_id: { label: Legal value}
+      fields:  ~
       list:
-        display: [=name, documenttype, organisation]
+        title: Documents
+        display: [name, parent]
+        max_per_page: 10
       filter:  ~
       form:    ~
-      edit:
-        display: [name, documenttype_id, publication_date, adoption_date, organisation_id, code, legal_value_id, min_ratification_count, preamble, tags_list, created_at, updated_at]
-      new:
-        display: [name, documenttype_id, publication_date, adoption_date, organisation_id, code, legal_value_id, min_ratification_count, preamble, tags_list]
+      edit:    ~
+      new:     ~

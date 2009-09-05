@@ -19,6 +19,7 @@
 
 <div id="menu">
 <ul>
+  <li><?php echo link_to('Addressees', '@addressee_addressees') ?></li>
   <li><?php echo link_to('Legal Values', '@legalvalue_legalvalues') ?></li>
   <li>|</li>
   <li><?php echo link_to('Document Types', '@documenttype_documenttypes') ?>

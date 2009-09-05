@@ -1,22 +1,24 @@
 generator:
   class: sfDoctrineGenerator
   param:
-    model_class:           Documenttype
+    model_class:           DocumentType
     theme:                 admin
     non_verbose_templates: true
     with_show:             false
     singular:              ~
     plural:                ~
-    route_prefix:          documenttype_documenttypes
+    route_prefix:          document_type_documenttypes
     with_doctrine_route:     1
 
     config:
       actions: ~
-      fields:
-        legal_value_id: { label: "Legal value" }
+      fields:  ~
       list:
-        display: [=name, legal_value]
+        title: Document Types Management
+        display: [name]
       filter:  ~
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        title: Edit Document type "%%name%%"
+      new:
+        title: Create new Document Type

@@ -1,25 +1,20 @@
 generator:
   class: sfDoctrineGenerator
   param:
-    model_class:           Memberstate
+    model_class:           TagImplication
     theme:                 admin
     non_verbose_templates: true
     with_show:             false
     singular:              ~
     plural:                ~
-    route_prefix:          memberstate_memberstates
+    route_prefix:          tag_implication_tagimplications
     with_doctrine_route:     1
 
     config:
       actions: ~
       fields:  ~
-      list:
-        title: UN Membership States
-        display: [name]
-        max_per_page: 10
+      list:    ~
       filter:  ~
       form:    ~
-      edit:
-        title: Edit Memberstate "%%name%%"
-      new:
-        title: Create new memberstate
+      edit:    ~
+      new:     ~

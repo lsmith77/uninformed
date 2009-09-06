@@ -8,19 +8,17 @@ abstract class BaseTagHierarchie extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('taghierarchies');
-        $this->hasColumn('taghierarchie_id', 'integer', 4, array(
+        $this->hasColumn('taghierarchie_id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
-             'unsigned' => true,
-             'length' => '4',
              ));
-        $this->hasColumn('name', 'string', 45, array(
+        $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => '45',
+             'length' => '255',
              ));
-        $this->hasColumn('hierachie_level', 'enum', 7, array(
+        $this->hasColumn('hierarchie_level', 'enum', null, array(
              'type' => 'enum',
              'values' => 
              array(
@@ -28,21 +26,32 @@ abstract class BaseTagHierarchie extends sfDoctrineRecord
               1 => 'issue',
               2 => 'keyword',
              ),
-             'notnull' => true,
-             'length' => '7',
              ));
-        $this->hasColumn('parent_taghierarchie_id', 'integer', 4, array(
+        $this->hasColumn('parent_id', 'integer', null, array(
              'type' => 'integer',
-             'unsigned' => true,
-             'length' => '4',
              ));
+
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
     public function setUp()
     {
+        $this->hasOne('TagHierarchie as Parent', array(
+             'local' => 'parent_id',
+             'foreign' => 'taghierarchie_id'));
+
         $this->hasMany('Tag as Tags', array(
              'refClass' => 'TagHierarchieTag',
              'local' => 'taghierarchie_id',
              'foreign' => 'tag_id'));
+
+        $this->hasMany('TagHierarchie as SubHierarchies', array(
+             'local' => 'taghierarchie_id',
+             'foreign' => 'parent_id'));
+
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($timestampable0);
     }
 }

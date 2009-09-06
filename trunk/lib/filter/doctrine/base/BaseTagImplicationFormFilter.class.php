@@ -15,10 +15,18 @@ class BaseTagImplicationFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'implication_type' => new sfWidgetFormChoice(array('choices' => array('' => '', 'implies' => 'implies', 'suggests' => 'suggests'))),
+      'tag_left_hand'    => new sfWidgetFormFilterInput(),
+      'tag_right_hand'   => new sfWidgetFormDoctrineChoice(array('model' => 'Tag', 'add_empty' => true)),
+      'created_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
+      'updated_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
     ));
 
     $this->setValidators(array(
       'implication_type' => new sfValidatorChoice(array('required' => false, 'choices' => array('implies' => 'implies', 'suggests' => 'suggests'))),
+      'tag_left_hand'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'tag_right_hand'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => 'Tag', 'column' => 'tag_id')),
+      'created_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'updated_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
     ));
 
     $this->widgetSchema->setNameFormat('tag_implication_filters[%s]');
@@ -36,9 +44,12 @@ class BaseTagImplicationFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'tag_id'           => 'Number',
-      'implied_tag_id'   => 'Number',
+      'id'               => 'Number',
       'implication_type' => 'Enum',
+      'tag_left_hand'    => 'Number',
+      'tag_right_hand'   => 'ForeignKey',
+      'created_at'       => 'Date',
+      'updated_at'       => 'Date',
     );
   }
 }

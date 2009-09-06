@@ -8,19 +8,12 @@ abstract class BaseTagImplication extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('tagimplications');
-        $this->hasColumn('tag_id', 'integer', 4, array(
+        $this->hasColumn('id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
-             'unsigned' => true,
-             'length' => '4',
+             'autoincrement' => true,
              ));
-        $this->hasColumn('implied_tag_id', 'integer', 4, array(
-             'type' => 'integer',
-             'primary' => true,
-             'unsigned' => true,
-             'length' => '4',
-             ));
-        $this->hasColumn('implication_type', 'enum', 8, array(
+        $this->hasColumn('implication_type', 'enum', null, array(
              'type' => 'enum',
              'values' => 
              array(
@@ -28,18 +21,28 @@ abstract class BaseTagImplication extends sfDoctrineRecord
               1 => 'suggests',
              ),
              'notnull' => true,
-             'length' => '8',
              ));
+        $this->hasColumn('tag_left_hand', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => true,
+             ));
+        $this->hasColumn('tag_right_hand', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => true,
+             ));
+
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
     public function setUp()
     {
-        $this->hasOne('Tag as ImpliedTag', array(
-             'local' => 'implied_tag_id',
+        $this->hasOne('Tag', array(
+             'local' => 'tag_right_hand',
              'foreign' => 'tag_id'));
 
-        $this->hasOne('Tag', array(
-             'local' => 'tag_id',
-             'foreign' => 'tag_id'));
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($timestampable0);
     }
 }

@@ -11,5 +11,6 @@ class TagHierarchieForm extends BaseTagHierarchieForm
 {
   public function configure()
   {
+    $this->widgetSchema['tags_list']->setOption('renderer_class', 'sfWidgetFormSelectDoubleList');
   }
 }

@@ -11,17 +11,8 @@ class TagForm extends BaseTagForm
 {
   public function configure()
   {
-    $this->widgetSchema['created_at'] = new myWidgetFormPlain();
-    $this->widgetSchema['updated_at'] = new myWidgetFormPlain();
-  }
-
-  public function updateCreatedAtColumn()
-  {
-    return false;
-  }
-
-  public function updateUpdatedAtColumn()
-  {
-    return false;
+    $this->widgetSchema['clauses_list']->setOption('renderer_class', 'sfWidgetFormSelectDoubleList');
+    $this->widgetSchema['documents_list']->setOption('renderer_class', 'sfWidgetFormSelectDoubleList');
+    $this->widgetSchema['tag_hierarchies_list']->setOption('renderer_class', 'sfWidgetFormSelectDoubleList');
   }
 }

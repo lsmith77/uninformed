@@ -12,15 +12,21 @@ class BaseDocumentRelationForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'document_id'         => new sfWidgetFormInputHidden(),
-      'related_document_id' => new sfWidgetFormInputHidden(),
-      'relation_type'       => new sfWidgetFormInputHidden(array('choices' => array('followup' => 'followup', 'recalls' => 'recalls', 'report' => 'report'))),
+      'id'                  => new sfWidgetFormInputHidden(),
+      'relation_type'       => new sfWidgetFormChoice(array('choices' => array('followup' => 'followup', 'recalls' => 'recalls', 'report' => 'report'))),
+      'document_left_hand'  => new sfWidgetFormInput(),
+      'document_right_hand' => new sfWidgetFormDoctrineChoice(array('model' => 'Document', 'add_empty' => false)),
+      'created_at'          => new sfWidgetFormDateTime(),
+      'updated_at'          => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
-      'document_id'         => new sfValidatorDoctrineChoice(array('model' => 'DocumentRelation', 'column' => 'document_id', 'required' => false)),
-      'related_document_id' => new sfValidatorDoctrineChoice(array('model' => 'DocumentRelation', 'column' => 'related_document_id', 'required' => false)),
-      'relation_type'       => new sfValidatorDoctrineChoice(array('model' => 'DocumentRelation', 'column' => 'relation_type', 'required' => false)),
+      'id'                  => new sfValidatorDoctrineChoice(array('model' => 'DocumentRelation', 'column' => 'id', 'required' => false)),
+      'relation_type'       => new sfValidatorChoice(array('choices' => array('followup' => 'followup', 'recalls' => 'recalls', 'report' => 'report'))),
+      'document_left_hand'  => new sfValidatorInteger(),
+      'document_right_hand' => new sfValidatorDoctrineChoice(array('model' => 'Document')),
+      'created_at'          => new sfValidatorDateTime(array('required' => false)),
+      'updated_at'          => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('document_relation[%s]');

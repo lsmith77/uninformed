@@ -12,13 +12,17 @@ class BaseClauseTagForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'clause_id' => new sfWidgetFormInputHidden(),
-      'tag_id'    => new sfWidgetFormInputHidden(),
+      'clause_id'  => new sfWidgetFormInputHidden(),
+      'tag_id'     => new sfWidgetFormInputHidden(),
+      'created_at' => new sfWidgetFormDateTime(),
+      'updated_at' => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
-      'clause_id' => new sfValidatorDoctrineChoice(array('model' => 'ClauseTag', 'column' => 'clause_id', 'required' => false)),
-      'tag_id'    => new sfValidatorDoctrineChoice(array('model' => 'ClauseTag', 'column' => 'tag_id', 'required' => false)),
+      'clause_id'  => new sfValidatorDoctrineChoice(array('model' => 'ClauseTag', 'column' => 'clause_id', 'required' => false)),
+      'tag_id'     => new sfValidatorDoctrineChoice(array('model' => 'ClauseTag', 'column' => 'tag_id', 'required' => false)),
+      'created_at' => new sfValidatorDateTime(array('required' => false)),
+      'updated_at' => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('clause_tag[%s]');

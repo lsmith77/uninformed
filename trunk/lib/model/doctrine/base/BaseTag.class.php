@@ -8,19 +8,17 @@ abstract class BaseTag extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('tags');
-        $this->hasColumn('tag_id', 'integer', 4, array(
+        $this->hasColumn('tag_id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
-             'unsigned' => true,
-             'length' => '4',
              ));
-        $this->hasColumn('name', 'string', 45, array(
+        $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => '45',
+             'length' => '255',
              ));
-        $this->hasColumn('tag_type', 'enum', 13, array(
+        $this->hasColumn('tag_type', 'enum', null, array(
              'type' => 'enum',
              'values' => 
              array(
@@ -28,8 +26,11 @@ abstract class BaseTag extends sfDoctrineRecord
               1 => 'legal_measure',
              ),
              'notnull' => true,
-             'length' => '13',
              ));
+
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
     public function setUp()
@@ -49,13 +50,9 @@ abstract class BaseTag extends sfDoctrineRecord
              'local' => 'tag_id',
              'foreign' => 'taghierarchie_id'));
 
-        $this->hasMany('TagImplication as ImpliedTagImplications', array(
+        $this->hasMany('TagImplication', array(
              'local' => 'tag_id',
-             'foreign' => 'implied_tag_id'));
-
-        $this->hasMany('TagImplication as Tagimplications', array(
-             'local' => 'tag_id',
-             'foreign' => 'tag_id'));
+             'foreign' => 'tag_right_hand'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

@@ -8,23 +8,15 @@ abstract class BaseDocument extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('documents');
-        $this->hasColumn('document_id', 'integer', 4, array(
+        $this->hasColumn('document_id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
-             'unsigned' => true,
-             'length' => '4',
              ));
-        $this->hasColumn('name', 'string', 45, array(
+        $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => '45',
-             ));
-        $this->hasColumn('documenttype_id', 'integer', 4, array(
-             'type' => 'integer',
-             'notnull' => true,
-             'unsigned' => true,
-             'length' => '4',
+             'length' => '255',
              ));
         $this->hasColumn('publication_date', 'date', null, array(
              'type' => 'date',
@@ -33,60 +25,64 @@ abstract class BaseDocument extends sfDoctrineRecord
         $this->hasColumn('adoption_date', 'date', null, array(
              'type' => 'date',
              ));
-        $this->hasColumn('organisation_id', 'integer', 4, array(
-             'type' => 'integer',
-             'notnull' => true,
-             'unsigned' => true,
-             'length' => '4',
-             ));
-        $this->hasColumn('code', 'string', 45, array(
+        $this->hasColumn('code', 'string', 255, array(
              'type' => 'string',
-             'length' => '45',
-             ));
-        $this->hasColumn('legal_value_id', 'integer', 4, array(
-             'type' => 'integer',
-             'unsigned' => true,
-             'length' => '4',
+             'length' => '255',
              ));
         $this->hasColumn('min_ratification_count', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
              ));
-        $this->hasColumn('preamble', 'string', 60000, array(
+        $this->hasColumn('preamble', 'string', null, array(
              'type' => 'string',
-             'length' => '60000',
              ));
+        $this->hasColumn('parent_id', 'integer', null, array(
+             'type' => 'integer',
+             ));
+        $this->hasColumn('organisation_id', 'integer', null, array(
+             'type' => 'integer',
+             ));
+        $this->hasColumn('documenttype_id', 'integer', null, array(
+             'type' => 'integer',
+             ));
+
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
     public function setUp()
     {
-        $this->hasOne('LegalValue', array(
-             'local' => 'legal_value_id',
-             'foreign' => 'legal_value_id'));
-
-        $this->hasOne('Documenttype', array(
-             'local' => 'documenttype_id',
-             'foreign' => 'documenttype_id'));
+        $this->hasOne('Document as Parent', array(
+             'local' => 'parent_id',
+             'foreign' => 'document_id'));
 
         $this->hasOne('Organisation', array(
              'local' => 'organisation_id',
              'foreign' => 'organisation_id'));
+
+        $this->hasOne('DocumentType', array(
+             'local' => 'documenttype_id',
+             'foreign' => 'documenttype_id'));
 
         $this->hasMany('Tag as Tags', array(
              'refClass' => 'DocumentTag',
              'local' => 'document_id',
              'foreign' => 'tag_id'));
 
-        $this->hasMany('Memberstate as Votingrecords', array(
-             'refClass' => 'Votingrecord',
+        $this->hasMany('Document as Subdocuments', array(
              'local' => 'document_id',
-             'foreign' => 'memberstate_id'));
+             'foreign' => 'parent_id'));
 
-        $this->hasMany('Clause', array(
+        $this->hasMany('DocumentRelation', array(
+             'local' => 'document_id',
+             'foreign' => 'document_right_hand'));
+
+        $this->hasMany('Clause as Clauses', array(
              'local' => 'document_id',
              'foreign' => 'document_id'));
 
-        $this->hasMany('DocumentRelation', array(
+        $this->hasMany('Vote as Votes', array(
              'local' => 'document_id',
              'foreign' => 'document_id'));
 

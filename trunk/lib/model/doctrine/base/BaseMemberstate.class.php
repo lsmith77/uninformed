@@ -8,31 +8,30 @@ abstract class BaseMemberstate extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('memberstates');
-        $this->hasColumn('memberstate_id', 'integer', 4, array(
+        $this->hasColumn('memberstate_id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
-             'unsigned' => true,
-             'length' => '4',
              ));
-        $this->hasColumn('name', 'string', 45, array(
+        $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
-             'notnull' => true,
-             'length' => '45',
+             'length' => '255',
              ));
+
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
     public function setUp()
     {
-        $this->hasMany('Organisation as Organisations', array(
-             'refClass' => 'MemberstateOrganisation',
+        $this->hasMany('MemberstateOrganisation as Organisations', array(
              'local' => 'memberstate_id',
-             'foreign' => 'organisation_id'));
+             'foreign' => 'memberstate_id'));
 
-        $this->hasMany('Document as Votingrecords', array(
-             'refClass' => 'Votingrecord',
+        $this->hasMany('Vote as Votes', array(
              'local' => 'memberstate_id',
-             'foreign' => 'document_id'));
+             'foreign' => 'memberstate_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

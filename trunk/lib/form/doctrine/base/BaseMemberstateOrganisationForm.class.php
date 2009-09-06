@@ -12,15 +12,23 @@ class BaseMemberstateOrganisationForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'memberstate_id'  => new sfWidgetFormInputHidden(),
-      'organisation_id' => new sfWidgetFormInputHidden(),
-      'month'           => new sfWidgetFormInputHidden(),
+      'id'              => new sfWidgetFormInputHidden(),
+      'join_date'       => new sfWidgetFormDate(),
+      'leave_date'      => new sfWidgetFormDate(),
+      'memberstate_id'  => new sfWidgetFormDoctrineChoice(array('model' => 'Memberstate', 'add_empty' => true)),
+      'organisation_id' => new sfWidgetFormDoctrineChoice(array('model' => 'Organisation', 'add_empty' => true)),
+      'created_at'      => new sfWidgetFormDateTime(),
+      'updated_at'      => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
-      'memberstate_id'  => new sfValidatorDoctrineChoice(array('model' => 'MemberstateOrganisation', 'column' => 'memberstate_id', 'required' => false)),
-      'organisation_id' => new sfValidatorDoctrineChoice(array('model' => 'MemberstateOrganisation', 'column' => 'organisation_id', 'required' => false)),
-      'month'           => new sfValidatorDoctrineChoice(array('model' => 'MemberstateOrganisation', 'column' => 'month', 'required' => false)),
+      'id'              => new sfValidatorDoctrineChoice(array('model' => 'MemberstateOrganisation', 'column' => 'id', 'required' => false)),
+      'join_date'       => new sfValidatorDate(),
+      'leave_date'      => new sfValidatorDate(array('required' => false)),
+      'memberstate_id'  => new sfValidatorDoctrineChoice(array('model' => 'Memberstate', 'required' => false)),
+      'organisation_id' => new sfValidatorDoctrineChoice(array('model' => 'Organisation', 'required' => false)),
+      'created_at'      => new sfValidatorDateTime(array('required' => false)),
+      'updated_at'      => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('memberstate_organisation[%s]');

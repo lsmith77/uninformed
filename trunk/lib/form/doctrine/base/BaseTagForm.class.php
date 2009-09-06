@@ -24,7 +24,7 @@ class BaseTagForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'tag_id'               => new sfValidatorDoctrineChoice(array('model' => 'Tag', 'column' => 'tag_id', 'required' => false)),
-      'name'                 => new sfValidatorString(array('max_length' => 45)),
+      'name'                 => new sfValidatorString(array('max_length' => 255)),
       'tag_type'             => new sfValidatorChoice(array('choices' => array('' => '', 'legal_measure' => 'legal_measure'))),
       'created_at'           => new sfValidatorDateTime(array('required' => false)),
       'updated_at'           => new sfValidatorDateTime(array('required' => false)),

@@ -14,9 +14,19 @@ class BaseDocumentRelationFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
+      'relation_type'       => new sfWidgetFormChoice(array('choices' => array('' => '', 'followup' => 'followup', 'recalls' => 'recalls', 'report' => 'report'))),
+      'document_left_hand'  => new sfWidgetFormFilterInput(),
+      'document_right_hand' => new sfWidgetFormDoctrineChoice(array('model' => 'Document', 'add_empty' => true)),
+      'created_at'          => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
+      'updated_at'          => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
     ));
 
     $this->setValidators(array(
+      'relation_type'       => new sfValidatorChoice(array('required' => false, 'choices' => array('followup' => 'followup', 'recalls' => 'recalls', 'report' => 'report'))),
+      'document_left_hand'  => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'document_right_hand' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => 'Document', 'column' => 'document_id')),
+      'created_at'          => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'updated_at'          => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
     ));
 
     $this->widgetSchema->setNameFormat('document_relation_filters[%s]');
@@ -34,9 +44,12 @@ class BaseDocumentRelationFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'document_id'         => 'Number',
-      'related_document_id' => 'Number',
+      'id'                  => 'Number',
       'relation_type'       => 'Enum',
+      'document_left_hand'  => 'Number',
+      'document_right_hand' => 'ForeignKey',
+      'created_at'          => 'Date',
+      'updated_at'          => 'Date',
     );
   }
 }

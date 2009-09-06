@@ -14,17 +14,15 @@ class BaseMemberstateFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'name'               => new sfWidgetFormFilterInput(),
-      'created_at'         => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
-      'updated_at'         => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
-      'organisations_list' => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Organisation')),
+      'name'           => new sfWidgetFormFilterInput(),
+      'created_at'     => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
+      'updated_at'     => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
     ));
 
     $this->setValidators(array(
-      'name'               => new sfValidatorPass(array('required' => false)),
-      'created_at'         => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
-      'updated_at'         => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
-      'organisations_list' => new sfValidatorDoctrineChoiceMany(array('model' => 'Organisation', 'required' => false)),
+      'name'           => new sfValidatorPass(array('required' => false)),
+      'created_at'     => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'updated_at'     => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
     ));
 
     $this->widgetSchema->setNameFormat('memberstate_filters[%s]');
@@ -32,22 +30,6 @@ class BaseMemberstateFormFilter extends BaseFormFilterDoctrine
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
 
     parent::setup();
-  }
-
-  public function addOrganisationsListColumnQuery(Doctrine_Query $query, $field, $values)
-  {
-    if (!is_array($values))
-    {
-      $values = array($values);
-    }
-
-    if (!count($values))
-    {
-      return;
-    }
-
-    $query->leftJoin('r.MemberstateOrganisation MemberstateOrganisation')
-          ->andWhereIn('MemberstateOrganisation.organisation_id', $values);
   }
 
   public function getModelName()
@@ -58,11 +40,10 @@ class BaseMemberstateFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'memberstate_id'     => 'Number',
-      'name'               => 'Text',
-      'created_at'         => 'Date',
-      'updated_at'         => 'Date',
-      'organisations_list' => 'ManyKey',
+      'memberstate_id' => 'Number',
+      'name'           => 'Text',
+      'created_at'     => 'Date',
+      'updated_at'     => 'Date',
     );
   }
 }

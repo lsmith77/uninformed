@@ -7,19 +7,24 @@ abstract class BaseTagHierarchieTag extends sfDoctrineRecord
 {
     public function setTableDefinition()
     {
-        $this->setTableName('taghierarchie2tag');
-        $this->hasColumn('taghierarchie_id', 'integer', 4, array(
+        $this->setTableName('tag_hierarchie_tag');
+        $this->hasColumn('taghierarchie_id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
-             'unsigned' => true,
-             'length' => '4',
              ));
-        $this->hasColumn('tag_id', 'integer', 4, array(
+        $this->hasColumn('tag_id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
-             'unsigned' => true,
-             'length' => '4',
              ));
+
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
+    public function setUp()
+    {
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($timestampable0);
+    }
 }

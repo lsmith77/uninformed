@@ -8,78 +8,90 @@ abstract class BaseClause extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('clauses');
-        $this->hasColumn('clause_id', 'integer', 4, array(
+        $this->hasColumn('clause_id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
-             'unsigned' => true,
-             'length' => '4',
              ));
-        $this->hasColumn('name', 'string', 45, array(
+        $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => '45',
+             'length' => '255',
              ));
-        $this->hasColumn('document_id', 'integer', 4, array(
+        $this->hasColumn('clause_process', 'integer', null, array(
              'type' => 'integer',
+             ));
+        $this->hasColumn('clause_number', 'string', 255, array(
+             'type' => 'string',
              'notnull' => true,
-             'unsigned' => true,
-             'length' => '4',
+             'length' => '255',
              ));
-        $this->hasColumn('clause_number', 'integer', 4, array(
+        $this->hasColumn('information_type', 'integer', null, array(
              'type' => 'integer',
-             'notnull' => true,
-             'length' => '4',
              ));
-        $this->hasColumn('parent_clause_id', 'integer', 4, array(
+        $this->hasColumn('operative_phrase', 'integer', null, array(
              'type' => 'integer',
-             'unsigned' => true,
-             'length' => '4',
              ));
-        $this->hasColumn('information_type', 'string', 45, array(
+        $this->hasColumn('addressee', 'integer', null, array(
+             'type' => 'integer',
+             ));
+        $this->hasColumn('relevance', 'string', 255, array(
              'type' => 'string',
-             'length' => '45',
+             'length' => '255',
              ));
-        $this->hasColumn('operative_phrase', 'string', 45, array(
+        $this->hasColumn('significants', 'string', 255, array(
              'type' => 'string',
-             'length' => '45',
+             'length' => '255',
              ));
-        $this->hasColumn('adressee', 'string', 45, array(
+        $this->hasColumn('content', 'string', null, array(
              'type' => 'string',
-             'length' => '45',
              ));
-        $this->hasColumn('relevance', 'string', 45, array(
-             'type' => 'string',
-             'length' => '45',
+        $this->hasColumn('parent_id', 'integer', null, array(
+             'type' => 'integer',
              ));
-        $this->hasColumn('significants', 'string', 45, array(
-             'type' => 'string',
-             'length' => '45',
+        $this->hasColumn('document_id', 'integer', null, array(
+             'type' => 'integer',
              ));
-        $this->hasColumn('content', 'string', 60000, array(
-             'type' => 'string',
-             'length' => '60000',
-             ));
+
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
     public function setUp()
     {
+        $this->hasOne('Clause as Parent', array(
+             'local' => 'parent_id',
+             'foreign' => 'clause_id'));
+
+        $this->hasOne('ClauseProcess', array(
+             'local' => 'clause_process',
+             'foreign' => 'id'));
+
+        $this->hasOne('ClauseInformationType', array(
+             'local' => 'information_type',
+             'foreign' => 'id'));
+
+        $this->hasOne('ClauseOperativePhrase', array(
+             'local' => 'operative_phrase',
+             'foreign' => 'id'));
+
+        $this->hasOne('Addressee', array(
+             'local' => 'addressee',
+             'foreign' => 'id'));
+
         $this->hasOne('Document', array(
              'local' => 'document_id',
              'foreign' => 'document_id'));
-
-        $this->hasOne('Clause', array(
-             'local' => 'parent_clause_id',
-             'foreign' => 'clause_id'));
 
         $this->hasMany('Tag as Tags', array(
              'refClass' => 'ClauseTag',
              'local' => 'clause_id',
              'foreign' => 'tag_id'));
 
-        $this->hasMany('Clause as ParentClauses', array(
+        $this->hasMany('Clause as Subclauses', array(
              'local' => 'clause_id',
-             'foreign' => 'parent_clause_id'));
+             'foreign' => 'parent_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

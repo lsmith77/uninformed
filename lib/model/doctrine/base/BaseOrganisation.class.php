@@ -8,42 +8,41 @@ abstract class BaseOrganisation extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('organisations');
-        $this->hasColumn('organisation_id', 'integer', 4, array(
+        $this->hasColumn('organisation_id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
-             'unsigned' => true,
-             'length' => '4',
              ));
-        $this->hasColumn('name', 'string', 45, array(
+        $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => '45',
+             'length' => '255',
              ));
-        $this->hasColumn('parent_organisation_id', 'integer', 4, array(
+        $this->hasColumn('parent_id', 'integer', null, array(
              'type' => 'integer',
-             'unsigned' => true,
-             'length' => '4',
              ));
+
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
     public function setUp()
     {
-        $this->hasMany('Memberstate as Memberstates', array(
-             'refClass' => 'MemberstateOrganisation',
-             'local' => 'organisation_id',
-             'foreign' => 'memberstate_id'));
+        $this->hasOne('Organisation as Parent', array(
+             'local' => 'parent_id',
+             'foreign' => 'organisation_id'));
 
-        $this->hasMany('Organisation as ChildOrganisations', array(
+        $this->hasMany('Organisation as Suborganisations', array(
              'local' => 'organisation_id',
-             'foreign' => 'parent_organisation_id'));
+             'foreign' => 'parent_id'));
 
-        $this->hasMany('Document', array(
+        $this->hasMany('Document as Organisations', array(
              'local' => 'organisation_id',
              'foreign' => 'organisation_id'));
 
-        $this->hasOne('Organisation', array(
-             'local' => 'parent_organisation_id',
+        $this->hasMany('MemberstateOrganisation as Memberstates', array(
+             'local' => 'organisation_id',
              'foreign' => 'organisation_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();

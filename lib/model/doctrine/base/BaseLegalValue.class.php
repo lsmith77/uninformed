@@ -7,29 +7,30 @@ abstract class BaseLegalValue extends sfDoctrineRecord
 {
     public function setTableDefinition()
     {
-        $this->setTableName('legal_values');
-        $this->hasColumn('legal_value_id', 'integer', 4, array(
+        $this->setTableName('legalvalues');
+        $this->hasColumn('legalvalue_id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
-             'unsigned' => true,
-             'length' => '4',
              ));
-        $this->hasColumn('name', 'string', 45, array(
+        $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => '45',
+             'length' => '255',
              ));
+
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
     public function setUp()
     {
-        $this->hasMany('Document', array(
-             'local' => 'legal_value_id',
-             'foreign' => 'legal_value_id'));
+        $this->hasMany('DocumentType', array(
+             'local' => 'legalvalue_id',
+             'foreign' => 'legalvalue_id'));
 
-        $this->hasMany('Documenttype', array(
-             'local' => 'legal_value_id',
-             'foreign' => 'legal_value_id'));
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($timestampable0);
     }
 }

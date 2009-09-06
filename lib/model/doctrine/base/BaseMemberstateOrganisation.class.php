@@ -7,23 +7,42 @@ abstract class BaseMemberstateOrganisation extends sfDoctrineRecord
 {
     public function setTableDefinition()
     {
-        $this->setTableName('memberstates2organisations');
-        $this->hasColumn('memberstate_id', 'integer', 4, array(
+        $this->setTableName('memberstatesorganisations');
+        $this->hasColumn('id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
-             'unsigned' => true,
-             'length' => '4',
+             'autoincrement' => true,
              ));
-        $this->hasColumn('organisation_id', 'integer', 4, array(
-             'type' => 'integer',
-             'primary' => true,
-             'unsigned' => true,
-             'length' => '4',
-             ));
-        $this->hasColumn('month', 'date', null, array(
+        $this->hasColumn('join_date', 'date', null, array(
              'type' => 'date',
-             'primary' => true,
+             'notnull' => true,
              ));
+        $this->hasColumn('leave_date', 'date', null, array(
+             'type' => 'date',
+             ));
+        $this->hasColumn('memberstate_id', 'integer', null, array(
+             'type' => 'integer',
+             ));
+        $this->hasColumn('organisation_id', 'integer', null, array(
+             'type' => 'integer',
+             ));
+
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
+    public function setUp()
+    {
+        $this->hasOne('Memberstate', array(
+             'local' => 'memberstate_id',
+             'foreign' => 'memberstate_id'));
+
+        $this->hasOne('Organisation', array(
+             'local' => 'organisation_id',
+             'foreign' => 'organisation_id'));
+
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($timestampable0);
+    }
 }

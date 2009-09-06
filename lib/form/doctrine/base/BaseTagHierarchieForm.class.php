@@ -12,19 +12,23 @@ class BaseTagHierarchieForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'taghierarchie_id'        => new sfWidgetFormInputHidden(),
-      'name'                    => new sfWidgetFormInput(),
-      'hierachie_level'         => new sfWidgetFormChoice(array('choices' => array('area' => 'area', 'issue' => 'issue', 'keyword' => 'keyword'))),
-      'parent_taghierarchie_id' => new sfWidgetFormInput(),
-      'tags_list'               => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Tag')),
+      'taghierarchie_id' => new sfWidgetFormInputHidden(),
+      'name'             => new sfWidgetFormInput(),
+      'hierarchie_level' => new sfWidgetFormChoice(array('choices' => array('area' => 'area', 'issue' => 'issue', 'keyword' => 'keyword'))),
+      'parent_id'        => new sfWidgetFormDoctrineChoice(array('model' => 'TagHierarchie', 'add_empty' => true)),
+      'created_at'       => new sfWidgetFormDateTime(),
+      'updated_at'       => new sfWidgetFormDateTime(),
+      'tags_list'        => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Tag')),
     ));
 
     $this->setValidators(array(
-      'taghierarchie_id'        => new sfValidatorDoctrineChoice(array('model' => 'TagHierarchie', 'column' => 'taghierarchie_id', 'required' => false)),
-      'name'                    => new sfValidatorString(array('max_length' => 45)),
-      'hierachie_level'         => new sfValidatorChoice(array('choices' => array('area' => 'area', 'issue' => 'issue', 'keyword' => 'keyword'))),
-      'parent_taghierarchie_id' => new sfValidatorInteger(array('required' => false)),
-      'tags_list'               => new sfValidatorDoctrineChoiceMany(array('model' => 'Tag', 'required' => false)),
+      'taghierarchie_id' => new sfValidatorDoctrineChoice(array('model' => 'TagHierarchie', 'column' => 'taghierarchie_id', 'required' => false)),
+      'name'             => new sfValidatorString(array('max_length' => 255)),
+      'hierarchie_level' => new sfValidatorChoice(array('choices' => array('area' => 'area', 'issue' => 'issue', 'keyword' => 'keyword'), 'required' => false)),
+      'parent_id'        => new sfValidatorDoctrineChoice(array('model' => 'TagHierarchie', 'required' => false)),
+      'created_at'       => new sfValidatorDateTime(array('required' => false)),
+      'updated_at'       => new sfValidatorDateTime(array('required' => false)),
+      'tags_list'        => new sfValidatorDoctrineChoiceMany(array('model' => 'Tag', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('tag_hierarchie[%s]');

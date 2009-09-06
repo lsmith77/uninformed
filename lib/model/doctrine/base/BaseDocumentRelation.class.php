@@ -8,19 +8,12 @@ abstract class BaseDocumentRelation extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('documentrelations');
-        $this->hasColumn('document_id', 'integer', 4, array(
+        $this->hasColumn('id', 'integer', null, array(
              'type' => 'integer',
              'primary' => true,
-             'unsigned' => true,
-             'length' => '4',
+             'autoincrement' => true,
              ));
-        $this->hasColumn('related_document_id', 'integer', 4, array(
-             'type' => 'integer',
-             'primary' => true,
-             'unsigned' => true,
-             'length' => '4',
-             ));
-        $this->hasColumn('relation_type', 'enum', 8, array(
+        $this->hasColumn('relation_type', 'enum', null, array(
              'type' => 'enum',
              'values' => 
              array(
@@ -28,19 +21,29 @@ abstract class BaseDocumentRelation extends sfDoctrineRecord
               1 => 'recalls',
               2 => 'report',
              ),
-             'primary' => true,
-             'length' => '8',
+             'notnull' => true,
              ));
+        $this->hasColumn('document_left_hand', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => true,
+             ));
+        $this->hasColumn('document_right_hand', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => true,
+             ));
+
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
     public function setUp()
     {
         $this->hasOne('Document', array(
-             'local' => 'document_id',
+             'local' => 'document_right_hand',
              'foreign' => 'document_id'));
 
-        $this->hasOne('Document as RelatedDocument', array(
-             'local' => 'related_document_id',
-             'foreign' => 'document_id'));
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($timestampable0);
     }
 }

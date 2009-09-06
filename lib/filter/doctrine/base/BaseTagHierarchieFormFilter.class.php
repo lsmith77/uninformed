@@ -14,17 +14,21 @@ class BaseTagHierarchieFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'name'                    => new sfWidgetFormFilterInput(),
-      'hierachie_level'         => new sfWidgetFormChoice(array('choices' => array('' => '', 'area' => 'area', 'issue' => 'issue', 'keyword' => 'keyword'))),
-      'parent_taghierarchie_id' => new sfWidgetFormFilterInput(),
-      'tags_list'               => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Tag')),
+      'name'             => new sfWidgetFormFilterInput(),
+      'hierarchie_level' => new sfWidgetFormChoice(array('choices' => array('' => '', 'area' => 'area', 'issue' => 'issue', 'keyword' => 'keyword'))),
+      'parent_id'        => new sfWidgetFormDoctrineChoice(array('model' => 'TagHierarchie', 'add_empty' => true)),
+      'created_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
+      'updated_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
+      'tags_list'        => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Tag')),
     ));
 
     $this->setValidators(array(
-      'name'                    => new sfValidatorPass(array('required' => false)),
-      'hierachie_level'         => new sfValidatorChoice(array('required' => false, 'choices' => array('area' => 'area', 'issue' => 'issue', 'keyword' => 'keyword'))),
-      'parent_taghierarchie_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'tags_list'               => new sfValidatorDoctrineChoiceMany(array('model' => 'Tag', 'required' => false)),
+      'name'             => new sfValidatorPass(array('required' => false)),
+      'hierarchie_level' => new sfValidatorChoice(array('required' => false, 'choices' => array('area' => 'area', 'issue' => 'issue', 'keyword' => 'keyword'))),
+      'parent_id'        => new sfValidatorDoctrineChoice(array('required' => false, 'model' => 'TagHierarchie', 'column' => 'taghierarchie_id')),
+      'created_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'updated_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'tags_list'        => new sfValidatorDoctrineChoiceMany(array('model' => 'Tag', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('tag_hierarchie_filters[%s]');
@@ -58,11 +62,13 @@ class BaseTagHierarchieFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'taghierarchie_id'        => 'Number',
-      'name'                    => 'Text',
-      'hierachie_level'         => 'Enum',
-      'parent_taghierarchie_id' => 'Number',
-      'tags_list'               => 'ManyKey',
+      'taghierarchie_id' => 'Number',
+      'name'             => 'Text',
+      'hierarchie_level' => 'Enum',
+      'parent_id'        => 'ForeignKey',
+      'created_at'       => 'Date',
+      'updated_at'       => 'Date',
+      'tags_list'        => 'ManyKey',
     );
   }
 }

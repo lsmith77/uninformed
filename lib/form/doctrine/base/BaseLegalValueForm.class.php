@@ -12,13 +12,17 @@ class BaseLegalValueForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'legal_value_id' => new sfWidgetFormInputHidden(),
-      'name'           => new sfWidgetFormInput(),
+      'legalvalue_id' => new sfWidgetFormInputHidden(),
+      'name'          => new sfWidgetFormInput(),
+      'created_at'    => new sfWidgetFormDateTime(),
+      'updated_at'    => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
-      'legal_value_id' => new sfValidatorDoctrineChoice(array('model' => 'LegalValue', 'column' => 'legal_value_id', 'required' => false)),
-      'name'           => new sfValidatorString(array('max_length' => 45)),
+      'legalvalue_id' => new sfValidatorDoctrineChoice(array('model' => 'LegalValue', 'column' => 'legalvalue_id', 'required' => false)),
+      'name'          => new sfValidatorString(array('max_length' => 255)),
+      'created_at'    => new sfValidatorDateTime(array('required' => false)),
+      'updated_at'    => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('legal_value[%s]');

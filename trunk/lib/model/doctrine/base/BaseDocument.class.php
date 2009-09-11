@@ -20,10 +20,10 @@ abstract class BaseDocument extends sfDoctrineRecord
              ));
         $this->hasColumn('publication_date', 'date', null, array(
              'type' => 'date',
-             'notnull' => true,
              ));
         $this->hasColumn('adoption_date', 'date', null, array(
              'type' => 'date',
+             'notnull' => true,
              ));
         $this->hasColumn('code', 'string', 255, array(
              'type' => 'string',

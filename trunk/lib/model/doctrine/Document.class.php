@@ -5,5 +5,4 @@
  */
 class Document extends BaseDocument
 {
-
 }

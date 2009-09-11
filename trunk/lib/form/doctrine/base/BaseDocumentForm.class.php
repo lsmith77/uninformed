@@ -30,8 +30,8 @@ class BaseDocumentForm extends BaseFormDoctrine
     $this->setValidators(array(
       'document_id'            => new sfValidatorDoctrineChoice(array('model' => 'Document', 'column' => 'document_id', 'required' => false)),
       'name'                   => new sfValidatorString(array('max_length' => 255)),
-      'publication_date'       => new sfValidatorDate(),
-      'adoption_date'          => new sfValidatorDate(array('required' => false)),
+      'publication_date'       => new sfValidatorDate(array('required' => false)),
+      'adoption_date'          => new sfValidatorDate(),
       'code'                   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'min_ratification_count' => new sfValidatorInteger(array('required' => false)),
       'preamble'               => new sfValidatorString(array('max_length' => 2147483647, 'required' => false)),

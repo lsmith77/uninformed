@@ -80,11 +80,24 @@ class importActions extends sfActions
     {
       $documentTitle = trim($data->value($j,$startColumn,$useSheet));
       
-      if($documentTitle != "")
+      if($documentTitle != "") //document name is obligatory
       {
         for($i = 1; $i <= $countDocAttrColumns; $i++)
         {
-          $documentAttributes[$i] = $data->raw($j,$i+$startColumn,$useSheet);
+          if($i == 2) //check whether actual column is date column
+          {
+            $documentAttributes[$i] = trim($data->raw($j,$i+$startColumn,$useSheet));
+          }
+          else // not the date column, process normally
+          {
+            $documentAttributes[$i] = trim($data->value($j,$i+$startColumn,$useSheet));
+          }
+        }
+        
+        if($documentAttributes[1] != "") //check whether a code is defined
+        {
+          // create unique document title using document code as prefix
+          $documentTitle = $documentAttributes[1]."-".$documentTitle;
         }
         
         $documents[$documentTitle] = $documentAttributes;
@@ -105,6 +118,7 @@ class importActions extends sfActions
     {
       $document = new Document();
       $document->set('name', $name);
+      $document->set('code', $attributes[1]);
       
       $adoptiondateFormatted = $this->createDate($attributes[2]);
       if(is_null($adoptiondateFormatted))

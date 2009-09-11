@@ -76,9 +76,9 @@ Document:
       notnull: true
     publication_date:
       type: date
-      notnull: true
     adoption_date:
       type: date
+      notnull: true
     code:
       type: string(255)
     min_ratification_count:

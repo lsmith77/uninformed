@@ -15,8 +15,8 @@ class BaseDocumentFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'name'                   => new sfWidgetFormFilterInput(),
-      'publication_date'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
-      'adoption_date'          => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
+      'publication_date'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
+      'adoption_date'          => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'code'                   => new sfWidgetFormFilterInput(),
       'min_ratification_count' => new sfWidgetFormFilterInput(),
       'preamble'               => new sfWidgetFormFilterInput(),

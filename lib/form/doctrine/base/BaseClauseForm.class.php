@@ -39,7 +39,7 @@ class BaseClauseForm extends BaseFormDoctrine
       'addressee'        => new sfValidatorDoctrineChoice(array('model' => 'Addressee', 'required' => false)),
       'relevance'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'significants'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'content'          => new sfValidatorString(array('max_length' => 2147483647, 'required' => false)),
+      'content'          => new sfValidatorString(array('required' => false)),
       'parent_id'        => new sfValidatorDoctrineChoice(array('model' => 'Clause', 'required' => false)),
       'document_id'      => new sfValidatorDoctrineChoice(array('model' => 'Document', 'required' => false)),
       'created_at'       => new sfValidatorDateTime(array('required' => false)),

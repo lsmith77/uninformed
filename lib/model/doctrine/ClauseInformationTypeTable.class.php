@@ -4,5 +4,24 @@
  */
 class ClauseInformationTypeTable extends Doctrine_Table
 {
-
+  public function getAllClauseInformationTypes()
+  {
+    $q = $this->createQuery('j');
+    return $q->fetchArray();
+  }
+  
+  public function retrieveClauseInformationTypeIdByLabel($clauseInformationTypeLabel)
+  {
+    $clauseInformationTypes = $this->getAllClauseInformationTypes();
+    
+    foreach($clauseInformationTypes as $clauseInformationType)
+    {
+      if($clauseInformationTypeLabel == $clauseInformationType['label'])
+      {
+        return $clauseInformationType['id'];
+      }
+    }
+    
+    return NULL;
+  }
 }

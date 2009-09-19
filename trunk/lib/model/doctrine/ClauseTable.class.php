@@ -4,5 +4,9 @@
  */
 class ClauseTable extends Doctrine_Table
 {
-
+  public function getAllClauses()
+  {
+    $q = $this->createQuery('j');
+    return $q->fetchArray();
+  }
 }

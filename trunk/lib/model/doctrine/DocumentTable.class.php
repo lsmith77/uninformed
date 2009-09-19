@@ -4,4 +4,9 @@
  */
 class DocumentTable extends Doctrine_Table
 {
+  public function getAllDocuments()
+  {
+    $q = $this->createQuery('j');
+    return $q->fetchArray();
+  }
 }

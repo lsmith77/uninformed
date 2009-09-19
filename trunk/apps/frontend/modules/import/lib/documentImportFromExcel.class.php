@@ -4,7 +4,13 @@ class documentImportFromExcel
   var $excelFile;
   var $excelData;
   var $documents; //will contain all documents and their attributes
+  var $clauses; //will contain all clauses and their attributes
   
+  /**
+   * Constructor
+   * 
+   * @param $excelFile
+   */
   function documentImportFromExcel($excelFile)
   {
     /*
@@ -17,8 +23,15 @@ class documentImportFromExcel
     $this->excelData = new spreadsheetExcelReader($this->excelFile);
     
     $this->documents = array();
+    $this->clauses = array();
   }
   
+  /**
+   * Retrieves document and clause information from the excel data structure and
+   * saves it in arrays for documents and for clauses.
+   * 
+   * @return unknown_type
+   */
   public function process()
   {
     $useSheet = 0;
@@ -26,6 +39,7 @@ class documentImportFromExcel
     $startColumn = 2;
     
     $countDocAttrColumns = 16; //No. of Excel columns used for UN document attributes
+    $countClauseAttrColumns = 8; //No. of Excel columns used for clause attributes
     
     /*
      * The following code extracts all documents from the Excel.
@@ -40,17 +54,21 @@ class documentImportFromExcel
     $documentAttributes = array(); //will contain document columns
     $documentIdentifiers = array(); //will contain ids of saved documents
     
+    $clauseName = "";
+    $clauseAttributes = array(); //will contain clause columns
+    
     $amountOfUsedRows = $this->excelData->rowcount($useSheet);
     
     for($j = $startRow + 1; $j <= $amountOfUsedRows; $j++)
     {
       $documentTitle = trim($this->excelData->value($j,$startColumn,$useSheet));
+      $clauseName = ""; //reset clause name
       
       if($documentTitle != "") //document name is obligatory
       {
         for($i = 1; $i <= $countDocAttrColumns; $i++)
         {
-          if($i == 2) //check whether actual column is date column
+          if($i == 2) //check whether actual column is the date column
           {
             $documentAttributes[$i] = trim($this->excelData->raw($j,$i+$startColumn,$useSheet));
           }
@@ -64,17 +82,43 @@ class documentImportFromExcel
         {
           // create unique document title using document code as prefix
           $documentTitle = $documentAttributes[1]."-".$documentTitle;
+          $clauseName = $documentAttributes[1];
         }
         
         $this->documents[$documentTitle] = $documentAttributes;
+        
+        if($clauseName != "")
+        {
+          $clauseAttributes[0] = $clauseName;
+          
+          for($k = 1; $k <= $countClauseAttrColumns; $k++)
+          {
+            $clauseAttributes[$k] = trim($this->excelData->value($j,($k-1)+$startColumn+$countDocAttrColumns,$useSheet));
+          }
+          
+          $this->clauses[] = $clauseAttributes;
+        }
       }
     }
   }
   
+  /**
+   * Calls functions to save data from arrays into the database
+   */
   public function save()
   {
-    $identifiers = array();
-    
+    $this->saveDocumentsInTable();
+    $this->saveClausesInTable();
+    $this->linkClausesWithDocuments();
+  }
+  
+  /**
+   * For each document in the array it creates an object and saves it in the
+   * database.
+   * 
+   */
+  private function saveDocumentsInTable()
+  {
     foreach($this->documents as $name => $attributes)
     {
       $document = new Document();
@@ -88,7 +132,7 @@ class documentImportFromExcel
       }
       else
       {
-        $document->set('adoption_date', $this->createDate($attributes[2]));
+        $document->set('adoption_date', $adoptiondateFormatted);
       }
       
       $document->set('organisation_id',
@@ -107,13 +151,75 @@ class documentImportFromExcel
       );
     
       $document->save();
-      
-      $identifiers[] = $document->get('document_id');
     }
-    
-    //return $identifiers;
   }
   
+  /**
+   * For each clause in the array it creates an object and saves it in the
+   * database.
+   */
+  private function saveClausesInTable()
+  {
+    foreach($this->clauses as $clauseItem)
+    {
+      $clause = new Clause();
+      $clause->set('name', $clauseItem[0]);
+      $clause->set('clause_number', $clauseItem[2]);
+      $clause->set('content', $clauseItem[1]);
+      
+      $clause->set('information_type',
+        Doctrine::getTable('ClauseInformationType')
+          ->retrieveClauseInformationTypeIdByLabel($clauseItem[4])
+      );
+      
+      $clause->set('operative_phrase',
+        Doctrine::getTable('ClauseOperativePhrase')
+          ->retrieveClauseOperativePhraseIdByLabel($clauseItem[3])
+      );
+      
+      $clause->set('addressee',
+        Doctrine::getTable('Addressee')
+          ->retrieveAddresseeIdByLabel($clauseItem[8])
+      );
+      
+      $clause->save();
+    }
+  }
+  
+  /**
+   * Updates clauses adding the correct document id. Matched through
+   * document code which was used as clause name.
+   * 
+   */
+  private function linkClausesWithDocuments()
+  {
+    $clauses = Doctrine::getTable('Clause')->getAllClauses();
+    $documents = Doctrine::getTable('Document')->getAllDocuments();
+    
+    foreach($clauses as $clauseItem)
+    {
+      foreach($documents as $documentItem)
+      {
+        if($clauseItem['name'] == $documentItem['code'])
+        {
+          $clause = Doctrine::getTable('Clause')->find($clauseItem['clause_id']);
+          $clause->set('document_id', $documentItem['document_id']);
+          
+          $clause->save();
+        }
+      }
+    }
+  }
+  
+  /**
+   * Receives an excel date number (days since 1-1-1900).
+   * Converts it into a timestamp which then is converted into
+   * a date string of format Y-m-d.
+   * Returns NULL when date number is not valid.
+   * 
+   * @param $dateInteger
+   * @return unknown_type
+   */
   private function createDate($dateInteger)
   {
     $dateInteger = trim($dateInteger);

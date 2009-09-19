@@ -4,5 +4,24 @@
  */
 class ClauseProcessTable extends Doctrine_Table
 {
-
+  public function getAllClauseProcesses()
+  {
+    $q = $this->createQuery('j');
+    return $q->fetchArray();
+  }
+  
+  public function retrieveClauseInformationTypeIdByLabel($clauseProcessLabel)
+  {
+    $clauseProcesses = $this->getAllClauseProcesses();
+    
+    foreach($clauseProcesses as $clauseProcess)
+    {
+      if($clauseProcessLabel == $clauseProcess['label'])
+      {
+        return $clauseProcess['id'];
+      }
+    }
+    
+    return NULL;
+  }
 }

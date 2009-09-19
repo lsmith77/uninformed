@@ -21,8 +21,6 @@ ClauseOperativePhrase:
     label: Decides
   phrase011:
     label: Declares
-  phrase011:
-    label: Deplores
   phrase012: 
     label: Deplores
   phrase013:

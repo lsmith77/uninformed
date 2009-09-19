@@ -4,5 +4,24 @@
  */
 class AddresseeTable extends Doctrine_Table
 {
-
+  public function getAllAddressees()
+  {
+    $q = $this->createQuery('j');
+    return $q->fetchArray();
+  }
+  
+  public function retrieveAddresseeIdByLabel($addresseeLabel)
+  {
+    $addressees = $this->getAllAddressees();
+    
+    foreach($addressees as $addressee)
+    {
+      if($addresseeLabel == $addressee['label'])
+      {
+        return $addressee['id'];
+      }
+    }
+    
+    return NULL;
+  }
 }

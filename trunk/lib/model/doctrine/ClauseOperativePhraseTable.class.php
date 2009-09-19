@@ -4,5 +4,24 @@
  */
 class ClauseOperativePhraseTable extends Doctrine_Table
 {
-
+  public function getAllClauseOperativePhrases()
+  {
+    $q = $this->createQuery('j');
+    return $q->fetchArray();
+  }
+  
+  public function retrieveClauseOperativePhraseIdByLabel($clauseOperativePhraseLabel)
+  {
+    $clauseOperativePhrases = $this->getAllClauseOperativePhrases();
+    
+    foreach($clauseOperativePhrases as $clauseOperativePhrase)
+    {
+      if($clauseOperativePhraseLabel == $clauseOperativePhrase['label'])
+      {
+        return $clauseOperativePhrase['id'];
+      }
+    }
+    
+    return NULL;
+  }
 }

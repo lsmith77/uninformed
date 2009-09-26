@@ -5,6 +5,7 @@ class documentImportFromExcel
   var $excelData;
   var $documents; //will contain all documents and their attributes
   var $clauses; //will contain all clauses and their attributes
+  var $subTags; //will contain all subtags
   
   /**
    * Constructor
@@ -24,6 +25,7 @@ class documentImportFromExcel
     
     $this->documents = array();
     $this->clauses = array();
+    $this->subTags = array();
   }
   
   /**
@@ -39,7 +41,8 @@ class documentImportFromExcel
     $startColumn = 2;
     
     $countDocAttrColumns = 16; //No. of Excel columns used for UN document attributes
-    $countClauseAttrColumns = 8; //No. of Excel columns used for clause attributes
+    $countClauseAttrColumns = 12; //No. of Excel columns used for clause attributes
+    $countSubTagAttrColumns = 10; //No. of Excel columns used for sub tag attributes
     
     /*
      * The following code extracts all documents from the Excel.
@@ -56,6 +59,7 @@ class documentImportFromExcel
     
     $clauseName = "";
     $clauseAttributes = array(); //will contain clause columns
+    $subTags = array(); //will contain a row of subtags
     
     $amountOfUsedRows = $this->excelData->rowcount($useSheet);
     
@@ -90,13 +94,25 @@ class documentImportFromExcel
         if($clauseName != "")
         {
           $clauseAttributes[0] = $clauseName;
+          $subTags[0] = $clauseName;
           
           for($k = 1; $k <= $countClauseAttrColumns; $k++)
           {
             $clauseAttributes[$k] = trim($this->excelData->value($j,($k-1)+$startColumn+$countDocAttrColumns,$useSheet));
           }
           
+          for($m = 1; $m <=$countSubTagAttrColumns; $m++)
+          {
+            $subTag = trim($this->excelData->value($j,($m-1)+$startColumn+$countDocAttrColumns+$countClauseAttrColumns,$useSheet));
+            
+            if($subTag != "")
+            {
+              $subTags[$m] = trim($this->excelData->value($j,($m-1)+$startColumn+$countDocAttrColumns+$countClauseAttrColumns,$useSheet));
+            }
+          }
+          
           $this->clauses[] = $clauseAttributes;
+          $this->subTags[] = $subTags;
         }
       }
     }

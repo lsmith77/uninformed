@@ -26,7 +26,8 @@ abstract class BaseClauseProcess extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasMany('Clause as Clauses', array(
+        parent::setUp();
+    $this->hasMany('Clause as Clauses', array(
              'local' => 'id',
              'foreign' => 'clause_process'));
 

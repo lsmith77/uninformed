@@ -60,7 +60,8 @@ abstract class BaseClause extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasOne('Clause as Parent', array(
+        parent::setUp();
+    $this->hasOne('Clause as Parent', array(
              'local' => 'parent_id',
              'foreign' => 'clause_id'));
 

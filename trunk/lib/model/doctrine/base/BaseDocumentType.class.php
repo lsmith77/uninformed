@@ -29,7 +29,8 @@ abstract class BaseDocumentType extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasOne('LegalValue', array(
+        parent::setUp();
+    $this->hasOne('LegalValue', array(
              'local' => 'legalvalue_id',
              'foreign' => 'legalvalue_id'));
 

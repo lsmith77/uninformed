@@ -25,7 +25,7 @@ class documentImportFromExcel
     
     $this->documents = array();
     $this->clauses = array();
-    $this->subTags = array();
+    $this->subTagsByClause = array();
   }
   
   /**
@@ -59,7 +59,6 @@ class documentImportFromExcel
     
     $clauseName = "";
     $clauseAttributes = array(); //will contain clause columns
-    $subTags = array(); //will contain a row of subtags
     
     $amountOfUsedRows = $this->excelData->rowcount($useSheet);
     
@@ -94,25 +93,26 @@ class documentImportFromExcel
         if($clauseName != "")
         {
           $clauseAttributes[0] = $clauseName;
-          $subTags[0] = $clauseName;
+          //$tags[0] = $clauseName;
           
           for($k = 1; $k <= $countClauseAttrColumns; $k++)
           {
             $clauseAttributes[$k] = trim($this->excelData->value($j,($k-1)+$startColumn+$countDocAttrColumns,$useSheet));
           }
           
+          $tags = array(); //will contain a row of subtags
           for($m = 1; $m <=$countSubTagAttrColumns; $m++)
           {
             $subTag = trim($this->excelData->value($j,($m-1)+$startColumn+$countDocAttrColumns+$countClauseAttrColumns,$useSheet));
             
             if($subTag != "")
             {
-              $subTags[$m] = trim($this->excelData->value($j,($m-1)+$startColumn+$countDocAttrColumns+$countClauseAttrColumns,$useSheet));
+              $tags[$m] = trim($this->excelData->value($j,($m-1)+$startColumn+$countDocAttrColumns+$countClauseAttrColumns,$useSheet));
             }
           }
           
-          $this->clauses[] = $clauseAttributes;
-          $this->subTags[] = $subTags;
+          $clauseIdentifier = $this->saveClauseInTable($clauseAttributes);
+          $this->subTagsByClause[$clauseIdentifier] = $tags;
         }
       }
     }
@@ -124,7 +124,7 @@ class documentImportFromExcel
   public function save()
   {
     $this->saveDocumentsInTable();
-    $this->saveClausesInTable();
+    $this->saveTagsInTable();
     $this->linkClausesWithDocuments();
   }
   
@@ -171,35 +171,34 @@ class documentImportFromExcel
   }
   
   /**
-   * For each clause in the array it creates an object and saves it in the
-   * database.
+   * Creates a new Clause object from clauseAttributes array
+   * Returns clause identifier.
    */
-  private function saveClausesInTable()
+  private function saveClauseInTable($clauseAttributesArray)
   {
-    foreach($this->clauses as $clauseItem)
-    {
-      $clause = new Clause();
-      $clause->set('name', $clauseItem[0]);
-      $clause->set('clause_number', $clauseItem[2]);
-      $clause->set('content', $clauseItem[1]);
-      
-      $clause->set('information_type',
-        Doctrine::getTable('ClauseInformationType')
-          ->retrieveClauseInformationTypeIdByLabel($clauseItem[4])
-      );
-      
-      $clause->set('operative_phrase',
-        Doctrine::getTable('ClauseOperativePhrase')
-          ->retrieveClauseOperativePhraseIdByLabel($clauseItem[3])
-      );
-      
-      $clause->set('addressee',
-        Doctrine::getTable('Addressee')
-          ->retrieveAddresseeIdByLabel($clauseItem[8])
-      );
-      
-      $clause->save();
-    }
+    $clause = new Clause();
+    $clause->set('name', $clauseAttributesArray[0]);
+    $clause->set('clause_number', $clauseAttributesArray[2]);
+    $clause->set('content', $clauseAttributesArray[1]);
+    
+    $clause->set('information_type',
+      Doctrine::getTable('ClauseInformationType')
+        ->retrieveClauseInformationTypeIdByLabel($clauseAttributesArray[4])
+    );
+    
+    $clause->set('operative_phrase',
+      Doctrine::getTable('ClauseOperativePhrase')
+        ->retrieveClauseOperativePhraseIdByLabel($clauseAttributesArray[3])
+    );
+    
+    $clause->set('addressee',
+      Doctrine::getTable('Addressee')
+        ->retrieveAddresseeIdByLabel($clauseAttributesArray[8])
+    );
+    
+    $clause->save();
+    
+    return $clause->get('clause_id');
   }
   
   /**
@@ -227,6 +226,80 @@ class documentImportFromExcel
     }
   }
   
+  private function saveTagsInTable()
+  {
+    $newTagsAvailable = false;
+    $tagIdentifiers = array();
+    
+    //Retrieve list of existing tags
+    $tags = Doctrine::getTable('Tag')->getAllTagNames();
+    
+    foreach($this->subTagsByClause as $clauseId => $subTags)
+    {
+      $tagIdentifiers[$clauseId] = array();
+      
+      foreach($subTags as $subTag)
+      {
+        if($newTagsAvailable)
+        {
+          //Retrieve list of existing tags
+          $tags = Doctrine::getTable('Tag')->getAllTagNames();
+        }
+        
+        $foundTagInList = false;
+        
+        foreach($tags as $tag)
+        {
+          if(strCaseCmp($subTag,$tag['name']) == 0)
+          {
+            $tagIdentifiers[$clauseId][] = $tag['tag_id'];
+            $newTagsAvailable = false;
+            
+            $foundTagInList = true;
+            
+            break;
+          }
+          else
+          {
+            // pass $foundTagInList = false;
+          }
+        }
+        
+        if(!$foundTagInList)
+        {
+          $tag = new Tag();
+          
+          $tag->set('name', $subTag);
+          $tag->set('tag_type', '');
+          
+          $tag->save();
+          
+          $tagIdentifiers[$clauseId][] = $tag->get('tag_id');
+          
+          $newTagsAvailable = true;
+        }
+      }
+    }
+    
+    $this->linkClausesWithTags($tagIdentifiers);
+  }
+  
+  private function linkClausesWithTags($clauseTagIdentifiers)
+  {
+    foreach($clauseTagIdentifiers as $clauseId => $tagIds)
+    {
+      foreach($tagIds as $tagId)
+      {
+        $clauseTag = new ClauseTag();
+        
+        $clauseTag->set('clause_id', $clauseId);
+        $clauseTag->set('tag_id', $tagId);
+        
+        $clauseTag->save();
+      }
+    }
+  }
+  
   /**
    * Receives an excel date number (days since 1-1-1900).
    * Converts it into a timestamp which then is converted into
@@ -243,7 +316,7 @@ class documentImportFromExcel
     
     if($dateInteger[0] > 0 && $dateInteger[0] != "" && !(count($dateInteger) > 1))
     {
-      $oneDayInSeconds = 24 * 60 * 60;
+      $oneDayInSeconds = 24 * 60 * 60; //hours * minutes * seconds
       $utcDateInExcel = 25569; //number of days since 1-1-1900 until 1-1-1970
       $utcDateInExcelInSeconds = $utcDateInExcel * $oneDayInSeconds;
       $excelDateInSeconds = $dateInteger[0] * $oneDayInSeconds;

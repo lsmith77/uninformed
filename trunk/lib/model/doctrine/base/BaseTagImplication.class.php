@@ -38,7 +38,8 @@ abstract class BaseTagImplication extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasOne('Tag', array(
+        parent::setUp();
+    $this->hasOne('Tag', array(
              'local' => 'tag_right_hand',
              'foreign' => 'tag_id'));
 

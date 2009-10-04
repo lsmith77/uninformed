@@ -39,7 +39,8 @@ abstract class BaseDocumentRelation extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasOne('Document', array(
+        parent::setUp();
+    $this->hasOne('Document', array(
              'local' => 'document_right_hand',
              'foreign' => 'document_id'));
 

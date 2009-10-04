@@ -4,5 +4,34 @@
  */
 class TagTable extends Doctrine_Table
 {
-
+  public function getAllTags()
+  {
+    $q = $this->createQuery('j');
+    return $q->fetchArray();
+  }
+  
+  public function getAllTagNames()
+  {
+    $q = $this->createQuery('t')
+      ->select('t.name');
+      
+     return $q->fetchArray();
+  }
+  
+  public function retrieveTagIdByName($tagName)
+  {
+    $tags = $this->getAllTags();
+    
+    foreach($tags as $tag)
+    {
+      //case insensitive comparison
+      $compareResult = strcasecmp($tagName, $tag['name']);
+      if($compareResult == 0)
+      {
+        return $tag['id'];
+      }
+    }
+    
+    return NULL;
+  }
 }

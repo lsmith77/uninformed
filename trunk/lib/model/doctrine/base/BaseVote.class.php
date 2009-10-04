@@ -38,7 +38,8 @@ abstract class BaseVote extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasOne('Document', array(
+        parent::setUp();
+    $this->hasOne('Document', array(
              'local' => 'document_id',
              'foreign' => 'document_id'));
 

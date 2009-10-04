@@ -4,5 +4,24 @@
  */
 class DocumentTypeTable extends Doctrine_Table
 {
-
+  public function getAllDocumentTypes()
+  {
+    $q = $this->createQuery('j');
+    return $q->fetchArray();
+  }
+  
+  public function retrieveDocumentTypeIdByName($documentTypeName)
+  {
+    $documentTypes = $this->getAllDocumentTypes();
+    
+    foreach($documentTypes as $documentType)
+    {
+      if($documentTypeName == $documentType['name'])
+      {
+        return $documentType['documenttype_id'];
+      }
+    }
+    
+    return NULL;
+  }
 }

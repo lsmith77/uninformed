@@ -26,7 +26,8 @@ abstract class BaseLegalValue extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasMany('DocumentType', array(
+        parent::setUp();
+    $this->hasMany('DocumentType', array(
              'local' => 'legalvalue_id',
              'foreign' => 'legalvalue_id'));
 

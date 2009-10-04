@@ -26,7 +26,8 @@ abstract class BaseClauseOperativePhrase extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasMany('Clause as Clauses', array(
+        parent::setUp();
+    $this->hasMany('Clause as Clauses', array(
              'local' => 'id',
              'foreign' => 'operative_phrase'));
 

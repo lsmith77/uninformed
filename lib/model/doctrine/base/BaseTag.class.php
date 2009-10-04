@@ -35,7 +35,8 @@ abstract class BaseTag extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasMany('Clause as Clauses', array(
+        parent::setUp();
+    $this->hasMany('Clause as Clauses', array(
              'refClass' => 'ClauseTag',
              'local' => 'tag_id',
              'foreign' => 'clause_id'));

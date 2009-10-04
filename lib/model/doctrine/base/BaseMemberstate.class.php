@@ -25,7 +25,8 @@ abstract class BaseMemberstate extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasMany('MemberstateOrganisation as Organisations', array(
+        parent::setUp();
+    $this->hasMany('MemberstateOrganisation as Organisations', array(
              'local' => 'memberstate_id',
              'foreign' => 'memberstate_id'));
 

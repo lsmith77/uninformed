@@ -29,7 +29,8 @@ abstract class BaseOrganisation extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasOne('Organisation as Parent', array(
+        parent::setUp();
+    $this->hasOne('Organisation as Parent', array(
              'local' => 'parent_id',
              'foreign' => 'organisation_id'));
 

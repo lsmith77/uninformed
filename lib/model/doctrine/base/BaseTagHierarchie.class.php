@@ -38,7 +38,8 @@ abstract class BaseTagHierarchie extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasOne('TagHierarchie as Parent', array(
+        parent::setUp();
+    $this->hasOne('TagHierarchie as Parent', array(
              'local' => 'parent_id',
              'foreign' => 'taghierarchie_id'));
 

@@ -10,5 +10,12 @@ abstract class BaseFormDoctrine extends sfFormDoctrine
 {
   public function setup()
   {
+    if ($this->isNew()) {
+      unset($this->widgetSchema['created_at']);
+      unset($this->widgetSchema['updated_at']);
+    } else {
+      $this->widgetSchema['created_at'] = new myWidgetFormPlain();
+      $this->widgetSchema['updated_at'] = new myWidgetFormPlain();
+    }
   }
 }

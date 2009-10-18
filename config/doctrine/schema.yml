@@ -97,6 +97,8 @@ Document:
       type: integer
     documenttype_id:
       type: integer
+    documentURL:
+      type: string(255)
   relations:
     Parent:
       class: Document

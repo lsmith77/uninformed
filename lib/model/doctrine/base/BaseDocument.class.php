@@ -45,6 +45,10 @@ abstract class BaseDocument extends sfDoctrineRecord
         $this->hasColumn('documenttype_id', 'integer', null, array(
              'type' => 'integer',
              ));
+        $this->hasColumn('documentURL', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
+             ));
 
         $this->option('collation', 'utf8_general_ci');
         $this->option('charset', 'utf8');

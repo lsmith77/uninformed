@@ -13,7 +13,7 @@ abstract class BaseAddressee extends sfDoctrineRecord
              'primary' => true,
              'autoincrement' => true,
              ));
-        $this->hasColumn('label', 'string', 255, array(
+        $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
              'length' => '255',
@@ -28,8 +28,13 @@ abstract class BaseAddressee extends sfDoctrineRecord
     {
         parent::setUp();
     $this->hasMany('Clause as Clauses', array(
+             'refClass' => 'ClauseAddressee',
              'local' => 'id',
-             'foreign' => 'addressee'));
+             'foreign' => 'clause_id'));
+
+        $this->hasMany('Clause as ClauseAddressee', array(
+             'local' => 'id',
+             'foreign' => 'clause_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

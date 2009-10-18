@@ -1,5 +1,6 @@
-CREATE TABLE addressees (id BIGINT AUTO_INCREMENT, label VARCHAR(255) NOT NULL, created_at DATETIME, updated_at DATETIME, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
-CREATE TABLE clauses (clause_id BIGINT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, clause_process BIGINT, clause_number VARCHAR(255) NOT NULL, information_type BIGINT, operative_phrase BIGINT, addressee BIGINT, relevance VARCHAR(255), significants VARCHAR(255), content TEXT, parent_id BIGINT, document_id BIGINT, created_at DATETIME, updated_at DATETIME, INDEX parent_id_idx (parent_id), INDEX clause_process_idx (clause_process), INDEX information_type_idx (information_type), INDEX operative_phrase_idx (operative_phrase), INDEX addressee_idx (addressee), INDEX document_id_idx (document_id), PRIMARY KEY(clause_id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
+CREATE TABLE addressees (id BIGINT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, created_at DATETIME, updated_at DATETIME, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
+CREATE TABLE clauses (clause_id BIGINT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, clause_process BIGINT, clause_number VARCHAR(255) NOT NULL, information_type BIGINT, operative_phrase BIGINT, relevance VARCHAR(255), significants VARCHAR(255), content TEXT, parent_id BIGINT, document_id BIGINT, created_at DATETIME, updated_at DATETIME, INDEX parent_id_idx (parent_id), INDEX clause_process_idx (clause_process), INDEX information_type_idx (information_type), INDEX operative_phrase_idx (operative_phrase), INDEX document_id_idx (document_id), PRIMARY KEY(clause_id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
+CREATE TABLE clause_addressee (clause_id BIGINT, addressee_id BIGINT, created_at DATETIME, updated_at DATETIME, PRIMARY KEY(clause_id, addressee_id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
 CREATE TABLE clauseinformationtypes (id BIGINT AUTO_INCREMENT, label VARCHAR(255) NOT NULL, created_at DATETIME, updated_at DATETIME, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
 CREATE TABLE clauseoperativephrases (id BIGINT AUTO_INCREMENT, label VARCHAR(255) NOT NULL, created_at DATETIME, updated_at DATETIME, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
 CREATE TABLE clauseprocesses (id BIGINT AUTO_INCREMENT, label VARCHAR(255) NOT NULL, created_at DATETIME, updated_at DATETIME, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
@@ -22,7 +23,7 @@ ALTER TABLE clauses ADD FOREIGN KEY (operative_phrase) REFERENCES clauseoperativ
 ALTER TABLE clauses ADD FOREIGN KEY (information_type) REFERENCES clauseinformationtypes(id);
 ALTER TABLE clauses ADD FOREIGN KEY (document_id) REFERENCES documents(document_id);
 ALTER TABLE clauses ADD FOREIGN KEY (clause_process) REFERENCES clauseprocesses(id);
-ALTER TABLE clauses ADD FOREIGN KEY (addressee) REFERENCES addressees(id);
+ALTER TABLE clause_addressee ADD FOREIGN KEY (clause_id) REFERENCES clauses(clause_id);
 ALTER TABLE clause_tag ADD FOREIGN KEY (clause_id) REFERENCES clauses(clause_id);
 ALTER TABLE documents ADD FOREIGN KEY (parent_id) REFERENCES documents(document_id);
 ALTER TABLE documents ADD FOREIGN KEY (organisation_id) REFERENCES organisations(organisation_id);

@@ -32,9 +32,6 @@ abstract class BaseClause extends sfDoctrineRecord
         $this->hasColumn('operative_phrase', 'integer', null, array(
              'type' => 'integer',
              ));
-        $this->hasColumn('addressee', 'integer', null, array(
-             'type' => 'integer',
-             ));
         $this->hasColumn('relevance', 'string', 255, array(
              'type' => 'string',
              'length' => '255',
@@ -77,18 +74,23 @@ abstract class BaseClause extends sfDoctrineRecord
              'local' => 'operative_phrase',
              'foreign' => 'id'));
 
-        $this->hasOne('Addressee', array(
-             'local' => 'addressee',
-             'foreign' => 'id'));
-
         $this->hasOne('Document', array(
              'local' => 'document_id',
              'foreign' => 'document_id'));
+
+        $this->hasOne('Addressee as Addressees', array(
+             'local' => 'clause_id',
+             'foreign' => 'id'));
 
         $this->hasMany('Tag as Tags', array(
              'refClass' => 'ClauseTag',
              'local' => 'clause_id',
              'foreign' => 'tag_id'));
+
+        $this->hasMany('Addressee', array(
+             'refClass' => 'ClauseAddressee',
+             'local' => 'clause_id',
+             'foreign' => 'id'));
 
         $this->hasMany('Clause as Subclauses', array(
              'local' => 'clause_id',

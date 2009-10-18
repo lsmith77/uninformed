@@ -12,9 +12,15 @@ Addressee:
       type: integer
       primary: true
       autoincrement: true
-    label:
+    name:
       type: string(255)
       notnull: true
+  relations:
+    Clauses:
+      class: Clause
+      local: id
+      foreign: clause_id
+      refClass: ClauseAddressee
 
 LegalValue:
   tableName: legalvalues
@@ -155,8 +161,6 @@ Clause:
       type: integer
     operative_phrase:
       type: integer
-    addressee:
-      type: integer
     relevance:
       type: string(255)
     significants:
@@ -185,14 +189,15 @@ Clause:
       local: operative_phrase
       foreign: id
       foreignAlias: Clauses
-    Addressee:
-      local: addressee
-      foreign: id
-      foreignAlias: Clauses
     Document:
       local: document_id
       foreign: document_id
       foreignAlias: Clauses
+    Addressees:
+      class: Addressee
+      local: clause_id
+      foreign: id
+      foreignAlias: ClauseAddressee
     Tags:
       class: Tag
       local: clause_id
@@ -374,6 +379,15 @@ Vote:
       local: memberstate_id
       foreign: memberstate_id
       foreignAlias: Votes
+
+ClauseAddressee:
+  columns:
+    clause_id:
+      type: integer
+      primary: true
+    addressee_id:
+      type: integer
+      primary: true
 
 ClauseTag:
   columns:

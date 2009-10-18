@@ -10,13 +10,23 @@ class AddresseeTable extends Doctrine_Table
     return $q->fetchArray();
   }
   
-  public function retrieveAddresseeIdByLabel($addresseeLabel)
+  public function getAllAddresseeNames()
+  {
+    $q = $this->createQuery('a')
+      ->select('a.name');
+      
+     return $q->fetchArray();
+  }
+  
+  public function retrieveAddresseeIdByName($addresseeName)
   {
     $addressees = $this->getAllAddressees();
     
     foreach($addressees as $addressee)
     {
-      if($addresseeLabel == $addressee['label'])
+      //case insensitive comparison
+      $compareResult = strcasecmp($addresseeName, $addressee['name']);
+      if($compareResult == 0)
       {
         return $addressee['id'];
       }

@@ -1,4 +1,12 @@
 <?php
+/**
+ * This class handles the import of data from a given Excel file.
+ * The columns of the Excel and its type of information is hard coded
+ * in this class. It is used only for un-informed documents.
+ * 
+ * @author Dennis Riedel <riedel.dennis@gmail.com>
+ *
+ */
 class documentImportFromExcel
 {
   var $excelFile;
@@ -26,6 +34,7 @@ class documentImportFromExcel
     $this->documents = array();
     $this->clauses = array();
     $this->subTagsByClause = array();
+    $this->addresseesByClause = array();
   }
   
   /**
@@ -41,7 +50,14 @@ class documentImportFromExcel
     $startColumn = 2;
     
     $countDocAttrColumns = 16; //No. of Excel columns used for UN document attributes
-    $countClauseAttrColumns = 12; //No. of Excel columns used for clause attributes
+    
+    $clauseStartColumn = 18;
+    $countClauseAttrColumns = 7; //No. of Excel columns used for clause attributes
+    
+    $addresseeStartColumn = 25;
+    $countAddresseeAttrColumns = 4; //No. of Excel columns used for addressee attributes
+    
+    $subTagStartColumn = 30;
     $countSubTagAttrColumns = 10; //No. of Excel columns used for sub tag attributes
     
     /*
@@ -51,7 +67,6 @@ class documentImportFromExcel
      * clauses result in one document entry because the value part gets
      * overridden in the for loop. Maybe there is a better way
      * 
-     * TODO: Non obligatory document attributes, Clauses and Tags
      */
     $documentTitle = "";
     $documentAttributes = array(); //will contain document columns
@@ -95,24 +110,40 @@ class documentImportFromExcel
           $clauseAttributes[0] = $clauseName;
           //$tags[0] = $clauseName;
           
-          for($k = 1; $k <= $countClauseAttrColumns; $k++)
+          for($k = 0; $k < $countClauseAttrColumns; $k++)
           {
-            $clauseAttributes[$k] = trim($this->excelData->value($j,($k-1)+$startColumn+$countDocAttrColumns,$useSheet));
+            $clauseAttributes[$k+1] = trim($this->excelData->value($j, $clauseStartColumn + $k,$useSheet));
           }
           
+          /**
+           * TODO Refactor next to loops
+           * @var unknown_type
+           */
           $tags = array(); //will contain a row of subtags
-          for($m = 1; $m <=$countSubTagAttrColumns; $m++)
+          for($m = 0; $m < $countSubTagAttrColumns; $m++)
           {
-            $subTag = trim($this->excelData->value($j,($m-1)+$startColumn+$countDocAttrColumns+$countClauseAttrColumns,$useSheet));
+            $subTag = trim($this->excelData->value($j, $subTagStartColumn + $m,$useSheet));
             
             if($subTag != "")
             {
-              $tags[$m] = trim($this->excelData->value($j,($m-1)+$startColumn+$countDocAttrColumns+$countClauseAttrColumns,$useSheet));
+              $tags[] = $subTag;
+            }
+          }
+          
+          $addressees = array(); //will contain a row of addressees
+          for($n = 0; $n < $countAddresseeAttrColumns; $n++)
+          {
+            $addressee = trim($this->excelData->value($j, $addresseeStartColumn + $n,$useSheet));
+            
+            if($addressee != "")
+            {
+              $addressees[] = $addressee;
             }
           }
           
           $clauseIdentifier = $this->saveClauseInTable($clauseAttributes);
           $this->subTagsByClause[$clauseIdentifier] = $tags;
+          $this->addresseesByClause[$clauseIdentifier] = $addressees;
         }
       }
     }
@@ -125,6 +156,7 @@ class documentImportFromExcel
   {
     $this->saveDocumentsInTable();
     $this->saveTagsInTable();
+    $this->saveAddresseesInTable();
     $this->linkClausesWithDocuments();
   }
   
@@ -191,11 +223,6 @@ class documentImportFromExcel
         ->retrieveClauseOperativePhraseIdByLabel($clauseAttributesArray[3])
     );
     
-    $clause->set('addressee',
-      Doctrine::getTable('Addressee')
-        ->retrieveAddresseeIdByLabel($clauseAttributesArray[8])
-    );
-    
     $clause->save();
     
     return $clause->get('clause_id');
@@ -226,6 +253,21 @@ class documentImportFromExcel
     }
   }
   
+  /**
+   * This function saves subTags retrieved from the Excel document in the
+   * Tag table. To avoid duplicates, it first gets a list of all tag names
+   * from the tag table.
+   * 
+   * To save the tags with their corresponding clauses later, we save the tag
+   * identifiers in an assoc array, for each clause ID the correspondig tag IDs.
+   * 
+   * If a tag already exists in the table Tag, we retrieve its ID. If it does
+   * not exist, we create it and afterwards retrieve its ID.
+   * 
+   * Finally, we call the function to save the relationships between tag and clause.
+   * 
+   * @return none
+   */
   private function saveTagsInTable()
   {
     $newTagsAvailable = false;
@@ -250,6 +292,7 @@ class documentImportFromExcel
         
         foreach($tags as $tag)
         {
+          // compare existing Tags with Tag from Excel, case insensitive
           if(strCaseCmp($subTag,$tag['name']) == 0)
           {
             $tagIdentifiers[$clauseId][] = $tag['tag_id'];
@@ -265,6 +308,10 @@ class documentImportFromExcel
           }
         }
         
+        /*
+         * If we cannot find the tag in the Tag table, we creat a new
+         * item in the table with the name and an empty tag_type.
+         */
         if(!$foundTagInList)
         {
           $tag = new Tag();
@@ -284,6 +331,13 @@ class documentImportFromExcel
     $this->linkClausesWithTags($tagIdentifiers);
   }
   
+  /**
+   * The function instantiates an object of type ClauseTag and saves
+   * the relationship between a Clause and its (sub)Tags using their IDs.
+   * 
+   * @param array $clauseTagIdentifiers
+   * @return none
+   */
   private function linkClausesWithTags($clauseTagIdentifiers)
   {
     foreach($clauseTagIdentifiers as $clauseId => $tagIds)
@@ -296,6 +350,106 @@ class documentImportFromExcel
         $clauseTag->set('tag_id', $tagId);
         
         $clauseTag->save();
+      }
+    }
+  }
+  
+  /**
+   * This function saves addressees retrieved from the Excel document in the
+   * Addressee table. To avoid duplicates, it first gets a list of all addressee
+   * names from the adressee table.
+   * 
+   * To save the addressees with their corresponding clauses later, we save the addressee
+   * identifiers in an assoc array, for each clause ID the correspondig addressee IDs.
+   * 
+   * If a addressee already exists in the table addressee, we retrieve its ID. If it does
+   * not exist, we create it and afterwards retrieve its ID.
+   * 
+   * Finally, we call the function to save the relationships between addressee and clause.
+   * 
+   * @return none
+   */
+  private function saveAddresseesInTable()
+  {
+    $newAddresseesAvailable = false;
+    $clauseAddresseeIdentifiers = array();
+    
+    //Retrieve list of existing as
+    $addresseesFromTable = Doctrine::getTable('Addressee')->getAllAddresseeNames();
+    
+    foreach($this->addresseesByClause as $clauseId => $addresseesFromExcel)
+    {
+      $clauseAddresseeIdentifiers[$clauseId] = array();
+      
+      foreach($addresseesFromExcel as $oneAddresseeFromExcel)
+      {
+        if($newAddresseesAvailable)
+        {
+          //Retrieve list of existing tags
+          $addresseesFromTable = Doctrine::getTable('Addressee')->getAllAddresseeNames();
+        }
+        
+        $foundAddresseeInList = false;
+        
+        foreach($addresseesFromTable as $oneAddresseeFromTable)
+        {
+          // compare existing Addressees with Addressee from Excel, case insensitive
+          if(strCaseCmp($oneAddresseeFromExcel,$oneAddresseeFromTable['name']) == 0)
+          {
+            $clauseAddresseeIdentifiers[$clauseId][] = $oneAddresseeFromTable['id'];
+            $newAddresseesAvailable = false;
+            
+            $foundAddresseeInList = true;
+            
+            break;
+          }
+          else
+          {
+            // pass $foundAddresseeInList = false;
+          }
+        }
+        
+        /*
+         * If we cannot find the addressee in the Addressee table, we creat a new
+         * item in the table with the name.
+         */
+        if(!$foundAddresseeInList)
+        {
+          $addressee = new Addressee();
+          
+          $addressee->set('name', $oneAddresseeFromExcel);
+          
+          $addressee->save();
+          
+          $clauseAddresseeIdentifiers[$clauseId][] = $addressee->get('id');
+          
+          $newAddresseesAvailable = true;
+        }
+      }
+    }
+    
+    $this->linkClausesWithAddressees($clauseAddresseeIdentifiers);
+  }
+  
+  /**
+   * The function instantiates an object of type ClauseAddressee and saves
+   * the relationship between a Clause and its Addressees using their IDs.
+   * 
+   * @param array $clauseAddresseeIdentifiers
+   * @return none
+   */
+  private function linkClausesWithAddressees($clauseAddresseeIdentifiers)
+  {
+    foreach($clauseAddresseeIdentifiers as $clauseId => $addresseeIds)
+    {
+      foreach($addresseeIds as $addresseeId)
+      {
+        $clauseAddressee = new ClauseAddressee();
+        
+        $clauseAddressee->set('clause_id', $clauseId);
+        $clauseAddressee->set('addressee_id', $addresseeId);
+        
+        $clauseAddressee->save();
       }
     }
   }

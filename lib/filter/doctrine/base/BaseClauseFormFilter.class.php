@@ -19,7 +19,6 @@ class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'clause_number'    => new sfWidgetFormFilterInput(),
       'information_type' => new sfWidgetFormDoctrineChoice(array('model' => 'ClauseInformationType', 'add_empty' => true)),
       'operative_phrase' => new sfWidgetFormDoctrineChoice(array('model' => 'ClauseOperativePhrase', 'add_empty' => true)),
-      'addressee'        => new sfWidgetFormDoctrineChoice(array('model' => 'Addressee', 'add_empty' => true)),
       'relevance'        => new sfWidgetFormFilterInput(),
       'significants'     => new sfWidgetFormFilterInput(),
       'content'          => new sfWidgetFormFilterInput(),
@@ -28,6 +27,7 @@ class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'created_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
       'updated_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
       'tags_list'        => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Tag')),
+      'addressee_list'   => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Addressee')),
     ));
 
     $this->setValidators(array(
@@ -36,7 +36,6 @@ class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'clause_number'    => new sfValidatorPass(array('required' => false)),
       'information_type' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => 'ClauseInformationType', 'column' => 'id')),
       'operative_phrase' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => 'ClauseOperativePhrase', 'column' => 'id')),
-      'addressee'        => new sfValidatorDoctrineChoice(array('required' => false, 'model' => 'Addressee', 'column' => 'id')),
       'relevance'        => new sfValidatorPass(array('required' => false)),
       'significants'     => new sfValidatorPass(array('required' => false)),
       'content'          => new sfValidatorPass(array('required' => false)),
@@ -45,6 +44,7 @@ class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'created_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'updated_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'tags_list'        => new sfValidatorDoctrineChoiceMany(array('model' => 'Tag', 'required' => false)),
+      'addressee_list'   => new sfValidatorDoctrineChoiceMany(array('model' => 'Addressee', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('clause_filters[%s]');
@@ -70,6 +70,22 @@ class BaseClauseFormFilter extends BaseFormFilterDoctrine
           ->andWhereIn('ClauseTag.tag_id', $values);
   }
 
+  public function addAddresseeListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query->leftJoin('r.ClauseAddressee ClauseAddressee')
+          ->andWhereIn('ClauseAddressee.id', $values);
+  }
+
   public function getModelName()
   {
     return 'Clause';
@@ -84,7 +100,6 @@ class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'clause_number'    => 'Text',
       'information_type' => 'ForeignKey',
       'operative_phrase' => 'ForeignKey',
-      'addressee'        => 'ForeignKey',
       'relevance'        => 'Text',
       'significants'     => 'Text',
       'content'          => 'Text',
@@ -93,6 +108,7 @@ class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'created_at'       => 'Date',
       'updated_at'       => 'Date',
       'tags_list'        => 'ManyKey',
+      'addressee_list'   => 'ManyKey',
     );
   }
 }

@@ -18,7 +18,6 @@ class BaseClauseForm extends BaseFormDoctrine
       'clause_number'    => new sfWidgetFormInput(),
       'information_type' => new sfWidgetFormDoctrineChoice(array('model' => 'ClauseInformationType', 'add_empty' => true)),
       'operative_phrase' => new sfWidgetFormDoctrineChoice(array('model' => 'ClauseOperativePhrase', 'add_empty' => true)),
-      'addressee'        => new sfWidgetFormDoctrineChoice(array('model' => 'Addressee', 'add_empty' => true)),
       'relevance'        => new sfWidgetFormInput(),
       'significants'     => new sfWidgetFormInput(),
       'content'          => new sfWidgetFormTextarea(),
@@ -27,6 +26,7 @@ class BaseClauseForm extends BaseFormDoctrine
       'created_at'       => new sfWidgetFormDateTime(),
       'updated_at'       => new sfWidgetFormDateTime(),
       'tags_list'        => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Tag')),
+      'addressee_list'   => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Addressee')),
     ));
 
     $this->setValidators(array(
@@ -36,7 +36,6 @@ class BaseClauseForm extends BaseFormDoctrine
       'clause_number'    => new sfValidatorString(array('max_length' => 255)),
       'information_type' => new sfValidatorDoctrineChoice(array('model' => 'ClauseInformationType', 'required' => false)),
       'operative_phrase' => new sfValidatorDoctrineChoice(array('model' => 'ClauseOperativePhrase', 'required' => false)),
-      'addressee'        => new sfValidatorDoctrineChoice(array('model' => 'Addressee', 'required' => false)),
       'relevance'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'significants'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'content'          => new sfValidatorString(array('required' => false)),
@@ -45,6 +44,7 @@ class BaseClauseForm extends BaseFormDoctrine
       'created_at'       => new sfValidatorDateTime(array('required' => false)),
       'updated_at'       => new sfValidatorDateTime(array('required' => false)),
       'tags_list'        => new sfValidatorDoctrineChoiceMany(array('model' => 'Tag', 'required' => false)),
+      'addressee_list'   => new sfValidatorDoctrineChoiceMany(array('model' => 'Addressee', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('clause[%s]');
@@ -68,6 +68,11 @@ class BaseClauseForm extends BaseFormDoctrine
       $this->setDefault('tags_list', $this->object->Tags->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['addressee_list']))
+    {
+      $this->setDefault('addressee_list', $this->object->Addressee->getPrimaryKeys());
+    }
+
   }
 
   protected function doSave($con = null)
@@ -75,6 +80,7 @@ class BaseClauseForm extends BaseFormDoctrine
     parent::doSave($con);
 
     $this->saveTagsList($con);
+    $this->saveAddresseeList($con);
   }
 
   public function saveTagsList($con = null)
@@ -112,6 +118,44 @@ class BaseClauseForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Tags', array_values($link));
+    }
+  }
+
+  public function saveAddresseeList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['addressee_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (is_null($con))
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Addressee->getPrimaryKeys();
+    $values = $this->getValue('addressee_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Addressee', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Addressee', array_values($link));
     }
   }
 

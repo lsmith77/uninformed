@@ -1,17 +1,17 @@
 Addressee:
   addressee001:
-    label: All Member States
+    name: All Member States
   addressee002:
-    label: Group of States
+    name: Group of States
   addressee003:
-    label: International Community
+    name: International Community
   addressee004:
-    label: UN Secretary General
+    name: UN Secretary General
   addressee005:
-    label: UN Organ
+    name: UN Organ
   addressee006:
-    label: Private sector
+    name: Private sector
   addressee007:
-    label: Civil society
+    name: Civil society
   addressee008:
-    label: Major groups
+    name: Major groups

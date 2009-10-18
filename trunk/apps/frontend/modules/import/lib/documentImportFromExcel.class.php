@@ -197,6 +197,8 @@ class documentImportFromExcel
         Doctrine::getTable('DocumentType')
           ->retrieveDocumentTypeIdByName($attributes[9])
       );
+      
+      $document->set('documentURL', $attributes[15]);
     
       $document->save();
     }

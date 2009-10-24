@@ -5,6 +5,31 @@ options:
   charset: utf8
   type: InnoDB
 
+ExcelFile:
+  tableName: excelfiles
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    tag_id:
+      type: integer
+      notnull: true
+    author:
+      type: string(255)
+      notnull: true
+    file:
+      type: string(255)
+      notnull: true
+  relations:
+    Tag:
+      class: Tag
+      local: tag_id
+      foreign: tag_id
+
 Addressee:
   tableName: addressees
   columns:

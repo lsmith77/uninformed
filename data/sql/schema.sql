@@ -9,6 +9,7 @@ CREATE TABLE documents (document_id BIGINT AUTO_INCREMENT, name VARCHAR(255) NOT
 CREATE TABLE documentrelations (id BIGINT AUTO_INCREMENT, relation_type VARCHAR(255) NOT NULL, document_left_hand BIGINT NOT NULL, document_right_hand BIGINT NOT NULL, created_at DATETIME, updated_at DATETIME, INDEX document_right_hand_idx (document_right_hand), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
 CREATE TABLE document_tag (document_id BIGINT, tag_id BIGINT, created_at DATETIME, updated_at DATETIME, PRIMARY KEY(document_id, tag_id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
 CREATE TABLE documenttypes (documenttype_id BIGINT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, legalvalue_id BIGINT, created_at DATETIME, updated_at DATETIME, INDEX legalvalue_id_idx (legalvalue_id), PRIMARY KEY(documenttype_id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
+CREATE TABLE excelfiles (id BIGINT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, tag_id BIGINT NOT NULL, author VARCHAR(255) NOT NULL, file VARCHAR(255) NOT NULL, created_at DATETIME, updated_at DATETIME, INDEX tag_id_idx (tag_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
 CREATE TABLE legalvalues (legalvalue_id BIGINT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, created_at DATETIME, updated_at DATETIME, PRIMARY KEY(legalvalue_id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
 CREATE TABLE memberstates (memberstate_id BIGINT AUTO_INCREMENT, name VARCHAR(255), created_at DATETIME, updated_at DATETIME, PRIMARY KEY(memberstate_id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
 CREATE TABLE memberstatesorganisations (id BIGINT AUTO_INCREMENT, join_date DATE NOT NULL, leave_date DATE, memberstate_id BIGINT, organisation_id BIGINT, created_at DATETIME, updated_at DATETIME, INDEX memberstate_id_idx (memberstate_id), INDEX organisation_id_idx (organisation_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
@@ -31,6 +32,7 @@ ALTER TABLE documents ADD FOREIGN KEY (documenttype_id) REFERENCES documenttypes
 ALTER TABLE documentrelations ADD FOREIGN KEY (document_right_hand) REFERENCES documents(document_id);
 ALTER TABLE document_tag ADD FOREIGN KEY (document_id) REFERENCES documents(document_id);
 ALTER TABLE documenttypes ADD FOREIGN KEY (legalvalue_id) REFERENCES legalvalues(legalvalue_id);
+ALTER TABLE excelfiles ADD FOREIGN KEY (tag_id) REFERENCES tags(tag_id);
 ALTER TABLE memberstatesorganisations ADD FOREIGN KEY (organisation_id) REFERENCES organisations(organisation_id);
 ALTER TABLE memberstatesorganisations ADD FOREIGN KEY (memberstate_id) REFERENCES memberstates(memberstate_id);
 ALTER TABLE organisations ADD FOREIGN KEY (parent_id) REFERENCES organisations(organisation_id);

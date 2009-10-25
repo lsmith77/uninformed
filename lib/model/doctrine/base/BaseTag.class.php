@@ -51,6 +51,10 @@ abstract class BaseTag extends sfDoctrineRecord
              'local' => 'tag_id',
              'foreign' => 'taghierarchie_id'));
 
+        $this->hasMany('ExcelFile', array(
+             'local' => 'tag_id',
+             'foreign' => 'tag_id'));
+
         $this->hasMany('TagImplication', array(
              'local' => 'tag_id',
              'foreign' => 'tag_right_hand'));

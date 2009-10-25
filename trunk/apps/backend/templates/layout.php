@@ -44,6 +44,14 @@
   </li>
   <li>|</li>
   <li><?php echo link_to('Votes', '@vote_votes') ?></li>
+<?php if ($sf_user->isSuperAdmin()) { ?>
+  <li>|</li>
+  <li><?php echo link_to('User admin', '@sf_guard_user') ?></li>
+  <li><?php echo link_to('Group admin', '@sf_guard_group') ?></li>
+  <li><?php echo link_to('Perm admin', '@sf_guard_perm') ?></li>
+<?php } ?>
+  <li>|</li>
+  <li><?php echo link_to('Logout', '@sf_guard_signout') ?></li>
 </ul>
 </div>
 

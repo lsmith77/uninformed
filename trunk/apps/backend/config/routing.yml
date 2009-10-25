@@ -10,6 +10,18 @@ sf_guard_password:
   url:   /request_password
   param: { module: sfGuardAuth, action: password }
 
+sf_guard_user:
+  url:   /sfGuardUser
+  param: { module: sfGuardUser, action: index }
+
+sf_guard_group:
+  url:   /sfGuardGroup
+  param: { module: sfGuardGroup, action: index }
+
+sf_guard_perm:
+  url:   /sfGuardPermission
+  param: { module: sfGuardPermission, action: index }
+
 excel_file_excelfiles:
   class: sfDoctrineRouteCollection
   options:

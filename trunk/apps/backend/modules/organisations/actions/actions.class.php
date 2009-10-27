@@ -13,4 +13,8 @@ require_once dirname(__FILE__).'/../lib/organisationsGeneratorHelper.class.php';
  */
 class organisationsActions extends autoOrganisationsActions
 {
+    public function executeAutocomplete($request)
+    {
+        return autocompleteHelper::executeAutocomplete($this, $request, 'Organisation');
+    }
 }

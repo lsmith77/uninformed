@@ -5,6 +5,14 @@ options:
   charset: utf8
   type: InnoDB
 
+Import:
+  tableName: imports
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+
 ExcelFile:
   tableName: excelfiles
   columns:
@@ -24,11 +32,17 @@ ExcelFile:
     file:
       type: string(255)
       notnull: true
+    import_id:
+      type: integer
   relations:
     Tag:
       class: Tag
       local: tag_id
       foreign: tag_id
+    Import:
+      class: Import
+      local: import_id
+      foreign: id
 
 Addressee:
   tableName: addressees
@@ -124,6 +138,9 @@ Document:
       type: integer
     documentURL:
       type: string(255)
+    import_id:
+      type: integer
+      notnull: true
   relations:
     Parent:
       class: Document
@@ -143,6 +160,10 @@ Document:
       local: document_id
       foreign: tag_id
       refClass: DocumentTag
+    Import:
+      class: Import
+      local: import_id
+      foreign: id
       
 DocumentRelation:
   tableName: documentrelations
@@ -198,6 +219,9 @@ Clause:
       type: integer
     document_id:
       type: integer
+    import_id:
+      type: integer
+      notnull: true
   relations:
     Parent:
       class: Clause
@@ -230,6 +254,10 @@ Clause:
       local: clause_id
       foreign: tag_id
       refClass: ClauseTag
+    Import:
+      class: Import
+      local: import_id
+      foreign: id
 
 ClauseProcess:
   tableName: clauseprocesses

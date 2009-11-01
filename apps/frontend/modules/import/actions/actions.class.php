@@ -44,6 +44,7 @@ class importActions extends sfActions
     */
     
     $documentImport = new documentImportFromExcel('uploads/Template_PoP_JULY2009_malariaII.xls');
+    //$documentImport = new documentImportFromExcel('uploads/new.water20090910_roxana_hannah_new templateII.xls');
     
     $documentImport->process();
     $documentImport->save();

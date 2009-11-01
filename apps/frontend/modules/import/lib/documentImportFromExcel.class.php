@@ -9,6 +9,8 @@
  */
 class documentImportFromExcel
 {
+	var $import; //holds the import object (for the ID)
+	
   var $excelFile;
   var $excelData;
   var $documents; //will contain all documents and their attributes
@@ -27,7 +29,9 @@ class documentImportFromExcel
      */
     //$objPHPExcel = new sfPhpExcel();
     //$objPHPExcel = PHPExcel_IOFactory::load($this->excelFile);
-    
+    $this->import = new Import();
+    $this->import->save();
+  	
     $this->excelFile = $excelFile;
     $this->excelData = new spreadsheetExcelReader($this->excelFile);
     
@@ -46,9 +50,9 @@ class documentImportFromExcel
   public function process()
   {
     $useSheet = 0;
-    $startRow = 1;
-    $startColumn = 2;
+    $startRow = 2;
     
+    $startColumn = 2;
     $countDocAttrColumns = 16; //No. of Excel columns used for UN document attributes
     
     $clauseStartColumn = 18;
@@ -77,9 +81,13 @@ class documentImportFromExcel
     
     $amountOfUsedRows = $this->excelData->rowcount($useSheet);
     
-    for($j = $startRow + 1; $j <= $amountOfUsedRows; $j++)
+    $lastDocumentTitle = "";
+    $lastDocumentCode = "";
+    
+    for($j = $startRow; $j <= $amountOfUsedRows; $j++)
     {
       $documentTitle = trim($this->excelData->value($j,$startColumn,$useSheet));
+      
       $clauseName = ""; //reset clause name
       
       if($documentTitle != "") //document name is obligatory
@@ -96,11 +104,40 @@ class documentImportFromExcel
           }
         }
         
-        if($documentAttributes[1] != "") //check whether a code is defined
+        if($documentAttributes[1] != "") //check whether a code is set
         {
           // create unique document title using document code as prefix
           $documentTitle = $documentAttributes[1]."-".$documentTitle;
           $clauseName = $documentAttributes[1];
+        }
+        else // no code found
+        {
+        	$randomCode = "";
+        	
+        	// check whether last document title equals actual document title
+        	// if so, we want to reuse the same randomCode for the clause name
+        	// so we can match clauses and documents later
+        	if($lastDocumentTitle == $documentTitle)
+        	{
+        		$randomCode = $lastDocumentCode;
+        	}
+        	else
+        	{
+        		// new document with no code, so create a new one
+        		$randomCode = "no_code#".mt_rand();
+        	}
+        	
+        	//write the created code into the attributes array
+        	$documentAttributes[1] = $randomCode;
+        	
+        	//save the document title for next document row to compare with
+        	$lastDocumentTitle = $documentTitle;
+        	
+        	$documentTitle = $randomCode."-".$documentTitle;
+        	$clauseName = $randomCode;
+        	
+        	//save the document code to reuse it when next document row is the same document
+        	$lastDocumentCode = $randomCode;
         }
         
         $this->documents[$documentTitle] = $documentAttributes;
@@ -108,7 +145,6 @@ class documentImportFromExcel
         if($clauseName != "")
         {
           $clauseAttributes[0] = $clauseName;
-          //$tags[0] = $clauseName;
           
           for($k = 0; $k < $countClauseAttrColumns; $k++)
           {
@@ -200,6 +236,8 @@ class documentImportFromExcel
       
       $document->set('documentURL', $attributes[15]);
     
+      $document->set('import_id', $this->import->get('id'));
+      
       $document->save();
     }
   }
@@ -215,15 +253,43 @@ class documentImportFromExcel
     $clause->set('clause_number', $clauseAttributesArray[2]);
     $clause->set('content', $clauseAttributesArray[1]);
     
-    $clause->set('information_type',
-      Doctrine::getTable('ClauseInformationType')
-        ->retrieveClauseInformationTypeIdByLabel($clauseAttributesArray[4])
-    );
+    // Clause Information Type
+    if(strlen($clauseAttributesArray[4]) > 0)
+    {
+    	$informationType = Doctrine::getTable('ClauseInformationType')
+        ->retrieveClauseInformationTypeIdByLabel($clauseAttributesArray[4]);
+        
+      if($informationType == NULL) // no entry found in database
+      {
+      	$newInformationType = new ClauseInformationType();
+      	$newInformationType->set('label', $clauseAttributesArray[4]);
+      	$newInformationType->save();
+      	
+      	$informationType = $newInformationType->get('id');
+      }
+      
+      $clause->set('information_type', $informationType);
+    }
     
-    $clause->set('operative_phrase',
-      Doctrine::getTable('ClauseOperativePhrase')
-        ->retrieveClauseOperativePhraseIdByLabel($clauseAttributesArray[3])
-    );
+    // Clause Operative Phrase
+    if(strlen($clauseAttributesArray[3]) > 0)
+    {
+    	$operativePhrase = Doctrine::getTable('ClauseOperativePhrase')
+	      ->retrieveClauseOperativePhraseIdByLabel($clauseAttributesArray[3]);
+	    
+	    if($operativePhrase == NULL) // no entry found in database
+	    {
+	      $newOperativePhrase = new ClauseOperativePhrase();
+	      $newOperativePhrase->set('label', $clauseAttributesArray[3]);
+	      $newOperativePhrase->save();
+	          
+	      $operativePhrase = $newOperativePhrase->get('id');
+	    }
+	    
+	    $clause->set('operative_phrase', $operativePhrase);
+    }
+    
+    $clause->set('import_id', $this->import->get('id'));
     
     $clause->save();
     

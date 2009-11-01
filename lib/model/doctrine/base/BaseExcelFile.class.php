@@ -32,6 +32,9 @@ abstract class BaseExcelFile extends sfDoctrineRecord
              'notnull' => true,
              'length' => '255',
              ));
+        $this->hasColumn('import_id', 'integer', null, array(
+             'type' => 'integer',
+             ));
 
         $this->option('collation', 'utf8_general_ci');
         $this->option('charset', 'utf8');
@@ -44,6 +47,10 @@ abstract class BaseExcelFile extends sfDoctrineRecord
     $this->hasOne('Tag', array(
              'local' => 'tag_id',
              'foreign' => 'tag_id'));
+
+        $this->hasOne('Import', array(
+             'local' => 'import_id',
+             'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

@@ -49,6 +49,10 @@ abstract class BaseDocument extends sfDoctrineRecord
              'type' => 'string',
              'length' => '255',
              ));
+        $this->hasColumn('import_id', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => true,
+             ));
 
         $this->option('collation', 'utf8_general_ci');
         $this->option('charset', 'utf8');
@@ -74,6 +78,10 @@ abstract class BaseDocument extends sfDoctrineRecord
              'refClass' => 'DocumentTag',
              'local' => 'document_id',
              'foreign' => 'tag_id'));
+
+        $this->hasOne('Import', array(
+             'local' => 'import_id',
+             'foreign' => 'id'));
 
         $this->hasMany('Document as Subdocuments', array(
              'local' => 'document_id',

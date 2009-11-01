@@ -49,6 +49,10 @@ abstract class BaseClause extends sfDoctrineRecord
         $this->hasColumn('document_id', 'integer', null, array(
              'type' => 'integer',
              ));
+        $this->hasColumn('import_id', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => true,
+             ));
 
         $this->option('collation', 'utf8_general_ci');
         $this->option('charset', 'utf8');
@@ -86,6 +90,10 @@ abstract class BaseClause extends sfDoctrineRecord
              'refClass' => 'ClauseTag',
              'local' => 'clause_id',
              'foreign' => 'tag_id'));
+
+        $this->hasOne('Import', array(
+             'local' => 'import_id',
+             'foreign' => 'id'));
 
         $this->hasMany('Addressee', array(
              'refClass' => 'ClauseAddressee',

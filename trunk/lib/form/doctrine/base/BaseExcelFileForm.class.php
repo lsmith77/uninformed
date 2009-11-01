@@ -17,6 +17,7 @@ class BaseExcelFileForm extends BaseFormDoctrine
       'tag_id'     => new sfWidgetFormDoctrineChoice(array('model' => 'Tag', 'add_empty' => false)),
       'author'     => new sfWidgetFormInput(),
       'file'       => new sfWidgetFormInput(),
+      'import_id'  => new sfWidgetFormDoctrineChoice(array('model' => 'Import', 'add_empty' => true)),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
     ));
@@ -27,6 +28,7 @@ class BaseExcelFileForm extends BaseFormDoctrine
       'tag_id'     => new sfValidatorDoctrineChoice(array('model' => 'Tag')),
       'author'     => new sfValidatorString(array('max_length' => 255)),
       'file'       => new sfValidatorString(array('max_length' => 255)),
+      'import_id'  => new sfValidatorDoctrineChoice(array('model' => 'Import', 'required' => false)),
       'created_at' => new sfValidatorDateTime(array('required' => false)),
       'updated_at' => new sfValidatorDateTime(array('required' => false)),
     ));

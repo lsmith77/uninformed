@@ -13,4 +13,14 @@ require_once dirname(__FILE__).'/../lib/excelfilesGeneratorHelper.class.php';
  */
 class excelfilesActions extends autoExcelfilesActions
 {
+	public function executeImportSpreadsheet($request)
+	{
+	  $excelFileId = $request->getParameter('id');
+	  $excelFileData = Doctrine::getTable('ExcelFile')->retrieveByPk($excelFileId);
+	  
+	  $documentImport = new documentImportFromExcel('uploads/'.$excelFileData[0]['file']);
+    
+    $documentImport->process();
+    $documentImport->save();
+	}
 }

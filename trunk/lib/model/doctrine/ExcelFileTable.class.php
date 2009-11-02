@@ -4,5 +4,11 @@
  */
 class ExcelFileTable extends Doctrine_Table
 {
-
+  public function retrieveByPk($id)
+  {
+  	$q = $this->createQuery('e')
+      ->where('e.id = ?', $id);
+ 
+    return $q->fetchArray();
+  }
 }

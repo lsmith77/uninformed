@@ -13,8 +13,16 @@ generator:
     config:
       actions: ~
       fields:  ~
-      list:    ~
+      list:
+        title: List of uploaded spreadsheets and their import status
+        display: [name, tag_id, author]
+        object_actions:
+          _edit: ~
+          _delete: ~  
+          import: { label: Import Spreadsheet, action: importSpreadsheet}
       filter:  ~
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        display: [name, tag_id, author]
+      new:
+        display: [name, tag_id, author, file]

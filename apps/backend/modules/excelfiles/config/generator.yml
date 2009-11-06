@@ -15,7 +15,7 @@ generator:
       fields:  ~
       list:
         title: List of uploaded spreadsheets and their import status
-        display: [name, tag_id, author]
+        display: [name, tag_id, author, is_imported]
         object_actions:
           _edit: ~
           _delete: ~  

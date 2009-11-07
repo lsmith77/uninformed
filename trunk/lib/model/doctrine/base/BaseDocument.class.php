@@ -45,9 +45,9 @@ abstract class BaseDocument extends BaseRecord
         $this->hasColumn('documenttype_id', 'integer', null, array(
              'type' => 'integer',
              ));
-        $this->hasColumn('documentURL', 'string', 255, array(
+        $this->hasColumn('documentURL', 'string', 2505, array(
              'type' => 'string',
-             'length' => '255',
+             'length' => '2505',
              ));
         $this->hasColumn('import_id', 'integer', null, array(
              'type' => 'integer',

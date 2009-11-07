@@ -139,7 +139,7 @@ Document:
     documenttype_id:
       type: integer
     documentURL:
-      type: string(255)
+      type: string(2505)
     import_id:
       type: integer
       notnull: true

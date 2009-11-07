@@ -13,7 +13,10 @@ generator:
     config:
       actions: ~
       fields:  ~
-      list:    ~
+      list:
+        title: Clauses
+        display: [name]
+        max_per_page: 10
       filter:  ~
       form:    ~
       edit:    ~

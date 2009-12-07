@@ -11,6 +11,7 @@ The following specification just details the functional delta between the curren
 == Specifications ==
 
  * TagAdmintool
+ * OrganisationAdmintool
  * Memberstates2OrganisationAdmintool
  * DocumentTypeAdmintool
  * ExcelsheetImport

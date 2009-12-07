@@ -1,3 +1,4 @@
+#labels featured
 = Introduction =
 
 We currently have a reference implementation for the backend in trunk that will not be developed further. Based on this reference implementation we have discussed the concept of a final version of the backend scheduled for March 2010. Since we are not sure yet about how many development resources we have available there is a plan A and plan B in order to be able to provide a fully working solution either way:

@@ -1,0 +1,12 @@
+= Introduction =
+
+The tag admintool will manage both the tags as well as the implied/recommended related tags.
+
+= Details =
+
+ * List of all existing tags with edit/delete buttons
+ * Search filters with livesearch for clauses/documents
+ * Button to create a new tag
+ * Tag has a name and an optional list of implied and recommended related tags
+ * Implied and recommended tags search via livesearch
+ * On enter/click the tag relation gets added as plain text with a delete button

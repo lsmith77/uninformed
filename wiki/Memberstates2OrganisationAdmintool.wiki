@@ -1,0 +1,10 @@
+= Introduction =
+
+The memberstate 2 organisation admintool will manage relations between countries and organisations.
+
+= Details =
+
+ * List of all existing countries with an edit button
+ * Search filters with livesearch for countries
+ * Country edit allows selecting multiple organizations
+ * For each organization selected optionally multiple join/leave date combinations may be selected

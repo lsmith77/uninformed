@@ -10,6 +10,7 @@ The following specification just details the functional delta between the curren
 == Specifications ==
 
  * TagAdmintool
+ * TagImplicationAdmintool
  * Memberstates2OrganisationAdmintool
  * DocumentTypeAdmintool
  * ExcelsheetImport

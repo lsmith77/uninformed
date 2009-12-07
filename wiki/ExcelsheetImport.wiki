@@ -1,0 +1,7 @@
+= Introduction =
+
+The current excel sheet import will be updated as needed (based on the changes to the database schema). Furthermore it will support a way to revert an excelsheet import.
+
+== Details ==
+
+This means that anything created by the excelsheet import needs to be tracked. Since multiple imports and manual management can overlap, there needs to be a shadow table for all relevant entities where links to the import are stored. When undoing an import that reference needs to be removed and the entity deleted if its not used anywhere else.

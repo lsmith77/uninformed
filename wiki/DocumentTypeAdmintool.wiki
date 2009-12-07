@@ -1,0 +1,10 @@
+= Introduction =
+
+The document type admintool will manage document types.  Its assumed a full list of relevant legal values is available inside the database (no specific admintool).
+
+= Details =
+
+ * List of all existing document types with edit/delete buttons
+ * Search filters with livesearch for document types as well clauses/documents
+ * Button to create a new document type
+ * Tag has a document types and an integer "rank" value as well as a legal value (select box)

@@ -1,0 +1,11 @@
+= Introduction =
+
+The organisation admintool will manage (sub)organisations.
+
+= Details =
+
+ * List of all existing organisations with edit/delete buttons
+ * Search filters with livesearch for organisations as well as clauses/documents
+ * Button to create a new organisation
+ * Organisation has a name and an optional parent organisation
+ * Parent organisation search via livesearch

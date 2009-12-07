@@ -11,11 +11,11 @@ The following specification just details the functional delta between the curren
 == Specifications ==
 
  * TagAdmintool
- * OrganisationAdmintool
- * Memberstates2OrganisationAdmintool
+ * OrganisationAdmintool (plan B)
+ * Memberstates2OrganisationAdmintool (plan B)
  * DocumentTypeAdmintool
- * ExcelsheetImport
- * DocumentAdmintool
+ * ExcelsheetImport (plan B)
+ * DocumentAdmintool (plan B, only voting)
  * OperativePhrasesAdmintool
  * InformationTypeAdmintool
  * AddresseeAdmintool

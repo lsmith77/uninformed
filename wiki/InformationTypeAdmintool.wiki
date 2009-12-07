@@ -1,0 +1,3 @@
+= Introduction =
+
+Simple admintool to manage names of information types.

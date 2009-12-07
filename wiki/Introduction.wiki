@@ -8,6 +8,10 @@ We currently have a reference implementation for the backend in trunk that will 
 
 The following specification just details the functional delta between the current backend prototype and the final planned version. All features which are required for plan B will be noted as such.
 
+== General requirements ==
+
+It needs to be possible to define what admintools are accessible to what user groups. Further certain actions within admintools also need to be restrict-able (For example setting a Document to status active should be limited to certain users). Ideally there would be a versioned history of all entities. Ideally there would also be some support tools/filters to aid the editorial process like being able to see a list of items that need review, seeing all items which were created/modified by someone specific etc.
+
 == Specifications ==
 
  * TagAdmintool

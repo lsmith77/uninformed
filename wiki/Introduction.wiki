@@ -1,7 +1,7 @@
 #labels Featured
 = Introduction =
 
-We currently have a reference implementation for the backend in trunk that will not be developed further. Based on this reference implementation we have discussed the concept of a final version of the backend scheduled for March 2010. Since we are not sure yet about how many development resources we have available there is a plan A and plan B in order to be able to provide a fully working solution either way:
+We currently have a reference implementation for the backend in the [http://code.google.com/p/uninformed/source/browse/#svn/branches/backend-prototype backend-prototype branch] that will not be developed further. Based on this reference implementation we have discussed the concept of a final version of the backend scheduled for March 2010. Since we are not sure yet about how many development resources we have available there is a plan A and plan B in order to be able to provide a fully working solution either way:
 
  * Plan A: In plan A the idea is that all data entry will be done via the backend web interface. There will be a way to import excel sheets solely for the purpose of being able to import legacy data files.
  * Plan B: In plan B the idea is that all data entry will be done via the backend web interface that cannot be done via the excel sheet format in a sensible way.

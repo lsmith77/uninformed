@@ -13,7 +13,9 @@ The clause admintool will manage both the clause as well as document/clause rela
  * Clause Number split into integer, additional information and subparagraph text field
  * Add button to send private comment field to a fixed mailinglist
  * Add button to send private comment field to a fixed mailinglist
- * After choosing the document, if the document has a direct followup load the list of different clauses from all parent (and their parents etc) document so that it can be selected as the parent id for the clause) 
+ * After choosing the document, if the document has a direct followup load the list of different clauses from all parent (and their parents etc) document
+ * Optionally choose an existing clause or create a new one
+ * Optionally when choosing an existing one, choose to edit
  * Show implied and recommended tags when adding a new tag via livesearch
  * Status (in draft, active, ready for editor, please review etc.)
 
@@ -23,6 +25,7 @@ The clause admintool will manage both the clause as well as document/clause rela
  * Clause number
  * Private comment field
  * Status
+ * Parent clause relation (implied by
 
 == Content ==
 

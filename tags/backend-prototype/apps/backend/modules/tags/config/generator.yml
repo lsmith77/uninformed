@@ -1,0 +1,25 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Tag
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tag_tags
+    with_doctrine_route:   1
+ 
+    config:
+      actions: ~
+      fields:
+        name: { label: Tag Name, help: Please enter a descriptive and unique name }
+      list:
+        title: Tag Management
+        display: [name, tag_type]
+      filter:    ~
+      form:    ~
+      edit:
+        title: Editing Tag "%%name%%"
+      new:
+        title: New Tag

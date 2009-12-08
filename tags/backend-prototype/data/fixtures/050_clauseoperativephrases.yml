@@ -1,0 +1,83 @@
+ClauseOperativePhrase:
+  phrase001:
+    label: Accepts
+  phrase002:
+    label: Affirms
+  phrase003:
+    label: Approves
+  phrase004:
+    label: Authorizes
+  phrase005:
+    label: Calls
+  phrase006:
+    label: Calls upon
+  phrase007:
+    label: Condemns
+  phrase008:
+    label: Confirms
+  phrase009:
+    label: Considers
+  phrase010:
+    label: Decides
+  phrase011:
+    label: Declares
+  phrase012: 
+    label: Deplores
+  phrase013:
+    label: Designates
+  phrase014:
+    label: Emphasizes
+  phrase015:
+    label: Encourages
+  phrase016:
+    label: Endorses
+  phrase017:
+    label: Invites
+  phrase018:
+    label: Notes
+  phrase019:
+    label: Proclaims
+  phrase020:
+    label: Reaffirms
+  phrase021:
+    label: Recommends
+  phrase022:
+    label: Regrets
+  phrase023:
+    label: Reminds
+  phrase024:
+    label: Requests
+  phrase025:
+    label: Resolves
+  phrase026:
+    label: Supports
+  phrase027:
+    label: Takes note of
+  phrase028:
+    label: Urges
+  phrase029:
+    label: Regrets
+  phrase030:
+    label: Reminds
+  phrase031:
+    label: Requests
+  phrase032:
+    label: Resolves
+  phrase033:
+    label: Solemnly affirms
+  phrase034:
+    label: Supports
+  phrase035:
+    label: Takes note of
+  phrase036:
+    label: Urges
+  phrase037:
+    label: We resolve
+  phrase038:
+    label: We commit
+  phrase039:
+    label: We undertake
+  phrase040:
+    label: States could implement
+  phrase041:
+    label: States could set the following targets

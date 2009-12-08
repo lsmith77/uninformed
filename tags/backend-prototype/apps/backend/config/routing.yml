@@ -1,0 +1,216 @@
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardAuth, action: password }
+
+sf_guard_user:
+  url:   /sfGuardUser
+  param: { module: sfGuardUser, action: index }
+
+sf_guard_group:
+  url:   /sfGuardGroup
+  param: { module: sfGuardGroup, action: index }
+
+sf_guard_perm:
+  url:   /sfGuardPermission
+  param: { module: sfGuardPermission, action: index }
+
+excel_file_excelfiles:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ExcelFile
+    module:               excelfiles
+    prefix_path:          excelfiles
+    column:               id
+    with_wildcard_routes: true
+
+memberstate_organisation_memberstatesorganisations:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                MemberstateOrganisation
+    module:               memberstatesorganisations
+    prefix_path:          memberstatesorganisations
+    column:               id
+    with_wildcard_routes: true
+
+document_relation_documentrelations:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DocumentRelation
+    module:               documentrelations
+    prefix_path:          documentrelations
+    column:               id
+    with_wildcard_routes: true
+
+tag_hierarchie_taghierarchies:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TagHierarchie
+    module:               taghierarchies
+    prefix_path:          taghierarchies
+    column:               taghierarchie_id
+    with_wildcard_routes: true
+
+tag_implication_tagimplications:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TagImplication
+    module:               tagimplications
+    prefix_path:          tagimplications
+    column:               id
+    with_wildcard_routes: true
+
+document_type_documenttypes:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DocumentType
+    module:               documenttypes
+    prefix_path:          documenttypes
+    column:               documenttype_id
+    with_wildcard_routes: true
+
+legal_value_legalvalues:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                LegalValue
+    module:               legalvalues
+    prefix_path:          legalvalues
+    column:               legalvalue_id
+    with_wildcard_routes: true
+
+addressee_addressees:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Addressee
+    module:               addressees
+    prefix_path:          addressees
+    column:               id
+    with_wildcard_routes: true
+
+legalvalue_legalvalues:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                LegalValue
+    module:               legalvalues
+    prefix_path:          legalvalues
+    column:               legalvalue_id
+    with_wildcard_routes: true
+
+organisation_organisations:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Organisation
+    module:               organisations
+    prefix_path:          organisations
+    column:               organisation_id
+    with_wildcard_routes: true
+
+memberstate_memberstates:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Memberstate
+    module:               memberstates
+    prefix_path:          memberstates
+    column:               memberstate_id
+    with_wildcard_routes: true
+
+documenttype_documenttypes:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Documenttype
+    module:               documenttypes
+    prefix_path:          documenttypes
+    column:               documenttype_id
+    with_wildcard_routes: true
+
+document_documents:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Document
+    module:               documents
+    prefix_path:          documents
+    column:               document_id
+    with_wildcard_routes: true
+
+documentrelation_documentrelations:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DocumentRelation
+    module:               documentrelations
+    prefix_path:          documentrelations
+    column:               id
+    with_wildcard_routes: true
+
+clause_clauses:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Clause
+    module:               clauses
+    prefix_path:          clauses
+    column:               clause_id
+    with_wildcard_routes: true
+
+tag_tags:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Tag
+    module:               tags
+    prefix_path:          tags
+    column:               tag_id
+    with_wildcard_routes: true
+
+tagimplication_tagimplications:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TagImplication
+    module:               tagimplications
+    prefix_path:          tagimplications
+    column:               id
+    with_wildcard_routes: true
+
+taghierarchie_taghierarchies:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TagHierarchie
+    module:               taghierarchies
+    prefix_path:          taghierarchies
+    column:               taghierarchie_id
+    with_wildcard_routes: true
+
+memberstateorganisation_memberstatesorganisations:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                MemberstateOrganisation
+    module:               memberstatesorganisations
+    prefix_path:          memberstatesorganisations
+    column:               id
+    with_wildcard_routes: true
+
+vote_votes:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Vote
+    module:               votes
+    prefix_path:          votes
+    column:               vote_id
+    with_wildcard_routes: true
+
+homepage:
+  url:   /
+  param: { module: documents, action: index }
+
+# default rules
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

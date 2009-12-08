@@ -1,0 +1,28 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           ExcelFile
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          excel_file_excelfiles
+    with_doctrine_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: List of uploaded spreadsheets and their import status
+        display: [name, tag_id, author, is_imported]
+        object_actions:
+          _edit: ~
+          _delete: ~  
+          import: { label: Import Spreadsheet, action: importSpreadsheet}
+      filter:  ~
+      form:    ~
+      edit:
+        display: [name, tag_id, author]
+      new:
+        display: [name, tag_id, author, file]

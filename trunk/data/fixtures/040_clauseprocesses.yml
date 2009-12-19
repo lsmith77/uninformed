@@ -1,9 +1,0 @@
-ClauseProcess:
-  process001:
-    label: New
-  process002:
-    label: Changed
-  process003:
-    label: Agreed language
-  process004:
-    label: Deleted

@@ -1,0 +1,432 @@
+actAs: [Timestampable]
+
+options:
+  collation: utf8_general_ci
+  charset: utf8
+  type: InnoDB
+
+Import:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+
+ExcelFile:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    tag_id:
+      type: integer
+      notnull: true
+    author:
+      type: string(255)
+      notnull: true
+    file:
+      type: string(255)
+      notnull: true
+    import_id:
+      type: integer
+    is_imported:
+      type: boolean
+  relations:
+    Tag:
+      class: Tag
+      local: id
+      foreign: id
+    Import:
+      class: Import
+      local: import_id
+      foreign: id
+
+Addressee:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+  relations:
+    Clauses:
+      class: Clause
+      local: id
+      foreign: id
+      refClass: ClauseAddressee
+
+LegalValue:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+
+Organisation:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    parent_id:
+      type: integer
+  relations:
+    Parent:
+      class: Organisation
+      local: parent_id
+      foreign: id
+      foreignAlias: Suborganisations
+
+DocumentType:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    legalvalue_id:
+      type: integer
+  relations:
+    LegalValue:
+      class: LegalValue
+      local: legalvalue_id
+      foreign: id
+
+Document:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    publication_date:
+      type: date
+    adoption_date:
+      type: date
+      notnull: true
+    code:
+      type: string(255)
+    min_ratification_count:
+      type: integer(4)
+    preamble:
+      type: string
+    parent_id:
+      type: integer
+    organisation_id:
+      type: integer
+    documenttype_id:
+      type: integer
+    documentURL:
+      type: string(2505)
+    import_id:
+      type: integer
+      notnull: true
+  relations:
+    Parent:
+      class: Document
+      local: parent_id
+      foreign: id
+      foreignAlias: Subdocuments
+    Organisation:
+      local: organisation_id
+      foreign: id
+      foreignAlias: Organisations
+    DocumentType:
+      local: documenttype_id
+      foreign: id
+      foreignAlias: Documents
+    Tags:
+      class: Tag
+      local: id
+      foreign: id
+      refClass: DocumentTag
+    Import:
+      class: Import
+      local: import_id
+      foreign: id
+
+DocumentRelation:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    relation_type:
+      type: enum
+      values: [followup, recalls, report]
+      notnull: true
+    document_id:
+      type: integer
+      notnull: true
+    implied_document_id:
+      type: integer
+      notnull: true
+  relations:
+    Document:
+      local: document_id
+      foreign: id
+    DocumentImplied:
+      local: implied_document_id
+      foreign: id
+
+Clause:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    clause_process:
+      type: integer
+    clause_number:
+      type: string(255)
+      notnull: true
+    information_type_id:
+      type: integer
+    operative_phrase_id:
+      type: integer
+    relevance:
+      type: string(255)
+    significants:
+      type: string(255)
+    content:
+      type: string
+    parent_id:
+      type: integer
+    document_id:
+      type: integer
+    import_id:
+      type: integer
+      notnull: true
+  relations:
+    Parent:
+      class: Clause
+      local: parent_id
+      foreign: id
+      foreignAlias: Subclauses
+    ClauseProcess:
+      local: clause_process
+      foreign: id
+      foreignAlias: Clauses
+    ClauseInformationType:
+      local: information_type_id
+      foreign: id
+      foreignAlias: Clauses
+    ClauseOperativePhrase:
+      local: operative_phrase_id
+      foreign: id
+      foreignAlias: Clauses
+    Document:
+      local: document_id
+      foreign: id
+      foreignAlias: Clauses
+    Addressees:
+      class: Addressee
+      local: id
+      foreign: id
+      foreignAlias: ClauseAddressee
+    Tags:
+      class: Tag
+      local: id
+      foreign: id
+      refClass: ClauseTag
+    Import:
+      class: Import
+      local: import_id
+      foreign: id
+
+ClauseProcess:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    label:
+      type: string(255)
+      notnull: true
+
+ClauseOperativePhrase:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    label:
+      type: string(255)
+      notnull: true
+
+ClauseInformationType:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    label:
+      type: string(255)
+      notnull: true
+
+Tag:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    tag_type:
+      type: enum
+      values: ['', legal_measure]
+      notnull: true
+  relations:
+    Clauses:
+      class: Clause
+      local: tag_id
+      foreign: id
+      refClass: ClauseTag
+    Documents:
+      class: Document
+      local: tag_id
+      foreign: id
+      refClass: DocumentTag
+    TagHierarchies:
+      class: TagHierarchie
+      local: tag_id
+      foreign: id
+      refClass: TagHierarchieTag
+
+TagImplication:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    implication_type:
+      type: enum
+      values: ['implies', 'suggests']
+      notnull: true
+    tag_id:
+      type: integer
+      notnull: true
+    implied_tag_id:
+      type: integer
+      notnull: true
+  relations:
+    Tag:
+      class: Tag
+      local: tag_id
+      foreign: id
+    TagImplied:
+      class: Tag
+      local: implied_tag_id
+      foreign: id
+
+Country:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+
+CountryOrganisation:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    join_date:
+      type: date
+      notnull: true
+    leave_date:
+      type: date
+    country_id:
+      type: integer
+    organisation_id:
+      type: integer
+  relations:
+    Country:
+      local: country_id
+      foreign: id
+      foreignAlias: Organisations
+    Organisation:
+      local: organisation_id
+      foreign: id
+      foreignAlias: Countries
+
+Vote:
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    label:
+      type: enum
+      values: [signed, agreed, 'no', abstain, missing]
+    document_id:
+      type: integer
+    country_id:
+      type: integer
+  relations:
+    Document:
+      local: document_id
+      foreign: id
+      foreignAlias: Votes
+    Country:
+      local: country_id
+      foreign: id
+      foreignAlias: Votes
+
+ClauseAddressee:
+  columns:
+    clause_id:
+      type: integer
+      primary: true
+    addressee_id:
+      type: integer
+      primary: true
+
+ClauseTag:
+  columns:
+    clause_id:
+      type: integer
+      primary: true
+    tag_id:
+      type: integer
+      primary: true
+
+DocumentTag:
+  columns:
+    document_id:
+      type: integer
+      primary: true
+    tag_id:
+      type: integer
+      primary: true
+
+TagHierarchieTag:
+  columns:
+    taghierarchie_id:
+      type: integer
+      primary: true
+    tag_id:
+      type: integer
+      primary: true

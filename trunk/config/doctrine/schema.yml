@@ -1,4 +1,4 @@
-actAs: [Timestampable]
+actAs: [Timestampable, Versionable]
 
 options:
   collation: utf8_general_ci
@@ -23,9 +23,6 @@ ExcelFile:
       notnull: true
     tag_id:
       type: integer
-      notnull: true
-    author:
-      type: string(255)
       notnull: true
     file:
       type: string(255)
@@ -69,8 +66,17 @@ LegalValue:
     name:
       type: string(255)
       notnull: true
+    decision_type:
+      type: enum
+      values: [vote, ratification]
+      notnull: false
 
 Organisation:
+  actAs:
+    Sluggable:
+      unique: true
+      fields: [name]
+      canUpdate: true
   columns:
     id:
       type: integer
@@ -99,6 +105,8 @@ DocumentType:
       notnull: true
     legalvalue_id:
       type: integer
+    rank_priority:
+      type: integer
   relations:
     LegalValue:
       class: LegalValue
@@ -106,6 +114,11 @@ DocumentType:
       foreign: id
 
 Document:
+  actAs:
+    Sluggable:
+      unique: true
+      fields: [name]
+      canUpdate: true
   columns:
     id:
       type: integer
@@ -123,19 +136,26 @@ Document:
       type: string(255)
     min_ratification_count:
       type: integer(4)
-    preamble:
-      type: string
+    is_ratified:
+      type: bool
+    private_comment:
+      type: clob
+    public_comment:
+      type: clob
     parent_id:
       type: integer
     organisation_id:
       type: integer
     documenttype_id:
       type: integer
-    documentURL:
+    document_url:
       type: string(2505)
     import_id:
       type: integer
       notnull: true
+    status:
+      type: enum
+      values: [draft, review, reviewed, inactive, active]
   relations:
     Parent:
       class: Document
@@ -160,7 +180,7 @@ Document:
       local: import_id
       foreign: id
 
-DocumentRelation:
+DocumentDocumentRelation:
   columns:
     id:
       type: integer
@@ -168,75 +188,120 @@ DocumentRelation:
       autoincrement: true
     relation_type:
       type: enum
-      values: [followup, recalls, report]
+      values: [followup, recalls, closely_related]
       notnull: true
     document_id:
       type: integer
       notnull: true
-    implied_document_id:
+    related_document_id:
       type: integer
       notnull: true
   relations:
     Document:
       local: document_id
       foreign: id
-    DocumentImplied:
-      local: implied_document_id
+    DocumentRelated:
+      class: Document
+      local: related_document_id
       foreign: id
 
-Clause:
+DocumentClauseRelation:
   columns:
     id:
       type: integer
       primary: true
       autoincrement: true
-    name:
-      type: string(255)
+    relation_type:
+      type: enum
+      values: [closely_related]
       notnull: true
-    clause_process:
-      type: integer
-    clause_number:
-      type: string(255)
-      notnull: true
-    information_type_id:
-      type: integer
-    operative_phrase_id:
-      type: integer
-    relevance:
-      type: string(255)
-    significants:
-      type: string(255)
-    content:
-      type: string
-    parent_id:
-      type: integer
     document_id:
       type: integer
-    import_id:
+      notnull: true
+    related_clause_id:
       type: integer
       notnull: true
   relations:
-    Parent:
+    Document:
+      local: document_id
+      foreign: id
+    ClauseRelated:
       class: Clause
-      local: parent_id
+      local: related_document_id
       foreign: id
-      foreignAlias: Subclauses
-    ClauseProcess:
-      local: clause_process
-      foreign: id
-      foreignAlias: Clauses
-    ClauseInformationType:
-      local: information_type_id
-      foreign: id
-      foreignAlias: Clauses
-    ClauseOperativePhrase:
-      local: operative_phrase_id
-      foreign: id
-      foreignAlias: Clauses
+
+Clause:
+  actAs:
+    Sluggable:
+      unique: true
+      fields: [document_id, clause_number, clause_number_information, clause_number_subparagraph]
+      builder: ['Clause', 'sluggify']
+      canUpdate: true
+  columns:
+    id:
+      type: integer
+      primary: true
+    document_id:
+      type: integer
+      autoincrement: true
+    clause_number:
+      type: integer
+      notnull: true
+    clause_number_information:
+      type: string(255)
+      notnull: true
+    clause_number_subparagraph:
+      type: string(255)
+      notnull: true
+    import_id:
+      type: integer
+      notnull: true
+    private_comment:
+      type: clob
+  relations:
     Document:
       local: document_id
       foreign: id
       foreignAlias: Clauses
+    Import:
+      class: Import
+      local: import_id
+      foreign: id
+
+ClauseBody:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    clause_id:
+      type: integer
+    import_id:
+      type: integer
+      notnull: true
+    content:
+      type: clob
+    information_type_id:
+      type: integer
+    operative_phrase_id:
+      type: integer
+    public_comment:
+      type: clob
+    parent_id:
+      type: integer
+    clause_process_id:
+      type: integer
+    status:
+      type: enum
+      values: [draft, in_review, reviewed, inactive, active]
+  columns:
+    Import:
+      class: Import
+      local: import_id
+      foreign: id
+    Clause:
+      class: Clause
+      local: id
+      foreign: id
     Addressees:
       class: Addressee
       local: id
@@ -247,10 +312,44 @@ Clause:
       local: id
       foreign: id
       refClass: ClauseTag
-    Import:
-      class: Import
-      local: import_id
+    ClauseParent:
+      class: Clause
+      local: parent_id
       foreign: id
+      foreignAlias: Subclauses
+    ClauseProcess:
+      local: clause_process_id
+      foreign: id
+      foreignAlias: Clauses
+    ClauseInformationType:
+      local: information_type_id
+      foreign: id
+      foreignAlias: Clauses
+    ClauseOperativePhrase:
+      local: operative_phrase_id
+      foreign: id
+      foreignAlias: Clauses
+
+ClauseReservation:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    clause_id:
+      type: integer
+    country_id:
+      type: integer
+    reservation:
+      type: clob
+  columns:
+    Clause:
+      class: Clause
+      local: id
+      foreign: id
+    Country:
+      local: country_id
+      foreign: id
+      foreignAlias: Countries
 
 ClauseProcess:
   columns:
@@ -306,11 +405,6 @@ Tag:
       local: tag_id
       foreign: id
       refClass: DocumentTag
-    TagHierarchies:
-      class: TagHierarchie
-      local: tag_id
-      foreign: id
-      refClass: TagHierarchieTag
 
 TagImplication:
   columns:
@@ -416,15 +510,6 @@ ClauseTag:
 DocumentTag:
   columns:
     document_id:
-      type: integer
-      primary: true
-    tag_id:
-      type: integer
-      primary: true
-
-TagHierarchieTag:
-  columns:
-    taghierarchie_id:
       type: integer
       primary: true
     tag_id:

@@ -1,16 +1,47 @@
-actAs: [Timestampable, Versionable]
+actAs: &actAs
+  Timestampable: ~
+  Blameable: &Blameable
+    default: null
+    blameVar: user_id
+    listener: BlameableCustomListener
+    columns:
+      updated:
+        disabled: true
+    relations:
+      class: sfGuardUser
+      disabled: false
+  Versionable:
+    actAs:
+      Blameable:
+        <<: *Blameable
 
 options:
   collation: utf8_general_ci
   charset: utf8
   type: InnoDB
 
-Import:
+sfGuardUserProfile:
+  actAs:
+    Blameable:
+      <<: *Blameable
   columns:
     id:
       type: integer
       primary: true
       autoincrement: true
+  relations:
+    User:
+      class: sfGuardUser
+      local: id
+      foreign: id
+      type: one
+      foreignType: one
+      foreignAlias: Profile
+
+Import:
+  inheritance:
+    type:          column_aggregation
+    extends:       sfGuardUser
 
 ExcelFile:
   columns:
@@ -27,18 +58,12 @@ ExcelFile:
     file:
       type: string(255)
       notnull: true
-    import_id:
-      type: integer
     is_imported:
       type: boolean
   relations:
     Tag:
       class: Tag
-      local: id
-      foreign: id
-    Import:
-      class: Import
-      local: import_id
+      local: tag_id
       foreign: id
 
 Addressee:
@@ -52,7 +77,7 @@ Addressee:
       notnull: true
   relations:
     Clauses:
-      class: Clause
+      class: ClauseBody
       local: id
       foreign: id
       refClass: ClauseAddressee
@@ -73,6 +98,7 @@ LegalValue:
 
 Organisation:
   actAs:
+    <<: *actAs
     Sluggable:
       unique: true
       fields: [name]
@@ -115,6 +141,7 @@ DocumentType:
 
 Document:
   actAs:
+    <<: *actAs
     Sluggable:
       unique: true
       fields: [name]
@@ -150,9 +177,6 @@ Document:
       type: integer
     document_url:
       type: string(2505)
-    import_id:
-      type: integer
-      notnull: true
     status:
       type: enum
       values: [draft, review, reviewed, inactive, active]
@@ -175,10 +199,6 @@ Document:
       local: id
       foreign: id
       refClass: DocumentTag
-    Import:
-      class: Import
-      local: import_id
-      foreign: id
 
 DocumentDocumentRelation:
   columns:
@@ -186,7 +206,7 @@ DocumentDocumentRelation:
       type: integer
       primary: true
       autoincrement: true
-    relation_type:
+    type:
       type: enum
       values: [followup, recalls, closely_related]
       notnull: true
@@ -204,6 +224,10 @@ DocumentDocumentRelation:
       class: Document
       local: related_document_id
       foreign: id
+  indexes:
+    mapping:
+      fields: [document_id, related_document_id, type]
+      type: unique
 
 DocumentClauseRelation:
   columns:
@@ -211,14 +235,10 @@ DocumentClauseRelation:
       type: integer
       primary: true
       autoincrement: true
-    relation_type:
-      type: enum
-      values: [closely_related]
-      notnull: true
     document_id:
       type: integer
       notnull: true
-    related_clause_id:
+    related_clause_body_id:
       type: integer
       notnull: true
   relations:
@@ -226,24 +246,32 @@ DocumentClauseRelation:
       local: document_id
       foreign: id
     ClauseRelated:
-      class: Clause
-      local: related_document_id
+      class: ClauseBody
+      local: related_clause_body_id
       foreign: id
+  indexes:
+    mapping:
+      fields: [document_id, related_clause_body_id]
+      type: unique
 
 Clause:
   actAs:
+    <<: *actAs
     Sluggable:
       unique: true
-      fields: [document_id, clause_number, clause_number_information, clause_number_subparagraph]
-      builder: ['Clause', 'sluggify']
+      fields: [name]
       canUpdate: true
   columns:
     id:
       type: integer
       primary: true
+      autoincrement: true
     document_id:
       type: integer
-      autoincrement: true
+      notnull: true
+    clause_body_id:
+      type: integer
+      notnull: true
     clause_number:
       type: integer
       notnull: true
@@ -253,9 +281,6 @@ Clause:
     clause_number_subparagraph:
       type: string(255)
       notnull: true
-    import_id:
-      type: integer
-      notnull: true
     private_comment:
       type: clob
   relations:
@@ -263,45 +288,36 @@ Clause:
       local: document_id
       foreign: id
       foreignAlias: Clauses
-    Import:
-      class: Import
-      local: import_id
+    ClauseBody:
+      local: clause_body_id
       foreign: id
+  indexes:
+    mapping:
+      fields: [document_id, clause_body_id]
+      type: unique
 
 ClauseBody:
+  columns:
     id:
       type: integer
       primary: true
       autoincrement: true
-    clause_id:
-      type: integer
-    import_id:
-      type: integer
-      notnull: true
     content:
       type: clob
     information_type_id:
       type: integer
     operative_phrase_id:
       type: integer
+    clause_process_id:
+      type: integer
     public_comment:
       type: clob
-    parent_id:
-      type: integer
-    clause_process_id:
+    parent_clause_body_id:
       type: integer
     status:
       type: enum
       values: [draft, in_review, reviewed, inactive, active]
-  columns:
-    Import:
-      class: Import
-      local: import_id
-      foreign: id
-    Clause:
-      class: Clause
-      local: id
-      foreign: id
+  relations:
     Addressees:
       class: Addressee
       local: id
@@ -312,9 +328,9 @@ ClauseBody:
       local: id
       foreign: id
       refClass: ClauseTag
-    ClauseParent:
-      class: Clause
-      local: parent_id
+    ClauseBodyParent:
+      class: ClauseBody
+      local: parent_clause_body_id
       foreign: id
       foreignAlias: Subclauses
     ClauseProcess:
@@ -331,25 +347,30 @@ ClauseBody:
       foreignAlias: Clauses
 
 ClauseReservation:
+  columns:
     id:
       type: integer
       primary: true
       autoincrement: true
-    clause_id:
+    clause_body_id:
       type: integer
     country_id:
       type: integer
     reservation:
       type: clob
-  columns:
+  relations:
     Clause:
-      class: Clause
-      local: id
+      class: ClauseBody
+      local: clause_body_id
       foreign: id
     Country:
       local: country_id
       foreign: id
       foreignAlias: Countries
+  indexes:
+    mapping:
+      fields: [clause_body_id, country_id]
+      type: unique
 
 ClauseProcess:
   columns:
@@ -357,7 +378,7 @@ ClauseProcess:
       type: integer
       primary: true
       autoincrement: true
-    label:
+    name:
       type: string(255)
       notnull: true
 
@@ -367,7 +388,7 @@ ClauseOperativePhrase:
       type: integer
       primary: true
       autoincrement: true
-    label:
+    name:
       type: string(255)
       notnull: true
 
@@ -377,7 +398,7 @@ ClauseInformationType:
       type: integer
       primary: true
       autoincrement: true
-    label:
+    name:
       type: string(255)
       notnull: true
 
@@ -390,13 +411,9 @@ Tag:
     name:
       type: string(255)
       notnull: true
-    tag_type:
-      type: enum
-      values: ['', legal_measure]
-      notnull: true
   relations:
     Clauses:
-      class: Clause
+      class: ClauseBody
       local: tag_id
       foreign: id
       refClass: ClauseTag
@@ -431,6 +448,10 @@ TagImplication:
       class: Tag
       local: implied_tag_id
       foreign: id
+  indexes:
+    mapping:
+      fields: [tag_id, implied_tag_id]
+      type: unique
 
 Country:
   columns:
@@ -440,6 +461,7 @@ Country:
       autoincrement: true
     name:
       type: string(255)
+      notnull: true
 
 CountryOrganisation:
   columns:
@@ -454,8 +476,10 @@ CountryOrganisation:
       type: date
     country_id:
       type: integer
+      notnull: true
     organisation_id:
       type: integer
+      notnull: true
   relations:
     Country:
       local: country_id
@@ -472,13 +496,15 @@ Vote:
       type: integer
       primary: true
       autoincrement: true
-    label:
+    type:
       type: enum
       values: [signed, agreed, 'no', abstain, missing]
     document_id:
       type: integer
+      notnull: true
     country_id:
       type: integer
+      notnull: true
   relations:
     Document:
       local: document_id
@@ -488,30 +514,58 @@ Vote:
       local: country_id
       foreign: id
       foreignAlias: Votes
+  indexes:
+    mapping:
+      fields: [document_id, country_id]
+      type: unique
 
 ClauseAddressee:
   columns:
-    clause_id:
+    id:
       type: integer
       primary: true
+      autoincrement: true
+    clause_body_id:
+      type: integer
+      notnull: true
     addressee_id:
       type: integer
-      primary: true
+      notnull: true
+  indexes:
+    mapping:
+      fields: [clause_body_id, addressee_id]
+      type: unique
 
 ClauseTag:
   columns:
-    clause_id:
+    id:
       type: integer
       primary: true
+      autoincrement: true
+    clause_body_id:
+      type: integer
+      notnull: true
     tag_id:
       type: integer
-      primary: true
+      notnull: true
+  indexes:
+    mapping:
+      fields: [clause_body_id, tag_id]
+      type: unique
 
 DocumentTag:
   columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
     document_id:
       type: integer
-      primary: true
+      notnull: true
     tag_id:
       type: integer
-      primary: true
+      notnull: true
+  indexes:
+    mapping:
+      fields: [document_id, tag_id]
+      type: unique

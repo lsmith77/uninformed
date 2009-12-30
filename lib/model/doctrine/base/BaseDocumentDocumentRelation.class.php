@@ -35,10 +35,11 @@ abstract class BaseDocumentDocumentRelation extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('document_document_relation');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
         $this->hasColumn('type', 'enum', null, array(
              'type' => 'enum',
@@ -50,13 +51,15 @@ abstract class BaseDocumentDocumentRelation extends sfDoctrineRecord
              ),
              'notnull' => true,
              ));
-        $this->hasColumn('document_id', 'integer', null, array(
+        $this->hasColumn('document_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
-        $this->hasColumn('related_document_id', 'integer', null, array(
+        $this->hasColumn('related_document_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
 
 

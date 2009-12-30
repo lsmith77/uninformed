@@ -89,10 +89,11 @@ abstract class BaseDocument extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('document');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
         $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
@@ -110,8 +111,9 @@ abstract class BaseDocument extends sfDoctrineRecord
              'type' => 'string',
              'length' => '255',
              ));
-        $this->hasColumn('min_ratification_count', 'integer', null, array(
+        $this->hasColumn('min_ratification_count', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
         $this->hasColumn('is_ratified', 'bool', null, array(
              'type' => 'bool',
@@ -122,14 +124,17 @@ abstract class BaseDocument extends sfDoctrineRecord
         $this->hasColumn('public_comment', 'clob', null, array(
              'type' => 'clob',
              ));
-        $this->hasColumn('parent_id', 'integer', null, array(
+        $this->hasColumn('parent_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
-        $this->hasColumn('organisation_id', 'integer', null, array(
+        $this->hasColumn('organisation_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
-        $this->hasColumn('documenttype_id', 'integer', null, array(
+        $this->hasColumn('documenttype_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
         $this->hasColumn('document_url', 'string', 2505, array(
              'type' => 'string',

@@ -26,18 +26,21 @@ abstract class BaseClauseAddressee extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('clause_addressee');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
-        $this->hasColumn('clause_body_id', 'integer', null, array(
+        $this->hasColumn('clause_body_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
-        $this->hasColumn('addressee_id', 'integer', null, array(
+        $this->hasColumn('addressee_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
 
 

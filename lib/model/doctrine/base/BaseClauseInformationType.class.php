@@ -26,10 +26,11 @@ abstract class BaseClauseInformationType extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('clause_information_type');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
         $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',

@@ -118,28 +118,33 @@ abstract class BaseClauseBody extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('clause_body');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
         $this->hasColumn('content', 'clob', null, array(
              'type' => 'clob',
              ));
-        $this->hasColumn('information_type_id', 'integer', null, array(
+        $this->hasColumn('information_type_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
-        $this->hasColumn('operative_phrase_id', 'integer', null, array(
+        $this->hasColumn('operative_phrase_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
-        $this->hasColumn('clause_process_id', 'integer', null, array(
+        $this->hasColumn('clause_process_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
         $this->hasColumn('public_comment', 'clob', null, array(
              'type' => 'clob',
              ));
-        $this->hasColumn('parent_clause_body_id', 'integer', null, array(
+        $this->hasColumn('parent_clause_body_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
         $this->hasColumn('status', 'enum', null, array(
              'type' => 'enum',

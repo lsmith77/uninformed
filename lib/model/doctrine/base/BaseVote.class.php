@@ -35,10 +35,11 @@ abstract class BaseVote extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('vote');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
         $this->hasColumn('type', 'enum', null, array(
              'type' => 'enum',
@@ -51,13 +52,15 @@ abstract class BaseVote extends sfDoctrineRecord
               4 => 'missing',
              ),
              ));
-        $this->hasColumn('document_id', 'integer', null, array(
+        $this->hasColumn('document_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
-        $this->hasColumn('country_id', 'integer', null, array(
+        $this->hasColumn('country_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
 
 

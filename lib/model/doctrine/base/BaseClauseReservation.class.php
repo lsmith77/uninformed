@@ -35,16 +35,19 @@ abstract class BaseClauseReservation extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('clause_reservation');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
-        $this->hasColumn('clause_body_id', 'integer', null, array(
+        $this->hasColumn('clause_body_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
-        $this->hasColumn('country_id', 'integer', null, array(
+        $this->hasColumn('country_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
         $this->hasColumn('reservation', 'clob', null, array(
              'type' => 'clob',

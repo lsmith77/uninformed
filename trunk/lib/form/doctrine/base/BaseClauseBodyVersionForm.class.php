@@ -25,7 +25,7 @@ abstract class BaseClauseBodyVersionForm extends BaseFormDoctrine
       'status'                => new sfWidgetFormChoice(array('choices' => array('draft' => 'draft', 'in_review' => 'in_review', 'reviewed' => 'reviewed', 'inactive' => 'inactive', 'active' => 'active'))),
       'created_at'            => new sfWidgetFormDateTime(),
       'updated_at'            => new sfWidgetFormDateTime(),
-      'created_by'            => new sfWidgetFormInputText(),
+      'author_id'             => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => false)),
       'version'               => new sfWidgetFormInputHidden(),
     ));
 
@@ -40,7 +40,7 @@ abstract class BaseClauseBodyVersionForm extends BaseFormDoctrine
       'status'                => new sfValidatorChoice(array('choices' => array('draft' => 'draft', 'in_review' => 'in_review', 'reviewed' => 'reviewed', 'inactive' => 'inactive', 'active' => 'active'), 'required' => false)),
       'created_at'            => new sfValidatorDateTime(),
       'updated_at'            => new sfValidatorDateTime(),
-      'created_by'            => new sfValidatorInteger(),
+      'author_id'             => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'))),
       'version'               => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'version', 'required' => false)),
     ));
 

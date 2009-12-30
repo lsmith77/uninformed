@@ -47,6 +47,11 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              'listener' => 'BlameableCustomListener',
              'columns' => 
              array(
+              'created' => 
+              array(
+              'name' => 'author_id',
+              'length' => 4,
+              ),
               'updated' => 
               array(
               'disabled' => true,
@@ -54,8 +59,12 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              ),
              'relations' => 
              array(
+              'created' => 
+              array(
               'class' => 'sfGuardUser',
               'disabled' => false,
+              'name' => 'Author',
+              ),
              ),
              ));
         $this->actAs($blameable0);

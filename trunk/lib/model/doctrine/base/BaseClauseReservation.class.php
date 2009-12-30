@@ -82,6 +82,11 @@ abstract class BaseClauseReservation extends sfDoctrineRecord
              'listener' => 'BlameableCustomListener',
              'columns' => 
              array(
+              'created' => 
+              array(
+              'name' => 'author_id',
+              'length' => 4,
+              ),
               'updated' => 
               array(
               'disabled' => true,
@@ -89,8 +94,12 @@ abstract class BaseClauseReservation extends sfDoctrineRecord
              ),
              'relations' => 
              array(
+              'created' => 
+              array(
               'class' => 'sfGuardUser',
               'disabled' => false,
+              'name' => 'Author',
+              ),
              ),
              ));
         $versionable0 = new Doctrine_Template_Versionable(array(
@@ -101,6 +110,11 @@ abstract class BaseClauseReservation extends sfDoctrineRecord
              'listener' => 'BlameableCustomListener',
              'columns' => 
              array(
+              'created' => 
+              array(
+              'name' => 'author_id',
+              'length' => 4,
+              ),
               'updated' => 
               array(
               'disabled' => true,
@@ -108,8 +122,12 @@ abstract class BaseClauseReservation extends sfDoctrineRecord
              ),
              'relations' => 
              array(
+              'created' => 
+              array(
               'class' => 'sfGuardUser',
               'disabled' => false,
+              'name' => 'Author',
+              ),
              ),
              ));
         $versionable0->addChild($blameable1);

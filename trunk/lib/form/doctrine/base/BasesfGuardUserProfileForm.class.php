@@ -15,13 +15,13 @@ abstract class BasesfGuardUserProfileForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'         => new sfWidgetFormInputHidden(),
-      'created_by' => new sfWidgetFormInputText(),
+      'id'        => new sfWidgetFormInputHidden(),
+      'author_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
-      'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'created_by' => new sfValidatorInteger(),
+      'id'        => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'author_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'))),
     ));
 
     $this->widgetSchema->setNameFormat('sf_guard_user_profile[%s]');

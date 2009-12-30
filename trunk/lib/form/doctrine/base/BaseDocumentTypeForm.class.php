@@ -21,7 +21,7 @@ abstract class BaseDocumentTypeForm extends BaseFormDoctrine
       'rank_priority' => new sfWidgetFormInputText(),
       'created_at'    => new sfWidgetFormDateTime(),
       'updated_at'    => new sfWidgetFormDateTime(),
-      'created_by'    => new sfWidgetFormInputText(),
+      'author_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => false)),
       'version'       => new sfWidgetFormInputText(),
     ));
 
@@ -32,7 +32,7 @@ abstract class BaseDocumentTypeForm extends BaseFormDoctrine
       'rank_priority' => new sfValidatorInteger(array('required' => false)),
       'created_at'    => new sfValidatorDateTime(),
       'updated_at'    => new sfValidatorDateTime(),
-      'created_by'    => new sfValidatorInteger(),
+      'author_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'))),
       'version'       => new sfValidatorInteger(array('required' => false)),
     ));
 

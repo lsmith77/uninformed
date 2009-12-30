@@ -5,11 +5,16 @@ actAs: &actAs
     blameVar: user_id
     listener: BlameableCustomListener
     columns:
+      created:
+        name: author_id
+        length:  4
       updated:
         disabled: true
     relations:
-      class: sfGuardUser
-      disabled: false
+      created:
+        class: sfGuardUser
+        disabled: false
+        name: Author
   Versionable:
     actAs:
       Blameable:
@@ -39,6 +44,7 @@ sfGuardUserProfile:
       foreignAlias: Profile
 
 Import:
+  actAs: [Timestampable]
   inheritance:
     type:          column_aggregation
     extends:       sfGuardUser
@@ -162,7 +168,7 @@ Document:
     code:
       type: string(255)
     min_ratification_count:
-      type: integer(4)
+      type: integer
     is_ratified:
       type: bool
     private_comment:

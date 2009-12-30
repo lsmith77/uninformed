@@ -25,9 +25,9 @@ abstract class BaseImportVersionForm extends BaseFormDoctrine
       'last_login'     => new sfWidgetFormDateTime(),
       'email_address'  => new sfWidgetFormInputText(),
       'type'           => new sfWidgetFormInputText(),
+      'author_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => false)),
       'created_at'     => new sfWidgetFormDateTime(),
       'updated_at'     => new sfWidgetFormDateTime(),
-      'created_by'     => new sfWidgetFormInputText(),
       'version'        => new sfWidgetFormInputHidden(),
     ));
 
@@ -42,9 +42,9 @@ abstract class BaseImportVersionForm extends BaseFormDoctrine
       'last_login'     => new sfValidatorDateTime(array('required' => false)),
       'email_address'  => new sfValidatorString(array('max_length' => 128)),
       'type'           => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'author_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'))),
       'created_at'     => new sfValidatorDateTime(),
       'updated_at'     => new sfValidatorDateTime(),
-      'created_by'     => new sfValidatorInteger(),
       'version'        => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'version', 'required' => false)),
     ));
 

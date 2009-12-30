@@ -17,45 +17,6 @@ abstract class BaseImport extends sfGuardUser
     {
         parent::setUp();
         $timestampable0 = new Doctrine_Template_Timestampable();
-        $blameable0 = new Doctrine_Template_Blameable(array(
-             'default' => NULL,
-             'blameVar' => 'user_id',
-             'listener' => 'BlameableCustomListener',
-             'columns' => 
-             array(
-              'updated' => 
-              array(
-              'disabled' => true,
-              ),
-             ),
-             'relations' => 
-             array(
-              'class' => 'sfGuardUser',
-              'disabled' => false,
-             ),
-             ));
-        $versionable0 = new Doctrine_Template_Versionable(array(
-             ));
-        $blameable1 = new Doctrine_Template_Blameable(array(
-             'default' => NULL,
-             'blameVar' => 'user_id',
-             'listener' => 'BlameableCustomListener',
-             'columns' => 
-             array(
-              'updated' => 
-              array(
-              'disabled' => true,
-              ),
-             ),
-             'relations' => 
-             array(
-              'class' => 'sfGuardUser',
-              'disabled' => false,
-             ),
-             ));
-        $versionable0->addChild($blameable1);
         $this->actAs($timestampable0);
-        $this->actAs($blameable0);
-        $this->actAs($versionable0);
     }
 }

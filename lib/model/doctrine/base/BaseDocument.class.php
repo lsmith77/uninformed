@@ -110,9 +110,8 @@ abstract class BaseDocument extends sfDoctrineRecord
              'type' => 'string',
              'length' => '255',
              ));
-        $this->hasColumn('min_ratification_count', 'integer', 4, array(
+        $this->hasColumn('min_ratification_count', 'integer', null, array(
              'type' => 'integer',
-             'length' => '4',
              ));
         $this->hasColumn('is_ratified', 'bool', null, array(
              'type' => 'bool',
@@ -205,6 +204,11 @@ abstract class BaseDocument extends sfDoctrineRecord
              'listener' => 'BlameableCustomListener',
              'columns' => 
              array(
+              'created' => 
+              array(
+              'name' => 'author_id',
+              'length' => 4,
+              ),
               'updated' => 
               array(
               'disabled' => true,
@@ -212,8 +216,12 @@ abstract class BaseDocument extends sfDoctrineRecord
              ),
              'relations' => 
              array(
+              'created' => 
+              array(
               'class' => 'sfGuardUser',
               'disabled' => false,
+              'name' => 'Author',
+              ),
              ),
              ));
         $versionable0 = new Doctrine_Template_Versionable(array(
@@ -224,6 +232,11 @@ abstract class BaseDocument extends sfDoctrineRecord
              'listener' => 'BlameableCustomListener',
              'columns' => 
              array(
+              'created' => 
+              array(
+              'name' => 'author_id',
+              'length' => 4,
+              ),
               'updated' => 
               array(
               'disabled' => true,
@@ -231,8 +244,12 @@ abstract class BaseDocument extends sfDoctrineRecord
              ),
              'relations' => 
              array(
+              'created' => 
+              array(
               'class' => 'sfGuardUser',
               'disabled' => false,
+              'name' => 'Author',
+              ),
              ),
              ));
         $versionable0->addChild($blameable1);

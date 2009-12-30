@@ -24,7 +24,7 @@ abstract class BaseClauseVersionForm extends BaseFormDoctrine
       'private_comment'            => new sfWidgetFormTextarea(),
       'created_at'                 => new sfWidgetFormDateTime(),
       'updated_at'                 => new sfWidgetFormDateTime(),
-      'created_by'                 => new sfWidgetFormInputText(),
+      'author_id'                  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => false)),
       'version'                    => new sfWidgetFormInputHidden(),
     ));
 
@@ -38,7 +38,7 @@ abstract class BaseClauseVersionForm extends BaseFormDoctrine
       'private_comment'            => new sfValidatorString(array('required' => false)),
       'created_at'                 => new sfValidatorDateTime(),
       'updated_at'                 => new sfValidatorDateTime(),
-      'created_by'                 => new sfValidatorInteger(),
+      'author_id'                  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'))),
       'version'                    => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'version', 'required' => false)),
     ));
 

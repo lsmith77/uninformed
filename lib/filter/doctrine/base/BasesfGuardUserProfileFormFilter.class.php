@@ -13,11 +13,11 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'created_by' => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'author_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
-      'created_by' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'author_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Author'), 'column' => 'id')),
     ));
 
     $this->widgetSchema->setNameFormat('sf_guard_user_profile_filters[%s]');
@@ -37,8 +37,8 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'id'         => 'Number',
-      'created_by' => 'Number',
+      'id'        => 'Number',
+      'author_id' => 'ForeignKey',
     );
   }
 }

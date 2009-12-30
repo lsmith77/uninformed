@@ -38,10 +38,11 @@ abstract class BaseCountryOrganisation extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('country_organisation');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
         $this->hasColumn('join_date', 'date', null, array(
              'type' => 'date',
@@ -50,13 +51,15 @@ abstract class BaseCountryOrganisation extends sfDoctrineRecord
         $this->hasColumn('leave_date', 'date', null, array(
              'type' => 'date',
              ));
-        $this->hasColumn('country_id', 'integer', null, array(
+        $this->hasColumn('country_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
-        $this->hasColumn('organisation_id', 'integer', null, array(
+        $this->hasColumn('organisation_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
 
         $this->option('collation', 'utf8_general_ci');

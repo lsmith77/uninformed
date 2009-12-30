@@ -35,10 +35,11 @@ abstract class BaseTagImplication extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('tag_implication');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
         $this->hasColumn('implication_type', 'enum', null, array(
              'type' => 'enum',
@@ -49,13 +50,15 @@ abstract class BaseTagImplication extends sfDoctrineRecord
              ),
              'notnull' => true,
              ));
-        $this->hasColumn('tag_id', 'integer', null, array(
+        $this->hasColumn('tag_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
-        $this->hasColumn('implied_tag_id', 'integer', null, array(
+        $this->hasColumn('implied_tag_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
 
 

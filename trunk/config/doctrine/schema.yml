@@ -7,7 +7,7 @@ actAs: &actAs
     columns:
       created:
         name: author_id
-        length:  4
+        length: 4
       updated:
         disabled: true
     relations:
@@ -25,57 +25,52 @@ options:
   charset: utf8
   type: InnoDB
 
-sfGuardUserProfile:
-  actAs:
-    Blameable:
-      <<: *Blameable
-  columns:
-    id:
-      type: integer
-      primary: true
-      autoincrement: true
-  relations:
-    User:
-      class: sfGuardUser
-      local: id
-      foreign: id
-      type: one
-      foreignType: one
-      foreignAlias: Profile
-
 Import:
-  actAs: [Timestampable]
   inheritance:
     type:          column_aggregation
     extends:       sfGuardUser
+  columns:
+    excel_file_id:
+      type: integer(4)
+      notnull: false
+  relations:
+    ExcelFile:
+      class: ExcelFile
+      local: excel_file_id
+      foreign: id
 
 ExcelFile:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     name:
       type: string(255)
       notnull: true
     tag_id:
-      type: integer
+      type: integer(4)
       notnull: true
     file:
       type: string(255)
       notnull: true
-    is_imported:
-      type: boolean
+    excel_author_id:
+      type: integer(4)
+      notnull: false
   relations:
     Tag:
       class: Tag
       local: tag_id
       foreign: id
+    sfGuardUser:
+      class: sfGuardUser
+      local: excel_author_id
+      foreign: id
 
 Addressee:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     name:
@@ -91,7 +86,7 @@ Addressee:
 LegalValue:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     name:
@@ -111,14 +106,14 @@ Organisation:
       canUpdate: true
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     name:
       type: string(255)
       notnull: true
     parent_id:
-      type: integer
+      type: integer(4)
   relations:
     Parent:
       class: Organisation
@@ -129,16 +124,16 @@ Organisation:
 DocumentType:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     name:
       type: string(255)
       notnull: true
     legalvalue_id:
-      type: integer
+      type: integer(4)
     rank_priority:
-      type: integer
+      type: integer(4)
   relations:
     LegalValue:
       class: LegalValue
@@ -154,7 +149,7 @@ Document:
       canUpdate: true
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     name:
@@ -168,7 +163,7 @@ Document:
     code:
       type: string(255)
     min_ratification_count:
-      type: integer
+      type: integer(4)
     is_ratified:
       type: bool
     private_comment:
@@ -176,11 +171,11 @@ Document:
     public_comment:
       type: clob
     parent_id:
-      type: integer
+      type: integer(4)
     organisation_id:
-      type: integer
+      type: integer(4)
     documenttype_id:
-      type: integer
+      type: integer(4)
     document_url:
       type: string(2505)
     status:
@@ -209,7 +204,7 @@ Document:
 DocumentDocumentRelation:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     type:
@@ -217,10 +212,10 @@ DocumentDocumentRelation:
       values: [followup, recalls, closely_related]
       notnull: true
     document_id:
-      type: integer
+      type: integer(4)
       notnull: true
     related_document_id:
-      type: integer
+      type: integer(4)
       notnull: true
   relations:
     Document:
@@ -238,14 +233,14 @@ DocumentDocumentRelation:
 DocumentClauseRelation:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     document_id:
-      type: integer
+      type: integer(4)
       notnull: true
     related_clause_body_id:
-      type: integer
+      type: integer(4)
       notnull: true
   relations:
     Document:
@@ -269,17 +264,17 @@ Clause:
       canUpdate: true
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     document_id:
-      type: integer
+      type: integer(4)
       notnull: true
     clause_body_id:
-      type: integer
+      type: integer(4)
       notnull: true
     clause_number:
-      type: integer
+      type: integer(4)
       notnull: true
     clause_number_information:
       type: string(255)
@@ -305,21 +300,21 @@ Clause:
 ClauseBody:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     content:
       type: clob
     information_type_id:
-      type: integer
+      type: integer(4)
     operative_phrase_id:
-      type: integer
+      type: integer(4)
     clause_process_id:
-      type: integer
+      type: integer(4)
     public_comment:
       type: clob
     parent_clause_body_id:
-      type: integer
+      type: integer(4)
     status:
       type: enum
       values: [draft, in_review, reviewed, inactive, active]
@@ -355,13 +350,13 @@ ClauseBody:
 ClauseReservation:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     clause_body_id:
-      type: integer
+      type: integer(4)
     country_id:
-      type: integer
+      type: integer(4)
     reservation:
       type: clob
   relations:
@@ -381,7 +376,7 @@ ClauseReservation:
 ClauseProcess:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     name:
@@ -391,7 +386,7 @@ ClauseProcess:
 ClauseOperativePhrase:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     name:
@@ -401,7 +396,7 @@ ClauseOperativePhrase:
 ClauseInformationType:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     name:
@@ -411,7 +406,7 @@ ClauseInformationType:
 Tag:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     name:
@@ -432,7 +427,7 @@ Tag:
 TagImplication:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     implication_type:
@@ -440,10 +435,10 @@ TagImplication:
       values: ['implies', 'suggests']
       notnull: true
     tag_id:
-      type: integer
+      type: integer(4)
       notnull: true
     implied_tag_id:
-      type: integer
+      type: integer(4)
       notnull: true
   relations:
     Tag:
@@ -462,7 +457,7 @@ TagImplication:
 Country:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     name:
@@ -472,7 +467,7 @@ Country:
 CountryOrganisation:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     join_date:
@@ -481,10 +476,10 @@ CountryOrganisation:
     leave_date:
       type: date
     country_id:
-      type: integer
+      type: integer(4)
       notnull: true
     organisation_id:
-      type: integer
+      type: integer(4)
       notnull: true
   relations:
     Country:
@@ -499,17 +494,17 @@ CountryOrganisation:
 Vote:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     type:
       type: enum
       values: [signed, agreed, 'no', abstain, missing]
     document_id:
-      type: integer
+      type: integer(4)
       notnull: true
     country_id:
-      type: integer
+      type: integer(4)
       notnull: true
   relations:
     Document:
@@ -528,14 +523,14 @@ Vote:
 ClauseAddressee:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     clause_body_id:
-      type: integer
+      type: integer(4)
       notnull: true
     addressee_id:
-      type: integer
+      type: integer(4)
       notnull: true
   indexes:
     mapping:
@@ -545,14 +540,14 @@ ClauseAddressee:
 ClauseTag:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     clause_body_id:
-      type: integer
+      type: integer(4)
       notnull: true
     tag_id:
-      type: integer
+      type: integer(4)
       notnull: true
   indexes:
     mapping:
@@ -562,14 +557,14 @@ ClauseTag:
 DocumentTag:
   columns:
     id:
-      type: integer
+      type: integer(4)
       primary: true
       autoincrement: true
     document_id:
-      type: integer
+      type: integer(4)
       notnull: true
     tag_id:
-      type: integer
+      type: integer(4)
       notnull: true
   indexes:
     mapping:

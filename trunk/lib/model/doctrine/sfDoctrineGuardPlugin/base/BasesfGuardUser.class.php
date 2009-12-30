@@ -15,12 +15,13 @@
  * @property timestamp $last_login
  * @property string $email_address
  * @property string $type
+ * @property integer $excel_file_id
  * @property Doctrine_Collection $groups
  * @property Doctrine_Collection $permissions
  * @property Doctrine_Collection $sfGuardUserPermission
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
- * @property sfGuardUserProfile $Profile
+ * @property Doctrine_Collection $ExcelFile
  * 
  * @method integer             getId()                    Returns the current record's "id" value
  * @method string              getUsername()              Returns the current record's "username" value
@@ -32,12 +33,13 @@
  * @method timestamp           getLastLogin()             Returns the current record's "last_login" value
  * @method string              getEmailAddress()          Returns the current record's "email_address" value
  * @method string              getType()                  Returns the current record's "type" value
+ * @method integer             getExcelFileId()           Returns the current record's "excel_file_id" value
  * @method Doctrine_Collection getGroups()                Returns the current record's "groups" collection
  * @method Doctrine_Collection getPermissions()           Returns the current record's "permissions" collection
  * @method Doctrine_Collection getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
  * @method Doctrine_Collection getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey  getRememberKeys()          Returns the current record's "RememberKeys" value
- * @method sfGuardUserProfile  getProfile()               Returns the current record's "Profile" value
+ * @method Doctrine_Collection getExcelFile()             Returns the current record's "ExcelFile" collection
  * @method sfGuardUser         setId()                    Sets the current record's "id" value
  * @method sfGuardUser         setUsername()              Sets the current record's "username" value
  * @method sfGuardUser         setAlgorithm()             Sets the current record's "algorithm" value
@@ -48,12 +50,13 @@
  * @method sfGuardUser         setLastLogin()             Sets the current record's "last_login" value
  * @method sfGuardUser         setEmailAddress()          Sets the current record's "email_address" value
  * @method sfGuardUser         setType()                  Sets the current record's "type" value
+ * @method sfGuardUser         setExcelFileId()           Sets the current record's "excel_file_id" value
  * @method sfGuardUser         setGroups()                Sets the current record's "groups" collection
  * @method sfGuardUser         setPermissions()           Sets the current record's "permissions" collection
  * @method sfGuardUser         setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
  * @method sfGuardUser         setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser         setRememberKeys()          Sets the current record's "RememberKeys" value
- * @method sfGuardUser         setProfile()               Sets the current record's "Profile" value
+ * @method sfGuardUser         setExcelFile()             Sets the current record's "ExcelFile" collection
  * 
  * @package    uninformed
  * @subpackage model
@@ -112,6 +115,11 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'type' => 'string',
              'length' => 255,
              ));
+        $this->hasColumn('excel_file_id', 'integer', 4, array(
+             'type' => 'integer',
+             'notnull' => false,
+             'length' => '4',
+             ));
 
 
         $this->index('is_active_idx', array(
@@ -157,9 +165,9 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasOne('sfGuardUserProfile as Profile', array(
+        $this->hasMany('ExcelFile', array(
              'local' => 'id',
-             'foreign' => 'id'));
+             'foreign' => 'excel_author_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

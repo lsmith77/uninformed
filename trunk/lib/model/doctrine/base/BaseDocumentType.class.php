@@ -35,21 +35,24 @@ abstract class BaseDocumentType extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('document_type');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
         $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
              'length' => '255',
              ));
-        $this->hasColumn('legalvalue_id', 'integer', null, array(
+        $this->hasColumn('legalvalue_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
-        $this->hasColumn('rank_priority', 'integer', null, array(
+        $this->hasColumn('rank_priority', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
 
         $this->option('collation', 'utf8_general_ci');

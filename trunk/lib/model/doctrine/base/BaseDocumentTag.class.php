@@ -26,18 +26,21 @@ abstract class BaseDocumentTag extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('document_tag');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
-        $this->hasColumn('document_id', 'integer', null, array(
+        $this->hasColumn('document_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
-        $this->hasColumn('tag_id', 'integer', null, array(
+        $this->hasColumn('tag_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
 
 

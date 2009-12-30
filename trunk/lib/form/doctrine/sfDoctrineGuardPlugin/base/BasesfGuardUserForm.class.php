@@ -25,8 +25,11 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'last_login'       => new sfWidgetFormDateTime(),
       'email_address'    => new sfWidgetFormInputText(),
       'type'             => new sfWidgetFormInputText(),
+      'excel_file_id'    => new sfWidgetFormInputText(),
       'created_at'       => new sfWidgetFormDateTime(),
       'updated_at'       => new sfWidgetFormDateTime(),
+      'deleted_at'       => new sfWidgetFormDateTime(),
+      'author_id'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'groups_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup')),
       'permissions_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission')),
     ));
@@ -42,8 +45,11 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'last_login'       => new sfValidatorDateTime(array('required' => false)),
       'email_address'    => new sfValidatorString(array('max_length' => 128)),
       'type'             => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'excel_file_id'    => new sfValidatorInteger(array('required' => false)),
       'created_at'       => new sfValidatorDateTime(),
       'updated_at'       => new sfValidatorDateTime(),
+      'deleted_at'       => new sfValidatorDateTime(array('required' => false)),
+      'author_id'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
       'groups_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup', 'required' => false)),
       'permissions_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission', 'required' => false)),
     ));

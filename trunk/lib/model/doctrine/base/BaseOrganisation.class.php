@@ -38,18 +38,20 @@ abstract class BaseOrganisation extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('organisation');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
         $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
              'length' => '255',
              ));
-        $this->hasColumn('parent_id', 'integer', null, array(
+        $this->hasColumn('parent_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
 
         $this->option('collation', 'utf8_general_ci');

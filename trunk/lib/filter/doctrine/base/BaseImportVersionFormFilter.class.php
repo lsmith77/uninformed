@@ -22,9 +22,11 @@ abstract class BaseImportVersionFormFilter extends BaseFormFilterDoctrine
       'last_login'     => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'email_address'  => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'type'           => new sfWidgetFormFilterInput(),
-      'author_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
+      'excel_file_id'  => new sfWidgetFormFilterInput(),
       'created_at'     => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'     => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'deleted_at'     => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
+      'author_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -37,9 +39,11 @@ abstract class BaseImportVersionFormFilter extends BaseFormFilterDoctrine
       'last_login'     => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'email_address'  => new sfValidatorPass(array('required' => false)),
       'type'           => new sfValidatorPass(array('required' => false)),
-      'author_id'      => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Author'), 'column' => 'id')),
+      'excel_file_id'  => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'created_at'     => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_at'     => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
+      'deleted_at'     => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
+      'author_id'      => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Author'), 'column' => 'id')),
     ));
 
     $this->widgetSchema->setNameFormat('import_version_filters[%s]');
@@ -69,9 +73,11 @@ abstract class BaseImportVersionFormFilter extends BaseFormFilterDoctrine
       'last_login'     => 'Date',
       'email_address'  => 'Text',
       'type'           => 'Text',
-      'author_id'      => 'ForeignKey',
+      'excel_file_id'  => 'Number',
       'created_at'     => 'Date',
       'updated_at'     => 'Date',
+      'deleted_at'     => 'Date',
+      'author_id'      => 'ForeignKey',
       'version'        => 'Number',
     );
   }

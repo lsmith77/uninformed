@@ -32,18 +32,21 @@ abstract class BaseDocumentClauseRelation extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('document_clause_relation');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
+             'length' => '4',
              ));
-        $this->hasColumn('document_id', 'integer', null, array(
+        $this->hasColumn('document_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
-        $this->hasColumn('related_clause_body_id', 'integer', null, array(
+        $this->hasColumn('related_clause_body_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
 
 

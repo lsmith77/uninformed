@@ -16,6 +16,9 @@ abstract class BaseImportForm extends sfGuardUserForm
   {
     parent::setupInheritance();
 
+    $this->widgetSchema   ['version'] = new sfWidgetFormInputText();
+    $this->validatorSchema['version'] = new sfValidatorInteger(array('required' => false));
+
     $this->widgetSchema->setNameFormat('import[%s]');
   }
 

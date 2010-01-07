@@ -12,42 +12,4 @@
  */
 class sfGuardUser extends PluginsfGuardUser
 {
-    public function setUp()
-    {
-        parent::setUp();
-
-        $softdelete0 = new Doctrine_Template_SoftDelete();
-        $blameable0 = new Doctrine_Template_Blameable(array(
-             'default' => NULL,
-             'blameVar' => 'user_id',
-             'listener' => 'BlameableCustomListener',
-             'columns' =>
-             array(
-              'created' =>
-              array(
-              'name' => 'author_id',
-              'length' => 4,
-              'options' =>
-              array(
-                'notnull' => false,
-              )
-              ),
-              'updated' =>
-              array(
-              'disabled' => true,
-              ),
-             ),
-             'relations' =>
-             array(
-              'created' =>
-              array(
-              'class' => 'sfGuardUser',
-              'disabled' => false,
-              'name' => 'Author',
-              ),
-             ),
-             ));
-        $this->actAs($softdelete0);
-        $this->actAs($blameable0);
-    }
 }

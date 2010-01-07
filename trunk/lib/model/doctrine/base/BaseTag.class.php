@@ -100,6 +100,10 @@ abstract class BaseTag extends sfDoctrineRecord
               array(
               'name' => 'author_id',
               'length' => 4,
+              'options' => 
+              array(
+               'notnull' => false,
+              ),
               ),
               'updated' => 
               array(
@@ -128,6 +132,10 @@ abstract class BaseTag extends sfDoctrineRecord
               array(
               'name' => 'author_id',
               'length' => 4,
+              'options' => 
+              array(
+               'notnull' => false,
+              ),
               ),
               'updated' => 
               array(

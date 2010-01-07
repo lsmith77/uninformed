@@ -22,7 +22,7 @@ abstract class BaseCountryOrganisationForm extends BaseFormDoctrine
       'organisation_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Organisation'), 'add_empty' => false)),
       'created_at'      => new sfWidgetFormDateTime(),
       'updated_at'      => new sfWidgetFormDateTime(),
-      'author_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => false)),
+      'author_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'         => new sfWidgetFormInputText(),
     ));
 
@@ -34,7 +34,7 @@ abstract class BaseCountryOrganisationForm extends BaseFormDoctrine
       'organisation_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Organisation'))),
       'created_at'      => new sfValidatorDateTime(),
       'updated_at'      => new sfValidatorDateTime(),
-      'author_id'       => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'))),
+      'author_id'       => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
       'version'         => new sfValidatorInteger(array('required' => false)),
     ));
 

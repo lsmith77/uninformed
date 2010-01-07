@@ -29,7 +29,7 @@ abstract class BaseImportVersionForm extends BaseFormDoctrine
       'created_at'     => new sfWidgetFormDateTime(),
       'updated_at'     => new sfWidgetFormDateTime(),
       'deleted_at'     => new sfWidgetFormDateTime(),
-      'author_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => false)),
+      'author_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'        => new sfWidgetFormInputHidden(),
     ));
 
@@ -48,7 +48,7 @@ abstract class BaseImportVersionForm extends BaseFormDoctrine
       'created_at'     => new sfValidatorDateTime(),
       'updated_at'     => new sfValidatorDateTime(),
       'deleted_at'     => new sfValidatorDateTime(array('required' => false)),
-      'author_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'))),
+      'author_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
       'version'        => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'version', 'required' => false)),
     ));
 

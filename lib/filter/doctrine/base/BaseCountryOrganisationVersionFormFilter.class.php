@@ -13,8 +13,6 @@ abstract class BaseCountryOrganisationVersionFormFilter extends BaseFormFilterDo
   public function setup()
   {
     $this->setWidgets(array(
-      'join_date'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
-      'leave_date'      => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'country_id'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'organisation_id' => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'created_at'      => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
@@ -23,8 +21,6 @@ abstract class BaseCountryOrganisationVersionFormFilter extends BaseFormFilterDo
     ));
 
     $this->setValidators(array(
-      'join_date'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDateTime(array('required' => false)))),
-      'leave_date'      => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDateTime(array('required' => false)))),
       'country_id'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'organisation_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'created_at'      => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
@@ -50,8 +46,6 @@ abstract class BaseCountryOrganisationVersionFormFilter extends BaseFormFilterDo
   {
     return array(
       'id'              => 'Number',
-      'join_date'       => 'Date',
-      'leave_date'      => 'Date',
       'country_id'      => 'Number',
       'organisation_id' => 'Number',
       'created_at'      => 'Date',

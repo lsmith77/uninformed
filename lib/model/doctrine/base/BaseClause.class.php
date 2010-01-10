@@ -8,7 +8,6 @@
  * @property integer $id
  * @property integer $document_id
  * @property integer $clause_body_id
- * @property integer $clause_number
  * @property string $clause_number_information
  * @property string $clause_number_subparagraph
  * @property clob $private_comment
@@ -18,7 +17,6 @@
  * @method integer    getId()                         Returns the current record's "id" value
  * @method integer    getDocumentId()                 Returns the current record's "document_id" value
  * @method integer    getClauseBodyId()               Returns the current record's "clause_body_id" value
- * @method integer    getClauseNumber()               Returns the current record's "clause_number" value
  * @method string     getClauseNumberInformation()    Returns the current record's "clause_number_information" value
  * @method string     getClauseNumberSubparagraph()   Returns the current record's "clause_number_subparagraph" value
  * @method clob       getPrivateComment()             Returns the current record's "private_comment" value
@@ -27,7 +25,6 @@
  * @method Clause     setId()                         Sets the current record's "id" value
  * @method Clause     setDocumentId()                 Sets the current record's "document_id" value
  * @method Clause     setClauseBodyId()               Sets the current record's "clause_body_id" value
- * @method Clause     setClauseNumber()               Sets the current record's "clause_number" value
  * @method Clause     setClauseNumberInformation()    Sets the current record's "clause_number_information" value
  * @method Clause     setClauseNumberSubparagraph()   Sets the current record's "clause_number_subparagraph" value
  * @method Clause     setPrivateComment()             Sets the current record's "private_comment" value
@@ -56,11 +53,6 @@ abstract class BaseClause extends sfDoctrineRecord
              'length' => '4',
              ));
         $this->hasColumn('clause_body_id', 'integer', 4, array(
-             'type' => 'integer',
-             'notnull' => true,
-             'length' => '4',
-             ));
-        $this->hasColumn('clause_number', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
              'length' => '4',
@@ -168,6 +160,7 @@ abstract class BaseClause extends sfDoctrineRecord
              ),
              ));
         $versionable0->addChild($blameable1);
+        $sortable0 = new Doctrine_Template_Sortable();
         $sluggable0 = new Doctrine_Template_Sluggable(array(
              'unique' => true,
              'fields' => 
@@ -179,6 +172,7 @@ abstract class BaseClause extends sfDoctrineRecord
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);
+        $this->actAs($sortable0);
         $this->actAs($sluggable0);
     }
 }

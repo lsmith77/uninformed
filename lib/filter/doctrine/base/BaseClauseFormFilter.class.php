@@ -15,7 +15,6 @@ abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'document_id'                => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Document'), 'add_empty' => true)),
       'clause_body_id'             => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseBody'), 'add_empty' => true)),
-      'clause_number'              => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'clause_number_information'  => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'clause_number_subparagraph' => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'private_comment'            => new sfWidgetFormFilterInput(),
@@ -23,13 +22,13 @@ abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'updated_at'                 => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'author_id'                  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'                    => new sfWidgetFormFilterInput(),
+      'position'                   => new sfWidgetFormFilterInput(),
       'slug'                       => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
       'document_id'                => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Document'), 'column' => 'id')),
       'clause_body_id'             => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('ClauseBody'), 'column' => 'id')),
-      'clause_number'              => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'clause_number_information'  => new sfValidatorPass(array('required' => false)),
       'clause_number_subparagraph' => new sfValidatorPass(array('required' => false)),
       'private_comment'            => new sfValidatorPass(array('required' => false)),
@@ -37,6 +36,7 @@ abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'updated_at'                 => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'author_id'                  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Author'), 'column' => 'id')),
       'version'                    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'position'                   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'slug'                       => new sfValidatorPass(array('required' => false)),
     ));
 
@@ -60,7 +60,6 @@ abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'id'                         => 'Number',
       'document_id'                => 'ForeignKey',
       'clause_body_id'             => 'ForeignKey',
-      'clause_number'              => 'Number',
       'clause_number_information'  => 'Text',
       'clause_number_subparagraph' => 'Text',
       'private_comment'            => 'Text',
@@ -68,6 +67,7 @@ abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'updated_at'                 => 'Date',
       'author_id'                  => 'ForeignKey',
       'version'                    => 'Number',
+      'position'                   => 'Number',
       'slug'                       => 'Text',
     );
   }

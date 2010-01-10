@@ -16,8 +16,6 @@ abstract class BaseCountryOrganisationVersionForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'              => new sfWidgetFormInputHidden(),
-      'join_date'       => new sfWidgetFormDate(),
-      'leave_date'      => new sfWidgetFormDate(),
       'country_id'      => new sfWidgetFormInputText(),
       'organisation_id' => new sfWidgetFormInputText(),
       'created_at'      => new sfWidgetFormDateTime(),
@@ -28,8 +26,6 @@ abstract class BaseCountryOrganisationVersionForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'              => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'join_date'       => new sfValidatorDate(),
-      'leave_date'      => new sfValidatorDate(array('required' => false)),
       'country_id'      => new sfValidatorInteger(),
       'organisation_id' => new sfValidatorInteger(),
       'created_at'      => new sfValidatorDateTime(),

@@ -14,48 +14,6 @@
  * @property integer $parent_clause_body_id
  * @property enum $status
  * @property Addressee $Addressees
- * @property Doctrine_Collection $Tag
- * 
- * @method integer               getId()                     Returns the current record's "id" value
- * @method clob                  getContent()                Returns the current record's "content" value
- * @method integer               getInformationTypeId()      Returns the current record's "information_type_id" value
- * @method integer               getOperativePhraseId()      Returns the current record's "operative_phrase_id" value
- * @method integer               getClauseProcessId()        Returns the current record's "clause_process_id" value
- * @method clob                  getPublicComment()          Returns the current record's "public_comment" value
- * @method integer               getParentClauseBodyId()     Returns the current record's "parent_clause_body_id" value
- * @method enum                  getStatus()                 Returns the current record's "status" value
- * @method Addressee             getAddressees()             Returns the current record's "Addressees" value
- * @method Doctrine_Collection   getTags()                   Returns the current record's "Tags" collection
- * @method ClauseBody            getClauseBodyParent()       Returns the current record's "ClauseBodyParent" value
- * @method ClauseProcess         getClauseProcess()          Returns the current record's "ClauseProcess" value
- * @method ClauseInformationType getClauseInformationType()  Returns the current record's "ClauseInformationType" value
- * @method ClauseOperativePhrase getClauseOperativePhrase()  Returns the current record's "ClauseOperativePhrase" value
- * @method Doctrine_Collection   getAddressee()              Returns the current record's "Addressee" collection
- * @method Doctrine_Collection   getDocumentClauseRelation() Returns the current record's "DocumentClauseRelation" collection
- * @method Doctrine_Collection   getClause()                 Returns the current record's "Clause" collection
- * @method Doctrine_Collection   getSubclauses()             Returns the current record's "Subclauses" collection
- * @method Doctrine_Collection   getClauseReservation()      Returns the current record's "ClauseReservation" collection
- * @method Doctrine_Collection   getTag()                    Returns the current record's "Tag" collection
- * @method ClauseBody            setId()                     Sets the current record's "id" value
- * @method ClauseBody            setContent()                Sets the current record's "content" value
- * @method ClauseBody            setInformationTypeId()      Sets the current record's "information_type_id" value
- * @method ClauseBody            setOperativePhraseId()      Sets the current record's "operative_phrase_id" value
- * @method ClauseBody            setClauseProcessId()        Sets the current record's "clause_process_id" value
- * @method ClauseBody            setPublicComment()          Sets the current record's "public_comment" value
- * @method ClauseBody            setParentClauseBodyId()     Sets the current record's "parent_clause_body_id" value
- * @method ClauseBody            setStatus()                 Sets the current record's "status" value
- * @method ClauseBody            setAddressees()             Sets the current record's "Addressees" value
- * @method ClauseBody            setTags()                   Sets the current record's "Tags" collection
- * @method ClauseBody            setClauseBodyParent()       Sets the current record's "ClauseBodyParent" value
- * @method ClauseBody            setClauseProcess()          Sets the current record's "ClauseProcess" value
- * @method ClauseBody            setClauseInformationType()  Sets the current record's "ClauseInformationType" value
- * @method ClauseBody            setClauseOperativePhrase()  Sets the current record's "ClauseOperativePhrase" value
- * @method ClauseBody            setAddressee()              Sets the current record's "Addressee" collection
- * @method ClauseBody            setDocumentClauseRelation() Sets the current record's "DocumentClauseRelation" collection
- * @method ClauseBody            setClause()                 Sets the current record's "Clause" collection
- * @method ClauseBody            setSubclauses()             Sets the current record's "Subclauses" collection
- * @method ClauseBody            setClauseReservation()      Sets the current record's "ClauseReservation" collection
- * @method ClauseBody            setTag()                    Sets the current record's "Tag" collections
  * @property ClauseBody $ClauseBodyParent
  * @property ClauseProcess $ClauseProcess
  * @property ClauseInformationType $ClauseInformationType
@@ -65,7 +23,6 @@
  * @property Doctrine_Collection $Clause
  * @property Doctrine_Collection $Subclauses
  * @property Doctrine_Collection $ClauseReservation
- * @property Doctrine_Collection $Tag
  * 
  * @method integer               getId()                     Returns the current record's "id" value
  * @method clob                  getContent()                Returns the current record's "content" value
@@ -76,7 +33,6 @@
  * @method integer               getParentClauseBodyId()     Returns the current record's "parent_clause_body_id" value
  * @method enum                  getStatus()                 Returns the current record's "status" value
  * @method Addressee             getAddressees()             Returns the current record's "Addressees" value
- * @method Doctrine_Collection   getTags()                   Returns the current record's "Tags" collection
  * @method ClauseBody            getClauseBodyParent()       Returns the current record's "ClauseBodyParent" value
  * @method ClauseProcess         getClauseProcess()          Returns the current record's "ClauseProcess" value
  * @method ClauseInformationType getClauseInformationType()  Returns the current record's "ClauseInformationType" value
@@ -86,7 +42,6 @@
  * @method Doctrine_Collection   getClause()                 Returns the current record's "Clause" collection
  * @method Doctrine_Collection   getSubclauses()             Returns the current record's "Subclauses" collection
  * @method Doctrine_Collection   getClauseReservation()      Returns the current record's "ClauseReservation" collection
- * @method Doctrine_Collection   getTag()                    Returns the current record's "Tag" collection
  * @method ClauseBody            setId()                     Sets the current record's "id" value
  * @method ClauseBody            setContent()                Sets the current record's "content" value
  * @method ClauseBody            setInformationTypeId()      Sets the current record's "information_type_id" value
@@ -96,7 +51,6 @@
  * @method ClauseBody            setParentClauseBodyId()     Sets the current record's "parent_clause_body_id" value
  * @method ClauseBody            setStatus()                 Sets the current record's "status" value
  * @method ClauseBody            setAddressees()             Sets the current record's "Addressees" value
- * @method ClauseBody            setTags()                   Sets the current record's "Tags" collection
  * @method ClauseBody            setClauseBodyParent()       Sets the current record's "ClauseBodyParent" value
  * @method ClauseBody            setClauseProcess()          Sets the current record's "ClauseProcess" value
  * @method ClauseBody            setClauseInformationType()  Sets the current record's "ClauseInformationType" value
@@ -106,7 +60,6 @@
  * @method ClauseBody            setClause()                 Sets the current record's "Clause" collection
  * @method ClauseBody            setSubclauses()             Sets the current record's "Subclauses" collection
  * @method ClauseBody            setClauseReservation()      Sets the current record's "ClauseReservation" collection
- * @method ClauseBody            setTag()                    Sets the current record's "Tag" collection
  * 
  * @package    uninformed
  * @subpackage model
@@ -170,11 +123,6 @@ abstract class BaseClauseBody extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'id'));
 
-        $this->hasMany('Tag as Tags', array(
-             'refClass' => 'ClauseTag',
-             'local' => 'id',
-             'foreign' => 'id'));
-
         $this->hasOne('ClauseBody as ClauseBodyParent', array(
              'local' => 'parent_clause_body_id',
              'foreign' => 'id'));
@@ -211,11 +159,6 @@ abstract class BaseClauseBody extends sfDoctrineRecord
         $this->hasMany('ClauseReservation', array(
              'local' => 'id',
              'foreign' => 'clause_body_id'));
-
-        $this->hasMany('Tag', array(
-             'refClass' => 'ClauseTag',
-             'local' => 'id',
-             'foreign' => 'tag_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $blameable0 = new Doctrine_Template_Blameable(array(
@@ -281,8 +224,10 @@ abstract class BaseClauseBody extends sfDoctrineRecord
              ),
              ));
         $versionable0->addChild($blameable1);
+        $taggable0 = new Doctrine_Template_Taggable();
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);
+        $this->actAs($taggable0);
     }
 }

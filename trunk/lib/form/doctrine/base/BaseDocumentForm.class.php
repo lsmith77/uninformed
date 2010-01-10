@@ -34,8 +34,7 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
       'author_id'              => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'                => new sfWidgetFormInputText(),
       'slug'                   => new sfWidgetFormInputText(),
-      'tags_list'              => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Tag')),
-      'tag_list'               => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Tag')),
+      'tags_list'              => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag')),
     ));
 
     $this->setValidators(array(
@@ -58,8 +57,7 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
       'author_id'              => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
       'version'                => new sfValidatorInteger(array('required' => false)),
       'slug'                   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'tags_list'              => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Tag', 'required' => false)),
-      'tag_list'               => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Tag', 'required' => false)),
+      'tags_list'              => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -89,17 +87,11 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
       $this->setDefault('tags_list', $this->object->Tags->getPrimaryKeys());
     }
 
-    if (isset($this->widgetSchema['tag_list']))
-    {
-      $this->setDefault('tag_list', $this->object->Tag->getPrimaryKeys());
-    }
-
   }
 
   protected function doSave($con = null)
   {
     $this->saveTagsList($con);
-    $this->saveTagList($con);
 
     parent::doSave($con);
   }
@@ -139,44 +131,6 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Tags', array_values($link));
-    }
-  }
-
-  public function saveTagList($con = null)
-  {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
-    if (!isset($this->widgetSchema['tag_list']))
-    {
-      // somebody has unset this widget
-      return;
-    }
-
-    if (null === $con)
-    {
-      $con = $this->getConnection();
-    }
-
-    $existing = $this->object->Tag->getPrimaryKeys();
-    $values = $this->getValue('tag_list');
-    if (!is_array($values))
-    {
-      $values = array();
-    }
-
-    $unlink = array_diff($existing, $values);
-    if (count($unlink))
-    {
-      $this->object->unlink('Tag', array_values($unlink));
-    }
-
-    $link = array_diff($values, $existing);
-    if (count($link))
-    {
-      $this->object->link('Tag', array_values($link));
     }
   }
 

@@ -1,14 +1,14 @@
 <?php
 
 /**
- * DocumentTag form.
+ * DocumentTaggableTag form.
  *
  * @package    uninformed
  * @subpackage form
  * @author     Your name here
  * @version    SVN: $Id: sfDoctrineFormTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class DocumentTagForm extends BaseDocumentTagForm
+class DocumentTaggableTagForm extends BaseDocumentTaggableTagForm
 {
   public function configure()
   {

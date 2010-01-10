@@ -57,7 +57,7 @@ ExcelFile:
       type: string(255)
       notnull: true
     tag_id:
-      type: integer(4)
+      type: integer(8)
       notnull: true
     file:
       type: string(255)
@@ -67,7 +67,7 @@ ExcelFile:
       notnull: false
   relations:
     Tag:
-      class: Tag
+      class: TaggableTag
       local: tag_id
       foreign: id
     sfGuardUser:
@@ -151,6 +151,7 @@ DocumentType:
 Document:
   actAs:
     <<: *actAs
+    Taggable: ~
     Sluggable:
       unique: true
       fields: [name]
@@ -306,6 +307,9 @@ Clause:
       type: unique
 
 ClauseBody:
+  actAs:
+    <<: *actAs
+    Taggable: ~
   columns:
     id:
       type: integer(4)
@@ -411,27 +415,6 @@ ClauseInformationType:
       type: string(255)
       notnull: true
 
-Tag:
-  columns:
-    id:
-      type: integer(4)
-      primary: true
-      autoincrement: true
-    name:
-      type: string(255)
-      notnull: true
-  relations:
-    Clauses:
-      class: ClauseBody
-      local: tag_id
-      foreign: id
-      refClass: ClauseTag
-    Documents:
-      class: Document
-      local: tag_id
-      foreign: id
-      refClass: DocumentTag
-
 TagImplication:
   columns:
     id:
@@ -443,18 +426,18 @@ TagImplication:
       values: ['implies', 'suggests']
       notnull: true
     tag_id:
-      type: integer(4)
+      type: integer(8)
       notnull: true
     implied_tag_id:
-      type: integer(4)
+      type: integer(8)
       notnull: true
   relations:
     Tag:
-      class: Tag
+      class: TaggableTag
       local: tag_id
       foreign: id
     TagImplied:
-      class: Tag
+      class: TaggableTag
       local: implied_tag_id
       foreign: id
   indexes:
@@ -543,38 +526,4 @@ ClauseAddressee:
   indexes:
     mapping:
       fields: [clause_body_id, addressee_id]
-      type: unique
-
-ClauseTag:
-  columns:
-    id:
-      type: integer(4)
-      primary: true
-      autoincrement: true
-    clause_body_id:
-      type: integer(4)
-      notnull: true
-    tag_id:
-      type: integer(4)
-      notnull: true
-  indexes:
-    mapping:
-      fields: [clause_body_id, tag_id]
-      type: unique
-
-DocumentTag:
-  columns:
-    id:
-      type: integer(4)
-      primary: true
-      autoincrement: true
-    document_id:
-      type: integer(4)
-      notnull: true
-    tag_id:
-      type: integer(4)
-      notnull: true
-  indexes:
-    mapping:
-      fields: [document_id, tag_id]
       type: unique

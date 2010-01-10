@@ -14,7 +14,7 @@ abstract class BaseExcelFileFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'name'            => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'tag_id'          => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Tag'), 'add_empty' => true)),
+      'tag_id'          => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'file'            => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'excel_author_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
       'created_at'      => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
@@ -25,7 +25,7 @@ abstract class BaseExcelFileFormFilter extends BaseFormFilterDoctrine
 
     $this->setValidators(array(
       'name'            => new sfValidatorPass(array('required' => false)),
-      'tag_id'          => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Tag'), 'column' => 'id')),
+      'tag_id'          => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'file'            => new sfValidatorPass(array('required' => false)),
       'excel_author_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('sfGuardUser'), 'column' => 'id')),
       'created_at'      => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
@@ -53,7 +53,7 @@ abstract class BaseExcelFileFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'              => 'Number',
       'name'            => 'Text',
-      'tag_id'          => 'ForeignKey',
+      'tag_id'          => 'Number',
       'file'            => 'Text',
       'excel_author_id' => 'ForeignKey',
       'created_at'      => 'Date',

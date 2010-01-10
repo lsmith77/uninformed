@@ -24,9 +24,8 @@ abstract class BaseClauseBodyFormFilter extends BaseFormFilterDoctrine
       'updated_at'            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'author_id'             => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'               => new sfWidgetFormFilterInput(),
-      'tags_list'             => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Tag')),
       'addressee_list'        => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Addressee')),
-      'tag_list'              => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Tag')),
+      'tags_list'             => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag')),
     ));
 
     $this->setValidators(array(
@@ -41,9 +40,8 @@ abstract class BaseClauseBodyFormFilter extends BaseFormFilterDoctrine
       'updated_at'            => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'author_id'             => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Author'), 'column' => 'id')),
       'version'               => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'tags_list'             => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Tag', 'required' => false)),
       'addressee_list'        => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Addressee', 'required' => false)),
-      'tag_list'              => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Tag', 'required' => false)),
+      'tags_list'             => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('clause_body_filters[%s]');
@@ -53,22 +51,6 @@ abstract class BaseClauseBodyFormFilter extends BaseFormFilterDoctrine
     $this->setupInheritance();
 
     parent::setup();
-  }
-
-  public function addTagsListColumnQuery(Doctrine_Query $query, $field, $values)
-  {
-    if (!is_array($values))
-    {
-      $values = array($values);
-    }
-
-    if (!count($values))
-    {
-      return;
-    }
-
-    $query->leftJoin('r.ClauseTag ClauseTag')
-          ->andWhereIn('ClauseTag.id', $values);
   }
 
   public function addAddresseeListColumnQuery(Doctrine_Query $query, $field, $values)
@@ -87,7 +69,7 @@ abstract class BaseClauseBodyFormFilter extends BaseFormFilterDoctrine
           ->andWhereIn('ClauseAddressee.id', $values);
   }
 
-  public function addTagListColumnQuery(Doctrine_Query $query, $field, $values)
+  public function addTagsListColumnQuery(Doctrine_Query $query, $field, $values)
   {
     if (!is_array($values))
     {
@@ -99,8 +81,8 @@ abstract class BaseClauseBodyFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query->leftJoin('r.ClauseTag ClauseTag')
-          ->andWhereIn('ClauseTag.tag_id', $values);
+    $query->leftJoin('r.ClauseBodyTaggableTag ClauseBodyTaggableTag')
+          ->andWhereIn('ClauseBodyTaggableTag.tag_id', $values);
   }
 
   public function getModelName()
@@ -123,9 +105,8 @@ abstract class BaseClauseBodyFormFilter extends BaseFormFilterDoctrine
       'updated_at'            => 'Date',
       'author_id'             => 'ForeignKey',
       'version'               => 'Number',
-      'tags_list'             => 'ManyKey',
       'addressee_list'        => 'ManyKey',
-      'tag_list'              => 'ManyKey',
+      'tags_list'             => 'ManyKey',
     );
   }
 }

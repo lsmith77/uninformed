@@ -14,5 +14,7 @@ class ProjectConfiguration extends sfProjectConfiguration
   {
     $manager->registerExtension('Blameable');
     $manager->registerExtension('Taggable');
+    $manager->registerExtension('Temporal');
+    $manager->registerExtension('Sortable');
   }
 }

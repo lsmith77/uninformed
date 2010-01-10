@@ -267,6 +267,7 @@ DocumentClauseRelation:
 Clause:
   actAs:
     <<: *actAs
+    Sortable: ~
     Sluggable:
       unique: true
       fields: [name]
@@ -280,9 +281,6 @@ Clause:
       type: integer(4)
       notnull: true
     clause_body_id:
-      type: integer(4)
-      notnull: true
-    clause_number:
       type: integer(4)
       notnull: true
     clause_number_information:
@@ -456,16 +454,15 @@ Country:
       notnull: true
 
 CountryOrganisation:
+  actAs:
+    <<: *actAs
+    Temporal:
+      unique_fields: [document_id, country_id]
   columns:
     id:
       type: integer(4)
       primary: true
       autoincrement: true
-    join_date:
-      type: date
-      notnull: true
-    leave_date:
-      type: date
     country_id:
       type: integer(4)
       notnull: true

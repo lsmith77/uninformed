@@ -15,7 +15,6 @@ abstract class BaseClauseVersionFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'document_id'                => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'clause_body_id'             => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'clause_number'              => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'clause_number_information'  => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'clause_number_subparagraph' => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'private_comment'            => new sfWidgetFormFilterInput(),
@@ -27,7 +26,6 @@ abstract class BaseClauseVersionFormFilter extends BaseFormFilterDoctrine
     $this->setValidators(array(
       'document_id'                => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'clause_body_id'             => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'clause_number'              => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'clause_number_information'  => new sfValidatorPass(array('required' => false)),
       'clause_number_subparagraph' => new sfValidatorPass(array('required' => false)),
       'private_comment'            => new sfValidatorPass(array('required' => false)),
@@ -56,7 +54,6 @@ abstract class BaseClauseVersionFormFilter extends BaseFormFilterDoctrine
       'id'                         => 'Number',
       'document_id'                => 'Number',
       'clause_body_id'             => 'Number',
-      'clause_number'              => 'Number',
       'clause_number_information'  => 'Text',
       'clause_number_subparagraph' => 'Text',
       'private_comment'            => 'Text',

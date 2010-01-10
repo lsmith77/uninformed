@@ -10,7 +10,6 @@
  * @property integer $tag_id
  * @property string $file
  * @property integer $excel_author_id
- * @property Tag $Tag
  * @property sfGuardUser $sfGuardUser
  * @property Doctrine_Collection $Import
  * 
@@ -19,7 +18,6 @@
  * @method integer             getTagId()           Returns the current record's "tag_id" value
  * @method string              getFile()            Returns the current record's "file" value
  * @method integer             getExcelAuthorId()   Returns the current record's "excel_author_id" value
- * @method Tag                 getTag()             Returns the current record's "Tag" value
  * @method sfGuardUser         getSfGuardUser()     Returns the current record's "sfGuardUser" value
  * @method Doctrine_Collection getImport()          Returns the current record's "Import" collection
  * @method ExcelFile           setId()              Sets the current record's "id" value
@@ -27,7 +25,6 @@
  * @method ExcelFile           setTagId()           Sets the current record's "tag_id" value
  * @method ExcelFile           setFile()            Sets the current record's "file" value
  * @method ExcelFile           setExcelAuthorId()   Sets the current record's "excel_author_id" value
- * @method ExcelFile           setTag()             Sets the current record's "Tag" value
  * @method ExcelFile           setSfGuardUser()     Sets the current record's "sfGuardUser" value
  * @method ExcelFile           setImport()          Sets the current record's "Import" collection
  * 
@@ -52,10 +49,10 @@ abstract class BaseExcelFile extends sfDoctrineRecord
              'notnull' => true,
              'length' => '255',
              ));
-        $this->hasColumn('tag_id', 'integer', 4, array(
+        $this->hasColumn('tag_id', 'integer', 8, array(
              'type' => 'integer',
              'notnull' => true,
-             'length' => '4',
+             'length' => '8',
              ));
         $this->hasColumn('file', 'string', 255, array(
              'type' => 'string',
@@ -76,10 +73,6 @@ abstract class BaseExcelFile extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Tag', array(
-             'local' => 'tag_id',
-             'foreign' => 'id'));
-
         $this->hasOne('sfGuardUser', array(
              'local' => 'excel_author_id',
              'foreign' => 'id'));

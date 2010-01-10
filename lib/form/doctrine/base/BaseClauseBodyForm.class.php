@@ -27,9 +27,8 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
       'updated_at'            => new sfWidgetFormDateTime(),
       'author_id'             => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'               => new sfWidgetFormInputText(),
-      'tags_list'             => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Tag')),
       'addressee_list'        => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Addressee')),
-      'tag_list'              => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Tag')),
+      'tags_list'             => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag')),
     ));
 
     $this->setValidators(array(
@@ -45,9 +44,8 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
       'updated_at'            => new sfValidatorDateTime(),
       'author_id'             => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
       'version'               => new sfValidatorInteger(array('required' => false)),
-      'tags_list'             => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Tag', 'required' => false)),
       'addressee_list'        => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Addressee', 'required' => false)),
-      'tag_list'              => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Tag', 'required' => false)),
+      'tags_list'             => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('clause_body[%s]');
@@ -68,68 +66,24 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
   {
     parent::updateDefaultsFromObject();
 
-    if (isset($this->widgetSchema['tags_list']))
-    {
-      $this->setDefault('tags_list', $this->object->Tags->getPrimaryKeys());
-    }
-
     if (isset($this->widgetSchema['addressee_list']))
     {
       $this->setDefault('addressee_list', $this->object->Addressee->getPrimaryKeys());
     }
 
-    if (isset($this->widgetSchema['tag_list']))
+    if (isset($this->widgetSchema['tags_list']))
     {
-      $this->setDefault('tag_list', $this->object->Tag->getPrimaryKeys());
+      $this->setDefault('tags_list', $this->object->Tags->getPrimaryKeys());
     }
 
   }
 
   protected function doSave($con = null)
   {
-    $this->saveTagsList($con);
     $this->saveAddresseeList($con);
-    $this->saveTagList($con);
+    $this->saveTagsList($con);
 
     parent::doSave($con);
-  }
-
-  public function saveTagsList($con = null)
-  {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
-    if (!isset($this->widgetSchema['tags_list']))
-    {
-      // somebody has unset this widget
-      return;
-    }
-
-    if (null === $con)
-    {
-      $con = $this->getConnection();
-    }
-
-    $existing = $this->object->Tags->getPrimaryKeys();
-    $values = $this->getValue('tags_list');
-    if (!is_array($values))
-    {
-      $values = array();
-    }
-
-    $unlink = array_diff($existing, $values);
-    if (count($unlink))
-    {
-      $this->object->unlink('Tags', array_values($unlink));
-    }
-
-    $link = array_diff($values, $existing);
-    if (count($link))
-    {
-      $this->object->link('Tags', array_values($link));
-    }
   }
 
   public function saveAddresseeList($con = null)
@@ -170,14 +124,14 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
     }
   }
 
-  public function saveTagList($con = null)
+  public function saveTagsList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['tag_list']))
+    if (!isset($this->widgetSchema['tags_list']))
     {
       // somebody has unset this widget
       return;
@@ -188,8 +142,8 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
       $con = $this->getConnection();
     }
 
-    $existing = $this->object->Tag->getPrimaryKeys();
-    $values = $this->getValue('tag_list');
+    $existing = $this->object->Tags->getPrimaryKeys();
+    $values = $this->getValue('tags_list');
     if (!is_array($values))
     {
       $values = array();
@@ -198,13 +152,13 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
     $unlink = array_diff($existing, $values);
     if (count($unlink))
     {
-      $this->object->unlink('Tag', array_values($unlink));
+      $this->object->unlink('Tags', array_values($unlink));
     }
 
     $link = array_diff($values, $existing);
     if (count($link))
     {
-      $this->object->link('Tag', array_values($link));
+      $this->object->link('Tags', array_values($link));
     }
   }
 

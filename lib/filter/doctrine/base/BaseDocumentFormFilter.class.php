@@ -31,8 +31,7 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
       'author_id'              => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'                => new sfWidgetFormFilterInput(),
       'slug'                   => new sfWidgetFormFilterInput(),
-      'tags_list'              => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Tag')),
-      'tag_list'               => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Tag')),
+      'tags_list'              => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag')),
     ));
 
     $this->setValidators(array(
@@ -54,8 +53,7 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
       'author_id'              => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Author'), 'column' => 'id')),
       'version'                => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'slug'                   => new sfValidatorPass(array('required' => false)),
-      'tags_list'              => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Tag', 'required' => false)),
-      'tag_list'               => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Tag', 'required' => false)),
+      'tags_list'              => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('document_filters[%s]');
@@ -79,24 +77,8 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query->leftJoin('r.DocumentTag DocumentTag')
-          ->andWhereIn('DocumentTag.id', $values);
-  }
-
-  public function addTagListColumnQuery(Doctrine_Query $query, $field, $values)
-  {
-    if (!is_array($values))
-    {
-      $values = array($values);
-    }
-
-    if (!count($values))
-    {
-      return;
-    }
-
-    $query->leftJoin('r.DocumentTag DocumentTag')
-          ->andWhereIn('DocumentTag.tag_id', $values);
+    $query->leftJoin('r.DocumentTaggableTag DocumentTaggableTag')
+          ->andWhereIn('DocumentTaggableTag.tag_id', $values);
   }
 
   public function getModelName()
@@ -127,7 +109,6 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
       'version'                => 'Number',
       'slug'                   => 'Text',
       'tags_list'              => 'ManyKey',
-      'tag_list'               => 'ManyKey',
     );
   }
 }

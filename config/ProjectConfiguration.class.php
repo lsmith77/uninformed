@@ -13,5 +13,6 @@ class ProjectConfiguration extends sfProjectConfiguration
   public function configureDoctrine(Doctrine_Manager $manager)
   {
     $manager->registerExtension('Blameable');
+    $manager->registerExtension('Taggable');
   }
 }

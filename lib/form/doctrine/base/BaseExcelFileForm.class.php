@@ -17,7 +17,7 @@ abstract class BaseExcelFileForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'              => new sfWidgetFormInputHidden(),
       'name'            => new sfWidgetFormInputText(),
-      'tag_id'          => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Tag'), 'add_empty' => false)),
+      'tag_id'          => new sfWidgetFormInputText(),
       'file'            => new sfWidgetFormInputText(),
       'excel_author_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
       'created_at'      => new sfWidgetFormDateTime(),
@@ -29,7 +29,7 @@ abstract class BaseExcelFileForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'              => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'name'            => new sfValidatorString(array('max_length' => 255)),
-      'tag_id'          => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Tag'))),
+      'tag_id'          => new sfValidatorInteger(),
       'file'            => new sfValidatorString(array('max_length' => 255)),
       'excel_author_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'required' => false)),
       'created_at'      => new sfValidatorDateTime(),

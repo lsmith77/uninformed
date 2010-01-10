@@ -22,12 +22,10 @@
  * @property Document $Parent
  * @property Organisation $Organisation
  * @property DocumentType $DocumentType
- * @property Doctrine_Collection $Tags
  * @property Doctrine_Collection $Subdocuments
  * @property Doctrine_Collection $DocumentDocumentRelation
  * @property Doctrine_Collection $DocumentClauseRelation
  * @property Doctrine_Collection $Clauses
- * @property Doctrine_Collection $Tag
  * @property Doctrine_Collection $Votes
  * 
  * @method integer             getId()                       Returns the current record's "id" value
@@ -47,12 +45,10 @@
  * @method Document            getParent()                   Returns the current record's "Parent" value
  * @method Organisation        getOrganisation()             Returns the current record's "Organisation" value
  * @method DocumentType        getDocumentType()             Returns the current record's "DocumentType" value
- * @method Doctrine_Collection getTags()                     Returns the current record's "Tags" collection
  * @method Doctrine_Collection getSubdocuments()             Returns the current record's "Subdocuments" collection
  * @method Doctrine_Collection getDocumentDocumentRelation() Returns the current record's "DocumentDocumentRelation" collection
  * @method Doctrine_Collection getDocumentClauseRelation()   Returns the current record's "DocumentClauseRelation" collection
  * @method Doctrine_Collection getClauses()                  Returns the current record's "Clauses" collection
- * @method Doctrine_Collection getTag()                      Returns the current record's "Tag" collection
  * @method Doctrine_Collection getVotes()                    Returns the current record's "Votes" collection
  * @method Document            setId()                       Sets the current record's "id" value
  * @method Document            setName()                     Sets the current record's "name" value
@@ -71,12 +67,10 @@
  * @method Document            setParent()                   Sets the current record's "Parent" value
  * @method Document            setOrganisation()             Sets the current record's "Organisation" value
  * @method Document            setDocumentType()             Sets the current record's "DocumentType" value
- * @method Document            setTags()                     Sets the current record's "Tags" collection
  * @method Document            setSubdocuments()             Sets the current record's "Subdocuments" collection
  * @method Document            setDocumentDocumentRelation() Sets the current record's "DocumentDocumentRelation" collection
  * @method Document            setDocumentClauseRelation()   Sets the current record's "DocumentClauseRelation" collection
  * @method Document            setClauses()                  Sets the current record's "Clauses" collection
- * @method Document            setTag()                      Sets the current record's "Tag" collection
  * @method Document            setVotes()                    Sets the current record's "Votes" collection
  * 
  * @package    uninformed
@@ -172,11 +166,6 @@ abstract class BaseDocument extends sfDoctrineRecord
              'local' => 'documenttype_id',
              'foreign' => 'id'));
 
-        $this->hasMany('Tag as Tags', array(
-             'refClass' => 'DocumentTag',
-             'local' => 'id',
-             'foreign' => 'id'));
-
         $this->hasMany('Document as Subdocuments', array(
              'local' => 'id',
              'foreign' => 'parent_id'));
@@ -192,11 +181,6 @@ abstract class BaseDocument extends sfDoctrineRecord
         $this->hasMany('Clause as Clauses', array(
              'local' => 'id',
              'foreign' => 'document_id'));
-
-        $this->hasMany('Tag', array(
-             'refClass' => 'DocumentTag',
-             'local' => 'id',
-             'foreign' => 'tag_id'));
 
         $this->hasMany('Vote as Votes', array(
              'local' => 'id',
@@ -266,6 +250,7 @@ abstract class BaseDocument extends sfDoctrineRecord
              ),
              ));
         $versionable0->addChild($blameable1);
+        $taggable0 = new Doctrine_Template_Taggable();
         $sluggable0 = new Doctrine_Template_Sluggable(array(
              'unique' => true,
              'fields' => 
@@ -277,6 +262,7 @@ abstract class BaseDocument extends sfDoctrineRecord
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);
+        $this->actAs($taggable0);
         $this->actAs($sluggable0);
     }
 }

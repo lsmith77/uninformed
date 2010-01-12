@@ -208,7 +208,7 @@ Document:
       class: Tag
       local: id
       foreign: id
-      refClass: DocumentTag
+      foreignAlias: Tags
 
 DocumentDocumentRelation:
   columns:
@@ -338,7 +338,7 @@ ClauseBody:
       class: Tag
       local: id
       foreign: id
-      refClass: ClauseTag
+      foreignAlias: Tags
     ClauseBodyParent:
       class: ClauseBody
       local: parent_clause_body_id
@@ -434,10 +434,12 @@ TagImplication:
       class: TaggableTag
       local: tag_id
       foreign: id
-    TagImplied:
+      alias: Tag
+    ImpliedTag:
       class: TaggableTag
       local: implied_tag_id
       foreign: id
+      alias: ImpliedTag
   indexes:
     mapping:
       fields: [tag_id, implied_tag_id]

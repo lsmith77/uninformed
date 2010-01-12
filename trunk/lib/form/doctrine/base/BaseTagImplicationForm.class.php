@@ -17,8 +17,8 @@ abstract class BaseTagImplicationForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'               => new sfWidgetFormInputHidden(),
       'implication_type' => new sfWidgetFormChoice(array('choices' => array('implies' => 'implies', 'suggests' => 'suggests'))),
-      'tag_id'           => new sfWidgetFormInputText(),
-      'implied_tag_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('TaggableTag'), 'add_empty' => false)),
+      'tag_id'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Tag'), 'add_empty' => false)),
+      'implied_tag_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ImpliedTag'), 'add_empty' => false)),
       'created_at'       => new sfWidgetFormDateTime(),
       'updated_at'       => new sfWidgetFormDateTime(),
       'author_id'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
@@ -28,8 +28,8 @@ abstract class BaseTagImplicationForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'               => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'implication_type' => new sfValidatorChoice(array('choices' => array('implies' => 'implies', 'suggests' => 'suggests'))),
-      'tag_id'           => new sfValidatorInteger(),
-      'implied_tag_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('TaggableTag'))),
+      'tag_id'           => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Tag'))),
+      'implied_tag_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ImpliedTag'))),
       'created_at'       => new sfValidatorDateTime(),
       'updated_at'       => new sfValidatorDateTime(),
       'author_id'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),

@@ -9,17 +9,21 @@
  * @property enum $implication_type
  * @property integer $tag_id
  * @property integer $implied_tag_id
+ * @property TaggableTag $Tag
+ * @property TaggableTag $ImpliedTag
  * 
  * @method integer        getId()               Returns the current record's "id" value
  * @method enum           getImplicationType()  Returns the current record's "implication_type" value
  * @method integer        getTagId()            Returns the current record's "tag_id" value
  * @method integer        getImpliedTagId()     Returns the current record's "implied_tag_id" value
+ * @method TaggableTag    getTag()              Returns the current record's "Tag" value
+ * @method TaggableTag    getImpliedTag()       Returns the current record's "ImpliedTag" value
  * @method TagImplication setId()               Sets the current record's "id" value
  * @method TagImplication setImplicationType()  Sets the current record's "implication_type" value
  * @method TagImplication setTagId()            Sets the current record's "tag_id" value
  * @method TagImplication setImpliedTagId()     Sets the current record's "implied_tag_id" value
- * @property TaggableTag $
- * @property TaggableTag $
+ * @method TagImplication setTag()              Sets the current record's "Tag" value
+ * @method TagImplication setImpliedTag()       Sets the current record's "ImpliedTag" value
  * 
  * @package    uninformed
  * @subpackage model
@@ -74,11 +78,11 @@ abstract class BaseTagImplication extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('TaggableTag', array(
+        $this->hasOne('TaggableTag as Tag', array(
              'local' => 'tag_id',
              'foreign' => 'id'));
 
-        $this->hasOne('TaggableTag', array(
+        $this->hasOne('TaggableTag as ImpliedTag', array(
              'local' => 'implied_tag_id',
              'foreign' => 'id'));
 

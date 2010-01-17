@@ -10,7 +10,9 @@ The excel files contain of three tabs, of which we use currently only the first 
 Right now we are trying to understand the working of special columns regarding document and clause relations (documents replacing other documents and some or all of their clauses):
 
 Document A with Clauses 1 and 2.
+
 Document B with Clauses 3, 4 and 5
+
 "Document B replaces Document A in the way that: Clause 3 replaces Clause 2, Clause 5 is new/added and Clause 1 is removed."
 
 Looking at the Excelsheet (water-almost.final.xls) you have sent on Januar, 6th, we see the following columns for documents and clauses:

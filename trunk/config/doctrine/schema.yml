@@ -273,10 +273,11 @@ Clause:
   actAs:
     <<: *actAs
     Sortable: ~
-    Sluggable:
-      unique: true
-      fields: [name]
-      canUpdate: true
+# we need to somehow inject the document name here and combin it with the position/clause_number* fields
+#    Sluggable:
+#      unique: true
+#      fields: [name]
+#      canUpdate: true
   columns:
     id:
       type: integer(4)

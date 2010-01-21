@@ -15,8 +15,8 @@ abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'document_id'                => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Document'), 'add_empty' => true)),
       'clause_body_id'             => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseBody'), 'add_empty' => true)),
-      'clause_number_information'  => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'clause_number_subparagraph' => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'clause_number_information'  => new sfWidgetFormFilterInput(),
+      'clause_number_subparagraph' => new sfWidgetFormFilterInput(),
       'private_comment'            => new sfWidgetFormFilterInput(),
       'created_at'                 => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'                 => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),

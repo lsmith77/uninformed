@@ -13,7 +13,7 @@
  * @package    uninformed
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
+ * @version    SVN: $Id: Builder.php 7021 2010-01-12 20:39:49Z lsmith $
  */
 abstract class BaseImport extends sfGuardUser
 {
@@ -25,6 +25,7 @@ abstract class BaseImport extends sfGuardUser
              'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
+        $softdelete0 = new Doctrine_Template_SoftDelete();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'default' => NULL,
              'blameVar' => 'user_id',
@@ -55,41 +56,8 @@ abstract class BaseImport extends sfGuardUser
               ),
              ),
              ));
-        $versionable0 = new Doctrine_Template_Versionable(array(
-             ));
-        $blameable1 = new Doctrine_Template_Blameable(array(
-             'default' => NULL,
-             'blameVar' => 'user_id',
-             'listener' => 'BlameableCustomListener',
-             'columns' => 
-             array(
-              'created' => 
-              array(
-              'name' => 'author_id',
-              'length' => 4,
-              'options' => 
-              array(
-               'notnull' => false,
-              ),
-              ),
-              'updated' => 
-              array(
-              'disabled' => true,
-              ),
-             ),
-             'relations' => 
-             array(
-              'created' => 
-              array(
-              'class' => 'sfGuardUser',
-              'disabled' => false,
-              'name' => 'Author',
-              ),
-             ),
-             ));
-        $versionable0->addChild($blameable1);
         $this->actAs($timestampable0);
+        $this->actAs($softdelete0);
         $this->actAs($blameable0);
-        $this->actAs($versionable0);
     }
 }

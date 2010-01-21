@@ -34,6 +34,11 @@ sfGuardUser:
       <<: *Blameable
 
 Import:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+    Blameable:
+      <<: *Blameable
   inheritance:
     type:          column_aggregation
     extends:       sfGuardUser
@@ -285,10 +290,8 @@ Clause:
       notnull: true
     clause_number_information:
       type: string(255)
-      notnull: true
     clause_number_subparagraph:
       type: string(255)
-      notnull: true
     private_comment:
       type: clob
   relations:

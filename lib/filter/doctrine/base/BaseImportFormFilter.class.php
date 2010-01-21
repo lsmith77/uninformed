@@ -14,21 +14,11 @@ abstract class BaseImportFormFilter extends sfGuardUserFormFilter
   {
     parent::setupInheritance();
 
-    $this->widgetSchema   ['version'] = new sfWidgetFormFilterInput();
-    $this->validatorSchema['version'] = new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false)));
-
     $this->widgetSchema->setNameFormat('import_filters[%s]');
   }
 
   public function getModelName()
   {
     return 'Import';
-  }
-
-  public function getFields()
-  {
-    return array_merge(parent::getFields(), array(
-      'version' => 'Number',
-    ));
   }
 }

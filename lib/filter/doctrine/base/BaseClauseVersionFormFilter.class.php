@@ -15,8 +15,8 @@ abstract class BaseClauseVersionFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'document_id'                => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'clause_body_id'             => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'clause_number_information'  => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'clause_number_subparagraph' => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'clause_number_information'  => new sfWidgetFormFilterInput(),
+      'clause_number_subparagraph' => new sfWidgetFormFilterInput(),
       'private_comment'            => new sfWidgetFormFilterInput(),
       'created_at'                 => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'                 => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),

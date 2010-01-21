@@ -34,7 +34,7 @@
  * @package    uninformed
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
+ * @version    SVN: $Id: Builder.php 7021 2010-01-12 20:39:49Z lsmith $
  */
 abstract class BaseClause extends sfDoctrineRecord
 {
@@ -59,12 +59,10 @@ abstract class BaseClause extends sfDoctrineRecord
              ));
         $this->hasColumn('clause_number_information', 'string', 255, array(
              'type' => 'string',
-             'notnull' => true,
              'length' => '255',
              ));
         $this->hasColumn('clause_number_subparagraph', 'string', 255, array(
              'type' => 'string',
-             'notnull' => true,
              'length' => '255',
              ));
         $this->hasColumn('private_comment', 'clob', null, array(

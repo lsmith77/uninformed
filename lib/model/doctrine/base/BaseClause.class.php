@@ -159,18 +159,9 @@ abstract class BaseClause extends sfDoctrineRecord
              ));
         $versionable0->addChild($blameable1);
         $sortable0 = new Doctrine_Template_Sortable();
-        $sluggable0 = new Doctrine_Template_Sluggable(array(
-             'unique' => true,
-             'fields' => 
-             array(
-              0 => 'name',
-             ),
-             'canUpdate' => true,
-             ));
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);
         $this->actAs($sortable0);
-        $this->actAs($sluggable0);
     }
 }

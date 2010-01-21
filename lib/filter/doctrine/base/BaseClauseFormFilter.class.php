@@ -23,7 +23,6 @@ abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'author_id'                  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'                    => new sfWidgetFormFilterInput(),
       'position'                   => new sfWidgetFormFilterInput(),
-      'slug'                       => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -37,7 +36,6 @@ abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'author_id'                  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Author'), 'column' => 'id')),
       'version'                    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'position'                   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'slug'                       => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('clause_filters[%s]');
@@ -68,7 +66,6 @@ abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
       'author_id'                  => 'ForeignKey',
       'version'                    => 'Number',
       'position'                   => 'Number',
-      'slug'                       => 'Text',
     );
   }
 }

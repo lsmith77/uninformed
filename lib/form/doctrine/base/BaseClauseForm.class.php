@@ -26,7 +26,6 @@ abstract class BaseClauseForm extends BaseFormDoctrine
       'author_id'                  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'                    => new sfWidgetFormInputText(),
       'position'                   => new sfWidgetFormInputText(),
-      'slug'                       => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
@@ -41,14 +40,10 @@ abstract class BaseClauseForm extends BaseFormDoctrine
       'author_id'                  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
       'version'                    => new sfValidatorInteger(array('required' => false)),
       'position'                   => new sfValidatorInteger(array('required' => false)),
-      'slug'                       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
-      new sfValidatorAnd(array(
-        new sfValidatorDoctrineUnique(array('model' => 'Clause', 'column' => array('document_id', 'clause_body_id'))),
-        new sfValidatorDoctrineUnique(array('model' => 'Clause', 'column' => array('slug'))),
-      ))
+      new sfValidatorDoctrineUnique(array('model' => 'Clause', 'column' => array('document_id', 'clause_body_id')))
     );
 
     $this->widgetSchema->setNameFormat('clause[%s]');

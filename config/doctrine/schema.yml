@@ -53,6 +53,9 @@ Import:
       foreign: id
 
 ExcelFile:
+  actAs:
+    <<: *actAs
+    Taggable: ~
   columns:
     id:
       type: integer(4)
@@ -61,17 +64,10 @@ ExcelFile:
     name:
       type: string(255)
       notnull: true
-    tag_id:
-      type: integer(8)
-      notnull: true
     file:
       type: string(255)
       notnull: true
   relations:
-    Tag:
-      class: TaggableTag
-      local: tag_id
-      foreign: id
     sfGuardUser:
       class: sfGuardUser
       local: author_id

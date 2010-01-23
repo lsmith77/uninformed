@@ -12,5 +12,12 @@ class ExcelFileForm extends BaseExcelFileForm
 {
   public function configure()
   {
+    $this->setWidget(
+      'file', new sfWidgetFormInputFile()
+    );
+
+    $this->setValidator(
+      'file', new sfValidatorFile()
+    );
   }
 }

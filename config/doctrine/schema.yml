@@ -67,9 +67,6 @@ ExcelFile:
     file:
       type: string(255)
       notnull: true
-    excel_author_id:
-      type: integer(4)
-      notnull: false
   relations:
     Tag:
       class: TaggableTag
@@ -77,7 +74,7 @@ ExcelFile:
       foreign: id
     sfGuardUser:
       class: sfGuardUser
-      local: excel_author_id
+      local: author_id
       foreign: id
 
 Addressee:

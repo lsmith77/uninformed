@@ -35,13 +35,16 @@ class BlameableCustomListener extends Doctrine_Template_Listener_Blameable
 {
     public function getUserIdentity()
     {
-        // probably move this to a flash variable, so that we can use the user id created for an Import
         try {
             $context = sfContext::getInstance();
             if ($context) {
-                $user = sfContext::getInstance()->getUser();
+                $user = $context->getUser();
                 if ($user && $user->isAuthenticated()) {
-                    return $user->getAttribute($this->_options['blameVar']);
+                    $id = $user->getFlash('blame_id');
+                    if ($id) {
+                        return $id;
+                    }
+                    return $user->getGuardUser()->{$this->_options['blameVar']};
                 }
             }
         } catch (Exception $e) { }

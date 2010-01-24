@@ -28,7 +28,7 @@ abstract class BaseImport extends sfGuardUser
         $softdelete0 = new Doctrine_Template_SoftDelete();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'default' => NULL,
-             'blameVar' => 'user_id',
+             'blameVar' => 'id',
              'listener' => 'BlameableCustomListener',
              'columns' => 
              array(

@@ -13,25 +13,23 @@ abstract class BaseExcelFileFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'name'            => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'tag_id'          => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'file'            => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'excel_author_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
-      'created_at'      => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
-      'updated_at'      => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
-      'author_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
-      'version'         => new sfWidgetFormFilterInput(),
+      'name'       => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'file'       => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'created_at' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'updated_at' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'author_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
+      'version'    => new sfWidgetFormFilterInput(),
+      'tags_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag')),
     ));
 
     $this->setValidators(array(
-      'name'            => new sfValidatorPass(array('required' => false)),
-      'tag_id'          => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'file'            => new sfValidatorPass(array('required' => false)),
-      'excel_author_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('sfGuardUser'), 'column' => 'id')),
-      'created_at'      => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
-      'updated_at'      => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
-      'author_id'       => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Author'), 'column' => 'id')),
-      'version'         => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'name'       => new sfValidatorPass(array('required' => false)),
+      'file'       => new sfValidatorPass(array('required' => false)),
+      'created_at' => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
+      'updated_at' => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
+      'author_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('sfGuardUser'), 'column' => 'id')),
+      'version'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'tags_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('excel_file_filters[%s]');
@@ -43,6 +41,22 @@ abstract class BaseExcelFileFormFilter extends BaseFormFilterDoctrine
     parent::setup();
   }
 
+  public function addTagsListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query->leftJoin('r.ExcelFileTaggableTag ExcelFileTaggableTag')
+          ->andWhereIn('ExcelFileTaggableTag.tag_id', $values);
+  }
+
   public function getModelName()
   {
     return 'ExcelFile';
@@ -51,15 +65,14 @@ abstract class BaseExcelFileFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'id'              => 'Number',
-      'name'            => 'Text',
-      'tag_id'          => 'Number',
-      'file'            => 'Text',
-      'excel_author_id' => 'ForeignKey',
-      'created_at'      => 'Date',
-      'updated_at'      => 'Date',
-      'author_id'       => 'ForeignKey',
-      'version'         => 'Number',
+      'id'         => 'Number',
+      'name'       => 'Text',
+      'file'       => 'Text',
+      'created_at' => 'Date',
+      'updated_at' => 'Date',
+      'author_id'  => 'ForeignKey',
+      'version'    => 'Number',
+      'tags_list'  => 'ManyKey',
     );
   }
 }

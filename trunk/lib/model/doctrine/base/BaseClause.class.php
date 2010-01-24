@@ -97,7 +97,7 @@ abstract class BaseClause extends sfDoctrineRecord
         $timestampable0 = new Doctrine_Template_Timestampable();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'default' => NULL,
-             'blameVar' => 'user_id',
+             'blameVar' => 'id',
              'listener' => 'BlameableCustomListener',
              'columns' => 
              array(
@@ -129,7 +129,7 @@ abstract class BaseClause extends sfDoctrineRecord
              ));
         $blameable1 = new Doctrine_Template_Blameable(array(
              'default' => NULL,
-             'blameVar' => 'user_id',
+             'blameVar' => 'id',
              'listener' => 'BlameableCustomListener',
              'columns' => 
              array(
@@ -158,10 +158,8 @@ abstract class BaseClause extends sfDoctrineRecord
              ),
              ));
         $versionable0->addChild($blameable1);
-        $sortable0 = new Doctrine_Template_Sortable();
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);
-        $this->actAs($sortable0);
     }
 }

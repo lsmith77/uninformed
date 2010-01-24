@@ -167,13 +167,13 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
 
         $this->hasMany('ExcelFile', array(
              'local' => 'id',
-             'foreign' => 'excel_author_id'));
+             'foreign' => 'author_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'default' => NULL,
-             'blameVar' => 'user_id',
+             'blameVar' => 'id',
              'listener' => 'BlameableCustomListener',
              'columns' => 
              array(

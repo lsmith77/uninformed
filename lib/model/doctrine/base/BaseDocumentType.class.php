@@ -74,7 +74,7 @@ abstract class BaseDocumentType extends sfDoctrineRecord
         $timestampable0 = new Doctrine_Template_Timestampable();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'default' => NULL,
-             'blameVar' => 'user_id',
+             'blameVar' => 'id',
              'listener' => 'BlameableCustomListener',
              'columns' => 
              array(
@@ -106,7 +106,7 @@ abstract class BaseDocumentType extends sfDoctrineRecord
              ));
         $blameable1 = new Doctrine_Template_Blameable(array(
              'default' => NULL,
-             'blameVar' => 'user_id',
+             'blameVar' => 'id',
              'listener' => 'BlameableCustomListener',
              'columns' => 
              array(

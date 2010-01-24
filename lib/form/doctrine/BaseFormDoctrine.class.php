@@ -12,14 +12,16 @@ abstract class BaseFormDoctrine extends sfFormDoctrine
 {
     public function setup()
     {
-        if ($this->isNew()) {
-            unset($this->widgetSchema['created_at']);
-            unset($this->widgetSchema['updated_at']);
-        } else {
-            $this->setWidget('created_at', new sfWidgetFormPlain(array('value'=>$this->getObject()->created_at)));
-            $this->setWidget('updated_at', new sfWidgetFormPlain(array('value'=>$this->getObject()->updated_at)));
+        if (isset($this->widgetSchema['created_at'])) {
+            if ($this->isNew()) {
+                unset($this->widgetSchema['created_at']);
+                unset($this->widgetSchema['updated_at']);
+            } else {
+                $this->setWidget('created_at', new sfWidgetFormPlain(array('value'=>$this->getObject()->created_at)));
+                $this->setWidget('updated_at', new sfWidgetFormPlain(array('value'=>$this->getObject()->updated_at)));
+            }
+            unset($this->validatorSchema['created_at']);
+            unset($this->validatorSchema['updated_at']);
         }
-        unset($this->validatorSchema['created_at']);
-        unset($this->validatorSchema['updated_at']);
     }
 }

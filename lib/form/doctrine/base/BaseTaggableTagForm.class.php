@@ -19,6 +19,7 @@ abstract class BaseTaggableTagForm extends BaseFormDoctrine
       'name'             => new sfWidgetFormInputText(),
       'clause_body_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'ClauseBody')),
       'document_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Document')),
+      'excel_file_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'ExcelFile')),
     ));
 
     $this->setValidators(array(
@@ -26,6 +27,7 @@ abstract class BaseTaggableTagForm extends BaseFormDoctrine
       'name'             => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'clause_body_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'ClauseBody', 'required' => false)),
       'document_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Document', 'required' => false)),
+      'excel_file_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'ExcelFile', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -60,12 +62,18 @@ abstract class BaseTaggableTagForm extends BaseFormDoctrine
       $this->setDefault('document_list', $this->object->Document->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['excel_file_list']))
+    {
+      $this->setDefault('excel_file_list', $this->object->ExcelFile->getPrimaryKeys());
+    }
+
   }
 
   protected function doSave($con = null)
   {
     $this->saveClauseBodyList($con);
     $this->saveDocumentList($con);
+    $this->saveExcelFileList($con);
 
     parent::doSave($con);
   }
@@ -143,6 +151,44 @@ abstract class BaseTaggableTagForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Document', array_values($link));
+    }
+  }
+
+  public function saveExcelFileList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['excel_file_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->ExcelFile->getPrimaryKeys();
+    $values = $this->getValue('excel_file_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('ExcelFile', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('ExcelFile', array_values($link));
     }
   }
 

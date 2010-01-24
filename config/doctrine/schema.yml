@@ -2,7 +2,7 @@ actAs: &actAs
   Timestampable: ~
   Blameable: &Blameable
     default: null
-    blameVar: user_id
+    blameVar: id
     listener: BlameableCustomListener
     columns:
       created:
@@ -265,7 +265,8 @@ DocumentClauseRelation:
 Clause:
   actAs:
     <<: *actAs
-    Sortable: ~
+# fix issues with skipOperation() in the SortableListener
+#    Sortable: ~
 # we need to somehow inject the document name here and combin it with the position/clause_number* fields
 #    Sluggable:
 #      unique: true

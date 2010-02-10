@@ -4,7 +4,8 @@ The document type admintool will manage document types.  Its assumed a full list
 
 = Details =
 
- * List of all existing document types with edit/delete buttons
- * Search filters with livesearch for document types as well clauses/documents
+ * List of all existing document types with edit/delete buttons along with a count of how often the phrase is currently used
+ * Search filters with livesearch for names as well as clauses/documents
  * Button to create a new document type
- * Tag has a document types and an integer "rank" value as well as a legal value (select box)
+ * Store a name, an integer "rank" value as well as a legal value (select box)
+ * In the edit panel consider adding a tool to migrate the document type setting of clauses to an another/new document type (needs to also work when we have a large number of clauses).

@@ -25,7 +25,7 @@ The clause admintool will manage both the clause as well as document/clause rela
  * Clause number
  * Private comment field
  * Status
- * Parent clause relation (implied by
+ * Parent clause relation (implied by selecting a clause)
 
 == Content ==
 
@@ -37,3 +37,4 @@ The clause admintool will manage both the clause as well as document/clause rela
  * Public comment field
  * Document relations (see DocumentAdmintool clause relations)
  * Reservations for all states (only if the parent document is legally binding): text field
+ * Optionally a list of zero or many closely related clauses

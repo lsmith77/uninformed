@@ -19,9 +19,9 @@ class excelfileActions extends autoExcelfileActions
     $excelFileData = Doctrine::getTable('ExcelFile')->findById($excelFileId)->getFirst();
 
     $import = new excelSpreadsheetImport();
-    $import->loadDataFromFile($excelFileData['file']);
+    $this->documents = $import->loadDataFromFile($excelFileData['file']);
 
-    $this->redirect('excel_file');
+//    $this->redirect('excel_file');
   }
 	
   protected function processForm(sfWebRequest $request, sfForm $form)

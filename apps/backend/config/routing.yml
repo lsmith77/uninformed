@@ -1,10 +1,19 @@
+excel_file:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ExcelFile
+    module:               excelfile
+    prefix_path:          /excelfile
+    column:               id
+    with_wildcard_routes: true
+
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
 # default rules
 homepage:
   url:   /
-  param: { module: excelfiles, action: index }
+  param: { module: excelfile, action: index }
 
 sf_guard_signin:
   url:   /login

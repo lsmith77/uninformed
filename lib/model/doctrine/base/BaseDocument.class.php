@@ -14,10 +14,11 @@
  * @property bool $is_ratified
  * @property clob $private_comment
  * @property clob $public_comment
- * @property integer $parent_id
+ * @property integer $parent_document_id
  * @property integer $organisation_id
  * @property integer $documenttype_id
  * @property string $document_url
+ * @property string $clause_ordering
  * @property enum $status
  * @property Document $Parent
  * @property Organisation $Organisation
@@ -37,10 +38,11 @@
  * @method bool                getIsRatified()               Returns the current record's "is_ratified" value
  * @method clob                getPrivateComment()           Returns the current record's "private_comment" value
  * @method clob                getPublicComment()            Returns the current record's "public_comment" value
- * @method integer             getParentId()                 Returns the current record's "parent_id" value
+ * @method integer             getParentDocumentId()         Returns the current record's "parent_document_id" value
  * @method integer             getOrganisationId()           Returns the current record's "organisation_id" value
  * @method integer             getDocumenttypeId()           Returns the current record's "documenttype_id" value
  * @method string              getDocumentUrl()              Returns the current record's "document_url" value
+ * @method string              getClauseOrdering()           Returns the current record's "clause_ordering" value
  * @method enum                getStatus()                   Returns the current record's "status" value
  * @method Document            getParent()                   Returns the current record's "Parent" value
  * @method Organisation        getOrganisation()             Returns the current record's "Organisation" value
@@ -59,10 +61,11 @@
  * @method Document            setIsRatified()               Sets the current record's "is_ratified" value
  * @method Document            setPrivateComment()           Sets the current record's "private_comment" value
  * @method Document            setPublicComment()            Sets the current record's "public_comment" value
- * @method Document            setParentId()                 Sets the current record's "parent_id" value
+ * @method Document            setParentDocumentId()         Sets the current record's "parent_document_id" value
  * @method Document            setOrganisationId()           Sets the current record's "organisation_id" value
  * @method Document            setDocumenttypeId()           Sets the current record's "documenttype_id" value
  * @method Document            setDocumentUrl()              Sets the current record's "document_url" value
+ * @method Document            setClauseOrdering()           Sets the current record's "clause_ordering" value
  * @method Document            setStatus()                   Sets the current record's "status" value
  * @method Document            setParent()                   Sets the current record's "Parent" value
  * @method Document            setOrganisation()             Sets the current record's "Organisation" value
@@ -118,7 +121,7 @@ abstract class BaseDocument extends sfDoctrineRecord
         $this->hasColumn('public_comment', 'clob', null, array(
              'type' => 'clob',
              ));
-        $this->hasColumn('parent_id', 'integer', 4, array(
+        $this->hasColumn('parent_document_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
              ));
@@ -130,9 +133,13 @@ abstract class BaseDocument extends sfDoctrineRecord
              'type' => 'integer',
              'length' => '4',
              ));
-        $this->hasColumn('document_url', 'string', 2505, array(
+        $this->hasColumn('document_url', 'string', 255, array(
              'type' => 'string',
-             'length' => '2505',
+             'length' => '255',
+             ));
+        $this->hasColumn('clause_ordering', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
              ));
         $this->hasColumn('status', 'enum', null, array(
              'type' => 'enum',
@@ -155,7 +162,7 @@ abstract class BaseDocument extends sfDoctrineRecord
     {
         parent::setUp();
         $this->hasOne('Document as Parent', array(
-             'local' => 'parent_id',
+             'local' => 'parent_document_id',
              'foreign' => 'id'));
 
         $this->hasOne('Organisation', array(
@@ -168,7 +175,7 @@ abstract class BaseDocument extends sfDoctrineRecord
 
         $this->hasMany('Document as Subdocuments', array(
              'local' => 'id',
-             'foreign' => 'parent_id'));
+             'foreign' => 'parent_document_id'));
 
         $this->hasMany('DocumentDocumentRelation', array(
              'local' => 'id',

@@ -27,7 +27,7 @@ abstract class BaseLegalValueVersionForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'            => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'name'          => new sfValidatorString(array('max_length' => 255)),
-      'decision_type' => new sfValidatorChoice(array('choices' => array('vote' => 'vote', 'ratification' => 'ratification'), 'required' => false)),
+      'decision_type' => new sfValidatorChoice(array('choices' => array(0 => 'vote', 1 => 'ratification'), 'required' => false)),
       'created_at'    => new sfValidatorDateTime(),
       'updated_at'    => new sfValidatorDateTime(),
       'author_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),

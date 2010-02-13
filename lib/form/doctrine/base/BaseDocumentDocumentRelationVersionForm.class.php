@@ -16,7 +16,7 @@ abstract class BaseDocumentDocumentRelationVersionForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                  => new sfWidgetFormInputHidden(),
-      'type'                => new sfWidgetFormChoice(array('choices' => array('followup' => 'followup', 'recalls' => 'recalls', 'closely_related' => 'closely_related'))),
+      'type'                => new sfWidgetFormChoice(array('choices' => array('recalls' => 'recalls', 'closely_related' => 'closely_related'))),
       'document_id'         => new sfWidgetFormInputText(),
       'related_document_id' => new sfWidgetFormInputText(),
       'created_at'          => new sfWidgetFormDateTime(),
@@ -27,7 +27,7 @@ abstract class BaseDocumentDocumentRelationVersionForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                  => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'type'                => new sfValidatorChoice(array('choices' => array('followup' => 'followup', 'recalls' => 'recalls', 'closely_related' => 'closely_related'))),
+      'type'                => new sfValidatorChoice(array('choices' => array(0 => 'recalls', 1 => 'closely_related'))),
       'document_id'         => new sfValidatorInteger(),
       'related_document_id' => new sfValidatorInteger(),
       'created_at'          => new sfValidatorDateTime(),

@@ -37,7 +37,7 @@ abstract class BaseClauseBodyVersionForm extends BaseFormDoctrine
       'clause_process_id'     => new sfValidatorInteger(array('required' => false)),
       'public_comment'        => new sfValidatorString(array('required' => false)),
       'parent_clause_body_id' => new sfValidatorInteger(array('required' => false)),
-      'status'                => new sfValidatorChoice(array('choices' => array('draft' => 'draft', 'in_review' => 'in_review', 'reviewed' => 'reviewed', 'inactive' => 'inactive', 'active' => 'active'), 'required' => false)),
+      'status'                => new sfValidatorChoice(array('choices' => array(0 => 'draft', 1 => 'in_review', 2 => 'reviewed', 3 => 'inactive', 4 => 'active'), 'required' => false)),
       'created_at'            => new sfValidatorDateTime(),
       'updated_at'            => new sfValidatorDateTime(),
       'author_id'             => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),

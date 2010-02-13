@@ -177,21 +177,23 @@ Document:
       type: clob
     public_comment:
       type: clob
-    parent_id:
+    parent_document_id:
       type: integer(4)
     organisation_id:
       type: integer(4)
     documenttype_id:
       type: integer(4)
     document_url:
-      type: string(2505)
+      type: string(255)
+    clause_ordering:
+      type: string(255)
     status:
       type: enum
       values: [draft, review, reviewed, inactive, active]
   relations:
     Parent:
       class: Document
-      local: parent_id
+      local: parent_document_id
       foreign: id
       foreignAlias: Subdocuments
     Organisation:
@@ -216,7 +218,7 @@ DocumentDocumentRelation:
       autoincrement: true
     type:
       type: enum
-      values: [followup, recalls, closely_related]
+      values: [recalls, closely_related]
       notnull: true
     document_id:
       type: integer(4)
@@ -262,16 +264,47 @@ DocumentClauseRelation:
       fields: [document_id, related_clause_body_id]
       type: unique
 
+ClauseClauseRelation:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    type:
+      type: enum
+      values: [recalls, closely_related]
+      notnull: true
+    clause_id:
+      type: integer(4)
+      notnull: true
+    related_clause_id:
+      type: integer(4)
+      notnull: true
+  relations:
+    Clause:
+      local: clause_id
+      foreign: id
+    ClauseRelated:
+      class: Clause
+      local: related_clause_id
+      foreign: id
+  indexes:
+    mapping:
+      fields: [clause_id, related_clause_id, type]
+      type: unique
+
 Clause:
   actAs:
     <<: *actAs
-# fix issues with skipOperation() in the SortableListener
-#    Sortable: ~
-# we need to somehow inject the document name here and combin it with the position/clause_number* fields
+# we need to somehow inject the document name here and combine it with the clause_number* fields
 #    Sluggable:
 #      unique: true
 #      fields: [name]
 #      canUpdate: true
+    Versionable:
+      actAs:
+        Blameable:
+          <<: *Blameable
   columns:
     id:
       type: integer(4)

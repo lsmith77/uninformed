@@ -13,23 +13,26 @@
  * @property clob $private_comment
  * @property Document $Document
  * @property ClauseBody $ClauseBody
+ * @property Doctrine_Collection $ClauseClauseRelation
  * 
- * @method integer    getId()                         Returns the current record's "id" value
- * @method integer    getDocumentId()                 Returns the current record's "document_id" value
- * @method integer    getClauseBodyId()               Returns the current record's "clause_body_id" value
- * @method string     getClauseNumberInformation()    Returns the current record's "clause_number_information" value
- * @method string     getClauseNumberSubparagraph()   Returns the current record's "clause_number_subparagraph" value
- * @method clob       getPrivateComment()             Returns the current record's "private_comment" value
- * @method Document   getDocument()                   Returns the current record's "Document" value
- * @method ClauseBody getClauseBody()                 Returns the current record's "ClauseBody" value
- * @method Clause     setId()                         Sets the current record's "id" value
- * @method Clause     setDocumentId()                 Sets the current record's "document_id" value
- * @method Clause     setClauseBodyId()               Sets the current record's "clause_body_id" value
- * @method Clause     setClauseNumberInformation()    Sets the current record's "clause_number_information" value
- * @method Clause     setClauseNumberSubparagraph()   Sets the current record's "clause_number_subparagraph" value
- * @method Clause     setPrivateComment()             Sets the current record's "private_comment" value
- * @method Clause     setDocument()                   Sets the current record's "Document" value
- * @method Clause     setClauseBody()                 Sets the current record's "ClauseBody" value
+ * @method integer             getId()                         Returns the current record's "id" value
+ * @method integer             getDocumentId()                 Returns the current record's "document_id" value
+ * @method integer             getClauseBodyId()               Returns the current record's "clause_body_id" value
+ * @method string              getClauseNumberInformation()    Returns the current record's "clause_number_information" value
+ * @method string              getClauseNumberSubparagraph()   Returns the current record's "clause_number_subparagraph" value
+ * @method clob                getPrivateComment()             Returns the current record's "private_comment" value
+ * @method Document            getDocument()                   Returns the current record's "Document" value
+ * @method ClauseBody          getClauseBody()                 Returns the current record's "ClauseBody" value
+ * @method Doctrine_Collection getClauseClauseRelation()       Returns the current record's "ClauseClauseRelation" collection
+ * @method Clause              setId()                         Sets the current record's "id" value
+ * @method Clause              setDocumentId()                 Sets the current record's "document_id" value
+ * @method Clause              setClauseBodyId()               Sets the current record's "clause_body_id" value
+ * @method Clause              setClauseNumberInformation()    Sets the current record's "clause_number_information" value
+ * @method Clause              setClauseNumberSubparagraph()   Sets the current record's "clause_number_subparagraph" value
+ * @method Clause              setPrivateComment()             Sets the current record's "private_comment" value
+ * @method Clause              setDocument()                   Sets the current record's "Document" value
+ * @method Clause              setClauseBody()                 Sets the current record's "ClauseBody" value
+ * @method Clause              setClauseClauseRelation()       Sets the current record's "ClauseClauseRelation" collection
  * 
  * @package    uninformed
  * @subpackage model
@@ -93,6 +96,10 @@ abstract class BaseClause extends sfDoctrineRecord
         $this->hasOne('ClauseBody', array(
              'local' => 'clause_body_id',
              'foreign' => 'id'));
+
+        $this->hasMany('ClauseClauseRelation', array(
+             'local' => 'id',
+             'foreign' => 'clause_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $blameable0 = new Doctrine_Template_Blameable(array(

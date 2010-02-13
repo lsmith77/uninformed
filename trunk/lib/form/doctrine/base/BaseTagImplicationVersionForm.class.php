@@ -27,7 +27,7 @@ abstract class BaseTagImplicationVersionForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'               => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'implication_type' => new sfValidatorChoice(array('choices' => array('implies' => 'implies', 'suggests' => 'suggests'))),
+      'implication_type' => new sfValidatorChoice(array('choices' => array(0 => 'implies', 1 => 'suggests'))),
       'tag_id'           => new sfValidatorInteger(),
       'implied_tag_id'   => new sfValidatorInteger(),
       'created_at'       => new sfValidatorDateTime(),

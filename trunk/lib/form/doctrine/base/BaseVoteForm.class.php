@@ -27,7 +27,7 @@ abstract class BaseVoteForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'          => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'type'        => new sfValidatorChoice(array('choices' => array('signed' => 'signed', 'agreed' => 'agreed', 'no' => 'no', 'abstain' => 'abstain', 'missing' => 'missing'), 'required' => false)),
+      'type'        => new sfValidatorChoice(array('choices' => array(0 => 'signed', 1 => 'agreed', 2 => 'no', 3 => 'abstain', 4 => 'missing'), 'required' => false)),
       'document_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Document'))),
       'country_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Country'))),
       'created_at'  => new sfValidatorDateTime(),

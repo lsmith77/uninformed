@@ -13,7 +13,7 @@ abstract class BaseDocumentDocumentRelationVersionFormFilter extends BaseFormFil
   public function setup()
   {
     $this->setWidgets(array(
-      'type'                => new sfWidgetFormChoice(array('choices' => array('' => '', 'followup' => 'followup', 'recalls' => 'recalls', 'closely_related' => 'closely_related'))),
+      'type'                => new sfWidgetFormChoice(array('choices' => array('' => '', 'recalls' => 'recalls', 'closely_related' => 'closely_related'))),
       'document_id'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'related_document_id' => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'created_at'          => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
@@ -22,7 +22,7 @@ abstract class BaseDocumentDocumentRelationVersionFormFilter extends BaseFormFil
     ));
 
     $this->setValidators(array(
-      'type'                => new sfValidatorChoice(array('required' => false, 'choices' => array('followup' => 'followup', 'recalls' => 'recalls', 'closely_related' => 'closely_related'))),
+      'type'                => new sfValidatorChoice(array('required' => false, 'choices' => array('recalls' => 'recalls', 'closely_related' => 'closely_related'))),
       'document_id'         => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'related_document_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'created_at'          => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),

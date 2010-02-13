@@ -22,7 +22,8 @@ The document admintool will manage both the documents as well as voting and docu
 
 == Document relations ==
 
- * document relations aka parent id (optional about upto 15)
+ * optional followup to a previous document
+ * optional document relations (in practice about upto 15)
  * make it possible to specify the type of relation, make possible to create the direction in both direction
  * either select a document in the system or a quick way to create an "in draft" document
   * followup: there can be zero or one

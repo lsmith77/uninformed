@@ -2,7 +2,6 @@
 class excelSpreadsheetImport
 { 
   private $excelData = NULL;
-  private $excelStructure = NULL;
   
   private static $SHEET = 0;
   
@@ -27,14 +26,12 @@ class excelSpreadsheetImport
   	$countRows = $this->excelData->rowcount(self::$SHEET);
   	
   	$documents = array();
-  	$followups = array();
-    
-  	$title = "";
-  	$code = "";
-  	$followup = "";
   	
     for($i = self::$FIRST_ROW; $i <= $countRows; $i++) //rows
     {
+      $title = "";
+      $code = "";
+      $followup = "";
     	$data = array();
     	
     	for($j = self::$FIRST_DOCUMENTCOLUMN; $j < self::$AMOUNT_DOCUMENTCOLUMNS + 1; $j++) //columns
@@ -66,6 +63,30 @@ class excelSpreadsheetImport
     }
     
     //add clause data
+    $documentClauses_firstRow = self::$FIRST_ROW;
+    
+    foreach($documents as &$document)
+    {
+    	$clauses = array();
+    	$rowcount = 0;
+    	
+    	do
+    	{
+    		$clause = array();
+    		
+        for($n = self::$FIRST_CLAUSECOLUMN; $n < self::$FIRST_CLAUSECOLUMN + self::$AMOUNT_CLAUSECOLUMNS; $n++)
+        {
+          $clause[$n] = trim($this->excelData->value($documentClauses_firstRow + $rowcount,$n,self::$SHEET));
+        }
+    		
+        $clauses[] = $clause;
+    		$rowcount++;
+    	}while($rowcount < $document['countClauses']);
+    	
+    	$document['clauses'] = $clauses;
+    	
+    	$documentClauses_firstRow = $documentClauses_firstRow + $document['countClauses'];
+    }
     
     return $documents;
   }

@@ -104,12 +104,6 @@ LegalValue:
       notnull: false
 
 Organisation:
-  actAs:
-    <<: *actAs
-    Sluggable:
-      unique: true
-      fields: [name]
-      canUpdate: true
   columns:
     id:
       type: integer(4)
@@ -118,8 +112,14 @@ Organisation:
     name:
       type: string(255)
       notnull: true
+    slug:
+      type: string(255)
     parent_id:
       type: integer(4)
+  indexes:
+    slug:
+      fields: [slug]
+      type: unique
   relations:
     Parent:
       class: Organisation
@@ -150,10 +150,6 @@ Document:
   actAs:
     <<: *actAs
     Taggable: ~
-    Sluggable:
-      unique: true
-      fields: [name]
-      canUpdate: true
   columns:
     id:
       type: integer(4)
@@ -162,6 +158,8 @@ Document:
     name:
       type: string(255)
       notnull: true
+    slug:
+      type: string(255)
     publication_date:
       type: date
     adoption_date:
@@ -190,6 +188,10 @@ Document:
     status:
       type: enum
       values: [draft, review, reviewed, inactive, active]
+  indexes:
+    slug:
+      fields: [slug]
+      type: unique
   relations:
     Parent:
       class: Document
@@ -294,17 +296,6 @@ ClauseClauseRelation:
       type: unique
 
 Clause:
-  actAs:
-    <<: *actAs
-# we need to somehow inject the document name here and combine it with the clause_number* fields
-#    Sluggable:
-#      unique: true
-#      fields: [name]
-#      canUpdate: true
-    Versionable:
-      actAs:
-        Blameable:
-          <<: *Blameable
   columns:
     id:
       type: integer(4)
@@ -322,6 +313,8 @@ Clause:
       type: string(255)
     private_comment:
       type: clob
+    slug:
+      type: string(255)
   relations:
     Document:
       local: document_id
@@ -331,6 +324,9 @@ Clause:
       local: clause_body_id
       foreign: id
   indexes:
+    slug:
+      fields: [slug]
+      type: unique
     mapping:
       fields: [document_id, clause_body_id]
       type: unique

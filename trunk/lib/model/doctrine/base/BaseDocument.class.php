@@ -7,6 +7,7 @@
  * 
  * @property integer $id
  * @property string $name
+ * @property string $slug
  * @property date $publication_date
  * @property date $adoption_date
  * @property string $code
@@ -31,6 +32,7 @@
  * 
  * @method integer             getId()                       Returns the current record's "id" value
  * @method string              getName()                     Returns the current record's "name" value
+ * @method string              getSlug()                     Returns the current record's "slug" value
  * @method date                getPublicationDate()          Returns the current record's "publication_date" value
  * @method date                getAdoptionDate()             Returns the current record's "adoption_date" value
  * @method string              getCode()                     Returns the current record's "code" value
@@ -54,6 +56,7 @@
  * @method Doctrine_Collection getVotes()                    Returns the current record's "Votes" collection
  * @method Document            setId()                       Sets the current record's "id" value
  * @method Document            setName()                     Sets the current record's "name" value
+ * @method Document            setSlug()                     Sets the current record's "slug" value
  * @method Document            setPublicationDate()          Sets the current record's "publication_date" value
  * @method Document            setAdoptionDate()             Sets the current record's "adoption_date" value
  * @method Document            setCode()                     Sets the current record's "code" value
@@ -95,6 +98,10 @@ abstract class BaseDocument extends sfDoctrineRecord
         $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
+             'length' => '255',
+             ));
+        $this->hasColumn('slug', 'string', 255, array(
+             'type' => 'string',
              'length' => '255',
              ));
         $this->hasColumn('publication_date', 'date', null, array(
@@ -153,6 +160,14 @@ abstract class BaseDocument extends sfDoctrineRecord
              ),
              ));
 
+
+        $this->index('slug', array(
+             'fields' => 
+             array(
+              0 => 'slug',
+             ),
+             'type' => 'unique',
+             ));
         $this->option('collation', 'utf8_general_ci');
         $this->option('charset', 'utf8');
         $this->option('type', 'InnoDB');
@@ -258,18 +273,9 @@ abstract class BaseDocument extends sfDoctrineRecord
              ));
         $versionable0->addChild($blameable1);
         $taggable0 = new Doctrine_Template_Taggable();
-        $sluggable0 = new Doctrine_Template_Sluggable(array(
-             'unique' => true,
-             'fields' => 
-             array(
-              0 => 'name',
-             ),
-             'canUpdate' => true,
-             ));
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);
         $this->actAs($taggable0);
-        $this->actAs($sluggable0);
     }
 }

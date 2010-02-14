@@ -43,10 +43,7 @@ abstract class BaseClauseForm extends BaseFormDoctrine
     ));
 
     $this->validatorSchema->setPostValidator(
-      new sfValidatorAnd(array(
-        new sfValidatorDoctrineUnique(array('model' => 'Clause', 'column' => array('slug'))),
-        new sfValidatorDoctrineUnique(array('model' => 'Clause', 'column' => array('document_id', 'clause_body_id'))),
-      ))
+      new sfValidatorDoctrineUnique(array('model' => 'Clause', 'column' => array('document_id', 'clause_body_id')))
     );
 
     $this->widgetSchema->setNameFormat('clause[%s]');

@@ -22,12 +22,17 @@ actAs: &actAs
       Blameable:
         <<: *Blameable
 
+# apply this to the sfDoctrineGuard schema as well
 options:
   collation: utf8_general_ci
   charset: utf8
   type: InnoDB
 
 sfGuardUser:
+  options:
+    collation: utf8_general_ci
+    charset: utf8
+    type: InnoDB
   actAs:
     SoftDelete: ~
     Blameable:
@@ -116,10 +121,6 @@ Organisation:
       type: string(255)
     parent_id:
       type: integer(4)
-  indexes:
-    slug:
-      fields: [slug]
-      type: unique
   relations:
     Parent:
       class: Organisation
@@ -188,10 +189,6 @@ Document:
     status:
       type: enum
       values: [draft, review, reviewed, inactive, active]
-  indexes:
-    slug:
-      fields: [slug]
-      type: unique
   relations:
     Parent:
       class: Document
@@ -324,9 +321,6 @@ Clause:
       local: clause_body_id
       foreign: id
   indexes:
-    slug:
-      fields: [slug]
-      type: unique
     mapping:
       fields: [document_id, clause_body_id]
       type: unique

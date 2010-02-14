@@ -36,10 +36,6 @@ abstract class BaseOrganisationForm extends BaseFormDoctrine
       'version'    => new sfValidatorInteger(array('required' => false)),
     ));
 
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'Organisation', 'column' => array('slug')))
-    );
-
     $this->widgetSchema->setNameFormat('organisation[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);

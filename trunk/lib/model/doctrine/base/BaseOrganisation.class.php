@@ -61,14 +61,6 @@ abstract class BaseOrganisation extends sfDoctrineRecord
              'length' => '4',
              ));
 
-
-        $this->index('slug', array(
-             'fields' => 
-             array(
-              0 => 'slug',
-             ),
-             'type' => 'unique',
-             ));
         $this->option('collation', 'utf8_general_ci');
         $this->option('charset', 'utf8');
         $this->option('type', 'InnoDB');

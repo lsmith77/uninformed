@@ -10,7 +10,13 @@
  */
 class OrganisationForm extends BaseOrganisationForm
 {
-  public function configure()
-  {
-  }
+    public function setup()
+    {
+        parent::setup();
+        if ($this->isNew()) {
+            unset($this->widgetSchema['slug']);
+        } else {
+            $this->setWidget('slug', new sfWidgetFormPlain(array('value'=>$this->getObject()->slug)));
+        }
+    }
 }

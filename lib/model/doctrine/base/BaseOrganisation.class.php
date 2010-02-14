@@ -7,6 +7,7 @@
  * 
  * @property integer $id
  * @property string $name
+ * @property string $slug
  * @property integer $parent_id
  * @property Organisation $Parent
  * @property Doctrine_Collection $Suborganisations
@@ -15,6 +16,7 @@
  * 
  * @method integer             getId()               Returns the current record's "id" value
  * @method string              getName()             Returns the current record's "name" value
+ * @method string              getSlug()             Returns the current record's "slug" value
  * @method integer             getParentId()         Returns the current record's "parent_id" value
  * @method Organisation        getParent()           Returns the current record's "Parent" value
  * @method Doctrine_Collection getSuborganisations() Returns the current record's "Suborganisations" collection
@@ -22,6 +24,7 @@
  * @method Doctrine_Collection getCountries()        Returns the current record's "Countries" collection
  * @method Organisation        setId()               Sets the current record's "id" value
  * @method Organisation        setName()             Sets the current record's "name" value
+ * @method Organisation        setSlug()             Sets the current record's "slug" value
  * @method Organisation        setParentId()         Sets the current record's "parent_id" value
  * @method Organisation        setParent()           Sets the current record's "Parent" value
  * @method Organisation        setSuborganisations() Sets the current record's "Suborganisations" collection
@@ -49,11 +52,23 @@ abstract class BaseOrganisation extends sfDoctrineRecord
              'notnull' => true,
              'length' => '255',
              ));
+        $this->hasColumn('slug', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
+             ));
         $this->hasColumn('parent_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
              ));
 
+
+        $this->index('slug', array(
+             'fields' => 
+             array(
+              0 => 'slug',
+             ),
+             'type' => 'unique',
+             ));
         $this->option('collation', 'utf8_general_ci');
         $this->option('charset', 'utf8');
         $this->option('type', 'InnoDB');
@@ -142,17 +157,8 @@ abstract class BaseOrganisation extends sfDoctrineRecord
              ),
              ));
         $versionable0->addChild($blameable1);
-        $sluggable0 = new Doctrine_Template_Sluggable(array(
-             'unique' => true,
-             'fields' => 
-             array(
-              0 => 'name',
-             ),
-             'canUpdate' => true,
-             ));
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);
-        $this->actAs($sluggable0);
     }
 }

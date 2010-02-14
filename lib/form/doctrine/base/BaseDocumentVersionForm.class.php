@@ -17,6 +17,7 @@ abstract class BaseDocumentVersionForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'                     => new sfWidgetFormInputHidden(),
       'name'                   => new sfWidgetFormInputText(),
+      'slug'                   => new sfWidgetFormInputText(),
       'publication_date'       => new sfWidgetFormDate(),
       'adoption_date'          => new sfWidgetFormDate(),
       'code'                   => new sfWidgetFormInputText(),
@@ -39,6 +40,7 @@ abstract class BaseDocumentVersionForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'                     => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'name'                   => new sfValidatorString(array('max_length' => 255)),
+      'slug'                   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'publication_date'       => new sfValidatorDate(array('required' => false)),
       'adoption_date'          => new sfValidatorDate(),
       'code'                   => new sfValidatorString(array('max_length' => 255, 'required' => false)),

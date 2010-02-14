@@ -11,6 +11,7 @@
  * @property string $clause_number_information
  * @property string $clause_number_subparagraph
  * @property clob $private_comment
+ * @property string $slug
  * @property Document $Document
  * @property ClauseBody $ClauseBody
  * @property Doctrine_Collection $ClauseClauseRelation
@@ -21,6 +22,7 @@
  * @method string              getClauseNumberInformation()    Returns the current record's "clause_number_information" value
  * @method string              getClauseNumberSubparagraph()   Returns the current record's "clause_number_subparagraph" value
  * @method clob                getPrivateComment()             Returns the current record's "private_comment" value
+ * @method string              getSlug()                       Returns the current record's "slug" value
  * @method Document            getDocument()                   Returns the current record's "Document" value
  * @method ClauseBody          getClauseBody()                 Returns the current record's "ClauseBody" value
  * @method Doctrine_Collection getClauseClauseRelation()       Returns the current record's "ClauseClauseRelation" collection
@@ -30,6 +32,7 @@
  * @method Clause              setClauseNumberInformation()    Sets the current record's "clause_number_information" value
  * @method Clause              setClauseNumberSubparagraph()   Sets the current record's "clause_number_subparagraph" value
  * @method Clause              setPrivateComment()             Sets the current record's "private_comment" value
+ * @method Clause              setSlug()                       Sets the current record's "slug" value
  * @method Clause              setDocument()                   Sets the current record's "Document" value
  * @method Clause              setClauseBody()                 Sets the current record's "ClauseBody" value
  * @method Clause              setClauseClauseRelation()       Sets the current record's "ClauseClauseRelation" collection
@@ -71,8 +74,19 @@ abstract class BaseClause extends sfDoctrineRecord
         $this->hasColumn('private_comment', 'clob', null, array(
              'type' => 'clob',
              ));
+        $this->hasColumn('slug', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
+             ));
 
 
+        $this->index('slug', array(
+             'fields' => 
+             array(
+              0 => 'slug',
+             ),
+             'type' => 'unique',
+             ));
         $this->index('mapping', array(
              'fields' => 
              array(

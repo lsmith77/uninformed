@@ -17,6 +17,7 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'                     => new sfWidgetFormInputHidden(),
       'name'                   => new sfWidgetFormInputText(),
+      'slug'                   => new sfWidgetFormInputText(),
       'publication_date'       => new sfWidgetFormDate(),
       'adoption_date'          => new sfWidgetFormDate(),
       'code'                   => new sfWidgetFormInputText(),
@@ -34,13 +35,13 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
       'updated_at'             => new sfWidgetFormDateTime(),
       'author_id'              => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'                => new sfWidgetFormInputText(),
-      'slug'                   => new sfWidgetFormInputText(),
       'tags_list'              => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag')),
     ));
 
     $this->setValidators(array(
       'id'                     => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'name'                   => new sfValidatorString(array('max_length' => 255)),
+      'slug'                   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'publication_date'       => new sfValidatorDate(array('required' => false)),
       'adoption_date'          => new sfValidatorDate(),
       'code'                   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
@@ -58,7 +59,6 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
       'updated_at'             => new sfValidatorDateTime(),
       'author_id'              => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
       'version'                => new sfValidatorInteger(array('required' => false)),
-      'slug'                   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'tags_list'              => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag', 'required' => false)),
     ));
 

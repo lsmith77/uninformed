@@ -12,4 +12,50 @@
  */
 class Document extends BaseDocument
 {
+    protected $nameChange = false;
+
+    public function preSave($event) {
+        $invoker = $event->getInvoker();
+        $slug = $invoker->_get('name');
+        $slug = Doctrine_Inflector::urlize($slug);
+        $invoker->_set('slug', $slug);
+
+        // update clause slugs if the name changed
+        $modified = $invoker->getModified();
+        if (array_key_exists('name', $modified)) {
+            $this->nameChange = true;
+        }
+    }
+
+    public function postSave($event) {
+        if (!$this->nameChange) {
+            return;
+        }
+
+        $this->nameChange = false;
+
+        $invoker = $event->getInvoker();
+        $clauses = $invoker->getClauses();
+        foreach ($clauses as $clause) {
+            $clause->save();
+        }
+    }
+
+    public function getClauses() {
+        $query = Doctrine_Query::create()
+            ->from('Clause c')
+            ->innerJoin('c.ClauseBody cb')
+            ->where('c.document_id = ?', $this->_get('id'));
+
+        $clauseOrdering = $this->_get('clause_ordering');
+        if ($clauseOrdering) {
+            $query->orderBy("FIELD(c.id,$clauseOrdering)");
+        }
+
+        return $query->execute();
+    }
+
+    public function getSlug() {
+        return $this->_get('id').'-'.$this->_get('slug');
+    }
 }

@@ -12,4 +12,14 @@
  */
 class Organisation extends BaseOrganisation
 {
+    public function preSave($event) {
+        $invoker = $event->getInvoker();
+        $slug = $invoker->_get('name');
+        $slug = Doctrine_Inflector::urlize($slug);
+        $invoker->_set('slug', $slug);
+    }
+
+    public function getSlug() {
+        return $this->_get('id').'-'.$this->_get('slug');
+    }
 }

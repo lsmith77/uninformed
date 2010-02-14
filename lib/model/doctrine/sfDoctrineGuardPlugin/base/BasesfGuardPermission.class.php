@@ -53,6 +53,10 @@ abstract class BasesfGuardPermission extends sfDoctrineRecord
              'type' => 'string',
              'length' => '1000',
              ));
+
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
     public function setUp()

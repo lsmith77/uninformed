@@ -28,15 +28,36 @@ options:
   charset: utf8
   type: InnoDB
 
-sfGuardUser:
-  options:
-    collation: utf8_general_ci
-    charset: utf8
-    type: InnoDB
+sfGuardGroup:
   actAs:
+    Timestampable: ~
+
+sfGuardPermission:
+  actAs:
+    Timestampable: ~
+
+sfGuardGroupPermission:
+  actAs:
+    Timestampable: ~
+
+sfGuardUser:
+  actAs:
+    Timestampable: ~
     SoftDelete: ~
     Blameable:
       <<: *Blameable
+
+sfGuardUserPermission:
+  actAs:
+    Timestampable: ~
+
+sfGuardUserGroup:
+  actAs:
+    Timestampable: ~
+
+sfGuardRememberKey:
+  actAs:
+    Timestampable: ~
 
 Import:
   actAs:

@@ -44,6 +44,9 @@ abstract class BasesfGuardGroupPermission extends sfDoctrineRecord
              'form' => false,
              'filter' => false,
              ));
+        $this->option('collation', 'utf8_general_ci');
+        $this->option('charset', 'utf8');
+        $this->option('type', 'InnoDB');
     }
 
     public function setUp()

@@ -361,11 +361,11 @@ ClauseBody:
       local: id
       foreign: id
       foreignAlias: ClauseAddressee
-    Tags:
-      class: Tag
-      local: id
-      foreign: id
-      foreignAlias: Tags
+    #Tags:
+    #  class: Tag
+    #  local: id
+    #  foreign: id
+    #  foreignAlias: Tags
     ClauseBodyParent:
       class: ClauseBody
       local: parent_clause_body_id

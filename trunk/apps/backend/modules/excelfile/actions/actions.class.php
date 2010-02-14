@@ -21,6 +21,7 @@ class excelfileActions extends autoExcelfileActions
     $import = new excelSpreadsheetImport();
     $this->documents = $import->loadDataFromFile($excelFileData['file']);
 
+    $import->saveData($this->documents);
 //    $this->redirect('excel_file');
   }
 	

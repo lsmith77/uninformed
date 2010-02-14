@@ -11,6 +11,12 @@ class excelSpreadsheetImport
   private static $FIRST_DOCUMENTCOLUMN = 2;
   private static $FIRST_CLAUSECOLUMN = 29;
   
+  private static $AMOUNT_DOCUMENTTAGCOLUMNS = 11;
+  private static $AMOUNT_CLAUSETAGCOLUMNS = 10;
+  
+  private static $FIRST_DOCUMENTTAGCOLUMN = 18;
+  private static $FIRST_CLAUSETAGCOLUMN = 42;
+  
   private static $FIRST_ROW = 2;
   
   private static $COLUMN_DOCUMENTTITLE = 2;
@@ -34,7 +40,7 @@ class excelSpreadsheetImport
       $followup = "";
     	$data = array();
     	
-    	for($j = self::$FIRST_DOCUMENTCOLUMN; $j < self::$AMOUNT_DOCUMENTCOLUMNS + 1; $j++) //columns
+    	for($j = self::$FIRST_DOCUMENTCOLUMN; $j < self::$FIRST_DOCUMENTCOLUMN + self::$AMOUNT_DOCUMENTCOLUMNS; $j++) //columns
     	{
     		$value = trim($this->excelData->value($i,$j,self::$SHEET));
     		
@@ -91,8 +97,44 @@ class excelSpreadsheetImport
     return $documents;
   }
   
-  public function saveData()
+  public function saveData(&$documents)
   {
 //  	save data in database
+
+  	$clauseHelper = new ClauseHelper();
+  	
+//  	clause tags
+    foreach($documents as &$document)
+    {
+    	foreach($document['clauses'] as &$clause)
+    	{
+    		$clauseBody = new ClauseBody();
+    		
+    		$clauseBody->set('content', $clause[29]);
+    		$clauseBody->set('operative_phrase_id', $clauseHelper->retrieveClauseOperativePhrase($clause[31])); //operative phrase
+    		$clauseBody->set('information_type_id', $clauseHelper->retrieveClauseInformationType($clause[32])); //information type
+        
+    		$arr_clause_tags = array_slice($clause, self::$FIRST_CLAUSETAGCOLUMN, self::$AMOUNT_CLAUSETAGCOLUMNS);
+    		$tags = array();
+    		foreach($arr_clause_tags as $name)
+        {
+          if($name != "")
+        	  $tags[] = $name;
+        }
+        $clauseBody->setTags($tags);
+        
+    		$clauseBody->save();
+    		
+    		$clause = $clauseBody->get('id');
+    	}
+    }
+//  	
+//  	clause bodys
+//  	
+//  	clauses
+//  	
+//  	document tags
+//  	
+//  	documents
   }
 }

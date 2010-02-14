@@ -62,10 +62,6 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
       'tags_list'              => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag', 'required' => false)),
     ));
 
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'Document', 'column' => array('slug')))
-    );
-
     $this->widgetSchema->setNameFormat('document[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);

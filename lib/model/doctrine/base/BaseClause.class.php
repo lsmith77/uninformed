@@ -80,13 +80,6 @@ abstract class BaseClause extends sfDoctrineRecord
              ));
 
 
-        $this->index('slug', array(
-             'fields' => 
-             array(
-              0 => 'slug',
-             ),
-             'type' => 'unique',
-             ));
         $this->index('mapping', array(
              'fields' => 
              array(

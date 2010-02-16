@@ -564,6 +564,15 @@ ClauseAddressee:
     addressee_id:
       type: integer(4)
       notnull: true
+  relations:
+    ClauseBody:
+      local: clause_body_id
+      foreign: id
+      foreignAlias: ClauseAddressees
+    Addressee:
+      local: addressee_id
+      foreign: id
+      foreignAlias: ClauseAddressees
   indexes:
     mapping:
       fields: [clause_body_id, addressee_id]

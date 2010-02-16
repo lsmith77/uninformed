@@ -103,7 +103,6 @@ class excelSpreadsheetImport
 
   	$clauseHelper = new ClauseHelper();
   	
-//  	clause tags
     foreach($documents as &$document)
     {
     	foreach($document['clauses'] as &$clause)
@@ -125,6 +124,26 @@ class excelSpreadsheetImport
         
     		$clauseBody->save();
     		
+    		//addressees
+    		for($i = 37; $i < 37 + 4; $i++)
+    		{
+    			if($clause[$i] != "")
+    			{
+    		    $addressee = $clauseHelper->retrieveAddressee($clause[$i]);
+    			
+	    		  if($addressee != NULL)
+	    			{
+	    				$clauseAddressee = new ClauseAddressee();
+			        
+			        $clauseAddressee->clause_body_id = $clauseBody->get('id');
+			        $clauseAddressee->addressee_id = $addressee;
+			        
+			        $clauseAddressee->save();
+	    			}
+    			}
+    		}
+    		
+    		//last: overwrite clause value with body id for later referencing
     		$clause = $clauseBody->get('id');
     	}
     }

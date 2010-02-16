@@ -23,6 +23,9 @@ class excelSpreadsheetImport
   private static $COLUMN_DOCUMENTCODE = 3;
   private static $COLUMN_DOCUMENTFOLLOWUP = 13;
   
+  private static $FIRST_ADDRESSEECOLUMN = 37;
+  private static $AMOUNT_ADDRESSEECOLUMNS = 4;
+  
   public function __construct() {}
   
   public function loadDataFromFile($file)
@@ -125,7 +128,7 @@ class excelSpreadsheetImport
     		$clauseBody->save();
     		
     		//addressees
-    		for($i = 37; $i < 37 + 4; $i++)
+    		for($i = self::$FIRST_ADDRESSEECOLUMN; $i < self::$FIRST_ADDRESSEECOLUMN + self::$AMOUNT_ADDRESSEECOLUMNS; $i++)
     		{
     			if($clause[$i] != "")
     			{
@@ -146,6 +149,21 @@ class excelSpreadsheetImport
     		//last: overwrite clause value with body id for later referencing
     		$clause = $clauseBody->get('id');
     	}
+    	
+    	$documentHelper = new DocumentHelper();
+    	
+    	$newDocument = new Document();
+    	
+    	$newDocument->set('name', key($documents));
+    	$newDocument->set('code', $document['code']);
+    	$newDocument->set('adoption_date', $document['data'][4]);
+    	$newDocument->set('organisation_id', $documentHelper->retrieveOrganisation($document['data'][5])); //organisation
+      $newDocument->set('documenttype_id', $documentHelper->retrieveDocumentType($document['data'][11])); //document type
+    	$newDocument->set('document_url', $document['data'][17]);
+      
+    	$newDocument->save();
+    	
+    	//$document = new Document();
     }
 //  	
 //  	clause bodys

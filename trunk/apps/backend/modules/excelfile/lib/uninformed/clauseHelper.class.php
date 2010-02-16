@@ -48,4 +48,28 @@ class ClauseHelper
     
     return $type->get('id');
 	}
+	
+  public function retrieveAddressee($name)
+  {
+    //Retrieve list of existing types
+    $addressees = Doctrine::getTable('Addressee')->getAllAddresseeNames();
+        
+    foreach($addressees as $addressee)
+    {
+      if(strCaseCmp($name,$addressee['name']) == 0)
+      {
+        return $addressee['id'];
+      }
+      else
+      {
+        // pass $foundTypeInList = false;
+      }
+    }
+    
+    $addressee = new Addressee();  
+    $addressee->set('name', $name);
+    $addressee->save();
+    
+    return $addressee->get('id');
+  }
 }

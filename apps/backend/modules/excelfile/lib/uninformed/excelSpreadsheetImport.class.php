@@ -208,7 +208,24 @@ class excelSpreadsheetImport
 	      }
       }
     }
+    
+    //save clause body document relation in Clause Table
+    foreach($documents as $documentBody)
+    {
+    	foreach($documentBody['clauses'] as $key => $clauseItem)
+    	{
+    		$clauseBodyId = key($clauseItem);
+
+        $newClause = new Clause();
+              
+        $newClause->clause_body_id = $clauseBodyId;
+        $newClause->document_id = $documentBody['id'];
+              
+        $newClause->save();
+    	}
+    }
   }
+  
   /**
    * Receives an excel date number (days since 1-1-1900).
    * Converts it into a timestamp which then is converted into

@@ -169,6 +169,15 @@ class excelSpreadsheetImport
     	$newDocument->set('organisation_id', $documentHelper->retrieveOrganisation($document['data'][5])); //organisation
       $newDocument->set('documenttype_id', $documentHelper->retrieveDocumentType($document['data'][11])); //document type
     	$newDocument->set('document_url', $document['data'][17]);
+    	
+    	$arr_document_tags = array_slice($document, self::$FIRST_DOCUMENTTAGCOLUMN, self::$AMOUNT_DOCUMENTTAGCOLUMNS);
+      $tags = array();
+      foreach($arr_document_tags as $name)
+      {
+        if($name != "")
+          $tags[] = $name;
+      }
+      $newDocument->setTags($tags);
       
     	$newDocument->save();
     	

@@ -41,6 +41,7 @@ class excelSpreadsheetImport
       $title = "";
       $code = "";
       $followup = "";
+      $tags = array();
     	$data = array();
     	
     	for($j = self::$FIRST_DOCUMENTCOLUMN; $j < self::$FIRST_DOCUMENTCOLUMN + self::$AMOUNT_DOCUMENTCOLUMNS; $j++) //columns
@@ -56,20 +57,27 @@ class excelSpreadsheetImport
           $code = $value;
         else if($j == self::$COLUMN_DOCUMENTFOLLOWUP)
           $followup = $value;
+        else if($j >= self::$FIRST_DOCUMENTTAGCOLUMN && $j < self::$FIRST_DOCUMENTTAGCOLUMN + self::$AMOUNT_DOCUMENTTAGCOLUMNS)
+          $tags[] = $value;
     		else  
     		  $data[$j] = $value;
     	}
     	
     	if(!isset($documents[$title]))
         $documents[$title]['countClauses'] = 1;
-      else
+    	else
         $documents[$title]['countClauses']++;
         
       if(!isset($documents[$title]['code']))
         $documents[$title]['code'] = $code;
         
       if(!isset($documents[$title]['followup']))
-        $documents[$title]['followup'] = $followup;
+        $documents[$title]['followup'] = $followup;  
+ 
+      if(!isset($documents[$title]['tags']))
+        $documents[$title]['tags'] = $tags;
+      else
+        $documents[$title]['tags'] = array_merge($documents[$title]['tags'],$tags);
         
       $documents[$title]['data'] = $data;
     }
@@ -124,14 +132,14 @@ class excelSpreadsheetImport
     		
     		$clauseBody->set('operative_phrase_id', $clauseHelper->retrieveClauseOperativePhrase($clause[31])); //operative phrase
     		$clauseBody->set('information_type_id', $clauseHelper->retrieveClauseInformationType($clause[32])); //information type
-        
-    		$arr_clause_tags = array_slice($clause, self::$FIRST_CLAUSETAGCOLUMN, self::$AMOUNT_CLAUSETAGCOLUMNS);
-    		$tags = array();
-    		foreach($arr_clause_tags as $name)
+    		    		
+        $tags = array();
+    	  for($a = self::$FIRST_CLAUSETAGCOLUMN; $a < self::$FIRST_CLAUSETAGCOLUMN + self::$AMOUNT_CLAUSETAGCOLUMNS; $a++)
         {
-          if($name != "")
-        	  $tags[] = $name;
+        	if($clause[$a] != "")
+            $tags[] = $clause[$a];
         }
+        
         $clauseBody->setTags($tags);
         
     		$clauseBody->save();
@@ -170,13 +178,15 @@ class excelSpreadsheetImport
       $newDocument->set('documenttype_id', $documentHelper->retrieveDocumentType($document['data'][11])); //document type
     	$newDocument->set('document_url', $document['data'][17]);
     	
-    	$arr_document_tags = array_slice($document, self::$FIRST_DOCUMENTTAGCOLUMN, self::$AMOUNT_DOCUMENTTAGCOLUMNS);
       $tags = array();
-      foreach($arr_document_tags as $name)
+      
+      foreach($document['tags'] as $name)
       {
         if($name != "")
           $tags[] = $name;
       }
+
+      $tags = array_unique($tags);  
       $newDocument->setTags($tags);
       
     	$newDocument->save();

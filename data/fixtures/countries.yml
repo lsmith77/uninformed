@@ -1,0 +1,607 @@
+Country:
+  ANDORRA:
+    iso: AND
+    name: ANDORRA
+  UNITED ARAB EMIRATES:
+    iso: ARE
+    name: UNITED ARAB EMIRATES
+  AFGHANISTAN:
+    iso: AFG
+    name: AFGHANISTAN
+  ANTIGUA AND BARBUDA:
+    iso: ATG
+    name: ANTIGUA AND BARBUDA
+  ALBANIA:
+    iso: ALB
+    name: ALBANIA
+  ARMENIA:
+    iso: ARM
+    name: ARMENIA
+  ANGOLA:
+    iso: AGO
+    name: ANGOLA
+  ANTARCTICA:
+    iso: ATA
+    name: ANTARCTICA
+  ARGENTINA:
+    iso: ARG
+    name: ARGENTINA
+  AUSTRIA:
+    iso: AUT
+    name: AUSTRIA
+  AUSTRALIA:
+    iso: AUS
+    name: AUSTRALIA
+  ARUBA:
+    iso: ABW
+    name: ARUBA
+  AZERBAIJAN:
+    iso: AZE
+    name: AZERBAIJAN
+  BOSNIA AND HERZEGOVINA:
+    iso: BIH
+    name: BOSNIA AND HERZEGOVINA
+  BARBADOS:
+    iso: BRB
+    name: BARBADOS
+  BANGLADESH:
+    iso: BGD
+    name: BANGLADESH
+  BELGIUM:
+    iso: BEL
+    name: BELGIUM
+  BURKINA FASO:
+    iso: BFA
+    name: BURKINA FASO
+  BULGARIA:
+    iso: BGR
+    name: BULGARIA
+  BAHRAIN:
+    iso: BHR
+    name: BAHRAIN
+  BURUNDI:
+    iso: BDI
+    name: BURUNDI
+  BENIN:
+    iso: BEN
+    name: BENIN
+  BERMUDA:
+    iso: BMU
+    name: BERMUDA
+  BRUNEI DARUSSALAM:
+    iso: BRN
+    name: BRUNEI DARUSSALAM
+  BOLIVIA:
+    iso: BOL
+    name: BOLIVIA
+  BRAZIL:
+    iso: BRA
+    name: BRAZIL
+  BAHAMAS:
+    iso: BHS
+    name: BAHAMAS
+  BHUTAN:
+    iso: BTN
+    name: BHUTAN
+  BOTSWANA:
+    iso: BWA
+    name: BOTSWANA
+  BELARUS:
+    iso: BLR
+    name: BELARUS
+  BELIZE:
+    iso: BLZ
+    name: BELIZE
+  CANADA:
+    iso: CAN
+    name: CANADA
+  CONGO, DEMOCRATIC REPUBLIC OF THE:
+    iso: COD
+    name: CONGO, DEMOCRATIC REPUBLIC OF THE
+  CENTRAL AFRICAN REPUBLIC:
+    iso: CAF
+    name: CENTRAL AFRICAN REPUBLIC
+  CONGO:
+    iso: COG
+    name: CONGO
+  SWITZERLAND:
+    iso: CHE
+    name: SWITZERLAND
+  COTE D'IVOIRE:
+    iso: CIV
+    name: COTE D'IVOIRE
+  CHILE:
+    iso: CHL
+    name: CHILE
+  CAMEROON:
+    iso: CMR
+    name: CAMEROON
+  CHINA:
+    iso: CHN
+    name: CHINA
+  COLOMBIA:
+    iso: COL
+    name: COLOMBIA
+  COSTA RICA:
+    iso: CRI
+    name: COSTA RICA
+  CUBA:
+    iso: CUB
+    name: CUBA
+  CAPE VERDE:
+    iso: CPV
+    name: CAPE VERDE
+  CYPRUS:
+    iso: CYP
+    name: CYPRUS
+  CZECH REPUBLIC:
+    iso: CZE
+    name: CZECH REPUBLIC
+  GERMANY:
+    iso: DEU
+    name: GERMANY
+  DJIBOUTI:
+    iso: DJI
+    name: DJIBOUTI
+  DENMARK:
+    iso: DNK
+    name: DENMARK
+  DOMINICA:
+    iso: DMA
+    name: DOMINICA
+  DOMINICAN REPUBLIC:
+    iso: DOM
+    name: DOMINICAN REPUBLIC
+  ALGERIA:
+    iso: DZA
+    name: ALGERIA
+  ECUADOR:
+    iso: ECU
+    name: ECUADOR
+  ESTONIA:
+    iso: EST
+    name: ESTONIA
+  EGYPT:
+    iso: EGY
+    name: EGYPT
+  WESTERN SAHARA:
+    iso: ESH
+    name: WESTERN SAHARA
+  ERITREA:
+    iso: ERI
+    name: ERITREA
+  SPAIN:
+    iso: ESP
+    name: SPAIN
+  ETHIOPIA:
+    iso: ETH
+    name: ETHIOPIA
+  FINLAND:
+    iso: FIN
+    name: FINLAND
+  FIJI:
+    iso: FJI
+    name: FIJI
+  MICRONESIA, FEDERATED STATES OF:
+    iso: FSM
+    name: MICRONESIA, FEDERATED STATES OF
+  FAROE ISLANDS:
+    iso: FRO
+    name: FAROE ISLANDS
+  FRANCE:
+    iso: FRA
+    name: FRANCE
+  GABON:
+    iso: GAB
+    name: GABON
+  UNITED KINGDOM:
+    iso: GBR
+    name: UNITED KINGDOM
+  GRENADA:
+    iso: GRD
+    name: GRENADA
+  GEORGIA:
+    iso: GEO
+    name: GEORGIA
+  FRENCH GUIANA:
+    iso: GUF
+    name: FRENCH GUIANA
+  GHANA:
+    iso: GHA
+    name: GHANA
+  GAMBIA:
+    iso: GMB
+    name: GAMBIA
+  GUINEA:
+    iso: GIN
+    name: GUINEA
+  GUADELOUPE:
+    iso: GLP
+    name: GUADELOUPE
+  EQUATORIAL GUINEA:
+    iso: GNQ
+    name: EQUATORIAL GUINEA
+  GREECE:
+    iso: GRC
+    name: GREECE
+  GUATEMALA:
+    iso: GTM
+    name: GUATEMALA
+  GUINEA-BISSAU:
+    iso: GNB
+    name: GUINEA-BISSAU
+  GUYANA:
+    iso: GUY
+    name: GUYANA
+  HONDURAS:
+    iso: HND
+    name: HONDURAS
+  CROATIA:
+    iso: HRV
+    name: CROATIA
+  HAITI:
+    iso: HTI
+    name: HAITI
+  HUNGARY:
+    iso: HUN
+    name: HUNGARY
+  INDONESIA:
+    iso: IDN
+    name: INDONESIA
+  IRELAND:
+    iso: IRL
+    name: IRELAND
+  ISRAEL:
+    iso: ISR
+    name: ISRAEL
+  INDIA:
+    iso: IND
+    name: INDIA
+  BRITISH INDIAN OCEAN TERRITORY:
+    iso: IOT
+    name: BRITISH INDIAN OCEAN TERRITORY
+  IRAQ:
+    iso: IRQ
+    name: IRAQ
+  IRAN, ISLAMIC REPUBLIC OF:
+    iso: IRN
+    name: IRAN, ISLAMIC REPUBLIC OF
+  ICELAND:
+    iso: ISL
+    name: ICELAND
+  ITALY:
+    iso: ITA
+    name: ITALY
+  JERSEY:
+    iso: JEY
+    name: JERSEY
+  JAMAICA:
+    iso: JAM
+    name: JAMAICA
+  JORDAN:
+    iso: JOR
+    name: JORDAN
+  JAPAN:
+    iso: JPN
+    name: JAPAN
+  KENYA:
+    iso: KEN
+    name: KENYA
+  KYRGYZSTAN:
+    iso: KGZ
+    name: KYRGYZSTAN
+  CAMBODIA:
+    iso: KHM
+    name: CAMBODIA
+  KIRIBATI:
+    iso: KIR
+    name: KIRIBATI
+  COMOROS:
+    iso: COM
+    name: COMOROS
+  SAINT KITTS AND NEVIS:
+    iso: KNA
+    name: SAINT KITTS AND NEVIS
+  KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF:
+    iso: PRK
+    name: KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF
+  KOREA, REPUBLIC OF:
+    iso: KOR
+    name: KOREA, REPUBLIC OF
+  KUWAIT:
+    iso: KWT
+    name: KUWAIT
+  KAZAKHSTAN:
+    iso: KAZ
+    name: KAZAKHSTAN
+  LAO PEOPLE'S DEMOCRATIC REPUBLIC:
+    iso: LAO
+    name: LAO PEOPLE'S DEMOCRATIC REPUBLIC
+  LEBANON:
+    iso: LBN
+    name: LEBANON
+  SAINT LUCIA:
+    iso: LCA
+    name: SAINT LUCIA
+  LIECHTENSTEIN:
+    iso: LIE
+    name: LIECHTENSTEIN
+  SRI LANKA:
+    iso: LKA
+    name: SRI LANKA
+  LIBERIA:
+    iso: LBR
+    name: LIBERIA
+  LESOTHO:
+    iso: LSO
+    name: LESOTHO
+  LITHUANIA:
+    iso: LTU
+    name: LITHUANIA
+  LUXEMBOURG:
+    iso: LUX
+    name: LUXEMBOURG
+  LATVIA:
+    iso: LVA
+    name: LATVIA
+  LIBYAN ARAB JAMAHIRIYA:
+    iso: LBY
+    name: LIBYAN ARAB JAMAHIRIYA
+  MOROCCO:
+    iso: MAR
+    name: MOROCCO
+  MONACO:
+    iso: MCO
+    name: MONACO
+  MOLDOVA:
+    iso: MDA
+    name: MOLDOVA
+  MONTENEGRO:
+    iso: MNE
+    name: MONTENEGRO
+  MADAGASCAR:
+    iso: MDG
+    name: MADAGASCAR
+  MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF:
+    iso: MKD
+    name: MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF
+  MALI:
+    iso: MLI
+    name: MALI
+  MYANMAR:
+    iso: MMR
+    name: MYANMAR
+  MONGOLIA:
+    iso: MNG
+    name: MONGOLIA
+  MACAU:
+    iso: MAC
+    name: MACAU
+  MARTINIQUE:
+    iso: MTQ
+    name: MARTINIQUE
+  MAURITANIA:
+    iso: MRT
+    name: MAURITANIA
+  MONTSERRAT:
+    iso: MSR
+    name: MONTSERRAT
+  MAURITIUS:
+    iso: MUS
+    name: MAURITIUS
+  MALDIVES:
+    iso: MDV
+    name: MALDIVES
+  MALAWI:
+    iso: MWI
+    name: MALAWI
+  MEXICO:
+    iso: MEX
+    name: MEXICO
+  MALAYSIA:
+    iso: MYS
+    name: MALAYSIA
+  MOZAMBIQUE:
+    iso: MOZ
+    name: MOZAMBIQUE
+  NAMIBIA:
+    iso: NAM
+    name: NAMIBIA
+  NIGER:
+    iso: NER
+    name: NIGER
+  NIGERIA:
+    iso: NGA
+    name: NIGERIA
+  NICARAGUA:
+    iso: NIC
+    name: NICARAGUA
+  NETHERLANDS:
+    iso: NLD
+    name: NETHERLANDS
+  NORWAY:
+    iso: NOR
+    name: NORWAY
+  NEPAL:
+    iso: NPL
+    name: NEPAL
+  NEW ZEALAND:
+    iso: NZL
+    name: NEW ZEALAND
+  OMAN:
+    iso: OMN
+    name: OMAN
+  PANAMA:
+    iso: PAN
+    name: PANAMA
+  PERU:
+    iso: PER
+    name: PERU
+  PAPUA NEW GUINEA:
+    iso: PNG
+    name: PAPUA NEW GUINEA
+  PHILIPPINES:
+    iso: PHL
+    name: PHILIPPINES
+  PAKISTAN:
+    iso: PAK
+    name: PAKISTAN
+  POLAND:
+    iso: POL
+    name: POLAND
+  PALESTINIAN TERRITORY:
+    iso: PSE
+    name: PALESTINIAN TERRITORY
+  PORTUGAL:
+    iso: PRT
+    name: PORTUGAL
+  PALAU:
+    iso: PLW
+    name: PALAU
+  PARAGUAY:
+    iso: PRY
+    name: PARAGUAY
+  QATAR:
+    iso: QAT
+    name: QATAR
+  REUNION:
+    iso: REU
+    name: REUNION
+  ROMANIA:
+    iso: ROU
+    name: ROMANIA
+  SERBIA:
+    iso: SRB
+    name: SERBIA
+  RUSSIAN FEDERATION:
+    iso: RUS
+    name: RUSSIAN FEDERATION
+  RWANDA:
+    iso: RWA
+    name: RWANDA
+  SAUDI ARABIA:
+    iso: SAU
+    name: SAUDI ARABIA
+  SOLOMON ISLANDS:
+    iso: SLB
+    name: SOLOMON ISLANDS
+  SEYCHELLES:
+    iso: SYC
+    name: SEYCHELLES
+  SUDAN:
+    iso: SDN
+    name: SUDAN
+  SWEDEN:
+    iso: SWE
+    name: SWEDEN
+  SAINT HELENA:
+    iso: SHN
+    name: SAINT HELENA
+  SLOVENIA:
+    iso: SVN
+    name: SLOVENIA
+  SLOVAKIA:
+    iso: SVK
+    name: SLOVAKIA
+  SIERRA LEONE:
+    iso: SLE
+    name: SIERRA LEONE
+  SAN MARINO:
+    iso: SMR
+    name: SAN MARINO
+  SENEGAL:
+    iso: SEN
+    name: SENEGAL
+  SOMALIA:
+    iso: SOM
+    name: SOMALIA
+  SURIname: 
+    iso: SUR
+    name: SURINAME
+  SAO TOME AND PRINCIPE:
+    iso: STP
+    name: SAO TOME AND PRINCIPE
+  EL SALVADOR:
+    iso: SLV
+    name: EL SALVADOR
+  SYRIAN ARAB REPUBLIC:
+    iso: SYR
+    name: SYRIAN ARAB REPUBLIC
+  SWAZILAND:
+    iso: SWZ
+    name: SWAZILAND
+  CHAD:
+    iso: TCD
+    name: CHAD
+  FRENCH SOUTHERN TERRITORIES:
+    iso: ATF
+    name: FRENCH SOUTHERN TERRITORIES
+  TOGO:
+    iso: TGO
+    name: TOGO
+  THAILAND:
+    iso: THA
+    name: THAILAND
+  TAJIKISTAN:
+    iso: TJK
+    name: TAJIKISTAN
+  TIMOR-LESTE (EAST TIMOR):
+    iso: TLS
+    name: TIMOR-LESTE (EAST TIMOR)
+  TURKMENISTAN:
+    iso: TKM
+    name: TURKMENISTAN
+  TUNISIA:
+    iso: TUN
+    name: TUNISIA
+  TURKEY:
+    iso: TUR
+    name: TURKEY
+  TRINIDAD AND TOBAGO:
+    iso: TTO
+    name: TRINIDAD AND TOBAGO
+  TAIWAN, PROVINCE OF CHINA:
+    iso: TWN
+    name: TAIWAN, PROVINCE OF CHINA
+  TANZANIA, UNITED REPUBLIC OF:
+    iso: TZA
+    name: TANZANIA, UNITED REPUBLIC OF
+  UKRAINE:
+    iso: UKR
+    name: UKRAINE
+  UGANDA:
+    iso: UGA
+    name: UGANDA
+  UNITED STATES:
+    iso: USA
+    name: UNITED STATES
+  URUGUAY:
+    iso: URY
+    name: URUGUAY
+  UZBEKISTAN:
+    iso: UZB
+    name: UZBEKISTAN
+  SAINT VINCENT AND THE GRENADINES:
+    iso: VCT
+    name: SAINT VINCENT AND THE GRENADINES
+  VENEZUELA:
+    iso: VEN
+    name: VENEZUELA
+  VIETNAM:
+    iso: VNM
+    name: VIETNAM
+  VANUATU:
+    iso: VUT
+    name: VANUATU
+  YEMEN:
+    iso: YEM
+    name: YEMEN
+  SOUTH AFRICA:
+    iso: ZAF
+    name: SOUTH AFRICA
+  ZAMBIA:
+    iso: ZMB
+    name: ZAMBIA
+  ZIMBABWE:
+    iso: ZWE
+    name: ZIMBABWE

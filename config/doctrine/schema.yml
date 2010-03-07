@@ -493,6 +493,9 @@ Country:
       type: integer(4)
       primary: true
       autoincrement: true
+    iso:
+      type: string(3)
+      notnull: true
     name:
       type: string(255)
       notnull: true
@@ -501,7 +504,7 @@ CountryOrganisation:
   actAs:
     <<: *actAs
     Temporal:
-      unique_fields: [document_id, country_id]
+      unique_fields: [country_id, organisation_id]
   columns:
     id:
       type: integer(4)

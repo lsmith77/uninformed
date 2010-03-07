@@ -1,0 +1,37 @@
+Organisation:
+  FAO:
+    name: FAO
+  UNFPA:
+    name: UNFPA
+  IAEA:
+    name: IAEA
+  ICAO:
+    name: ICAO
+  IFAD:
+    name: IFAD
+  ILO:
+    name: ILO
+  IMO:
+    name: IMO
+  ITU:
+    name: ITU
+  UNESCO:
+    name: UNESCO
+  UNIDO:
+    name: UNIDO
+  UPU:
+    name: UPU
+  WB:
+    name: WB
+  WFP:
+    name: WFP
+  WHO:
+    name: WHO
+  WIPO:
+    name: WIPO
+  WMO:
+    name: WMO
+  WTO:
+    name: WTO
+  IMF:
+    name: IMF

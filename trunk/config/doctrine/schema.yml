@@ -18,6 +18,7 @@ actAs: &actAs
         disabled: false
         name: Author
   Versionable:
+    listener: Doctrine_AuditLog_Listener_Microtime
     actAs:
       Blameable:
         <<: *Blameable
@@ -580,3 +581,12 @@ ClauseAddressee:
     mapping:
       fields: [clause_body_id, addressee_id]
       type: unique
+  relations:
+    ClauseBody:
+      class: ClauseBody
+      local: clause_body_id
+      foreign: id
+    Addressee:
+      class: Addressee
+      local: addressee_id
+      foreign: id

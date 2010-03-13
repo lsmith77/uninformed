@@ -23,6 +23,7 @@
  * @property Doctrine_Collection $Clause
  * @property Doctrine_Collection $Subclauses
  * @property Doctrine_Collection $ClauseReservation
+ * @property Doctrine_Collection $ClauseAddressee
  * 
  * @method integer               getId()                     Returns the current record's "id" value
  * @method clob                  getContent()                Returns the current record's "content" value
@@ -42,6 +43,7 @@
  * @method Doctrine_Collection   getClause()                 Returns the current record's "Clause" collection
  * @method Doctrine_Collection   getSubclauses()             Returns the current record's "Subclauses" collection
  * @method Doctrine_Collection   getClauseReservation()      Returns the current record's "ClauseReservation" collection
+ * @method Doctrine_Collection   getClauseAddressee()        Returns the current record's "ClauseAddressee" collection
  * @method ClauseBody            setId()                     Sets the current record's "id" value
  * @method ClauseBody            setContent()                Sets the current record's "content" value
  * @method ClauseBody            setInformationTypeId()      Sets the current record's "information_type_id" value
@@ -60,11 +62,12 @@
  * @method ClauseBody            setClause()                 Sets the current record's "Clause" collection
  * @method ClauseBody            setSubclauses()             Sets the current record's "Subclauses" collection
  * @method ClauseBody            setClauseReservation()      Sets the current record's "ClauseReservation" collection
+ * @method ClauseBody            setClauseAddressee()        Sets the current record's "ClauseAddressee" collection
  * 
  * @package    uninformed
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7021 2010-01-12 20:39:49Z lsmith $
+ * @version    SVN: $Id: Builder.php 7294 2010-03-02 17:59:20Z jwage $
  */
 abstract class BaseClauseBody extends sfDoctrineRecord
 {
@@ -160,6 +163,10 @@ abstract class BaseClauseBody extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'clause_body_id'));
 
+        $this->hasMany('ClauseAddressee', array(
+             'local' => 'id',
+             'foreign' => 'clause_body_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'default' => NULL,
@@ -192,6 +199,7 @@ abstract class BaseClauseBody extends sfDoctrineRecord
              ),
              ));
         $versionable0 = new Doctrine_Template_Versionable(array(
+             'listener' => 'Doctrine_AuditLog_Listener_Microtime',
              ));
         $blameable1 = new Doctrine_Template_Blameable(array(
              'default' => NULL,

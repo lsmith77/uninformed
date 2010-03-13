@@ -42,43 +42,50 @@ class excelSpreadsheetImport
       $code = "";
       $followup = "";
       $tags = array();
-    	$data = array();
+      $data = array();
     	
-    	for($j = self::$FIRST_DOCUMENTCOLUMN; $j < self::$FIRST_DOCUMENTCOLUMN + self::$AMOUNT_DOCUMENTCOLUMNS; $j++) //columns
-    	{
-    		if($j == 4) //excel date format data, adoption date column
-    		  $value = trim($this->excelData->raw($i,$j,self::$SHEET));
-    		else
-    		  $value = trim($this->excelData->value($i,$j,self::$SHEET));
-    		
-    		if($j == self::$COLUMN_DOCUMENTTITLE)
-    		  $title = $value;
-    		else if($j == self::$COLUMN_DOCUMENTCODE)
+      for($j = self::$FIRST_DOCUMENTCOLUMN; $j < self::$FIRST_DOCUMENTCOLUMN + self::$AMOUNT_DOCUMENTCOLUMNS; $j++) //columns
+      {
+        if($j == 4) { //excel date format data, adoption date column
+          $value = trim($this->excelData->raw($i, $j,self::$SHEET));
+        } else {
+          $value = trim($this->excelData->value($i, $j,self::$SHEET));
+        }
+        if($j == self::$COLUMN_DOCUMENTTITLE) {
+          $title = $value;
+        } else if($j == self::$COLUMN_DOCUMENTCODE) {
           $code = $value;
-        else if($j == self::$COLUMN_DOCUMENTFOLLOWUP)
+        } else if($j == self::$COLUMN_DOCUMENTFOLLOWUP) {
           $followup = $value;
-        else if($j >= self::$FIRST_DOCUMENTTAGCOLUMN && $j < self::$FIRST_DOCUMENTTAGCOLUMN + self::$AMOUNT_DOCUMENTTAGCOLUMNS)
+        } else if($j >= self::$FIRST_DOCUMENTTAGCOLUMN
+          && $j < self::$FIRST_DOCUMENTTAGCOLUMN + self::$AMOUNT_DOCUMENTTAGCOLUMNS
+        ) {
           $tags[] = $value;
-    		else  
-    		  $data[$j] = $value;
-    	}
-    	
-    	if(!isset($documents[$title]))
+        } else {
+          $data[$j] = $value;
+        }
+      }
+
+      if(!isset($documents[$title])) {
         $documents[$title]['countClauses'] = 1;
-    	else
+      } else {
         $documents[$title]['countClauses']++;
-        
-      if(!isset($documents[$title]['code']))
+      }
+
+      if(!isset($documents[$title]['code'])) {
         $documents[$title]['code'] = $code;
-        
-      if(!isset($documents[$title]['followup']))
-        $documents[$title]['followup'] = $followup;  
- 
-      if(!isset($documents[$title]['tags']))
+      }
+    
+      if(!isset($documents[$title]['followup'])) {
+        $documents[$title]['followup'] = $followup;
+      }
+    
+      if(!isset($documents[$title]['tags'])) {
         $documents[$title]['tags'] = $tags;
-      else
-        $documents[$title]['tags'] = array_merge($documents[$title]['tags'],$tags);
-        
+      } else {
+        $documents[$title]['tags'] = array_merge($documents[$title]['tags'], $tags);
+      }
+
       $documents[$title]['data'] = $data;
     }
     
@@ -87,153 +94,156 @@ class excelSpreadsheetImport
     
     foreach($documents as &$document)
     {
-    	$clauses = array();
-    	$rowcount = 0;
+  	  $clauses = array();
+      $rowcount = 0;
     	
-    	do
-    	{
-    		$clause = array();
+      do
+      {
+        $clause = array();
     		
         for($n = self::$FIRST_CLAUSECOLUMN; $n < self::$FIRST_CLAUSECOLUMN + self::$AMOUNT_CLAUSECOLUMNS; $n++)
         {
-          $clause[$n] = trim($this->excelData->value($documentClauses_firstRow + $rowcount,$n,self::$SHEET));
+          $clause[$n] = trim($this->excelData->value($documentClauses_firstRow + $rowcount, $n, self::$SHEET));
         }
     		
         $clauses[] = $clause;
-    		$rowcount++;
-    	}while($rowcount < $document['countClauses']);
+        $rowcount++;
+      } while($rowcount < $document['countClauses']);
     	
-    	$document['clauses'] = $clauses;
+      $document['clauses'] = $clauses;
     	
-    	$documentClauses_firstRow = $documentClauses_firstRow + $document['countClauses'];
+      $documentClauses_firstRow+= $document['countClauses'];
     }
     
     return $documents;
   }
   
+//  	save data in database
   public function saveData(&$documents)
   {
-//  	save data in database
-
   	$clauseHelper = new ClauseHelper();
   	
     foreach($documents as $documentName => &$document)
     {
-    	foreach($document['clauses'] as &$clause)
-    	{
-    		$clauseBody = new ClauseBody();
-    		
-    		$clauseNumber = "";
-    		
-    		$clauseBody->set('content', $clause[29]);
-    		
-    		$clauseNumber = $clause[30];
-    		$clauseParentNumber = $clause[35];
-    		
-    		$clauseBody->set('operative_phrase_id', $clauseHelper->retrieveClauseOperativePhrase($clause[31])); //operative phrase
-    		$clauseBody->set('information_type_id', $clauseHelper->retrieveClauseInformationType($clause[32])); //information type
-    		    		
+      foreach($document['clauses'] as &$clause)
+      {
+        $clauseBody = new ClauseBody();
+
+        $clauseNumber = "";
+
+        $clauseBody->set('content', $clause[29]);
+
+        $clauseNumber = $clause[30];
+        $clauseParentNumber = $clause[35];
+
+        $clauseBody->set('operative_phrase_id', $clauseHelper->retrieveClauseOperativePhrase($clause[31])); //operative phrase
+        $clauseBody->set('information_type_id', $clauseHelper->retrieveClauseInformationType($clause[32])); //information type
+
         $tags = array();
-    	  for($a = self::$FIRST_CLAUSETAGCOLUMN; $a < self::$FIRST_CLAUSETAGCOLUMN + self::$AMOUNT_CLAUSETAGCOLUMNS; $a++)
+        for($a = self::$FIRST_CLAUSETAGCOLUMN; $a < self::$FIRST_CLAUSETAGCOLUMN + self::$AMOUNT_CLAUSETAGCOLUMNS; $a++)
         {
-        	if($clause[$a] != "")
+          if($clause[$a] != "") {
             $tags[] = $clause[$a];
+          }
         }
-        
+
         $clauseBody->setTags($tags);
-        
-    		$clauseBody->save();
-    		
-    		//addressees
-    		for($i = self::$FIRST_ADDRESSEECOLUMN; $i < self::$FIRST_ADDRESSEECOLUMN + self::$AMOUNT_ADDRESSEECOLUMNS; $i++)
-    		{
-    			if($clause[$i] != "")
-    			{
-    		    $addressee = $clauseHelper->retrieveAddressee($clause[$i]);
-    			
-	    		  if($addressee != NULL)
-	    			{
-	    				$clauseAddressee = new ClauseAddressee();
-			        
-			        $clauseAddressee->clause_body_id = $clauseBody->get('id');
-			        $clauseAddressee->addressee_id = $addressee;
-			        
-			        $clauseAddressee->save();
-	    			}
-    			}
-    		}
-    		
-    		//last: overwrite clause value with body id and number for later referencing
-    		$clause = array($clauseBody->get('id') => array($clauseNumber,$clauseParentNumber));
-    	}
-    	
-    	$documentHelper = new DocumentHelper();
-    	
-    	$newDocument = new Document();
-    	
-    	$newDocument->set('name', $documentName);
-    	$newDocument->set('code', $document['code']);
-    	$newDocument->set('adoption_date', $this->createDate($document['data'][4]));
-    	$newDocument->set('organisation_id', $documentHelper->retrieveOrganisation($document['data'][5])); //organisation
+
+        $clauseBody->save();
+
+        //addressees
+        for($i = self::$FIRST_ADDRESSEECOLUMN; $i < self::$FIRST_ADDRESSEECOLUMN + self::$AMOUNT_ADDRESSEECOLUMNS; $i++)
+        {
+          if($clause[$i] != "")
+          {
+            $addressee = $clauseHelper->retrieveAddressee($clause[$i]);
+
+            if($addressee != NULL)
+            {
+              $clauseAddressee = new ClauseAddressee();
+
+              $clauseAddressee->clause_body_id = $clauseBody->get('id');
+              $clauseAddressee->addressee_id = $addressee;
+
+              $clauseAddressee->save();
+            }
+          }
+        }
+
+        //last: overwrite clause value with body id and number for later referencing
+        $clause = array($clauseBody->get('id') => array($clauseNumber, $clauseParentNumber));
+      }
+
+      $documentHelper = new DocumentHelper();
+
+      $newDocument = new Document();
+
+      $newDocument->set('name', $documentName);
+      $newDocument->set('code', $document['code']);
+      $newDocument->set('adoption_date', $this->createDate($document['data'][4]));
+      $newDocument->set('organisation_id', $documentHelper->retrieveOrganisation($document['data'][5])); //organisation
       $newDocument->set('documenttype_id', $documentHelper->retrieveDocumentType($document['data'][11])); //document type
-    	$newDocument->set('document_url', $document['data'][17]);
-    	
+      $newDocument->set('document_url', $document['data'][17]);
+
       $tags = array();
-      
+
       foreach($document['tags'] as $name)
       {
-        if($name != "")
+        if($name != "") {
           $tags[] = $name;
+        }
       }
 
       $tags = array_unique($tags);  
       $newDocument->setTags($tags);
       
-    	$newDocument->save();
+      $newDocument->save();
     	
-    	$document['id'] = $newDocument->get('id');
+      $document['id'] = $newDocument->get('id');
     }
 
     // find and save document parent relations
     foreach($documents as $documentA)
     {
-    	foreach($documents as $documentB)
+      foreach($documents as $documentB)
       {
         $compareResult = strcasecmp($documentA['code'], $documentB['followup']);
-	      if($compareResult == 0 && $documentA['code'] != "")
-	      {
-	      	// Document B is parent of Document A
-	      	$child = Doctrine_Core::getTable('Document')->find($documentA['id']);
+        if($compareResult == 0 && $documentA['code'] != "")
+        {
+          // Document B is parent of Document A
+          $child = Doctrine_Core::getTable('Document')->find($documentA['id']);
           $child->set('parent_document_id', $documentB['id']);
           $child->save();
-          
+
           // Clause Body Relations
           foreach($documentA['clauses'] as $keyA => $clauseOfA)
           {
-          	foreach($documentB['clauses'] as $keyB => $clauseOfB)
-          	{          		
-          		$id_a = key($clauseOfA);
-          		$id_b = key($clauseOfB);
-          		
-          		if($clauseOfA[$id_a][1] == $clauseOfB[$id_b][0] && $clauseOfA[$id_a][1] != "" && $clauseOfB[$id_b][0] != "")
-          		{
-          			// Clause Body B is parent of Clause Body A
-			          $child = Doctrine_Core::getTable('ClauseBody')->find($id_a);
-			          $child->set('parent_clause_body_id', $id_b);
-			          $child->save();
-          		}
-          	}
+            foreach($documentB['clauses'] as $keyB => $clauseOfB)
+            {
+              $id_a = key($clauseOfA);
+              $id_b = key($clauseOfB);
+
+              if($clauseOfA[$id_a][1] == $clauseOfB[$id_b][0]
+                && $clauseOfA[$id_a][1] != ""
+                && $clauseOfB[$id_b][0] != ""
+              ) {
+                // Clause Body B is parent of Clause Body A
+                $child = Doctrine_Core::getTable('ClauseBody')->find($id_a);
+                $child->set('parent_clause_body_id', $id_b);
+                $child->save();
+              }
+            }
           }
-	      }
+        }
       }
     }
     
     //save clause body document relation in Clause Table
     foreach($documents as $documentBody)
     {
-    	foreach($documentBody['clauses'] as $key => $clauseItem)
-    	{
-    		$clauseBodyId = key($clauseItem);
+      foreach($documentBody['clauses'] as $key => $clauseItem)
+      {
+        $clauseBodyId = key($clauseItem);
 
         $newClause = new Clause();
               
@@ -241,7 +251,7 @@ class excelSpreadsheetImport
         $newClause->document_id = $documentBody['id'];
               
         $newClause->save();
-    	}
+      }
     }
   }
   
@@ -270,9 +280,6 @@ class excelSpreadsheetImport
       
       return date("Y-m-d", $dateInUtcTimestamp);
     }
-    else
-    {
-      return NULL;
-    }
+    return null;
   }
 }

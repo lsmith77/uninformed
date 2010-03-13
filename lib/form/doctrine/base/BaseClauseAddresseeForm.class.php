@@ -16,8 +16,8 @@ abstract class BaseClauseAddresseeForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'             => new sfWidgetFormInputHidden(),
-      'clause_body_id' => new sfWidgetFormInputText(),
-      'addressee_id'   => new sfWidgetFormInputText(),
+      'clause_body_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseBody'), 'add_empty' => false)),
+      'addressee_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Addressee'), 'add_empty' => false)),
       'created_at'     => new sfWidgetFormDateTime(),
       'updated_at'     => new sfWidgetFormDateTime(),
       'author_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
@@ -26,8 +26,8 @@ abstract class BaseClauseAddresseeForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'             => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'clause_body_id' => new sfValidatorInteger(),
-      'addressee_id'   => new sfValidatorInteger(),
+      'clause_body_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseBody'))),
+      'addressee_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Addressee'))),
       'created_at'     => new sfValidatorDateTime(),
       'updated_at'     => new sfValidatorDateTime(),
       'author_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),

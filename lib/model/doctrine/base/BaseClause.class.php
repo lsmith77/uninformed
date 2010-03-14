@@ -42,7 +42,7 @@
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 7294 2010-03-02 17:59:20Z jwage $
  */
-abstract class BaseClause extends sfDoctrineRecord
+abstract class BaseClause extends MyBaseRecord
 {
     public function setTableDefinition()
     {

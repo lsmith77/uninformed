@@ -27,7 +27,7 @@
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 7294 2010-03-02 17:59:20Z jwage $
  */
-abstract class BaseCountryOrganisation extends sfDoctrineRecord
+abstract class BaseCountryOrganisation extends MyBaseRecord
 {
     public function setTableDefinition()
     {
@@ -133,8 +133,8 @@ abstract class BaseCountryOrganisation extends sfDoctrineRecord
         $temporal0 = new Doctrine_Template_Temporal(array(
              'unique_fields' => 
              array(
-              0 => 'document_id',
-              1 => 'country_id',
+              0 => 'country_id',
+              1 => 'organisation_id',
              ),
              ));
         $this->actAs($timestampable0);

@@ -27,7 +27,7 @@
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 7294 2010-03-02 17:59:20Z jwage $
  */
-abstract class BasesfGuardRememberKey extends sfDoctrineRecord
+abstract class BasesfGuardRememberKey extends MyBaseRecord
 {
     public function setTableDefinition()
     {

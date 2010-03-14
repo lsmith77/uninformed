@@ -12,6 +12,10 @@
  */
 class Organisation extends BaseOrganisation
 {
+    protected static $autoCompletable = array(
+        'name' => true,
+    );
+
     public function preSave($event) {
         $invoker = $event->getInvoker();
         $slug = $invoker->_get('name');

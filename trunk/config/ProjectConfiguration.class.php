@@ -13,6 +13,11 @@ class ProjectConfiguration extends sfProjectConfiguration
 
   public function configureDoctrine(Doctrine_Manager $manager)
   {
+    sfConfig::set('doctrine_model_builder_options',
+        array(
+//            'baseTableClassName' => 'MyBaseTable',
+            'baseClassName' => 'MyBaseRecord')
+    );
     $manager->registerExtension('Blameable');
     $manager->registerExtension('Taggable');
     $manager->registerExtension('Temporal');

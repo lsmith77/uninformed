@@ -14,7 +14,11 @@ class Clause extends BaseClause
 {
     public function preSave($event) {
         $invoker = $event->getInvoker();
-        $slug = $invoker->_get('Document')->_get('name');
+        $clauseOrdering = $invoker->_get('Document')->_get('clause_ordering');
+
+        $slug = $invoker->_get('Document')->_get('code');
+        $slug.= ' '.$invoker->_get('clause_body_id');
+        $slug.= ' '.(str_word_count($clauseOrdering, 0, '023456789')+1);
         $slug.= ' '.$invoker->_get('clause_number_information');
         $slug.= ' '.$invoker->_get('clause_number_subparagraph');
         $slug = Doctrine_Inflector::urlize($slug);
@@ -32,7 +36,8 @@ class Clause extends BaseClause
                 ->set('clause_ordering', "IF (clause_ordering IS NULL, '$id', CONCAT (clause_ordering, ',$id'))")
                 ->where('id = ?', $invoker->_get('Document')->_get('id'))
                 ->execute();
-            }
+        }
+        $invoker->_get('Document')->refresh();
     }
 
     public function getSlug() {

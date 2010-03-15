@@ -5,7 +5,7 @@ class autocompleteHelper {
     {
         $action->getResponse()->setContentType('application/json');
 
-        if (!$model::checkAutoComplete($model, $name)) {
+        if (!$model::checkAutoComplete($name)) {
             return $action->renderText(json_encode(false));
         }
 

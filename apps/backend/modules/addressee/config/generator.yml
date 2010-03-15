@@ -1,0 +1,27 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Addressee
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              addressee
+    plural:                addressee
+    route_prefix:          addressee
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        display: [=name, numberAddressedClauses]
+      filter:
+        display: [clause]
+        fields:
+          clause:
+            label: Filter by Clause
+            help: Type the clause number you want to filter by
+      form:    ~
+      edit:    ~
+      new:     ~

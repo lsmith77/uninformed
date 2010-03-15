@@ -32,4 +32,27 @@ class AddresseeTable extends Doctrine_Table
     
     return NULL;
   }
+  
+  /**
+   * Applies the clause attribute to a given query retrieving addressees.
+   *
+   * @param Doctrine_Query $query - query to have clause attribute applied.
+   * @param Integer $value - Clause ID
+   */
+  static public function applyClauseFilter($query, $value)
+  {
+    $rootAlias = $query->getRootAlias();
+    switch ($value)
+    {
+      case '0':
+        $query->where($rootAlias.'.quantity > '
+          .$rootAlias.'.quantity_alarm');
+        break;
+      case '1':
+        $query->where($rootAlias.'.quantity <= '
+          .$rootAlias.'.quantity_alarm');
+        break;
+    }
+    return $query;
+  }
 }

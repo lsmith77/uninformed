@@ -12,4 +12,8 @@
  */
 class Addressee extends BaseAddressee
 {
+	public function getNumberAddressedClauses()
+	{
+		return $this->getClauseAddressee()->count();
+	}
 }

@@ -1,3 +1,21 @@
+clause:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Clause
+    module:               clause
+    prefix_path:          /clauses
+    column:               id
+    with_wildcard_routes: true
+
+addressee:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Addressee
+    module:               addressee
+    prefix_path:          /addressee
+    column:               id
+    with_wildcard_routes: true
+
 organisation:
   class: sfDoctrineRouteCollection
   options:

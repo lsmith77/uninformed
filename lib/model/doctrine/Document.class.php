@@ -13,6 +13,10 @@
 class Document extends BaseDocument
 {
     protected $nameChange = false;
+    
+    protected static $autoCompletable = array(
+        'code' => true,
+    );
 
     public function preSave($event) {
         $invoker = $event->getInvoker();

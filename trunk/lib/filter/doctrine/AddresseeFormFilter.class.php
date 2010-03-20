@@ -16,33 +16,27 @@ class AddresseeFormFilter extends BaseAddresseeFormFilter
   	
   	sfContext::switchTo('backend');
   	
-  	//$this->widgetSchema['clauses_list']->setOption('renderer_class', 'sfWidgetFormDoctrineJQueryAutocompleter');
-    /*$this->widgetSchema['clauses_list']->setOption('renderer_options', array(
-      'model' => 'ClauseBody',
-      //'id' => 'findOneByOrganisationId',
-      'url'   => sfContext::getInstance()->getController()->genUrl('addressee/clauseBodyAutocomplete'),
-    ));*/
-  	
-  	$this->widgetSchema['clause'] = new sfWidgetFormDoctrineJQueryAutocompleter(
+  	$this->widgetSchema['document'] = new sfWidgetFormDoctrineJQueryAutocompleter(
       array(
-        'model' => 'Clause',
-        //'id' => 'findOneById',
-        'url'   => sfContext::getInstance()->getController()->genUrl('clause/autocomplete'),
+        'model' => 'Document',
+        'url'   => sfContext::getInstance()->getController()->genUrl('document/autocomplete'),
       )
   	);
+  	
+  	$this->validatorSchema['document'] = new sfValidatorPass ();
   }
   
   public function getFields()
   {
     $fields = parent::getFields();
-    $fields['clause'] = 'clause';
+    $fields['document'] = 'custom';
     
     return $fields;
   }
   
-	public function addClauseColumnQuery($query, $field, $value)
+	public function addDocumentColumnQuery($query, $field, $value)
 	{
 	  Doctrine::getTable('Addressee')
-	    ->applyClauseFilter($query, $value);
+	    ->applyDocumentFilter($query, $value);
 	}
 }

@@ -1,9 +1,18 @@
+document:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Document
+    module:               document
+    prefix_path:          /document
+    column:               id
+    with_wildcard_routes: true
+
 clause:
   class: sfDoctrineRouteCollection
   options:
     model:                Clause
     module:               clause
-    prefix_path:          /clauses
+    prefix_path:          /clause
     column:               id
     with_wildcard_routes: true
 

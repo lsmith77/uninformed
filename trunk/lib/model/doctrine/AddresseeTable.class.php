@@ -34,13 +34,15 @@ class AddresseeTable extends Doctrine_Table
   }
   
   /**
-   * Applies the clause attribute to a given query retrieving addressees.
+   * Applies the document attribute to a given query retrieving addressees.
    *
    * @param Doctrine_Query $query - query to have clause attribute applied.
    * @param Integer $value - Clause ID
    */
-  static public function applyClauseFilter($query, $value)
+  static public function applyDocumentFilter($query, $value)
   {
+  	
+    /* TODO: Return set of addressees related to chosen document
     $rootAlias = $query->getRootAlias();
     switch ($value)
     {
@@ -54,5 +56,6 @@ class AddresseeTable extends Doctrine_Table
         break;
     }
     return $query;
+    */
   }
 }

@@ -161,7 +161,7 @@ class excelSpreadsheetImport
           }
         }
 
-        $clauseBody->setTags($tags);
+        //$clauseBody->setTags($tags);
 
         $clauseBody->save();
 
@@ -194,10 +194,10 @@ class excelSpreadsheetImport
 
       $newDocument->set('name', $documentName);
       $newDocument->set('code', $document['code']);
-      $newDocument->set('adoption_date', $this->createDate($document['data'][$POS_DOCUMENT_ADOPTIONDATE]));
-      $newDocument->set('organisation_id', $documentHelper->retrieveOrganisation($document['data'][$POS_DOCUMENT_ORGANISATION])); //organisation
-      $newDocument->set('documenttype_id', $documentHelper->retrieveDocumentType($document['data'][$POS_DOCUMENT_DOCUMENTTYPE])); //document type
-      $newDocument->set('document_url', $document['data'][$POS_DOCUMENT_URL]);
+      $newDocument->set('adoption_date', $this->createDate($document['data'][self::$POS_DOCUMENT_ADOPTIONDATE]));
+      $newDocument->set('organisation_id', $documentHelper->retrieveOrganisation($document['data'][self::$POS_DOCUMENT_ORGANISATION])); //organisation
+      $newDocument->set('documenttype_id', $documentHelper->retrieveDocumentType($document['data'][self::$POS_DOCUMENT_DOCUMENTTYPE])); //document type
+      $newDocument->set('document_url', $document['data'][self::$POS_DOCUMENT_URL]);
 
       // Save tags of document
       $tags = array();
@@ -210,7 +210,7 @@ class excelSpreadsheetImport
       }
 
       $tags = array_unique($tags);  
-      $newDocument->setTags($tags);
+      //$newDocument->setTags($tags);
       
       $newDocument->save();
     	

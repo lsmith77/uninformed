@@ -5,7 +5,7 @@ abstract class MyBaseRecord extends sfDoctrineRecord
   protected static $autoCompletable = array();
 
   public static function checkAutoComplete($property) {
-    return !empty(self::$autoCompletable[$property]);
+    return !empty(static::$autoCompletable[$property]);
   }
 
   public function __toString() {

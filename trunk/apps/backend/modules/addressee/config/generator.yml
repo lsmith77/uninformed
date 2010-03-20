@@ -17,11 +17,11 @@ generator:
       list:
         display: [=name, numberAddressedClauses]
       filter:
-        display: [clause]
+        display: [document]
         fields:
-          clause:
-            label: Filter by Clause
-            help: Type the clause number you want to filter by
+          document:
+            label: Filter by Document
+            help: Type the document code you want to filter by
       form:    ~
       edit:    ~
       new:     ~

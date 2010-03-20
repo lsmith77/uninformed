@@ -4,12 +4,13 @@ class excelSpreadsheetImport
   private $excelData = NULL;
   
   private static $SHEET = 0;
-  
-  private static $AMOUNT_DOCUMENTCOLUMNS = 27;
-  private static $AMOUNT_CLAUSECOLUMNS = 23;
+  private static $FIRST_ROW = 2;
   
   private static $FIRST_DOCUMENTCOLUMN = 2;
   private static $FIRST_CLAUSECOLUMN = 29;
+  
+  private static $AMOUNT_DOCUMENTCOLUMNS = 27;
+  private static $AMOUNT_CLAUSECOLUMNS = 23;
   
   private static $AMOUNT_DOCUMENTTAGCOLUMNS = 11;
   private static $AMOUNT_CLAUSETAGCOLUMNS = 10;
@@ -17,15 +18,27 @@ class excelSpreadsheetImport
   private static $FIRST_DOCUMENTTAGCOLUMN = 18;
   private static $FIRST_CLAUSETAGCOLUMN = 42;
   
-  private static $FIRST_ROW = 2;
-  
-  private static $COLUMN_DOCUMENTTITLE = 2;
-  private static $COLUMN_DOCUMENTCODE = 3;
-  private static $COLUMN_DOCUMENTFOLLOWUP = 13;
-  
   private static $FIRST_ADDRESSEECOLUMN = 37;
   private static $AMOUNT_ADDRESSEECOLUMNS = 4;
   
+  /*
+   * Document and clause columns positions
+   */
+  private static $POS_DOCUMENT_TITLE = 2;
+  private static $POS_DOCUMENT_CODE = 3;
+  private static $POS_DOCUMENT_FOLLOWUP = 13;
+  
+  private static $POS_DOCUMENT_ADOPTIONDATE = 4;
+  private static $POS_DOCUMENT_ORGANISATION = 5;
+  private static $POS_DOCUMENT_DOCUMENTTYPE = 11;
+  private static $POS_DOCUMENT_URL = 17;
+  
+  private static $POS_CLAUSE_CONTENT = 29;
+  private static $POS_CLAUSE_NUMBER = 30;
+  private static $POS_CLAUSE_OPERATIVEPHRASE = 31;
+  private static $POS_CLAUSE_INFORMATIONTYPE = 32;
+  private static $POS_CLAUSE_PARENTNUMBER = 35;
+
   public function __construct() {}
   
   public function loadDataFromFile($file)
@@ -46,16 +59,16 @@ class excelSpreadsheetImport
     	
       for($j = self::$FIRST_DOCUMENTCOLUMN; $j < self::$FIRST_DOCUMENTCOLUMN + self::$AMOUNT_DOCUMENTCOLUMNS; $j++) //columns
       {
-        if($j == 4) { //excel date format data, adoption date column
+        if($j == self::$POS_DOCUMENT_ADOPTIONDATE) { //excel date format data, adoption date column
           $value = trim($this->excelData->raw($i, $j,self::$SHEET));
         } else {
           $value = trim($this->excelData->value($i, $j,self::$SHEET));
         }
-        if($j == self::$COLUMN_DOCUMENTTITLE) {
+        if($j == self::$POS_DOCUMENT_TITLE) {
           $title = $value;
-        } else if($j == self::$COLUMN_DOCUMENTCODE) {
+        } else if($j == self::$POS_DOCUMENT_CODE) {
           $code = $value;
-        } else if($j == self::$COLUMN_DOCUMENTFOLLOWUP) {
+        } else if($j == self::$POS_DOCUMENT_FOLLOWUP) {
           $followup = $value;
         } else if($j >= self::$FIRST_DOCUMENTTAGCOLUMN
           && $j < self::$FIRST_DOCUMENTTAGCOLUMN + self::$AMOUNT_DOCUMENTTAGCOLUMNS
@@ -131,14 +144,15 @@ class excelSpreadsheetImport
 
         $clauseNumber = "";
 
-        $clauseBody->set('content', $clause[29]);
+        $clauseBody->set('content', $clause[self::$POS_CLAUSE_CONTENT]);
 
-        $clauseNumber = $clause[30];
-        $clauseParentNumber = $clause[35];
+        $clauseNumber = $clause[self::$POS_CLAUSE_NUMBER];
+        $clauseParentNumber = $clause[self::$POS_CLAUSE_PARENTNUMBER];
 
-        $clauseBody->set('operative_phrase_id', $clauseHelper->retrieveClauseOperativePhrase($clause[31])); //operative phrase
-        $clauseBody->set('information_type_id', $clauseHelper->retrieveClauseInformationType($clause[32])); //information type
+        $clauseBody->set('operative_phrase_id', $clauseHelper->retrieveClauseOperativePhrase($clause[self::$POS_CLAUSE_OPERATIVEPHRASE])); //operative phrase
+        $clauseBody->set('information_type_id', $clauseHelper->retrieveClauseInformationType($clause[self::$POS_CLAUSE_INFORMATIONTYPE])); //information type
 
+        // Save tags of clause
         $tags = array();
         for($a = self::$FIRST_CLAUSETAGCOLUMN; $a < self::$FIRST_CLAUSETAGCOLUMN + self::$AMOUNT_CLAUSETAGCOLUMNS; $a++)
         {
@@ -180,11 +194,12 @@ class excelSpreadsheetImport
 
       $newDocument->set('name', $documentName);
       $newDocument->set('code', $document['code']);
-      $newDocument->set('adoption_date', $this->createDate($document['data'][4]));
-      $newDocument->set('organisation_id', $documentHelper->retrieveOrganisation($document['data'][5])); //organisation
-      $newDocument->set('documenttype_id', $documentHelper->retrieveDocumentType($document['data'][11])); //document type
-      $newDocument->set('document_url', $document['data'][17]);
+      $newDocument->set('adoption_date', $this->createDate($document['data'][$POS_DOCUMENT_ADOPTIONDATE]));
+      $newDocument->set('organisation_id', $documentHelper->retrieveOrganisation($document['data'][$POS_DOCUMENT_ORGANISATION])); //organisation
+      $newDocument->set('documenttype_id', $documentHelper->retrieveDocumentType($document['data'][$POS_DOCUMENT_DOCUMENTTYPE])); //document type
+      $newDocument->set('document_url', $document['data'][$POS_DOCUMENT_URL]);
 
+      // Save tags of document
       $tags = array();
 
       foreach($document['tags'] as $name)

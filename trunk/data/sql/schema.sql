@@ -50,7 +50,6 @@ CREATE TABLE sf_guard_remember_key (id INT AUTO_INCREMENT, user_id INT, remember
 CREATE TABLE sf_guard_user (id INT AUTO_INCREMENT, username VARCHAR(128) NOT NULL UNIQUE, algorithm VARCHAR(128) DEFAULT 'sha1' NOT NULL, salt VARCHAR(128), password VARCHAR(128), is_active TINYINT(1) DEFAULT '1', is_super_admin TINYINT(1) DEFAULT '0', last_login DATETIME, email_address VARCHAR(128) NOT NULL UNIQUE, type VARCHAR(255), excel_file_id INT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, deleted_at DATETIME, author_id INT, INDEX is_active_idx_idx (is_active), INDEX sf_guard_user_type_idx (type), INDEX author_id_idx (author_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
 CREATE TABLE sf_guard_user_group (user_id INT, group_id INT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(user_id, group_id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
 CREATE TABLE sf_guard_user_permission (user_id INT, permission_id INT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(user_id, permission_id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
-CREATE TABLE sf_guard_user_profile (id BIGINT AUTO_INCREMENT, author_id INT NOT NULL, INDEX author_id_idx (author_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 ENGINE = InnoDB;
 ALTER TABLE addressee_version ADD CONSTRAINT addressee_version_id_addressee_id FOREIGN KEY (id) REFERENCES addressee(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE addressee_version ADD CONSTRAINT addressee_version_author_id_sf_guard_user_id FOREIGN KEY (author_id) REFERENCES sf_guard_user(id);
 ALTER TABLE addressee ADD CONSTRAINT addressee_author_id_sf_guard_user_id FOREIGN KEY (author_id) REFERENCES sf_guard_user(id);
@@ -67,7 +66,7 @@ ALTER TABLE clause_addressee ADD CONSTRAINT clause_addressee_addressee_id_addres
 ALTER TABLE clause_body_version ADD CONSTRAINT clause_body_version_id_clause_body_id FOREIGN KEY (id) REFERENCES clause_body(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE clause_body_version ADD CONSTRAINT clause_body_version_author_id_sf_guard_user_id FOREIGN KEY (author_id) REFERENCES sf_guard_user(id);
 ALTER TABLE clause_body_taggable_tag ADD CONSTRAINT clause_body_taggable_tag_tag_id_taggable_tag_id FOREIGN KEY (tag_id) REFERENCES taggable_tag(id) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE clause_body_taggable_tag ADD CONSTRAINT clause_body_taggable_tag_id_clause_body_id FOREIGN KEY (id) REFERENCES clause_body(id);
+ALTER TABLE clause_body_taggable_tag ADD CONSTRAINT clause_body_taggable_tag_id_clause_body_id FOREIGN KEY (id) REFERENCES clause_body(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE clause_body ADD CONSTRAINT clause_body_parent_clause_body_id_clause_body_id FOREIGN KEY (parent_clause_body_id) REFERENCES clause_body(id);
 ALTER TABLE clause_body ADD CONSTRAINT clause_body_operative_phrase_id_clause_operative_phrase_id FOREIGN KEY (operative_phrase_id) REFERENCES clause_operative_phrase(id);
 ALTER TABLE clause_body ADD CONSTRAINT clause_body_information_type_id_clause_information_type_id FOREIGN KEY (information_type_id) REFERENCES clause_information_type(id);
@@ -103,7 +102,7 @@ ALTER TABLE country_organisation ADD CONSTRAINT country_organisation_author_id_s
 ALTER TABLE document_version ADD CONSTRAINT document_version_id_document_id FOREIGN KEY (id) REFERENCES document(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE document_version ADD CONSTRAINT document_version_author_id_sf_guard_user_id FOREIGN KEY (author_id) REFERENCES sf_guard_user(id);
 ALTER TABLE document_taggable_tag ADD CONSTRAINT document_taggable_tag_tag_id_taggable_tag_id FOREIGN KEY (tag_id) REFERENCES taggable_tag(id) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE document_taggable_tag ADD CONSTRAINT document_taggable_tag_id_document_id FOREIGN KEY (id) REFERENCES document(id);
+ALTER TABLE document_taggable_tag ADD CONSTRAINT document_taggable_tag_id_document_id FOREIGN KEY (id) REFERENCES document(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE document ADD CONSTRAINT document_parent_document_id_document_id FOREIGN KEY (parent_document_id) REFERENCES document(id);
 ALTER TABLE document ADD CONSTRAINT document_organisation_id_organisation_id FOREIGN KEY (organisation_id) REFERENCES organisation(id);
 ALTER TABLE document ADD CONSTRAINT document_documenttype_id_document_type_id FOREIGN KEY (documenttype_id) REFERENCES document_type(id);
@@ -125,7 +124,7 @@ ALTER TABLE document_type ADD CONSTRAINT document_type_author_id_sf_guard_user_i
 ALTER TABLE excel_file_version ADD CONSTRAINT excel_file_version_id_excel_file_id FOREIGN KEY (id) REFERENCES excel_file(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE excel_file_version ADD CONSTRAINT excel_file_version_author_id_sf_guard_user_id FOREIGN KEY (author_id) REFERENCES sf_guard_user(id);
 ALTER TABLE excel_file_taggable_tag ADD CONSTRAINT excel_file_taggable_tag_tag_id_taggable_tag_id FOREIGN KEY (tag_id) REFERENCES taggable_tag(id) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE excel_file_taggable_tag ADD CONSTRAINT excel_file_taggable_tag_id_excel_file_id FOREIGN KEY (id) REFERENCES excel_file(id);
+ALTER TABLE excel_file_taggable_tag ADD CONSTRAINT excel_file_taggable_tag_id_excel_file_id FOREIGN KEY (id) REFERENCES excel_file(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE excel_file ADD CONSTRAINT excel_file_author_id_sf_guard_user_id FOREIGN KEY (author_id) REFERENCES sf_guard_user(id);
 ALTER TABLE sf_guard_user ADD CONSTRAINT sf_guard_user_excel_file_id_excel_file_id FOREIGN KEY (excel_file_id) REFERENCES excel_file(id);
 ALTER TABLE sf_guard_user ADD CONSTRAINT sf_guard_user_author_id_sf_guard_user_id FOREIGN KEY (author_id) REFERENCES sf_guard_user(id);
@@ -153,4 +152,3 @@ ALTER TABLE sf_guard_user_group ADD CONSTRAINT sf_guard_user_group_user_id_sf_gu
 ALTER TABLE sf_guard_user_group ADD CONSTRAINT sf_guard_user_group_group_id_sf_guard_group_id FOREIGN KEY (group_id) REFERENCES sf_guard_group(id) ON DELETE CASCADE;
 ALTER TABLE sf_guard_user_permission ADD CONSTRAINT sf_guard_user_permission_user_id_sf_guard_user_id FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
 ALTER TABLE sf_guard_user_permission ADD CONSTRAINT sf_guard_user_permission_permission_id_sf_guard_permission_id FOREIGN KEY (permission_id) REFERENCES sf_guard_permission(id) ON DELETE CASCADE;
-ALTER TABLE sf_guard_user_profile ADD CONSTRAINT sf_guard_user_profile_author_id_sf_guard_user_id FOREIGN KEY (author_id) REFERENCES sf_guard_user(id);

@@ -17,8 +17,7 @@ class Clause extends BaseClause
         $clauseOrdering = $invoker->_get('Document')->_get('clause_ordering');
 
         $slug = $invoker->_get('Document')->_get('code');
-        $slug.= ' '.$invoker->_get('clause_body_id');
-        $slug.= ' '.(str_word_count($clauseOrdering, 0, '023456789')+1);
+        $slug.= ' '.(str_word_count($clauseOrdering, 0, '0123456789')+1);
         $slug.= ' '.$invoker->_get('clause_number_information');
         $slug.= ' '.$invoker->_get('clause_number_subparagraph');
         $slug = Doctrine_Inflector::urlize($slug);

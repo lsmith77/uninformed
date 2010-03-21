@@ -27,7 +27,7 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
       'updated_at'            => new sfWidgetFormDateTime(),
       'author_id'             => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'               => new sfWidgetFormInputText(),
-      'addressee_list'        => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Addressee')),
+      'addressees_list'       => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Addressee')),
       'tags_list'             => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag')),
     ));
 
@@ -44,7 +44,7 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
       'updated_at'            => new sfValidatorDateTime(),
       'author_id'             => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
       'version'               => new sfValidatorInteger(array('required' => false)),
-      'addressee_list'        => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Addressee', 'required' => false)),
+      'addressees_list'       => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Addressee', 'required' => false)),
       'tags_list'             => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag', 'required' => false)),
     ));
 
@@ -66,9 +66,9 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
   {
     parent::updateDefaultsFromObject();
 
-    if (isset($this->widgetSchema['addressee_list']))
+    if (isset($this->widgetSchema['addressees_list']))
     {
-      $this->setDefault('addressee_list', $this->object->Addressee->getPrimaryKeys());
+      $this->setDefault('addressees_list', $this->object->Addressees->getPrimaryKeys());
     }
 
     if (isset($this->widgetSchema['tags_list']))
@@ -80,20 +80,20 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
 
   protected function doSave($con = null)
   {
-    $this->saveAddresseeList($con);
+    $this->saveAddresseesList($con);
     $this->saveTagsList($con);
 
     parent::doSave($con);
   }
 
-  public function saveAddresseeList($con = null)
+  public function saveAddresseesList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['addressee_list']))
+    if (!isset($this->widgetSchema['addressees_list']))
     {
       // somebody has unset this widget
       return;
@@ -104,8 +104,8 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
       $con = $this->getConnection();
     }
 
-    $existing = $this->object->Addressee->getPrimaryKeys();
-    $values = $this->getValue('addressee_list');
+    $existing = $this->object->Addressees->getPrimaryKeys();
+    $values = $this->getValue('addressees_list');
     if (!is_array($values))
     {
       $values = array();
@@ -114,13 +114,13 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
     $unlink = array_diff($existing, $values);
     if (count($unlink))
     {
-      $this->object->unlink('Addressee', array_values($unlink));
+      $this->object->unlink('Addressees', array_values($unlink));
     }
 
     $link = array_diff($values, $existing);
     if (count($link))
     {
-      $this->object->link('Addressee', array_values($link));
+      $this->object->link('Addressees', array_values($link));
     }
   }
 

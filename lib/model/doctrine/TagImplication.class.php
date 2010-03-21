@@ -8,8 +8,9 @@
  * @package    uninformed
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
+ * @version    SVN: $Id: Builder.php 7380 2010-03-15 21:07:50Z jwage $
  */
 class TagImplication extends BaseTagImplication
 {
+
 }

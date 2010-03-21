@@ -35,7 +35,7 @@ class AddresseeFormFilter extends BaseAddresseeFormFilter
   }
   
 	public function addDocumentColumnQuery($query, $field, $value)
-	{
+	{	
 	  Doctrine::getTable('Addressee')
 	    ->applyDocumentFilter($query, $value);
 	}

@@ -34,28 +34,19 @@ class AddresseeTable extends Doctrine_Table
   }
   
   /**
-   * Applies the document attribute to a given query retrieving addressees.
+   * Applies the document to a given query retrieving addressees to be filtered.
    *
-   * @param Doctrine_Query $query - query to have clause attribute applied.
-   * @param Integer $value - Clause ID
+   * @param Doctrine_Query $query - query to have document attribute applied.
+   * @param Integer $value - Document ID
    */
   static public function applyDocumentFilter($query, $value)
   {
-  	
-    /* TODO: Return set of addressees related to chosen document
     $rootAlias = $query->getRootAlias();
-    switch ($value)
-    {
-      case '0':
-        $query->where($rootAlias.'.quantity > '
-          .$rootAlias.'.quantity_alarm');
-        break;
-      case '1':
-        $query->where($rootAlias.'.quantity <= '
-          .$rootAlias.'.quantity_alarm');
-        break;
-    }
-    return $query;
-    */
+    
+    $query->leftJoin($rootAlias.'.ClauseAddressee ca')
+      ->leftJoin('ca.Clause c')
+      ->where('c.document_id = ?', $value);
+    
+    return $query; 
   }
 }

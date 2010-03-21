@@ -42,11 +42,11 @@ class AddresseeTable extends Doctrine_Table
   static public function applyDocumentFilter($query, $value)
   {
     $rootAlias = $query->getRootAlias();
-    
-    $query->leftJoin($rootAlias.'.ClauseAddressee ca')
-      ->leftJoin('ca.Clause c')
+
+    $query->innerJoin($rootAlias.'.ClauseBodies cb')
+      ->innerJoin('cb.Clause c')
       ->where('c.document_id = ?', $value);
-    
-    return $query; 
+
+    return $query;
   }
 }

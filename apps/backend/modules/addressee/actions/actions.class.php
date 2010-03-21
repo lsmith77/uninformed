@@ -13,4 +13,8 @@ require_once dirname(__FILE__).'/../lib/addresseeGeneratorHelper.class.php';
  */
 class addresseeActions extends autoAddresseeActions
 {
+  public function executeAutocomplete($request)
+  {
+    return autocompleteHelper::executeAutocomplete($this, $request, 'Addressee', 'id');
+  }
 }

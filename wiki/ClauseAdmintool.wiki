@@ -5,7 +5,8 @@ The clause admintool will manage both the clause as well as document/clause rela
 == Details ==
 
  * List of all existing clauses with edit/delete buttons
- * Search filters with livesearch for clauses as well as documents
+ * Search filters with livesearch for clauses
+ * A separate "quick jump" livesearch form to directly jump to the edit page of that document entry
  * Button to create a new clause
  * Remove clause name, relevance and significants
  * Make import id non editable and show the name of the excel

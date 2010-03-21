@@ -161,7 +161,7 @@ class excelSpreadsheetImport
           }
         }
 
-        //$clauseBody->setTags($tags);
+        $clauseBody->setTags($tags);
 
         $clauseBody->save();
 
@@ -210,7 +210,7 @@ class excelSpreadsheetImport
       }
 
       $tags = array_unique($tags);  
-      //$newDocument->setTags($tags);
+      $newDocument->setTags($tags);
       
       $newDocument->save();
     	

@@ -15,23 +15,23 @@ abstract class BaseAddresseeForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'           => new sfWidgetFormInputHidden(),
-      'name'         => new sfWidgetFormInputText(),
-      'created_at'   => new sfWidgetFormDateTime(),
-      'updated_at'   => new sfWidgetFormDateTime(),
-      'author_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
-      'version'      => new sfWidgetFormInputText(),
-      'clauses_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'ClauseBody')),
+      'id'                 => new sfWidgetFormInputHidden(),
+      'name'               => new sfWidgetFormInputText(),
+      'created_at'         => new sfWidgetFormDateTime(),
+      'updated_at'         => new sfWidgetFormDateTime(),
+      'author_id'          => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
+      'version'            => new sfWidgetFormInputText(),
+      'clause_bodies_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'ClauseBody')),
     ));
 
     $this->setValidators(array(
-      'id'           => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'name'         => new sfValidatorString(array('max_length' => 255)),
-      'created_at'   => new sfValidatorDateTime(),
-      'updated_at'   => new sfValidatorDateTime(),
-      'author_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
-      'version'      => new sfValidatorInteger(array('required' => false)),
-      'clauses_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'ClauseBody', 'required' => false)),
+      'id'                 => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'name'               => new sfValidatorString(array('max_length' => 255)),
+      'created_at'         => new sfValidatorDateTime(),
+      'updated_at'         => new sfValidatorDateTime(),
+      'author_id'          => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
+      'version'            => new sfValidatorInteger(array('required' => false)),
+      'clause_bodies_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'ClauseBody', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('addressee[%s]');
@@ -52,28 +52,28 @@ abstract class BaseAddresseeForm extends BaseFormDoctrine
   {
     parent::updateDefaultsFromObject();
 
-    if (isset($this->widgetSchema['clauses_list']))
+    if (isset($this->widgetSchema['clause_bodies_list']))
     {
-      $this->setDefault('clauses_list', $this->object->Clauses->getPrimaryKeys());
+      $this->setDefault('clause_bodies_list', $this->object->ClauseBodies->getPrimaryKeys());
     }
 
   }
 
   protected function doSave($con = null)
   {
-    $this->saveClausesList($con);
+    $this->saveClauseBodiesList($con);
 
     parent::doSave($con);
   }
 
-  public function saveClausesList($con = null)
+  public function saveClauseBodiesList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['clauses_list']))
+    if (!isset($this->widgetSchema['clause_bodies_list']))
     {
       // somebody has unset this widget
       return;
@@ -84,8 +84,8 @@ abstract class BaseAddresseeForm extends BaseFormDoctrine
       $con = $this->getConnection();
     }
 
-    $existing = $this->object->Clauses->getPrimaryKeys();
-    $values = $this->getValue('clauses_list');
+    $existing = $this->object->ClauseBodies->getPrimaryKeys();
+    $values = $this->getValue('clause_bodies_list');
     if (!is_array($values))
     {
       $values = array();
@@ -94,13 +94,13 @@ abstract class BaseAddresseeForm extends BaseFormDoctrine
     $unlink = array_diff($existing, $values);
     if (count($unlink))
     {
-      $this->object->unlink('Clauses', array_values($unlink));
+      $this->object->unlink('ClauseBodies', array_values($unlink));
     }
 
     $link = array_diff($values, $existing);
     if (count($link))
     {
-      $this->object->link('Clauses', array_values($link));
+      $this->object->link('ClauseBodies', array_values($link));
     }
   }
 

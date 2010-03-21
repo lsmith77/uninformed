@@ -62,4 +62,8 @@ class Document extends BaseDocument
     public function getSlug() {
         return $this->_get('id').'-'.$this->_get('slug');
     }
+
+    public function __toString() {
+        return $this->_get('code');
+    }
 }

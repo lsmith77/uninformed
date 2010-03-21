@@ -16,8 +16,11 @@ generator:
       fields:  ~
       list:
         display: [=name, numberAddressedClauses]
+        object_actions:
+          _edit: ~
+          _delete: ~
       filter:
-        display: [document]
+        display: [name, document]
         fields:
           document:
             label: Filter by Document

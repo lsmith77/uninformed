@@ -12,8 +12,12 @@
  */
 class Addressee extends BaseAddressee
 {
+	protected static $autoCompletable = array(
+    'name' => true,
+  );
+	
 	public function getNumberAddressedClauses()
 	{
-		return $this->getClauseAddressee()->count();
+		return $this->getClauseBodies()->count();
 	}
 }

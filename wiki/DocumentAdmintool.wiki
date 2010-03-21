@@ -5,7 +5,8 @@ The document admintool will manage both the documents as well as voting and docu
 == Details ==
 
  * List of all existing documents with edit/delete buttons
- * Search filters with livesearch for documents as well as clauses
+ * Search filters with livesearch for clauses
+ * A separate "quick jump" livesearch form to directly jump to the edit page of that document entry
  * Button to create a new document
  * Support for managing document/clause relations (see below)
  * min_ratification_count (integer, optional)

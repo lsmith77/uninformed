@@ -13,17 +13,15 @@
  * @property clob $public_comment
  * @property integer $parent_clause_body_id
  * @property enum $status
- * @property Addressee $Addressees
+ * @property Doctrine_Collection $Addressees
  * @property ClauseBody $ClauseBodyParent
  * @property ClauseProcess $ClauseProcess
  * @property ClauseInformationType $ClauseInformationType
  * @property ClauseOperativePhrase $ClauseOperativePhrase
- * @property Doctrine_Collection $Addressee
  * @property Doctrine_Collection $DocumentClauseRelation
  * @property Doctrine_Collection $Clause
  * @property Doctrine_Collection $Subclauses
  * @property Doctrine_Collection $ClauseReservation
- * @property Doctrine_Collection $ClauseAddressee
  * 
  * @method integer               getId()                     Returns the current record's "id" value
  * @method clob                  getContent()                Returns the current record's "content" value
@@ -33,17 +31,15 @@
  * @method clob                  getPublicComment()          Returns the current record's "public_comment" value
  * @method integer               getParentClauseBodyId()     Returns the current record's "parent_clause_body_id" value
  * @method enum                  getStatus()                 Returns the current record's "status" value
- * @method Addressee             getAddressees()             Returns the current record's "Addressees" value
+ * @method Doctrine_Collection   getAddressees()             Returns the current record's "Addressees" collection
  * @method ClauseBody            getClauseBodyParent()       Returns the current record's "ClauseBodyParent" value
  * @method ClauseProcess         getClauseProcess()          Returns the current record's "ClauseProcess" value
  * @method ClauseInformationType getClauseInformationType()  Returns the current record's "ClauseInformationType" value
  * @method ClauseOperativePhrase getClauseOperativePhrase()  Returns the current record's "ClauseOperativePhrase" value
- * @method Doctrine_Collection   getAddressee()              Returns the current record's "Addressee" collection
  * @method Doctrine_Collection   getDocumentClauseRelation() Returns the current record's "DocumentClauseRelation" collection
  * @method Doctrine_Collection   getClause()                 Returns the current record's "Clause" collection
  * @method Doctrine_Collection   getSubclauses()             Returns the current record's "Subclauses" collection
  * @method Doctrine_Collection   getClauseReservation()      Returns the current record's "ClauseReservation" collection
- * @method Doctrine_Collection   getClauseAddressee()        Returns the current record's "ClauseAddressee" collection
  * @method ClauseBody            setId()                     Sets the current record's "id" value
  * @method ClauseBody            setContent()                Sets the current record's "content" value
  * @method ClauseBody            setInformationTypeId()      Sets the current record's "information_type_id" value
@@ -52,17 +48,15 @@
  * @method ClauseBody            setPublicComment()          Sets the current record's "public_comment" value
  * @method ClauseBody            setParentClauseBodyId()     Sets the current record's "parent_clause_body_id" value
  * @method ClauseBody            setStatus()                 Sets the current record's "status" value
- * @method ClauseBody            setAddressees()             Sets the current record's "Addressees" value
+ * @method ClauseBody            setAddressees()             Sets the current record's "Addressees" collection
  * @method ClauseBody            setClauseBodyParent()       Sets the current record's "ClauseBodyParent" value
  * @method ClauseBody            setClauseProcess()          Sets the current record's "ClauseProcess" value
  * @method ClauseBody            setClauseInformationType()  Sets the current record's "ClauseInformationType" value
  * @method ClauseBody            setClauseOperativePhrase()  Sets the current record's "ClauseOperativePhrase" value
- * @method ClauseBody            setAddressee()              Sets the current record's "Addressee" collection
  * @method ClauseBody            setDocumentClauseRelation() Sets the current record's "DocumentClauseRelation" collection
  * @method ClauseBody            setClause()                 Sets the current record's "Clause" collection
  * @method ClauseBody            setSubclauses()             Sets the current record's "Subclauses" collection
  * @method ClauseBody            setClauseReservation()      Sets the current record's "ClauseReservation" collection
- * @method ClauseBody            setClauseAddressee()        Sets the current record's "ClauseAddressee" collection
  * 
  * @package    uninformed
  * @subpackage model
@@ -122,9 +116,10 @@ abstract class BaseClauseBody extends MyBaseRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Addressee as Addressees', array(
-             'local' => 'id',
-             'foreign' => 'id'));
+        $this->hasMany('Addressee as Addressees', array(
+             'refClass' => 'ClauseAddressee',
+             'local' => 'clause_body_id',
+             'foreign' => 'addressee_id'));
 
         $this->hasOne('ClauseBody as ClauseBodyParent', array(
              'local' => 'parent_clause_body_id',
@@ -142,11 +137,6 @@ abstract class BaseClauseBody extends MyBaseRecord
              'local' => 'operative_phrase_id',
              'foreign' => 'id'));
 
-        $this->hasMany('Addressee', array(
-             'refClass' => 'ClauseAddressee',
-             'local' => 'id',
-             'foreign' => 'id'));
-
         $this->hasMany('DocumentClauseRelation', array(
              'local' => 'id',
              'foreign' => 'related_clause_body_id'));
@@ -160,10 +150,6 @@ abstract class BaseClauseBody extends MyBaseRecord
              'foreign' => 'parent_clause_body_id'));
 
         $this->hasMany('ClauseReservation', array(
-             'local' => 'id',
-             'foreign' => 'clause_body_id'));
-
-        $this->hasMany('ClauseAddressee', array(
              'local' => 'id',
              'foreign' => 'clause_body_id'));
 

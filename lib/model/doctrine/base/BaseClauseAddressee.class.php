@@ -8,19 +8,13 @@
  * @property integer $id
  * @property integer $clause_body_id
  * @property integer $addressee_id
- * @property ClauseBody $ClauseBody
- * @property Addressee $Addressee
  * 
  * @method integer         getId()             Returns the current record's "id" value
  * @method integer         getClauseBodyId()   Returns the current record's "clause_body_id" value
  * @method integer         getAddresseeId()    Returns the current record's "addressee_id" value
- * @method ClauseBody      getClauseBody()     Returns the current record's "ClauseBody" value
- * @method Addressee       getAddressee()      Returns the current record's "Addressee" value
  * @method ClauseAddressee setId()             Sets the current record's "id" value
  * @method ClauseAddressee setClauseBodyId()   Sets the current record's "clause_body_id" value
  * @method ClauseAddressee setAddresseeId()    Sets the current record's "addressee_id" value
- * @method ClauseAddressee setClauseBody()     Sets the current record's "ClauseBody" value
- * @method ClauseAddressee setAddressee()      Sets the current record's "Addressee" value
  * 
  * @package    uninformed
  * @subpackage model
@@ -66,14 +60,6 @@ abstract class BaseClauseAddressee extends MyBaseRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('ClauseBody', array(
-             'local' => 'clause_body_id',
-             'foreign' => 'id'));
-
-        $this->hasOne('Addressee', array(
-             'local' => 'addressee_id',
-             'foreign' => 'id'));
-
         $timestampable0 = new Doctrine_Template_Timestampable();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'default' => NULL,

@@ -110,10 +110,10 @@ Addressee:
       type: string(255)
       notnull: true
   relations:
-    Clauses:
+    ClauseBodies:
       class: ClauseBody
-      local: id
-      foreign: id
+      local: addressee_id
+      foreign: clause_body_id
       refClass: ClauseAddressee
 
 LegalValue:
@@ -374,14 +374,9 @@ ClauseBody:
   relations:
     Addressees:
       class: Addressee
-      local: id
-      foreign: id
-      foreignAlias: ClauseAddressee
-    #Tags:
-    #  class: Tag
-    #  local: id
-    #  foreign: id
-    #  foreignAlias: Tags
+      local: clause_body_id
+      foreign: addressee_id
+      refClass: ClauseAddressee
     ClauseBodyParent:
       class: ClauseBody
       local: parent_clause_body_id
@@ -568,25 +563,7 @@ ClauseAddressee:
     addressee_id:
       type: integer(4)
       notnull: true
-  relations:
-    ClauseBody:
-      local: clause_body_id
-      foreign: id
-      foreignAlias: ClauseAddressees
-    Addressee:
-      local: addressee_id
-      foreign: id
-      foreignAlias: ClauseAddressees
   indexes:
     mapping:
       fields: [clause_body_id, addressee_id]
       type: unique
-  relations:
-    ClauseBody:
-      class: ClauseBody
-      local: clause_body_id
-      foreign: id
-    Addressee:
-      class: Addressee
-      local: addressee_id
-      foreign: id

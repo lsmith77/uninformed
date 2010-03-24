@@ -158,6 +158,8 @@ abstract class BaseDocument extends MyBaseRecord
               3 => 'inactive',
               4 => 'active',
              ),
+             'default' => 'draft',
+             'notnull' => true,
              ));
 
         $this->option('collation', 'utf8_general_ci');

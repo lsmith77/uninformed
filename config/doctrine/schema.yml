@@ -215,6 +215,8 @@ Document:
     status:
       type: enum
       values: [draft, review, reviewed, inactive, active]
+      default: draft
+      notnull: true
   relations:
     Parent:
       class: Document
@@ -376,7 +378,9 @@ ClauseBody:
       type: integer(4)
     status:
       type: enum
-      values: [draft, in_review, reviewed, inactive, active]
+      values: [draft, review, reviewed, inactive, active]
+      default: draft
+      notnull: true
   relations:
     Addressees:
       class: Addressee

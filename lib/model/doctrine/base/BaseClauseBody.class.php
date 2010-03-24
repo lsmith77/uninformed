@@ -101,11 +101,13 @@ abstract class BaseClauseBody extends MyBaseRecord
              'values' => 
              array(
               0 => 'draft',
-              1 => 'in_review',
+              1 => 'review',
               2 => 'reviewed',
               3 => 'inactive',
               4 => 'active',
              ),
+             'default' => 'draft',
+             'notnull' => true,
              ));
 
         $this->option('collation', 'utf8_general_ci');

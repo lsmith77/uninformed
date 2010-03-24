@@ -82,7 +82,9 @@ Import:
 ExcelFile:
   actAs:
     <<: *actAs
-    Taggable: ~
+    Taggable:
+      builderOptions:
+        baseClassName: MyBaseRecord
   columns:
     id:
       type: integer(4)
@@ -172,7 +174,9 @@ DocumentType:
 Document:
   actAs:
     <<: *actAs
-    Taggable: ~
+    Taggable:
+      builderOptions:
+        baseClassName: MyBaseRecord
   columns:
     id:
       type: integer(4)
@@ -350,7 +354,9 @@ Clause:
 ClauseBody:
   actAs:
     <<: *actAs
-    Taggable: ~
+    Taggable:
+      builderOptions:
+        baseClassName: MyBaseRecord
   columns:
     id:
       type: integer(4)

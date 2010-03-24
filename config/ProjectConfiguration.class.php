@@ -7,16 +7,23 @@ class ProjectConfiguration extends sfProjectConfiguration
 {
   public function setup()
   {
-    $this->enablePlugins('sfDoctrinePlugin', 'sfDoctrineGuardPlugin', 'sfDoctrineGuardExtraPlugin');
-    $this->enablePlugins('sfFormExtraPlugin');
+    $this->enablePlugins(
+      'sfDoctrinePlugin',
+      'sfDoctrineGuardPlugin',
+      'sfDoctrineGuardExtraPlugin',
+      'sfFormExtraPlugin',
+      'sfAdminThemejRollerPlugin',
+      'sfJqueryReloadedPlugin'
+    );
   }
 
   public function configureDoctrine(Doctrine_Manager $manager)
   {
     sfConfig::set('doctrine_model_builder_options',
-        array(
-//            'baseTableClassName' => 'MyBaseTable',
-            'baseClassName' => 'MyBaseRecord')
+      array(
+//        'baseTableClassName' => 'MyBaseTable',
+        'baseClassName' => 'MyBaseRecord'
+      )
     );
     $manager->registerExtension('Blameable');
     $manager->registerExtension('Taggable');

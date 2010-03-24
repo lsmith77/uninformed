@@ -130,7 +130,12 @@ abstract class BaseExcelFile extends MyBaseRecord
              ),
              ));
         $versionable0->addChild($blameable1);
-        $taggable0 = new Doctrine_Template_Taggable();
+        $taggable0 = new Doctrine_Template_Taggable(array(
+             'builderOptions' => 
+             array(
+              'baseClassName' => 'MyBaseRecord',
+             ),
+             ));
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);

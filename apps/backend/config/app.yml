@@ -10,7 +10,7 @@ all:
     resize_mode:                  thumbnail
     site:                         UN-informed.org
     include_path:                 true
-    include_jquery_no_conflict:   false
+    include_jquery_no_conflict:   true
     logout:                       true
     login_route:                  @sf_guard_signin
     logout_route:                 @sf_guard_signout

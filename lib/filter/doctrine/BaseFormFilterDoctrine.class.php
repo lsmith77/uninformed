@@ -12,5 +12,12 @@ abstract class BaseFormFilterDoctrine extends sfFormFilterDoctrine
 {
   public function setup()
   {
+    foreach ($this->widgetSchema->getFields() as $name => $widget) {
+      if ($widget instanceof sfWidgetFormFilterDate) {
+        $this->widgetSchema[$name] = new sfWidgetFormJQueryDate(array(
+//          'image'=>'/images/calendar.gif',
+        ));
+      }
+    }
   }
 }

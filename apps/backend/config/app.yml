@@ -2,4 +2,38 @@
 # http://www.symfony-project.org/reference/1_4/en/11-App
 
 # default values
-#all:
+all:
+  sf_admin_dash:
+    web_dir:                      /sfAdminDashPlugin
+    image_dir:                    /sfAdminDashPlugin/images/icons/
+    default_image:                config.png
+    resize_mode:                  thumbnail
+    site:                         UN-informed.org
+    include_path:                 true
+    include_jquery_no_conflict:   false
+    logout:                       true
+    login_route:                  @sf_guard_signin
+    logout_route:                 @sf_guard_signout
+    categories:
+      "Content Management":
+        credentials:      [admin]
+        items:
+          Addressees:
+            url:    addressee
+          Organisations:
+            url:    organisation
+          "Excelfile Upload":
+            url:    excel_file
+          Documents:
+            url:    document
+          Clause:
+            url:    clause
+      "User Management":
+        credentials:      [superadmin]
+        items:
+          User:
+            url:    sf_guard_user
+          Groups:
+            url:    sf_guard_group
+          Permissions:
+            url:    sf_guard_perm

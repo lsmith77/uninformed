@@ -34,7 +34,7 @@ all:
     # Enable the database manager
     use_database:           true
     
-    enabled_modules:      [default, sfGuardAuth, sfGuardGroup, sfGuardUser, sfGuardPermission, sfGuardForgotPassword]
+    enabled_modules:      [default, sfGuardAuth, sfGuardGroup, sfGuardUser, sfGuardPermission, sfGuardForgotPassword, sfAdminDash]
 
     sf_guard_plugin:
       routes_register: false

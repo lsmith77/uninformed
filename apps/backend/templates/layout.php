@@ -18,31 +18,10 @@
 </h1>
 </div>
 
-<div id="menu">
-<ul>
-  <li><?php echo link_to('Excel Files', '@excel_file') ?></li>
-  <li>|</li>
-  <li><?php echo link_to('Addressees', '@addressee') ?></li>
-  <li><?php echo link_to('Documents', '@document') ?></li>
-  <li><?php echo link_to('Clauses', '@clause') ?></li>
-  <li><?php echo link_to('Organisations', '@organisation') ?></li>
-<?php if ($sf_user->isSuperAdmin()) { ?>
-  <li>|</li>
-  <li><?php echo link_to('User admin', '@sf_guard_user') ?></li>
-  <li><?php echo link_to('Group admin', '@sf_guard_group') ?></li>
-  <li><?php echo link_to('Perm admin', '@sf_guard_perm') ?></li>
-<?php } ?>
-  <li>|</li>
-<?php if ($sf_user->isAuthenticated()) { ?>
-  <li>|</li>
-  <li><?php echo link_to('Logout', '@sf_guard_signout') ?></li>
-<?php } else {?>
-  <li><?php echo link_to('Login', '@sf_guard_signin') ?></li>
-<?php } ?>
-</ul>
-</div>
-
+<?php include_component('sfAdminDash','header'); ?>
 <div id="content"><?php echo $sf_content ?></div>
+<?php include_partial('sfAdminDash/footer'); ?>
+
 </div>
 </body>
 </html>

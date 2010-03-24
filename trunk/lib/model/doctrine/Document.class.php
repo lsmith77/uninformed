@@ -64,6 +64,6 @@ class Document extends BaseDocument
     }
 
     public function __toString() {
-        return $this->_get('code');
+        return (string)$this->_get('code');
     }
 }

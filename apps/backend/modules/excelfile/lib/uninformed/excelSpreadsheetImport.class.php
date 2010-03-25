@@ -134,7 +134,6 @@ class excelSpreadsheetImport
 //  	save data in database
   public function saveData($excelFileId, &$documents)
   {
-    // TODO: create a new user and set the blame_id flash variable\
     $importuser = new sfGuardUser();
     $importuser->username = $importuser->email_address = 'import-'.(string)microtime(true);
     $importuser->is_active = false;

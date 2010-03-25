@@ -18,10 +18,13 @@ class excelfileActions extends autoExcelfileActions
     $excelFileId = $request->getParameter('id');
     $excelFileData = Doctrine::getTable('ExcelFile')->findById($excelFileId)->getFirst();
 
-    $import = new excelSpreadsheetImport();
-    $this->documents = $import->loadDataFromFile($excelFileData['file']);
+    $this->documents = null;
+    if ($excelFileData) {
+        $import = new excelSpreadsheetImport();
+        $this->documents = $import->loadDataFromFile($excelFileData['file']);
+        $import->saveData($this->documents);
+    }
 
-    $import->saveData($this->documents);
 //    $this->redirect('excel_file');
   }
 	

@@ -332,6 +332,9 @@ Clause:
     clause_body_id:
       type: integer(4)
       notnull: true
+    clause_number:
+      type: integer(4)
+      notnull: true
     clause_number_information:
       type: string(255)
     clause_number_subparagraph:

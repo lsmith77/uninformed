@@ -12,16 +12,27 @@
  */
 class Clause extends BaseClause
 {
-    public function preSave($event) {
-        $invoker = $event->getInvoker();
-        $clauseOrdering = $invoker->_get('Document')->_get('clause_ordering');
+    protected static $autoCompletable = array(
+        'slug' => true,
+    );
 
-        $slug = $invoker->_get('Document')->_get('code');
-        $slug.= ' '.(str_word_count($clauseOrdering, 0, '0123456789')+1);
-        $slug.= ' '.$invoker->_get('clause_number_information');
-        $slug.= ' '.$invoker->_get('clause_number_subparagraph');
-        $slug = Doctrine_Inflector::urlize($slug);
-        $invoker->_set('slug', $slug);
+    public function preSave($event) {
+        if (!$this->exists()) {
+            $invoker = $event->getInvoker();
+            $clauseOrdering = $invoker->_get('Document')->_get('clause_ordering');
+
+            $invoker->_set('clause_number', (str_word_count($clauseOrdering, 0, '0123456789')+1));
+
+            $slug = $invoker->_get('Document')->_get('code');
+            $slug.= ' '.$invoker->_get('clause_number');
+            $slug.= ' '.$invoker->_get('clause_number_information');
+            $slug.= ' '.$invoker->_get('clause_number_subparagraph');
+            if ($invoker->_get('ClauseBody')->_get('ClauseInformationType')) {
+                $slug.= ' '.$invoker->_get('ClauseBody')->_get('ClauseInformationType')->_get('name');
+            }
+            $slug = Doctrine_Inflector::urlize($slug);
+            $invoker->_set('slug', $slug);
+        }
     }
 
     public function postSave($event) {

@@ -22,7 +22,7 @@ class excelfileActions extends autoExcelfileActions
     if ($excelFileData) {
         $import = new excelSpreadsheetImport();
         $this->documents = $import->loadDataFromFile($excelFileData['file']);
-        $import->saveData($this->documents);
+        $import->saveData($excelFileId, $this->documents);
     }
 
 //    $this->redirect('excel_file');

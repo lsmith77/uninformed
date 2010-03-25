@@ -132,9 +132,28 @@ class excelSpreadsheetImport
   }
   
 //  	save data in database
-  public function saveData(&$documents)
+  public function saveData($excelFileId, &$documents)
   {
-  	$clauseHelper = new ClauseHelper();
+    // TODO: create a new user and set the blame_id flash variable\
+    $importuser = new sfGuardUser();
+    $importuser->username = $importuser->email_address = 'import-'.(string)microtime(true);
+    $importuser->is_active = false;
+    $importuser->is_super_admin = false;
+    $importuser->excel_file_id = $excelFileId;
+    $importuser->save();
+
+    $context = sfContext::getInstance();
+    if ($context) {
+        $user = $context->getUser();
+        if ($user) {
+            $user->setFlash('blame_id', $importuser);
+        }
+    }
+    if (empty($user)) {
+        throw new Exception('Could not get current user');
+    }
+
+    $clauseHelper = new ClauseHelper();
   	
     foreach($documents as $documentName => &$document)
     {

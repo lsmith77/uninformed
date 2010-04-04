@@ -291,6 +291,32 @@ DocumentClauseRelation:
       fields: [document_id, related_clause_body_id]
       type: unique
 
+DocumentReservation:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    document_id:
+      type: integer(4)
+    country_id:
+      type: integer(4)
+    reservation:
+      type: clob
+  relations:
+    Document:
+      class: Document
+      local: document_id
+      foreign: id
+    Country:
+      local: country_id
+      foreign: id
+      foreignAlias: Countries
+  indexes:
+    mapping:
+      fields: [document_id, country_id]
+      type: unique
+
 ClauseClauseRelation:
   columns:
     id:

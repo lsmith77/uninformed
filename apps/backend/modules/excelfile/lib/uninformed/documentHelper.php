@@ -3,49 +3,65 @@ class DocumentHelper
 {
   public function retrieveOrganisation($name)
   {
-    //Retrieve list of existing organisations
-    $organisations = Doctrine::getTable('Organisation')->getAllOrganisations();
-        
-    foreach($organisations as $organisation)
+    $organisation = Doctrine::getTable('Organisation')->retrieveOrganisationIdByName($name);
+  
+    if($organisation != NULL)
     {
-      if(strCaseCmp($name,$organisation['name']) == 0)
-      {
-        return $organisation['id'];
-      }
-      else
-      {
-        // pass $foundPhraseInList = false;
-      }
+      return $organisation;
     }
-    
-    $organisation = new Organisation();  
-    $organisation->set('name', $name);
-    $organisation->save();
-    
-    return $organisation->get('id');
+    else
+    {
+      $organisation = new Organisation();  
+      $organisation->set('name', $name);
+      $organisation->save();
+      
+      return $organisation->get('id');
+    }
   }
   
-  public function retrieveDocumentType($name)
+  public function retrieveDocumentType($name, $legalValue)
   {
-    //Retrieve list of existing documentTypes
-    $documentTypes = Doctrine::getTable('DocumentType')->getAllDocumentTypes();
-        
-    foreach($documentTypes as $documentType)
+	  //$documentType = Doctrine::getTable('DocumentType')->retrieveDocumentTypeIdByName($name);
+	  
+	  $q = Doctrine_Query::create()
+    ->select('dt.id, dt.legalvalue_id')
+    ->from('DocumentType dt');
+
+    $documentType = $q->fetchOne();
+	
+    if($documentType != false)
     {
-      if(strCaseCmp($name,$documentType['name']) == 0)
-      {
-        return $documentType['id'];
-      }
-      else
-      {
-        // pass $foundPhraseInList = false;
-      }
+    	if($legalValue == $documentType['legalvalue_id'])
+    	{
+    		return $documentType['id'];
+    	}
+    	//else
     }
+    //else
     
     $documentType = new DocumentType();  
     $documentType->set('name', $name);
+    $documentType->set('legalvalue_id', $legalValue);
     $documentType->save();
-    
+      
     return $documentType->get('id');
+  }
+  
+  public function retrieveLegalValue($name)
+  {
+    $legalValue = Doctrine::getTable('LegalValue')->retrieveLegalValueIdByName($name);
+
+    if($legalValue != NULL)
+    {
+    	return $legalValue;
+    }
+    else
+    {
+    	$legalValue = new LegalValue();  
+	    $legalValue->set('name', $name);
+	    $legalValue->save();
+	    
+	    return $legalValue->get('id');
+    }
   }
 }

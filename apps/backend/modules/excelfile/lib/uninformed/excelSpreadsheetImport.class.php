@@ -30,6 +30,7 @@ class excelSpreadsheetImport
   
   private static $POS_DOCUMENT_ADOPTIONDATE = 4;
   private static $POS_DOCUMENT_ORGANISATION = 5;
+  private static $POS_DOCUMENT_LEGALVALUE = 10;
   private static $POS_DOCUMENT_DOCUMENTTYPE = 11;
   private static $POS_DOCUMENT_URL = 17;
   
@@ -214,7 +215,12 @@ class excelSpreadsheetImport
       $newDocument->set('code', $document['code']);
       $newDocument->set('adoption_date', $this->createDate($document['data'][self::$POS_DOCUMENT_ADOPTIONDATE]));
       $newDocument->set('organisation_id', $documentHelper->retrieveOrganisation($document['data'][self::$POS_DOCUMENT_ORGANISATION])); //organisation
-      $newDocument->set('documenttype_id', $documentHelper->retrieveDocumentType($document['data'][self::$POS_DOCUMENT_DOCUMENTTYPE])); //document type
+      
+      $newDocument->set('documenttype_id', $documentHelper
+        ->retrieveDocumentType(
+          $document['data'][self::$POS_DOCUMENT_DOCUMENTTYPE],
+          $documentHelper->retrieveLegalValue($document['data'][self::$POS_DOCUMENT_LEGALVALUE])
+        )); //document type
       $newDocument->set('document_url', $document['data'][self::$POS_DOCUMENT_URL]);
 
       // Save tags of document

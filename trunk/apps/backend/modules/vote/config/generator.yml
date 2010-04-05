@@ -1,0 +1,22 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Vote
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              vote
+    plural:                votes
+    route_prefix:          vote
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        display: [type, document_id, country_id, _document_reservation]
+      filter:  ~
+      form:    ~
+      edit:    ~
+      new:     ~

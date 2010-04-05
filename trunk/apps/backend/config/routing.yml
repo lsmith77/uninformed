@@ -1,3 +1,21 @@
+vote:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Vote
+    module:               vote
+    prefix_path:          /votes
+    column:               id
+    with_wildcard_routes: true
+
+document_reservation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DocumentReservation
+    module:               documentreservation
+    prefix_path:          /documentreservations
+    column:               id
+    with_wildcard_routes: true
+
 document:
   class: sfDoctrineRouteCollection
   options:

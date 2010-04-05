@@ -187,7 +187,7 @@ Document:
       notnull: true
     slug:
       type: string(255)
-    publication_date:
+    enforcement_date:
       type: date
     adoption_date:
       type: date
@@ -569,7 +569,9 @@ Vote:
       autoincrement: true
     type:
       type: enum
-      values: [signed, agreed, 'no', abstain, missing]
+      values: ['yes','no','abstention','not present','signed','ratified','reservations']
+    vote_date:
+      type: datetime
     document_id:
       type: integer(4)
       notnull: true

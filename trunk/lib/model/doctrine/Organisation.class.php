@@ -26,4 +26,8 @@ class Organisation extends BaseOrganisation
     public function getSlug() {
         return $this->_get('id').'-'.$this->_get('slug');
     }
+    
+    public function __toString() {
+    	return $this->_get('name');
+    }
 }

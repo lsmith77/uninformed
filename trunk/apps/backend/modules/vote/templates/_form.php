@@ -18,4 +18,6 @@
   
   <?php include_component('documentreservation', 'documentReservations', array('vote' => $vote)) ?>
   
+  <?php include_component('clausereservation', 'clauseReservations', array('vote' => $vote)) ?>
+  
 </div>

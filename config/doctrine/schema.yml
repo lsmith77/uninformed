@@ -569,7 +569,7 @@ Vote:
       autoincrement: true
     type:
       type: enum
-      values: ['yes','no','abstention','not present','signed','ratified','reservations']
+      values: ['yes','no','abstention','not present','signed','ratified']
     vote_date:
       type: datetime
     document_id:

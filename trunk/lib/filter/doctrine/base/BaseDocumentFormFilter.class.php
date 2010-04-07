@@ -15,7 +15,7 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'name'                   => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'slug'                   => new sfWidgetFormFilterInput(),
-      'publication_date'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
+      'enforcement_date'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'adoption_date'          => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'code'                   => new sfWidgetFormFilterInput(),
       'min_ratification_count' => new sfWidgetFormFilterInput(),
@@ -38,7 +38,7 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
     $this->setValidators(array(
       'name'                   => new sfValidatorPass(array('required' => false)),
       'slug'                   => new sfValidatorPass(array('required' => false)),
-      'publication_date'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDateTime(array('required' => false)))),
+      'enforcement_date'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDateTime(array('required' => false)))),
       'adoption_date'          => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDateTime(array('required' => false)))),
       'code'                   => new sfValidatorPass(array('required' => false)),
       'min_ratification_count' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
@@ -94,7 +94,7 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
       'id'                     => 'Number',
       'name'                   => 'Text',
       'slug'                   => 'Text',
-      'publication_date'       => 'Date',
+      'enforcement_date'       => 'Date',
       'adoption_date'          => 'Date',
       'code'                   => 'Text',
       'min_ratification_count' => 'Number',

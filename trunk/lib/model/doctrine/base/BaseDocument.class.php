@@ -8,7 +8,7 @@
  * @property integer $id
  * @property string $name
  * @property string $slug
- * @property date $publication_date
+ * @property date $enforcement_date
  * @property date $adoption_date
  * @property string $code
  * @property integer $min_ratification_count
@@ -27,13 +27,14 @@
  * @property Doctrine_Collection $Subdocuments
  * @property Doctrine_Collection $DocumentDocumentRelation
  * @property Doctrine_Collection $DocumentClauseRelation
+ * @property Doctrine_Collection $DocumentReservation
  * @property Doctrine_Collection $Clauses
  * @property Doctrine_Collection $Votes
  * 
  * @method integer             getId()                       Returns the current record's "id" value
  * @method string              getName()                     Returns the current record's "name" value
  * @method string              getSlug()                     Returns the current record's "slug" value
- * @method date                getPublicationDate()          Returns the current record's "publication_date" value
+ * @method date                getEnforcementDate()          Returns the current record's "enforcement_date" value
  * @method date                getAdoptionDate()             Returns the current record's "adoption_date" value
  * @method string              getCode()                     Returns the current record's "code" value
  * @method integer             getMinRatificationCount()     Returns the current record's "min_ratification_count" value
@@ -52,12 +53,13 @@
  * @method Doctrine_Collection getSubdocuments()             Returns the current record's "Subdocuments" collection
  * @method Doctrine_Collection getDocumentDocumentRelation() Returns the current record's "DocumentDocumentRelation" collection
  * @method Doctrine_Collection getDocumentClauseRelation()   Returns the current record's "DocumentClauseRelation" collection
+ * @method Doctrine_Collection getDocumentReservation()      Returns the current record's "DocumentReservation" collection
  * @method Doctrine_Collection getClauses()                  Returns the current record's "Clauses" collection
  * @method Doctrine_Collection getVotes()                    Returns the current record's "Votes" collection
  * @method Document            setId()                       Sets the current record's "id" value
  * @method Document            setName()                     Sets the current record's "name" value
  * @method Document            setSlug()                     Sets the current record's "slug" value
- * @method Document            setPublicationDate()          Sets the current record's "publication_date" value
+ * @method Document            setEnforcementDate()          Sets the current record's "enforcement_date" value
  * @method Document            setAdoptionDate()             Sets the current record's "adoption_date" value
  * @method Document            setCode()                     Sets the current record's "code" value
  * @method Document            setMinRatificationCount()     Sets the current record's "min_ratification_count" value
@@ -76,13 +78,14 @@
  * @method Document            setSubdocuments()             Sets the current record's "Subdocuments" collection
  * @method Document            setDocumentDocumentRelation() Sets the current record's "DocumentDocumentRelation" collection
  * @method Document            setDocumentClauseRelation()   Sets the current record's "DocumentClauseRelation" collection
+ * @method Document            setDocumentReservation()      Sets the current record's "DocumentReservation" collection
  * @method Document            setClauses()                  Sets the current record's "Clauses" collection
  * @method Document            setVotes()                    Sets the current record's "Votes" collection
  * 
  * @package    uninformed
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7380 2010-03-15 21:07:50Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseDocument extends MyBaseRecord
 {
@@ -93,18 +96,18 @@ abstract class BaseDocument extends MyBaseRecord
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => '255',
+             'length' => 255,
              ));
         $this->hasColumn('slug', 'string', 255, array(
              'type' => 'string',
-             'length' => '255',
+             'length' => 255,
              ));
-        $this->hasColumn('publication_date', 'date', null, array(
+        $this->hasColumn('enforcement_date', 'date', null, array(
              'type' => 'date',
              ));
         $this->hasColumn('adoption_date', 'date', null, array(
@@ -113,11 +116,11 @@ abstract class BaseDocument extends MyBaseRecord
              ));
         $this->hasColumn('code', 'string', 255, array(
              'type' => 'string',
-             'length' => '255',
+             'length' => 255,
              ));
         $this->hasColumn('min_ratification_count', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('is_ratified', 'bool', null, array(
              'type' => 'bool',
@@ -130,23 +133,23 @@ abstract class BaseDocument extends MyBaseRecord
              ));
         $this->hasColumn('parent_document_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('organisation_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('documenttype_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('document_url', 'string', 255, array(
              'type' => 'string',
-             'length' => '255',
+             'length' => 255,
              ));
         $this->hasColumn('clause_ordering', 'string', 255, array(
              'type' => 'string',
-             'length' => '255',
+             'length' => 255,
              ));
         $this->hasColumn('status', 'enum', null, array(
              'type' => 'enum',
@@ -191,6 +194,10 @@ abstract class BaseDocument extends MyBaseRecord
              'foreign' => 'document_id'));
 
         $this->hasMany('DocumentClauseRelation', array(
+             'local' => 'id',
+             'foreign' => 'document_id'));
+
+        $this->hasMany('DocumentReservation', array(
              'local' => 'id',
              'foreign' => 'document_id'));
 

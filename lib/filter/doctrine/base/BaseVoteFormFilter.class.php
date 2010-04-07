@@ -13,7 +13,8 @@ abstract class BaseVoteFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'type'        => new sfWidgetFormChoice(array('choices' => array('' => '', 'signed' => 'signed', 'agreed' => 'agreed', 'no' => 'no', 'abstain' => 'abstain', 'missing' => 'missing'))),
+      'type'        => new sfWidgetFormChoice(array('choices' => array('' => '', 'yes' => 'yes', 'no' => 'no', 'abstention' => 'abstention', 'not present' => 'not present', 'signed' => 'signed', 'ratified' => 'ratified'))),
+      'vote_date'   => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'document_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Document'), 'add_empty' => true)),
       'country_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Country'), 'add_empty' => true)),
       'created_at'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
@@ -23,7 +24,8 @@ abstract class BaseVoteFormFilter extends BaseFormFilterDoctrine
     ));
 
     $this->setValidators(array(
-      'type'        => new sfValidatorChoice(array('required' => false, 'choices' => array('signed' => 'signed', 'agreed' => 'agreed', 'no' => 'no', 'abstain' => 'abstain', 'missing' => 'missing'))),
+      'type'        => new sfValidatorChoice(array('required' => false, 'choices' => array('yes' => 'yes', 'no' => 'no', 'abstention' => 'abstention', 'not present' => 'not present', 'signed' => 'signed', 'ratified' => 'ratified'))),
+      'vote_date'   => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'document_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Document'), 'column' => 'id')),
       'country_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Country'), 'column' => 'id')),
       'created_at'  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
@@ -51,6 +53,7 @@ abstract class BaseVoteFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'          => 'Number',
       'type'        => 'Enum',
+      'vote_date'   => 'Date',
       'document_id' => 'ForeignKey',
       'country_id'  => 'ForeignKey',
       'created_at'  => 'Date',

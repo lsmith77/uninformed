@@ -7,6 +7,7 @@
  * 
  * @property integer $id
  * @property enum $type
+ * @property datetime $vote_date
  * @property integer $document_id
  * @property integer $country_id
  * @property Document $Document
@@ -14,12 +15,14 @@
  * 
  * @method integer  getId()          Returns the current record's "id" value
  * @method enum     getType()        Returns the current record's "type" value
+ * @method datetime getVoteDate()    Returns the current record's "vote_date" value
  * @method integer  getDocumentId()  Returns the current record's "document_id" value
  * @method integer  getCountryId()   Returns the current record's "country_id" value
  * @method Document getDocument()    Returns the current record's "Document" value
  * @method Country  getCountry()     Returns the current record's "Country" value
  * @method Vote     setId()          Sets the current record's "id" value
  * @method Vote     setType()        Sets the current record's "type" value
+ * @method Vote     setVoteDate()    Sets the current record's "vote_date" value
  * @method Vote     setDocumentId()  Sets the current record's "document_id" value
  * @method Vote     setCountryId()   Sets the current record's "country_id" value
  * @method Vote     setDocument()    Sets the current record's "Document" value
@@ -28,7 +31,7 @@
  * @package    uninformed
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7380 2010-03-15 21:07:50Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseVote extends MyBaseRecord
 {
@@ -39,28 +42,32 @@ abstract class BaseVote extends MyBaseRecord
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('type', 'enum', null, array(
              'type' => 'enum',
              'values' => 
              array(
-              0 => 'signed',
-              1 => 'agreed',
-              2 => 'no',
-              3 => 'abstain',
-              4 => 'missing',
+              0 => 'yes',
+              1 => 'no',
+              2 => 'abstention',
+              3 => 'not present',
+              4 => 'signed',
+              5 => 'ratified',
              ),
+             ));
+        $this->hasColumn('vote_date', 'datetime', null, array(
+             'type' => 'datetime',
              ));
         $this->hasColumn('document_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('country_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
-             'length' => '4',
+             'length' => 4,
              ));
 
 

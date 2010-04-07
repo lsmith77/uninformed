@@ -61,7 +61,7 @@
  * @package    uninformed
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7380 2010-03-15 21:07:50Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseClauseBody extends MyBaseRecord
 {
@@ -72,29 +72,29 @@ abstract class BaseClauseBody extends MyBaseRecord
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('content', 'clob', null, array(
              'type' => 'clob',
              ));
         $this->hasColumn('information_type_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('operative_phrase_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('clause_process_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('public_comment', 'clob', null, array(
              'type' => 'clob',
              ));
         $this->hasColumn('parent_clause_body_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('status', 'enum', null, array(
              'type' => 'enum',

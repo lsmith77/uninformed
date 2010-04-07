@@ -28,7 +28,7 @@
  * @package    uninformed
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7380 2010-03-15 21:07:50Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseCountry extends MyBaseRecord
 {
@@ -39,17 +39,17 @@ abstract class BaseCountry extends MyBaseRecord
              'type' => 'integer',
              'primary' => true,
              'autoincrement' => true,
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('iso', 'string', 3, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => '3',
+             'length' => 3,
              ));
         $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => '255',
+             'length' => 255,
              ));
 
         $this->option('collation', 'utf8_general_ci');
@@ -60,7 +60,7 @@ abstract class BaseCountry extends MyBaseRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('ClauseReservation as Countries', array(
+        $this->hasMany('DocumentReservation as Countries', array(
              'local' => 'id',
              'foreign' => 'country_id'));
 

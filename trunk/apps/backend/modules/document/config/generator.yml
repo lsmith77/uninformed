@@ -14,12 +14,12 @@ generator:
     config:
       actions: ~
       fields:
-        publication_date:     {date_format: yyyy/MM/dd}
+        enforcement_date:     {date_format: yyyy/MM/dd}
         adoption_date:       {date_format: yyyy/MM/dd}
       list:
-        display: [=code, parent, publication_date, adoption_date, is_ratified, status, author]
+        display: [=code, parent, organisation, enforcement_date, adoption_date, is_ratified, status, author]
       filter:
-        display: [code, publication_date, adoption_date, is_ratified, status]
+        display: [code, enforcement_date, adoption_date, is_ratified, status]
       form:    ~
       edit:    ~
       new:     ~

@@ -19,7 +19,7 @@ class AddresseeFormFilter extends BaseAddresseeFormFilter
   	$this->widgetSchema['name'] = new sfWidgetFormDoctrineJQueryAutocompleter(
       array(
         'model' => 'Addressee',
-        'url'   => sfContext::getInstance()->getController()->genUrl('addressee/autocomplete'),
+        'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=addressee&action=autocomplete'),
       )
     );
     
@@ -28,7 +28,7 @@ class AddresseeFormFilter extends BaseAddresseeFormFilter
   	$this->widgetSchema['document'] = new sfWidgetFormDoctrineJQueryAutocompleter(
       array(
         'model' => 'Document',
-        'url'   => sfContext::getInstance()->getController()->genUrl('document/autocomplete'),
+        'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=document&action=autocomplete'),
       )
   	);
   	

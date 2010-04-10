@@ -19,7 +19,7 @@ class OrganisationFormFilter extends BaseOrganisationFormFilter
     $this->widgetSchema['name'] = new sfWidgetFormDoctrineJQueryAutocompleter(
       array(
         'model' => 'Organisation',
-        'url'   => sfContext::getInstance()->getController()->genUrl('organisation/autocomplete'),
+        'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=organisation&action=autocomplete'),
       )
     );
     

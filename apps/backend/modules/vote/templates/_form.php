@@ -1,5 +1,6 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
+<?php use_helper('jQuery'); ?>
 
 <div class="sf_admin_form">
   <?php echo form_tag_for($form, '@vote') ?>
@@ -21,3 +22,12 @@
   <?php include_component('clausereservation', 'clauseReservations', array('vote' => $vote)) ?>
   
 </div>
+
+<script type="text/javascript">
+//<![CDATA[
+jQuery('#vote_document_id').change(function()
+{
+  jQuery.ajax({type:'POST',dataType:'html',success:function(data, textStatus){jQuery('#vote_type').html(data);},url:'/backend_dev.php/legalvalue/retrieveApplicableDecisionTypes/document_id/'+this.value})  
+});
+//]]>
+</script>

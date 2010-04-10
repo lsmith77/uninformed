@@ -18,5 +18,7 @@ generator:
         display: [type, document_id, country_id, _document_reservation]
       filter:  ~
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        display: [country_id, document_id, type]
+      new:
+        display: [country_id, document_id, type]

@@ -1,3 +1,12 @@
+legal_value:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                LegalValue
+    module:               legalvalue
+    prefix_path:          /legalvalues
+    column:               id
+    with_wildcard_routes: true
+
 clause_reservation:
   class: sfDoctrineRouteCollection
   options:

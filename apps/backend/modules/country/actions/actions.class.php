@@ -111,4 +111,39 @@ class countryActions extends sfActions
       $this->redirect('country/edit?id='.$country->getId());
     }
   }
+  
+  public function executeRetrieveApplicableCountries($request)
+  {
+    $document_id = $request->getParameter('document_id');
+    
+    $q = Doctrine_Query::create()
+      ->select('c.id, c.name')
+      ->from('Country c')
+      ->leftJoin('CountryOrganisation co')
+      ->leftJoin('Document d')
+      ->where('c.id = co.country_id')
+      ->andWhere('co.organisation_id = d.organisation_id')
+      ->andWhere('co.eff_date <= d.adoption_date')
+      ->andWhere('co.exp_date >= d.adoption_date')
+      ->andWhere('d.id = ?', $document_id);
+    
+    $countries = $q->fetchArray();
+    
+    $html = '';
+    
+    if(count($countries) > 0)
+    {
+      foreach($countries as $country)
+      {
+      	$html .= '<option value="'.$country['id'].'">'.$country['name'].'</option>';
+      }
+    }
+    else
+    {
+      $html .= '<option value="">---</option>';
+    }
+    
+    $this->renderText($html);
+    return sfView::NONE;
+  }
 }

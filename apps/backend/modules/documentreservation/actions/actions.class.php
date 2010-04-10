@@ -13,13 +13,26 @@ require_once dirname(__FILE__).'/../lib/documentreservationGeneratorHelper.class
  */
 class documentreservationActions extends autoDocumentreservationActions
 {
+  public function executeNewFromVote($request)
+  {
+    $vote_id = $request->getParameter('vote_id');
+    
+    $vote = Doctrine::getTable('Vote')->find($vote_id);
+    
+    $this->params = array();
+    $this->params['document_id'] = $vote['document_id'];
+    $this->params['country_id'] = $vote['country_id'];
+    
+    return "Success";
+  }
+	
 	public function executeCreateFromVote($request)
 	{
 		$vote_id = $request->getParameter('vote_id');
 		
 		$vote = Doctrine::getTable('Vote')->find($vote_id);
     
-    if($vote['type'] == 'reservations')
+    if($vote['type'] == 'ratified')
     {
       $reservationText = $request->getParameter('reservationText');
 
@@ -36,7 +49,7 @@ class documentreservationActions extends autoDocumentreservationActions
     }
 		else
 		{
-			$this->message = "The vote is not of type \"reservations\".";
+			$this->message = "The vote is not of type \"ratified\".";
 			
 		  return "Failure";
 	  }

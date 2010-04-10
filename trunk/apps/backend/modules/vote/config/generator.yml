@@ -19,6 +19,6 @@ generator:
       filter:  ~
       form:    ~
       edit:
-        display: [country_id, document_id, type]
+        display: [document_id, country_id, type]
       new:
-        display: [country_id, document_id, type]
+        display: [document_id, country_id, type]

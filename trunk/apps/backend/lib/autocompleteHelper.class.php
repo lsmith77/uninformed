@@ -10,7 +10,7 @@ class autocompleteHelper {
         }
 
         $alias = strtolower($model[0]);
-        $limit = (int)$request->getParameter('limit', 10);
+        $limit = min((int)$request->getParameter('limit', 10), 10);
         $q = $request->getParameter('q');
 
         $results = Doctrine_Query::create()

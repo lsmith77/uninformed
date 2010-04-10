@@ -16,6 +16,21 @@ class Clause extends BaseClause
         'slug' => true,
     );
 
+    public function __toString() {
+        $identifier = $this->_get('Document')->_get('code');
+        $identifier.= ' #'.$this->_get('clause_number');
+        if ($this->_get('clause_number_information')) {
+            $identifier.= ' '.$this->_get('clause_number_information');
+        }
+        if ($this->_get('clause_number_subparagraph')) {
+            $identifier.= ' '.$this->_get('clause_number_subparagraph');
+        }
+        if ($this->_get('ClauseBody')->_get('ClauseInformationType')) {
+            $identifier.= ' '.$this->_get('ClauseBody')->_get('ClauseInformationType')->_get('name');
+        }
+        return trim($identifier);
+    }
+
     public function preSave($event) {
         if (!$this->exists()) {
             $invoker = $event->getInvoker();
@@ -23,13 +38,7 @@ class Clause extends BaseClause
 
             $invoker->_set('clause_number', (str_word_count($clauseOrdering, 0, '0123456789')+1));
 
-            $slug = $invoker->_get('Document')->_get('code');
-            $slug.= ' '.$invoker->_get('clause_number');
-            $slug.= ' '.$invoker->_get('clause_number_information');
-            $slug.= ' '.$invoker->_get('clause_number_subparagraph');
-            if ($invoker->_get('ClauseBody')->_get('ClauseInformationType')) {
-                $slug.= ' '.$invoker->_get('ClauseBody')->_get('ClauseInformationType')->_get('name');
-            }
+            $slug = (string)$invoker;
             $slug = Doctrine_Inflector::urlize($slug);
             $invoker->_set('slug', $slug);
         }

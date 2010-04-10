@@ -1,3 +1,12 @@
+country_organisation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                CountryOrganisation
+    module:               countryorganisation
+    prefix_path:          /countryorganisations
+    column:               id
+    with_wildcard_routes: true
+
 legal_value:
   class: sfDoctrineRouteCollection
   options:

@@ -16,13 +16,13 @@ class DocumentFormFilter extends BaseDocumentFormFilter
 
     sfContext::switchTo('backend');
 
-    $this->widgetSchema['code'] = new sfWidgetFormDoctrineJQueryAutocompleter(
+    $this->widgetSchema['quick search'] = new sfWidgetFormDoctrineJQueryAutocompleter(
       array(
         'model' => 'Document',
         'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=document&action=autocomplete'),
       )
     );
 
-    $this->validatorSchema['code'] = new sfValidatorPass ();
+    $this->validatorSchema['quick search'] = new sfValidatorPass ();
   }
 }

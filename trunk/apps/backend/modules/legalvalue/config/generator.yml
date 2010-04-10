@@ -1,0 +1,21 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           LegalValue
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              legalvalue
+    plural:                legalvalues
+    route_prefix:          legal_value
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    ~
+      filter:  ~
+      form:    ~
+      edit:    ~
+      new:     ~

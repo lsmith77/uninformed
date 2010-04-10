@@ -102,6 +102,9 @@ sf_guard_perm:
   url:   /sfGuardPermission
   param: { module: sfGuardPermission, action: index }
 
+default_edit:
+  url:   /:module/:id/:action
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

@@ -17,9 +17,17 @@
     <?php include_partial('vote/form_actions', array('vote' => $vote, 'form' => $form, 'configuration' => $configuration, 'helper' => $helper)) ?>
   </form>
   
-  <?php include_component('documentreservation', 'documentReservations', array('vote' => $vote)) ?>
+  <?php
   
-  <?php include_component('clausereservation', 'clauseReservations', array('vote' => $vote)) ?>
+  /*
+   * Display links to reservations only in Edit mode
+   */  
+  if(!$form->isNew())
+  {
+    include_component('documentreservation', 'documentReservations', array('vote' => $vote));
+    include_component('clausereservation', 'clauseReservations', array('vote' => $vote));
+  }
+  ?>
   
 </div>
 

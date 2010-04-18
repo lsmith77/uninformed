@@ -15,7 +15,6 @@ generator:
       actions: ~
       fields:  ~
       list:
-        display: [name, parent]
         object_actions:
           _edit: ~
           _delete: ~

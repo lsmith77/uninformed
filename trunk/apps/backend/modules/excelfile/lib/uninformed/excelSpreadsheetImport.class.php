@@ -57,6 +57,8 @@ class excelSpreadsheetImport
       $followup = "";
       $tags = array();
       $data = array();
+      
+      $emptyRow = false;
     	
       for($j = self::$FIRST_DOCUMENTCOLUMN; $j < self::$FIRST_DOCUMENTCOLUMN + self::$AMOUNT_DOCUMENTCOLUMNS; $j++) //columns
       {
@@ -66,7 +68,12 @@ class excelSpreadsheetImport
           $value = trim($this->excelData->value($i, $j,self::$SHEET));
         }
         if($j == self::$POS_DOCUMENT_TITLE) {
-          $title = $value;
+        	if($value == "")
+        	{
+        		$emptyRow = true;
+        	}
+        	
+        	$title = $value;
         } else if($j == self::$POS_DOCUMENT_CODE) {
           $code = $value;
         } else if($j == self::$POS_DOCUMENT_FOLLOWUP) {
@@ -80,27 +87,36 @@ class excelSpreadsheetImport
         }
       }
 
-      if(!isset($documents[$title])) {
-        $documents[$title]['countClauses'] = 1;
-      } else {
-        $documents[$title]['countClauses']++;
+      if(!$emptyRow)
+      {
+      
+	      if(!isset($documents[$title])) {
+	        $documents[$title]['countClauses'] = 1;
+	      } else {
+	        $documents[$title]['countClauses']++;
+	      }
+	
+	      if(!isset($documents[$title]['code'])) {
+	        $documents[$title]['code'] = $code;
+	      }
+	    
+	      if(!isset($documents[$title]['followup'])) {
+	        $documents[$title]['followup'] = $followup;
+	      }
+	    
+	      if(!isset($documents[$title]['tags'])) {
+	        $documents[$title]['tags'] = $tags;
+	      } else {
+	        $documents[$title]['tags'] = array_merge($documents[$title]['tags'], $tags);
+	      }
+	
+	      $documents[$title]['data'] = $data;
       }
-
-      if(!isset($documents[$title]['code'])) {
-        $documents[$title]['code'] = $code;
+      else
+      {
+      	//reset for next loop iteration
+      	$emptyRow = false;
       }
-    
-      if(!isset($documents[$title]['followup'])) {
-        $documents[$title]['followup'] = $followup;
-      }
-    
-      if(!isset($documents[$title]['tags'])) {
-        $documents[$title]['tags'] = $tags;
-      } else {
-        $documents[$title]['tags'] = array_merge($documents[$title]['tags'], $tags);
-      }
-
-      $documents[$title]['data'] = $data;
     }
     
     //add clause data
@@ -233,7 +249,7 @@ class excelSpreadsheetImport
         }
       }
 
-      $tags = array_unique($tags);  
+      $tags = array_unique($tags);
       $newDocument->setTags($tags);
       
       $newDocument->save();

@@ -24,7 +24,7 @@ class sfWidgetFormDoctrineJQueryQuickSearchAutocompleter extends sfWidgetFormDoc
     {
       $url = url_for('@default_edit?module='.strtolower($this->getOption('model')).'&action=edit&id=XXX');
       $widget = parent::render($name, '', $attributes, $errors);
-      $widget = str_replace('.val(data[1]);', ".val(data[1]); if (data[1] !== '') { url = '$url'; location.href = url.replace(/XXX/, data[1]); }", $widget);
+      $widget = str_replace('.val(data[1]);', ".val(data[1]); if (data[1].replace(/ /, '') !== '') { url = '$url'; location.href = url.replace(/XXX/, data[1]); }", $widget);
       return $widget;
     }
 }

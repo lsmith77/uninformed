@@ -20,11 +20,7 @@ generator:
           _edit: ~
           _delete: ~
       filter:
-        display: [name, document]
-        fields:
-          document:
-            label: Filter by Document
-            help: Type the document code you want to filter by
+        display: ["quick edit search"]
       form:    ~
       edit:    ~
       new:     ~

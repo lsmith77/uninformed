@@ -14,8 +14,10 @@ generator:
     config:
       actions: ~
       fields:  ~
-      list:    ~
-      filter:  ~
+      list:
+        display: [_clause_number, _tags, _status, _process, _information_type, _operative_phrase, _addressees, author]
+      filter:
+        display: ["quick edit search", author_id]
       form:    ~
       edit:    ~
       new:     ~

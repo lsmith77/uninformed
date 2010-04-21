@@ -12,5 +12,16 @@ class ClauseFormFilter extends BaseClauseFormFilter
 {
   public function configure()
   {
+      parent::configure();
+
+      sfContext::switchTo('backend');
+
+      $this->widgetSchema['quick edit search'] = new sfWidgetFormDoctrineJQueryQuickSearchAutocompleter(
+        array(
+          'model' => 'Clause',
+          'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=clause&action=autocomplete'),
+        )
+      );
+      $this->validatorSchema['quick edit search'] = new sfValidatorPass ();
   }
 }

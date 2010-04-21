@@ -18,8 +18,8 @@ generator:
         object_actions:
           _edit: ~
           _delete: ~
-      filter:  ~
+      filter:
+        display: ["quick edit search"]
       form:    ~
       edit:    ~
       new:     ~
- 

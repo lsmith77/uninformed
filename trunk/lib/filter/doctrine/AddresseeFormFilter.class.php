@@ -12,39 +12,29 @@ class AddresseeFormFilter extends BaseAddresseeFormFilter
 {
   public function configure()
   {
-  	parent::configure();
-  	
-  	sfContext::switchTo('backend');
-  	
-  	$this->widgetSchema['name'] = new sfWidgetFormDoctrineJQueryAutocompleter(
+    parent::configure();
+
+    sfContext::switchTo('backend');
+
+    $this->widgetSchema['quick edit search'] = new sfWidgetFormDoctrineJQueryQuickSearchAutocompleter(
       array(
         'model' => 'Addressee',
         'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=addressee&action=autocomplete'),
       )
     );
-    
-    $this->validatorSchema['name'] = new sfValidatorPass ();
-  	
-  	$this->widgetSchema['document'] = new sfWidgetFormDoctrineJQueryAutocompleter(
-      array(
-        'model' => 'Document',
-        'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=document&action=autocomplete'),
-      )
-  	);
-  	
-  	$this->validatorSchema['document'] = new sfValidatorPass ();
+    $this->validatorSchema['quick edit search'] = new sfValidatorPass ();
   }
-  
+
   public function getFields()
   {
     $fields = parent::getFields();
     $fields['document'] = 'custom';
-    
+
     return $fields;
   }
-  
+
 	public function addDocumentColumnQuery($query, $field, $value)
-	{	
+	{
 	  Doctrine::getTable('Addressee')
 	    ->applyDocumentFilter($query, $value);
 	}

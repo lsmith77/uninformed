@@ -13,16 +13,15 @@ class OrganisationFormFilter extends BaseOrganisationFormFilter
   public function configure()
   {
   	parent::configure();
-    
+
     sfContext::switchTo('backend');
-    
-    $this->widgetSchema['name'] = new sfWidgetFormDoctrineJQueryAutocompleter(
+
+    $this->widgetSchema['quick edit search'] = new sfWidgetFormDoctrineJQueryQuickSearchAutocompleter(
       array(
         'model' => 'Organisation',
         'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=organisation&action=autocomplete'),
       )
     );
-    
-    $this->validatorSchema['name'] = new sfValidatorPass ();
+    $this->validatorSchema['quick edit search'] = new sfValidatorPass ();
   }
 }

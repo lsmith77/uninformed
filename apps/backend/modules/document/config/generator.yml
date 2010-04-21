@@ -19,7 +19,7 @@ generator:
       list:
         display: [=code, _parent, _organisation, _tags, adoption_date, is_ratified, status, author]
       filter:
-        display: ["quick search", enforcement_date, adoption_date, is_ratified, status, tags_list]
+        display: ["quick edit search", enforcement_date, adoption_date, is_ratified, status, tags_list]
       form:    ~
       edit:    ~
       new:     ~

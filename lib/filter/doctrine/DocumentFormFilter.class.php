@@ -16,7 +16,7 @@ class DocumentFormFilter extends BaseDocumentFormFilter
 
     sfContext::switchTo('backend');
 
-    $this->widgetSchema['quick search'] = new sfWidgetFormDoctrineJQueryAutocompleter(
+    $this->widgetSchema['quick edit search'] = new sfWidgetFormDoctrineJQueryQuickSearchAutocompleter(
       array(
         'model' => 'Document',
         'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=document&action=autocomplete'),

@@ -32,7 +32,6 @@ class DocumentFormFilter extends BaseDocumentFormFilter
     );
     $this->validatorSchema['parent_document_id'] = new sfValidatorPass ();
 
-
     $this->widgetSchema['organisation_id'] = new sfWidgetFormDoctrineJQueryAutocompleter(
       array(
         'model' => 'Organisation',

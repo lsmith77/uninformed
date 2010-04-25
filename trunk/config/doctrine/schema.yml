@@ -198,6 +198,8 @@ Document:
       type: integer(4)
     is_ratified:
       type: bool
+    vote_url:
+      type: string(255)
     private_comment:
       type: clob
     public_comment:
@@ -569,7 +571,7 @@ Vote:
       autoincrement: true
     type:
       type: enum
-      values: ['yes','no','abstention','not present','signed','ratified']
+      values: ['adopted without a vote','yes','no','abstention','not present','signed','ratified']
     vote_date:
       type: datetime
     document_id:

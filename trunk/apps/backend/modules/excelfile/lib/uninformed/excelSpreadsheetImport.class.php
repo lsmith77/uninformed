@@ -6,7 +6,7 @@ class excelSpreadsheetImport
   private static $SHEET = 0;
   private static $FIRST_ROW = 2;
   
-  private static $FIRST_DOCUMENTCOLUMN = 2;
+  private static $FIRST_DOCUMENTCOLUMN = 1;
   private static $FIRST_CLAUSECOLUMN = 29;
   
   private static $AMOUNT_DOCUMENTCOLUMNS = 27;
@@ -24,14 +24,22 @@ class excelSpreadsheetImport
   /*
    * Document and clause columns positions
    */
+  private static $POS_DOCUMENT_ID = 1;
   private static $POS_DOCUMENT_TITLE = 2;
   private static $POS_DOCUMENT_CODE = 3;
   private static $POS_DOCUMENT_FOLLOWUP = 13;
-  
   private static $POS_DOCUMENT_ADOPTIONDATE = 4;
+  
   private static $POS_DOCUMENT_ORGANISATION = 5;
+  private static $POS_DOCUMENT_ORGANISATION_NEW = 6;
+  private static $POS_DOCUMENT_MAINORGAN = 7;
+  private static $POS_DOCUMENT_MAINORGAN_NEW = 8;
+  private static $POS_DOCUMENT_SUBORGAN = 9;
+  
   private static $POS_DOCUMENT_LEGALVALUE = 10;
   private static $POS_DOCUMENT_DOCUMENTTYPE = 11;
+  private static $POS_DOCUMENT_VOTE = 15;
+  private static $POS_DOCUMENT_VOTE_URL = 16;
   private static $POS_DOCUMENT_URL = 17;
   
   private static $POS_CLAUSE_CONTENT = 29;
@@ -54,6 +62,7 @@ class excelSpreadsheetImport
     {
       $title = "";
       $code = "";
+      $date = "";
       $followup = "";
       $tags = array();
       $data = array();
@@ -62,11 +71,21 @@ class excelSpreadsheetImport
     	
       for($j = self::$FIRST_DOCUMENTCOLUMN; $j < self::$FIRST_DOCUMENTCOLUMN + self::$AMOUNT_DOCUMENTCOLUMNS; $j++) //columns
       {
+      	$value = "";
+      	
         if($j == self::$POS_DOCUMENT_ADOPTIONDATE) { //excel date format data, adoption date column
           $value = trim($this->excelData->raw($i, $j,self::$SHEET));
+          /*
+          if($value == "") // do not import documents without adoption date
+          {
+            $emptyRow = true;
+          }*/
+          
+          $date = $value;
         } else {
           $value = trim($this->excelData->value($i, $j,self::$SHEET));
         }
+        
         if($j == self::$POS_DOCUMENT_TITLE) {
         	if($value == "")
         	{
@@ -79,8 +98,8 @@ class excelSpreadsheetImport
         } else if($j == self::$POS_DOCUMENT_FOLLOWUP) {
           $followup = $value;
         } else if($j >= self::$FIRST_DOCUMENTTAGCOLUMN
-          && $j < self::$FIRST_DOCUMENTTAGCOLUMN + self::$AMOUNT_DOCUMENTTAGCOLUMNS
-        ) {
+          && $j < self::$FIRST_DOCUMENTTAGCOLUMN + self::$AMOUNT_DOCUMENTTAGCOLUMNS)
+        {
           $tags[] = $value;
         } else {
           $data[$j] = $value;
@@ -89,13 +108,20 @@ class excelSpreadsheetImport
 
       if(!$emptyRow)
       {
-      
+      	
+      	$title = $title."#".$date;
+      	
 	      if(!isset($documents[$title])) {
+	      	$documents[$title] = array();
 	        $documents[$title]['countClauses'] = 1;
 	      } else {
 	        $documents[$title]['countClauses']++;
 	      }
 	
+        if(!isset($documents[$title]['adoption_date'])) {
+          $documents[$title]['adoption_date'] = $date;
+        }
+	      
 	      if(!isset($documents[$title]['code'])) {
 	        $documents[$title]['code'] = $code;
 	      }
@@ -170,6 +196,7 @@ class excelSpreadsheetImport
     }
 
     $clauseHelper = new ClauseHelper();
+    $documentHelper = new DocumentHelper();
   	
     foreach($documents as $documentName => &$document)
     {
@@ -192,10 +219,11 @@ class excelSpreadsheetImport
         for($a = self::$FIRST_CLAUSETAGCOLUMN; $a < self::$FIRST_CLAUSETAGCOLUMN + self::$AMOUNT_CLAUSETAGCOLUMNS; $a++)
         {
           if($clause[$a] != "") {
-            $tags[] = $clause[$a];
+            $tags[] = strtolower($clause[$a]);
           }
         }
 
+        $tags = array_unique($tags);
         $clauseBody->setTags($tags);
 
         $clauseBody->save();
@@ -223,20 +251,33 @@ class excelSpreadsheetImport
         $clause = array($clauseBody->get('id') => array($clauseNumber, $clauseParentNumber));
       }
 
-      $documentHelper = new DocumentHelper();
-
+      /**
+       * DOCUMENTS
+       * 
+       */
+      
       $newDocument = new Document();
 
       $newDocument->set('name', $documentName);
       $newDocument->set('code', $document['code']);
-      $newDocument->set('adoption_date', $this->createDate($document['data'][self::$POS_DOCUMENT_ADOPTIONDATE]));
-      $newDocument->set('organisation_id', $documentHelper->retrieveOrganisation($document['data'][self::$POS_DOCUMENT_ORGANISATION])); //organisation
+      $newDocument->set('adoption_date', $this->createDate($document['adoption_date']));
+      
+      $organisationFields = array();
+      
+      $organisationFields[] = $document['data'][self::$POS_DOCUMENT_SUBORGAN];
+      $organisationFields[] = $document['data'][self::$POS_DOCUMENT_MAINORGAN_NEW];
+      $organisationFields[] = $document['data'][self::$POS_DOCUMENT_MAINORGAN];
+      $organisationFields[] = $document['data'][self::$POS_DOCUMENT_ORGANISATION_NEW];
+      $organisationFields[] = $document['data'][self::$POS_DOCUMENT_ORGANISATION];
+      
+      $newDocument->set('organisation_id', $documentHelper->retrieveIssuingOrganisation($organisationFields));
       
       $newDocument->set('documenttype_id', $documentHelper
         ->retrieveDocumentType(
           $document['data'][self::$POS_DOCUMENT_DOCUMENTTYPE],
           $documentHelper->retrieveLegalValue($document['data'][self::$POS_DOCUMENT_LEGALVALUE])
         )); //document type
+      $newDocument->set('vote_url', $document['data'][self::$POS_DOCUMENT_VOTE_URL]);
       $newDocument->set('document_url', $document['data'][self::$POS_DOCUMENT_URL]);
 
       // Save tags of document
@@ -245,16 +286,22 @@ class excelSpreadsheetImport
       foreach($document['tags'] as $name)
       {
         if($name != "") {
-          $tags[] = $name;
+          $tags[] = strtolower($name);
         }
       }
 
-      $tags = array_unique($tags);
+      //$tags = array_unique($tags);
+      $tags = array_merge(array_flip(array_flip($tags)));
       $newDocument->setTags($tags);
       
       $newDocument->save();
     	
       $document['id'] = $newDocument->get('id');
+      
+      $documentHelper->saveVotesForDocument(
+        $document['id'],
+        $document['data'][self::$POS_DOCUMENT_LEGALVALUE],
+        $document['data'][self::$POS_DOCUMENT_VOTE]);
     }
 
     // find and save document parent relations

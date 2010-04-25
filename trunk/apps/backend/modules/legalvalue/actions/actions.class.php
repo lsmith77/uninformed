@@ -33,7 +33,8 @@ class legalvalueActions extends autoLegalvalueActions
     {
       if($legalValue['name'] == "Non-legally Binding")
       {
-        $html = '<option value="yes" selected="selected">yes</option>';
+      	$html = '<option value="adopted without a vote" selected="selected">adopted without a vote</option>';
+        $html .= '<option value="yes">yes</option>';
         $html .= '<option value="no">no</option>';
         $html .= '<option value="abstention">abstention</option>';
         $html .= '<option value="not present">not present</option>';

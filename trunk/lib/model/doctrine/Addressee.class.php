@@ -20,4 +20,8 @@ class Addressee extends BaseAddressee
 	{
 		return $this->getClauseBodies()->count();
 	}
+	
+  public function __toString() {
+    return $this->_get('name');
+  }
 }

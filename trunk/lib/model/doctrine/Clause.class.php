@@ -62,4 +62,17 @@ class Clause extends BaseClause
     public function getSlug() {
         return $this->_get('id').'-'.$this->_get('slug');
     }
+
+    public function __call($method, $params) {
+        try {
+            return parent::__call($method, $params);
+        } catch (Exception $e) {}
+
+        $clauseBody = $this->_get('ClauseBody');
+        if (!is_object($clauseBody)) {
+            trigger_error(sprintf('Call to undefined function: %s::%s().', get_class($this), $method), E_USER_ERROR);
+        }
+
+        return call_user_func_array(array($clauseBody, $method), $params);
+    }
 }

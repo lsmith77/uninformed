@@ -269,7 +269,7 @@ class excelSpreadsheetImport
       $organisationFields[] = $document['data'][self::$POS_DOCUMENT_MAINORGAN];
       $organisationFields[] = $document['data'][self::$POS_DOCUMENT_ORGANISATION_NEW];
       $organisationFields[] = $document['data'][self::$POS_DOCUMENT_ORGANISATION];
-      
+
       $newDocument->set('organisation_id', $documentHelper->retrieveIssuingOrganisation($organisationFields));
       
       $newDocument->set('documenttype_id', $documentHelper

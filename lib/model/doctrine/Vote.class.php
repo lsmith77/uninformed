@@ -12,4 +12,14 @@
  */
 class Vote extends BaseVote
 {
+    public function retrieveDocumentReservation()
+    {
+        $q = Doctrine_Query::create()
+            ->select("dr.id, dr.reservation")
+            ->from('DocumentReservation dr')
+            ->where('dr.document_id = ?', $this->_get('document_id'))
+            ->andWhere('dr.country_id = ?', $this->_get('country_id'));
+
+        return $q->fetchOne();
+    }
 }

@@ -1,0 +1,45 @@
+# Define any application specific rules to your models here
+# such as routing, partials, etc.
+
+MyIndex:
+  models:
+    Clause:
+      route: clause/%slug%
+      fields:
+        id:
+          type: int
+          indexed: false
+          stored: true
+          alias: getId
+        slug:
+          type: string
+          indexed: false
+          stored: true
+          required: true
+          alias: getSlug
+        document_id:
+          type: int
+          required: true
+          alias: getDocumentId
+        title:
+          type: string
+          alias: __toString
+          stored: true
+        tags:
+          type: text
+          stored: false
+          multiValued: true
+          alias: getTagNames
+        description:
+          type: text
+          alias: getContent
+          stored: true
+        clause_operative_phrase:
+          type: text
+          alias: getClauseOperativePhrase
+        clause_information_type:
+          type: text
+          alias: getClauseInformationType
+        clause_process:
+          type: text
+          alias: getClauseProcess

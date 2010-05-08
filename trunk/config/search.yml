@@ -1,0 +1,8 @@
+# Define all the models in your project that you want indexed.
+
+MyIndex:
+  index:
+    encoding: UTF-8
+    host: 127.0.0.1
+    port: 8983
+    base_url: "/solr"

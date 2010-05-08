@@ -349,6 +349,9 @@ ClauseClauseRelation:
       type: unique
 
 Clause:
+  actAs:
+    <<: *actAs
+    sfLuceneDoctrine: ~
   columns:
     id:
       type: integer(4)

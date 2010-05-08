@@ -7,13 +7,18 @@ class ProjectConfiguration extends sfProjectConfiguration
 {
   public function setup()
   {
+    $opts = array('http' => array('user_agent' => 'PHP libxml agent',));
+    $context = stream_context_create($opts);
+    libxml_set_streams_context($context);
+
     $this->enablePlugins(
       'sfDoctrinePlugin',
       'sfDoctrineGuardPlugin',
       'sfDoctrineGuardExtraPlugin',
       'sfFormExtraPlugin',
       'sfAdminDashPlugin',
-      'sfJqueryReloadedPlugin'
+      'sfJqueryReloadedPlugin',
+      'sfSolrPlugin'
     );
   }
 
@@ -28,6 +33,5 @@ class ProjectConfiguration extends sfProjectConfiguration
     $manager->registerExtension('Blameable');
     $manager->registerExtension('Taggable');
     $manager->registerExtension('Temporal');
-    $manager->registerExtension('Sortable');
   }
 }

@@ -1,10 +1,27 @@
 <?php use_helper('jQuery'); ?>
 
+<?php
+$documentReservation = $vote->retrieveDocumentReservation();
+?>
+
 <div id="documentReservation">
-  
-  <?php echo jq_link_to_remote('Add document reservation', array(
+
+  <?php
+  if($documentReservation != Null)
+  {
+    echo "<p>".$documentReservation->getReservation()."</p>";
+    echo jq_link_to_remote('Edit document reservation', array(
       'update' => 'documentReservation',
-      'url'    => 'documentReservation/newFromVote?vote_id='.$vote
-  )) ?>
-  
+      'url'    => 'documentReservation/editFromVote?reservation_id='.$documentReservation->getId()
+    ));
+  }
+  else
+  {
+    echo jq_link_to_remote('Add document reservation', array(
+      'update' => 'documentReservation',
+      'url'    => 'documentReservation/newFromVote?vote='.$vote
+    ));
+  }
+  ?>
+
 </div>

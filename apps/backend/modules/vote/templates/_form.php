@@ -22,7 +22,7 @@
   /*
    * Display links to reservations only in Edit mode
    */  
-  if(!$form->isNew())
+  if(!$form->isNew() && $vote->getType() == "ratified")
   {
     include_component('documentreservation', 'documentReservations', array('vote' => $vote));
     include_component('clausereservation', 'clauseReservations', array('vote' => $vote));

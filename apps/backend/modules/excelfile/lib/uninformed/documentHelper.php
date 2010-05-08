@@ -50,7 +50,7 @@ class DocumentHelper
   	
     // remove duplicates, reset array index to be continuous
     $hierarchy = array_merge(array_unique($hierarchy));
-    
+
   	if(count($hierarchy) > 0)
   	{
   		if(count($hierarchy) > 1)
@@ -96,9 +96,9 @@ class DocumentHelper
   	
   	if($organisation != NULL)
   	{
-	  	if($organisation->get('parent_id') != NULL && $organisation->get('parent_id') != $parent)
+	  	if($organisation->get('parent_id') != $parent)
 	  	{
-	  		$organisation->set('parent_id', $parent);
+	  	  $organisation->set('parent_id', $parent);
 	      $organisation->save();
 	  	}
   	}

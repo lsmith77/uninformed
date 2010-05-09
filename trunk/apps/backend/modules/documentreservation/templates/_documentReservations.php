@@ -1,10 +1,8 @@
 <?php use_helper('jQuery'); ?>
 
-<?php
-$documentReservation = $vote->retrieveDocumentReservation();
-?>
-
 <div id="documentReservation">
+
+  <h3>Document Reservations</h3>
 
   <?php
   if($documentReservation != Null)

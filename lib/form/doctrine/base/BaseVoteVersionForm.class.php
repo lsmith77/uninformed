@@ -5,7 +5,7 @@
  *
  * @method VoteVersion getObject() Returns the current form's model object
  *
- * @package    uninformed
+ * @package    symfony
  * @subpackage form
  * @author     Your name here
  * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
@@ -16,7 +16,7 @@ abstract class BaseVoteVersionForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'          => new sfWidgetFormInputHidden(),
-      'type'        => new sfWidgetFormChoice(array('choices' => array('yes' => 'yes', 'no' => 'no', 'abstention' => 'abstention', 'not present' => 'not present', 'signed' => 'signed', 'ratified' => 'ratified'))),
+      'type'        => new sfWidgetFormChoice(array('choices' => array('adopted without a vote' => 'adopted without a vote', 'yes' => 'yes', 'no' => 'no', 'abstention' => 'abstention', 'not present' => 'not present', 'signed' => 'signed', 'ratified' => 'ratified'))),
       'vote_date'   => new sfWidgetFormInputText(),
       'document_id' => new sfWidgetFormInputText(),
       'country_id'  => new sfWidgetFormInputText(),
@@ -28,7 +28,7 @@ abstract class BaseVoteVersionForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'          => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'type'        => new sfValidatorChoice(array('choices' => array(0 => 'yes', 1 => 'no', 2 => 'abstention', 3 => 'not present', 4 => 'signed', 5 => 'ratified'), 'required' => false)),
+      'type'        => new sfValidatorChoice(array('choices' => array(0 => 'adopted without a vote', 1 => 'yes', 2 => 'no', 3 => 'abstention', 4 => 'not present', 5 => 'signed', 6 => 'ratified'), 'required' => false)),
       'vote_date'   => new sfValidatorPass(array('required' => false)),
       'document_id' => new sfValidatorInteger(),
       'country_id'  => new sfValidatorInteger(),

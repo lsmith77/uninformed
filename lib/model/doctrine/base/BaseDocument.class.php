@@ -13,6 +13,7 @@
  * @property string $code
  * @property integer $min_ratification_count
  * @property bool $is_ratified
+ * @property string $vote_url
  * @property clob $private_comment
  * @property clob $public_comment
  * @property integer $parent_document_id
@@ -39,6 +40,7 @@
  * @method string              getCode()                     Returns the current record's "code" value
  * @method integer             getMinRatificationCount()     Returns the current record's "min_ratification_count" value
  * @method bool                getIsRatified()               Returns the current record's "is_ratified" value
+ * @method string              getVoteUrl()                  Returns the current record's "vote_url" value
  * @method clob                getPrivateComment()           Returns the current record's "private_comment" value
  * @method clob                getPublicComment()            Returns the current record's "public_comment" value
  * @method integer             getParentDocumentId()         Returns the current record's "parent_document_id" value
@@ -64,6 +66,7 @@
  * @method Document            setCode()                     Sets the current record's "code" value
  * @method Document            setMinRatificationCount()     Sets the current record's "min_ratification_count" value
  * @method Document            setIsRatified()               Sets the current record's "is_ratified" value
+ * @method Document            setVoteUrl()                  Sets the current record's "vote_url" value
  * @method Document            setPrivateComment()           Sets the current record's "private_comment" value
  * @method Document            setPublicComment()            Sets the current record's "public_comment" value
  * @method Document            setParentDocumentId()         Sets the current record's "parent_document_id" value
@@ -82,7 +85,7 @@
  * @method Document            setClauses()                  Sets the current record's "Clauses" collection
  * @method Document            setVotes()                    Sets the current record's "Votes" collection
  * 
- * @package    uninformed
+ * @package    symfony
  * @subpackage model
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
@@ -124,6 +127,10 @@ abstract class BaseDocument extends MyBaseRecord
              ));
         $this->hasColumn('is_ratified', 'bool', null, array(
              'type' => 'bool',
+             ));
+        $this->hasColumn('vote_url', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
              ));
         $this->hasColumn('private_comment', 'clob', null, array(
              'type' => 'clob',

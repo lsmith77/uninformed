@@ -58,7 +58,7 @@
  * @method ClauseBody            setSubclauses()             Sets the current record's "Subclauses" collection
  * @method ClauseBody            setClauseReservation()      Sets the current record's "ClauseReservation" collection
  * 
- * @package    uninformed
+ * @package    symfony
  * @subpackage model
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $

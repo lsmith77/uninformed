@@ -10,7 +10,7 @@
  * @method ExcelFile getExcelFile() Returns the current record's "ExcelFile" value
  * @method Import    setExcelFile() Sets the current record's "ExcelFile" value
  * 
- * @package    uninformed
+ * @package    symfony
  * @subpackage model
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $

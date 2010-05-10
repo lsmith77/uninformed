@@ -28,7 +28,7 @@
  * @method Vote     setDocument()    Sets the current record's "Document" value
  * @method Vote     setCountry()     Sets the current record's "Country" value
  * 
- * @package    uninformed
+ * @package    symfony
  * @subpackage model
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
@@ -48,12 +48,13 @@ abstract class BaseVote extends MyBaseRecord
              'type' => 'enum',
              'values' => 
              array(
-              0 => 'yes',
-              1 => 'no',
-              2 => 'abstention',
-              3 => 'not present',
-              4 => 'signed',
-              5 => 'ratified',
+              0 => 'adopted without a vote',
+              1 => 'yes',
+              2 => 'no',
+              3 => 'abstention',
+              4 => 'not present',
+              5 => 'signed',
+              6 => 'ratified',
              ),
              ));
         $this->hasColumn('vote_date', 'datetime', null, array(

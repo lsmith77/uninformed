@@ -4,6 +4,8 @@
 /web/*_dev.php
 /web/uploads/*
 
+.DS_Store
+
 # SCM files
 .arch-params
 .bzr
@@ -13,3 +15,4 @@ _darcs
 .monotone
 .svn
 CVS
+

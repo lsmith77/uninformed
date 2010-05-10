@@ -3,7 +3,7 @@
 /**
  * Document filter form base class.
  *
- * @package    uninformed
+ * @package    symfony
  * @subpackage filter
  * @author     Your name here
  * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
@@ -20,6 +20,7 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
       'code'                   => new sfWidgetFormFilterInput(),
       'min_ratification_count' => new sfWidgetFormFilterInput(),
       'is_ratified'            => new sfWidgetFormFilterInput(),
+      'vote_url'               => new sfWidgetFormFilterInput(),
       'private_comment'        => new sfWidgetFormFilterInput(),
       'public_comment'         => new sfWidgetFormFilterInput(),
       'parent_document_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Parent'), 'add_empty' => true)),
@@ -43,6 +44,7 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
       'code'                   => new sfValidatorPass(array('required' => false)),
       'min_ratification_count' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'is_ratified'            => new sfValidatorPass(array('required' => false)),
+      'vote_url'               => new sfValidatorPass(array('required' => false)),
       'private_comment'        => new sfValidatorPass(array('required' => false)),
       'public_comment'         => new sfValidatorPass(array('required' => false)),
       'parent_document_id'     => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Parent'), 'column' => 'id')),
@@ -99,6 +101,7 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
       'code'                   => 'Text',
       'min_ratification_count' => 'Number',
       'is_ratified'            => 'Text',
+      'vote_url'               => 'Text',
       'private_comment'        => 'Text',
       'public_comment'         => 'Text',
       'parent_document_id'     => 'ForeignKey',

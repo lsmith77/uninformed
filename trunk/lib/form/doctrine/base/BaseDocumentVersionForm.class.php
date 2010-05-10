@@ -5,7 +5,7 @@
  *
  * @method DocumentVersion getObject() Returns the current form's model object
  *
- * @package    uninformed
+ * @package    symfony
  * @subpackage form
  * @author     Your name here
  * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
@@ -23,6 +23,7 @@ abstract class BaseDocumentVersionForm extends BaseFormDoctrine
       'code'                   => new sfWidgetFormInputText(),
       'min_ratification_count' => new sfWidgetFormInputText(),
       'is_ratified'            => new sfWidgetFormInputText(),
+      'vote_url'               => new sfWidgetFormInputText(),
       'private_comment'        => new sfWidgetFormTextarea(),
       'public_comment'         => new sfWidgetFormTextarea(),
       'parent_document_id'     => new sfWidgetFormInputText(),
@@ -46,6 +47,7 @@ abstract class BaseDocumentVersionForm extends BaseFormDoctrine
       'code'                   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'min_ratification_count' => new sfValidatorInteger(array('required' => false)),
       'is_ratified'            => new sfValidatorPass(array('required' => false)),
+      'vote_url'               => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'private_comment'        => new sfValidatorString(array('required' => false)),
       'public_comment'         => new sfValidatorString(array('required' => false)),
       'parent_document_id'     => new sfValidatorInteger(array('required' => false)),

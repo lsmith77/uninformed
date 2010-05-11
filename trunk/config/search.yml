@@ -1,5 +1,3 @@
-# Define all the models in your project that you want indexed.
-
 ClauseBody:
   index:
     cultures: [en]
@@ -12,6 +10,7 @@ ClauseBody:
       title: title
       description: content
       route: clause/%slug%
+      validator: isIndexable
       fields:
         id:
           type: int
@@ -25,16 +24,10 @@ ClauseBody:
           stored: true
           required: true
           alias: getSlug
-        root_clause_body_id:
-          type: int
-          stored: true
+        is_latest_clause_body:
+          type: boolean
           required: true
-          alias: getRootClauseBodyId
-        document_id:
-          type: int
-          stored: true
-          required: true
-          alias: getDocumentId
+          alias: getIsLatestClauseBody
         title:
           type: string
           alias: getTitle
@@ -42,24 +35,42 @@ ClauseBody:
           type: tdate
           stored: false
           alias: getAdoptionDate
-        tags:
-          type: text
+        tag_ids:
+          type: int
           stored: false
           multiValued: true
-          alias: getTagNames
+          alias: getTagIds
+          boost: 3
+        addressee_ids:
+          type: int
+          stored: false
+          multiValued: true
+          alias: getAddresseeIds
         content:
           type: text
           stored: false
           alias: getContent
-        clause_operative_phrase:
-          type: text
+        operative_phrase_id:
+          type: int
           stored: false
-          alias: getClauseOperativePhrase
-        clause_information_type:
-          type: text
+          alias: getOperativePhraseId
+        information_type_id:
+          type: int
           stored: false
-          alias: getClauseInformationType
-        clause_process:
-          type: text
+          alias: getInformationTypeId
+        clause_process_id:
+          type: int
           stored: false
-          alias: getClauseProcess
+          alias: getClauseProcessId
+        organisation_id:
+          type: int
+          stored: false
+          alias: getOrganisationId
+        legalvalue_id:
+          type: int
+          stored: false
+          alias: getLegalvalueId
+        decision_type:
+          type: string
+          stored: false
+          alias: getDecisionType

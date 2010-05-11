@@ -247,15 +247,18 @@
   <!-- merged model information into one document -->
   <field name='id' type='int' stored='true' multiValued='false' required='true'  />
   <field name='slug' type='string' stored='true' multiValued='false' required='true'  />
-  <field name='root_clause_body_id' type='int' stored='true' multiValued='false' required='true'  />
-  <field name='document_id' type='int' stored='true' multiValued='false' required='true'  />
+  <field name='is_latest_clause_body' type='boolean' stored='false' multiValued='false' required='true'  />
   <field name='title' type='string' stored='false' multiValued='false' required='false'  />
   <field name='adoption_date' type='tdate' stored='false' multiValued='false' required='false'  />
-  <field name='tags' type='text' stored='false' multiValued='true' required='false'  />
+  <field name='tag_ids' type='int' stored='false' multiValued='true' required='false' omitNorms='false' />
+  <field name='addressee_ids' type='int' stored='false' multiValued='true' required='false'  />
   <field name='content' type='text' stored='false' multiValued='false' required='false'  />
-  <field name='clause_operative_phrase' type='text' stored='false' multiValued='false' required='false'  />
-  <field name='clause_information_type' type='text' stored='false' multiValued='false' required='false'  />
-  <field name='clause_process' type='text' stored='false' multiValued='false' required='false'  />
+  <field name='operative_phrase_id' type='int' stored='false' multiValued='false' required='false'  />
+  <field name='information_type_id' type='int' stored='false' multiValued='false' required='false'  />
+  <field name='clause_process_id' type='int' stored='false' multiValued='false' required='false'  />
+  <field name='organisation_id' type='int' stored='false' multiValued='false' required='false'  />
+  <field name='legalvalue_id' type='int' stored='false' multiValued='false' required='false'  />
+  <field name='decision_type' type='string' stored='false' multiValued='false' required='false'  />
  </fields>
 
  <!-- field to use to determine and enforce document uniqueness. -->
@@ -273,14 +276,17 @@
  
   <copyField source='id' dest='sfl_all' />
   <copyField source='slug' dest='sfl_all' />
-  <copyField source='root_clause_body_id' dest='sfl_all' />
-  <copyField source='document_id' dest='sfl_all' />
+  <copyField source='is_latest_clause_body' dest='sfl_all' />
   <copyField source='title' dest='sfl_all' />
   <copyField source='adoption_date' dest='sfl_all' />
-  <copyField source='tags' dest='sfl_all' />
+  <copyField source='tag_ids' dest='sfl_all' />
+  <copyField source='addressee_ids' dest='sfl_all' />
   <copyField source='content' dest='sfl_all' />
-  <copyField source='clause_operative_phrase' dest='sfl_all' />
-  <copyField source='clause_information_type' dest='sfl_all' />
-  <copyField source='clause_process' dest='sfl_all' />
+  <copyField source='operative_phrase_id' dest='sfl_all' />
+  <copyField source='information_type_id' dest='sfl_all' />
+  <copyField source='clause_process_id' dest='sfl_all' />
+  <copyField source='organisation_id' dest='sfl_all' />
+  <copyField source='legalvalue_id' dest='sfl_all' />
+  <copyField source='decision_type' dest='sfl_all' />
   
 </schema>

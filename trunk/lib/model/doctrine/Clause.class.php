@@ -12,12 +12,14 @@
  */
 class Clause extends BaseClause
 {
+    protected $overloadProperty = 'Document';
+
     protected static $autoCompletable = array(
         'slug' => true,
     );
 
     public function __toString() {
-        $identifier = $this->_get('Document')->_get('code');
+        $identifier = (string)$this->_get('Document');
         $identifier.= ' #'.$this->_get('clause_number');
         if ($this->_get('clause_number_information')) {
             $identifier.= ' '.$this->_get('clause_number_information');

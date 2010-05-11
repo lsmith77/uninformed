@@ -36,7 +36,7 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
       'updated_at'             => new sfWidgetFormDateTime(),
       'author_id'              => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'                => new sfWidgetFormInputText(),
-      'tags_list'              => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag')),
+      'tags_list'              => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Tag')),
     ));
 
     $this->setValidators(array(
@@ -61,7 +61,7 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
       'updated_at'             => new sfValidatorDateTime(),
       'author_id'              => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
       'version'                => new sfValidatorInteger(array('required' => false)),
-      'tags_list'              => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag', 'required' => false)),
+      'tags_list'              => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Tag', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('document[%s]');

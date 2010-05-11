@@ -25,6 +25,7 @@
  * @property Document $Parent
  * @property Organisation $Organisation
  * @property DocumentType $DocumentType
+ * @property Doctrine_Collection $Tags
  * @property Doctrine_Collection $Subdocuments
  * @property Doctrine_Collection $DocumentDocumentRelation
  * @property Doctrine_Collection $DocumentClauseRelation
@@ -52,6 +53,7 @@
  * @method Document            getParent()                   Returns the current record's "Parent" value
  * @method Organisation        getOrganisation()             Returns the current record's "Organisation" value
  * @method DocumentType        getDocumentType()             Returns the current record's "DocumentType" value
+ * @method Doctrine_Collection getTags()                     Returns the current record's "Tags" collection
  * @method Doctrine_Collection getSubdocuments()             Returns the current record's "Subdocuments" collection
  * @method Doctrine_Collection getDocumentDocumentRelation() Returns the current record's "DocumentDocumentRelation" collection
  * @method Doctrine_Collection getDocumentClauseRelation()   Returns the current record's "DocumentClauseRelation" collection
@@ -78,6 +80,7 @@
  * @method Document            setParent()                   Sets the current record's "Parent" value
  * @method Document            setOrganisation()             Sets the current record's "Organisation" value
  * @method Document            setDocumentType()             Sets the current record's "DocumentType" value
+ * @method Document            setTags()                     Sets the current record's "Tags" collection
  * @method Document            setSubdocuments()             Sets the current record's "Subdocuments" collection
  * @method Document            setDocumentDocumentRelation() Sets the current record's "DocumentDocumentRelation" collection
  * @method Document            setDocumentClauseRelation()   Sets the current record's "DocumentClauseRelation" collection
@@ -192,6 +195,11 @@ abstract class BaseDocument extends MyBaseRecord
              'local' => 'documenttype_id',
              'foreign' => 'id'));
 
+        $this->hasMany('Tag as Tags', array(
+             'refClass' => 'DocumentTag',
+             'local' => 'document_id',
+             'foreign' => 'tag_id'));
+
         $this->hasMany('Document as Subdocuments', array(
              'local' => 'id',
              'foreign' => 'parent_document_id'));
@@ -281,15 +289,8 @@ abstract class BaseDocument extends MyBaseRecord
              ),
              ));
         $versionable0->addChild($blameable1);
-        $taggable0 = new Doctrine_Template_Taggable(array(
-             'builderOptions' => 
-             array(
-              'baseClassName' => 'MyBaseRecord',
-             ),
-             ));
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);
-        $this->actAs($taggable0);
     }
 }

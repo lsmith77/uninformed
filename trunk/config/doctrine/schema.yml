@@ -349,9 +349,9 @@ ClauseClauseRelation:
       type: unique
 
 Clause:
-#  actAs:
-#    <<: *actAs
-#    sfLuceneDoctrine: ~
+  actAs:
+    <<: *actAs
+    sfLuceneDoctrineTemplate: ~
   columns:
     id:
       type: integer(4)
@@ -393,6 +393,7 @@ ClauseBody:
     Taggable:
       builderOptions:
         baseClassName: MyBaseRecord
+#    sfLuceneDoctrineTemplate: ~
   columns:
     id:
       type: integer(4)
@@ -410,6 +411,8 @@ ClauseBody:
       type: clob
     parent_clause_body_id:
       type: integer(4)
+    root_clause_body_id:
+      type: integer(4)
     status:
       type: enum
       values: [draft, review, reviewed, inactive, active]
@@ -421,6 +424,11 @@ ClauseBody:
       local: clause_body_id
       foreign: addressee_id
       refClass: ClauseAddressee
+    ClauseBodyRoot:
+      class: ClauseBody
+      local: root_clause_body_id
+      foreign: id
+      foreignAlias: Rootclause
     ClauseBodyParent:
       class: ClauseBody
       local: parent_clause_body_id

@@ -22,6 +22,6 @@ class searchComponents extends BasesfLuceneComponents
    */
   protected function getLuceneInstance()
   {
-    return sfLucene::getInstance('MyIndex');
+    return sfLucene::getInstance('Clause');
   }
 }

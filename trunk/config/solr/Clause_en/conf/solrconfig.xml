@@ -20,7 +20,7 @@
     <pingQuery>q=solr&amp;version=2.0&amp;start=0&amp;rows=0</pingQuery>
   </admin>
 
-  <dataDir>${solr.data.dir}/MyIndex_en</dataDir>
+  <dataDir>${solr.data.dir}/Clause_en</dataDir>
     
   <!-- WARNING: this <indexDefaults> section only provides defaults for index writers
        in general. See also the <mainIndex> section after that when changing parameters

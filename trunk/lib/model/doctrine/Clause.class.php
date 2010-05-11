@@ -18,7 +18,7 @@ class Clause extends BaseClause
 
     public function __toString() {
         $identifier = $this->_get('Document')->_get('code');
-        $identifier.= ' #'.$this->_get('clause_number');
+        $identifier.= ' num'.$this->_get('clause_number');
         if ($this->_get('clause_number_information')) {
             $identifier.= ' '.$this->_get('clause_number_information');
         }
@@ -57,6 +57,15 @@ class Clause extends BaseClause
                 ->execute();
         }
         $invoker->_get('Document')->refresh();
+    }
+
+    public function getTitle() {
+        return $this->_get('Document')->_get('name').' ('.(string)$this.')';
+    }
+
+    public function getAdoptionDate() {
+        $adoption_date = $this->_get('Document')->_get('adoption_date');
+        return date('Y-m-d\TH:i:s\Z', strtotime($adoption_date));
     }
 
     public function getSlug() {

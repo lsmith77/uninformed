@@ -1,6 +1,6 @@
 # Define all the models in your project that you want indexed.
 
-Clause:
+ClauseBody:
   index:
     cultures: [en]
     encoding: UTF-8
@@ -8,7 +8,7 @@ Clause:
     port: 8983
     base_url: "/solr"
   models:
-    Clause:
+    ClauseBody:
       title: title
       description: content
       route: clause/%slug%
@@ -25,6 +25,11 @@ Clause:
           stored: true
           required: true
           alias: getSlug
+        root_clause_body_id:
+          type: int
+          stored: true
+          required: true
+          alias: getRootClauseBodyId
         document_id:
           type: int
           stored: true

@@ -247,9 +247,11 @@ abstract class BaseClauseBody extends MyBaseRecord
               'baseClassName' => 'MyBaseRecord',
              ),
              ));
+        $sflucenedoctrinetemplate0 = new sfLuceneDoctrineTemplate();
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);
         $this->actAs($taggable0);
+        $this->actAs($sflucenedoctrinetemplate0);
     }
 }

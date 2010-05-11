@@ -349,9 +349,6 @@ ClauseClauseRelation:
       type: unique
 
 Clause:
-  actAs:
-    <<: *actAs
-    sfLuceneDoctrineTemplate: ~
   columns:
     id:
       type: integer(4)
@@ -393,7 +390,7 @@ ClauseBody:
     Taggable:
       builderOptions:
         baseClassName: MyBaseRecord
-#    sfLuceneDoctrineTemplate: ~
+    sfLuceneDoctrineTemplate: ~
   columns:
     id:
       type: integer(4)

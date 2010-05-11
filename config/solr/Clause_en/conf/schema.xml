@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<schema name="MyIndex_en" version="1.1">
+<schema name="Clause_en" version="1.1">
   <types>   
    <fieldType name="text" class="solr.TextField" positionIncrementGap="100">
       <analyzer type="index">
@@ -245,12 +245,13 @@
   <field name="sfl_all"      type="text"   indexed="true"  stored="false"  multiValued="true" required="false"/>
   
   <!-- merged model information into one document -->
-  <field name='id' type='int' stored='true' multiValued='false' required='false'  />
+  <field name='id' type='int' stored='true' multiValued='false' required='true'  />
   <field name='slug' type='string' stored='true' multiValued='false' required='true'  />
-  <field name='document_id' type='int' stored='false' multiValued='false' required='true'  />
-  <field name='title' type='string' stored='true' multiValued='false' required='false'  />
+  <field name='document_id' type='int' stored='true' multiValued='false' required='true'  />
+  <field name='title' type='string' stored='false' multiValued='false' required='false'  />
+  <field name='adoption_date' type='tdate' stored='false' multiValued='false' required='false'  />
   <field name='tags' type='text' stored='false' multiValued='true' required='false'  />
-  <field name='description' type='text' stored='true' multiValued='false' required='false'  />
+  <field name='content' type='text' stored='false' multiValued='false' required='false'  />
   <field name='clause_operative_phrase' type='text' stored='false' multiValued='false' required='false'  />
   <field name='clause_information_type' type='text' stored='false' multiValued='false' required='false'  />
   <field name='clause_process' type='text' stored='false' multiValued='false' required='false'  />
@@ -273,8 +274,9 @@
   <copyField source='slug' dest='sfl_all' />
   <copyField source='document_id' dest='sfl_all' />
   <copyField source='title' dest='sfl_all' />
+  <copyField source='adoption_date' dest='sfl_all' />
   <copyField source='tags' dest='sfl_all' />
-  <copyField source='description' dest='sfl_all' />
+  <copyField source='content' dest='sfl_all' />
   <copyField source='clause_operative_phrase' dest='sfl_all' />
   <copyField source='clause_information_type' dest='sfl_all' />
   <copyField source='clause_process' dest='sfl_all' />

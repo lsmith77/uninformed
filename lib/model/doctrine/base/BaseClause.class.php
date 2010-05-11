@@ -181,10 +181,8 @@ abstract class BaseClause extends MyBaseRecord
              ),
              ));
         $versionable0->addChild($blameable1);
-        $sflucenedoctrinetemplate0 = new sfLuceneDoctrineTemplate();
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);
-        $this->actAs($sflucenedoctrinetemplate0);
     }
 }

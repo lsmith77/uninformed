@@ -22,6 +22,6 @@ class searchActions extends BasesfLuceneActions
    */
   protected function getLuceneInstance()
   {
-    return sfLucene::getInstance('Clause', null);
+    return sfLucene::getInstance('ClauseBody', null);
   }
 }

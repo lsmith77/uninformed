@@ -18,7 +18,7 @@ class Clause extends BaseClause
 
     public function __toString() {
         $identifier = $this->_get('Document')->_get('code');
-        $identifier.= ' num'.$this->_get('clause_number');
+        $identifier.= ' #'.$this->_get('clause_number');
         if ($this->_get('clause_number_information')) {
             $identifier.= ' '.$this->_get('clause_number_information');
         }

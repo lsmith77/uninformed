@@ -23,13 +23,14 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
       'public_comment'        => new sfWidgetFormTextarea(),
       'parent_clause_body_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseBodyParent'), 'add_empty' => true)),
       'root_clause_body_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseBodyRoot'), 'add_empty' => true)),
+      'is_latest_clause_body' => new sfWidgetFormInputCheckbox(),
       'status'                => new sfWidgetFormChoice(array('choices' => array('draft' => 'draft', 'review' => 'review', 'reviewed' => 'reviewed', 'inactive' => 'inactive', 'active' => 'active'))),
       'created_at'            => new sfWidgetFormDateTime(),
       'updated_at'            => new sfWidgetFormDateTime(),
       'author_id'             => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
       'version'               => new sfWidgetFormInputText(),
       'addressees_list'       => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Addressee')),
-      'tags_list'             => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag')),
+      'tags_list'             => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Tag')),
     ));
 
     $this->setValidators(array(
@@ -41,13 +42,14 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
       'public_comment'        => new sfValidatorString(array('required' => false)),
       'parent_clause_body_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseBodyParent'), 'required' => false)),
       'root_clause_body_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseBodyRoot'), 'required' => false)),
+      'is_latest_clause_body' => new sfValidatorBoolean(array('required' => false)),
       'status'                => new sfValidatorChoice(array('choices' => array(0 => 'draft', 1 => 'review', 2 => 'reviewed', 3 => 'inactive', 4 => 'active'), 'required' => false)),
       'created_at'            => new sfValidatorDateTime(),
       'updated_at'            => new sfValidatorDateTime(),
       'author_id'             => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
       'version'               => new sfValidatorInteger(array('required' => false)),
       'addressees_list'       => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Addressee', 'required' => false)),
-      'tags_list'             => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'TaggableTag', 'required' => false)),
+      'tags_list'             => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Tag', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('clause_body[%s]');

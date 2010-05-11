@@ -1,14 +1,14 @@
 <?php
 
 /**
- * DocumentTaggableTag form.
+ * ClauseBodyTagVersion form.
  *
- * @package    uninformed
+ * @package    symfony
  * @subpackage form
  * @author     Your name here
  * @version    SVN: $Id: sfDoctrineFormTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class DocumentTaggableTagForm extends BaseDocumentTaggableTagForm
+class ClauseBodyTagVersionForm extends BaseClauseBodyTagVersionForm
 {
   public function configure()
   {

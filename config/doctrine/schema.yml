@@ -80,11 +80,6 @@ Import:
       foreign: id
 
 ExcelFile:
-  actAs:
-    <<: *actAs
-    Taggable:
-      builderOptions:
-        baseClassName: MyBaseRecord
   columns:
     id:
       type: integer(4)
@@ -172,11 +167,6 @@ DocumentType:
       foreign: id
 
 Document:
-  actAs:
-    <<: *actAs
-    Taggable:
-      builderOptions:
-        baseClassName: MyBaseRecord
   columns:
     id:
       type: integer(4)
@@ -235,9 +225,9 @@ Document:
       foreignAlias: Documents
     Tags:
       class: Tag
-      local: id
-      foreign: id
-      foreignAlias: Tags
+      local: document_id
+      foreign: tag_id
+      refClass: DocumentTag
 
 DocumentDocumentRelation:
   columns:
@@ -387,9 +377,6 @@ Clause:
 ClauseBody:
   actAs:
     <<: *actAs
-    Taggable:
-      builderOptions:
-        baseClassName: MyBaseRecord
     sfLuceneDoctrineTemplate: ~
   columns:
     id:
@@ -410,6 +397,9 @@ ClauseBody:
       type: integer(4)
     root_clause_body_id:
       type: integer(4)
+    is_latest_clause_body:
+      type: boolean
+      default: true
     status:
       type: enum
       values: [draft, review, reviewed, inactive, active]
@@ -443,6 +433,11 @@ ClauseBody:
       local: operative_phrase_id
       foreign: id
       foreignAlias: Clauses
+    Tags:
+      class: Tag
+      local: clause_body_id
+      foreign: tag_id
+      refClass: ClauseBodyTag
 
 ClauseReservation:
   columns:
@@ -500,6 +495,31 @@ ClauseInformationType:
       type: string(255)
       notnull: true
 
+Tag:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+  relations:
+    Documents:
+      class: Document
+      local: tag_id
+      foreign: document_id
+      refClass: DocumentTag
+    ClauseBodies:
+      class: ClauseBody
+      local: tag_id
+      foreign: clause_body_id
+      refClass: ClauseBodyTag
+  indexes:
+    name:
+      fields: [name]
+      type: unique
+
 TagImplication:
   columns:
     id:
@@ -511,22 +531,20 @@ TagImplication:
       values: ['implies', 'suggests']
       notnull: true
     tag_id:
-      type: integer(8)
+      type: integer(4)
       notnull: true
     implied_tag_id:
-      type: integer(8)
+      type: integer(4)
       notnull: true
   relations:
     Tag:
-      class: TaggableTag
+      class: Tag
       local: tag_id
       foreign: id
-      alias: Tag
     ImpliedTag:
-      class: TaggableTag
+      class: Tag
       local: implied_tag_id
       foreign: id
-      alias: ImpliedTag
   indexes:
     mapping:
       fields: [tag_id, implied_tag_id]
@@ -617,4 +635,38 @@ ClauseAddressee:
   indexes:
     mapping:
       fields: [clause_body_id, addressee_id]
+      type: unique
+
+DocumentTag:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    document_id:
+      type: integer(4)
+      notnull: true
+    tag_id:
+      type: integer(4)
+      notnull: true
+  indexes:
+    mapping:
+      fields: [document_id, tag_id]
+      type: unique
+
+ClauseBodyTag:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    clause_body_id:
+      type: integer(4)
+      notnull: true
+    tag_id:
+      type: integer(4)
+      notnull: true
+  indexes:
+    mapping:
+      fields: [clause_body_id, tag_id]
       type: unique

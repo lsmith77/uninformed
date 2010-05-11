@@ -13,6 +13,7 @@
  * @property clob $public_comment
  * @property integer $parent_clause_body_id
  * @property integer $root_clause_body_id
+ * @property boolean $is_latest_clause_body
  * @property enum $status
  * @property Doctrine_Collection $Addressees
  * @property ClauseBody $ClauseBodyRoot
@@ -20,6 +21,7 @@
  * @property ClauseProcess $ClauseProcess
  * @property ClauseInformationType $ClauseInformationType
  * @property ClauseOperativePhrase $ClauseOperativePhrase
+ * @property Doctrine_Collection $Tags
  * @property Doctrine_Collection $DocumentClauseRelation
  * @property Doctrine_Collection $Clause
  * @property Doctrine_Collection $Rootclause
@@ -34,6 +36,7 @@
  * @method clob                  getPublicComment()          Returns the current record's "public_comment" value
  * @method integer               getParentClauseBodyId()     Returns the current record's "parent_clause_body_id" value
  * @method integer               getRootClauseBodyId()       Returns the current record's "root_clause_body_id" value
+ * @method boolean               getIsLatestClauseBody()     Returns the current record's "is_latest_clause_body" value
  * @method enum                  getStatus()                 Returns the current record's "status" value
  * @method Doctrine_Collection   getAddressees()             Returns the current record's "Addressees" collection
  * @method ClauseBody            getClauseBodyRoot()         Returns the current record's "ClauseBodyRoot" value
@@ -41,6 +44,7 @@
  * @method ClauseProcess         getClauseProcess()          Returns the current record's "ClauseProcess" value
  * @method ClauseInformationType getClauseInformationType()  Returns the current record's "ClauseInformationType" value
  * @method ClauseOperativePhrase getClauseOperativePhrase()  Returns the current record's "ClauseOperativePhrase" value
+ * @method Doctrine_Collection   getTags()                   Returns the current record's "Tags" collection
  * @method Doctrine_Collection   getDocumentClauseRelation() Returns the current record's "DocumentClauseRelation" collection
  * @method Doctrine_Collection   getClause()                 Returns the current record's "Clause" collection
  * @method Doctrine_Collection   getRootclause()             Returns the current record's "Rootclause" collection
@@ -54,6 +58,7 @@
  * @method ClauseBody            setPublicComment()          Sets the current record's "public_comment" value
  * @method ClauseBody            setParentClauseBodyId()     Sets the current record's "parent_clause_body_id" value
  * @method ClauseBody            setRootClauseBodyId()       Sets the current record's "root_clause_body_id" value
+ * @method ClauseBody            setIsLatestClauseBody()     Sets the current record's "is_latest_clause_body" value
  * @method ClauseBody            setStatus()                 Sets the current record's "status" value
  * @method ClauseBody            setAddressees()             Sets the current record's "Addressees" collection
  * @method ClauseBody            setClauseBodyRoot()         Sets the current record's "ClauseBodyRoot" value
@@ -61,6 +66,7 @@
  * @method ClauseBody            setClauseProcess()          Sets the current record's "ClauseProcess" value
  * @method ClauseBody            setClauseInformationType()  Sets the current record's "ClauseInformationType" value
  * @method ClauseBody            setClauseOperativePhrase()  Sets the current record's "ClauseOperativePhrase" value
+ * @method ClauseBody            setTags()                   Sets the current record's "Tags" collection
  * @method ClauseBody            setDocumentClauseRelation() Sets the current record's "DocumentClauseRelation" collection
  * @method ClauseBody            setClause()                 Sets the current record's "Clause" collection
  * @method ClauseBody            setRootclause()             Sets the current record's "Rootclause" collection
@@ -109,6 +115,10 @@ abstract class BaseClauseBody extends MyBaseRecord
              'type' => 'integer',
              'length' => 4,
              ));
+        $this->hasColumn('is_latest_clause_body', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => true,
+             ));
         $this->hasColumn('status', 'enum', null, array(
              'type' => 'enum',
              'values' => 
@@ -155,6 +165,11 @@ abstract class BaseClauseBody extends MyBaseRecord
         $this->hasOne('ClauseOperativePhrase', array(
              'local' => 'operative_phrase_id',
              'foreign' => 'id'));
+
+        $this->hasMany('Tag as Tags', array(
+             'refClass' => 'ClauseBodyTag',
+             'local' => 'clause_body_id',
+             'foreign' => 'tag_id'));
 
         $this->hasMany('DocumentClauseRelation', array(
              'local' => 'id',
@@ -241,17 +256,10 @@ abstract class BaseClauseBody extends MyBaseRecord
              ),
              ));
         $versionable0->addChild($blameable1);
-        $taggable0 = new Doctrine_Template_Taggable(array(
-             'builderOptions' => 
-             array(
-              'baseClassName' => 'MyBaseRecord',
-             ),
-             ));
         $sflucenedoctrinetemplate0 = new sfLuceneDoctrineTemplate();
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);
-        $this->actAs($taggable0);
         $this->actAs($sflucenedoctrinetemplate0);
     }
 }

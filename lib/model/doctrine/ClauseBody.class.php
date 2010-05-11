@@ -31,14 +31,24 @@ class ClauseBody extends BaseClauseBody
         $root_clause_body_id = $invoker->_get('root_clause_body_id');
         $parent_clause_body_id = $invoker->_get('parent_clause_body_id');
         if (!empty($parent_clause_body_id) && empty($root_clause_body_id)) {
-            $invoker->set('root_clause_body_id', $invoker->ClauseBodyParent->root_clause_body_id);
+            $root_clause_body_id = $invoker->ClauseBodyParent->root_clause_body_id;
+            $invoker->set('root_clause_body_id', $root_clause_body_id);
+        }
+
+        if ($root_clause_body_id && !$this->exists()) {
+            Doctrine_Query::create()
+                ->update('ClauseBody')
+                ->set('is_latest_clause_body', false)
+                ->where('root_clause_body_id = ? OR id = ?', array($root_clause_body_id, $root_clause_body_id))
+                ->execute();
         }
     }
 
-    public function getLatestAdoptedClause() {
+    public function setLatestAdoptedClause() {
         if (isset($this->latestAdoptedClause)) {
             return $this->latestAdoptedClause;
         }
+
         $max_adoption_date = Doctrine_Query::create()
             ->select('MAX(adoption_date)')
             ->from('Document d')
@@ -55,14 +65,32 @@ class ClauseBody extends BaseClauseBody
         return $this->latestAdoptedClause;
     }
 
+    public function getAddresseeIds() {
+        $ids = Doctrine_Query::create()
+            ->select('addressee_id')
+            ->from('ClauseAddressee')
+            ->where('clause_body_id = ?', $this->_get('id'))
+            ->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
+        foreach ($ids as $key => $id) {
+            $ids[$key] = reset($id);
+        }
+        return $ids;
+    }
+
+    public function isIndexable() {
+        $clause = $this->setLatestAdoptedClause();
+        return !empty($clause);
+    }
+
     public function __call($method, $params) {
         try {
             return parent::__call($method, $params);
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
 
-        $clause = $this->getLatestAdoptedClause();
-        if (!is_object($clause)) {
-            trigger_error(sprintf('Call to undefined function: %s::%s().', get_class($this), $method), E_USER_ERROR);
+        $clause = $this->setLatestAdoptedClause();
+        if (empty($clause) || !is_object($clause)) {
+            throw new Exception(sprintf('Call to undefined function: %s::%s().', get_class($this), $method), E_USER_ERROR);
         }
 
         return call_user_func_array(array($clause, $method), $params);

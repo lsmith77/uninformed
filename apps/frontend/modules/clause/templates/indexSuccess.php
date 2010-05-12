@@ -1,3 +1,3 @@
 <?php echo $clause ?>
 <br />
-<?php echo $clause->getContent() ?>
+<?php echo $clause->ClauseBody->getContent() ?>

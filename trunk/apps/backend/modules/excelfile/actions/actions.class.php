@@ -20,6 +20,7 @@ class excelfileActions extends autoExcelfileActions
 
     $this->documents = null;
     if ($excelFileData) {
+        set_time_limit(60*60);
         $import = new excelSpreadsheetImport();
         $this->documents = $import->loadDataFromFile($excelFileData['file']);
         $import->saveData($excelFileId, $this->documents);
@@ -27,18 +28,18 @@ class excelfileActions extends autoExcelfileActions
 
 //    $this->redirect('excel_file');
   }
-	
+
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
       $file = $form->getValue('file');
-      
+
       $filename = 'uploaded_'.sha1($file->getOriginalName());
       $extension = $file->getExtension($file->getOriginalExtension());
       $file->save(sfConfig::get('sf_upload_dir').'/'.$filename.$extension);
-      
+
       $excel_file = $form->save();
 
       $this->redirect('excelfile/edit?id='.$excel_file->getId());

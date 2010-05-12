@@ -78,14 +78,10 @@ class Clause extends BaseClause
 
         $root_clause_body_id = $this->ClauseBody->root_clause_body_id;
         $query = Doctrine_Query::create()
-            ->from('Clause c')
+            ->from('Clause c INDEXBY c.document_id')
             ->innerJoin('c.ClauseBody cb')
             ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id));
 
-        $clauses = $query->execute();
-
-        $clauses->setKeyColumn('document_id');
-
-        return $clauses;
+        return $query->execute();
     }
 }

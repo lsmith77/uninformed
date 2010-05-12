@@ -92,7 +92,7 @@ class Document extends BaseDocument
     public function getMainOrgan() {
         // TODO: check if ok like that
         $organ = $this->Organisation;
-        $parent = $organ->getParent();
+        $parent = $organ->OrganisationParent;
         $mainOrgan = $parent ? $parent : $organ;
         return $mainOrgan;
     }

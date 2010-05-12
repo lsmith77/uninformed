@@ -13,6 +13,8 @@ class clauseActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->clause = $this->getRoute()->getObject();
+    $this->clauseBody = $this->clause->ClauseBody;
+    $this->document = $this->clause->Document;
 
     $this->forward404Unless($this->clause);
   }

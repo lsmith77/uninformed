@@ -19,4 +19,16 @@ class searchActions extends sfActions
     {
         $foo = sfLucene::getInstance('ClauseBody', null);
     }
+
+    public function executeResultPage(sfWebRequest $request)
+    {
+    }
+
+    public function executeResults(sfWebRequest $request)
+    {
+    }
+
+    public function executeFilters(sfWebRequest $request)
+    {
+    }
 }

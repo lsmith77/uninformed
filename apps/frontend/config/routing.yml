@@ -20,7 +20,16 @@ clause:
   options: { model: Clause, type: object }
   param:   { module: clause, action: index }
   requirements:
-    id: \d+-.*
+    id: \d+-?.*
+    sf_method: [get]
+
+document:
+  url:     /document/:id/*
+  class:   sfDoctrineRoute
+  options: { model: Document, type: object }
+  param:   { module: document, action: index }
+  requirements:
+    id: \d+-?.*
     sf_method: [get]
 
 # generic rules

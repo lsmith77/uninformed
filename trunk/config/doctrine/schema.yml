@@ -141,7 +141,7 @@ Organisation:
     parent_id:
       type: integer(4)
   relations:
-    Parent:
+    OrganisationParent:
       class: Organisation
       local: parent_id
       foreign: id
@@ -196,6 +196,8 @@ Document:
       type: clob
     parent_document_id:
       type: integer(4)
+    root_document_id:
+      type: integer(4)
     organisation_id:
       type: integer(4)
     documenttype_id:
@@ -210,7 +212,7 @@ Document:
       default: draft
       notnull: true
   relations:
-    Parent:
+    DocumentParent:
       class: Document
       local: parent_document_id
       foreign: id

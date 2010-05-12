@@ -20,6 +20,17 @@ class Document extends BaseDocument
         'code' => true,
     );
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->hasAccessor('root_document_id', 'getRootDocumentId');
+    }
+
+    public function getRootDocumentId() {
+        $root_document_id = $this->_get('root_document_id');
+        return empty($root_document_id) ? $this->_get('id') : $root_document_id;
+    }
+
     public function preSave($event) {
         $invoker = $event->getInvoker();
         $slug = $invoker->_get('name');
@@ -30,6 +41,13 @@ class Document extends BaseDocument
         $modified = $invoker->getModified();
         if (array_key_exists('name', $modified)) {
             $this->nameChange = true;
+        }
+
+        $root_document_id = $invoker->_get('root_document_id');
+        $parent_document_id = $invoker->_get('parent_document_id');
+        if (!empty($parent_document_id) && empty($root_document_id)) {
+            $root_document_id = $invoker->DocumentParent->root_document_id;
+            $invoker->set('root_document_id', $root_document_id);
         }
     }
 

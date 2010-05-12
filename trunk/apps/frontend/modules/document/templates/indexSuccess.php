@@ -26,8 +26,9 @@
     </tbody>
 </table>
 
-<?php foreach($clause->Document->getDocumentsByRoot() as $document): ?>
-<?php echo $document->getName(); ?><br />
+<?php $i = 0; ?>
+<?php foreach($document->getDocumentsByRoot() as $rootdoc): ?>
+<?php echo (++$i).'. '.$rootdoc->getName(); ?><br />
 <?php endforeach; ?>
 
 <h2>Voting</h2>

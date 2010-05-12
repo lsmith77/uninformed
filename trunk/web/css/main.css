@@ -100,4 +100,9 @@ p {
     font-size: 2em;
 }
 
+/* FRONTEND JQUERY COLLAPSING */
+a.toggleCol {
+    color: #999;
+}
+
 /* CLAUSE-MODULE */

@@ -50,8 +50,11 @@ class searchActions extends sfActions
     {
     }
 
-    public function executeResultPage(sfWebRequest $request)
+    public function executeClauseResultsPage(sfWebRequest $request)
     {
+        $this->query = $request->getGetParameter('q');
+        $this->tagMatch = $request->getGetParameter('tm');
+        $this->tags = $request->getGetParameter('t');
     }
 
     public function executeResults(sfWebRequest $request)

@@ -26,6 +26,10 @@
     </tbody>
 </table>
 
+<?php foreach($clause->Document->getDocumentsByRoot() as $document): ?>
+<?php echo $document->getName(); ?><br />
+<?php endforeach; ?>
+
 <h2>Voting</h2>
 <h2>Applied Keyword Tags</h2>
 

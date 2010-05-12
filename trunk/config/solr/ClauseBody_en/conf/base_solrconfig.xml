@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
- This is a stripped down config file used for a simple example...  
- It is *not* a good example to work from. 
+ This is a stripped down config file used for a simple example...
+ It is *not* a good example to work from.
 -->
 <config>
   <updateHandler class="solr.DirectUpdateHandler2" />
@@ -9,19 +9,19 @@
   <requestDispatcher handleSelect="true" >
     <requestParsers enableRemoteStreaming="false" multipartUploadLimitInKB="2048" />
   </requestDispatcher>
-  
+
   <requestHandler name="standard" class="solr.StandardRequestHandler" default="true" />
   <requestHandler name="/update" class="solr.XmlUpdateRequestHandler" />
   <requestHandler name="/admin/" class="org.apache.solr.handler.admin.AdminHandlers" />
-      
-  <!-- config for the admin interface --> 
+
+  <!-- config for the admin interface -->
   <admin>
     <defaultQuery>solr</defaultQuery>
     <pingQuery>q=solr&amp;version=2.0&amp;start=0&amp;rows=0</pingQuery>
   </admin>
 
   <dataDir>${solr.data.dir}/%%INDEX_NAME%%</dataDir>
-    
+
   <!-- WARNING: this <indexDefaults> section only provides defaults for index writers
        in general. See also the <mainIndex> section after that when changing parameters
        for Solr's main Lucene index. -->
@@ -74,10 +74,10 @@
      -->
     <!--<mergeScheduler class="org.apache.lucene.index.ConcurrentMergeScheduler"/>-->
 
-	  
+
     <!--
       This option specifies which Lucene LockFactory implementation to use.
-      
+
       single = SingleInstanceLockFactory - suggested for a read-only index
                or when there is no possibility of another process trying
                to modify the index.
@@ -93,5 +93,19 @@
     Controls how often Lucene loads terms into memory -->
     <!--<termIndexInterval>256</termIndexInterval>-->
   </indexDefaults>
+
+
+  <requestDispatcher handleSelect="true" >
+    <requestHandler name="search" class="solr.SearchHandler" default="true">
+      <lst name="defaults">
+       <str name="defType">dismax</str>
+       <str name="echoParams">explicit</str>
+       <float name="tie">0.01</float>
+       <str name="qf">title content</str>
+       <str name="pf">title content</str>
+       <str name="fl">id</str>
+      </lst>
+    </requestHandler>
+  </requestDispatcher>
 </config>
 

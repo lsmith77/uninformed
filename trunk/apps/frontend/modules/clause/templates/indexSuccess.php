@@ -43,6 +43,14 @@
 
 
 <h2><a href="#" class="toggleCol" target="history">History of this Clause</a></h2>
+<?php $clauses = $clause->getClausesByRoot(); ?>
+<?php foreach($clause->Document->getDocumentsByRoot() as $document): ?>
+<?php echo $document->getName(); ?><br />
+<?php if (isset($clauses[$document->getId()])): ?>
+<?php echo $clauses[$document->getId()]->ClauseBody->getContent(); ?><br />
+<?php endif; ?>
+<?php endforeach; ?>
+
 <table id="history" class="collapsed">
     <thead>
         <tr>

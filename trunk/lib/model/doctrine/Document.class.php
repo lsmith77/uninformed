@@ -65,6 +65,16 @@ class Document extends BaseDocument
         }
     }
 
+    public function getDocumentsByRoot() {
+        $root_document_id = $this->root_document_id;
+
+        $query = Doctrine_Query::create()
+            ->from('Document d')
+            ->where('d.id = ? OR d.root_document_id = ?', array($root_document_id, $root_document_id));
+
+        return $query->execute();
+    }
+
     public function getClauses() {
         $query = Doctrine_Query::create()
             ->from('Clause c')

@@ -7,9 +7,6 @@ ClauseBody:
     base_url: "/solr"
   models:
     ClauseBody:
-      title: title
-      description: content
-      route: clause/%slug%
       validator: isIndexable
       fields:
         id:
@@ -18,12 +15,6 @@ ClauseBody:
           stored: true
           required: true
           alias: getId
-        slug:
-          type: string
-          indexed: false
-          stored: true
-          required: true
-          alias: getSlug
         is_latest_clause_body:
           type: boolean
           required: true
@@ -31,6 +22,7 @@ ClauseBody:
         title:
           type: string
           alias: getTitle
+          stored: false
         adoption_date:
           type: tdate
           stored: false

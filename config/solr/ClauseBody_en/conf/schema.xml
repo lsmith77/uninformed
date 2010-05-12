@@ -246,7 +246,6 @@
   
   <!-- merged model information into one document -->
   <field name='id' type='int' stored='true' multiValued='false' required='true'  />
-  <field name='slug' type='string' stored='true' multiValued='false' required='true'  />
   <field name='is_latest_clause_body' type='boolean' stored='false' multiValued='false' required='true'  />
   <field name='title' type='string' stored='false' multiValued='false' required='false'  />
   <field name='adoption_date' type='tdate' stored='false' multiValued='false' required='false'  />
@@ -275,7 +274,6 @@
   <solrQueryParser defaultOperator="OR"/>
  
   <copyField source='id' dest='sfl_all' />
-  <copyField source='slug' dest='sfl_all' />
   <copyField source='is_latest_clause_body' dest='sfl_all' />
   <copyField source='title' dest='sfl_all' />
   <copyField source='adoption_date' dest='sfl_all' />

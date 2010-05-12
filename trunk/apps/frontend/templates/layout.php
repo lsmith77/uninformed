@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
   <head>
     <?php include_http_metas() ?>
     <?php include_metas() ?>
@@ -9,6 +9,15 @@
     <?php include_javascripts() ?>
   </head>
   <body>
+    <div class="header">
+      <span>un-informed.org - making commitments matter</span>
+    </div>
+    <ul class="nav">
+      <li><?php echo link_to('Search', 'search'); ?></li>
+      <li><?php echo link_to('UN-i.org', 'un_i_info'); ?></li>
+      <li><?php echo link_to('About', 'about'); ?></li>
+    </ul>
+    <noscript><p class="noscript">This site runs *much* better with javascript enabled</div></noscript>
     <?php echo $sf_content ?>
   </body>
 </html>

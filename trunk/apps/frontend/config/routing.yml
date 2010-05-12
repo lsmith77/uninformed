@@ -2,9 +2,13 @@
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
 # default rules
-homepage:
+search:
   url:   /
   param: { module: search, action: index }
+
+clauseSearch:
+  url:   /search/:action
+  param: { module: search, action: clauseResultsPage }
 
 sf_guard_signin:
   url:   /login
@@ -32,11 +36,10 @@ document:
     id: \d+-?.*
     sf_method: [get]
 
-# generic rules
-# please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
+un_i_info:
+  url:     /un-i.org
+  param: { module: un_i, action: index }
 
-default:
-  url:   /:module/:action/*
+about:
+  url:     /about
+  param: { module: about, action: index }

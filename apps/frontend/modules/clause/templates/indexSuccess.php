@@ -1,11 +1,15 @@
+<?php use_javascript('frontend/collapseBoxes.js'); ?>
+
 <?php echo $clause ?>
 <br />
 
-<h2>Content</h2>
-<div><?php echo $clauseBody->getContent() ?></div>
+<h2><a href="#" class="toggleCol" target="clauseContent">Content</a></h2>
+<div id="clauseContent">
+    <?php echo $clauseBody->getContent() ?>
+</div>
 
-<h2>Clause Details</h2>
-<table>
+<h2><a href="#" class="toggleCol" target="clauseDetails">Clause Details</a></h2>
+<table id="clauseDetails">
     <thead>
         <tr>
             <th>Clause Number</th>
@@ -38,8 +42,8 @@
 </div>
 
 
-<h2>History of this Clause</h2>
-<table>
+<h2><a href="#" class="toggleCol" target="history">History of this Clause</a></h2>
+<table id="history" class="collapsed">
     <thead>
         <tr>
             <th>Year</th>
@@ -56,6 +60,7 @@
     </tbody>
 </table>
 
-
-<h2>Other Clauses in this Document</h2>
-<?php include_partial('clauseListOfDocument', array('clauses' => $document->getClauses(), 'currentClause' => $clause)) ?>
+<h2><a href="#" class="toggleCol" target="otherClauses">Other Clauses in this Document</a></h2>
+<div id="otherClauses" class="collapsed">
+    <?php include_partial('clauseListOfDocument', array('clauses' => $document->getClauses(), 'currentClause' => $clause)) ?>
+</div>

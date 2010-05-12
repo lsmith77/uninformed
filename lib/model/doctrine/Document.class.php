@@ -61,6 +61,14 @@ class Document extends BaseDocument
         return $query->execute();
     }
 
+    public function getMainOrgan() {
+        // TODO: check if ok like that
+        $organ = $this->Organisation;
+        $parent = $organ->getParent();
+        $mainOrgan = $parent ? $parent : $organ;
+        return $mainOrgan;
+    }
+
     public function getSlug() {
         return $this->_get('id').'-'.$this->_get('slug');
     }

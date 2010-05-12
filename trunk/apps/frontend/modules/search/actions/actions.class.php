@@ -46,6 +46,11 @@ class searchActions extends sfActions
         $this->setTemplate('renderJson');
     }
 
+    protected function checkArrayOfInteger($array) {
+        $array = implode('', $array);
+        return strlen($array) === strlen((int)$array);
+    }
+
     public function executeIndex(sfWebRequest $request)
     {
     }
@@ -76,7 +81,10 @@ class searchActions extends sfActions
             'information_type_id' => 'ClauseInformationType',
             'clause_process_id' => 'ClauseProcess',
             'legalvalue_id' => 'LegalValue',
-            'decision_type' => array('values' => array('vote','ratification'), 'model' => 'DecisionType'),
+            'decision_type' => array(
+                'model' => 'DecisionType',
+                'values' => array('vote', 'ratification'),
+            ),
         );
 
         foreach ($facets as $facet => $model) {
@@ -94,7 +102,10 @@ class searchActions extends sfActions
             }
         }
         if (!empty($this->tags)) {
-            // TODO: add validation to ensure we are only getting integers
+            if (!$this->checkArrayOfInteger($this->tags)) {
+                $output = array('status' => 'error', 'message' => "parameter 't' needs to be an array of integer");
+                return $this->returnJson($output);
+            }
             $fq_op = ($this->tagMatch == 'all') ? ' AND ' : ' OR ';
             $fq = 'tag_ids:'.implode($fq_op.'tag_ids:', $this->tags);
             $criteria->addParam('fq', $fq);
@@ -103,13 +114,19 @@ class searchActions extends sfActions
             }
         }
 
-        // TODO: handle case where both query and tags is empty
-
         if (isset($criteria2)) {
             $criteria->setLimit(0);
             $fq = isset($fq) ? "($fq) AND " : '';
             foreach ($this->filters as $filter => $ids) {
-                // TODO: add validation to ensure we are handle supported $facets
+                if (!$this->checkArrayOfInteger($ids)) {
+                    $output = array('status' => 'error', 'message' => "parameter 'f' for key '$filter' to be an array of integer");
+                    return $this->returnJson($output);
+                }
+                if (empty($facets[$filter])) {
+                    $output = array('status' => 'error', 'message' => "unsupported filter '$filter'");
+                    return $this->returnJson($output);
+                }
+                $filter = '-'.$filter;
                 $fq.= $filter.':'.implode(' AND '.$filter.':', $ids);
             }
             $criteria2->addParam('fq', $fq);
@@ -145,7 +162,7 @@ class searchActions extends sfActions
             ? $lucene->friendlyFind($criteria2)->toArray()
             : $results->toArray();
 
-        $output = array('data' => $data, 'filters' => $filters);
+        $output = array('data' => $data, 'filters' => $filters, 'status' => 'success', 'message' => 'ok');
         return $this->returnJson($output);
     }
 }

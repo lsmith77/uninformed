@@ -89,12 +89,16 @@ class Document extends BaseDocument
         return $query->execute();
     }
 
-    public function getMainOrgan() {
-        // TODO: check if ok like that
-        $organ = $this->Organisation;
-        $parent = $organ->OrganisationParent;
-        $mainOrgan = $parent ? $parent : $organ;
-        return $mainOrgan;
+    public function getStructuredOrganisation() {
+        $o = $this->Organisation;
+        $parent = $o->getParentId() ? $o->OrganisationParent : null;
+        $root = $parent && $parent->getParentId() ? $parent->OrganisationParent : null;
+        //
+        $s = array();
+        $s['main'] = $root ? $root : ($parent ? $parent : $o);
+        $s['current'] = $root ? $parent : ($parent ? $o : '');
+        $s['sub'] = $root ? $o : '';
+        return $s;
     }
 
     public function getSlug() {

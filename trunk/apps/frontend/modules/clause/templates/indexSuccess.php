@@ -33,8 +33,8 @@
 </table>
 
 
-<h2>Applied Keyword Tags</h2>
-<div>
+<h2><a href="#" class="toggleCol" target="keywords">Applied Keyword Tags</a></h2>
+<div id="keywords">
     <?php foreach($clauseBody->Tags as $tag): ?>
     <?php //TODO: change link url! ?>
     <?php echo link_to($tag->getName(), $clause); ?>

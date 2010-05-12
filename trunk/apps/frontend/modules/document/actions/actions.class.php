@@ -18,7 +18,6 @@ class documentActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
       $this->document = $this->getRoute()->getObject();
-
       $this->forward404Unless($this->document);
   }
 }

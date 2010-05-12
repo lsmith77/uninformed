@@ -7,21 +7,16 @@
  * file that was distributed with this source code.
  */
 
-require_once  sfConfig::get('sf_plugins_dir'). '/sfSolrPlugin/modules/sfLucene/lib/BasesfLuceneActions.class.php';
-
 /**
  * @package    sfLucenePlugin
  * @subpackage Module
  * @author     Carl Vondrick <carl@carlsoft.net>
  * @version SVN: $Id: actions.class.php 6247 2007-12-01 03:25:13Z Carl.Vondrick $
  */
-class searchActions extends BasesfLuceneActions
+class searchActions extends sfActions
 {
-  /**
-   * Returns an instance of sfLucene configured for this environment.
-   */
-  protected function getLuceneInstance()
-  {
-    return sfLucene::getInstance('ClauseBody', null);
-  }
+    public function executeIndex(sfWebRequest $request)
+    {
+        $foo = sfLucene::getInstance('ClauseBody', null);
+    }
 }

@@ -83,7 +83,8 @@ class searchActions extends sfActions
             $criteria->addFacetField($facet);
         }
 
-        $criteria->addSane('water');
+        $criteria->addFieldSane('content', $request->getGetParameter('fulltext'));
+//        $criteria->addFieldSane('title', $request->getGetParameter('fulltext'));
 
         $results = $lucene->friendlyFind($criteria);
 
@@ -103,7 +104,7 @@ class searchActions extends sfActions
             }
             foreach ($output[$model] as $key => $data) {
                 if (empty($solr[$data['id']])) {
-//                    unset($output[$model][$key]);
+                    unset($output[$model][$key]);
                 } else {
                     $output[$model][$key]['count'] = $solr[$data['id']];
                 }

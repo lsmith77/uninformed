@@ -43,18 +43,22 @@ class searchActions extends sfActions
 
     public function executeIndex(sfWebRequest $request)
     {
-        $foo = sfLucene::getInstance('ClauseBody', null);
     }
 
     public function executeResultPage(sfWebRequest $request)
     {
+        $foo = sfLucene::getInstance('ClauseBody', null);
     }
 
     public function executeResults(sfWebRequest $request)
     {
+        $output = array();
+        return $this->returnJson($output);
     }
 
     public function executeFilters(sfWebRequest $request)
     {
+        $output = array();
+        return $this->returnJson($output);
     }
 }

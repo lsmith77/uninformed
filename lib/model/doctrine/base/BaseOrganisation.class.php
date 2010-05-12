@@ -9,27 +9,27 @@
  * @property string $name
  * @property string $slug
  * @property integer $parent_id
- * @property Organisation $Parent
+ * @property Organisation $OrganisationParent
  * @property Doctrine_Collection $Suborganisations
  * @property Doctrine_Collection $Organisations
  * @property Doctrine_Collection $Countries
  * 
- * @method integer             getId()               Returns the current record's "id" value
- * @method string              getName()             Returns the current record's "name" value
- * @method string              getSlug()             Returns the current record's "slug" value
- * @method integer             getParentId()         Returns the current record's "parent_id" value
- * @method Organisation        getParent()           Returns the current record's "Parent" value
- * @method Doctrine_Collection getSuborganisations() Returns the current record's "Suborganisations" collection
- * @method Doctrine_Collection getOrganisations()    Returns the current record's "Organisations" collection
- * @method Doctrine_Collection getCountries()        Returns the current record's "Countries" collection
- * @method Organisation        setId()               Sets the current record's "id" value
- * @method Organisation        setName()             Sets the current record's "name" value
- * @method Organisation        setSlug()             Sets the current record's "slug" value
- * @method Organisation        setParentId()         Sets the current record's "parent_id" value
- * @method Organisation        setParent()           Sets the current record's "Parent" value
- * @method Organisation        setSuborganisations() Sets the current record's "Suborganisations" collection
- * @method Organisation        setOrganisations()    Sets the current record's "Organisations" collection
- * @method Organisation        setCountries()        Sets the current record's "Countries" collection
+ * @method integer             getId()                 Returns the current record's "id" value
+ * @method string              getName()               Returns the current record's "name" value
+ * @method string              getSlug()               Returns the current record's "slug" value
+ * @method integer             getParentId()           Returns the current record's "parent_id" value
+ * @method Organisation        getOrganisationParent() Returns the current record's "OrganisationParent" value
+ * @method Doctrine_Collection getSuborganisations()   Returns the current record's "Suborganisations" collection
+ * @method Doctrine_Collection getOrganisations()      Returns the current record's "Organisations" collection
+ * @method Doctrine_Collection getCountries()          Returns the current record's "Countries" collection
+ * @method Organisation        setId()                 Sets the current record's "id" value
+ * @method Organisation        setName()               Sets the current record's "name" value
+ * @method Organisation        setSlug()               Sets the current record's "slug" value
+ * @method Organisation        setParentId()           Sets the current record's "parent_id" value
+ * @method Organisation        setOrganisationParent() Sets the current record's "OrganisationParent" value
+ * @method Organisation        setSuborganisations()   Sets the current record's "Suborganisations" collection
+ * @method Organisation        setOrganisations()      Sets the current record's "Organisations" collection
+ * @method Organisation        setCountries()          Sets the current record's "Countries" collection
  * 
  * @package    symfony
  * @subpackage model
@@ -69,7 +69,7 @@ abstract class BaseOrganisation extends MyBaseRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Organisation as Parent', array(
+        $this->hasOne('Organisation as OrganisationParent', array(
              'local' => 'parent_id',
              'foreign' => 'id'));
 

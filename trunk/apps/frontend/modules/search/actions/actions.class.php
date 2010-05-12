@@ -59,15 +59,12 @@ class searchActions extends sfActions
 
     public function executeResults(sfWebRequest $request)
     {
-        $output = array();
-        return $this->returnJson($output);
-    }
-
-    public function executeFilters(sfWebRequest $request)
-    {
+        $fulltext = $request->getGetParameter('fulltext');
         $lucene = $this->getInstance();
 
         $criteria = new sfLuceneFacetsCriteria;
+        $criteria->addSane($fulltext);
+
         $facets = array(
             'organisation_id' => 'Organisation',
             'tag_ids' => 'Tag',
@@ -83,33 +80,34 @@ class searchActions extends sfActions
             $criteria->addFacetField($facet);
         }
 
-        $criteria->addFieldSane('content', $request->getGetParameter('fulltext'));
-//        $criteria->addFieldSane('title', $request->getGetParameter('fulltext'));
-
         $results = $lucene->friendlyFind($criteria);
-
+        $filters = array();
         foreach ($facets as $facet => $model) {
             $solr = $results->getFacetField($facet);
             if (is_array($model)) {
-                $output[$model['model']] = array();
+                $filters[$model['model']] = array();
                 foreach ($model['values'] as $value) {
-                    $output[$model['model']][] = array('id' => $value);
+                    $filters[$model['model']][] = array('id' => $value);
                 }
                 $model = $model['model'];
             } else {
-                $output[$model] = Doctrine_Query::create()
+                $filters[$model] = Doctrine_Query::create()
                     ->from($model)
                     ->whereIn('id', array_keys($solr))
                     ->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
             }
-            foreach ($output[$model] as $key => $data) {
-                if (empty($solr[$data['id']])) {
-                    unset($output[$model][$key]);
+            foreach ($filters[$model] as $key => $value) {
+                if (empty($solr[$value['id']])) {
+                    unset($filters[$model][$key]);
                 } else {
-                    $output[$model][$key]['count'] = $solr[$data['id']];
+                    $filters[$model][$key]['count'] = $solr[$value['id']];
                 }
             }
         }
+
+        $data = $lucene->friendlyFind($criteria)->toArray();
+
+        $output = array('data' => $data, 'filters' => $filters);
         return $this->returnJson($output);
     }
 }

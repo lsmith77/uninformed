@@ -59,9 +59,9 @@ abstract class MyBaseRecord extends sfDoctrineRecord
             }
         } else if ($tags instanceof Doctrine_Collection) {
             return $tags->getPrimaryKeys();
-        } else {
-            throw new Doctrine_Exception('Invalid $tags data provided. Must be a string of tags, an array of tag ids, or a Doctrine_Collection of tag records.');
         }
+
+        throw new Doctrine_Exception('Invalid $tags data provided. Must be a string of tags, an array of tag ids, or a Doctrine_Collection of tag records.');
     }
 
     public function setTags($tags)
@@ -74,8 +74,8 @@ abstract class MyBaseRecord extends sfDoctrineRecord
 
     public function getTagIds() {
         // TODO: only allow for ClauseBody/Document
-        $colname = preg_replace('/([A-Z])/', '_$1', get_class($this));
-        $colname = strtolower(substr($colname, 1));
+        $colname = preg_replace('/([A-Z])/', '_$1', lcfirst(get_class($this)));
+        $colname = strtolower($colname);
         $ids = Doctrine_Query::create()
             ->select('tag_id')
             ->from(get_class($this).'Tag')

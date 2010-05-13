@@ -53,21 +53,36 @@ class searchActions extends sfActions
 
     public function executeIndex(sfWebRequest $request)
     {
+        $this->query = '';
+        $this->tagMatch = 'any';
+        $this->tags = array();
     }
 
     public function executeClauseResultsPage(sfWebRequest $request)
     {
         $this->query = $request->getGetParameter('q');
         $this->tagMatch = $request->getGetParameter('tm');
-        $this->tags = $request->getGetParameter('t');
+        $this->tags = (array) $request->getGetParameter('t');
+    }
+
+    public function executeSearchTags(sfWebRequest $request)
+    {
+        $term = $request->getGetParameter('term');
+        // TODO find all tags matching $term
+        $tags = array(
+            array('id' => 43, 'label' => 'foo'),
+            array('id' => 3, 'label' => 'bar'),
+            array('id' => 5, 'label' => 'baz'),
+        );
+        return $this->returnJson($tags);
     }
 
     public function executeResults(sfWebRequest $request)
     {
         $this->query = $request->getGetParameter('q');
         $this->tagMatch = $request->getGetParameter('tm');
-        $this->tags = (array)$request->getGetParameter('t');
-        $this->filters = (array)$request->getGetParameter('f');
+        $this->tags = (array) $request->getGetParameter('t');
+        $this->filters = (array) $request->getGetParameter('f');
 
         $lucene = $this->getInstance();
 
@@ -107,7 +122,7 @@ class searchActions extends sfActions
                 return $this->returnJson($output);
             }
             $fq_op = ($this->tagMatch == 'all') ? ' AND ' : ' OR ';
-            $fq = 'tag_ids:'.implode($fq_op.'tag_ids:', $this->tags);
+            $fq = 'tag_ids:'.implode($fq_op.'tag_ids:', array_keys($this->tags));
             $criteria->addParam('fq', $fq);
             if (isset($criteria2)) {
                 $criteria2->addParam('fq', $fq);

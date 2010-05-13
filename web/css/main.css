@@ -74,7 +74,7 @@ h1 {
 
 h2 {
     font-size: 1.2em;
-    margin-bottom: .7em;
+    margin: .7em 0;
 }
 
 input[type=text] {
@@ -142,6 +142,31 @@ div.search {
     float: left;
 }
 
+
+/* CLAUSES/DOCUMENTS DETAILVIEW */
+.clauseList li {
+    position: relative;
+    padding: 5px 50px 5px 10px;
+}
+.clauseList span {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+.clauseList a {
+    text-decoration: underline;
+    color: #333;
+}
+
+#tags {
+    margin-bottom: 1.5em;
+}
+
+#tags a {
+    text-decoration: underline;
+    color: #333;
+}
+
 div.results {
     margin-left: 260px;
 }
@@ -149,4 +174,9 @@ div.results {
 /* FRONTEND JQUERY COLLAPSING */
 a.toggleCol {
     color: #000;
+    padding-left: 20px;
+    background: url(../images/hide.gif) no-repeat;
+}
+a.toggleCol.closed {
+    background: url(../images/collapse.gif) no-repeat;
 }

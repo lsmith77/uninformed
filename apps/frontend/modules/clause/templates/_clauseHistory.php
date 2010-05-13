@@ -6,9 +6,7 @@
  * 
  */
 $rootclauses = $clause->getClausesByRoot();
-$currentDoc = $clause->Document;
-$rootdocuments = $currentDoc->getDocumentsByRoot();
-$history = array();
+$rootdocuments = $clause->Document->getDocumentsByRoot();
 ?>
 <table id="history" class="collapsed">
     <thead>
@@ -19,19 +17,32 @@ $history = array();
         </tr>
     </thead>
     <tbody>
+        <?php $introduced = null; ?>
         <?php foreach($rootdocuments as $rootdoc): ?>
+        <?php $current = (isset($rootclauses[$rootdoc->getId()])) ? $rootclauses[$rootdoc->getId()] : null; ?>
         <tr>
             <td>
                 <?php echo date('Y',strtotime($rootdoc->getAdoptionDate())); ?>
             </td>
             <td>
-                <?php echo $rootdoc->getName(); ?>
+                <?php
+                if ($current && $introduced) {
+                    $iID = $introduced->ClauseBody->getId();
+                    $cID = $current->ClauseBody->getId();
+                    if ($iID===$cID) {
+                        echo 'None';
+                    } else {
+                        echo 'Yes';
+                    }
+                }
+                if ($current && !$introduced) {
+                   $introduced = $current;
+                   echo 'Clause introduced';
+                }
+                ?>
             </td>
             <td>
-                <?php echo $rootdoc; ?>
-                <?php if (isset($rootclauses[$rootdoc->getId()])): ?>
-                    <?php echo $rootclauses[$rootdoc->getId()]->ClauseBody->getContent(); ?>
-                <?php endif; ?>
+                <?php echo isset($current) ? $current->ClauseBody->getContent() : ''; ?>
             </td>
         </tr>
         <?php endforeach; ?>

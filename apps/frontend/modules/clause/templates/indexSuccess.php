@@ -1,9 +1,6 @@
 <?php use_javascript('frontend/collapseBoxes.js'); ?>
 
-<h1>Clause details</h1>
-
-<?php echo $clause ?>
-<br />
+<h1><?php echo $clause ?></h1>
 
 <h2><a href="#" class="toggleCol" target="clauseContent">Content</a></h2>
 <div id="clauseContent">
@@ -35,13 +32,9 @@
 </table>
 
 
-<h2><a href="#" class="toggleCol" target="keywords">Applied Keyword Tags</a></h2>
-<div id="keywords">
-    <?php foreach($clauseBody->Tags as $tag): ?>
-    <?php //TODO: change link url! ?>
-    <?php echo link_to($tag->getName(), $clause); ?>
-    <?php endforeach; ?>
-</div>
+<h2><a href="#" class="toggleCol" target="tags">Applied Keyword Tags</a></h2>
+<?php include_partial('tagList', array('tags'=>$clauseBody->Tags)); ?>
+
 
 <h2><a href="#" class="toggleCol" target="history">History of this Clause</a></h2>
 <?php include_partial('clauseHistory', array('clause'=>$clause)); ?>

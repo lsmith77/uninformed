@@ -8,7 +8,7 @@
 ?>
 <?php $currentClauseId = isset($currentClause) ? $currentClause->clause_number : null; ?>
 <?php if(count($clauses)): ?>
-<ul>
+<ul class="clauseList">
     <?php foreach($clauses as $clause): ?>
     <?php if($clause->clause_number !== $currentClauseId): ?>
     <li>

@@ -3,6 +3,10 @@
 
 # default values
 all:
+  sfApplyPlugin:
+    from:
+      email: "noreply@un-informed.org"
+      fullname: "UN-informed.org"
   sf_admin_dash:
     web_dir:                      /sfAdminDashPlugin
     image_dir:                    /sfAdminDashPlugin/images/icons/
@@ -24,16 +28,19 @@ all:
             url:    organisation
           "Excelfile Upload":
             url:    excel_file
-          Documents:
-            url:    document
           "Doc. Reservations":
             url:    document_reservation
           "Cl. Reservations":
             url:    clause_reservation
-          Clause:
-            url:    clause
           Votes:
             url:    vote
+      "Document/Clause":
+        credentials:      [admin]
+        items:
+          Documents:
+            url:    document
+          Clause:
+            url:    clause
       "User Management":
         credentials:      [superadmin]
         items:

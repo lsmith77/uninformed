@@ -3,7 +3,6 @@ sfGuardUser:
     username:       admin
     password:       admin
     is_super_admin: true
-    email_address:  'foo@bar.de'
 
 sfGuardPermission:
   sgp_admin:

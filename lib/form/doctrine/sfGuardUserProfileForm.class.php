@@ -12,5 +12,13 @@ class sfGuardUserProfileForm extends BasesfGuardUserProfileForm
 {
   public function configure()
   {
+      unset($this->widgetSchema['author_id']);
+      unset($this->validatorSchema['author_id']);
+
+      unset($this->widgetSchema['created_at']);
+      unset($this->validatorSchema['created_at']);
+
+      unset($this->widgetSchema['updated_at']);
+      unset($this->validatorSchema['updated_at']);
   }
 }

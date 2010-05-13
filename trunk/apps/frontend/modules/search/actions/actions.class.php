@@ -101,15 +101,16 @@ class searchActions extends sfActions
             ),
         );
 
+        // use to define the order of the filters in the view
         $labels = array(
-            'organisation_id' => 'Organisation',
-            'tag_ids' => 'Tag',
             'addressee_ids' => 'Addressee',
-            'operative_phrase_id' => 'Clause Operative Phrase',
-            'information_type_id' => 'Clause Information Type',
-            'clause_process_id' => 'Clause Process',
             'legalvalue_id' => 'Legal Value',
             'decision_type' => 'Decision Type',
+            'organisation_id' => 'Organisation',
+            'clause_process_id' => 'Clause Process',
+            'operative_phrase_id' => 'Clause Operative Phrase',
+            'information_type_id' => 'Clause Information Type',
+            'tag_ids' => 'Tag',
         );
 
         foreach ($facets as $facet => $model) {

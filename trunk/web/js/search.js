@@ -6,15 +6,16 @@ $(function(){
         $('#taglist').jqoteapp(tpl, item);
     },
     loadResultsPage = function() {
-        var url = '/search/results?' + $('#searchForm').serialize()
+        var url = '/search/results?' + $('#searchForm').serialize();
         $.getJSON(url, null, function(data, status) {
             $('.filters').jqotesub($('#filtersTpl'), data);
             $('.results').jqotesub($('#resultsTpl'), data);
         });
     },
     refreshResults = function(query, tags, tagMatch) {
-        $.getJSON('/search/results', {q: query, t: tags, tm: tagMatch}, function(data, status) {
-            $('.filters').jqotesub($('#filtersTpl'), data);
+        var url = '/search/results?' + $('#searchForm').serialize();
+        url += '&' + $('#filtersForm').serialize();
+        $.getJSON(url, null, function(data, status) {
             $('.results').jqotesub($('#resultsTpl'), data);
         });
     };

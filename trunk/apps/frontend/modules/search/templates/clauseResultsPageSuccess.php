@@ -17,9 +17,18 @@
 <script type="text/x-jqote-template" id="filtersTpl">
     <![CDATA[
     <h2>Search filters</h2>
-    <% for (var str in this.filters) { %>
-        <h3><%= str %></h3>
-    <% } %>
+    <form id="filtersForm">
+    <% for (var str in this.filterLabels) {
+        var f = this.filters[str];
+        if (f.length) { %>
+        <h3><%= this.filterLabels[str] %></h3>
+        <% for each (var item in f) { %>
+        <input type="checkbox" name="f[<%= str %>][]" value="<%= item.id %>" checked="checked" <%= (item.count !== this.totalResults ? 'disabled="disabled"':'') %> />
+        <%= item.name %> <span class="count">(<%= item.count %>)</span><br />
+        <% } %>
+    <%  }
+    } %>
+    </form>
     ]]>
 </script>
 <script type="text/x-jqote-template" id="resultsTpl">
@@ -29,7 +38,7 @@
     for (i = 0; i < cnt; i++) { %>
     <div class="result">
         Id: <%= this.data[i].id %>
-        Guid: <%= this.data[i].sfl_guid %>
+        <% console.log(this.data[i]); %>
     </div>
     <% } %>
     ]]>

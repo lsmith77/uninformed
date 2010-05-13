@@ -1,4 +1,7 @@
 <?php use_javascript('frontend/collapseBoxes.js'); ?>
+<?php if ($sf_user->isAuthenticated()): ?>
+    <?php echo link_to('Bookmark this', 'bookmark_add', array('type'=>1, 'id'=>$clause->getId())); ?>
+<?php endif; ?>
 
 <h1><?php echo $clause ?></h1>
 

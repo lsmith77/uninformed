@@ -46,6 +46,19 @@ sf_guard_password:
   url: /reset-request
   param: { module: sfApply, action: resetRequest }
 
+bookmark:
+  url:     /bookmark
+  class: sfDoctrineRoute
+  options: { model: Bookmark, type: object }
+  param: { module: bookmark, action: index }
+
+bookmark_add:
+  url:     /bookmark/:action/:type/:id
+  param:   { module: bookmark, action: add }
+  requirements:
+    type: \d+-?.*
+    id: \d+-?.*
+
 clause:
   url:     /clause/:id/*
   class:   sfDoctrineRoute

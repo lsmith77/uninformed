@@ -178,10 +178,21 @@ class searchActions extends sfActions
             : $results->toArray();
 
         // extract the data out of the result objects
-        $fields = new ReflectionProperty('Apache_Solr_Document', '_fields');
-        $fields->setAccessible(true);
-        foreach ($data as $k => $item) {
-            $data[$k] = $fields->getValue($item);
+        if ($data) {
+            $clauses = array();
+            foreach ($data as $item) {
+                $clauses[] = (int) $item->getField('clause_id');
+            }
+            $q = Doctrine_Query::create()
+                ->from('clause');
+            if (count($clauses) === 1) {
+                $q->where('id = ?', $clauses[0]);
+            } elseif (count($clauses) > 1) {
+                $q->where('id IN ('.implode(',', $clauses).')');
+            } else {
+                $q->where('id = 0');
+            }
+            $data = $q->fetchArray();
         }
 
         $output = array('data' => $data, 'filters' => $filters, 'status' => 'success', 'message' => 'ok');

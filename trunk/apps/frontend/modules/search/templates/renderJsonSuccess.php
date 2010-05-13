@@ -1,3 +1,3 @@
 <pre>
-<?php print_r($sf_data->getRaw('output')); ?>
+<?php print_r(json_decode(json_encode($sf_data->getRaw('output')))); ?>
 </pre>

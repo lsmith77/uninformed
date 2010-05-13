@@ -87,6 +87,41 @@ abstract class MyBaseRecord extends sfDoctrineRecord
         return $ids;
     }
 
+    public function hasComments()
+    {
+      return $this->getNbComments() > 0;
+    }
+
+    public function getNbComments()
+    {
+      return $this->getCommentsQuery()->count();
+    }
+
+    public function addComment(Comment $comment)
+    {
+      $comment->set('record_model', $this->getTable()->getComponentName());
+      $comment->set('record_id', $this->get('id'));
+      $comment->save();
+
+      return $this;
+    }
+
+    public function getAllComments()
+    {
+      return $this->getCommentsQuery()->execute();
+    }
+
+    public function getCommentsQuery()
+    {
+      return Doctrine::getTable('Comment')->createQuery('c')
+        ->innerJoin( 'c.User u')
+        ->innerJoin( 'c.CommentReport cr')
+        ->where('c.record_id = ?', $this->get('id'))
+        ->andWhere('c.record_model = ?', $this->getTable()->getComponentName())
+        ->andWhere('cr.state = ?', 'invalid')
+        ->orderBy('c.created_at ASC');
+    }
+
     public function __call($method, $params) {
         try {
             return parent::__call($method, $params);

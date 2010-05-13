@@ -20,6 +20,7 @@
  * @property Doctrine_Collection $sfGuardUserPermission
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
+ * @property Doctrine_Collection $Comments
  * @property sfGuardUserProfile $Profile
  * @property Doctrine_Collection $ExcelFile
  * 
@@ -38,6 +39,7 @@
  * @method Doctrine_Collection getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
  * @method Doctrine_Collection getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey  getRememberKeys()          Returns the current record's "RememberKeys" value
+ * @method Doctrine_Collection getComments()              Returns the current record's "Comments" collection
  * @method sfGuardUserProfile  getProfile()               Returns the current record's "Profile" value
  * @method Doctrine_Collection getExcelFile()             Returns the current record's "ExcelFile" collection
  * @method sfGuardUser         setId()                    Sets the current record's "id" value
@@ -55,6 +57,7 @@
  * @method sfGuardUser         setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
  * @method sfGuardUser         setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser         setRememberKeys()          Sets the current record's "RememberKeys" value
+ * @method sfGuardUser         setComments()              Sets the current record's "Comments" collection
  * @method sfGuardUser         setProfile()               Sets the current record's "Profile" value
  * @method sfGuardUser         setExcelFile()             Sets the current record's "ExcelFile" collection
  * 
@@ -156,6 +159,10 @@ abstract class BasesfGuardUser extends MyBaseRecord
              'foreign' => 'user_id'));
 
         $this->hasOne('sfGuardRememberKey as RememberKeys', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Comment as Comments', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

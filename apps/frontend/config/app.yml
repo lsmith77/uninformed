@@ -3,6 +3,11 @@
 
 # default values
 all:
+  gravatar:
+    enabled:        false
+  vjCommentPlugin:
+    guardbind: true
+    restricted: true
   sfApplyPlugin:
     from:
       email: "noreply@un-informed.org"

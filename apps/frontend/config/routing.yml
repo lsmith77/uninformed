@@ -53,7 +53,7 @@ clause:
   param:   { module: clause, action: index }
   requirements:
     id: \d+-?.*
-    sf_method: [get]
+    sf_method: [get, post]
 
 document:
   url:     /document/:id/*
@@ -62,7 +62,7 @@ document:
   param:   { module: document, action: index }
   requirements:
     id: \d+-?.*
-    sf_method: [get]
+    sf_method: [get, post]
 
 un_i_info:
   url:     /un-i.org

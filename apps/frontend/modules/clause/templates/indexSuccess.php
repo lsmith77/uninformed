@@ -44,3 +44,8 @@
 <div id="otherClauses" class="collapsed">
     <?php include_partial('clauseListOfDocument', array('clauses' => $document->getClauses(), 'currentClause' => $clause)) ?>
 </div>
+
+<?php if ($sf_user->isAuthenticated()): ?>
+<?php include_component('comment', 'formComment', array('object' => $clause)) ?>
+<?php endif; ?>
+<?php include_component('comment', 'list', array('object' => $clause, 'i' => 0)) ?>

@@ -14,7 +14,7 @@ class clauseActions extends sfActions
   {
     $this->clause = $this->getRoute()->getObject();
     $this->forward404Unless($this->clause);
-    
+
     $this->clauseBody = $this->clause->ClauseBody;
     $this->document = $this->clause->Document;
   }

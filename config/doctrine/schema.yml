@@ -585,6 +585,8 @@ TagImplication:
       type: unique
 
 Bookmark:
+  actAs:
+    Timestampable: ~
   columns:
     id:
       type: integer(4)

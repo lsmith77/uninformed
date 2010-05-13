@@ -47,8 +47,7 @@ class searchActions extends sfActions
     }
 
     protected function checkArrayOfInteger($array) {
-        $array = implode('', $array);
-        return strlen($array) === strlen((int)$array);
+        return is_numeric(implode('', $array));
     }
 
     public function executeIndex(sfWebRequest $request)
@@ -102,6 +101,17 @@ class searchActions extends sfActions
             ),
         );
 
+        $labels = array(
+            'organisation_id' => 'Organisation',
+            'tag_ids' => 'Tag',
+            'addressee_ids' => 'Addressee',
+            'operative_phrase_id' => 'Clause Operative Phrase',
+            'information_type_id' => 'Clause Information Type',
+            'clause_process_id' => 'Clause Process',
+            'legalvalue_id' => 'Legal Value',
+            'decision_type' => 'Decision Type',
+        );
+
         foreach ($facets as $facet => $model) {
             $criteria->addFacetField($facet);
         }
@@ -153,24 +163,25 @@ class searchActions extends sfActions
         foreach ($facets as $facet => $model) {
             $solr = $results->getFacetField($facet);
             if (is_array($model)) {
-                $filters[$model['model']] = array();
+                $filters[$facet] = array();
                 foreach ($model['values'] as $value) {
-                    $filters[$model['model']][] = array('id' => $value);
+                    $filters[$facet][] = array('id' => $value);
                 }
-                $model = $model['model'];
             } else {
-                $filters[$model] = Doctrine_Query::create()
+                $filters[$facet] = Doctrine_Query::create()
                     ->from($model)
                     ->whereIn('id', array_keys($solr))
                     ->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
             }
-            foreach ($filters[$model] as $key => $value) {
+            foreach ($filters[$facet] as $key => $value) {
                 if (empty($solr[$value['id']])) {
-                    unset($filters[$model][$key]);
+                    unset($filters[$facet][$key]);
                 } else {
-                    $filters[$model][$key]['count'] = $solr[$value['id']];
+                    $filters[$facet][$key]['count'] = $solr[$value['id']];
                 }
             }
+            // reset the keys to force json to have an array
+            $filters[$facet] = array_values($filters[$facet]);
         }
 
         $data = isset($criteria2)
@@ -188,14 +199,26 @@ class searchActions extends sfActions
             if (count($clauses) === 1) {
                 $q->where('id = ?', $clauses[0]);
             } elseif (count($clauses) > 1) {
-                $q->where('id IN ('.implode(',', $clauses).')');
+                $q->whereIn('id', $clauses);
             } else {
                 $q->where('id = 0');
             }
-            $data = $q->fetchArray();
+            $res = $q->execute();
+            $data = array();
+            foreach ($res as $item) {
+//                $item->loadRelated();
+                $data[] = $item->toArray();
+            }
         }
 
-        $output = array('data' => $data, 'filters' => $filters, 'status' => 'success', 'message' => 'ok');
+        $output = array(
+            'data' => $data,
+            'filters' => $filters,
+            'filterLabels' => $labels,
+            'totalResults' => count($data), // TODO make that the total count if we add paging
+            'status' => 'success',
+            'message' => 'ok'
+        );
         return $this->returnJson($output);
     }
 }

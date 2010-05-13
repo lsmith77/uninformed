@@ -70,9 +70,8 @@ class searchActions extends sfActions
         $term = $request->getGetParameter('term');
         // TODO find all tags matching $term
         $tags = array(
-            array('id' => 43, 'label' => 'foo'),
-            array('id' => 3, 'label' => 'bar'),
-            array('id' => 5, 'label' => 'baz'),
+            array('id' => 2, 'label' => 'foo'),
+            array('id' => 10, 'label' => 'bar'),
         );
         return $this->returnJson($tags);
     }
@@ -177,6 +176,13 @@ class searchActions extends sfActions
         $data = isset($criteria2)
             ? $lucene->friendlyFind($criteria2)->toArray()
             : $results->toArray();
+
+        // extract the data out of the result objects
+        $fields = new ReflectionProperty('Apache_Solr_Document', '_fields');
+        $fields->setAccessible(true);
+        foreach ($data as $k => $item) {
+            $data[$k] = $fields->getValue($item);
+        }
 
         $output = array('data' => $data, 'filters' => $filters, 'status' => 'success', 'message' => 'ok');
         return $this->returnJson($output);

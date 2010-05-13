@@ -82,6 +82,7 @@ class searchActions extends sfActions
         $this->query = $request->getGetParameter('q');
         $this->tagMatch = $request->getGetParameter('tm');
         $this->tags = (array) $request->getGetParameter('t');
+        $tags = array_keys($this->tags);
         $this->filters = (array) $request->getGetParameter('f');
 
         $lucene = $this->getInstance();
@@ -116,13 +117,13 @@ class searchActions extends sfActions
                 $criteria2->addSane($this->query);
             }
         }
-        if (!empty($this->tags)) {
-            if (!$this->checkArrayOfInteger($this->tags)) {
+        if (!empty($tags)) {
+            if (!$this->checkArrayOfInteger($tags)) {
                 $output = array('status' => 'error', 'message' => "parameter 't' needs to be an array of integer");
                 return $this->returnJson($output);
             }
             $fq_op = ($this->tagMatch == 'all') ? ' AND ' : ' OR ';
-            $fq = 'tag_ids:'.implode($fq_op.'tag_ids:', array_keys($this->tags));
+            $fq = 'tag_ids:'.implode($fq_op.'tag_ids:', $tags);
             $criteria->addParam('fq', $fq);
             if (isset($criteria2)) {
                 $criteria2->addParam('fq', $fq);

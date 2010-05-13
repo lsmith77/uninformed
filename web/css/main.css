@@ -77,6 +77,10 @@ h2 {
     margin: .7em 0;
 }
 
+h3 {
+    margin: .4em 0;
+}
+
 input[type=text] {
     margin: .5em 0;
 }
@@ -141,7 +145,6 @@ div.search {
     background: #eee;
     float: left;
 }
-
 
 /* CLAUSES/DOCUMENTS DETAILVIEW */
 .clauseList li {

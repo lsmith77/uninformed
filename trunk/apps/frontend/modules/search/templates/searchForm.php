@@ -1,4 +1,4 @@
-<form action="<?php echo url_for('clauseSearch'); ?>" method="GET">
+<form action="<?php echo url_for('clauseSearch'); ?>" method="GET" id="searchForm">
 <p class="query">
     <label for="query">Containing</label><br />
     <input type="text" name="q" id="query" value="<?php echo $query ?>" />

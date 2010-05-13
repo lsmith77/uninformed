@@ -129,7 +129,7 @@ table td, table th {
 
 /* SEARCH HOME */
 div.homesearch {
-    width: 254px;
+    width: 240px;
     padding: 5px;
     background: #eee;
 }
@@ -139,6 +139,11 @@ div.search {
     width: 240px;
     padding: 5px;
     background: #eee;
+    float: left;
+}
+
+div.results {
+    margin-left: 260px;
 }
 
 /* FRONTEND JQUERY COLLAPSING */

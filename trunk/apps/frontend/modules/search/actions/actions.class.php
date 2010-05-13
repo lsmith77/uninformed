@@ -85,6 +85,7 @@ class searchActions extends sfActions
 
         $lucene = $this->getInstance();
 
+        // TODO: add support for is_latest_clause_body
         $criteria = new sfLuceneFacetsCriteria;
 
         $facets = array(
@@ -193,22 +194,33 @@ class searchActions extends sfActions
         if ($data) {
             $clauses = array();
             foreach ($data as $item) {
-                $clauses[] = (int) $item->getField('clause_id');
+                $clause = $item->getField('clause_id');
+                if (!empty($clause)) {
+                    $clauses[] = $clause['value'];
+                }
             }
-            $q = Doctrine_Query::create()
-                ->from('clause');
-            if (count($clauses) === 1) {
-                $q->where('id = ?', $clauses[0]);
-            } elseif (count($clauses) > 1) {
-                $q->whereIn('id', $clauses);
-            } else {
-                $q->where('id = 0');
-            }
-            $res = $q->execute();
+
             $data = array();
-            foreach ($res as $item) {
-//                $item->loadRelated();
-                $data[] = $item->toArray();
+            if (!empty($clauses)) {
+                $q = Doctrine_Query::create()
+                    ->from('clause c')
+                    ->innerJoin('c.Document d')
+                    ->innerJoin('d.Organisation o')
+                    ->innerJoin('d.DocumentType dt')
+                    ->innerJoin('dt.LegalValue l')
+                    ->innerJoin('c.ClauseBody cb')
+                    ->leftJoin('cb.ClauseOperativePhrase cop')
+                    ->leftJoin('cb.ClauseInformationType cit')
+                    ->leftJoin('cb.ClauseProcess cp')
+                    ->whereIn('id', $clauses);
+                $data = $q->fetchArray();
+                foreach ($data as $key => $clause) {
+                    // TODO fetch all clauses with the same root_clause_body_id
+                    $data[$key]['relatedClauses'] = array(
+                        5 => array('slug' => '5-', 'clause_body_id' => 3, 'code' => 'Asdfsdsdsdfdf'),
+                        6 => array('slug' => '6-', 'clause_body_id' => 6, 'code' => 'Asdfsdsdsdfdf'),
+                    );
+                }
             }
         }
 

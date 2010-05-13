@@ -89,6 +89,10 @@ p {
     margin-bottom: .5em;
 }
 
+table {
+    margin-bottom: 1em;
+}
+
 table thead {
     color: #333;
 }

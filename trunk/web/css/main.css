@@ -64,11 +64,25 @@ a, a:visited, a:link, a:active {
     color: #88f;
     font-weight: bold;
     text-decoration: none;
+    cursor: pointer;
 }
 
 h1 {
     font-size: 1.5em;
     margin-bottom: 1em;
+}
+
+h2 {
+    font-size: 1.2em;
+    margin-bottom: .7em;
+}
+
+input[type=text] {
+    margin: .5em 0;
+}
+
+input[type=checkbox] {
+    margin: 0 .5em 0 0;
 }
 
 p {
@@ -98,6 +112,20 @@ p {
     display: inline;
     margin: 0 1em 0 0;
     font-size: 2em;
+}
+
+/* SEARCH HOME */
+div.homesearch {
+    width: 254px;
+    padding: 5px;
+    background: #eee;
+}
+
+/* SEARCH PAGE */
+div.search {
+    width: 240px;
+    padding: 5px;
+    background: #eee;
 }
 
 /* FRONTEND JQUERY COLLAPSING */

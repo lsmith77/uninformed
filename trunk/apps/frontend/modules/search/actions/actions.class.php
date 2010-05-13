@@ -67,11 +67,13 @@ class searchActions extends sfActions
     public function executeSearchTags(sfWebRequest $request)
     {
         $term = $request->getGetParameter('term');
-        // TODO find all tags matching $term
-        $tags = array(
-            array('id' => 2, 'label' => 'foo'),
-            array('id' => 10, 'label' => 'bar'),
-        );
+
+        $q = Doctrine_Query::create()
+            ->select('id, name AS label')
+            ->from('Tag t')
+            ->where('t.name LIKE ?', "%$term%");
+        $tags = $q->fetchArray();
+
         return $this->returnJson($tags);
     }
 
@@ -82,6 +84,18 @@ class searchActions extends sfActions
         $this->tags = (array) $request->getGetParameter('t');
         $tags = array_keys($this->tags);
         $this->filters = (array) $request->getGetParameter('f');
+
+        if (empty($this->query) && empty($this->tags)) {
+            $output = array(
+                'data' => array(),
+                'filters' => array(),
+                'filterLabels' => array(),
+                'totalResults' => 0,
+                'status' => 'success',
+                'message' => 'ok'
+            );
+            return $this->returnJson($output);
+        }
 
         $lucene = $this->getInstance();
 
@@ -122,22 +136,30 @@ class searchActions extends sfActions
             $criteria2 = new sfLuceneCriteria;
         }
 
-        if (!empty($this->query)) {
-            $criteria->addSane($this->query);
-            if (isset($criteria2)) {
-                $criteria2->addSane($this->query);
-            }
-        }
         if (!empty($tags)) {
             if (!$this->checkArrayOfInteger($tags)) {
                 $output = array('status' => 'error', 'message' => "parameter 't' needs to be an array of integer");
                 return $this->returnJson($output);
             }
             $fq_op = ($this->tagMatch == 'all') ? ' AND ' : ' OR ';
-            $fq = 'tag_ids:'.implode($fq_op.'tag_ids:', $tags);
-            $criteria->addParam('fq', $fq);
+        }
+
+        if (empty($this->query)) {
+            $criteria->addParam('qt', 'search_tags');
             if (isset($criteria2)) {
-                $criteria2->addParam('fq', $fq);
+                $criteria2->addParam('qt', 'search_tags');
+            }
+            foreach ($tags as $tag) {
+                $criteria->addFieldSane('tag_ids', $tag);
+            }
+        } else {
+            if (!empty($tags)) {
+                $fq = 'tag_ids:'.implode($fq_op.'tag_ids:', $tags);
+                $criteria->addParam('fq', $fq);
+            }
+            $criteria->addSane($this->query);
+            if (isset($criteria2)) {
+                $criteria2->addSane($this->query);
             }
         }
 
@@ -153,7 +175,7 @@ class searchActions extends sfActions
                     $output = array('status' => 'error', 'message' => "unsupported filter '$filter'");
                     return $this->returnJson($output);
                 }
-                $filter = '-'.$filter;
+                $filter = ' -'.$filter;
                 $fq.= $filter.':'.implode(' AND '.$filter.':', $ids);
             }
             $criteria2->addParam('fq', $fq);

@@ -77,6 +77,14 @@ class ClauseBody extends BaseClauseBody
         return $ids;
     }
 
+    public function getClauseId() {
+        $clause = $this->setLatestAdoptedClause();
+        if (empty($clause)) {
+            return null;
+        }
+        return $clause->id;
+    }
+
     public function isIndexable() {
         $clause = $this->setLatestAdoptedClause();
         return !empty($clause);

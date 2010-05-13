@@ -2,13 +2,13 @@ $(function(){
     var tags = {},
     lastTagsVal,
     addTag = function(item) {
-        var tag = $('<li><a><img src="/images/close.gif" /></a> '+item.label+'</li>');
-        tag.append('<input type="hidden" name="t['+item.id+']" value="'+item.label+'" />');
-        $('#taglist').append(tag)
+        var tpl = '<li><a><img src="/images/close.gif" /></a><%= this.label %>'+
+        '<input type="hidden" name="t[<%= this.id %>]" value="<%= this.label %>" /></li>';
+        $('#taglist').jqoteapp(tpl, item);
     };
 
     // handle tag removal link
-    $('#taglist li a').click(function(){
+    $('#taglist li a').live('click', function(){
         $(this).parent('li').remove();
     });
 

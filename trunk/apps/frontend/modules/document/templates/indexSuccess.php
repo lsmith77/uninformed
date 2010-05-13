@@ -1,6 +1,6 @@
 <?php use_javascript('frontend/collapseBoxes.js'); ?>
 
-<h1>Document details</h1>
+<h1><?php echo $document->getName() ?></h1>
 
 <h2><a href="#" class="toggleCol" target="docDetails">Document details</a></h2>
 <table id="docDetails">
@@ -29,17 +29,16 @@
     </tbody>
 </table>
 
-<h2>History of this document</h2>
-<?php $i = 0; ?>
-<?php foreach($document->getDocumentsByRoot() as $rootdoc): ?>
-<?php echo (++$i).'. '.$rootdoc->getName(); ?><br />
-<?php endforeach; ?>
+
+<h2><a href="#" class="toggleCol" target="tags">Applied Keyword Tags</a></h2>
+<?php include_partial('clause/tagList', array('tags'=>$document->Tags)); ?>
 
 <h2>Voting</h2>
-
-<h2>Applied Keyword Tags</h2>
 
 <h2><a href="#" class="toggleCol" target="clauses">Clauses in this Document</a></h2>
 <div id="clauses">
     <?php include_partial('clause/clauseListOfDocument', array('clauses' => $document->getClauses())) ?>
 </div>
+
+<h2><a href="#" class="toggleCol" target="history">History of this document</a></h2>
+<?php include_partial('documentHistory', array('document'=>$document)); ?>

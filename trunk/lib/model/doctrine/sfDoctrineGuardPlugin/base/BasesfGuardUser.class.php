@@ -13,7 +13,6 @@
  * @property boolean $is_active
  * @property boolean $is_super_admin
  * @property timestamp $last_login
- * @property string $email_address
  * @property string $type
  * @property integer $excel_file_id
  * @property Doctrine_Collection $groups
@@ -21,6 +20,7 @@
  * @property Doctrine_Collection $sfGuardUserPermission
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
+ * @property sfGuardUserProfile $Profile
  * @property Doctrine_Collection $ExcelFile
  * 
  * @method integer             getId()                    Returns the current record's "id" value
@@ -31,7 +31,6 @@
  * @method boolean             getIsActive()              Returns the current record's "is_active" value
  * @method boolean             getIsSuperAdmin()          Returns the current record's "is_super_admin" value
  * @method timestamp           getLastLogin()             Returns the current record's "last_login" value
- * @method string              getEmailAddress()          Returns the current record's "email_address" value
  * @method string              getType()                  Returns the current record's "type" value
  * @method integer             getExcelFileId()           Returns the current record's "excel_file_id" value
  * @method Doctrine_Collection getGroups()                Returns the current record's "groups" collection
@@ -39,6 +38,7 @@
  * @method Doctrine_Collection getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
  * @method Doctrine_Collection getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey  getRememberKeys()          Returns the current record's "RememberKeys" value
+ * @method sfGuardUserProfile  getProfile()               Returns the current record's "Profile" value
  * @method Doctrine_Collection getExcelFile()             Returns the current record's "ExcelFile" collection
  * @method sfGuardUser         setId()                    Sets the current record's "id" value
  * @method sfGuardUser         setUsername()              Sets the current record's "username" value
@@ -48,7 +48,6 @@
  * @method sfGuardUser         setIsActive()              Sets the current record's "is_active" value
  * @method sfGuardUser         setIsSuperAdmin()          Sets the current record's "is_super_admin" value
  * @method sfGuardUser         setLastLogin()             Sets the current record's "last_login" value
- * @method sfGuardUser         setEmailAddress()          Sets the current record's "email_address" value
  * @method sfGuardUser         setType()                  Sets the current record's "type" value
  * @method sfGuardUser         setExcelFileId()           Sets the current record's "excel_file_id" value
  * @method sfGuardUser         setGroups()                Sets the current record's "groups" collection
@@ -56,6 +55,7 @@
  * @method sfGuardUser         setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
  * @method sfGuardUser         setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser         setRememberKeys()          Sets the current record's "RememberKeys" value
+ * @method sfGuardUser         setProfile()               Sets the current record's "Profile" value
  * @method sfGuardUser         setExcelFile()             Sets the current record's "ExcelFile" collection
  * 
  * @package    symfony
@@ -104,12 +104,6 @@ abstract class BasesfGuardUser extends MyBaseRecord
              ));
         $this->hasColumn('last_login', 'timestamp', null, array(
              'type' => 'timestamp',
-             ));
-        $this->hasColumn('email_address', 'string', 128, array(
-             'type' => 'string',
-             'notnull' => true,
-             'unique' => true,
-             'length' => 128,
              ));
         $this->hasColumn('type', 'string', 255, array(
              'type' => 'string',
@@ -162,6 +156,10 @@ abstract class BasesfGuardUser extends MyBaseRecord
              'foreign' => 'user_id'));
 
         $this->hasOne('sfGuardRememberKey as RememberKeys', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasOne('sfGuardUserProfile as Profile', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

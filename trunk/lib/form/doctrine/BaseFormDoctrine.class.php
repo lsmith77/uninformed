@@ -24,13 +24,9 @@ abstract class BaseFormDoctrine extends sfFormDoctrine
             unset($this->validatorSchema['created_at']);
             unset($this->validatorSchema['updated_at']);
         }
-//var_dump(($this->getObject()->revert(1957896241)));
+
         if (isset($this->widgetSchema['version']) && substr(get_class($this), -11) !== 'VersionForm') {
-            if ($this->isNew()) {
-                unset($this->widgetSchema['version']);
-            } else {
-                $this->setWidget('version', new sfWidgetFormPlain(array('value'=>$this->getObject()->version)));
-            }
+            unset($this->widgetSchema['version']);
             unset($this->validatorSchema['version']);
         }
     }

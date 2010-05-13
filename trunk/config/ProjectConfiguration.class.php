@@ -11,10 +11,12 @@ class ProjectConfiguration extends sfProjectConfiguration
     $context = stream_context_create($opts);
     libxml_set_streams_context($context);
 
+    set_include_path(sfConfig::get('sf_lib_dir') . '/vendor' . PATH_SEPARATOR . get_include_path());
+
     $this->enablePlugins(
       'sfDoctrinePlugin',
       'sfDoctrineGuardPlugin',
-      'sfDoctrineGuardExtraPlugin',
+      'sfDoctrineApplyPlugin',
       'sfFormExtraPlugin',
       'sfAdminDashPlugin',
       'sfJqueryReloadedPlugin',

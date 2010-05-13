@@ -193,6 +193,9 @@ DocumentType:
       foreign: id
 
 Document:
+  actAs:
+    <<: *actAs
+    Commentable: ~
   columns:
     id:
       type: integer(4)
@@ -367,6 +370,9 @@ ClauseClauseRelation:
       type: unique
 
 Clause:
+  actAs:
+    <<: *actAs
+    Commentable: ~
   columns:
     id:
       type: integer(4)

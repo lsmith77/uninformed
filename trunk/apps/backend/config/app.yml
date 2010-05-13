@@ -3,6 +3,11 @@
 
 # default values
 all:
+  commentAdmin:
+    max_length:     50
+  vjCommentPlugin:
+    guardbind: true
+    restricted: true
   sfApplyPlugin:
     from:
       email: "noreply@un-informed.org"
@@ -19,20 +24,27 @@ all:
     login_route:                  @sf_guard_signin
     logout_route:                 @sf_guard_signout
     categories:
-      "Document/Clause":
+      "Documents/Clauses/Comments":
         credentials:      [admin]
         items:
           Documents:
             url:    document
-          Clause:
+          Clauses:
             url:    clause
+          Comments:
+            url:    commentAdmin
+          Comment Reports:
+            url:    commentReportAdmin
+      "Reservations":
+        credentials:      [admin]
+        items:
+          "Documents":
+            url:    document_reservation
+          "Clauses":
+            url:    clause_reservation
       "Meta Data":
         credentials:      [admin]
         items:
-          "Doc. Reservations":
-            url:    document_reservation
-          "Cl. Reservations":
-            url:    clause_reservation
           Votes:
             url:    vote
           Addressees:

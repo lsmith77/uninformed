@@ -20,7 +20,8 @@ class ProjectConfiguration extends sfProjectConfiguration
       'sfFormExtraPlugin',
       'sfAdminDashPlugin',
       'sfJqueryReloadedPlugin',
-      'sfSolrPlugin'
+      'sfSolrPlugin',
+      'vjCommentPlugin'
     );
   }
 

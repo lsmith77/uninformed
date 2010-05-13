@@ -42,3 +42,8 @@
 
 <h2><a href="#" class="toggleCol" target="history">History of this document</a></h2>
 <?php include_partial('documentHistory', array('document'=>$document)); ?>
+
+<?php if ($sf_user->isAuthenticated()): ?>
+<?php include_component('comment', 'formComment', array('object' => $document)) ?>
+<?php endif; ?>
+<?php include_component('comment', 'list', array('object' => $document, 'i' => 0)) ?>

@@ -181,8 +181,10 @@ abstract class BaseClause extends MyBaseRecord
              ),
              ));
         $versionable0->addChild($blameable1);
+        $commentable0 = new Doctrine_Template_Commentable();
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($versionable0);
+        $this->actAs($commentable0);
     }
 }

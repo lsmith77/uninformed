@@ -1,5 +1,7 @@
 <?php use_javascript('frontend/collapseBoxes.js'); ?>
 
+<h1>Clause details</h1>
+
 <?php echo $clause ?>
 <br />
 
@@ -41,32 +43,9 @@
     <?php endforeach; ?>
 </div>
 
-
 <h2><a href="#" class="toggleCol" target="history">History of this Clause</a></h2>
-<?php $rootclauses = $clause->getClausesByRoot(); $i = 0; ?>
-<?php foreach($clause->Document->getDocumentsByRoot() as $rootdoc): ?>
-<?php echo (++$i).'. '.$rootdoc->getName(); ?><br />
-<?php if (isset($rootclauses[$rootdoc->getId()])): ?>
-<?php echo $rootclauses[$rootdoc->getId()]->ClauseBody->getContent(); ?><br />
-<?php endif; ?>
-<?php endforeach; ?>
+<?php include_partial('clauseHistory', array('clause'=>$clause)); ?>
 
-<table id="history" class="collapsed">
-    <thead>
-        <tr>
-            <th>Year</th>
-            <th>Changes</th>
-            <th>Content</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
 
 <h2><a href="#" class="toggleCol" target="otherClauses">Other Clauses in this Document</a></h2>
 <div id="otherClauses" class="collapsed">

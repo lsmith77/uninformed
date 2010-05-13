@@ -89,6 +89,15 @@ p {
     margin-bottom: .5em;
 }
 
+table thead {
+    color: #333;
+}
+
+table td, table th {
+    padding: 5px;
+    border: 1px solid #999;
+}
+
 /* HEADER & NAV */
 .header {
     position: absolute;
@@ -130,7 +139,5 @@ div.search {
 
 /* FRONTEND JQUERY COLLAPSING */
 a.toggleCol {
-    color: #999;
+    color: #000;
 }
-
-/* CLAUSE-MODULE */

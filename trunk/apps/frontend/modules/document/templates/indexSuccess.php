@@ -1,5 +1,7 @@
 <?php use_javascript('frontend/collapseBoxes.js'); ?>
 
+<h1>Document details</h1>
+
 <h2><a href="#" class="toggleCol" target="docDetails">Document details</a></h2>
 <table id="docDetails">
     <thead>
@@ -27,6 +29,7 @@
     </tbody>
 </table>
 
+<h2>History of this document</h2>
 <?php $i = 0; ?>
 <?php foreach($document->getDocumentsByRoot() as $rootdoc): ?>
 <?php echo (++$i).'. '.$rootdoc->getName(); ?><br />

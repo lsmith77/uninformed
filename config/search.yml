@@ -15,6 +15,11 @@ ClauseBody:
           stored: true
           required: true
           alias: getId
+        clause_id:
+          type: int
+          required: true
+          stored: true
+          alias: getClauseId
         is_latest_clause_body:
           type: boolean
           required: true

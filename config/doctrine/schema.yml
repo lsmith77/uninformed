@@ -584,6 +584,26 @@ TagImplication:
       fields: [tag_id, implied_tag_id]
       type: unique
 
+Bookmark:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    user_id:
+      type: integer(4)
+      notnull: true
+    object_type:
+      type: integer(4)
+      notnull: true
+    object_id:
+      type: integer(4)
+      notnull: true
+  indexes:
+    mapping:
+      fields: [user_id, object_type, object_id]
+      type: unique
+
 Country:
   columns:
     id:

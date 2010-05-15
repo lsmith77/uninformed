@@ -12,5 +12,7 @@
  */
 class DocumentType extends BaseDocumentType
 {
-    protected $overloadProperty = 'LegalValue';
+    public function getDecisionType() {
+        return $this->_get('LegalValue')->_get('decision_type');
+    }
 }

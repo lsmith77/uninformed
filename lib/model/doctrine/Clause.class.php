@@ -12,8 +12,6 @@
  */
 class Clause extends BaseClause
 {
-    protected $overloadProperty = 'Document';
-
     protected static $autoCompletable = array(
         'slug' => true,
     );
@@ -65,6 +63,22 @@ class Clause extends BaseClause
         return $this->_get('Document')->_get('name').' ('.(string)$this.')';
     }
 
+    public function getDocumenttypeId() {
+        return $this->_get('Document')->_get('documenttype_id');
+    }
+
+    public function getOrganisationId() {
+        return $this->_get('Document')->_get('organisation_id');
+    }
+
+    public function getLegalValueId() {
+        return $this->_get('Document')->getLegalValueId();
+    }
+
+    public function getDecisionType() {
+        return $this->_get('Document')->getDecisionType();
+    }
+
     public function getAdoptionDate() {
         $adoption_date = $this->_get('Document')->_get('adoption_date');
         return date('Y-m-d\TH:i:s\Z', strtotime($adoption_date));
@@ -75,7 +89,6 @@ class Clause extends BaseClause
     }
 
     public function getClausesByRoot() {
-
         $root_clause_body_id = $this->ClauseBody->root_clause_body_id;
         $query = Doctrine_Query::create()
             ->from('Clause c INDEXBY c.document_id')

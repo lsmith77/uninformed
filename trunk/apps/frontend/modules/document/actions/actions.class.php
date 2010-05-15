@@ -19,5 +19,13 @@ class documentActions extends sfActions
   {
       $this->document = $this->getRoute()->getObject();
       $this->forward404Unless($this->document);
+
+      $user = $this->getUser();
+      if ($user->isAuthenticated()) {
+          $q = Doctrine_Query::create()
+              ->from('Bookmark')
+              ->where('object_type = ? AND object_id = ? AND user_id = ?', array('document', $this->document->getId(), $user->getGuardUser()->getId()));
+          $this->bookmark = $q->fetchOne();
+      }
   }
 }

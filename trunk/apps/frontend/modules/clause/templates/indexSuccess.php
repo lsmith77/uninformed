@@ -1,6 +1,10 @@
 <?php use_javascript('frontend/collapseBoxes.js'); ?>
 <?php if ($sf_user->isAuthenticated()): ?>
-    <?php echo link_to('Bookmark this', 'bookmark_add', array('type'=>1, 'id'=>$clause->getId())); ?>
+    <?php if (empty($bookmark)): ?>
+        <?php echo link_to('Add Bookmark', 'bookmark_action', array('action' => 'add', 'type' => 1, 'id' => $clause->getId())); ?>
+    <?php else: ?>
+        <?php echo link_to('Remove Bookmark', 'bookmark_action', array('action' => 'remove', 'type' => 1, 'id' => $clause->getId())); ?>
+    <?php endif; ?>
 <?php endif; ?>
 
 <h1><?php echo $clause ?></h1>
@@ -48,7 +52,5 @@
     <?php include_partial('clauseListOfDocument', array('clauses' => $document->getClauses(), 'currentClause' => $clause)) ?>
 </div>
 
-<?php if ($sf_user->isAuthenticated()): ?>
 <?php include_component('comment', 'formComment', array('object' => $clause)) ?>
-<?php endif; ?>
 <?php include_component('comment', 'list', array('object' => $clause, 'i' => 0)) ?>

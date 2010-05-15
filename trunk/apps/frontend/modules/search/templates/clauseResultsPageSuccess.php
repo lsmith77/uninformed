@@ -23,7 +23,7 @@
         if (f && f.length) { %>
         <h3><%= this.filterLabels[str] %></h3>
         <% for each (var item in f) { %>
-        <input type="checkbox" name="f[<%= str %>][]" value="<%= item.id %>" checked="checked" <%= (item.count !== this.totalResults ? 'disabled="disabled"':'') %> />
+        <input type="checkbox" name="f[<%= str %>][]" value="<%= item.id %>" checked="checked" <%= (item.count == this.totalResults ? 'disabled="disabled"':'') %> />
         <%= item.name %> <span class="count">(<%= item.count %>)</span><br />
         <% } %>
     <%  }

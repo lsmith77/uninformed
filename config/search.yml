@@ -47,6 +47,10 @@ ClauseBody:
           type: text
           stored: false
           alias: getContent
+        documenttype_id:
+          type: int
+          stored: false
+          alias: getDocumenttypeId
         operative_phrase_id:
           type: int
           stored: false

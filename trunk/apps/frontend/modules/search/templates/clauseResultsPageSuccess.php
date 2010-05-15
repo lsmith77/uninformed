@@ -36,13 +36,23 @@
     <h2>Results</h2>
     <% var i, cnt = this.data.length;
     for (i = 0; i < cnt; i++) {
-        var res = this.data[i]; %>
-    <div class="result">
-        <h2><?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.Document.name %>', 'clause', array('id' => 'XXX'))) ?></h2>
-        <p><%= res.ClauseBody.content %></p>
-        <span class="doctype"><%= res.Document.DocumentType.name %></span>
-        <span class="infotype"><%= res.ClauseBody.ClauseInformationType.name %></span>
-        <span class="organisation"><%= res.Document.Organisation.name %></span>
+        var res = this.data[i];
+        var bgcolor = 'green';
+        if (res.Document.isSCResolution) {
+            bgcolor = 'blue';
+        } else if (res.Document.DocumentType.legal_value == 'legally binding') {
+            bgcolor = 'red';
+        }
+        %>
+    <div class="result" style="background-color: <%= bgcolor %>">
+        <h2><?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.title %>', 'clause', array('id' => 'XXX'))) ?> (<%= res.score %>%)</h2>
+        <h3>
+            <span class="docdetails"><%= res.Document.code %> (<%= res.Document.adoption_date %>)</span> |
+            <span class="organisation"><%= res.Document.Organisation.name %></span> |
+            <span class="doctype"><%= res.Document.DocumentType.name %></span> |
+            <span class="infotype"><%= res.ClauseBody.ClauseInformationType.name %></span>
+        </h3>
+        <p><%= ("#"+res.clause_number+": "+res.content) %></p>
     </div>
     <% } %>
     ]]>

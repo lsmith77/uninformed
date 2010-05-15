@@ -95,22 +95,11 @@
   </indexDefaults>
 
 
-  <requestHandler name="search_query" class="solr.SearchHandler" default="true">
+  <requestHandler name="search_query" class="solr.StandardRequestHandler" default="true">
     <lst name="defaults">
-     <str name="defType">dismax</str>
      <str name="echoParams">explicit</str>
      <float name="tie">0.01</float>
-     <str name="qf">title content</str>
-     <str name="pf">title content</str>
      <str name="fl">id</str>
-    </lst>
-  </requestHandler>
-
-  <requestHandler name="search_tags" class="solr.SearchHandler" >
-    <lst name="defaults">
-      <str name="echoParams">explicit</str>
-      <float name="tie">0.01</float>
-    <str name="fl">id</str>
     </lst>
   </requestHandler>
 </config>

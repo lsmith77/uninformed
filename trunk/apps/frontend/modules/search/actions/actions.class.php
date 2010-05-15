@@ -152,7 +152,6 @@ class searchActions extends sfActions
 //        $fq = '+is_latest_clause_body:true';
 
         if (empty($this->query)) {
-            $criteria->addParam('qt', 'search_tags');
             foreach ($tags as $tag) {
                 $criteria->addFieldSane('tag_ids', $tag);
             }
@@ -161,7 +160,14 @@ class searchActions extends sfActions
                 $fq = isset($fq) ? "$fq AND " : '';
                 $fq.= 'tag_ids:'.implode($fq_op.'tag_ids:', $tags);
             }
-            $criteria->add($this->query);
+            $criteria->addFieldSane('title', $this->query);
+            $criteria->addFieldSane('content', $this->query, 'OR');
+
+            $criteria->addParam('hl', 'true');
+            $criteria->addParam('hl.fl', '*');
+            $criteria->addParam('hl.fragsize', '0');
+            $criteria->addParam('hl.simple.pre', '<strong>');
+            $criteria->addParam('hl.simple.post', '</strong>');
         }
 
         if ($this->filters) {
@@ -196,10 +202,15 @@ class searchActions extends sfActions
                         $filters[$facet][] = array('id' => $value);
                     }
                 } else {
-                    $filters[$facet] = Doctrine_Query::create()
+                    $q = Doctrine_Query::create()
+                        ->select("$model.id, $model.name")
                         ->from($model)
-                        ->whereIn('id', array_keys($solr))
-                        ->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
+                        ->whereIn("$model.id", array_keys($solr));
+                    if ($model == 'Organisation') {
+                        $q->innerJoin("$model.OrganisationParent op")
+                            ->select("$model.id, CONCAT(op.name, ' ', $model.name) AS name");
+                    }
+                    $filters[$facet] = $q->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
                 }
                 foreach ($filters[$facet] as $key => $value) {
                     if (empty($solr[$value['id']])) {
@@ -219,23 +230,51 @@ class searchActions extends sfActions
 
         // extract the data out of the result objects
         if ($data) {
+            $highlighting = array();
+            if (!empty($results->getRawResult()->highlighting)) {
+                foreach ($results->getRawResult()->highlighting as $sfl_guid => $highlight) {
+                    $highlight = (array)$highlight;
+                    foreach ($highlight as $key => $values) {
+                        $highlighting[$sfl_guid][$key] = reset($values);
+                    }
+                }
+            }
+
             $clauses = array();
             foreach ($data as $item) {
                 $clause = $item->getField('clause_id');
                 if (!empty($clause)) {
-                    $clauses[] = $clause['value'];
+                    $sfl_guid = $item->getField('sfl_guid');
+                    $score = $item->getField('score');
+                    if (isset($highlighting[$sfl_guid['value']]['title'])) {
+                        $title = $highlighting[$sfl_guid['value']]['title'];
+                    } else {
+                        $title = $item->getField('title');
+                        $title = $title['value'];
+                    }
+                    if (isset($highlighting[$sfl_guid['value']]['content'])) {
+                        $content = $highlighting[$sfl_guid['value']]['content'];
+                    } else {
+                        $content = $item->getField('content');
+                        $content = $content['value'];
+                    }
+                    $clauses[$clause['value']] = array(
+                        'score' => $score['value'],
+                        'title' => $title,
+                        'content' => $content,
+                    );
                 }
             }
 
             $data = array();
             if (!empty($clauses)) {
                 $q = Doctrine_Query::create()
-                    ->select("CONCAT(c.id, '-', c.slug) AS slug, c.document_id, CONCAT(c.clause_number, ' ', c.clause_number_information, ' ', c.clause_number_subparagraph) AS clause_number, cb.content, cb.id, cb.root_clause_body_id, cop.name, cit.name")
+                    ->select("CONCAT(c.id, '-', c.slug) AS slug, c.document_id, TRIM(CONCAT(c.clause_number, ' ', COALESCE(c.clause_number_information, ''), ' ', COALESCE(c.clause_number_subparagraph, ''))) AS clause_number, cb.id, cb.root_clause_body_id, cop.name, cit.name")
                     ->from('clause c')
                     ->innerJoin('c.ClauseBody cb')
                     ->leftJoin('cb.ClauseOperativePhrase cop')
                     ->leftJoin('cb.ClauseInformationType cit')
-                    ->whereIn('c.id', $clauses);
+                    ->whereIn('c.id', array_keys($clauses));
                 $data = $q->fetchArray();
 
                 $documents = array();
@@ -249,12 +288,14 @@ class searchActions extends sfActions
                         ->innerJoin('c.ClauseBody cb')
                         ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id));
                     $data[$key]['clauseHistory'] = (bool)$q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
-                    $data[$key]['clause_number'] = trim($data[$key]['clause_number']);
                     $documents[] = $data[$key]['document_id'];
+                    $data[$key]['score'] = $clauses[$clause['id']]['score'];
+                    $data[$key]['title'] = $clauses[$clause['id']]['title'];
+                    $data[$key]['content'] = $clauses[$clause['id']]['content'];
                 }
 
                 $q = Doctrine_Query::create()
-                    ->select("CONCAT(d.id, '-', d.slug) AS slug, d.name, d.code, d.organisation_id, d.adoption_date, dt.name, dt.legal_value")
+                    ->select("CONCAT(d.id, '-', d.slug) AS slug, d.code, d.organisation_id, d.adoption_date, dt.name, dt.legal_value")
                     ->from('Document d INDEXBY d.id')
                     ->innerJoin('d.DocumentType dt')
                     ->whereIn('d.id', $documents);

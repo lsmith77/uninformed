@@ -45,7 +45,13 @@
         }
         %>
     <div class="result" style="background-color: <%= bgcolor %>">
-        <h2><?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.title %>', 'clause', array('id' => 'XXX'))) ?> (<%= res.score %>%)</h2>
+        <h2>
+            <?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.title %>', 'clause', array('id' => 'XXX'))) ?>
+            (<%= res.score %>)
+            <% if (res.clauseHistory) { %>
+                <span class="clauseHistory"><?php echo str_replace('XXX', '<%= res.slug %>', link_to('H', 'clause', array('id' => 'XXX#clauseHistory'))) ?></span>
+            <% } %>
+        </h2>
         <h3>
             <span class="docdetails"><%= res.Document.code %> (<%= res.Document.adoption_date %>)</span> |
             <span class="organisation"><%= res.Document.Organisation.name %></span> |

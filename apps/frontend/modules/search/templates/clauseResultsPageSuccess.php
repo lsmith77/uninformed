@@ -38,7 +38,7 @@
     for (i = 0; i < cnt; i++) {
         var res = this.data[i]; %>
     <div class="result">
-        <h2><?php echo str_replace('XXX', '<%= (""+res.id + "-" + res.slug) %>', link_to('<%= res.Document.name %>', 'clause', array('id' => 'XXX'))) ?></h2>
+        <h2><?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.Document.name %>', 'clause', array('id' => 'XXX'))) ?></h2>
         <p><%= res.ClauseBody.content %></p>
         <span class="doctype"><%= res.Document.DocumentType.name %></span>
         <span class="infotype"><%= res.ClauseBody.ClauseInformationType.name %></span>

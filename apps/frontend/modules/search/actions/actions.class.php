@@ -230,16 +230,17 @@ class searchActions extends sfActions
             $data = array();
             if (!empty($clauses)) {
                 $q = Doctrine_Query::create()
-                    ->select('c.id, c.slug, c.clause_number, c.clause_number_information, c.clause_number_subparagraph, cb.content, cb.id, cb.root_clause_body_id, cop.name, cit.name, d.id, d.slug, d.name, d.code, d.organisation_id, dt.name, dt.legal_value')
+                    ->select('c.id, c.slug, c.document_id, c.clause_number, c.clause_number_information, c.clause_number_subparagraph, cb.content, cb.id, cb.root_clause_body_id, cop.name, cit.name')
                     ->from('clause c')
                     ->innerJoin('c.Document d')
                     ->innerJoin('d.DocumentType dt')
                     ->innerJoin('c.ClauseBody cb')
                     ->leftJoin('cb.ClauseOperativePhrase cop')
                     ->leftJoin('cb.ClauseInformationType cit')
-                    ->whereIn('id', $clauses);
+                    ->whereIn('c.id', $clauses);
                 $data = $q->fetchArray();
 
+                $documents = array();
                 foreach ($data as $key => $clause) {
                     $root_clause_body_id = isset($clause['ClauseBody']['root_clause_body_id'])
                         ? $clause['ClauseBody']['root_clause_body_id']
@@ -250,11 +251,24 @@ class searchActions extends sfActions
                         ->innerJoin('c.ClauseBody cb')
                         ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id));
                     $data[$key]['clauseHistory'] = (bool)$q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+                    $data[$key]['slug'] = $data[$key]['id'].'-'.$data[$key]['slug'];
+                    $data[$key]['clause_number'] = trim($data[$key]['clause_number'].' '.trim($data[$key]['clause_number_information'].' '.$data[$key]['clause_number_subparagraph']));
+                    unset($data[$key]['clause_number_information'], $data[$key]['clause_number_subparagraph']);
+                    $documents[] = $data[$key]['document_id'];
+                }
+
+                $q = Doctrine_Query::create()
+                    ->select('d.id, d.slug, d.name, d.code, d.organisation_id, d.adoption_date, dt.name, dt.legal_value')
+                    ->from('Document d INDEXBY d.id')
+                    ->innerJoin('d.DocumentType dt')
+                    ->whereIn('d.id', $documents);
+                $documents = $q->fetchArray();
+                foreach ($documents as $key => $document) {
                     $q = Doctrine_Query::create()
                         ->select('so.name, so.parent_id, mo.name, mo.parent_id')
                         ->from('Organisation so')
                         ->innerJoin('so.OrganisationParent mo')
-                        ->where('so.id = ?', array($data[$key]['Document']['organisation_id']));
+                        ->where('so.id = ?', array($document['organisation_id']));
                     $suborgan = $q->fetchArray();
                     $suborgan = reset($suborgan);
                     if ($suborgan['OrganisationParent']['parent_id']) {
@@ -269,19 +283,20 @@ class searchActions extends sfActions
                         $organisation =  $suborgan['OrganisationParent']['name'];
                     }
 
-                    if ($data[$key]['Document']['DocumentType']['name'] == 'Resolution'
+                    if ($documents[$key]['DocumentType']['name'] == 'Resolution'
                         && $main_organ == 'SC'
                         && $organisation == 'UNO'
                     ) {
-                        $data[$key]['isSCResolution'] = true;
+                        $documents[$key]['isSCResolution'] = true;
                     } else {
-                        $data[$key]['isSCResolution'] = false;
+                        $documents[$key]['isSCResolution'] = false;
                     }
-                    $data[$key]['Document']['Organisation']['name'] = "$organisation $main_organ";
-                    $data[$key]['slug'] = $data[$key]['id'].'-'.$data[$key]['slug'];
-                    $data[$key]['clause_number'] = trim($data[$key]['clause_number'].' '.$data[$key]['clause_number_information'].' '.$data[$key]['clause_number_subparagraph']);
-                    unset($data[$key]['clause_number_information'], $data[$key]['clause_number_subparagraph']);
-                    $data[$key]['Document']['slug'] = $data[$key]['Document']['id'].'-'.$data[$key]['Document']['slug'];
+                    $documents[$key]['Organisation']['name'] = "$organisation $main_organ";
+                    $documents[$key]['slug'] = $documents[$key]['id'].'-'.$documents[$key]['slug'];
+                }
+
+                foreach ($data as $key => $clause) {
+                    $data[$key]['Document'] = $documents[$clause['document_id']];
                 }
             }
         }

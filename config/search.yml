@@ -25,9 +25,9 @@ ClauseBody:
           required: true
           alias: getIsLatestClauseBody
         title:
-          type: string
+          type: text
           alias: getTitle
-          stored: false
+          stored: true
         adoption_date:
           type: tdate
           stored: false
@@ -37,7 +37,7 @@ ClauseBody:
           stored: false
           multiValued: true
           alias: getTagIds
-          boost: 3
+          boost: 2
         addressee_ids:
           type: int
           stored: false
@@ -45,7 +45,7 @@ ClauseBody:
           alias: getAddresseeIds
         content:
           type: text
-          stored: false
+          stored: true
           alias: getContent
         documenttype_id:
           type: int

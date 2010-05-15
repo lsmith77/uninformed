@@ -347,6 +347,9 @@ Country:
   LIBYAN ARAB JAMAHIRIYA:
     iso: LBY
     name: LIBYAN ARAB JAMAHIRIYA
+  MALTA:
+    iso: MLT
+    name: MALTA
   MOROCCO:
     iso: MAR
     name: MOROCCO
@@ -395,6 +398,9 @@ Country:
   MALAWI:
     iso: MWI
     name: MALAWI
+  MARSHALL ISLANDS:
+    iso: MHL
+    name: MARSHALL ISLANDS
   MEXICO:
     iso: MEX
     name: MEXICO
@@ -407,6 +413,9 @@ Country:
   NAMIBIA:
     iso: NAM
     name: NAMIBIA
+  NAURU:
+    iso: NRU
+    name: NAURU
   NIGER:
     iso: NER
     name: NIGER
@@ -470,6 +479,9 @@ Country:
   ROMANIA:
     iso: ROU
     name: ROMANIA
+  SAMOA:
+    iso: WSM
+    name: SAMOA
   SERBIA:
     iso: SRB
     name: SERBIA
@@ -482,6 +494,9 @@ Country:
   SAUDI ARABIA:
     iso: SAU
     name: SAUDI ARABIA
+  SINGAPORE:
+    iso: SGP
+    name: SINGAPORE
   SOLOMON ISLANDS:
     iso: SLB
     name: SOLOMON ISLANDS
@@ -515,7 +530,7 @@ Country:
   SOMALIA:
     iso: SOM
     name: SOMALIA
-  SURIname: 
+  SURINAME: 
     iso: SUR
     name: SURINAME
   SAO TOME AND PRINCIPE:
@@ -539,6 +554,9 @@ Country:
   TOGO:
     iso: TGO
     name: TOGO
+  TONGA:
+    iso: TON
+    name: TONGA
   THAILAND:
     iso: THA
     name: THAILAND
@@ -566,15 +584,18 @@ Country:
   TANZANIA, UNITED REPUBLIC OF:
     iso: TZA
     name: TANZANIA, UNITED REPUBLIC OF
+  TUVALU:
+    iso: TUV
+    name: TUVALU
   UKRAINE:
     iso: UKR
     name: UKRAINE
   UGANDA:
     iso: UGA
     name: UGANDA
-  UNITED STATES:
+  UNITED STATES OF AMERICA:
     iso: USA
-    name: UNITED STATES
+    name: UNITED STATES OF AMERICA
   URUGUAY:
     iso: URY
     name: URUGUAY
@@ -584,9 +605,9 @@ Country:
   SAINT VINCENT AND THE GRENADINES:
     iso: VCT
     name: SAINT VINCENT AND THE GRENADINES
-  VENEZUELA:
+  VENEZUELA, BOLIVARIAN REPUBLIC OF:
     iso: VEN
-    name: VENEZUELA
+    name: VENEZUELA, BOLIVARIAN REPUBLIC OF
   VIETNAM:
     iso: VNM
     name: VIETNAM

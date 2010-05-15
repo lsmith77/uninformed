@@ -139,20 +139,6 @@ Addressee:
       foreign: clause_body_id
       refClass: ClauseAddressee
 
-LegalValue:
-  columns:
-    id:
-      type: integer(4)
-      primary: true
-      autoincrement: true
-    name:
-      type: string(255)
-      notnull: true
-    decision_type:
-      type: enum
-      values: [vote, ratification]
-      notnull: false
-
 Organisation:
   columns:
     id:
@@ -182,20 +168,17 @@ DocumentType:
     name:
       type: string(255)
       notnull: true
-    legalvalue_id:
-      type: integer(4)
     rank_priority:
       type: integer(4)
-  relations:
-    LegalValue:
-      class: LegalValue
-      local: legalvalue_id
-      foreign: id
+    legal_value:
+      type: enum
+      values: [legally binding, non-legally binding]
+      notnull: false
 
 Document:
   actAs:
     <<: *actAs
-    Commentable: ~
+    MyCommentable: ~
   columns:
     id:
       type: integer(4)
@@ -372,7 +355,7 @@ ClauseClauseRelation:
 Clause:
   actAs:
     <<: *actAs
-    Commentable: ~
+    MyCommentable: ~
   columns:
     id:
       type: integer(4)

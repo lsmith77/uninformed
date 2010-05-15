@@ -7,22 +7,19 @@
  * 
  * @property integer $id
  * @property string $name
- * @property integer $legalvalue_id
  * @property integer $rank_priority
- * @property LegalValue $LegalValue
+ * @property enum $legal_value
  * @property Doctrine_Collection $Documents
  * 
  * @method integer             getId()            Returns the current record's "id" value
  * @method string              getName()          Returns the current record's "name" value
- * @method integer             getLegalvalueId()  Returns the current record's "legalvalue_id" value
  * @method integer             getRankPriority()  Returns the current record's "rank_priority" value
- * @method LegalValue          getLegalValue()    Returns the current record's "LegalValue" value
+ * @method enum                getLegalValue()    Returns the current record's "legal_value" value
  * @method Doctrine_Collection getDocuments()     Returns the current record's "Documents" collection
  * @method DocumentType        setId()            Sets the current record's "id" value
  * @method DocumentType        setName()          Sets the current record's "name" value
- * @method DocumentType        setLegalvalueId()  Sets the current record's "legalvalue_id" value
  * @method DocumentType        setRankPriority()  Sets the current record's "rank_priority" value
- * @method DocumentType        setLegalValue()    Sets the current record's "LegalValue" value
+ * @method DocumentType        setLegalValue()    Sets the current record's "legal_value" value
  * @method DocumentType        setDocuments()     Sets the current record's "Documents" collection
  * 
  * @package    symfony
@@ -46,13 +43,18 @@ abstract class BaseDocumentType extends MyBaseRecord
              'notnull' => true,
              'length' => 255,
              ));
-        $this->hasColumn('legalvalue_id', 'integer', 4, array(
-             'type' => 'integer',
-             'length' => 4,
-             ));
         $this->hasColumn('rank_priority', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
+             ));
+        $this->hasColumn('legal_value', 'enum', null, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'legally binding',
+              1 => 'non-legally binding',
+             ),
+             'notnull' => false,
              ));
 
         $this->option('collation', 'utf8_general_ci');
@@ -63,10 +65,6 @@ abstract class BaseDocumentType extends MyBaseRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('LegalValue', array(
-             'local' => 'legalvalue_id',
-             'foreign' => 'id'));
-
         $this->hasMany('Document as Documents', array(
              'local' => 'id',
              'foreign' => 'documenttype_id'));

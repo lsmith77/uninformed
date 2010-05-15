@@ -71,12 +71,8 @@ class Clause extends BaseClause
         return $this->_get('Document')->_get('organisation_id');
     }
 
-    public function getLegalValueId() {
-        return $this->_get('Document')->getLegalValueId();
-    }
-
-    public function getDecisionType() {
-        return $this->_get('Document')->getDecisionType();
+    public function getLegalValue() {
+        return $this->_get('Document')->getLegalValue();
     }
 
     public function getAdoptionDate() {

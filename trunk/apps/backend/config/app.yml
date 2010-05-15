@@ -33,7 +33,7 @@ all:
             url:    clause
           Comments:
             url:    commentAdmin
-          Comment Reports:
+          Comment Moderation:
             url:    commentReportAdmin
       "Reservations":
         credentials:      [admin]

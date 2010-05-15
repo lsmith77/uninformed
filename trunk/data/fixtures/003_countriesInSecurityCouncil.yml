@@ -1,0 +1,1757 @@
+CountryOrganisation:
+  001:
+      Country: CHINA
+      Organisation: SC
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  002:
+      Country: FRANCE
+      Organisation: SC
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  003:
+      Country: RUSSIAN FEDERATION
+      Organisation: SC
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  004:
+      Country: UNITED KINGDOM
+      Organisation: SC
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  005:
+      Country: AUSTRIA
+      Organisation: SC
+      eff_date: "2009-01-01"
+      exp_date: "2010-12-31"
+
+  006:
+      Country: AUSTRIA
+      Organisation: SC
+      eff_date: "1973-01-01"
+      exp_date: "1974-12-31"
+
+  007:
+      Country: AUSTRIA
+      Organisation: SC
+      eff_date: "1991-01-01"
+      exp_date: "1992-12-31"
+
+  008:
+      Country: BOSNIA AND HERZEGOVINA
+      Organisation: SC
+      eff_date: "2010-01-01"
+      exp_date: "2011-12-31"
+
+  009:
+      Country: BRAZIL
+      Organisation: SC
+      eff_date: "2010-01-01"
+      exp_date: "2011-12-31"
+
+  010:
+      Country: BRAZIL
+      Organisation: SC
+      eff_date: "2004-01-01"
+      exp_date: "2005-12-31"
+
+  011:
+      Country: BRAZIL
+      Organisation: SC
+      eff_date: "1998-01-01"
+      exp_date: "1999-12-31"
+
+  012:
+      Country: BRAZIL
+      Organisation: SC
+      eff_date: "1993-01-01"
+      exp_date: "1994-12-31"
+
+  013:
+      Country: BRAZIL
+      Organisation: SC
+      eff_date: "1988-01-01"
+      exp_date: "1989-12-31"
+
+  014:
+      Country: BRAZIL
+      Organisation: SC
+      eff_date: "1967-01-01"
+      exp_date: "1968-12-31"
+
+  015:
+      Country: BRAZIL
+      Organisation: SC
+      eff_date: "1963-01-01"
+      exp_date: "1964-12-31"
+
+  016:
+      Country: BRAZIL
+      Organisation: SC
+      eff_date: "1954-01-01"
+      exp_date: "1955-12-31"
+
+  017:
+      Country: BRAZIL
+      Organisation: SC
+      eff_date: "1951-01-01"
+      exp_date: "1952-12-31"
+
+  018:
+      Country: BRAZIL
+      Organisation: SC
+      eff_date: "1946-01-01"
+      exp_date: "1947-12-31"
+
+  019:
+      Country: GABON
+      Organisation: SC
+      eff_date: "2010-01-01"
+      exp_date: "2011-12-31"
+
+  020:
+      Country: GABON
+      Organisation: SC
+      eff_date: "1998-01-01"
+      exp_date: "1999-12-31"
+
+  021:
+      Country: GABON
+      Organisation: SC
+      eff_date: "1978-01-01"
+      exp_date: "1979-12-31"
+
+  022:
+      Country: JAPAN
+      Organisation: SC
+      eff_date: "2009-01-01"
+      exp_date: "2010-12-31"
+
+  023:
+      Country: JAPAN
+      Organisation: SC
+      eff_date: "2005-01-01"
+      exp_date: "2006-12-31"
+
+  024:
+      Country: JAPAN
+      Organisation: SC
+      eff_date: "1997-01-01"
+      exp_date: "1998-12-31"
+
+  025:
+      Country: JAPAN
+      Organisation: SC
+      eff_date: "1992-01-01"
+      exp_date: "1993-12-31"
+
+  026:
+      Country: JAPAN
+      Organisation: SC
+      eff_date: "1987-01-01"
+      exp_date: "1988-12-31"
+
+  027:
+      Country: JAPAN
+      Organisation: SC
+      eff_date: "1981-01-01"
+      exp_date: "1982-12-31"
+
+  028:
+      Country: JAPAN
+      Organisation: SC
+      eff_date: "1975-01-01"
+      exp_date: "1976-12-31"
+
+  029:
+      Country: JAPAN
+      Organisation: SC
+      eff_date: "1971-01-01"
+      exp_date: "1972-12-31"
+
+  030:
+      Country: JAPAN
+      Organisation: SC
+      eff_date: "1966-01-01"
+      exp_date: "1967-12-31"
+
+  031:
+      Country: JAPAN
+      Organisation: SC
+      eff_date: "1958-01-01"
+      exp_date: "1959-12-31"
+
+  032:
+      Country: LEBANON
+      Organisation: SC
+      eff_date: "2010-01-01"
+      exp_date: "2011-12-31"
+  033:
+      Country: LEBANON
+      Organisation: SC
+      eff_date: "1953-01-01"
+      exp_date: "1954-12-31"
+
+  034:
+      Country: MEXICO
+      Organisation: SC
+      eff_date: "2009-01-01"
+      exp_date: "2010-12-31"
+
+  035:
+      Country: MEXICO
+      Organisation: SC
+      eff_date: "2002-01-01"
+      exp_date: "2003-12-31"
+
+  036:
+      Country: MEXICO
+      Organisation: SC
+      eff_date: "1980-01-01"
+      exp_date: "1981-12-31"
+
+  037:
+      Country: MEXICO
+      Organisation: SC
+      eff_date: "1946-01-01"
+      exp_date: "1946-12-31"
+
+  038:
+      Country: NIGERIA
+      Organisation: SC
+      eff_date: "2010-01-01"
+      exp_date: "2011-12-31"
+
+  039:
+      Country: NIGERIA
+      Organisation: SC
+      eff_date: "1994-01-01"
+      exp_date: "1995-12-31"
+
+  040:
+      Country: NIGERIA
+      Organisation: SC
+      eff_date: "1978-01-01"
+      exp_date: "1979-12-31"
+
+  041:
+      Country: NIGERIA
+      Organisation: SC
+      eff_date: "1963-01-01"
+      exp_date: "1964-12-31"
+
+  042:
+      Country: NIGERIA
+      Organisation: SC
+      eff_date: "1949-01-01"
+      exp_date: "1950-12-31"
+
+  043:
+      Country: TURKEY
+      Organisation: SC
+      eff_date: "2009-01-01"
+      exp_date: "2010-12-31"
+
+  044:
+      Country: TURKEY
+      Organisation: SC
+      eff_date: "1961-01-01"
+      exp_date: "1961-12-31"
+
+  045:
+      Country: TURKEY
+      Organisation: SC
+      eff_date: "1954-01-01"
+      exp_date: "1955-12-31"
+
+  046:
+      Country: TURKEY
+      Organisation: SC
+      eff_date: "1951-01-01"
+      exp_date: "1952-12-31"
+
+  047:
+      Country: UGANDA
+      Organisation: SC
+      eff_date: "2009-01-01"
+      exp_date: "2010-12-31"
+
+  048:
+      Country: UGANDA
+      Organisation: SC
+      eff_date: "1981-01-01"
+      exp_date: "1982-12-31"
+
+  049:
+      Country: UGANDA
+      Organisation: SC
+      eff_date: "1966-01-01"
+      exp_date: "1966-12-31"
+
+  050:
+      Country: UKRAINE
+      Organisation: SC
+      eff_date: "2000-01-01"
+      exp_date: "2001-12-31"
+
+  051:
+      Country: UKRAINE
+      Organisation: SC
+      eff_date: "1985-01-01"
+      exp_date: "1986-12-31"
+
+  052:
+      Country: UKRAINE
+      Organisation: SC
+      eff_date: "1948-01-01"
+      exp_date: "1949-12-31"
+
+  053:
+      Country: UNITED ARAB EMIRATES
+      Organisation: SC
+      eff_date: "1986-01-01"
+      exp_date: "1987-12-31"
+
+  054:
+      Country: TANZANIA, UNITED REPUBLIC OF
+      Organisation: SC
+      eff_date: "2005-01-01"
+      exp_date: "2006-12-31"
+
+  055:
+      Country: TANZANIA, UNITED REPUBLIC OF
+      Organisation: SC
+      eff_date: "1975-01-01"
+      exp_date: "1976-12-31"
+
+  056:
+      Country: URUGUAY
+      Organisation: SC
+      eff_date: "1965-01-01"
+      exp_date: "1966-12-31"
+
+  057:
+      Country: VENEZUELA, BOLIVARIAN REPUBLIC OF
+      Organisation: SC
+      eff_date: "1992-01-01"
+      exp_date: "1993-12-31"
+
+  058:
+      Country: VENEZUELA, BOLIVARIAN REPUBLIC OF
+      Organisation: SC
+      eff_date: "1986-01-01"
+      exp_date: "1987-12-31"
+
+  059:
+      Country: VENEZUELA, BOLIVARIAN REPUBLIC OF
+      Organisation: SC
+      eff_date: "1977-01-01"
+      exp_date: "1978-12-31"
+
+  060:
+      Country: VENEZUELA, BOLIVARIAN REPUBLIC OF
+      Organisation: SC
+      eff_date: "1962-01-01"
+      exp_date: "1963-12-31"
+
+  061:
+      Country: VIETNAM
+      Organisation: SC
+      eff_date: "2008-01-01"
+      exp_date: "2009-12-31"
+
+  062:
+      Country: YEMEN
+      Organisation: SC
+      eff_date: "1990-01-01"
+      exp_date: "1991-12-31"
+
+  063:
+      Country: ZAMBIA
+      Organisation: SC
+      eff_date: "1987-01-01"
+      exp_date: "1988-12-31"
+
+  064:
+      Country: ZAMBIA
+      Organisation: SC
+      eff_date: "1979-01-01"
+      exp_date: "1980-12-31"
+
+  065:
+      Country: ZAMBIA
+      Organisation: SC
+      eff_date: "1969-01-01"
+      exp_date: "1970-12-31"
+
+  066:
+      Country: ZIMBABWE
+      Organisation: SC
+      eff_date: "1983-01-01"
+      exp_date: "1984-12-31"
+
+  067:
+      Country: ZIMBABWE
+      Organisation: SC
+      eff_date: "1991-01-01"
+      exp_date: "1992-12-31"
+
+  068:
+      Country: ALGERIA
+      Organisation: SC
+      eff_date: "2004-01-01"
+      exp_date: "2005-12-31"
+
+  069:
+      Country: ALGERIA
+      Organisation: SC
+      eff_date: "1988-01-01"
+      exp_date: "1989-12-31"
+
+  070:
+      Country: ALGERIA
+      Organisation: SC
+      eff_date: "1968-01-01"
+      exp_date: "1969-12-31"
+
+  071:
+      Country: ANGOLA
+      Organisation: SC
+      eff_date: "2003-01-01"
+      exp_date: "2004-12-31"
+
+  072:
+      Country: ARGENTINA
+      Organisation: SC
+      eff_date: "2005-01-01"
+      exp_date: "2006-12-31"
+
+  073:
+      Country: ARGENTINA
+      Organisation: SC
+      eff_date: "1999-01-01"
+      exp_date: "2000-12-31"
+
+  074:
+      Country: ARGENTINA
+      Organisation: SC
+      eff_date: "1994-01-01"
+      exp_date: "1995-12-31"
+
+  075:
+      Country: ARGENTINA
+      Organisation: SC
+      eff_date: "1987-01-01"
+      exp_date: "1988-12-31"
+
+  076:
+      Country: ARGENTINA
+      Organisation: SC
+      eff_date: "1971-01-01"
+      exp_date: "1972-12-31"
+
+  077:
+      Country: ARGENTINA
+      Organisation: SC
+      eff_date: "1966-01-01"
+      exp_date: "1967-12-31"
+
+  078:
+      Country: ARGENTINA
+      Organisation: SC
+      eff_date: "1959-01-01"
+      exp_date: "1960-12-31"
+
+  079:
+      Country: ARGENTINA
+      Organisation: SC
+      eff_date: "1948-01-01"
+      exp_date: "1949-12-31"
+
+  080:
+      Country: AUSTRALIA
+      Organisation: SC
+      eff_date: "1985-01-01"
+      exp_date: "1986-12-31"
+
+  081:
+      Country: AUSTRALIA
+      Organisation: SC
+      eff_date: "1973-01-01"
+      exp_date: "1974-12-31"
+
+  082:
+      Country: AUSTRALIA
+      Organisation: SC
+      eff_date: "1956-01-01"
+      exp_date: "1957-12-31"
+
+  083:
+      Country: AUSTRALIA
+      Organisation: SC
+      eff_date: "1946-01-01"
+      exp_date: "1947-12-31"
+
+  084:
+      Country: BAHRAIN
+      Organisation: SC
+      eff_date: "1998-01-01"
+      exp_date: "1999-12-31"
+
+  085:
+      Country: BANGLADESH
+      Organisation: SC
+      eff_date: "2000-01-01"
+      exp_date: "2001-12-31"
+
+  086:
+      Country: BANGLADESH
+      Organisation: SC
+      eff_date: "1979-01-01"
+      exp_date: "1980-12-31"
+
+  087:
+      Country: BELARUS
+      Organisation: SC
+      eff_date: "1974-01-01"
+      exp_date: "1975-12-31"
+
+  088:
+      Country: BELGIUM
+      Organisation: SC
+      eff_date: "2007-01-01"
+      exp_date: "2008-12-31"
+
+  089:
+      Country: BELGIUM
+      Organisation: SC
+      eff_date: "1991-01-01"
+      exp_date: "1992-12-31"
+
+  090:
+      Country: BELGIUM
+      Organisation: SC
+      eff_date: "1971-01-01"
+      exp_date: "1972-12-31"
+
+  091:
+      Country: BELGIUM
+      Organisation: SC
+      eff_date: "1955-01-01"
+      exp_date: "1956-12-31"
+
+  092:
+      Country: BELGIUM
+      Organisation: SC
+      eff_date: "1947-01-01"
+      exp_date: "1948-12-31"
+
+  093:
+      Country: BENIN
+      Organisation: SC
+      eff_date: "2004-01-01"
+      exp_date: "2005-12-31"
+
+  094:
+      Country: BENIN
+      Organisation: SC
+      eff_date: "1976-01-01"
+      exp_date: "1977-12-31"
+
+  095:
+      Country: BOLIVIA
+      Organisation: SC
+      eff_date: "1978-01-01"
+      exp_date: "1979-12-31"
+
+  096:
+      Country: BOLIVIA
+      Organisation: SC
+      eff_date: "1964-01-01"
+      exp_date: "1965-12-31"
+
+  097:
+      Country: BOTSWANA
+      Organisation: SC
+      eff_date: "1995-01-01"
+      exp_date: "1996-12-31"
+
+  098:
+      Country: BULGARIA
+      Organisation: SC
+      eff_date: "2002-01-01"
+      exp_date: "2003-12-31"
+
+  099:
+      Country: BULGARIA
+      Organisation: SC
+      eff_date: "1986-01-01"
+      exp_date: "1987-12-31"
+
+  100:
+      Country: BULGARIA
+      Organisation: SC
+      eff_date: "1966-01-01"
+      exp_date: "1967-12-31"
+
+  101:
+      Country: BURKINA FASO
+      Organisation: SC
+      eff_date: "2008-01-01"
+      exp_date: "2009-12-31"
+
+  102:
+      Country: BURKINA FASO
+      Organisation: SC
+      eff_date: "1984-01-01"
+      exp_date: "1985-12-31"
+
+  103:
+      Country: BURUNDI
+      Organisation: SC
+      eff_date: "1970-01-01"
+      exp_date: "1971-12-31"
+
+  104:
+      Country: CAMEROON
+      Organisation: SC
+      eff_date: "2002-01-01"
+      exp_date: "2003-12-31"
+
+  105:
+      Country: CAMEROON
+      Organisation: SC
+      eff_date: "1974-01-01"
+      exp_date: "1975-12-31"
+
+  106:
+      Country: CANADA
+      Organisation: SC
+      eff_date: "1999-01-01"
+      exp_date: "2000-12-31"
+
+  107:
+      Country: CANADA
+      Organisation: SC
+      eff_date: "1989-01-01"
+      exp_date: "1990-12-31"
+
+  108:
+      Country: CANADA
+      Organisation: SC
+      eff_date: "1977-01-01"
+      exp_date: "1978-12-31"
+
+  109:
+      Country: CANADA
+      Organisation: SC
+      eff_date: "1967-01-01"
+      exp_date: "1968-12-31"
+
+  110:
+      Country: CANADA
+      Organisation: SC
+      eff_date: "1958-01-01"
+      exp_date: "1959-12-31"
+
+  111:
+      Country: CANADA
+      Organisation: SC
+      eff_date: "1948-01-01"
+      exp_date: "1949-12-31"
+
+  112:
+      Country: CAPE VERDE
+      Organisation: SC
+      eff_date: "1992-01-01"
+      exp_date: "1993-12-31"
+
+  113:
+      Country: CHILE
+      Organisation: SC
+      eff_date: "2003-01-01"
+      exp_date: "2004-12-31"
+
+  114:
+      Country: CHILE
+      Organisation: SC
+      eff_date: "1996-01-01"
+      exp_date: "1997-12-31"
+
+  115:
+      Country: CHILE
+      Organisation: SC
+      eff_date: "1961-01-01"
+      exp_date: "1962-12-31"
+
+  116:
+      Country: CHILE
+      Organisation: SC
+      eff_date: "1952-01-01"
+      exp_date: "1953-12-31"
+
+  117:
+      Country: COLOMBIA
+      Organisation: SC
+      eff_date: "2001-01-01"
+      exp_date: "2002-12-31"
+  118:
+      Country: COLOMBIA
+      Organisation: SC
+      eff_date: "1989-01-01"
+      exp_date: "1990-12-31"
+
+  119:
+      Country: COLOMBIA
+      Organisation: SC
+      eff_date: "1969-01-01"
+      exp_date: "1970-12-31"
+
+  120:
+      Country: COLOMBIA
+      Organisation: SC
+      eff_date: "1957-01-01"
+      exp_date: "1958-12-31"
+
+  121:
+      Country: COLOMBIA
+      Organisation: SC
+      eff_date: "1953-01-01"
+      exp_date: "1954-12-31"
+
+  122:
+      Country: COLOMBIA
+      Organisation: SC
+      eff_date: "1947-01-01"
+      exp_date: "1948-12-31"
+
+  123:
+      Country: CONGO
+      Organisation: SC
+      eff_date: "2006-01-01"
+      exp_date: "2007-12-31"
+
+  124:
+      Country: CONGO
+      Organisation: SC
+      eff_date: "1986-01-01"
+      exp_date: "1987-12-31"
+
+  125:
+      Country: COSTA RICA
+      Organisation: SC
+      eff_date: "2008-01-01"
+      exp_date: "2009-12-31"
+
+  126:
+      Country: COSTA RICA
+      Organisation: SC
+      eff_date: "1997-01-01"
+      exp_date: "1998-12-31"
+
+  127:
+      Country: COSTA RICA
+      Organisation: SC
+      eff_date: "1974-01-01"
+      exp_date: "1975-12-31"
+
+  128:
+      Country: COTE D'IVOIRE
+      Organisation: SC
+      eff_date: "1990-01-01"
+      exp_date: "1991-12-31"
+
+  129:
+      Country: COTE D'IVOIRE
+      Organisation: SC
+      eff_date: "1964-01-01"
+      exp_date: "1965-12-31"
+
+  130:
+      Country: CROATIA
+      Organisation: SC
+      eff_date: "2008-01-01"
+      exp_date: "2009-12-31"
+
+  131:
+      Country: CUBA
+      Organisation: SC
+      eff_date: "1990-01-01"
+      exp_date: "1991-12-31"
+
+  132:
+      Country: CUBA
+      Organisation: SC
+      eff_date: "1956-01-01"
+      exp_date: "1957-12-31"
+
+  133:
+      Country: CUBA
+      Organisation: SC
+      eff_date: "1949-01-01"
+      exp_date: "1950-12-31"
+
+  134:
+      Country: CZECH REPUBLIC
+      Organisation: SC
+      eff_date: "1994-01-01"
+      exp_date: "1995-12-31"
+
+  135:
+      Country: CONGO, DEMOCRATIC REPUBLIC OF THE
+      Organisation: SC
+      eff_date: "1990-01-01"
+      exp_date: "1991-12-31"
+
+  136:
+      Country: CONGO, DEMOCRATIC REPUBLIC OF THE
+      Organisation: SC
+      eff_date: "1982-01-01"
+      exp_date: "1983-12-31"
+
+  137:
+      Country: DENMARK
+      Organisation: SC
+      eff_date: "2005-01-01"
+      exp_date: "2006-12-31"
+
+  138:
+      Country: DENMARK
+      Organisation: SC
+      eff_date: "1985-01-01"
+      exp_date: "1986-12-31"
+
+  139:
+      Country: DENMARK
+      Organisation: SC
+      eff_date: "1967-01-01"
+      exp_date: "1968-12-31"
+
+  140:
+      Country: DENMARK
+      Organisation: SC
+      eff_date: "1953-01-01"
+      exp_date: "1954-12-31"
+
+  141:
+      Country: DJIBOUTI
+      Organisation: SC
+      eff_date: "1993-01-01"
+      exp_date: "1994-12-31"
+
+  142:
+      Country: ECUADOR
+      Organisation: SC
+      eff_date: "1991-01-01"
+      exp_date: "1992-12-31"
+
+  143:
+      Country: ECUADOR
+      Organisation: SC
+      eff_date: "1960-01-01"
+      exp_date: "1961-12-31"
+
+  144:
+      Country: ECUADOR
+      Organisation: SC
+      eff_date: "1950-01-01"
+      exp_date: "1951-12-31"
+
+  145:
+      Country: EGYPT
+      Organisation: SC
+      eff_date: "1996-01-01"
+      exp_date: "1997-12-31"
+
+  146:
+      Country: EGYPT
+      Organisation: SC
+      eff_date: "1984-01-01"
+      exp_date: "1985-12-31"
+
+  147:
+      Country: EGYPT
+      Organisation: SC
+      eff_date: "1949-01-01"
+      exp_date: "1950-12-31"
+
+  148:
+      Country: EGYPT
+      Organisation: SC
+      eff_date: "1946-01-01"
+      exp_date: "1946-12-31"
+
+  149:
+      Country: ETHIOPIA
+      Organisation: SC
+      eff_date: "1989-01-01"
+      exp_date: "1990-12-31"
+
+  150:
+      Country: ETHIOPIA
+      Organisation: SC
+      eff_date: "1967-01-01"
+      exp_date: "1968-12-31"
+
+  151:
+      Country: FINLAND
+      Organisation: SC
+      eff_date: "1989-01-01"
+      exp_date: "1990-12-31"
+
+  152:
+      Country: FINLAND
+      Organisation: SC
+      eff_date: "1969-01-01"
+      exp_date: "1970-12-31"
+
+  153:
+      Country: GAMBIA
+      Organisation: SC
+      eff_date: "1998-01-01"
+      exp_date: "1999-12-31"
+
+  154:
+      Country: GERMANY
+      Organisation: SC
+      eff_date: "2003-01-01"
+      exp_date: "2004-12-31"
+
+  155:
+      Country: GERMANY
+      Organisation: SC
+      eff_date: "1995-01-01"
+      exp_date: "1996-12-31"
+
+  156:
+      Country: GERMANY
+      Organisation: SC
+      eff_date: "1987-01-01"
+      exp_date: "1988-12-31"
+
+  157:
+      Country: GERMANY
+      Organisation: SC
+      eff_date: "1977-01-01"
+      exp_date: "1978-12-31"
+
+  158:
+      Country: GHANA
+      Organisation: SC
+      eff_date: "2006-01-01"
+      exp_date: "2007-12-31"
+
+  159:
+      Country: GHANA
+      Organisation: SC
+      eff_date: "1986-01-01"
+      exp_date: "1987-12-31"
+
+  160:
+      Country: GHANA
+      Organisation: SC
+      eff_date: "1962-01-01"
+      exp_date: "1963-12-31"
+
+  161:
+      Country: GREECE
+      Organisation: SC
+      eff_date: "2005-01-01"
+      exp_date: "2006-12-31"
+
+  162:
+      Country: GREECE
+      Organisation: SC
+      eff_date: "1952-01-01"
+      exp_date: "1953-12-31"
+
+  163:
+      Country: GUINEA
+      Organisation: SC
+      eff_date: "2002-01-01"
+      exp_date: "2003-12-31"
+
+  164:
+      Country: GUINEA
+      Organisation: SC
+      eff_date: "1972-01-01"
+      exp_date: "1973-12-31"
+
+  165:
+      Country: GUINEA-BISSAU
+      Organisation: SC
+      eff_date: "1996-01-01"
+      exp_date: "1997-12-31"
+
+  166:
+      Country: GUYANA
+      Organisation: SC
+      eff_date: "1982-01-01"
+      exp_date: "1983-12-31"
+
+  167:
+      Country: GUYANA
+      Organisation: SC
+      eff_date: "1975-01-01"
+      exp_date: "1976-12-31"
+
+  168:
+      Country: HONDURAS
+      Organisation: SC
+      eff_date: "1995-01-01"
+      exp_date: "1996-12-31"
+
+  169:
+      Country: HUNGARY
+      Organisation: SC
+      eff_date: "1992-01-01"
+      exp_date: "1993-12-31"
+
+  170:
+      Country: HUNGARY
+      Organisation: SC
+      eff_date: "1968-01-01"
+      exp_date: "1969-12-31"
+
+  171:
+      Country: INDIA
+      Organisation: SC
+      eff_date: "1991-01-01"
+      exp_date: "1992-12-31"
+
+  172:
+      Country: INDIA
+      Organisation: SC
+      eff_date: "1984-01-01"
+      exp_date: "1985-12-31"
+
+  173:
+      Country: INDIA
+      Organisation: SC
+      eff_date: "1977-01-01"
+      exp_date: "1978-12-31"
+
+  174:
+      Country: INDIA
+      Organisation: SC
+      eff_date: "1972-01-01"
+      exp_date: "1973-12-31"
+
+  175:
+      Country: INDIA
+      Organisation: SC
+      eff_date: "1967-01-01"
+      exp_date: "1968-12-31"
+
+  176:
+      Country: INDIA
+      Organisation: SC
+      eff_date: "1950-01-01"
+      exp_date: "1951-12-31"
+
+  177:
+      Country: INDONESIA
+      Organisation: SC
+      eff_date: "2007-01-01"
+      exp_date: "2008-12-31"
+
+  178:
+      Country: INDONESIA
+      Organisation: SC
+      eff_date: "1995-01-01"
+      exp_date: "1996-12-31"
+
+  179:
+      Country: INDONESIA
+      Organisation: SC
+      eff_date: "1973-01-01"
+      exp_date: "1974-12-31"
+
+  180:
+      Country: IRAN, ISLAMIC REPUBLIC OF
+      Organisation: SC
+      eff_date: "1955-01-01"
+      exp_date: "1956-12-31"
+
+  181:
+      Country: IRAQ
+      Organisation: SC
+      eff_date: "1974-01-01"
+      exp_date: "1975-12-31"
+
+  182:
+      Country: IRAQ
+      Organisation: SC
+      eff_date: "1957-01-01"
+      exp_date: "1958-12-31"
+
+  183:
+      Country: IRELAND
+      Organisation: SC
+      eff_date: "2001-01-01"
+      exp_date: "2002-12-31"
+
+  184:
+      Country: IRELAND
+      Organisation: SC
+      eff_date: "1981-01-01"
+      exp_date: "1982-12-31"
+
+  185:
+      Country: IRELAND
+      Organisation: SC
+      eff_date: "1962-01-01"
+      exp_date: "1962-12-31"
+
+  186:
+      Country: ITALY
+      Organisation: SC
+      eff_date: "2007-01-01"
+      exp_date: "2008-12-31"
+
+  187:
+      Country: ITALY
+      Organisation: SC
+      eff_date: "1995-01-01"
+      exp_date: "1996-12-31"
+
+  188:
+      Country: ITALY
+      Organisation: SC
+      eff_date: "1987-01-01"
+      exp_date: "1988-12-31"
+
+  189:
+      Country: ITALY
+      Organisation: SC
+      eff_date: "1975-01-01"
+      exp_date: "1976-12-31"
+
+  190:
+      Country: ITALY
+      Organisation: SC
+      eff_date: "1971-01-01"
+      exp_date: "1972-12-31"
+
+  191:
+      Country: ITALY
+      Organisation: SC
+      eff_date: "1959-01-01"
+      exp_date: "1960-12-31"
+
+  192:
+      Country: JAMAICA
+      Organisation: SC
+      eff_date: "2000-01-01"
+      exp_date: "2001-12-31"
+
+  193:
+      Country: JAMAICA
+      Organisation: SC
+      eff_date: "1979-01-01"
+      exp_date: "1980-12-31"
+
+  194:
+      Country: JORDAN
+      Organisation: SC
+      eff_date: "1982-01-01"
+      exp_date: "1983-12-31"
+
+  195:
+      Country: JORDAN
+      Organisation: SC
+      eff_date: "1965-01-01"
+      exp_date: "1966-12-31"
+
+  196:
+      Country: KENYA
+      Organisation: SC
+      eff_date: "1997-01-01"
+      exp_date: "1998-12-31"
+
+  197:
+      Country: KENYA
+      Organisation: SC
+      eff_date: "1973-01-01"
+      exp_date: "1974-12-31"
+
+  198:
+      Country: KUWAIT
+      Organisation: SC
+      eff_date: "1978-01-01"
+      exp_date: "1979-12-31"
+
+  199:
+      Country: LIBERIA
+      Organisation: SC
+      eff_date: "1961-01-01"
+      exp_date: "1961-12-31"
+
+  200:
+      Country: LIBYAN ARAB JAMAHIRIYA
+      Organisation: SC
+      eff_date: "2008-01-01"
+      exp_date: "2009-12-31"
+
+  201:
+      Country: LIBYAN ARAB JAMAHIRIYA
+      Organisation: SC
+      eff_date: "1976-01-01"
+      exp_date: "1977-12-31"
+
+  202:
+      Country: MADAGASCAR
+      Organisation: SC
+      eff_date: "1985-01-01"
+      exp_date: "1986-12-31"
+
+  203:
+      Country: MALAYSIA
+      Organisation: SC
+      eff_date: "1999-01-01"
+      exp_date: "2000-12-31"
+
+  204:
+      Country: MALAYSIA
+      Organisation: SC
+      eff_date: "1989-01-01"
+      exp_date: "1990-12-31"
+
+  205:
+      Country: MALAYSIA
+      Organisation: SC
+      eff_date: "1965-01-01"
+      exp_date: "1965-12-31"
+
+  206:
+      Country: MALI
+      Organisation: SC
+      eff_date: "2000-01-01"
+      exp_date: "2001-12-31"
+
+  207:
+      Country: MALI
+      Organisation: SC
+      eff_date: "1966-01-01"
+      exp_date: "1967-12-31"
+
+  208:
+      Country: MALTA
+      Organisation: SC
+      eff_date: "1983-01-01"
+      exp_date: "1984-12-31"
+
+  209:
+      Country: MAURITANIA
+      Organisation: SC
+      eff_date: "1974-01-01"
+      exp_date: "1975-12-31"
+
+  210:
+      Country: MAURITIUS
+      Organisation: SC
+      eff_date: "2001-01-01"
+      exp_date: "2002-12-31"
+
+  211:
+      Country: MAURITIUS
+      Organisation: SC
+      eff_date: "1977-01-01"
+      exp_date: "1978-12-31"
+
+  212:
+      Country: MOROCCO
+      Organisation: SC
+      eff_date: "1992-01-01"
+      exp_date: "1993-12-31"
+
+  213:
+      Country: MOROCCO
+      Organisation: SC
+      eff_date: "1963-01-01"
+      exp_date: "1964-12-31"
+
+  214:
+      Country: NAMIBIA
+      Organisation: SC
+      eff_date: "1999-01-01"
+      exp_date: "2000-12-31"
+
+  215:
+      Country: NEPAL
+      Organisation: SC
+      eff_date: "1988-01-01"
+      exp_date: "1989-12-31"
+
+  216:
+      Country: NEPAL
+      Organisation: SC
+      eff_date: "1969-01-01"
+      exp_date: "1970-12-31"
+
+  217:
+      Country: NETHERLANDS
+      Organisation: SC
+      eff_date: "1999-01-01"
+      exp_date: "2000-12-31"
+
+  218:
+      Country: NETHERLANDS
+      Organisation: SC
+      eff_date: "1983-01-01"
+      exp_date: "1984-12-31"
+
+  219:
+      Country: NETHERLANDS
+      Organisation: SC
+      eff_date: "1965-01-01"
+      exp_date: "1966-12-31"
+
+  220:
+      Country: NETHERLANDS
+      Organisation: SC
+      eff_date: "1951-01-01"
+      exp_date: "1952-12-31"
+
+  221:
+      Country: NETHERLANDS
+      Organisation: SC
+      eff_date: "1946-01-01"
+      exp_date: "1946-12-31"
+
+  223:
+      Country: NEW ZEALAND
+      Organisation: SC
+      eff_date: "1993-01-01"
+      exp_date: "1994-12-31"
+
+  224:
+      Country: NEW ZEALAND
+      Organisation: SC
+      eff_date: "1966-01-01"
+      exp_date: "1966-12-31"
+
+  225:
+      Country: NEW ZEALAND
+      Organisation: SC
+      eff_date: "1954-01-01"
+      exp_date: "1955-12-31"
+
+  226:
+      Country: NICARAGUA
+      Organisation: SC
+      eff_date: "1983-01-01"
+      exp_date: "1984-12-31"
+
+  227:
+      Country: NICARAGUA
+      Organisation: SC
+      eff_date: "1970-01-01"
+      exp_date: "1971-12-31"
+
+  228:
+      Country: NIGER
+      Organisation: SC
+      eff_date: "1980-01-01"
+      exp_date: "1981-12-31"
+
+  229:
+      Country: NORWAY
+      Organisation: SC
+      eff_date: "2001-01-01"
+      exp_date: "2002-12-31"
+
+  230:
+      Country: NORWAY
+      Organisation: SC
+      eff_date: "1979-01-01"
+      exp_date: "1980-12-31"
+
+  231:
+      Country: NORWAY
+      Organisation: SC
+      eff_date: "1963-01-01"
+      exp_date: "1964-12-31"
+
+  232:
+      Country: NORWAY
+      Organisation: SC
+      eff_date: "1949-01-01"
+      exp_date: "1950-12-31"
+
+  233:
+      Country: OMAN
+      Organisation: SC
+      eff_date: "1994-01-01"
+      exp_date: "1995-12-31"
+
+  234:
+      Country: PAKISTAN
+      Organisation: SC
+      eff_date: "2003-01-01"
+      exp_date: "2004-12-31"
+
+  235:
+      Country: PAKISTAN
+      Organisation: SC
+      eff_date: "1993-01-01"
+      exp_date: "1994-12-31"
+
+  236:
+      Country: PAKISTAN
+      Organisation: SC
+      eff_date: "1983-01-01"
+      exp_date: "1984-12-31"
+
+  237:
+      Country: PAKISTAN
+      Organisation: SC
+      eff_date: "1976-01-01"
+      exp_date: "1977-12-31"
+
+  238:
+      Country: PAKISTAN
+      Organisation: SC
+      eff_date: "1968-01-01"
+      exp_date: "1969-12-31"
+
+  239:
+      Country: PAKISTAN
+      Organisation: SC
+      eff_date: "1952-01-01"
+      exp_date: "1953-12-31"
+
+  240:
+      Country: PANAMA
+      Organisation: SC
+      eff_date: "2007-01-01"
+      exp_date: "2008-12-31"
+
+  241:
+      Country: PANAMA
+      Organisation: SC
+      eff_date: "1981-01-01"
+      exp_date: "1982-12-31"
+
+  242:
+      Country: PANAMA
+      Organisation: SC
+      eff_date: "1976-01-01"
+      exp_date: "1977-12-31"
+
+  243:
+      Country: PANAMA
+      Organisation: SC
+      eff_date: "1968-01-01"
+      exp_date: "1969-12-31"
+
+  244:
+      Country: PANAMA
+      Organisation: SC
+      eff_date: "1952-01-01"
+      exp_date: "1953-12-31"
+
+  245:
+      Country: PARAGUAY
+      Organisation: SC
+      eff_date: "1968-01-01"
+      exp_date: "1969-12-31"
+
+  246:
+      Country: PERU
+      Organisation: SC
+      eff_date: "2006-01-01"
+      exp_date: "2007-12-31"
+
+  247:
+      Country: PERU
+      Organisation: SC
+      eff_date: "1984-01-01"
+      exp_date: "1985-12-31"
+
+  248:
+      Country: PERU
+      Organisation: SC
+      eff_date: "1973-01-01"
+      exp_date: "1974-12-31"
+
+  249:
+      Country: PERU
+      Organisation: SC
+      eff_date: "1955-01-01"
+      exp_date: "1956-12-31"
+
+  250:
+      Country: PHILIPPINES
+      Organisation: SC
+      eff_date: "2004-01-01"
+      exp_date: "2005-12-31"
+
+  251:
+      Country: PHILIPPINES
+      Organisation: SC
+      eff_date: "1980-01-01"
+      exp_date: "1981-12-31"
+
+  252:
+      Country: PHILIPPINES
+      Organisation: SC
+      eff_date: "1963-01-01"
+      exp_date: "1963-12-31"
+
+  253:
+      Country: PHILIPPINES
+      Organisation: SC
+      eff_date: "1957-01-01"
+      exp_date: "1957-12-31"
+
+  254:
+      Country: POLAND
+      Organisation: SC
+      eff_date: "1996-01-01"
+      exp_date: "1997-12-31"
+
+  255:
+      Country: POLAND
+      Organisation: SC
+      eff_date: "1982-01-01"
+      exp_date: "1983-12-31"
+
+  256:
+      Country: POLAND
+      Organisation: SC
+      eff_date: "1970-01-01"
+      exp_date: "1971-12-31"
+
+  257:
+      Country: POLAND
+      Organisation: SC
+      eff_date: "1960-01-01"
+      exp_date: "1960-12-31"
+
+  258:
+      Country: POLAND
+      Organisation: SC
+      eff_date: "1946-01-01"
+      exp_date: "1947-12-31"
+
+  259:
+      Country: PORTUGAL
+      Organisation: SC
+      eff_date: "1997-01-01"
+      exp_date: "1998-12-31"
+
+  260:
+      Country: PORTUGAL
+      Organisation: SC
+      eff_date: "1979-01-01"
+      exp_date: "1980-12-31"
+
+  261:
+      Country: QATAR
+      Organisation: SC
+      eff_date: "2006-01-01"
+      exp_date: "2007-12-31"
+
+  262:
+      Country: KOREA, REPUBLIC OF
+      Organisation: SC
+      eff_date: "1996-01-01"
+      exp_date: "1997-12-31"
+
+  263:
+      Country: ROMANIA
+      Organisation: SC
+      eff_date: "2004-01-01"
+      exp_date: "2005-12-31"
+
+  264:
+      Country: ROMANIA
+      Organisation: SC
+      eff_date: "1990-01-01"
+      exp_date: "1991-12-31"
+
+  265:
+      Country: ROMANIA
+      Organisation: SC
+      eff_date: "1976-01-01"
+      exp_date: "1977-12-31"
+
+  266:
+      Country: ROMANIA
+      Organisation: SC
+      eff_date: "1962-01-01"
+      exp_date: "1962-12-31"
+
+  267:
+      Country: RWANDA
+      Organisation: SC
+      eff_date: "1994-01-01"
+      exp_date: "1995-12-31"
+
+  268:
+      Country: SENEGAL
+      Organisation: SC
+      eff_date: "1988-01-01"
+      exp_date: "1989-12-31"
+
+  269:
+      Country: SENEGAL
+      Organisation: SC
+      eff_date: "1968-01-01"
+      exp_date: "1969-12-31"
+
+  270:
+      Country: SIERRA LEONE
+      Organisation: SC
+      eff_date: "1970-01-01"
+      exp_date: "1971-12-31"
+
+  271:
+      Country: SINGAPORE
+      Organisation: SC
+      eff_date: "2001-01-01"
+      exp_date: "2002-12-31"
+
+  272:
+      Country: SLOVAKIA
+      Organisation: SC
+      eff_date: "2006-01-01"
+      exp_date: "2007-12-31"
+
+  273:
+      Country: SLOVENIA
+      Organisation: SC
+      eff_date: "1998-01-01"
+      exp_date: "1999-12-31"
+
+  274:
+      Country: SOMALIA
+      Organisation: SC
+      eff_date: "1971-01-01"
+      exp_date: "1972-12-31"
+
+  275:
+      Country: SOUTH AFRICA
+      Organisation: SC
+      eff_date: "2007-01-01"
+      exp_date: "2008-12-31"
+
+  276:
+      Country: SPAIN
+      Organisation: SC
+      eff_date: "2003-01-01"
+      exp_date: "2004-12-31"
+
+  277:
+      Country: SPAIN
+      Organisation: SC
+      eff_date: "1993-01-01"
+      exp_date: "1994-12-31"
+
+  278:
+      Country: SPAIN
+      Organisation: SC
+      eff_date: "1981-01-01"
+      exp_date: "1982-12-31"
+
+  279:
+      Country: SPAIN
+      Organisation: SC
+      eff_date: "1969-01-01"
+      exp_date: "1970-12-31"
+
+  280:
+      Country: SRI LANKA
+      Organisation: SC
+      eff_date: "1960-01-01"
+      exp_date: "1961-12-31"
+
+  281:
+      Country: SUDAN
+      Organisation: SC
+      eff_date: "1972-01-01"
+      exp_date: "1973-12-31"
+
+  282:
+      Country: SWEDEN
+      Organisation: SC
+      eff_date: "1997-01-01"
+      exp_date: "1998-12-31"
+
+  283:
+      Country: SWEDEN
+      Organisation: SC
+      eff_date: "1975-01-01"
+      exp_date: "1976-12-31"
+
+  284:
+      Country: SWEDEN
+      Organisation: SC
+      eff_date: "1957-01-01"
+      exp_date: "1958-12-31"
+
+  285:
+      Country: SYRIAN ARAB REPUBLIC
+      Organisation: SC
+      eff_date: "2002-01-01"
+      exp_date: "2003-12-31"
+
+  286:
+      Country: SYRIAN ARAB REPUBLIC
+      Organisation: SC
+      eff_date: "1970-01-01"
+      exp_date: "1971-12-31"
+
+  287:
+      Country: SYRIAN ARAB REPUBLIC
+      Organisation: SC
+      eff_date: "1947-01-01"
+      exp_date: "1948-12-31"
+
+  288:
+      Country: THAILAND
+      Organisation: SC
+      eff_date: "1985-01-01"
+      exp_date: "1986-12-31"
+
+  289:
+      Country: TOGO
+      Organisation: SC
+      eff_date: "1982-01-01"
+      exp_date: "1983-12-31"
+
+  290:
+      Country: TRINIDAD AND TOBAGO
+      Organisation: SC
+      eff_date: "1985-01-01"
+      exp_date: "1986-12-31"
+
+  291:
+      Country: TUNISIA
+      Organisation: SC
+      eff_date: "2000-01-01"
+      exp_date: "2001-12-31"
+
+  292:
+      Country: TUNISIA
+      Organisation: SC
+      eff_date: "1980-01-01"
+      exp_date: "1981-12-31"
+      exp_date: "1981-12-31"
+
+  293:
+      Country: TUNISIA
+      Organisation: SC
+      eff_date: "1959-01-01"
+      exp_date: "1960-12-31"
+      
+  294:
+      Country: UNITED STATES OF AMERICA
+      Organisation: SC
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"

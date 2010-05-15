@@ -90,6 +90,41 @@ class ClauseBody extends BaseClauseBody
         return !empty($clause);
     }
 
+    public function getDocumentId() {
+        $clause = $this->setLatestAdoptedClause();
+        return $clause->getDocumentId();
+    }
+
+    public function getOrganisationId() {
+        $clause = $this->setLatestAdoptedClause();
+        return $clause->getOrganisationId();
+    }
+
+    public function getLegalValueId() {
+        $clause = $this->setLatestAdoptedClause();
+        return $clause->getLegalValueId();
+    }
+
+    public function getDocumenttypeId() {
+        $clause = $this->setLatestAdoptedClause();
+        return $clause->getDocumenttypeId();
+    }
+
+    public function getDecisionType() {
+        $clause = $this->setLatestAdoptedClause();
+        return $clause->getDecisionType();
+    }
+
+    public function getTitle() {
+        $clause = $this->setLatestAdoptedClause();
+        return $clause->getTitle();
+    }
+
+    public function getAdoptionDate() {
+        $clause = $this->setLatestAdoptedClause();
+        return $clause->getAdoptionDate();
+    }
+
     public function __call($method, $params) {
         try {
             return parent::__call($method, $params);

@@ -14,8 +14,6 @@ class Document extends BaseDocument
 {
     protected $nameChange = false;
 
-    protected $overloadProperty = 'DocumentType';
-
     protected static $autoCompletable = array(
         'code' => true,
     );
@@ -100,6 +98,14 @@ class Document extends BaseDocument
         $s['current'] = $root ? $parent : ($parent ? $o : '');
         $s['sub'] = $root ? $o : '';
         return $s;
+    }
+
+    public function getLegalValueId() {
+        return $this->_get('DocumentType')->_get('legalvalue_id');
+    }
+
+    public function getDecisionType() {
+        return $this->_get('DocumentType')->getDecisionType();
     }
 
     public function getSlug() {

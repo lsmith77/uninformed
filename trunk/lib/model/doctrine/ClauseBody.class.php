@@ -59,7 +59,7 @@ class ClauseBody extends BaseClauseBody
         $this->latestAdoptedClause = Doctrine_Query::create()
             ->from('Clause c')
             ->innerJoin('c.Document d')
-            ->where('d.adoption_date = ?', $max_adoption_date)
+            ->where('c.clause_body_id = ? AND d.adoption_date = ?', array($this->_get('id'), $max_adoption_date))
             ->fetchOne();
 
         return $this->latestAdoptedClause;
@@ -92,50 +92,49 @@ class ClauseBody extends BaseClauseBody
 
     public function getDocumentId() {
         $clause = $this->setLatestAdoptedClause();
+        if (empty($clause)) {
+            return null;
+        }
         return $clause->getDocumentId();
     }
 
     public function getOrganisationId() {
         $clause = $this->setLatestAdoptedClause();
+        if (empty($clause)) {
+            return null;
+        }
         return $clause->getOrganisationId();
     }
 
-    public function getLegalValueId() {
+    public function getLegalValue() {
         $clause = $this->setLatestAdoptedClause();
-        return $clause->getLegalValueId();
+        if (empty($clause)) {
+            return null;
+        }
+        return $clause->getLegalValue();
     }
 
     public function getDocumenttypeId() {
         $clause = $this->setLatestAdoptedClause();
+        if (empty($clause)) {
+            return null;
+        }
         return $clause->getDocumenttypeId();
-    }
-
-    public function getDecisionType() {
-        $clause = $this->setLatestAdoptedClause();
-        return $clause->getDecisionType();
     }
 
     public function getTitle() {
         $clause = $this->setLatestAdoptedClause();
+        if (empty($clause)) {
+            return null;
+        }
         return $clause->getTitle();
     }
 
     public function getAdoptionDate() {
         $clause = $this->setLatestAdoptedClause();
+        if (empty($clause)) {
+            return null;
+        }
         return $clause->getAdoptionDate();
-    }
-
-    public function __call($method, $params) {
-        try {
-            return parent::__call($method, $params);
-        } catch (Exception $e) {
-        }
-
-        $clause = $this->setLatestAdoptedClause();
-        if (empty($clause) || !is_object($clause)) {
-            throw new Exception(sprintf('Call to undefined function: %s::%s().', get_class($this), $method), E_USER_ERROR);
-        }
-
-        return call_user_func_array(array($clause, $method), $params);
     }
 }

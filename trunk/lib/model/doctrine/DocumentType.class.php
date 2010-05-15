@@ -12,7 +12,4 @@
  */
 class DocumentType extends BaseDocumentType
 {
-    public function getDecisionType() {
-        return $this->_get('LegalValue')->_get('decision_type');
-    }
 }

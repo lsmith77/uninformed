@@ -100,12 +100,8 @@ class Document extends BaseDocument
         return $s;
     }
 
-    public function getLegalValueId() {
-        return $this->_get('DocumentType')->_get('legalvalue_id');
-    }
-
-    public function getDecisionType() {
-        return $this->_get('DocumentType')->getDecisionType();
+    public function getLegalValue() {
+        return $this->_get('DocumentType')->_get('legal_value');
     }
 
     public function getSlug() {

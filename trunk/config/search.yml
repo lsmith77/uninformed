@@ -59,19 +59,11 @@ ClauseBody:
           type: int
           stored: false
           alias: getInformationTypeId
-        clause_process_id:
-          type: int
-          stored: false
-          alias: getClauseProcessId
         organisation_id:
           type: int
           stored: false
           alias: getOrganisationId
-        legalvalue_id:
-          type: int
-          stored: false
-          alias: getLegalvalueId
-        decision_type:
+        legal_value:
           type: string
           stored: false
-          alias: getDecisionType
+          alias: getLegalValue

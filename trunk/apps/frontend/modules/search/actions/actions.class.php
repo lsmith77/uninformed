@@ -84,6 +84,8 @@ class searchActions extends sfActions
         $this->tags = (array) $request->getGetParameter('t');
         $tags = array_keys($this->tags);
         $this->filters = (array) $request->getGetParameter('f');
+        $this->page = (int) $request->getGetParameter('p', 0);
+        $limit = 20;
 
         if (empty($this->query) && empty($this->tags)) {
             $output = array(
@@ -107,13 +109,20 @@ class searchActions extends sfActions
             'tag_ids' => 'Tag',
             'addressee_ids' => 'Addressee',
             'operative_phrase_id' => 'ClauseOperativePhrase',
+            'documenttype_id' => 'DocumentType',
             'information_type_id' => 'ClauseInformationType',
             'clause_process_id' => 'ClauseProcess',
             'legalvalue_id' => 'LegalValue',
+/*
             'decision_type' => array(
                 'model' => 'DecisionType',
-                'values' => array('vote', 'ratification'),
+                'values' => array('non-legally binding', 'legally binding'),
             ),
+            'adopted_date' => array(
+                'model' => 'Document',
+                'values' => 'range',
+            ),
+*/
         );
 
         // use to define the order of the filters in the view
@@ -126,15 +135,15 @@ class searchActions extends sfActions
             'operative_phrase_id' => 'Clause Operative Phrase',
             'information_type_id' => 'Clause Information Type',
             'tag_ids' => 'Tag',
+            'adopted_date' => 'Adopted Date Range',
         );
 
         foreach ($facets as $facet => $model) {
-            $criteria->addFacetField($facet);
+            $criteria->addFacetField('{!ex=dt}'.$facet);
         }
 
-        if (!empty($this->filters)) {
-            $criteria2 = new sfLuceneCriteria;
-        }
+        $criteria->setLimit($limit+1);
+        $criteria->setOffset($this->page*$limit);
 
         if (!empty($tags)) {
             if (!$this->checkArrayOfInteger($tags)) {
@@ -146,25 +155,17 @@ class searchActions extends sfActions
 
         if (empty($this->query)) {
             $criteria->addParam('qt', 'search_tags');
-            if (isset($criteria2)) {
-                $criteria2->addParam('qt', 'search_tags');
-            }
             foreach ($tags as $tag) {
                 $criteria->addFieldSane('tag_ids', $tag);
             }
         } else {
             if (!empty($tags)) {
                 $fq = 'tag_ids:'.implode($fq_op.'tag_ids:', $tags);
-                $criteria->addParam('fq', $fq);
             }
-            $criteria->addSane($this->query);
-            if (isset($criteria2)) {
-                $criteria2->addSane($this->query);
-            }
+            $criteria->add($this->query);
         }
 
-        if (isset($criteria2)) {
-            $criteria->setLimit(0);
+        if ($this->filters) {
             $fq = isset($fq) ? "($fq) AND " : '';
             foreach ($this->filters as $filter => $ids) {
                 if (!$this->checkArrayOfInteger($ids)) {
@@ -175,10 +176,13 @@ class searchActions extends sfActions
                     $output = array('status' => 'error', 'message' => "unsupported filter '$filter'");
                     return $this->returnJson($output);
                 }
-                $filter = ' -'.$filter;
-                $fq.= $filter.':'.implode(' AND '.$filter.':', $ids);
+                $filter = '{!tag=dt}-'.$filter;
+                $fq.= $filter.':'.implode(" AND $filter:", $ids);
             }
-            $criteria2->addParam('fq', $fq);
+        }
+
+        if (isset($fq)) {
+            $criteria->addParam('fq', $fq);
         }
 
         $results = $lucene->friendlyFind($criteria);
@@ -208,9 +212,7 @@ class searchActions extends sfActions
             $filters[$facet] = array_values($filters[$facet]);
         }
 
-        $data = isset($criteria2)
-            ? $lucene->friendlyFind($criteria2)->toArray()
-            : $results->toArray();
+        $data = $results->toArray();
 
         // extract the data out of the result objects
         if ($data) {
@@ -250,7 +252,7 @@ class searchActions extends sfActions
             'data' => $data,
             'filters' => $filters,
             'filterLabels' => $labels,
-            'totalResults' => count($data), // TODO make that the total count if we add paging
+            'totalResults' => (int)$results->getRawResult()->response->numFound,
             'status' => 'success',
             'message' => 'ok'
         );

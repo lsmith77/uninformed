@@ -230,6 +230,7 @@ class searchActions extends sfActions
             $data = array();
             if (!empty($clauses)) {
                 $q = Doctrine_Query::create()
+                    ->select('c.id, c.slug, c.clause_number, c.clause_number_information, c.clause_number_subparagraph, cb.content, cb.id, cb.root_clause_body_id, cop.name, cit.name, d.id, d.slug, d.name, d.code, d.organisation_id, dt.name, dt.legal_value')
                     ->from('clause c')
                     ->innerJoin('c.Document d')
                     ->innerJoin('d.DocumentType dt')
@@ -238,31 +239,49 @@ class searchActions extends sfActions
                     ->leftJoin('cb.ClauseInformationType cit')
                     ->whereIn('id', $clauses);
                 $data = $q->fetchArray();
+
                 foreach ($data as $key => $clause) {
                     $root_clause_body_id = isset($clause['ClauseBody']['root_clause_body_id'])
                         ? $clause['ClauseBody']['root_clause_body_id']
                         : $clause['ClauseBody']['id'];
                     $q = Doctrine_Query::create()
-                        ->select('COUNT(*)')
+                        ->select('COUNT(c.id)')
                         ->from('Clause c')
                         ->innerJoin('c.ClauseBody cb')
-                        ->innerJoin('c.Document d')
                         ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id));
-                    $data[$key]['relatedClauseCount'] = $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+                    $data[$key]['clauseHistory'] = (bool)$q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
                     $q = Doctrine_Query::create()
+                        ->select('so.name, so.parent_id, mo.name, mo.parent_id')
                         ->from('Organisation so')
-                        ->leftJoin('so.OrganisationParent mo')
-                        ->leftJoin('mo.OrganisationParent o')
+                        ->innerJoin('so.OrganisationParent mo')
                         ->where('so.id = ?', array($data[$key]['Document']['organisation_id']));
-                    $data[$key]['Document']['Organisation'] = $q->fetchOne();
+                    $suborgan = $q->fetchArray();
+                    $suborgan = reset($suborgan);
+                    if ($suborgan['OrganisationParent']['parent_id']) {
+                        $main_organ = $suborgan['OrganisationParent']['name'];
+                        $q = Doctrine_Query::create()
+                            ->select('o.name')
+                            ->from('Organisation o')
+                            ->where('o.id = ?', array($suborgan['OrganisationParent']['parent_id']));
+                        $organisation =  $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);;
+                    } else {
+                        $main_organ = $suborgan['name'];
+                        $organisation =  $suborgan['OrganisationParent']['name'];
+                    }
+
                     if ($data[$key]['Document']['DocumentType']['name'] == 'Resolution'
-                        && $data[$key]['Document']['Organisation']['name'] == 'SC'
-                        && $data[$key]['Document']['Organisation']['OrganisationParent']['name'] == 'UNO'
+                        && $main_organ == 'SC'
+                        && $organisation == 'UNO'
                     ) {
                         $data[$key]['isSCResolution'] = true;
                     } else {
                         $data[$key]['isSCResolution'] = false;
                     }
+                    $data[$key]['Document']['Organisation']['name'] = "$organisation $main_organ";
+                    $data[$key]['slug'] = $data[$key]['id'].'-'.$data[$key]['slug'];
+                    $data[$key]['clause_number'] = trim($data[$key]['clause_number'].' '.$data[$key]['clause_number_information'].' '.$data[$key]['clause_number_subparagraph']);
+                    unset($data[$key]['clause_number_information'], $data[$key]['clause_number_subparagraph']);
+                    $data[$key]['Document']['slug'] = $data[$key]['Document']['id'].'-'.$data[$key]['Document']['slug'];
                 }
             }
         }

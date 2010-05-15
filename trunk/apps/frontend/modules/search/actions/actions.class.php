@@ -101,7 +101,6 @@ class searchActions extends sfActions
 
         $lucene = $this->getInstance();
 
-        // TODO: add support for is_latest_clause_body
         $criteria = new sfLuceneFacetsCriteria;
 
         $facets = array(
@@ -111,13 +110,11 @@ class searchActions extends sfActions
             'operative_phrase_id' => 'ClauseOperativePhrase',
             'documenttype_id' => 'DocumentType',
             'information_type_id' => 'ClauseInformationType',
-            'clause_process_id' => 'ClauseProcess',
-            'legalvalue_id' => 'LegalValue',
-/*
-            'decision_type' => array(
-                'model' => 'DecisionType',
+            'legal_value' => array(
+                'model' => 'LegalValue',
                 'values' => array('non-legally binding', 'legally binding'),
             ),
+/*
             'adopted_date' => array(
                 'model' => 'Document',
                 'values' => 'range',
@@ -127,15 +124,13 @@ class searchActions extends sfActions
 
         // use to define the order of the filters in the view
         $labels = array(
-            'addressee_ids' => 'Addressee',
-            'legalvalue_id' => 'Legal Value',
-            'decision_type' => 'Decision Type',
+            'adoption_date' => 'Adopted Date Range',
+            'legal_value' => 'Legal Value',
             'organisation_id' => 'Organisation',
-            'clause_process_id' => 'Clause Process',
-            'operative_phrase_id' => 'Clause Operative Phrase',
+            'addressee_ids' => 'Addressee',
             'information_type_id' => 'Clause Information Type',
+            'operative_phrase_id' => 'Clause Operative Phrase',
             'tag_ids' => 'Tag',
-            'adopted_date' => 'Adopted Date Range',
         );
 
         foreach ($facets as $facet => $model) {
@@ -153,6 +148,9 @@ class searchActions extends sfActions
             $fq_op = ($this->tagMatch == 'all') ? ' AND ' : ' OR ';
         }
 
+        // TODO: fix
+//        $fq = '+is_latest_clause_body:true';
+
         if (empty($this->query)) {
             $criteria->addParam('qt', 'search_tags');
             foreach ($tags as $tag) {
@@ -160,13 +158,14 @@ class searchActions extends sfActions
             }
         } else {
             if (!empty($tags)) {
-                $fq = 'tag_ids:'.implode($fq_op.'tag_ids:', $tags);
+                $fq = isset($fq) ? "$fq AND " : '';
+                $fq.= 'tag_ids:'.implode($fq_op.'tag_ids:', $tags);
             }
             $criteria->add($this->query);
         }
 
         if ($this->filters) {
-            $fq = isset($fq) ? "($fq) AND " : '';
+            $fq = isset($fq) ? "$fq AND " : '';
             foreach ($this->filters as $filter => $ids) {
                 if (!$this->checkArrayOfInteger($ids)) {
                     $output = array('status' => 'error', 'message' => "parameter 'f' for key '$filter' to be an array of integer");
@@ -189,27 +188,31 @@ class searchActions extends sfActions
 
         $filters = array();
         foreach ($facets as $facet => $model) {
-            $solr = (array) $results->getFacetField($facet);
-            if (is_array($model)) {
-                $filters[$facet] = array();
-                foreach ($model['values'] as $value) {
-                    $filters[$facet][] = array('id' => $value);
-                }
-            } else {
-                $filters[$facet] = Doctrine_Query::create()
-                    ->from($model)
-                    ->whereIn('id', array_keys($solr))
-                    ->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
-            }
-            foreach ($filters[$facet] as $key => $value) {
-                if (empty($solr[$value['id']])) {
-                    unset($filters[$facet][$key]);
+            $solr = $results->getFacetField($facet);
+            if (!empty($solr)) {
+                if (is_array($model)) {
+                    $filters[$facet] = array();
+                    foreach ($model['values'] as $value) {
+                        $filters[$facet][] = array('id' => $value);
+                    }
                 } else {
-                    $filters[$facet][$key]['count'] = $solr[$value['id']];
+                    $filters[$facet] = Doctrine_Query::create()
+                        ->from($model)
+                        ->whereIn('id', array_keys($solr))
+                        ->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
                 }
+                foreach ($filters[$facet] as $key => $value) {
+                    if (empty($solr[$value['id']])) {
+                        unset($filters[$facet][$key]);
+                    } else {
+                        $filters[$facet][$key]['count'] = $solr[$value['id']];
+                    }
+                }
+                // reset the keys to force json to have an array
+                $filters[$facet] = array_values($filters[$facet]);
+            } else {
+                $filters[$facet] = array();
             }
-            // reset the keys to force json to have an array
-            $filters[$facet] = array_values($filters[$facet]);
         }
 
         $data = $results->toArray();
@@ -229,21 +232,37 @@ class searchActions extends sfActions
                 $q = Doctrine_Query::create()
                     ->from('clause c')
                     ->innerJoin('c.Document d')
-                    ->innerJoin('d.Organisation o')
                     ->innerJoin('d.DocumentType dt')
-                    ->innerJoin('dt.LegalValue l')
                     ->innerJoin('c.ClauseBody cb')
                     ->leftJoin('cb.ClauseOperativePhrase cop')
                     ->leftJoin('cb.ClauseInformationType cit')
-                    ->leftJoin('cb.ClauseProcess cp')
                     ->whereIn('id', $clauses);
                 $data = $q->fetchArray();
                 foreach ($data as $key => $clause) {
-                    // TODO fetch all clauses with the same root_clause_body_id
-                    $data[$key]['relatedClauses'] = array(
-                        5 => array('slug' => '5-', 'clause_body_id' => 3, 'code' => 'Asdfsdsdsdfdf'),
-                        6 => array('slug' => '6-', 'clause_body_id' => 6, 'code' => 'Asdfsdsdsdfdf'),
-                    );
+                    $root_clause_body_id = isset($clause['ClauseBody']['root_clause_body_id'])
+                        ? $clause['ClauseBody']['root_clause_body_id']
+                        : $clause['ClauseBody']['id'];
+                    $q = Doctrine_Query::create()
+                        ->select('COUNT(*)')
+                        ->from('Clause c')
+                        ->innerJoin('c.ClauseBody cb')
+                        ->innerJoin('c.Document d')
+                        ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id));
+                    $data[$key]['relatedClauseCount'] = $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+                    $q = Doctrine_Query::create()
+                        ->from('Organisation so')
+                        ->leftJoin('so.OrganisationParent mo')
+                        ->leftJoin('mo.OrganisationParent o')
+                        ->where('so.id = ?', array($data[$key]['Document']['organisation_id']));
+                    $data[$key]['Document']['Organisation'] = $q->fetchOne();
+                    if ($data[$key]['Document']['DocumentType']['name'] == 'Resolution'
+                        && $data[$key]['Document']['Organisation']['name'] == 'SC'
+                        && $data[$key]['Document']['Organisation']['OrganisationParent']['name'] == 'UNO'
+                    ) {
+                        $data[$key]['isSCResolution'] = true;
+                    } else {
+                        $data[$key]['isSCResolution'] = false;
+                    }
                 }
             }
         }

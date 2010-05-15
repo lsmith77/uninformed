@@ -189,7 +189,7 @@ class searchActions extends sfActions
 
         $filters = array();
         foreach ($facets as $facet => $model) {
-            $solr = $results->getFacetField($facet);
+            $solr = (array) $results->getFacetField($facet);
             if (is_array($model)) {
                 $filters[$facet] = array();
                 foreach ($model['values'] as $value) {

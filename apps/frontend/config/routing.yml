@@ -52,9 +52,9 @@ bookmark:
   options: { model: Bookmark, type: object }
   param: { module: bookmark, action: index }
 
-bookmark_add:
+bookmark_action:
   url:     /bookmark/:action/:type/:id
-  param:   { module: bookmark, action: add }
+  param:   { module: bookmark }
   requirements:
     type: \d+-?.*
     id: \d+-?.*

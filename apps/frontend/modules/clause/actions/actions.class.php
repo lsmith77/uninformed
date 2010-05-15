@@ -17,5 +17,13 @@ class clauseActions extends sfActions
 
     $this->clauseBody = $this->clause->ClauseBody;
     $this->document = $this->clause->Document;
+
+    $user = $this->getUser();
+    if ($user->isAuthenticated()) {
+        $q = Doctrine_Query::create()
+            ->from('Bookmark')
+            ->where('object_type = ? AND object_id = ? AND user_id = ?', array('clause', $this->clause->getId(), $user->getGuardUser()->getId()));
+        $this->bookmark = $q->fetchOne();
+    }
   }
 }

@@ -14,7 +14,11 @@ $(function(){
     },
     refreshResults = function(query, tags, tagMatch) {
         var url = '/search/results?' + $('#searchForm').serialize();
-        url += '&' + $('#filtersForm').serialize();
+        $('#filtersForm :input').each(function(i, el) {
+            if (!$(el).attr('checked')) {
+                url += '&' + $(el).attr('name') + '=' + $(el).val();
+            }
+        });
         $.getJSON(url, null, function(data, status) {
             $('.results').jqotesub($('#resultsTpl'), data);
         });

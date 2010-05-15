@@ -227,9 +227,10 @@ class searchActions extends sfActions
         }
 
         $data = $results->toArray();
-
         // extract the data out of the result objects
         if ($data) {
+            $maxScore = $results->getRawResult()->response->maxScore;
+
             $highlighting = array();
             if (!empty($results->getRawResult()->highlighting)) {
                 foreach ($results->getRawResult()->highlighting as $sfl_guid => $highlight) {
@@ -259,9 +260,9 @@ class searchActions extends sfActions
                         $content = $content['value'];
                     }
                     $clauses[$clause['value']] = array(
-                        'score' => $score['value'],
                         'title' => $title,
                         'content' => $content,
+                        'score' => number_format(100*$score['value']/$maxScore, 2),
                     );
                 }
             }
@@ -274,7 +275,8 @@ class searchActions extends sfActions
                     ->innerJoin('c.ClauseBody cb')
                     ->leftJoin('cb.ClauseOperativePhrase cop')
                     ->leftJoin('cb.ClauseInformationType cit')
-                    ->whereIn('c.id', array_keys($clauses));
+                    ->whereIn('c.id', array_keys($clauses))
+                    ->orderBY('FIELD(c.id, '.implode(',', array_keys($clauses)).')');
                 $data = $q->fetchArray();
 
                 $documents = array();

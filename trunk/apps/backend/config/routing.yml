@@ -1,3 +1,66 @@
+document_document_relation_document_document_relation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DocumentDocumentRelation
+    module:               document_document_relation
+    prefix_path:          /document_document_relation
+    column:               id
+    with_wildcard_routes: true
+
+document_clause_relation_document_clause_relation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DocumentClauseRelation
+    module:               document_clause_relation
+    prefix_path:          /document_clause_relation
+    column:               id
+    with_wildcard_routes: true
+
+clause_clause_relation_clause_clause_relation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ClauseClauseRelation
+    module:               clause_clause_relation
+    prefix_path:          /clause_clause_relation
+    column:               id
+    with_wildcard_routes: true
+
+clause_clause_relation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ClauseClauseRelation
+    module:               clauseclauserelation
+    prefix_path:          /clauseclauserelation
+    column:               id
+    with_wildcard_routes: true
+
+document_clause_relation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DocumentClauseRelation
+    module:               documentclauserelation
+    prefix_path:          /documentclauserelation
+    column:               id
+    with_wildcard_routes: true
+
+document_document_relation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DocumentDocumentRelation
+    module:               documentdocumentrelation
+    prefix_path:          /documentdocumentrelation
+    column:               id
+    with_wildcard_routes: true
+
+tag:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Tag
+    module:               tag
+    prefix_path:          /tag
+    column:               id
+    with_wildcard_routes: true
+
 country_organisation:
   class: sfDoctrineRouteCollection
   options:

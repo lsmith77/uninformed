@@ -84,6 +84,7 @@ class searchActions extends sfActions
         $this->tags = (array) $request->getGetParameter('t');
         $tags = array_keys($this->tags);
         $this->filters = (array) $request->getGetParameter('f');
+        $this->latest_only = (array) $request->getGetParameter('l');
         $this->page = (int) $request->getGetParameter('p', 0);
         $limit = 20;
 
@@ -112,7 +113,11 @@ class searchActions extends sfActions
             'information_type_id' => 'ClauseInformationType',
             'legal_value' => array(
                 'model' => 'LegalValue',
-                'values' => array('non-legally binding', 'legally binding'),
+                'values' =>
+             array(
+              0 => 'legally binding',
+              1 => 'non-legally binding',
+             ),
             ),
 /*
             'adopted_date' => array(
@@ -145,23 +150,23 @@ class searchActions extends sfActions
                 $output = array('status' => 'error', 'message' => "parameter 't' needs to be an array of integer");
                 return $this->returnJson($output);
             }
-            $fq_op = ($this->tagMatch == 'all') ? ' AND ' : ' OR ';
+            $op = ($this->tagMatch == 'all') ? ' AND ' : ' OR ';
+            $subcritieria = new sfLuceneCriteria;
+            foreach ($tags as $tag) {
+                $subcritieria->addFieldSane('tag_ids', $tag, $op);
+            }
+            $criteria->add($subcritieria);
         }
 
-        // TODO: fix
-//        $fq = '+is_latest_clause_body:true';
+        if ($this->latest_only) {
+            $criteria->addFieldSane('is_latest_clause_body', 'true', 'AND');
+        }
 
-        if (empty($this->query)) {
-            foreach ($tags as $tag) {
-                $criteria->addFieldSane('tag_ids', $tag);
-            }
-        } else {
-            if (!empty($tags)) {
-                $fq = isset($fq) ? "$fq AND " : '';
-                $fq.= 'tag_ids:'.implode($fq_op.'tag_ids:', $tags);
-            }
-            $criteria->addFieldSane('title', $this->query);
-            $criteria->addFieldSane('content', $this->query, 'OR');
+        if (!empty($this->query)) {
+            $subcritieria = new sfLuceneCriteria;
+            $subcritieria->addFieldSane('title', $this->query);
+            $subcritieria->addFieldSane('content', $this->query, 'OR');
+            $criteria->add($subcritieria);
 
             $criteria->addParam('hl', 'true');
             $criteria->addParam('hl.fl', '*');
@@ -170,8 +175,16 @@ class searchActions extends sfActions
             $criteria->addParam('hl.simple.post', '</strong>');
         }
 
+        if (isset($this->filters['legal_value'])) {
+            $legal_value = array_intersect($this->filters['legal_value'], $facets['legal_value']['values']);
+            if (!empty($legal_value)) {
+                $legal_value = reset($legal_value);
+                $fq = "-legal_value:\"$legal_value\"";
+            }
+            unset($this->filters['legal_value']);
+        }
+
         if ($this->filters) {
-            $fq = isset($fq) ? "$fq AND " : '';
             foreach ($this->filters as $filter => $ids) {
                 if (!$this->checkArrayOfInteger($ids)) {
                     $output = array('status' => 'error', 'message' => "parameter 'f' for key '$filter' to be an array of integer");
@@ -181,13 +194,14 @@ class searchActions extends sfActions
                     $output = array('status' => 'error', 'message' => "unsupported filter '$filter'");
                     return $this->returnJson($output);
                 }
-                $filter = '{!tag=dt}-'.$filter;
-                $fq.= $filter.':'.implode(" AND $filter:", $ids);
+                $filter = $filter;
+                $fq = isset($fq) ? "$fq AND " : '';
+                $fq.= '-'.$filter.':'.implode(" AND $filter:", $ids);
             }
         }
 
         if (isset($fq)) {
-            $criteria->addParam('fq', $fq);
+            $criteria->addParam('fq', "{!tag=dt}($fq)");
         }
 
         $results = $lucene->friendlyFind($criteria);
@@ -198,8 +212,8 @@ class searchActions extends sfActions
             if (!empty($solr)) {
                 if (is_array($model)) {
                     $filters[$facet] = array();
-                    foreach ($model['values'] as $value) {
-                        $filters[$facet][] = array('id' => $value);
+                    foreach ($model['values'] as $key => $value) {
+                        $filters[$facet][] = array('name' => $value, 'id' => $value);
                     }
                 } else {
                     $q = Doctrine_Query::create()

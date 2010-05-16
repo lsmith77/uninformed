@@ -3,6 +3,7 @@
 /log/*
 /web/*_dev.php
 /web/uploads/*
+/data/solr_index/frontend_prod.pid
 
 .DS_Store
 

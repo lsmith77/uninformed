@@ -9,10 +9,8 @@
 
 <h1><?php echo $clause ?></h1>
 
-<h2><a href="#" class="toggleCol" target="clauseContent">Content</a></h2>
-<div id="clauseContent">
-    <?php echo $clauseBody->getContent() ?>
-</div>
+<h2><a href="#" class="toggleCol" target="docDetails">Document details</a></h2>
+<?php include_partial('document/documentDetails', array('document'=>$document)); ?>
 
 <h2><a href="#" class="toggleCol" target="clauseDetails">Clause Details</a></h2>
 <table id="clauseDetails">
@@ -38,19 +36,16 @@
     </tbody>
 </table>
 
-
 <h2><a href="#" class="toggleCol" target="tags">Applied Keyword Tags</a></h2>
 <?php include_partial('tagList', array('tags'=>$clauseBody->Tags)); ?>
 
+<h2><a href="#" class="toggleCol" target="clauseContent">Content</a></h2>
+<div id="clauseContent">
+    <?php echo $sf_data->getRaw('clauseBody')->getContent() ?>
+</div>
 
 <h2><a href="#" class="toggleCol" target="clauseHistory">History of this Clause</a></h2>
 <?php include_partial('clauseHistory', array('clause'=>$clause)); ?>
-
-
-<h2><a href="#" class="toggleCol" target="otherClauses">Other Clauses in this Document</a></h2>
-<div id="otherClauses" class="collapsed">
-    <?php include_partial('clauseListOfDocument', array('clauses' => $document->getClauses(), 'currentClause' => $clause)) ?>
-</div>
 
 <?php include_component('comment', 'formComment', array('object' => $clause)) ?>
 <?php include_component('comment', 'list', array('object' => $clause, 'i' => 0)) ?>

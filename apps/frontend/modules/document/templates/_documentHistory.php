@@ -10,7 +10,7 @@ $rootdocuments = $document->getDocumentsByRoot();
 <table id="documentHistory" class="collapsed">
     <thead>
         <tr>
-            <th>Code</th>
+            <th>Document Code</th>
             <th>Year</th>
             <th>Content</th>
         </tr>

@@ -17,7 +17,7 @@
 </p>
 <p class="tagMatch">
     Matching
-    <input type="radio" name="tm" id="anytag" value="any" <?php echo $tagMatch === 'any' ? 'checked="checked"':'' ?> /><label for="anytag">Any tag</label></a>
+    <input type="radio" name="tm" id="anytag" value="any" <?php echo $tagMatch !== 'all' ? 'checked="checked"':'' ?> /><label for="anytag">Any tag</label></a>
     <input type="radio" name="tm" id="alltags" value="all" <?php echo $tagMatch === 'all' ? 'checked="checked"':'' ?>  /><label for="alltags">All tags</label></a>
 </p>
 <p>

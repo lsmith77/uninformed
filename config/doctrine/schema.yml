@@ -201,7 +201,7 @@ Document:
     is_ratified:
       type: bool
     vote_url:
-      type: string(255)
+      type: string(500)
     private_comment:
       type: clob
     public_comment:
@@ -215,9 +215,9 @@ Document:
     documenttype_id:
       type: integer(4)
     document_url:
-      type: string(255)
+      type: string(500)
     clause_ordering:
-      type: string(255)
+      type: text
     status:
       type: enum
       values: [draft, review, reviewed, inactive, active]

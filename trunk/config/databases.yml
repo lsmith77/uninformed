@@ -8,3 +8,5 @@ all:
       dsn:      mysql:host=localhost;dbname=uninformed
       username: uninformed
       password: uninformed
+      attributes:
+        use_native_enum: true

@@ -9,7 +9,6 @@
  * @property clob $content
  * @property integer $information_type_id
  * @property integer $operative_phrase_id
- * @property integer $clause_process_id
  * @property clob $public_comment
  * @property integer $parent_clause_body_id
  * @property integer $root_clause_body_id
@@ -18,7 +17,6 @@
  * @property Doctrine_Collection $Addressees
  * @property ClauseBody $ClauseBodyRoot
  * @property ClauseBody $ClauseBodyParent
- * @property ClauseProcess $ClauseProcess
  * @property ClauseInformationType $ClauseInformationType
  * @property ClauseOperativePhrase $ClauseOperativePhrase
  * @property Doctrine_Collection $Tags
@@ -32,7 +30,6 @@
  * @method clob                  getContent()                Returns the current record's "content" value
  * @method integer               getInformationTypeId()      Returns the current record's "information_type_id" value
  * @method integer               getOperativePhraseId()      Returns the current record's "operative_phrase_id" value
- * @method integer               getClauseProcessId()        Returns the current record's "clause_process_id" value
  * @method clob                  getPublicComment()          Returns the current record's "public_comment" value
  * @method integer               getParentClauseBodyId()     Returns the current record's "parent_clause_body_id" value
  * @method integer               getRootClauseBodyId()       Returns the current record's "root_clause_body_id" value
@@ -41,7 +38,6 @@
  * @method Doctrine_Collection   getAddressees()             Returns the current record's "Addressees" collection
  * @method ClauseBody            getClauseBodyRoot()         Returns the current record's "ClauseBodyRoot" value
  * @method ClauseBody            getClauseBodyParent()       Returns the current record's "ClauseBodyParent" value
- * @method ClauseProcess         getClauseProcess()          Returns the current record's "ClauseProcess" value
  * @method ClauseInformationType getClauseInformationType()  Returns the current record's "ClauseInformationType" value
  * @method ClauseOperativePhrase getClauseOperativePhrase()  Returns the current record's "ClauseOperativePhrase" value
  * @method Doctrine_Collection   getTags()                   Returns the current record's "Tags" collection
@@ -54,7 +50,6 @@
  * @method ClauseBody            setContent()                Sets the current record's "content" value
  * @method ClauseBody            setInformationTypeId()      Sets the current record's "information_type_id" value
  * @method ClauseBody            setOperativePhraseId()      Sets the current record's "operative_phrase_id" value
- * @method ClauseBody            setClauseProcessId()        Sets the current record's "clause_process_id" value
  * @method ClauseBody            setPublicComment()          Sets the current record's "public_comment" value
  * @method ClauseBody            setParentClauseBodyId()     Sets the current record's "parent_clause_body_id" value
  * @method ClauseBody            setRootClauseBodyId()       Sets the current record's "root_clause_body_id" value
@@ -63,7 +58,6 @@
  * @method ClauseBody            setAddressees()             Sets the current record's "Addressees" collection
  * @method ClauseBody            setClauseBodyRoot()         Sets the current record's "ClauseBodyRoot" value
  * @method ClauseBody            setClauseBodyParent()       Sets the current record's "ClauseBodyParent" value
- * @method ClauseBody            setClauseProcess()          Sets the current record's "ClauseProcess" value
  * @method ClauseBody            setClauseInformationType()  Sets the current record's "ClauseInformationType" value
  * @method ClauseBody            setClauseOperativePhrase()  Sets the current record's "ClauseOperativePhrase" value
  * @method ClauseBody            setTags()                   Sets the current record's "Tags" collection
@@ -97,10 +91,6 @@ abstract class BaseClauseBody extends MyBaseRecord
              'length' => 4,
              ));
         $this->hasColumn('operative_phrase_id', 'integer', 4, array(
-             'type' => 'integer',
-             'length' => 4,
-             ));
-        $this->hasColumn('clause_process_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
              ));
@@ -152,10 +142,6 @@ abstract class BaseClauseBody extends MyBaseRecord
 
         $this->hasOne('ClauseBody as ClauseBodyParent', array(
              'local' => 'parent_clause_body_id',
-             'foreign' => 'id'));
-
-        $this->hasOne('ClauseProcess', array(
-             'local' => 'clause_process_id',
              'foreign' => 'id'));
 
         $this->hasOne('ClauseInformationType', array(

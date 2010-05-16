@@ -53,6 +53,7 @@ abstract class BaseDocumentType extends MyBaseRecord
              array(
               0 => 'legally binding',
               1 => 'non-legally binding',
+              2 => 'support document',
              ),
              'notnull' => false,
              ));

@@ -49,7 +49,7 @@
             <?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.title %>', 'clause', array('id' => 'XXX'))) ?>
             (<%= res.score %>)
             <% if (res.clauseHistory) { %>
-                <span class="clauseHistory"><?php echo str_replace('XXX', '<%= res.slug %>', link_to('H', 'clause', array('id' => 'XXX#clauseHistory'))) ?></span>
+                <span class="clauseHistory"><?php echo str_replace('XXX', '<%= res.slug %>#clauseHistory', link_to('H', 'clause', array('id' => 'XXX'))) ?></span>
             <% } %>
         </h2>
         <h3>

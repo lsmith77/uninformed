@@ -42,7 +42,7 @@ class bookmarkActions extends sfActions
         if (!empty($where)) {
             $q = Doctrine_Query::create()
                 ->from('Document d INDEXBY d.id')
-                ->innerJoin('d.Clauses c')
+                ->innerJoin('d.Clauses c INDEXBY c.id')
                 ->where(implode(' OR ', $where));
             $this->documents = $q->execute();
         }

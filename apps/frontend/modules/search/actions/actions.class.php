@@ -117,6 +117,7 @@ class searchActions extends sfActions
              array(
               0 => 'legally binding',
               1 => 'non-legally binding',
+              2 => 'support document',
              ),
             ),
 /*
@@ -176,10 +177,12 @@ class searchActions extends sfActions
         }
 
         if (isset($this->filters['legal_value'])) {
-            $legal_value = array_intersect($this->filters['legal_value'], $facets['legal_value']['values']);
-            if (!empty($legal_value)) {
-                $legal_value = reset($legal_value);
-                $fq = "-legal_value:\"$legal_value\"";
+            $legal_values = array_intersect($this->filters['legal_value'], $facets['legal_value']['values']);
+            if (!empty($legal_values)) {
+                foreach ($legal_values as $legal_value) {
+                    $fq = isset($fq) ? "$fq AND " : '';
+                    $fq.= "-legal_value:\"$legal_value\"";
+                }
             }
             unset($this->filters['legal_value']);
         }

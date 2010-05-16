@@ -20,10 +20,17 @@ class excelfileActions extends autoExcelfileActions
 
     $this->documents = null;
     if ($excelFileData) {
-        set_time_limit(60*60);
-        $import = new excelSpreadsheetImport();
-        $this->documents = $import->loadDataFromFile($excelFileData['file']);
-        $import->saveData($excelFileId, $this->documents);
+        try {
+            set_time_limit(3600);
+            Doctrine_Manager::connection()->beginTransaction();
+            $import = new excelSpreadsheetImport();
+            $this->documents = $import->loadDataFromFile($excelFileData['file']);
+            $import->saveData($excelFileId, $this->documents);
+            Doctrine_Manager::connection()->commit();
+        } catch (Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            echo 'failed: '.$e->getMessage();
+        }
     }
 
 //    $this->redirect('excel_file');

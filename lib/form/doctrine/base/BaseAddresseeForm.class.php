@@ -20,7 +20,6 @@ abstract class BaseAddresseeForm extends BaseFormDoctrine
       'created_at'         => new sfWidgetFormDateTime(),
       'updated_at'         => new sfWidgetFormDateTime(),
       'author_id'          => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
-      'version'            => new sfWidgetFormInputText(),
       'clause_bodies_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'ClauseBody')),
     ));
 
@@ -30,7 +29,6 @@ abstract class BaseAddresseeForm extends BaseFormDoctrine
       'created_at'         => new sfValidatorDateTime(),
       'updated_at'         => new sfValidatorDateTime(),
       'author_id'          => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),
-      'version'            => new sfValidatorInteger(array('required' => false)),
       'clause_bodies_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'ClauseBody', 'required' => false)),
     ));
 

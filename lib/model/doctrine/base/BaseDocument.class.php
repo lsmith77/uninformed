@@ -262,44 +262,9 @@ abstract class BaseDocument extends MyBaseRecord
               ),
              ),
              ));
-        $versionable0 = new Doctrine_Template_Versionable(array(
-             'listener' => 'Doctrine_AuditLog_Listener_Microtime',
-             ));
-        $blameable1 = new Doctrine_Template_Blameable(array(
-             'default' => NULL,
-             'blameVar' => 'id',
-             'listener' => 'BlameableCustomListener',
-             'columns' => 
-             array(
-              'created' => 
-              array(
-              'name' => 'author_id',
-              'length' => 4,
-              'options' => 
-              array(
-               'notnull' => false,
-              ),
-              ),
-              'updated' => 
-              array(
-              'disabled' => true,
-              ),
-             ),
-             'relations' => 
-             array(
-              'created' => 
-              array(
-              'class' => 'sfGuardUser',
-              'disabled' => false,
-              'name' => 'Author',
-              ),
-             ),
-             ));
-        $versionable0->addChild($blameable1);
         $mycommentable0 = new Doctrine_Template_MyCommentable();
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
-        $this->actAs($versionable0);
         $this->actAs($mycommentable0);
     }
 }

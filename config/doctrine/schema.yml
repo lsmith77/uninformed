@@ -17,11 +17,11 @@ actAs: &actAs
         class: sfGuardUser
         disabled: false
         name: Author
-  Versionable:
-    listener: Doctrine_AuditLog_Listener_Microtime
-    actAs:
-      Blameable:
-        <<: *Blameable
+#  Versionable:
+#    listener: Doctrine_AuditLog_Listener_Microtime
+#    actAs:
+#      Blameable:
+#        <<: *Blameable
 
 # apply this to the sfDoctrineGuard schema as well
 options:

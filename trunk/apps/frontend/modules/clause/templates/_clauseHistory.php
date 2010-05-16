@@ -5,13 +5,15 @@
  * @param     $clause
  *
  */
-$rootclauses = $clause->getClausesByRoot();
 $rootdocuments = $clause->Document->getDocumentsByRoot();
+
+$rootclauses = $clause->getClausesByRoot();
+$rawrootclauses = $rootclauses->getRawValue();
 ?>
 <table id="clauseHistory" class="collapsed">
     <thead>
         <tr>
-            <th>Code</th>
+            <th>Document Code</th>
             <th>Year</th>
             <th>Changes</th>
             <th>Content</th>
@@ -37,7 +39,7 @@ $rootdocuments = $clause->Document->getDocumentsByRoot();
                 if ($current && $introduced) {
                     $iID = $introduced->ClauseBody->getId();
                     $cID = $current->ClauseBody->getId();
-                    if ($iID===$cID) {
+                    if ($iID === $cID) {
                         echo '<li>Clause copied</li>';
                     } else {
                         echo '<li>Clause changed</li>';
@@ -50,12 +52,14 @@ $rootdocuments = $clause->Document->getDocumentsByRoot();
                    echo '<li>Clause removed</li>';
                 }
                 ?>
-                    </ul>
+                </ul>
             </td>
             <td>
-                <?php echo link_to($current->getClauseNumber(), 'clause', array('id' => $current->getSlug())); ?>:
-                <?php echo isset($current) ? $current->ClauseBody->getContent() : ''; ?>
-            </td>
+                <?php if (isset($current)): ?>
+                    <?php echo link_to($current->getClauseNumber(), 'clause', array('id' => $current->getSlug())); ?>:
+                    <?php echo $rawrootclauses[$rootdoc->getId()]->ClauseBody->getContent(); ?>
+                <?php endif; ?>
+                </td>
         </tr>
         <?php endforeach; ?>
     </tbody>

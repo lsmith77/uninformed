@@ -19,15 +19,34 @@ class bookmarkActions extends sfActions
     {
         $this->forward404Unless($this->getUser()->isAuthenticated());
         $userId = $this->getUser()->getGuardUser()->getId();
-        $this->bookmarks = array();
-        $index = 0;
-        foreach ($this->getRoute()->getObject()->getBookmarksByUser($userId) as $bookmark) {
-             $this->bookmarks[$index]['type'] = $bookmark->getObjectType()==0 ? 'Document' : 'Clause';
-             $this->bookmarks[$index]['model'] = $bookmark->getObjectType()==0 ? 'document' : 'clause';
-             $this->bookmarks[$index]['id'] = $bookmark->getObjectId();
-             $index++;
+
+        $q = Doctrine_Query::create()
+            ->select('b.object_id')
+            ->from('Bookmark b INDEXBY b.object_id')
+            ->where('b.object_type = ? AND b.user_id = ?', array(0, $userId));
+        $this->document_ids = $q->fetchArray();
+
+        $q = Doctrine_Query::create()
+            ->select('b.object_id')
+            ->from('Bookmark b INDEXBY b.object_id')
+            ->where('b.object_type = ? AND b.user_id = ?', array(1, $userId));
+        $this->clause_ids = $q->fetchArray();
+
+        $this->documents = $where = array();
+        if (!empty($this->document_ids)) {
+            $where[] = 'd.id IN ('.implode(',', array_keys($this->document_ids)).')';
         }
-  }
+        if (!empty($this->clause_ids)) {
+            $where[] = 'c.id IN ('.implode(',', array_keys($this->clause_ids)).')';
+        }
+        if (!empty($where)) {
+            $q = Doctrine_Query::create()
+                ->from('Document d INDEXBY d.id')
+                ->innerJoin('d.Clauses c')
+                ->where(implode(' OR ', $where));
+            $this->documents = $q->execute();
+        }
+    }
 
     public function executeAdd(sfWebRequest $request)
     {

@@ -15,7 +15,7 @@ generator:
       actions: ~
       fields:  ~
       list:
-        display: [type, document, country, _document_reservation, _clause_reservation]
+        display: [type, document, country]
       filter:  ~
       form:    ~
       edit:

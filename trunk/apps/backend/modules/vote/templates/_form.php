@@ -35,8 +35,8 @@
 //<![CDATA[
 jQuery('#vote_document_id').change(function()
 {
-	jQuery.ajax({type:'POST',dataType:'html',success:function(data, textStatus){jQuery('#vote_country_id').html(data);},url:'/backend_dev.php/country/retrieveApplicableCountries/document_id/'+this.value});
-  jQuery.ajax({type:'POST',dataType:'html',success:function(data, textStatus){jQuery('#vote_type').html(data);},url:'/backend_dev.php/legalvalue/retrieveApplicableDecisionTypes/document_id/'+this.value});  
+    /*jQuery.ajax({type:'POST',dataType:'html',success:function(data, textStatus){jQuery('#vote_country_id').html(data);},url:'/backend_dev.php/country/retrieveApplicableCountries/document_id/'+this.value});*/
+    jQuery.ajax({type:'POST',dataType:'html',success:function(data, textStatus){jQuery('#vote_type').html(data);},url:'/backend_dev.php/vote/retrieveApplicableDecisionTypes/document_id/'+this.value});
 });
 //]]>
 </script>

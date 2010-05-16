@@ -172,7 +172,7 @@ DocumentType:
       type: integer(4)
     legal_value:
       type: enum
-      values: [legally binding, non-legally binding]
+      values: [legally binding, non-legally binding, support document]
       notnull: false
 
 Document:
@@ -406,8 +406,6 @@ ClauseBody:
       type: integer(4)
     operative_phrase_id:
       type: integer(4)
-    clause_process_id:
-      type: integer(4)
     public_comment:
       type: clob
     parent_clause_body_id:
@@ -438,10 +436,6 @@ ClauseBody:
       local: parent_clause_body_id
       foreign: id
       foreignAlias: Subclauses
-    ClauseProcess:
-      local: clause_process_id
-      foreign: id
-      foreignAlias: Clauses
     ClauseInformationType:
       local: information_type_id
       foreign: id
@@ -481,16 +475,6 @@ ClauseReservation:
     mapping:
       fields: [clause_body_id, country_id]
       type: unique
-
-ClauseProcess:
-  columns:
-    id:
-      type: integer(4)
-      primary: true
-      autoincrement: true
-    name:
-      type: string(255)
-      notnull: true
 
 ClauseOperativePhrase:
   columns:

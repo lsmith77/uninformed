@@ -18,8 +18,6 @@ abstract class BaseBookmarkFormFilter extends BaseFormFilterDoctrine
       'object_id'   => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'created_at'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
-      'author_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
-      'version'     => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -28,8 +26,6 @@ abstract class BaseBookmarkFormFilter extends BaseFormFilterDoctrine
       'object_id'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'created_at'  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_at'  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
-      'author_id'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Author'), 'column' => 'id')),
-      'version'     => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('bookmark_filters[%s]');
@@ -55,8 +51,6 @@ abstract class BaseBookmarkFormFilter extends BaseFormFilterDoctrine
       'object_id'   => 'Number',
       'created_at'  => 'Date',
       'updated_at'  => 'Date',
-      'author_id'   => 'ForeignKey',
-      'version'     => 'Number',
     );
   }
 }

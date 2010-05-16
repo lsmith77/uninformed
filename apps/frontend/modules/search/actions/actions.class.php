@@ -287,10 +287,9 @@ class searchActions extends sfActions
             $data = array();
             if (!empty($clauses)) {
                 $q = Doctrine_Query::create()
-                    ->select("CONCAT(c.id, '-', c.slug) AS slug, c.document_id, TRIM(CONCAT(c.clause_number, ' ', COALESCE(c.clause_number_information, ''), ' ', COALESCE(c.clause_number_subparagraph, ''))) AS clause_number, cb.id, cb.root_clause_body_id, cop.name, cit.name")
+                    ->select("CONCAT(c.id, '-', c.slug) AS slug, c.document_id, TRIM(CONCAT(c.clause_number, ' ', COALESCE(c.clause_number_information, ''), ' ', COALESCE(c.clause_number_subparagraph, ''))) AS clause_number, cb.id, cb.root_clause_body_id, cit.name")
                     ->from('clause c')
                     ->innerJoin('c.ClauseBody cb')
-                    ->leftJoin('cb.ClauseOperativePhrase cop')
                     ->leftJoin('cb.ClauseInformationType cit')
                     ->whereIn('c.id', array_keys($clauses))
                     ->orderBY('FIELD(c.id, '.implode(',', array_keys($clauses)).')');
@@ -310,7 +309,6 @@ class searchActions extends sfActions
                     $documents[] = $data[$key]['document_id'];
                     $data[$key]['score'] = $clauses[$clause['id']]['score'];
                     $data[$key]['title'] = $clauses[$clause['id']]['title'];
-                    $operative_phrase = $clause['ClauseBody']['ClauseOperativePhrase']['name'];
                     $data[$key]['content'] = $clauses[$clause['id']]['content'];
                 }
 

@@ -21,6 +21,7 @@
       <li><?php echo link_to('About', 'about'); ?></li>
 <?php if ($sf_user->isAuthenticated()): ?>
       <li><?php echo link_to('Bookmarks', 'bookmark'); ?></li>
+      <li><?php echo link_to('Settings', 'settings'); ?></li>
       <li><?php echo link_to('Logout', 'sf_guard_signout'); ?></li>
 <?php else: ?>
       <li><?php echo link_to('Login', 'sf_guard_signin'); ?></li>

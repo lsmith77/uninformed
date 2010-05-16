@@ -18,7 +18,7 @@ class excelfileActions extends autoExcelfileActions
     $excelFileId = $request->getParameter('id');
     $excelFileData = Doctrine::getTable('ExcelFile')->findById($excelFileId)->getFirst();
 
-    $this->documents = null;
+    $this->documents = $this->error = null;
     if ($excelFileData) {
         try {
             set_time_limit(3600);
@@ -29,7 +29,7 @@ class excelfileActions extends autoExcelfileActions
             Doctrine_Manager::connection()->commit();
         } catch (Exception $e) {
             Doctrine_Manager::connection()->rollback();
-            echo 'failed: '.$e->getMessage();
+            $this->error = $e;
         }
     }
 

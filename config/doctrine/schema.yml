@@ -394,6 +394,7 @@ Clause:
 ClauseBody:
   actAs:
     <<: *actAs
+    sfLuceneDoctrineTemplate: ~
   columns:
     id:
       type: integer(4)

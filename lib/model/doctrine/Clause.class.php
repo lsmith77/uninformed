@@ -18,13 +18,7 @@ class Clause extends BaseClause
 
     public function __toString() {
         $identifier = (string)$this->_get('Document');
-        $identifier.= ' #'.$this->_get('clause_number');
-        if ($this->_get('clause_number_information')) {
-            $identifier.= ' '.$this->_get('clause_number_information');
-        }
-        if ($this->_get('clause_number_subparagraph')) {
-            $identifier.= ' '.$this->_get('clause_number_subparagraph');
-        }
+        $identifier.= $this->getClauseNumber();
         if ($this->_get('ClauseBody')->_get('ClauseInformationType')) {
             $identifier.= ' '.$this->_get('ClauseBody')->_get('ClauseInformationType')->_get('name');
         }
@@ -63,6 +57,17 @@ class Clause extends BaseClause
         return $this->_get('Document')->_get('name').' ('.(string)$this.')';
     }
 
+    public function getClauseNumber() {
+        $number = ' #'.$this->_get('clause_number');
+        if ($this->_get('clause_number_information')) {
+            $number.= ' '.$this->_get('clause_number_information');
+        }
+        if ($this->_get('clause_number_subparagraph')) {
+            $number.= ' '.$this->_get('clause_number_subparagraph');
+        }
+        return $number;
+    }
+
     public function getDocumenttypeId() {
         return $this->_get('Document')->_get('documenttype_id');
     }
@@ -89,7 +94,9 @@ class Clause extends BaseClause
         $query = Doctrine_Query::create()
             ->from('Clause c INDEXBY c.document_id')
             ->innerJoin('c.ClauseBody cb')
-            ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id));
+            ->innerJoin('c.Document d')
+            ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id))
+            ->orderBy('d.adoption_date');
 
         return $query->execute();
     }

@@ -308,7 +308,7 @@ class searchActions extends sfActions
                     $data[$key]['score'] = $clauses[$clause['id']]['score'];
                     $data[$key]['title'] = $clauses[$clause['id']]['title'];
                     $operative_phrase = $clause['ClauseBody']['ClauseOperativePhrase']['name'];
-                    $data[$key]['content'] = str_ireplace($operative_phrase, '<em>'.$operative_phrase.'</em>', $clauses[$clause['id']]['content']);
+                    $data[$key]['content'] = $clauses[$clause['id']]['content'];
                 }
 
                 $q = Doctrine_Query::create()

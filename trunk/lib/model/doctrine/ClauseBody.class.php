@@ -137,4 +137,9 @@ class ClauseBody extends BaseClauseBody
         }
         return $clause->getAdoptionDate();
     }
+
+    public function getContent() {
+        $operative_phrase = (string)$this->_get('ClauseOperativePhrase');
+        return str_ireplace($operative_phrase, '<em>'.$operative_phrase.'</em>', $this->_get('content'));
+    }
 }

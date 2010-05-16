@@ -89,14 +89,29 @@ class Document extends BaseDocument
     }
 
     public function getStructuredOrganisation() {
-        $o = $this->Organisation;
-        $parent = $o->getParentId() ? $o->OrganisationParent : null;
-        $root = $parent && $parent->getParentId() ? $parent->OrganisationParent : null;
-        //
-        $s = array();
-        $s['main'] = $root ? $root : ($parent ? $parent : $o);
-        $s['current'] = $root ? $parent : ($parent ? $o : '');
-        $s['sub'] = $root ? $o : '';
+        $s = array('main' => '', 'current' => '', 'sub' => '', );
+
+        $q = Doctrine_Query::create()
+            ->select('so.name, so.parent_id, mo.name, mo.parent_id')
+            ->from('Organisation so')
+            ->innerJoin('so.OrganisationParent mo')
+            ->where('so.id = ?', array($this->getOrganisationId()));
+        $suborgan = $q->fetchArray();
+        if (!empty($suborgan)) {
+            $suborgan = reset($suborgan);
+            if ($suborgan['OrganisationParent']['parent_id']) {
+                $q = Doctrine_Query::create()
+                    ->select('o.name')
+                    ->from('Organisation o')
+                    ->where('o.id = ?', array($suborgan['OrganisationParent']['parent_id']));
+                $s['main'] =  $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);;
+                $s['current'] = $suborgan['OrganisationParent']['name'];
+                $s['sub'] = $suborgan['name'];
+            } else {
+                $s['main'] =  $suborgan['OrganisationParent']['name'];
+                $s['current'] = $suborgan['name'];
+            }
+        }
         return $s;
     }
 

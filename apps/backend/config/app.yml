@@ -24,35 +24,40 @@ all:
     login_route:                  @sf_guard_signin
     logout_route:                 @sf_guard_signout
     categories:
-      "Documents/Clauses/Comments":
+      "Documents & Clauses":
         credentials:      [admin]
         items:
           Documents:
             url:    document
           Clauses:
             url:    clause
-          Comments:
-            url:    commentAdmin
-          Comment Moderation:
-            url:    commentReportAdmin
-      "Reservations":
-        credentials:      [admin]
-        items:
-          "Documents":
+          "Document Reservation":
             url:    document_reservation
-          "Clauses":
+          "Clauses Reservation":
             url:    clause_reservation
+          "Document Doc. Relations":
+            url:    document_document_relation
+          "Document Clause Relations":
+            url:    document_clause_relation
+          "Clause Clause Relations":
+            url:    clause_clause_relation
+          "Document Votes":
+            url:    vote
+          "Excelfile Upload":
+            url:    excel_file
       "Meta Data":
         credentials:      [admin]
         items:
-          Votes:
-            url:    vote
+          Comments:
+            url:    commentAdmin
+          "Comment Moderation":
+            url:    commentReportAdmin
           Addressees:
             url:    addressee
           Organisations:
             url:    organisation
-          "Excelfile Upload":
-            url:    excel_file
+          Tags:
+            url:    tag
       "User Management":
         credentials:      [superadmin]
         items:

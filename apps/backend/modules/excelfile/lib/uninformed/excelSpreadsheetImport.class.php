@@ -73,8 +73,14 @@ class excelSpreadsheetImport
       {
       	$value = "";
 
-        if($j == self::$POS_DOCUMENT_ADOPTIONDATE) { //excel date format data, adoption date column
+        if($j == self::$POS_DOCUMENT_ADOPTIONDATE) { //excel date format data, adoption date column, naive
           $value = trim($this->excelData->raw($i, $j,self::$SHEET));
+
+          if(trim($value) == "")
+          {
+              //could be another format or field is really empty
+              $value = trim($this->excelData->value($i, $j,self::$SHEET));
+          }
           /*
           if($value == "") // do not import documents without adoption date
           {
@@ -223,7 +229,8 @@ class excelSpreadsheetImport
           }
         }
 
-        $tags = array_unique($tags);
+        //$tags = array_unique($tags);
+        $tags = array_merge(array_flip(array_flip($tags)));
         $clauseBody->setTags($tags);
 
         $clauseBody->save();
@@ -275,7 +282,8 @@ class excelSpreadsheetImport
       $newDocument->set('documenttype_id', $documentHelper
         ->retrieveDocumentType(
           $document['data'][self::$POS_DOCUMENT_DOCUMENTTYPE],
-          $documentHelper->retrieveLegalValue($document['data'][self::$POS_DOCUMENT_LEGALVALUE])
+          //$documentHelper->retrieveLegalValue($document['data'][self::$POS_DOCUMENT_LEGALVALUE])
+          $document['data'][self::$POS_DOCUMENT_LEGALVALUE]
         )); //document type
       $newDocument->set('vote_url', $document['data'][self::$POS_DOCUMENT_VOTE_URL]);
       $newDocument->set('document_url', $document['data'][self::$POS_DOCUMENT_URL]);
@@ -299,10 +307,15 @@ class excelSpreadsheetImport
       $document['id'] = $newDocument->get('id');
 
       $documentHelper->saveVotesForDocument(
-        $document['id'],
+        $newDocument->get('id'),
+        $newDocument->get('adoption_date'),
+        $newDocument->get('organisation_id'),
         $document['data'][self::$POS_DOCUMENT_LEGALVALUE],
         $document['data'][self::$POS_DOCUMENT_VOTE]);
     }
+
+    $newDocument->free();
+    unset($newDocument);
 
     // find and save document parent relations
     foreach($documents as $documentA)
@@ -316,6 +329,9 @@ class excelSpreadsheetImport
           $child = Doctrine_Core::getTable('Document')->find($documentA['id']);
           $child->set('parent_document_id', $documentB['id']);
           $child->save();
+
+          $child->free(true);
+          unset($child);
 
           // Clause Body Relations
           foreach($documentA['clauses'] as $keyA => $clauseOfA)
@@ -333,6 +349,9 @@ class excelSpreadsheetImport
                 $child = Doctrine_Core::getTable('ClauseBody')->find($id_a);
                 $child->set('parent_clause_body_id', $id_b);
                 $child->save();
+
+                $child->free(true);
+                unset($child);
               }
             }
           }
@@ -353,6 +372,9 @@ class excelSpreadsheetImport
         $newClause->document_id = $documentBody['id'];
 
         $newClause->save();
+
+        $newClause->free(true);
+        unset($newClause);
       }
     }
   }
@@ -361,7 +383,11 @@ class excelSpreadsheetImport
    * Receives an excel date number (days since 1-1-1900).
    * Converts it into a timestamp which then is converted into
    * a date string of format Y-m-d.
-   * Returns NULL when date number is not valid.
+   *
+   * Sometimes the date is saved as a string only and no date number can be extracted
+   * We check this using explode on "-".
+   *
+   * Returns NULL when date cannot be read.
    *
    * @param $dateInteger
    * @return unknown_type
@@ -369,7 +395,10 @@ class excelSpreadsheetImport
   private function createDate($dateInteger)
   {
     $dateInteger = trim($dateInteger);
-    $dateInteger = explode(" ", $dateInteger);
+
+    //check for other date format string like
+    // 12-dec-10
+    $dateInteger = explode("-", $dateInteger);
 
     if($dateInteger[0] > 0 && $dateInteger[0] != "" && !(count($dateInteger) > 1))
     {
@@ -382,6 +411,13 @@ class excelSpreadsheetImport
 
       return date("Y-m-d", $dateInUtcTimestamp);
     }
-    return null;
+    else if(count($dateInteger) == 3)
+    {
+        return date("Y-m-d",strtotime($dateInteger[0]." ".$dateInteger[1]." ".$dateInteger[2]));
+    }
+    else
+    {
+        return null;
+    }
   }
 }

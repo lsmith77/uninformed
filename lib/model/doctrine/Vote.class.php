@@ -15,11 +15,34 @@ class Vote extends BaseVote
     public function retrieveDocumentReservation()
     {
         $q = Doctrine_Query::create()
-            ->select("dr.id, dr.reservation")
+            ->select('dr.id, dr.reservation')
             ->from('DocumentReservation dr')
             ->where('dr.document_id = ?', $this->_get('document_id'))
             ->andWhere('dr.country_id = ?', $this->_get('country_id'));
 
-        return $q->fetchOne();
+        $result = $q->fetchOne();
+
+        $q->free();
+        unset($q);
+
+        return $result;
+    }
+
+    public function retrieveClauseReservations()
+    {
+        $q = Doctrine_Query::create()
+            ->select('cr.id, cr.clause_body_id, cr.reservation, c.clause_number AS clause_number')
+            ->from('ClauseReservation cr')
+            ->innerJoin('cr.Clause AS cb')
+            ->innerJoin('cb.Clause AS c')
+            ->where('c.document_id = ?', $this->_get('document_id'))
+            ->andWhere('cr.country_id = ?', $this->_get('country_id'));
+
+        $result = $q->fetchArray();
+
+        $q->free();
+        unset($q);
+
+        return $result;
     }
 }

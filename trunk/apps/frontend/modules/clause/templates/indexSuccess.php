@@ -43,7 +43,7 @@
 <?php include_partial('tagList', array('tags'=>$clauseBody->Tags)); ?>
 
 
-<h2><a href="#" class="toggleCol" target="history">History of this Clause</a></h2>
+<h2><a href="#" class="toggleCol" target="clauseHistory">History of this Clause</a></h2>
 <?php include_partial('clauseHistory', array('clause'=>$clause)); ?>
 
 

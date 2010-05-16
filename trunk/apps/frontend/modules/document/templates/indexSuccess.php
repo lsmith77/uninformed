@@ -47,7 +47,7 @@
     <?php include_partial('clause/clauseListOfDocument', array('clauses' => $document->getClauses())) ?>
 </div>
 
-<h2><a href="#" class="toggleCol" target="history">History of this document</a></h2>
+<h2><a href="#" class="toggleCol" target="documentHistory">History of this document</a></h2>
 <?php include_partial('documentHistory', array('document'=>$document)); ?>
 
 <?php include_component('comment', 'formComment', array('object' => $document)) ?>

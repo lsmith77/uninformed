@@ -16,7 +16,7 @@
         <i><?php echo $clause->clause_number; ?>.</i>
         <?php echo strlen($c)>200 ? (substr($c, 0, 200).'...') : $c; ?>
         <span>
-            <?php echo link_to('View', $clause); ?>
+            <?php echo link_to('View', 'clause', array('id' => $clause->getSlug())); ?>
         </span>
     </li>
     <?php endif; ?>

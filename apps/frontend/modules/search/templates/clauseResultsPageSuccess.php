@@ -33,7 +33,7 @@
 </script>
 <script type="text/x-jqote-template" id="resultsTpl">
     <![CDATA[
-    <h2>Results</h2>
+    <h2>Results (<%= this.totalResults %>)</h2>
     <% var i, cnt = this.data.length;
     for (i = 0; i < cnt; i++) {
         var res = this.data[i];

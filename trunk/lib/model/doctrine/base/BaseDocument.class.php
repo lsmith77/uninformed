@@ -21,7 +21,7 @@
  * @property integer $organisation_id
  * @property integer $documenttype_id
  * @property string $document_url
- * @property string $clause_ordering
+ * @property text $clause_ordering
  * @property enum $status
  * @property Document $DocumentParent
  * @property Organisation $Organisation
@@ -50,7 +50,7 @@
  * @method integer             getOrganisationId()           Returns the current record's "organisation_id" value
  * @method integer             getDocumenttypeId()           Returns the current record's "documenttype_id" value
  * @method string              getDocumentUrl()              Returns the current record's "document_url" value
- * @method string              getClauseOrdering()           Returns the current record's "clause_ordering" value
+ * @method text                getClauseOrdering()           Returns the current record's "clause_ordering" value
  * @method enum                getStatus()                   Returns the current record's "status" value
  * @method Document            getDocumentParent()           Returns the current record's "DocumentParent" value
  * @method Organisation        getOrganisation()             Returns the current record's "Organisation" value
@@ -134,9 +134,9 @@ abstract class BaseDocument extends MyBaseRecord
         $this->hasColumn('is_ratified', 'bool', null, array(
              'type' => 'bool',
              ));
-        $this->hasColumn('vote_url', 'string', 255, array(
+        $this->hasColumn('vote_url', 'string', 500, array(
              'type' => 'string',
-             'length' => 255,
+             'length' => 500,
              ));
         $this->hasColumn('private_comment', 'clob', null, array(
              'type' => 'clob',
@@ -160,13 +160,12 @@ abstract class BaseDocument extends MyBaseRecord
              'type' => 'integer',
              'length' => 4,
              ));
-        $this->hasColumn('document_url', 'string', 255, array(
+        $this->hasColumn('document_url', 'string', 500, array(
              'type' => 'string',
-             'length' => 255,
+             'length' => 500,
              ));
-        $this->hasColumn('clause_ordering', 'string', 255, array(
-             'type' => 'string',
-             'length' => 255,
+        $this->hasColumn('clause_ordering', 'text', null, array(
+             'type' => 'text',
              ));
         $this->hasColumn('status', 'enum', null, array(
              'type' => 'enum',

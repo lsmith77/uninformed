@@ -140,6 +140,6 @@ class ClauseBody extends BaseClauseBody
 
     public function getContent() {
         $operative_phrase = (string)$this->_get('ClauseOperativePhrase');
-        return str_ireplace($operative_phrase, '<em>'.$operative_phrase.'</em>', $this->_get('content'));
+        return preg_replace('#\b('.preg_quote($operative_phrase, '#').')\b#i', '<em>$1</em>', $this->_get('content'));
     }
 }

@@ -80,7 +80,7 @@ class searchActions extends sfActions
     public function executeResults(sfWebRequest $request)
     {
         $this->query = $request->getGetParameter('q');
-        $this->tagMatch = $request->getGetParameter('tm');
+        $this->tagMatch = $request->getGetParameter('tm', 'any');
         $this->tags = (array) $request->getGetParameter('t');
         $tags = array_keys($this->tags);
         $this->filters = (array) $request->getGetParameter('f');

@@ -74,7 +74,7 @@ class Document extends BaseDocument
         return $query->execute();
     }
 
-    public function getClauses() {
+    public function getClauseList() {
         $query = Doctrine_Query::create()
             ->from('Clause c')
             ->innerJoin('c.ClauseBody cb')

@@ -17,7 +17,7 @@
 
 <h2><a href="#" class="toggleCol" target="clauses">Clauses in this Document</a></h2>
 <div id="clauses">
-    <?php include_partial('clauseListOfDocument', array('clauses' => $document->getClauses())) ?>
+    <?php include_partial('clauseListOfDocument', array('clauses' => $document->getClauseList())) ?>
 </div>
 
 <h2><a href="#" class="toggleCol" target="documentHistory">History of this document</a></h2>

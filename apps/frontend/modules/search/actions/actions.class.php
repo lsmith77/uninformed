@@ -179,10 +179,8 @@ class searchActions extends sfActions
         if (isset($this->filters['legal_value'])) {
             $legal_values = array_intersect($this->filters['legal_value'], $facets['legal_value']['values']);
             if (!empty($legal_values)) {
-                foreach ($legal_values as $legal_value) {
-                    $fq = isset($fq) ? "$fq AND " : '';
-                    $fq.= "-legal_value:\"$legal_value\"";
-                }
+                $fq = isset($fq) ? "$fq AND " : '';
+                $fq.= '{!tag=dt}legal_value:(-"'.implode('" -"', $legal_values).'")';
             }
             unset($this->filters['legal_value']);
         }
@@ -199,12 +197,12 @@ class searchActions extends sfActions
                 }
                 $filter = $filter;
                 $fq = isset($fq) ? "$fq AND " : '';
-                $fq.= '-'.$filter.':'.implode(" AND $filter:", $ids);
+                $fq.= '{!tag=dt}'.$filter.':(-"'.implode('" -"', $ids).'")';
             }
         }
 
         if (isset($fq)) {
-            $criteria->addParam('fq', "{!tag=dt}($fq)");
+            $criteria->addParam('fq', $fq);
         }
 
         $results = $lucene->friendlyFind($criteria);

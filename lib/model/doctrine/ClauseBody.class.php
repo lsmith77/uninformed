@@ -34,18 +34,30 @@ class ClauseBody extends BaseClauseBody
             $root_clause_body_id = $invoker->ClauseBodyParent->root_clause_body_id;
             $invoker->set('root_clause_body_id', $root_clause_body_id);
         }
+    }
 
-        if ($root_clause_body_id && !$this->exists()) {
-            Doctrine_Query::create()
-                ->update('ClauseBody')
-                ->set('is_latest_clause_body', false)
-                ->where('root_clause_body_id = ? OR id = ?', array($root_clause_body_id, $root_clause_body_id))
-                ->execute();
+    public function postSave($event) {
+        $invoker = $event->getInvoker();
+
+        $root_clause_body_id = $invoker->root_clause_body_id;
+
+        $clause = $invoker->setLatestAdoptedClause();
+        $clause_body_id = empty($clause) ? $invoker->_get('id') : $clause->_get('clause_body_id');
+
+        $q = Doctrine_Query::create()
+            ->update('ClauseBody')
+            ->set('is_latest_clause_body', 0)
+            ->where('root_clause_body_id = ? OR id = ?', array($root_clause_body_id, $root_clause_body_id))
+            ->andWhere('id != ?', array($clause_body_id));
+         $q->execute();
+
+        if ($clause_body_id != $invoker->_get('id')) {
+            $invoker->refresh();
         }
     }
 
     public function setLatestAdoptedClause() {
-        if (isset($this->latestAdoptedClause)) {
+        if (!empty($this->latestAdoptedClause)) {
             return $this->latestAdoptedClause;
         }
 

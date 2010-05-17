@@ -12,13 +12,16 @@
             echo '<li><a><img src="/images/close.gif" /></a> '.$tag.'
             <input type="hidden" name="t['.$id.']" value="'.$tag.'" /></li>';
         }
+        if (!count($tags)) {
+            echo '<li style="display: none"></li>';
+        }
     ?>
     </ul>
 </p>
 <p class="tagMatch">
     Matching
-    <input type="radio" name="tm" id="anytag" value="any" <?php echo $tagMatch !== 'all' ? 'checked="checked"':'' ?> /><label for="anytag">Any tag</label></a>
-    <input type="radio" name="tm" id="alltags" value="all" <?php echo $tagMatch === 'all' ? 'checked="checked"':'' ?>  /><label for="alltags">All tags</label></a>
+    <input type="radio" name="tm" id="anytag" value="any" <?php echo $tagMatch !== 'all' ? 'checked="checked"':'' ?> /><label for="anytag">Any tag</label>
+    <input type="radio" name="tm" id="alltags" value="all" <?php echo $tagMatch === 'all' ? 'checked="checked"':'' ?> /><label for="alltags">All tags</label>
 </p>
 <p>
     <input type="submit" name="s" value="Search" id="search" />

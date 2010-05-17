@@ -8,13 +8,13 @@
  * @property integer $id
  * @property string $name
  * @property integer $rank_priority
- * @property enum $legal_value
+ * @property string $legal_value
  * @property Doctrine_Collection $Documents
  * 
  * @method integer             getId()            Returns the current record's "id" value
  * @method string              getName()          Returns the current record's "name" value
  * @method integer             getRankPriority()  Returns the current record's "rank_priority" value
- * @method enum                getLegalValue()    Returns the current record's "legal_value" value
+ * @method string              getLegalValue()    Returns the current record's "legal_value" value
  * @method Doctrine_Collection getDocuments()     Returns the current record's "Documents" collection
  * @method DocumentType        setId()            Sets the current record's "id" value
  * @method DocumentType        setName()          Sets the current record's "name" value
@@ -47,15 +47,10 @@ abstract class BaseDocumentType extends MyBaseRecord
              'type' => 'integer',
              'length' => 4,
              ));
-        $this->hasColumn('legal_value', 'enum', null, array(
-             'type' => 'enum',
-             'values' => 
-             array(
-              0 => 'legally binding',
-              1 => 'non-legally binding',
-              2 => 'support document',
-             ),
-             'notnull' => false,
+        $this->hasColumn('legal_value', 'string', 30, array(
+             'type' => 'string',
+             'notnull' => true,
+             'length' => 30,
              ));
 
         $this->option('collation', 'utf8_general_ci');

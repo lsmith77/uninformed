@@ -3,7 +3,7 @@
     <label for="query">Containing</label><br />
     <input type="text" name="q" id="query" value="<?php echo $query ?>" />
 </p>
-<p class="tags">
+<div class="tags">
     <label for="tags">Tagged with</label><br />
     <input type="text" name="" id="tags" />
     <ul id="taglist">
@@ -17,7 +17,7 @@
         }
     ?>
     </ul>
-</p>
+</div>
 <p class="tagMatch">
     Matching
     <input type="radio" name="tm" id="anytag" value="any" <?php echo $tagMatch !== 'all' ? 'checked="checked"':'' ?> /><label for="anytag">Any tag</label>

@@ -298,7 +298,7 @@ class searchActions extends sfActions
                 }
 
                 $q = Doctrine_Query::create()
-                    ->select("CONCAT(d.id, '-', d.slug) AS slug, d.code, d.organisation_id, d.adoption_date, dt.name, dt.legal_value")
+                    ->select("CONCAT(d.id, '-', d.slug) AS slug, d.code, d.organisation_id, d.is_ratified, d.adoption_date, dt.name, dt.legal_value")
                     ->from('Document d INDEXBY d.id')
                     ->innerJoin('d.DocumentType dt')
                     ->whereIn('d.id', $documents);

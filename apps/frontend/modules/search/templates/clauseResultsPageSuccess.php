@@ -42,7 +42,11 @@
         if (res.Document.isSCResolution) {
             bgcolor = 'blue';
         } else if (res.Document.DocumentType.legal_value == 'legally binding') {
-            bgcolor = 'red';
+            if (res.Document.is_ratified) {
+                bgcolor = 'red';
+            } else {
+                bgcolor = 'indianred';
+            }
         }
         %>
     <div class="result" style="background-color: <%= bgcolor %>">

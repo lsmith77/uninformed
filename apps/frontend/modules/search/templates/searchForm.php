@@ -21,7 +21,11 @@
 <p class="tagMatch">
     Matching
     <input type="radio" name="tm" id="anytag" value="any" <?php echo $tagMatch !== 'all' ? 'checked="checked"':'' ?> /><label for="anytag">Any tag</label>
-    <input type="radio" name="tm" id="alltags" value="all" <?php echo $tagMatch === 'all' ? 'checked="checked"':'' ?> /><label for="alltags">All tags</label>
+    <input type="radio" name="tm" id="alltags" value="all" <?php echo $tagMatch === 'all' ? 'checked="checked"':'' ?>  /><label for="alltags">All tags</label>
+</p>
+<p class="latestClauseOnly">
+    <input type="checkbox" name="l" id="latestClauseOnly" value="1" <?php echo $latestClauseOnly ? 'checked="checked"':'' ?>  />
+    <label for="latestClauseOnly">Only latest clause version</label>
 </p>
 <p>
     <input type="submit" name="s" value="Search" id="search" />

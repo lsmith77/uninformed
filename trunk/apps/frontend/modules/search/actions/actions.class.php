@@ -55,13 +55,15 @@ class searchActions extends sfActions
         $this->query = '';
         $this->tagMatch = 'any';
         $this->tags = array();
+        $this->latestClauseOnly = true;
     }
 
     public function executeClauseResultsPage(sfWebRequest $request)
     {
         $this->query = $request->getGetParameter('q');
-        $this->tagMatch = $request->getGetParameter('tm');
+        $this->tagMatch = $request->getGetParameter('tm', 'any');
         $this->tags = (array) $request->getGetParameter('t');
+        $this->latestClauseOnly = $request->getGetParameter('l');
     }
 
     public function executeSearchTags(sfWebRequest $request)
@@ -82,9 +84,9 @@ class searchActions extends sfActions
         $this->query = $request->getGetParameter('q');
         $this->tagMatch = $request->getGetParameter('tm', 'any');
         $this->tags = (array) $request->getGetParameter('t');
+        $this->latestClauseOnly = $request->getGetParameter('l');
         $tags = array_keys($this->tags);
         $this->filters = (array) $request->getGetParameter('f');
-        $this->latest_only = (array) $request->getGetParameter('l');
         $this->page = (int) $request->getGetParameter('p', 0);
         $limit = 20;
 
@@ -159,7 +161,7 @@ class searchActions extends sfActions
             $criteria->add($subcritieria);
         }
 
-        if ($this->latest_only) {
+        if ($this->latestClauseOnly) {
             $criteria->addFieldSane('is_latest_clause_body', 'true', 'AND');
         }
 
@@ -213,7 +215,7 @@ class searchActions extends sfActions
             if (!empty($solr)) {
                 if (is_array($model)) {
                     $filters[$facet] = array();
-                    foreach ($model['values'] as $key => $value) {
+                    foreach ($model['values'] as $value) {
                         $filters[$facet][] = array('name' => $value, 'id' => $value);
                     }
                 } else {

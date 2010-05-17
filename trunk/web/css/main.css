@@ -117,8 +117,8 @@ table td, table th {
 }
 .header span {
     position: absolute;
-    left: 10000px;
-    top: -1000px;
+    left: -2000px;
+    top: -2000px;
 }
 
 .nav {

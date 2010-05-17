@@ -23,7 +23,7 @@ ClauseBody:
         is_latest_clause_body:
           type: boolean
           required: true
-          alias: getIsLatestClauseBody
+          alias: getIsLatestClauseBodySolr
         title:
           type: text
           alias: getTitle

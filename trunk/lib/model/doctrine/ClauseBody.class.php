@@ -98,6 +98,10 @@ class ClauseBody extends BaseClauseBody
         return $clause->getOrganisationId();
     }
 
+    public function getIsLatestClauseBodySolr() {
+        return $this->_get('is_latest_clause_body') ? 'true' : 'false';
+    }
+
     public function getLegalValue() {
         $clause = $this->setLatestAdoptedClause();
         if (empty($clause)) {

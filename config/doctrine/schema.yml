@@ -171,9 +171,8 @@ DocumentType:
     rank_priority:
       type: integer(4)
     legal_value:
-      type: enum
-      values: [legally binding, non-legally binding, support document]
-      notnull: false
+      type: string(30)
+      notnull: true
 
 Document:
   actAs:

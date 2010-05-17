@@ -12,7 +12,7 @@
  * @property date $adoption_date
  * @property string $code
  * @property integer $min_ratification_count
- * @property bool $is_ratified
+ * @property boolean $is_ratified
  * @property string $vote_url
  * @property clob $private_comment
  * @property clob $public_comment
@@ -41,7 +41,7 @@
  * @method date                getAdoptionDate()             Returns the current record's "adoption_date" value
  * @method string              getCode()                     Returns the current record's "code" value
  * @method integer             getMinRatificationCount()     Returns the current record's "min_ratification_count" value
- * @method bool                getIsRatified()               Returns the current record's "is_ratified" value
+ * @method boolean             getIsRatified()               Returns the current record's "is_ratified" value
  * @method string              getVoteUrl()                  Returns the current record's "vote_url" value
  * @method clob                getPrivateComment()           Returns the current record's "private_comment" value
  * @method clob                getPublicComment()            Returns the current record's "public_comment" value
@@ -131,8 +131,8 @@ abstract class BaseDocument extends MyBaseRecord
              'type' => 'integer',
              'length' => 4,
              ));
-        $this->hasColumn('is_ratified', 'bool', null, array(
-             'type' => 'bool',
+        $this->hasColumn('is_ratified', 'boolean', null, array(
+             'type' => 'boolean',
              ));
         $this->hasColumn('vote_url', 'string', 500, array(
              'type' => 'string',

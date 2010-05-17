@@ -36,26 +36,6 @@ class ClauseBody extends BaseClauseBody
         }
     }
 
-    public function postSave($event) {
-        $invoker = $event->getInvoker();
-
-        $root_clause_body_id = $invoker->root_clause_body_id;
-
-        $clause = $invoker->setLatestAdoptedClause();
-        $clause_body_id = empty($clause) ? $invoker->_get('id') : $clause->_get('clause_body_id');
-
-        $q = Doctrine_Query::create()
-            ->update('ClauseBody')
-            ->set('is_latest_clause_body', 0)
-            ->where('root_clause_body_id = ? OR id = ?', array($root_clause_body_id, $root_clause_body_id))
-            ->andWhere('id != ?', array($clause_body_id));
-         $q->execute();
-
-        if ($clause_body_id != $invoker->_get('id')) {
-            $invoker->refresh();
-        }
-    }
-
     public function setLatestAdoptedClause() {
         if (!empty($this->latestAdoptedClause)) {
             return $this->latestAdoptedClause;

@@ -51,6 +51,20 @@ class Clause extends BaseClause
                 ->execute();
         }
         $invoker->_get('Document')->refresh();
+
+        if ($invoker->ClauseBody) {
+            $root_clause_body_id = $invoker->ClauseBody->root_clause_body_id;
+
+            $clause = $invoker->ClauseBody->setLatestAdoptedClause();
+            $clause = empty($clause) ? $invoker : $clause;
+            $latest_clause_body_id = $clause->_get('clause_body_id');
+
+            $q = Doctrine_Query::create()
+                ->update('ClauseBody')
+                ->set('is_latest_clause_body', "CASE WHEN id = $latest_clause_body_id THEN 1 ELSE 0 END")
+                ->where('root_clause_body_id = ? OR id = ?', array($root_clause_body_id, $root_clause_body_id));
+            $q->execute();
+        }
     }
 
     public function getTitle() {

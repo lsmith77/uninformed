@@ -198,7 +198,7 @@ Document:
     min_ratification_count:
       type: integer(4)
     is_ratified:
-      type: bool
+      type: boolean
     vote_url:
       type: string(500)
     private_comment:

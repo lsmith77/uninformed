@@ -113,15 +113,7 @@ class searchActions extends sfActions
             'operative_phrase_id' => 'ClauseOperativePhrase',
             'documenttype_id' => 'DocumentType',
             'information_type_id' => 'ClauseInformationType',
-            'legal_value' => array(
-                'model' => 'LegalValue',
-                'values' =>
-             array(
-              0 => 'legally binding',
-              1 => 'non-legally binding',
-              2 => 'support document',
-             ),
-            ),
+            'legal_value' => true,
 /*
             'adopted_date' => array(
                 'model' => 'Document',
@@ -178,26 +170,25 @@ class searchActions extends sfActions
             $criteria->addParam('hl.simple.post', '</strong>');
         }
 
-        if (isset($this->filters['legal_value'])) {
-            $legal_values = array_intersect($this->filters['legal_value'], $facets['legal_value']['values']);
-            if (!empty($legal_values)) {
-                $fq = isset($fq) ? "$fq AND " : '';
-                $fq.= '{!tag=dt}legal_value:(-"'.implode('" -"', $legal_values).'")';
-            }
-            unset($this->filters['legal_value']);
-        }
-
         if ($this->filters) {
             foreach ($this->filters as $filter => $ids) {
-                if (!$this->checkArrayOfInteger($ids)) {
-                    $output = array('status' => 'error', 'message' => "parameter 'f' for key '$filter' to be an array of integer");
-                    return $this->returnJson($output);
+                if (empty($ids)) {
+                    continue;
                 }
                 if (empty($facets[$filter])) {
                     $output = array('status' => 'error', 'message' => "unsupported filter '$filter'");
                     return $this->returnJson($output);
                 }
-                $filter = $filter;
+                if ($facets[$filter] === true) {
+                    foreach ($ids as $key => $id) {
+                        $ids[$key] = sfLuceneCriteria::sanitize($id);
+                    }
+                } else {
+                    if (!$this->checkArrayOfInteger($ids)) {
+                        $output = array('status' => 'error', 'message' => "parameter 'f' for key '$filter' to be an array of integer");
+                        return $this->returnJson($output);
+                    }
+                }
                 $fq = isset($fq) ? "$fq AND " : '';
                 $fq.= '{!tag=dt}'.$filter.':(-"'.implode('" -"', $ids).'")';
             }
@@ -212,34 +203,28 @@ class searchActions extends sfActions
         $filters = array();
         foreach ($facets as $facet => $model) {
             $solr = $results->getFacetField($facet);
+            $filters[$facet] = array();
             if (!empty($solr)) {
-                if (is_array($model)) {
-                    $filters[$facet] = array();
-                    foreach ($model['values'] as $value) {
-                        $filters[$facet][] = array('name' => $value, 'id' => $value);
+                if ($model === true) {
+                    ksort($solr);
+                    foreach ($solr as $id => $count) {
+                        $filters[$facet][] = array('id' => $id, 'name' => $id, 'count' => $count);
                     }
                 } else {
                     $q = Doctrine_Query::create()
-                        ->select("$model.id, $model.name")
-                        ->from($model)
-                        ->whereIn("$model.id", array_keys($solr));
+                        ->select("$model.name")
+                        ->from("$model INDEXBY $model.id")
+                        ->whereIn("$model.id", array_keys($solr))
+                        ->orderBy("name");
                     if ($model == 'Organisation') {
                         $q->innerJoin("$model.OrganisationParent op")
                             ->select("$model.id, CONCAT(op.name, ' ', $model.name) AS name");
                     }
-                    $filters[$facet] = $q->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
-                }
-                foreach ($filters[$facet] as $key => $value) {
-                    if (empty($solr[$value['id']])) {
-                        unset($filters[$facet][$key]);
-                    } else {
-                        $filters[$facet][$key]['count'] = $solr[$value['id']];
+                    $values = $q->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
+                    foreach ($values as $id => $name) {
+                        $filters[$facet][] = array('id' => $id, 'name' => $name['name'], 'count' => $solr[$id]);
                     }
                 }
-                // reset the keys to force json to have an array
-                $filters[$facet] = array_values($filters[$facet]);
-            } else {
-                $filters[$facet] = array();
             }
         }
 

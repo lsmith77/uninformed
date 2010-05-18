@@ -163,6 +163,10 @@ div.search {
     left: -2000px;
 }
 
+.filters label {
+    display: block;
+}
+
 .filterGroup.folded {
     display: none;
 }

@@ -26,10 +26,13 @@
            else folded = ''; %>
         <h3><span class="fold<%= folded %>"><span>Collapse/Expand</span></span><%= this.filterLabels[fId] %></h3>
         <div class="filterGroup<%= folded %>">
+            <% if (f.length > 3) { %>
+            <label><input class="selectAll" type="checkbox" checked="checked" /> All</label>
+            <% } %>
             <% for (item in f) { %>
             <% item = f[item]; %>
-            <input type="checkbox" name="f[<%= fId %>][]" value="<%= item.id %>" checked="checked" <%= (item.count == this.totalResults ? 'disabled="disabled"':'') %> />
-            <%= item.name %> <span class="count">(<%= item.count %>)</span><br />
+            <label><input type="checkbox" name="f[<%= fId %>][]" value="<%= item.id %>" checked="checked" <%= (item.count == this.totalResults ? 'disabled="disabled"':'') %> />
+            <%= item.name %> <span class="count">(<%= item.count %>)</span></label>
             <% } %>
         </div>
     <%  }

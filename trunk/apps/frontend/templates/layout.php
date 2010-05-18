@@ -25,9 +25,6 @@ s.parentNode.insertBefore(ga, s);
  })();
 
 </script>
-    <?php if($sf_user->hasFlash('notice')): ?>
-      <div id="flash_notice"><b>Notice:</b> <?php echo $sf_user->getFlash('notice'); ?></div>
-    <?php endif; ?>
     <div class="header">
       <span>un-informed.org - making commitments matter</span>
     </div>
@@ -45,6 +42,9 @@ s.parentNode.insertBefore(ga, s);
 <?php endif; ?>
         <li><?php echo mail_to('info@un-informed.org', 'Feedback', 'encode=true', array('subject' => '[un-informed.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?></li>
     </ul>
+    <?php if($sf_user->hasFlash('notice')): ?>
+      <div id="flash_notice"><b>Notice:</b> <?php echo $sf_user->getFlash('notice'); ?></div>
+    <?php endif; ?>
     <noscript><p class="noscript">This site runs *much* better with javascript enabled</p></noscript>
     <?php echo $sf_content ?>
   </body>

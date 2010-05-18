@@ -200,7 +200,9 @@ class searchActions extends sfActions
                 if ($model === true) {
                     ksort($solr);
                     foreach ($solr as $id => $count) {
-                        $filters[$facet][] = array('id' => $id, 'name' => $id, 'count' => $count);
+                        if ($count) {
+                            $filters[$facet][] = array('id' => $id, 'name' => $id, 'count' => $count);
+                        }
                     }
                 } else {
                     $q = Doctrine_Query::create()
@@ -214,7 +216,9 @@ class searchActions extends sfActions
                     }
                     $values = $q->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
                     foreach ($values as $id => $name) {
-                        $filters[$facet][] = array('id' => $id, 'name' => $name['name'], 'count' => $solr[$id]);
+                        if (!empty($solr[$id])) {
+                            $filters[$facet][] = array('id' => $id, 'name' => $name['name'], 'count' => $solr[$id]);
+                        }
                     }
                 }
             }

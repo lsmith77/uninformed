@@ -33,7 +33,7 @@ s.parentNode.insertBefore(ga, s);
     </div>
     <ul class="nav">
       <li><?php echo link_to('Search', 'search'); ?></li>
-      <li><?php echo link_to('UN-i.org', 'un_i_info'); ?></li>
+      <li><?php echo link_to('UN-i.org', 'http://www.un-i.org'); ?></li>
       <li><?php echo link_to('About', 'about'); ?></li>
 <?php if ($sf_user->isAuthenticated()): ?>
       <li><?php echo link_to('Bookmarks', 'bookmark'); ?></li>

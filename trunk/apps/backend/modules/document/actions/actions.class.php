@@ -15,6 +15,7 @@ class documentActions extends autoDocumentActions
 {
   public function executeAutocomplete($request)
   {
+    // TODO: caution, code may be empty
     return autocompleteHelper::executeAutocomplete($this, $request, 'Document', 'id', 'code');
   }
 }

@@ -40,6 +40,7 @@ class clauseActions extends autoClauseActions
 
     $values = array();
     if (!isset($clause_number)) {
+        // TODO: caution, code may be empty
         $results = Doctrine_Query::create()
             ->select("d.code")
             ->from("Document d")

@@ -35,6 +35,13 @@
 <script type="text/x-jqote-template" id="resultsTpl">
     <![CDATA[
     <h2><%= this.totalResults %> Results (Page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
+    <h3>
+        Document color coding:
+        <span style="background-color: blue;">SC resolutions</span>,
+        <span style="background-color: red;">ratified legally binding</span>,
+        <span style="background-color: indianred;">not ratified legally binding</span>,
+        <span style="background-color: green;">non-legally binding</span>
+    </h3>
     <%
         $('.results').data('page', this.page);
         if (this.page > 0) { %>

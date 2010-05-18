@@ -15,10 +15,10 @@ generator:
       actions: ~
       fields:  ~
       list:
-        display: [name, created_at, updated_at, author]
+        display: [name, created_at, updated_at, author, is_imported]
         object_actions:
           _edit: ~
-          _delete: ~  
+          _delete: ~
           import: { label: Import, action: excelSpreadsheetImport}
       filter:  ~
       form:    ~

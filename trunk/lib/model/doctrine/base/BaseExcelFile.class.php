@@ -8,17 +8,20 @@
  * @property integer $id
  * @property string $name
  * @property string $file
+ * @property boolean $is_imported
  * @property sfGuardUser $sfGuardUser
  * @property Doctrine_Collection $Import
  * 
  * @method integer             getId()          Returns the current record's "id" value
  * @method string              getName()        Returns the current record's "name" value
  * @method string              getFile()        Returns the current record's "file" value
+ * @method boolean             getIsImported()  Returns the current record's "is_imported" value
  * @method sfGuardUser         getSfGuardUser() Returns the current record's "sfGuardUser" value
  * @method Doctrine_Collection getImport()      Returns the current record's "Import" collection
  * @method ExcelFile           setId()          Sets the current record's "id" value
  * @method ExcelFile           setName()        Sets the current record's "name" value
  * @method ExcelFile           setFile()        Sets the current record's "file" value
+ * @method ExcelFile           setIsImported()  Sets the current record's "is_imported" value
  * @method ExcelFile           setSfGuardUser() Sets the current record's "sfGuardUser" value
  * @method ExcelFile           setImport()      Sets the current record's "Import" collection
  * 
@@ -47,6 +50,11 @@ abstract class BaseExcelFile extends MyBaseRecord
              'type' => 'string',
              'notnull' => true,
              'length' => 255,
+             ));
+        $this->hasColumn('is_imported', 'boolean', null, array(
+             'type' => 'boolean',
+             'notnull' => true,
+             'default' => false,
              ));
 
         $this->option('collation', 'utf8_general_ci');

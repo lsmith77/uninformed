@@ -32,7 +32,7 @@ class Document extends BaseDocument
     public function preSave($event) {
         $invoker = $event->getInvoker();
         $slug = $invoker->_get('name');
-        $slug = Doctrine_Inflector::urlize($slug);
+        $slug = substr(Doctrine_Inflector::urlize($slug), 0, 30);
         $invoker->_set('slug', $slug);
 
         // update clause slugs if the name changed

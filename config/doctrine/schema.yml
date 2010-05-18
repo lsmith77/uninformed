@@ -184,10 +184,10 @@ Document:
       primary: true
       autoincrement: true
     name:
-      type: string(255)
+      type: string(1000)
       notnull: true
     slug:
-      type: string(255)
+      type: string(50)
     enforcement_date:
       type: date
     adoption_date:
@@ -376,7 +376,7 @@ Clause:
     private_comment:
       type: clob
     slug:
-      type: string(255)
+      type: string(50)
   relations:
     Document:
       local: document_id

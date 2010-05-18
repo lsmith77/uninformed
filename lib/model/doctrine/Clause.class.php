@@ -33,7 +33,7 @@ class Clause extends BaseClause
             $invoker->_set('clause_number', (str_word_count($clauseOrdering, 0, '0123456789')+1));
 
             $slug = (string)$invoker;
-            $slug = Doctrine_Inflector::urlize($slug);
+            $slug = substr(Doctrine_Inflector::urlize($slug), 0, 30);
             $invoker->_set('slug', $slug);
         }
     }

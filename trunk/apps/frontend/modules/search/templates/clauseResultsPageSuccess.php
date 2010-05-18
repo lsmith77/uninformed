@@ -6,7 +6,7 @@
 <div class="search">
     <div class="form">
         <h2>Update your search</h2>
-        <?php include dirname(__FILE__).'/searchForm.php' ?>
+        <?php include_partial('search/searchForm', $sf_data); ?>        
     </div>
     <div class="filters">
     </div>

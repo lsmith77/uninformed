@@ -25,7 +25,7 @@ $rawrootclauses = $rootclauses->getRawValue();
         <?php $current = (isset($rootclauses[$rootdoc->getId()])) ? $rootclauses[$rootdoc->getId()] : null; ?>
         <tr<?php if ($rootclauses[$rootdoc->getId()]->getId() == $clause->getId()) { echo ' style="background-color: grey"'; } ?>>
             <td>
-            <?php echo link_to($rootdoc->getCode(), 'document', array('id' => $rootdoc->getSlug())); ?>
+            <?php echo link_to((string)$rootdoc, 'document', array('id' => $rootdoc->getSlug())); ?>
             </td>
             <td>
                 <?php echo date('Y',strtotime($rootdoc->getAdoptionDate())); ?>

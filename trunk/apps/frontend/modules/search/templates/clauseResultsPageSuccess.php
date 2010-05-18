@@ -16,22 +16,28 @@
 
 <script type="text/x-jqote-template" id="filtersTpl">
     <![CDATA[
+    <% var f, fId, item, folded; %>
     <h2>Search filters</h2>
     <form id="filtersForm">
-    <% for (var str in this.filterLabels) {
-        var f = this.filters[str];
+    <% for (fId in this.filterLabels) {
+        f = this.filters[fId];
         if (f && f.length) { %>
-        <h3><%= this.filterLabels[str] %></h3>
-        <% for (var item in f) { %>
-        <% item = f[item]; %>
-        <input type="checkbox" name="f[<%= str %>][]" value="<%= item.id %>" checked="checked" <%= (item.count == this.totalResults ? 'disabled="disabled"':'') %> />
-        <%= item.name %> <span class="count">(<%= item.count %>)</span><br />
-        <% } %>
+        <% if (fId === 'operative_phrase_id' || fId === 'addressee_ids' || fId === 'legal_value') folded = ' folded';
+           else folded = ''; %>
+        <h3><span class="fold<%= folded %>"><span>Collapse/Expand</span></span><%= this.filterLabels[fId] %></h3>
+        <div class="filterGroup<%= folded %>">
+            <% for (item in f) { %>
+            <% item = f[item]; %>
+            <input type="checkbox" name="f[<%= fId %>][]" value="<%= item.id %>" checked="checked" <%= (item.count == this.totalResults ? 'disabled="disabled"':'') %> />
+            <%= item.name %> <span class="count">(<%= item.count %>)</span><br />
+            <% } %>
+        </div>
     <%  }
     } %>
     </form>
     ]]>
 </script>
+
 <script type="text/x-jqote-template" id="resultsTpl">
     <![CDATA[
     <h2><%= this.totalResults %> Results (Page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>

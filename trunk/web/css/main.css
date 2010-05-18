@@ -146,6 +146,35 @@ div.search {
     float: left;
 }
 
+.filters .fold {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    display: block;
+    float: left;
+    background: url(/images/hide.gif) no-repeat;
+}
+.filters .fold.folded {
+    background-image: url(/images/collapse.gif);
+}
+.filters .fold span {
+    position: absolute;
+    top: -2000px;
+    left: -2000px;
+}
+
+.filterGroup.folded {
+    display: none;
+}
+
+.filters h3 {
+    margin: 0 0 .4em;
+}
+
+.filterGroup {
+    margin: 0 0 .4em;
+}
+
 /* CLAUSES/DOCUMENTS DETAILVIEW */
 .clauseList li {
     position: relative;

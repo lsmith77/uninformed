@@ -24,6 +24,12 @@ $(function(){
         $.getJSON(url, null, function(data, status) {
             $('.results').jqotesub($('#resultsTpl'), data);
         });
+    },
+    foldFilterGroup = function(e) {
+        $(this)
+            .parent('h3').next('.filterGroup').toggle('fast')
+            .end().end()
+            .toggleClass('folded');
     };
 
     // handle tag removal link
@@ -56,5 +62,6 @@ $(function(){
         loadResultsPage();
 
         $('.filters').live('change', refreshResults)
+        $('.filters .fold').live('click', foldFilterGroup);
     }
 });

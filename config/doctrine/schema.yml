@@ -219,8 +219,6 @@ Document:
       type: integer(4)
     document_url:
       type: string(500)
-    clause_ordering:
-      type: text
     status:
       type: enum
       values: [draft, review, reviewed, inactive, active]
@@ -395,9 +393,9 @@ Clause:
       type: unique
 
 ClauseBody:
-  actAs:
-    <<: *actAs
-    sfLuceneDoctrineTemplate: ~
+#  actAs:
+#    <<: *actAs
+#    sfLuceneDoctrineTemplate: ~
   columns:
     id:
       type: integer(4)

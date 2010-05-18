@@ -28,9 +28,6 @@ class Clause extends BaseClause
     public function preSave($event) {
         if (!$this->exists()) {
             $invoker = $event->getInvoker();
-            $clauseOrdering = $invoker->_get('Document')->_get('clause_ordering');
-
-            $invoker->_set('clause_number', (str_word_count($clauseOrdering, 0, '0123456789')+1));
 
             $slug = (string)$invoker;
             $slug = substr(Doctrine_Inflector::urlize($slug), 0, 30);
@@ -40,18 +37,6 @@ class Clause extends BaseClause
 
     public function postSave($event) {
         $invoker = $event->getInvoker();
-
-        $id = $invoker->_get('id');
-        $clauseOrdering = $invoker->_get('Document')->_get('clause_ordering');
-        if (!preg_match("/(^|,)$id(,|$)/", $clauseOrdering)) {
-            Doctrine_Query::create()
-                ->update('Document')
-                ->set('clause_ordering', "IF (clause_ordering IS NULL, '$id', CONCAT (clause_ordering, ',$id'))")
-                ->where('id = ?', $invoker->_get('Document')->_get('id'))
-                ->execute();
-        }
-        $invoker->_get('Document')->refresh();
-
         if ($invoker->ClauseBody) {
             $root_clause_body_id = $invoker->ClauseBody->root_clause_body_id;
 

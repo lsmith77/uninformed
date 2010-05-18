@@ -43,6 +43,7 @@ s.parentNode.insertBefore(ga, s);
       <li><?php echo link_to('Login', 'sf_guard_signin'); ?></li>
       <li><?php echo link_to('Register', 'apply'); ?></li>
 <?php endif; ?>
+        <li><?php echo mail_to('info@un-informed.org', 'Feedback', 'encode=true', array('subject' => '[un-informed.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?></li>
     </ul>
     <noscript><p class="noscript">This site runs *much* better with javascript enabled</p></noscript>
     <?php echo $sf_content ?>

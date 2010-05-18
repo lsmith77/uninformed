@@ -165,7 +165,7 @@ class excelSpreadsheetImport
           $clause[$n] = trim($this->excelData->value($rowCount, $n, self::$SHEET));
         }
 
-        if($clause[self::$FIRST_CLAUSECOLUMN] != "")
+        if($clause[self::$POS_CLAUSE_NUMBER] != "")
         {
             $clauses[] = $clause;
         }
@@ -367,6 +367,7 @@ class excelSpreadsheetImport
         $clauseBodyId = key($clauseItem);
 
         $newClause = new Clause();
+        $newClause->clause_number = $clauseItem[$clauseBodyId][0];
 
         $newClause->clause_body_id = $clauseBodyId;
         $newClause->document_id = $documentBody['id'];

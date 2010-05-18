@@ -36,7 +36,7 @@ abstract class BaseClauseForm extends BaseFormDoctrine
       'clause_number_information'  => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'clause_number_subparagraph' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'private_comment'            => new sfValidatorString(array('required' => false)),
-      'slug'                       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'slug'                       => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'created_at'                 => new sfValidatorDateTime(),
       'updated_at'                 => new sfValidatorDateTime(),
       'author_id'                  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'required' => false)),

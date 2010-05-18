@@ -16,13 +16,13 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                     => new sfWidgetFormInputHidden(),
-      'name'                   => new sfWidgetFormInputText(),
+      'name'                   => new sfWidgetFormTextarea(),
       'slug'                   => new sfWidgetFormInputText(),
       'enforcement_date'       => new sfWidgetFormDate(),
       'adoption_date'          => new sfWidgetFormDate(),
       'code'                   => new sfWidgetFormInputText(),
       'min_ratification_count' => new sfWidgetFormInputText(),
-      'is_ratified'            => new sfWidgetFormInputText(),
+      'is_ratified'            => new sfWidgetFormInputCheckbox(),
       'vote_url'               => new sfWidgetFormTextarea(),
       'private_comment'        => new sfWidgetFormTextarea(),
       'public_comment'         => new sfWidgetFormTextarea(),
@@ -41,13 +41,13 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                     => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'name'                   => new sfValidatorString(array('max_length' => 255)),
-      'slug'                   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'name'                   => new sfValidatorString(array('max_length' => 1000)),
+      'slug'                   => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'enforcement_date'       => new sfValidatorDate(array('required' => false)),
       'adoption_date'          => new sfValidatorDate(),
       'code'                   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'min_ratification_count' => new sfValidatorInteger(array('required' => false)),
-      'is_ratified'            => new sfValidatorPass(array('required' => false)),
+      'is_ratified'            => new sfValidatorBoolean(array('required' => false)),
       'vote_url'               => new sfValidatorString(array('max_length' => 500, 'required' => false)),
       'private_comment'        => new sfValidatorString(array('required' => false)),
       'public_comment'         => new sfValidatorString(array('required' => false)),

@@ -117,32 +117,31 @@ class excelSpreadsheetImport
 
         $title = $title."#".$date;
 
-          if(!isset($documents[$title])) {
-            $documents[$title] = array();
-            $documents[$title]['countClauses'] = 1;
-          } else {
-            $documents[$title]['countClauses']++;
-          }
+        if(!isset($documents[$title])) {
+          $documents[$title] = array();
+        }
+
+        $documents[$title]['lastDocRow'] = $i;
 
         if(!isset($documents[$title]['adoption_date'])) {
           $documents[$title]['adoption_date'] = $date;
         }
 
-          if(!isset($documents[$title]['code'])) {
-            $documents[$title]['code'] = $code;
-          }
+        if(!isset($documents[$title]['code'])) {
+          $documents[$title]['code'] = $code;
+         }
 
-          if(!isset($documents[$title]['followup'])) {
-            $documents[$title]['followup'] = $followup;
-          }
+        if(!isset($documents[$title]['followup'])) {
+          $documents[$title]['followup'] = $followup;
+        }
 
-          if(!isset($documents[$title]['tags'])) {
-            $documents[$title]['tags'] = $tags;
-          } else {
-            $documents[$title]['tags'] = array_merge($documents[$title]['tags'], $tags);
-          }
+        if(!isset($documents[$title]['tags'])) {
+          $documents[$title]['tags'] = $tags;
+        } else {
+          $documents[$title]['tags'] = array_merge($documents[$title]['tags'], $tags);
+        }
 
-         $documents[$title]['data'] = $data;
+        $documents[$title]['data'] = $data;
       }
       else
       {
@@ -152,39 +151,30 @@ class excelSpreadsheetImport
     }
 
     //add clause data
-    $documentClauses_firstRow = self::$FIRST_ROW;
-
+    $rowCount = self::$FIRST_ROW;
     foreach($documents as $key => $document)
     {
-     $clauses = array();
-      $rowCount = 0;
+      $clauses = array();
 
-      $clauseRowCount = $document['countClauses'];
-
-      do
+      while($rowCount <= $document['lastDocRow'])
       {
         $clause = array();
 
         for($n = self::$FIRST_CLAUSECOLUMN; $n < self::$FIRST_CLAUSECOLUMN + self::$AMOUNT_CLAUSECOLUMNS; $n++)
         {
-          $clause[$n] = trim($this->excelData->value($documentClauses_firstRow + $rowCount, $n, self::$SHEET));
+          $clause[$n] = trim($this->excelData->value($rowCount, $n, self::$SHEET));
         }
 
         if($clause[self::$FIRST_CLAUSECOLUMN] != "")
         {
             $clauses[] = $clause;
-            $rowCount++;
-        }
-        else
-        {
-            $documentClauses_firstRow++;
         }
 
-      } while($rowCount < $clauseRowCount);
+        $rowCount++;
+
+      }
 
       $documents[$key]['clauses'] = $clauses;
-
-      $documentClauses_firstRow += $clauseRowCount;
     }
 
     return $documents;

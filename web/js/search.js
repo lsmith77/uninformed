@@ -12,13 +12,15 @@ $(function(){
             $('.results').jqotesub($('#resultsTpl'), data);
         });
     },
-    refreshResults = function(query, tags, tagMatch) {
+    refreshResults = function(page) {
+        page = page || 0;
         var url = '/search/results?' + $('#searchForm').serialize();
         $('#filtersForm :input').each(function(i, el) {
             if (!$(el).attr('checked')) {
                 url += '&' + $(el).attr('name') + '=' + $(el).val();
             }
         });
+        url += '&p=' + page;
         $.getJSON(url, null, function(data, status) {
             $('.results').jqotesub($('#resultsTpl'), data);
         });
@@ -27,6 +29,16 @@ $(function(){
     // handle tag removal link
     $('#taglist li a').live('click', function(e) {
         $(this).parent('li').remove();
+    });
+
+    // load next page
+    $('.results .nextPage').live('click', function(e) {
+        refreshResults($('.results').data('page')+1);
+    });
+
+    // load prev page
+    $('.results .prevPage').live('click', function(e) {
+        refreshResults($('.results').data('page')-1);
     });
 
     // autocomplete

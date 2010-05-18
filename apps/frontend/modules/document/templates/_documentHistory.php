@@ -19,7 +19,7 @@ $rootdocuments = $document->getDocumentsByRoot();
         <?php foreach($rootdocuments as $rootdoc): ?>
         <tr<?php if ($rootdoc->getId() == $document->getId()) { echo ' style="background-color: grey"'; } ?>>
             <td>
-                <?php echo link_to($rootdoc->getCode(), 'document', array('id' => $rootdoc->getSlug())); ?>
+                <?php echo link_to((string)$rootdoc, 'document', array('id' => $rootdoc->getSlug())); ?>
             </td>
             <td>
                 <?php echo date('Y',strtotime($rootdoc->getAdoptionDate())); ?>

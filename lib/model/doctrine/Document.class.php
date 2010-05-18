@@ -120,6 +120,12 @@ class Document extends BaseDocument
     }
 
     public function __toString() {
-        return (string)$this->_get('code');
+        if (strlen($this->_get('code')) > 3) {
+            return (string)$this->_get('code');
+        }
+        if (strlen($this->_get('code')) < 20) {
+            return (string)$this->_get('name');
+        }
+        return (string)substr($this->_get('name'), 0, 20).'..';
     }
 }

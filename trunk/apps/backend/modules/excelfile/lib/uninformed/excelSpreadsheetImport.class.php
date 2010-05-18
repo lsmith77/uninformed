@@ -157,7 +157,9 @@ class excelSpreadsheetImport
     foreach($documents as &$document)
     {
   	  $clauses = array();
-      $rowcount = 0;
+      $rowCount = 0;
+
+      $clauseRowCount = $document['countClauses'];
 
       do
       {
@@ -165,16 +167,24 @@ class excelSpreadsheetImport
 
         for($n = self::$FIRST_CLAUSECOLUMN; $n < self::$FIRST_CLAUSECOLUMN + self::$AMOUNT_CLAUSECOLUMNS; $n++)
         {
-          $clause[$n] = trim($this->excelData->value($documentClauses_firstRow + $rowcount, $n, self::$SHEET));
+          $clause[$n] = trim($this->excelData->value($documentClauses_firstRow + $rowCount, $n, self::$SHEET));
         }
 
-        $clauses[] = $clause;
-        $rowcount++;
-      } while($rowcount < $document['countClauses']);
+        if($clause[self::$FIRST_CLAUSECOLUMN] != "")
+        {
+            $clauses[] = $clause;
+            $rowCount++;
+        }
+        else
+        {
+            $documentClauses_firstRow++;
+        }
+
+      } while($rowCount < $clauseRowCount);
 
       $document['clauses'] = $clauses;
 
-      $documentClauses_firstRow+= $document['countClauses'];
+      $documentClauses_firstRow += $clauseRowCount;
     }
 
     return $documents;

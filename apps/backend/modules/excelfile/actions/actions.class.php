@@ -15,22 +15,25 @@ class excelfileActions extends autoExcelfileActions
 {
   public function executeExcelSpreadsheetImport($request)
   {
-    $excelFileId = $request->getParameter('id');
-    $excelFileData = Doctrine::getTable('ExcelFile')->findById($excelFileId)->getFirst();
+    try {
+      $excelFileId = $request->getParameter('id');
+      $excelFileData = Doctrine::getTable('ExcelFile')->findById($excelFileId)->getFirst();
 
-    $this->documents = $this->error = null;
-    if ($excelFileData) {
-        try {
-            set_time_limit(3600);
-            Doctrine_Manager::connection()->beginTransaction();
-            $import = new excelSpreadsheetImport();
-            $this->documents = $import->loadDataFromFile($excelFileData['file']);
-            $import->saveData($excelFileId, $this->documents);
-            Doctrine_Manager::connection()->commit();
-        } catch (Exception $e) {
-            Doctrine_Manager::connection()->rollback();
-            $this->error = $e;
-        }
+      $this->documents = $this->error = null;
+      if ($excelFileData) {
+        set_time_limit(3600);
+        Doctrine_Manager::connection()->beginTransaction();
+        $import = new excelSpreadsheetImport();
+        $this->documents = $import->loadDataFromFile($excelFileData['file']);
+        $import->saveData($excelFileId, $this->documents);
+
+        $excelFileData->setIsImported(true);
+        $excelFileData->save();
+        Doctrine_Manager::connection()->commit();
+      }
+    } catch (Exception $e) {
+      Doctrine_Manager::connection()->rollback();
+        $this->error = $e;
     }
 
 //    $this->redirect('excel_file');

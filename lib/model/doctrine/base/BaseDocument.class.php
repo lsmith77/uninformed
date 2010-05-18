@@ -107,14 +107,14 @@ abstract class BaseDocument extends MyBaseRecord
              'autoincrement' => true,
              'length' => 4,
              ));
-        $this->hasColumn('name', 'string', 255, array(
+        $this->hasColumn('name', 'string', 1000, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => 255,
+             'length' => 1000,
              ));
-        $this->hasColumn('slug', 'string', 255, array(
+        $this->hasColumn('slug', 'string', 50, array(
              'type' => 'string',
-             'length' => 255,
+             'length' => 50,
              ));
         $this->hasColumn('enforcement_date', 'date', null, array(
              'type' => 'date',

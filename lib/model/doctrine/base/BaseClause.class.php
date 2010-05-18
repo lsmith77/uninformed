@@ -82,9 +82,9 @@ abstract class BaseClause extends MyBaseRecord
         $this->hasColumn('private_comment', 'clob', null, array(
              'type' => 'clob',
              ));
-        $this->hasColumn('slug', 'string', 255, array(
+        $this->hasColumn('slug', 'string', 50, array(
              'type' => 'string',
-             'length' => 255,
+             'length' => 50,
              ));
 
 

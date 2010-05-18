@@ -71,7 +71,12 @@
             <span class="doctype"><%= res.Document.DocumentType.name %></span> |
             <span class="infotype"><%= res.ClauseBody.ClauseInformationType.name %></span>
         </h3>
-        <p><%= ("#"+res.clause_number+": "+res.content) %></p>
+        <p>
+            <%= ("#"+res.clause_number) %>
+            <% if (res.content) { %>
+            <%= (": "+res.content) %>
+            <% } %>
+        </p>
     </div>
     <% } %>
     ]]>

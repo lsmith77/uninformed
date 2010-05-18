@@ -78,12 +78,8 @@ class Document extends BaseDocument
         $query = Doctrine_Query::create()
             ->from('Clause c')
             ->innerJoin('c.ClauseBody cb')
-            ->where('c.document_id = ?', $this->_get('id'));
-
-        $clauseOrdering = $this->_get('clause_ordering');
-        if ($clauseOrdering) {
-            $query->orderBy("FIELD(c.id,$clauseOrdering)");
-        }
+            ->where('c.document_id = ?', $this->_get('id'))
+            ->orderBy("c.clause_number, c.clause_number_information, c.clause_number_subparagraph");
 
         return $query->execute();
     }

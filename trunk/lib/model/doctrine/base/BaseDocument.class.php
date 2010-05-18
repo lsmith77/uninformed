@@ -21,7 +21,6 @@
  * @property integer $organisation_id
  * @property integer $documenttype_id
  * @property string $document_url
- * @property text $clause_ordering
  * @property enum $status
  * @property Document $DocumentParent
  * @property Organisation $Organisation
@@ -50,7 +49,6 @@
  * @method integer             getOrganisationId()           Returns the current record's "organisation_id" value
  * @method integer             getDocumenttypeId()           Returns the current record's "documenttype_id" value
  * @method string              getDocumentUrl()              Returns the current record's "document_url" value
- * @method text                getClauseOrdering()           Returns the current record's "clause_ordering" value
  * @method enum                getStatus()                   Returns the current record's "status" value
  * @method Document            getDocumentParent()           Returns the current record's "DocumentParent" value
  * @method Organisation        getOrganisation()             Returns the current record's "Organisation" value
@@ -78,7 +76,6 @@
  * @method Document            setOrganisationId()           Sets the current record's "organisation_id" value
  * @method Document            setDocumenttypeId()           Sets the current record's "documenttype_id" value
  * @method Document            setDocumentUrl()              Sets the current record's "document_url" value
- * @method Document            setClauseOrdering()           Sets the current record's "clause_ordering" value
  * @method Document            setStatus()                   Sets the current record's "status" value
  * @method Document            setDocumentParent()           Sets the current record's "DocumentParent" value
  * @method Document            setOrganisation()             Sets the current record's "Organisation" value
@@ -163,9 +160,6 @@ abstract class BaseDocument extends MyBaseRecord
         $this->hasColumn('document_url', 'string', 500, array(
              'type' => 'string',
              'length' => 500,
-             ));
-        $this->hasColumn('clause_ordering', 'text', null, array(
-             'type' => 'text',
              ));
         $this->hasColumn('status', 'enum', null, array(
              'type' => 'enum',

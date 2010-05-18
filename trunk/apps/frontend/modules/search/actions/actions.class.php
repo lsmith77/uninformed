@@ -15,11 +15,6 @@
  */
 class searchActions extends sfActions
 {
-    protected function getInstance()
-    {
-        return sfLucene::getInstance('ClauseBody', null);
-    }
-
     protected function ensureXmlHttpRequest($request)
     {
         if (!sfConfig::get('sf_web_debug')
@@ -52,18 +47,16 @@ class searchActions extends sfActions
 
     public function executeIndex(sfWebRequest $request)
     {
-        $this->query = '';
-        $this->tagMatch = 'any';
-        $this->tags = array();
-        $this->latestClauseOnly = true;
+        $this->query = $request->getGetParameter('q', '');
+        $this->tagMatch = $request->getGetParameter('tm', 'any');
+        $this->tags = (array) $request->getGetParameter('t');
+        $this->latestClauseOnly = $request->getGetParameter('l');
+        $this->page = (int) $request->getGetParameter('p', 0);
     }
 
     public function executeClauseResultsPage(sfWebRequest $request)
     {
-        $this->query = $request->getGetParameter('q');
-        $this->tagMatch = $request->getGetParameter('tm', 'any');
-        $this->tags = (array) $request->getGetParameter('t');
-        $this->latestClauseOnly = $request->getGetParameter('l');
+        $this->executeIndex($request);
     }
 
     public function executeSearchTags(sfWebRequest $request)
@@ -81,14 +74,11 @@ class searchActions extends sfActions
 
     public function executeResults(sfWebRequest $request)
     {
-        $this->query = $request->getGetParameter('q');
-        $this->tagMatch = $request->getGetParameter('tm', 'any');
-        $this->tags = (array) $request->getGetParameter('t');
-        $this->latestClauseOnly = $request->getGetParameter('l');
+        $this->executeIndex($request);
+
         $tags = array_keys($this->tags);
         $this->filters = (array) $request->getGetParameter('f');
-        $this->page = (int) $request->getGetParameter('p', 0);
-        $limit = 20;
+        $limit = 5;
 
         if (empty($this->query) && empty($this->tags)) {
             $output = array(
@@ -96,13 +86,15 @@ class searchActions extends sfActions
                 'filters' => array(),
                 'filterLabels' => array(),
                 'totalResults' => 0,
+                'page' => $this->page,
+                'limit' => $limit,
                 'status' => 'success',
                 'message' => 'ok'
             );
             return $this->returnJson($output);
         }
 
-        $lucene = $this->getInstance();
+        $lucene = sfLucene::getInstance('ClauseBody', null);
 
         $criteria = new sfLuceneFacetsCriteria;
 
@@ -346,6 +338,8 @@ class searchActions extends sfActions
             'filters' => $filters,
             'filterLabels' => $labels,
             'totalResults' => (int)$results->getRawResult()->response->numFound,
+            'page' => $this->page,
+            'limit' => $limit,
             'status' => 'success',
             'message' => 'ok'
         );

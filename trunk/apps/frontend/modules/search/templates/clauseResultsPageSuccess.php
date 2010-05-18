@@ -6,7 +6,7 @@
 <div class="search">
     <div class="form">
         <h2>Update your search</h2>
-        <?php include_partial('search/searchForm', $sf_data); ?>        
+        <?php include_partial('search/searchForm', $sf_data); ?>
     </div>
     <div class="filters">
     </div>
@@ -34,9 +34,17 @@
 </script>
 <script type="text/x-jqote-template" id="resultsTpl">
     <![CDATA[
-    <h2>Results (<%= this.totalResults %>)</h2>
-    <% var i, cnt = this.data.length;
-    for (i = 0; i < cnt; i++) {
+    <h2><%= this.totalResults %> Results (Page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
+    <%
+        $('.results').data('page', this.page);
+        if (this.page > 0) { %>
+        <a class="prevPage">prev</a>
+    <% }
+    var cnt = this.data.length;
+    if (cnt > this.limit) { cnt = this.limit; %>
+        <a class="nextPage">next</a>
+    <% }
+        for (i = 0; i < cnt; i++) {
         var res = this.data[i];
         var bgcolor = 'green';
         if (res.Document.isSCResolution) {

@@ -52,11 +52,11 @@ class excelSpreadsheetImport
 
   public function loadDataFromFile($file)
   {
-  	$this->excelData = new spreadsheetExcelReader($file);
+    $this->excelData = new spreadsheetExcelReader($file);
 
-  	$countRows = $this->excelData->rowcount(self::$SHEET);
+    $countRows = $this->excelData->rowcount(self::$SHEET);
 
-  	$documents = array();
+    $documents = array();
 
     for($i = self::$FIRST_ROW; $i <= $countRows; $i++) //rows
     {
@@ -71,7 +71,7 @@ class excelSpreadsheetImport
 
       for($j = self::$FIRST_DOCUMENTCOLUMN; $j < self::$FIRST_DOCUMENTCOLUMN + self::$AMOUNT_DOCUMENTCOLUMNS; $j++) //columns
       {
-      	$value = "";
+        $value = "";
 
         if($j == self::$POS_DOCUMENT_ADOPTIONDATE) { //excel date format data, adoption date column, naive
           $value = trim($this->excelData->raw($i, $j,self::$SHEET));
@@ -93,12 +93,12 @@ class excelSpreadsheetImport
         }
 
         if($j == self::$POS_DOCUMENT_TITLE) {
-        	if($value == "")
-        	{
-        		$emptyRow = true;
-        	}
+          if($value == "")
+          {
+            $emptyRow = true;
+          }
 
-        	$title = $value;
+          $title = $value;
         } else if($j == self::$POS_DOCUMENT_CODE) {
           $code = $value;
         } else if($j == self::$POS_DOCUMENT_FOLLOWUP) {
@@ -115,48 +115,48 @@ class excelSpreadsheetImport
       if(!$emptyRow)
       {
 
-      	$title = $title."#".$date;
+        $title = $title."#".$date;
 
-	      if(!isset($documents[$title])) {
-	      	$documents[$title] = array();
-	        $documents[$title]['countClauses'] = 1;
-	      } else {
-	        $documents[$title]['countClauses']++;
-	      }
+          if(!isset($documents[$title])) {
+            $documents[$title] = array();
+            $documents[$title]['countClauses'] = 1;
+          } else {
+            $documents[$title]['countClauses']++;
+          }
 
         if(!isset($documents[$title]['adoption_date'])) {
           $documents[$title]['adoption_date'] = $date;
         }
 
-	      if(!isset($documents[$title]['code'])) {
-	        $documents[$title]['code'] = $code;
-	      }
+          if(!isset($documents[$title]['code'])) {
+            $documents[$title]['code'] = $code;
+          }
 
-	      if(!isset($documents[$title]['followup'])) {
-	        $documents[$title]['followup'] = $followup;
-	      }
+          if(!isset($documents[$title]['followup'])) {
+            $documents[$title]['followup'] = $followup;
+          }
 
-	      if(!isset($documents[$title]['tags'])) {
-	        $documents[$title]['tags'] = $tags;
-	      } else {
-	        $documents[$title]['tags'] = array_merge($documents[$title]['tags'], $tags);
-	      }
+          if(!isset($documents[$title]['tags'])) {
+            $documents[$title]['tags'] = $tags;
+          } else {
+            $documents[$title]['tags'] = array_merge($documents[$title]['tags'], $tags);
+          }
 
-	      $documents[$title]['data'] = $data;
+         $documents[$title]['data'] = $data;
       }
       else
       {
-      	//reset for next loop iteration
-      	$emptyRow = false;
+        //reset for next loop iteration
+        $emptyRow = false;
       }
     }
 
     //add clause data
     $documentClauses_firstRow = self::$FIRST_ROW;
 
-    foreach($documents as &$document)
+    foreach($documents as $key => $document)
     {
-  	  $clauses = array();
+     $clauses = array();
       $rowCount = 0;
 
       $clauseRowCount = $document['countClauses'];
@@ -182,7 +182,7 @@ class excelSpreadsheetImport
 
       } while($rowCount < $clauseRowCount);
 
-      $document['clauses'] = $clauses;
+      $documents[$key]['clauses'] = $clauses;
 
       $documentClauses_firstRow += $clauseRowCount;
     }
@@ -190,7 +190,7 @@ class excelSpreadsheetImport
     return $documents;
   }
 
-//  	save data in database
+//  save data in database
   public function saveData($excelFileId, &$documents)
   {
     $importuser = new sfGuardUser();
@@ -214,9 +214,9 @@ class excelSpreadsheetImport
     $clauseHelper = new ClauseHelper();
     $documentHelper = new DocumentHelper();
 
-    foreach($documents as $documentName => &$document)
+    foreach($documents as $documentName => $document)
     {
-      foreach($document['clauses'] as &$clause)
+      foreach($document['clauses'] as $key => $clause)
       {
         $clauseBody = new ClauseBody();
 
@@ -265,7 +265,7 @@ class excelSpreadsheetImport
         }
 
         //last: overwrite clause value with body id and number for later referencing
-        $clause = array($clauseBody->get('id') => array($clauseNumber, $clauseParentNumber));
+        $documents[$documentName]['clauses'][$key] = array($clauseBody->get('id') => array($clauseNumber, $clauseParentNumber));
       }
 
       /**
@@ -314,9 +314,7 @@ class excelSpreadsheetImport
 
       $newDocument->save();
 
-      $document['id'] = $newDocument->get('id');
-      $newDocument->free();
-      unset($newDocument);
+      $documents[$documentName]['id'] = $newDocument->get('id');
 
       $documentHelper->saveVotesForDocument(
         $newDocument->get('id'),
@@ -324,6 +322,9 @@ class excelSpreadsheetImport
         $newDocument->get('organisation_id'),
         $document['data'][self::$POS_DOCUMENT_LEGALVALUE],
         $document['data'][self::$POS_DOCUMENT_VOTE]);
+
+      $newDocument->free();
+      unset($newDocument);
     }
 
     // find and save document parent relations

@@ -315,6 +315,8 @@ class excelSpreadsheetImport
       $newDocument->save();
 
       $document['id'] = $newDocument->get('id');
+      $newDocument->free();
+      unset($newDocument);
 
       $documentHelper->saveVotesForDocument(
         $newDocument->get('id'),
@@ -323,9 +325,6 @@ class excelSpreadsheetImport
         $document['data'][self::$POS_DOCUMENT_LEGALVALUE],
         $document['data'][self::$POS_DOCUMENT_VOTE]);
     }
-
-    $newDocument->free();
-    unset($newDocument);
 
     // find and save document parent relations
     foreach($documents as $documentA)

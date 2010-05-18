@@ -78,7 +78,7 @@ class searchActions extends sfActions
 
         $tags = array_keys($this->tags);
         $this->filters = (array) $request->getGetParameter('f');
-        $limit = 5;
+        $limit = 20;
 
         if (empty($this->query) && empty($this->tags)) {
             $output = array(

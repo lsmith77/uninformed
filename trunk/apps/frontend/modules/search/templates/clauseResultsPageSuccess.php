@@ -51,10 +51,12 @@
         <span class="nonlegal">non-legally binding</span>
     </div>
     <% if (this.totalResults) { %>
-    <h2><%= this.totalResults %> Results (Page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
+     <h2><%= this.totalResults %> Results (Page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
     <% } else { %>
     <h2>No Results</h2>
-    <% }
+    <% } %>
+	<div class="prevnext">
+    <%
         $('.results').data('page', this.page);
         if (this.page > 0) { %>
         <a class="prevPage">prev</a>
@@ -76,6 +78,7 @@
             }
         }
         %>
+	</div>
     <div class="result <%= itemclass %>">
         <h2>
             <?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.title %>', 'clause', array('id' => 'XXX'))) ?>
@@ -97,5 +100,16 @@
         </p>
     </div>
     <% } %>
+	<div class="prevnext">
+    <%
+        $('.results').data('page', this.page);
+        if (this.page > 0) { %>
+        <a class="prevPage">prev</a>
+    <% }
+    var cnt = this.data.length;
+    if (cnt > this.limit) { cnt = this.limit; %>
+        <a class="nextPage">next</a>
+    <% } %>
+	</div>
     ]]>
 </script>

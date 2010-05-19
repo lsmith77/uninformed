@@ -13,7 +13,7 @@ $rawrootclauses = $rootclauses->getRawValue();
 <table id="clauseHistory" class="collapsed">
     <thead>
         <tr>
-            <th>Document Code</th>
+            <th>Document&nbsp;Code</th>
             <th>Year</th>
             <th>Changes</th>
             <th>Content</th>
@@ -23,7 +23,7 @@ $rawrootclauses = $rootclauses->getRawValue();
         <?php $introduced = null; ?>
         <?php foreach($rootdocuments as $i => $rootdoc): ?>
         <?php $current = (isset($rootclauses[$rootdoc->getId()])) ? $rootclauses[$rootdoc->getId()] : null; ?>
-        <tr<?php if ($rootclauses[$rootdoc->getId()]->getId() == $clause->getId()) { echo ' style="background-color: grey"'; } ?>>
+        <tr<?php if ($rootclauses[$rootdoc->getId()]->getId() == $clause->getId()) { echo ' class="highlighted"'; } ?>>
             <td>
             <?php echo link_to((string)$rootdoc, 'document', array('id' => $rootdoc->getSlug())); ?>
             </td>

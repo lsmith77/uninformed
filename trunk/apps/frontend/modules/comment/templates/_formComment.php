@@ -12,7 +12,7 @@
   <form action="" method="post">
   <fieldset>
     <legend><?php echo __('Add new comment', array(), 'vjComment') ?></legend>
-    <?php echo __('All comments require manual moderation before they appear', array(), 'vjComment') ?>
+    <em><?php echo __('All comments require manual moderation before they appear', array(), 'vjComment') ?></em>
     <?php include_partial("comment/form", array('form' => $form)) ?>
     <tr>
       <td colspan="2" class="submit">

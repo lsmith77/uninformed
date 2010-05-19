@@ -12,7 +12,7 @@
  */
 class Document extends BaseDocument
 {
-    protected $nameChange = false;
+    protected $titleChange = false;
 
     protected static $autoCompletable = array(
         'code' => true,
@@ -31,14 +31,14 @@ class Document extends BaseDocument
 
     public function preSave($event) {
         $invoker = $event->getInvoker();
-        $slug = $invoker->_get('name');
+        $slug = $invoker->_get('title');
         $slug = substr(Doctrine_Inflector::urlize($slug), 0, 30);
         $invoker->_set('slug', $slug);
 
         // update clause slugs if the name changed
         $modified = $invoker->getModified();
-        if (array_key_exists('name', $modified)) {
-            $this->nameChange = true;
+        if (array_key_exists('title', $modified)) {
+            $this->titleChange = true;
         }
 
         $root_document_id = $invoker->_get('root_document_id');
@@ -50,15 +50,18 @@ class Document extends BaseDocument
     }
 
     public function postSave($event) {
-        if (!$this->nameChange) {
+        if (!$this->titleChange) {
             return;
         }
 
-        $this->nameChange = false;
+        $this->titlechange = false;
 
         $invoker = $event->getInvoker();
         $clauses = $invoker->getClauses();
         foreach ($clauses as $clause) {
+            $slug = (string)$clause;
+            $slug = substr(Doctrine_Inflector::urlize($slug), 0, 30);
+            $clause->_set('slug', $slug);
             $clause->save();
         }
     }
@@ -123,9 +126,9 @@ class Document extends BaseDocument
         if (strlen($this->_get('code')) > 3) {
             return (string)$this->_get('code');
         }
-        if (strlen($this->_get('code')) < 20) {
-            return (string)$this->_get('name');
+        if (strlen($this->_get('title')) < 20) {
+            return (string)$this->_get('title');
         }
-        return (string)substr($this->_get('name'), 0, 20).'..';
+        return (string)substr($this->_get('title'), 0, 20).'..';
     }
 }

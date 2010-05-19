@@ -16,7 +16,7 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                     => new sfWidgetFormInputHidden(),
-      'name'                   => new sfWidgetFormTextarea(),
+      'title'                  => new sfWidgetFormTextarea(),
       'slug'                   => new sfWidgetFormInputText(),
       'enforcement_date'       => new sfWidgetFormDate(),
       'adoption_date'          => new sfWidgetFormDate(),
@@ -40,7 +40,7 @@ abstract class BaseDocumentForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                     => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'name'                   => new sfValidatorString(array('max_length' => 1000)),
+      'title'                  => new sfValidatorString(array('max_length' => 1000)),
       'slug'                   => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'enforcement_date'       => new sfValidatorDate(array('required' => false)),
       'adoption_date'          => new sfValidatorDate(),

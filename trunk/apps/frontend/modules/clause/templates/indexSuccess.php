@@ -44,6 +44,20 @@
     <?php echo $sf_data->getRaw('clauseBody')->getContent() ?>
 </div>
 
+<?php
+$related_documents = $clause->ClauseBody->DocumentClauseRelation;
+if ($related_documents->count()) { ?>
+<h2><a href="#" class="toggleCol" target="clauseDocumentRelations">Related Documents</a></h2>
+<?php include_partial('clauseDocumentRelations', array('related_documents' => $related_documents)); ?>
+<?php } ?>
+
+<?php
+$related_clauses = $clause->ClauseBody->ClauseClauseRelation;
+if ($related_clauses->count()) { ?>
+<h2><a href="#" class="toggleCol" target="clauseClausetRelations">Related Clauses</a></h2>
+<?php include_partial('clauseClauseRelations', array('related_clauses' => $related_clauses)); ?>
+<?php } ?>
+
 <h2><a href="#" class="toggleCol" target="clauseHistory">History of this Clause</a></h2>
 <?php include_partial('clauseHistory', array('clause'=>$clause)); ?>
 

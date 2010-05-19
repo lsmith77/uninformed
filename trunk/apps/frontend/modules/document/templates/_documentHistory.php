@@ -25,7 +25,7 @@ $rootdocuments = $document->getDocumentsByRoot();
                 <?php echo date('Y',strtotime($rootdoc->getAdoptionDate())); ?>
             </td>
             <td>
-                <?php echo $rootdoc->getName(); ?>
+                <?php echo $rootdoc->getTitle(); ?>
             </td>
         </tr>
         <?php endforeach; ?>

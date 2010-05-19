@@ -14,7 +14,7 @@ abstract class BaseClauseBodyTagFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'clause_body_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseBody'), 'add_empty' => true)),
-      'tag_id'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Tag'), 'add_empty' => true)),
+      'tag_id'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'created_at'     => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'     => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'author_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Author'), 'add_empty' => true)),
@@ -22,7 +22,7 @@ abstract class BaseClauseBodyTagFormFilter extends BaseFormFilterDoctrine
 
     $this->setValidators(array(
       'clause_body_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('ClauseBody'), 'column' => 'id')),
-      'tag_id'         => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Tag'), 'column' => 'id')),
+      'tag_id'         => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'created_at'     => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_at'     => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'author_id'      => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Author'), 'column' => 'id')),
@@ -47,7 +47,7 @@ abstract class BaseClauseBodyTagFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'             => 'Number',
       'clause_body_id' => 'ForeignKey',
-      'tag_id'         => 'ForeignKey',
+      'tag_id'         => 'Number',
       'created_at'     => 'Date',
       'updated_at'     => 'Date',
       'author_id'      => 'ForeignKey',

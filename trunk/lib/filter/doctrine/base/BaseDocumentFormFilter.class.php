@@ -13,7 +13,7 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'name'                   => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'title'                  => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'slug'                   => new sfWidgetFormFilterInput(),
       'enforcement_date'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'adoption_date'          => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
@@ -36,7 +36,7 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
     ));
 
     $this->setValidators(array(
-      'name'                   => new sfValidatorPass(array('required' => false)),
+      'title'                  => new sfValidatorPass(array('required' => false)),
       'slug'                   => new sfValidatorPass(array('required' => false)),
       'enforcement_date'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDateTime(array('required' => false)))),
       'adoption_date'          => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDateTime(array('required' => false)))),
@@ -92,7 +92,7 @@ abstract class BaseDocumentFormFilter extends BaseFormFilterDoctrine
   {
     return array(
       'id'                     => 'Number',
-      'name'                   => 'Text',
+      'title'                  => 'Text',
       'slug'                   => 'Text',
       'enforcement_date'       => 'Date',
       'adoption_date'          => 'Date',

@@ -16,7 +16,7 @@ abstract class BaseClauseClauseRelationForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                => new sfWidgetFormInputHidden(),
-      'type'              => new sfWidgetFormChoice(array('choices' => array('recalls' => 'recalls', 'closely_related' => 'closely_related'))),
+      'type'              => new sfWidgetFormChoice(array('choices' => array('recalls' => 'recalls', 'closely related' => 'closely related'))),
       'clause_id'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Clause'), 'add_empty' => false)),
       'related_clause_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseRelated'), 'add_empty' => false)),
       'created_at'        => new sfWidgetFormDateTime(),
@@ -26,7 +26,7 @@ abstract class BaseClauseClauseRelationForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'type'              => new sfValidatorChoice(array('choices' => array(0 => 'recalls', 1 => 'closely_related'))),
+      'type'              => new sfValidatorChoice(array('choices' => array(0 => 'recalls', 1 => 'closely related'))),
       'clause_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Clause'))),
       'related_clause_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseRelated'))),
       'created_at'        => new sfValidatorDateTime(),

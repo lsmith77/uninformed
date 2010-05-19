@@ -52,7 +52,7 @@ if ($related_documents->count()) { ?>
 <?php } ?>
 
 <?php
-$related_clauses = $clause->ClauseBody->ClauseClauseRelation;
+$related_clauses = $clause->ClauseClauseRelation;
 if ($related_clauses->count()) { ?>
 <h2><a href="#" class="toggleCol" target="clauseClausetRelations">Related Clauses</a></h2>
 <?php include_partial('clauseClauseRelations', array('related_clauses' => $related_clauses)); ?>

@@ -204,7 +204,7 @@ class excelSpreadsheetImport
     $clauseHelper = new ClauseHelper();
     $documentHelper = new DocumentHelper();
 
-    foreach($documents as $documentName => $document)
+    foreach($documents as $documentTitle => $document)
     {
       foreach($document['clauses'] as $key => $clause)
       {
@@ -255,7 +255,7 @@ class excelSpreadsheetImport
         }
 
         //last: overwrite clause value with body id and number for later referencing
-        $documents[$documentName]['clauses'][$key] = array($clauseBody->get('id') => array($clauseNumber, $clauseParentNumber));
+        $documents[$documentTitle]['clauses'][$key] = array($clauseBody->get('id') => array($clauseNumber, $clauseParentNumber));
       }
 
       /**
@@ -265,7 +265,7 @@ class excelSpreadsheetImport
 
       $newDocument = new Document();
 
-      $newDocument->set('name', $documentName);
+      $newDocument->set('title', $documentTitle);
       $newDocument->set('code', $document['code']);
       $newDocument->set('adoption_date', $this->createDate($document['adoption_date']));
 
@@ -304,7 +304,7 @@ class excelSpreadsheetImport
 
       $newDocument->save();
 
-      $documents[$documentName]['id'] = $newDocument->get('id');
+      $documents[$documentTitle]['id'] = $newDocument->get('id');
 
       $documentHelper->saveVotesForDocument(
         $newDocument->get('id'),

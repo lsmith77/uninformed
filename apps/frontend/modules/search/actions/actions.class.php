@@ -52,7 +52,6 @@ class searchActions extends sfActions
         $this->tags = (array) $request->getGetParameter('t');
         $this->latestClauseOnly = $request->getGetParameter('l');
         $this->page = (int) $request->getGetParameter('p', 0);
-        $this->showHelp = true;
     }
 
     public function executeIndex(sfWebRequest $request)
@@ -294,6 +293,7 @@ class searchActions extends sfActions
                     $root_clause_body_id = isset($clause['ClauseBody']['root_clause_body_id'])
                         ? $clause['ClauseBody']['root_clause_body_id']
                         : $clause['ClauseBody']['id'];
+                    // TODO: bug!
                     $q = Doctrine_Query::create()
                         ->select('COUNT(c.id)')
                         ->from('Clause c')

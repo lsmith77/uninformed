@@ -10,7 +10,7 @@ $rootdocuments = $clause->Document->getDocumentsByRoot();
 $rootclauses = $clause->getClausesByRoot();
 $rawrootclauses = $rootclauses->getRawValue();
 ?>
-<table id="clauseHistory" class="collapsed">
+<table id="clauseHistory">
     <thead>
         <tr>
             <th>Document&nbsp;Code</th>

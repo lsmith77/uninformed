@@ -265,7 +265,11 @@ class excelSpreadsheetImport
 
       $newDocument = new Document();
 
-      $newDocument->set('title', $documentTitle);
+      $title = $documentTitle;
+      if (preg_match('/^(.*)#\d+$/', $title, $matches)) {
+        $title = trim($matches[1]);
+      }
+      $newDocument->set('title', $title);
       $newDocument->set('code', $document['code']);
       $newDocument->set('adoption_date', $this->createDate($document['adoption_date']));
 

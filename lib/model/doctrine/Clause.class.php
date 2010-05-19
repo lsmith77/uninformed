@@ -53,7 +53,11 @@ class Clause extends BaseClause
     }
 
     public function getTitle() {
-        return $this->_get('Document')->_get('title').' ('.(string)$this.')';
+        return $this->getTitle().' ('.(string)$this.')';
+    }
+
+    public function getDocumentTitle() {
+        return $this->_get('Document')->_get('title');
     }
 
     public function getClauseNumber() {

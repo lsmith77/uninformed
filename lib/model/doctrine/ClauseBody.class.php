@@ -126,6 +126,14 @@ class ClauseBody extends BaseClauseBody
         return $clause->getTitle();
     }
 
+    public function getDocumentTitle() {
+        $clause = $this->setLatestAdoptedClause();
+        if (empty($clause)) {
+            return null;
+        }
+        return $clause->getDocumentTitle();
+    }
+    
     public function getAdoptionDate() {
         $clause = $this->setLatestAdoptedClause();
         if (empty($clause)) {

@@ -44,10 +44,10 @@
 <script type="text/x-jqote-template" id="resultsTpl">
     <![CDATA[
     <div class="colorcoding">
-        Document color coding:
+        legend:
         <span class="scresolutions">SC resolutions</span>
-        <span class="ratlegal">ratified legally binding</span>
-        <span class="nonratlegal">not ratified legally binding</span>
+        <span class="ratlegal">legally binding (in force)</span>
+        <span class="nonratlegal">legally binding (not in force)</span>
         <span class="nonlegal">non-legally binding</span>
     </div>
     <h2><%= this.totalResults %> Results (Page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>

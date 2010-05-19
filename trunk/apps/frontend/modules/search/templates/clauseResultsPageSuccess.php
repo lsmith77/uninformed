@@ -43,14 +43,14 @@
 
 <script type="text/x-jqote-template" id="resultsTpl">
     <![CDATA[
-    <h2><%= this.totalResults %> Results (Page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
-    <h3>
+    <div class="colorcoding">
         Document color coding:
-        <span style="background-color: blue;">SC resolutions</span>,
-        <span style="background-color: red;">ratified legally binding</span>,
-        <span style="background-color: indianred;">not ratified legally binding</span>,
-        <span style="background-color: green;">non-legally binding</span>
-    </h3>
+        <span class="scresolutions">SC resolutions</span>
+        <span class="ratlegal">ratified legally binding</span>
+        <span class="nonratlegal">not ratified legally binding</span>
+        <span class="nonlegal">non-legally binding</span>
+    </div>
+    <h2><%= this.totalResults %> Results (Page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
     <%
         $('.results').data('page', this.page);
         if (this.page > 0) { %>
@@ -62,24 +62,20 @@
     <% }
         for (i = 0; i < cnt; i++) {
         var res = this.data[i];
-        var bgcolor = 'green';
+        var itemclass = 'nonlegal';
         if (res.Document.isSCResolution) {
-            bgcolor = 'blue';
+            itemclass = 'scresolutions';
         } else if (res.Document.DocumentType.legal_value == 'legally binding') {
             if (res.Document.is_ratified) {
-                bgcolor = 'red';
+                itemclass = 'ratlegal';
             } else {
-                bgcolor = 'indianred';
+                itemclass = 'nonratlegal';
             }
         }
         %>
-    <div class="result" style="background-color: <%= bgcolor %>">
+    <div class="result <%= itemclass %>">
         <h2>
             <?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.title %>', 'clause', array('id' => 'XXX'))) ?>
-            (<%= res.score %>)
-            <% if (res.clauseHistory) { %>
-                <span class="clauseHistory"><?php echo str_replace('XXX', '<%= res.slug %>#clauseHistory', link_to('H', 'clause', array('id' => 'XXX'))) ?></span>
-            <% } %>
         </h2>
         <h3>
             <span class="docdetails"><%= res.Document.code %> (<%= res.Document.adoption_date %>)</span> |
@@ -91,6 +87,9 @@
             <%= ("#"+res.clause_number) %>
             <% if (res.content) { %>
             <%= (": "+res.content) %>
+            <% } %>
+            <% if (res.clauseHistory) { %>
+            <span class="clauseHistory"><?php echo str_replace('XXX', '<%= res.slug %>#clauseHistory', link_to('Clause History', 'clause', array('id' => 'XXX'))) ?></span>
             <% } %>
         </p>
     </div>

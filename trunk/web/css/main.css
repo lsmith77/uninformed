@@ -1,4 +1,4 @@
-/* css reset v1.0 | 20080212 | http://meyerweb.com/eric/tools/css/reset/ */
+/*  css reset v1.0 | 20080212 | http://meyerweb.com/eric/tools/css/reset/ */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -39,21 +39,18 @@ table {
 }
 
 /* GENERAL */
-html {
-    font: 12px Verdana, sans-serif;
-    padding: 1em;
-}
-
 body {
-    max-width: 1000px;
-    min-width: 600px;
-    margin: auto;
+    font: 13px/18px Arial, Verdana, Helvetica, sans-serif;
+    text-align: center; /* IE */
+    border-top: 3px solid #951c00;
+}
+#wrap {
+    width: 960px;
+    margin: 0 auto;
+    padding: 110px 0 0 0;
+    text-align: left; /* related to body IE fix */
     position: relative;
 }
-* html body {
-    width: 600px;
-}
-
 .noscript {
     padding: 1em;
     background: #ffff7d;
@@ -68,13 +65,16 @@ a, a:visited, a:link, a:active {
 }
 
 h1 {
-    font-size: 1.5em;
-    margin-bottom: 1em;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    letter-spacing: 1px;
 }
 
 h2 {
-    font-size: 1.2em;
-    margin: .7em 0;
+    font-size: 14px;
+    margin-bottom: 20px;
 }
 
 h3 {
@@ -112,8 +112,8 @@ table td, table th {
     background: url(/images/logo.gif) no-repeat;
     width: 283px;
     height: 53px;
-    right: 0;
-    top: 0;
+    right: 10px;
+    top: 30px;
 }
 .header span {
     position: absolute;
@@ -122,15 +122,48 @@ table td, table th {
 }
 
 .nav {
-    padding-top: 10px;
-    margin-bottom: 20px;
+    margin: 0 0 20px 0;
+    height: 34px;
+    background: #e2e2e2 url(/images/gradient.png) repeat-x top left;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+.mnav {
+    float: left;
+}
+
+.snav {
+    float: right;
 }
 .nav li {
     display: inline;
-    margin: 0 1em 0 0;
-    font-size: 2em;
+    font-size: 16p
 }
-
+.nav a {
+    float: left;
+    line-height: 34px;
+    height: 34px;
+    padding: 0 10px;
+    color: #222;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #f4f4f4;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+.nav a:hover {
+    color: #000;
+    background: #eee;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+.nav .current a {
+    height: 31px;
+    border-bottom: 3px solid #951c00;
+    
+}
 /* SEARCH HOME */
 div.homesearch {
     width: 240px;
@@ -140,9 +173,13 @@ div.homesearch {
 
 /* SEARCH PAGE */
 div.search {
-    width: 240px;
-    padding: 5px;
-    background: #eee;
+    width: 230px;
+    padding: 10px;
+    background: #e2e2e2 url(/images/gradient.png) repeat-x top left;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
     float: left;
 }
 
@@ -204,8 +241,63 @@ div.search {
 }
 
 div.results {
-    margin-left: 260px;
+    margin-left: 280px;
+    padding: 10px;
 }
+.results h2 a {
+    color: #000;
+}
+.colorcoding {
+    position: absolute;
+    top: 168px;
+    right: 0;
+    font-size: 11px;
+    color: #888;
+}
+.colorcoding span {
+    padding: 0 5px;
+    border-width: 12px;
+}
+.result {
+    margin: 0 0 30px 0;
+    padding: 0 20px 0 0;
+    color: #444;
+}
+.scresolutions {/* blue */
+    border-left: 5px solid #0058bc;
+}
+.ratlegal {/* red */
+    border-left: 5px solid #bc0000;
+    
+}
+.nonratlegal {/* lighter red */
+    border-left: 5px solid #e30000;
+    
+}
+.nonlegal {/* green */
+    border-right: 3px solid #0b7900;
+}
+
+.colorcoding span.scresolutions {/* blue */
+    border-left: 12px solid #0058bc;
+    border-right: 0;
+}
+.colorcoding span.ratlegal {/* red */
+    border-left: 12px solid #bc0000;
+    border-right: 0;
+    
+}
+.colorcoding span.nonratlegal {/* lighter red */
+    border-left: 12px solid #e30000;
+    border-right: 0;
+    
+}
+.colorcoding span.nonlegal {/* green */
+    border-left: 12px solid #0b7900;
+    border-right: 0;
+}
+
+
 
 /* FRONTEND JQUERY COLLAPSING */
 a.toggleCol {

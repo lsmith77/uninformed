@@ -14,7 +14,7 @@
     </thead>
     <tbody>
         <tr>
-            <td><?php echo $document->code; ?></td>
+            <td> <?php echo link_to((string)$document, 'document', array('id' => $document->getSlug())); ?></td>
             <td><?php echo $document->adoption_date; ?></td>
             <td><?php echo $organs['main']; ?></td>
             <?php if($organs['current']): ?><td><?php echo $organs['current']; ?></td><?php endif; ?>

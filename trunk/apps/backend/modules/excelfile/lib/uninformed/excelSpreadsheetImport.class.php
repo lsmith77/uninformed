@@ -371,7 +371,14 @@ class excelSpreadsheetImport
         $clauseBodyId = key($clauseItem);
 
         $newClause = new Clause();
-        $newClause->clause_number = $clauseItem[$clauseBodyId][0];
+        $clause_number = $clauseItem[$clauseBodyId][0];
+        if (preg_match('/^(\d+)(\D.*)$/', $clause_number, $matches)) {
+          $clause_number = trim($matches[1]);
+          $clause_number_information = trim($matches[2]);
+          $newClause->clause_number_information = $clause_number_information;
+        }
+
+        $newClause->clause_number = $clause_number;
 
         $newClause->clause_body_id = $clauseBodyId;
         $newClause->document_id = $documentBody['id'];

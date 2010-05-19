@@ -1,4 +1,4 @@
-document_document_relation_document_document_relation:
+document_document_relation:
   class: sfDoctrineRouteCollection
   options:
     model:                DocumentDocumentRelation
@@ -7,7 +7,7 @@ document_document_relation_document_document_relation:
     column:               id
     with_wildcard_routes: true
 
-document_clause_relation_document_clause_relation:
+document_clause_relation:
   class: sfDoctrineRouteCollection
   options:
     model:                DocumentClauseRelation
@@ -16,39 +16,12 @@ document_clause_relation_document_clause_relation:
     column:               id
     with_wildcard_routes: true
 
-clause_clause_relation_clause_clause_relation:
+clause_clause_relation:
   class: sfDoctrineRouteCollection
   options:
     model:                ClauseClauseRelation
     module:               clause_clause_relation
     prefix_path:          /clause_clause_relation
-    column:               id
-    with_wildcard_routes: true
-
-clause_clause_relation:
-  class: sfDoctrineRouteCollection
-  options:
-    model:                ClauseClauseRelation
-    module:               clauseclauserelation
-    prefix_path:          /clauseclauserelation
-    column:               id
-    with_wildcard_routes: true
-
-document_clause_relation:
-  class: sfDoctrineRouteCollection
-  options:
-    model:                DocumentClauseRelation
-    module:               documentclauserelation
-    prefix_path:          /documentclauserelation
-    column:               id
-    with_wildcard_routes: true
-
-document_document_relation:
-  class: sfDoctrineRouteCollection
-  options:
-    model:                DocumentDocumentRelation
-    module:               documentdocumentrelation
-    prefix_path:          /documentdocumentrelation
     column:               id
     with_wildcard_routes: true
 

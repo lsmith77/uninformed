@@ -9,6 +9,7 @@
     <?php include_javascripts() ?>
   </head>
   <body>
+	<div id="wrap">
 <script type="text/javascript">
 
  var _gaq = _gaq || [];
@@ -28,10 +29,13 @@ s.parentNode.insertBefore(ga, s);
     <div class="header">
       <span>un-informed.org - making commitments matter</span>
     </div>
-    <ul class="nav">
-      <li><?php echo link_to('Search', 'search'); ?></li>
+	<div class="nav">
+    <ul class="mnav">
+      <li class="current"><?php echo link_to('Search', 'search'); ?></li>
       <li><?php echo link_to('UN-i.org', 'http://www.un-i.org'); ?></li>
       <li><?php echo link_to('About', 'about'); ?></li>
+	</ul>
+	<ul class="snav">
 <?php if ($sf_user->isAuthenticated()): ?>
       <li><?php echo link_to('Bookmarks', 'bookmark'); ?></li>
       <li><?php echo link_to('Settings', 'settings'); ?></li>
@@ -42,10 +46,12 @@ s.parentNode.insertBefore(ga, s);
 <?php endif; ?>
         <li><?php echo mail_to('info@un-informed.org', 'Feedback', 'encode=true', array('subject' => '[un-informed.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?></li>
     </ul>
+	</div>
     <?php if($sf_user->hasFlash('notice')): ?>
       <div id="flash_notice"><b>Notice:</b> <?php echo $sf_user->getFlash('notice'); ?></div>
     <?php endif; ?>
     <noscript><p class="noscript">This site runs *much* better with javascript enabled</p></noscript>
     <?php echo $sf_content ?>
+	</div>
   </body>
 </html>

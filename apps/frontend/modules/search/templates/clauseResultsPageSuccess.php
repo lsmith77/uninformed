@@ -50,8 +50,11 @@
         <span class="nonratlegal">legally binding (not in force)</span>
         <span class="nonlegal">non-legally binding</span>
     </div>
+    <% if (this.totalResults) { %>
     <h2><%= this.totalResults %> Results (Page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
-    <%
+    <% } else { %>
+    <h2>No Results</h2>
+    <% }
         $('.results').data('page', this.page);
         if (this.page > 0) { %>
         <a class="prevPage">prev</a>

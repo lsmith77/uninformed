@@ -26,7 +26,7 @@ ClauseBody:
           alias: getIsLatestClauseBodySolr
         title:
           type: text
-          alias: getTitle
+          alias: getDocumentTitle
           stored: true
         adoption_date:
           type: tdate

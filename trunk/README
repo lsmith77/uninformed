@@ -20,10 +20,11 @@ Install just like any standard symfony application:
 
 php symfony doctrine:build --all --and-load
 
-In order to get the search going you need to start solr (for windows see the sfSolrPlugin README)
+In order to get the search going you need to start solr
+See: http://svn.symfony-project.com/plugins/sfSolrPlugin/branches/sf1.2/README
 
 php symfony lucene:create-solr-config frontend
-php symfony lucene:service frontend start
+php symfony lucene:service frontend start (for windows see the sfSolrPlugin README)
 php symfony lucene:update-model-system --model=ClauseBody --delete=true frontend ClauseBody en
 
 To deploy to the server:

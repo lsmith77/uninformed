@@ -54,7 +54,7 @@ class Document extends BaseDocument
             return;
         }
 
-        $this->titlechange = false;
+        $this->titleChange = false;
 
         $invoker = $event->getInvoker();
         $clauses = $invoker->getClauses();

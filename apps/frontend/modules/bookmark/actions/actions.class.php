@@ -43,7 +43,8 @@ class bookmarkActions extends sfActions
             $q = Doctrine_Query::create()
                 ->from('Document d INDEXBY d.id')
                 ->innerJoin('d.Clauses c INDEXBY c.id')
-                ->where(implode(' OR ', $where));
+                ->where(implode(' OR ', $where))
+                ->orderBy('d.id, c.clause_number, c.clause_number_information, c.clause_number_subparagraph');
             $this->documents = $q->execute();
         }
     }

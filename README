@@ -24,7 +24,7 @@ In order to get the search going you need to start solr (for windows see the sfS
 
 php symfony lucene:create-solr-config frontend
 php symfony lucene:service frontend start
-php symfony lucene:update-model frontend ClauseBody en ClauseBody --delete=true
+php symfony lucene:update-model-system --model=ClauseBody --delete=true frontend ClauseBody en
 
 To deploy to the server:
 

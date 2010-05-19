@@ -1,9 +1,9 @@
 <?php use_javascript('frontend/collapseBoxes.js'); ?>
 <?php if ($sf_user->isAuthenticated()): ?>
     <?php if (empty($bookmark)): ?>
-        <?php echo link_to('Add Bookmark', 'bookmark_action', array('action' => 'add', 'type' => 1, 'id' => $clause->getId()), array('class' => 'addbookmark')); ?>
+        <?php echo link_to('Add Bookmark', 'bookmark_action', array('action' => 'add', 'type' => 'clause', 'id' => $clause->getId()), array('class' => 'addbookmark')); ?>
     <?php else: ?>
-        <?php echo link_to('Remove Bookmark', 'bookmark_action', array('action' => 'remove', 'type' => 1, 'id' => $clause->getId()), array('class' => 'removebookmark')); ?>
+        <?php echo link_to('Remove Bookmark', 'bookmark_action', array('action' => 'remove', 'type' => 'clause', 'id' => $clause->getId()), array('class' => 'removebookmark')); ?>
     <?php endif; ?>
 <?php endif; ?>
 

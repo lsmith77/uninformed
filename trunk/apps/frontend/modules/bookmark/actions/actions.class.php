@@ -23,13 +23,13 @@ class bookmarkActions extends sfActions
         $q = Doctrine_Query::create()
             ->select('b.object_id')
             ->from('Bookmark b INDEXBY b.object_id')
-            ->where('b.object_type = ? AND b.user_id = ?', array(0, $userId));
+            ->where('b.object_type = ? AND b.user_id = ?', array('document', $userId));
         $this->document_ids = $q->fetchArray();
 
         $q = Doctrine_Query::create()
             ->select('b.object_id')
             ->from('Bookmark b INDEXBY b.object_id')
-            ->where('b.object_type = ? AND b.user_id = ?', array(1, $userId));
+            ->where('b.object_type = ? AND b.user_id = ?', array('clause', $userId));
         $this->clause_ids = $q->fetchArray();
 
         $this->documents = $where = array();
@@ -43,8 +43,7 @@ class bookmarkActions extends sfActions
             $q = Doctrine_Query::create()
                 ->from('Document d INDEXBY d.id')
                 ->innerJoin('d.Clauses c INDEXBY c.id')
-                ->where(implode(' OR ', $where))
-                ->orderBy('d.id, c.clause_number, c.clause_number_information, c.clause_number_subparagraph');
+                ->where(implode(' OR ', $where));
             $this->documents = $q->execute();
         }
     }
@@ -56,9 +55,7 @@ class bookmarkActions extends sfActions
         $objectType = $request->getParameter('type');
         $objectId = $request->getParameter('id');
 
-        // there are only 2 types [0: documents and 1:clauses]
-        $this->forward404Unless($objectType==0||$objectType==1);
-        $redirectModule = $objectType ? 'clause' : 'document';
+        $this->forward404Unless($objectType=='clause'||$objectType=='document');
 
         $bookmark = new Bookmark();
         $bookmark->setObjectType($objectType);
@@ -71,7 +68,7 @@ class bookmarkActions extends sfActions
         }
 
         $this->getUser()->setFlash('notice', 'Bookmark successfully added');
-        $this->redirect($redirectModule, array('id'=>$objectId));
+        $this->redirect($objectType, array('id'=>$objectId));
     }
 
     public function executeRemove(sfWebRequest $request)
@@ -81,9 +78,7 @@ class bookmarkActions extends sfActions
         $objectType = $request->getParameter('type');
         $objectId = $request->getParameter('id');
 
-        // there are only 2 types [0: documents and 1:clauses]
-        $this->forward404Unless($objectType==0||$objectType==1);
-        $redirectModule = $objectType ? 'clause' : 'document';
+        $this->forward404Unless($objectType=='clause'||$objectType=='document');
 
         $q = Doctrine_Query::create()
             ->from('Bookmark')
@@ -94,6 +89,6 @@ class bookmarkActions extends sfActions
         }
 
         $this->getUser()->setFlash('notice', 'Bookmark successfully removed');
-        $this->redirect($redirectModule, array('id'=>$objectId));
+        $this->redirect($objectType, array('id'=>$objectId));
     }
 }

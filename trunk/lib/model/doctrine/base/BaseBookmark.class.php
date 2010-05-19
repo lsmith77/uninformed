@@ -7,12 +7,12 @@
  * 
  * @property integer $id
  * @property integer $user_id
- * @property integer $object_type
+ * @property enum $object_type
  * @property integer $object_id
  * 
  * @method integer  getId()          Returns the current record's "id" value
  * @method integer  getUserId()      Returns the current record's "user_id" value
- * @method integer  getObjectType()  Returns the current record's "object_type" value
+ * @method enum     getObjectType()  Returns the current record's "object_type" value
  * @method integer  getObjectId()    Returns the current record's "object_id" value
  * @method Bookmark setId()          Sets the current record's "id" value
  * @method Bookmark setUserId()      Sets the current record's "user_id" value
@@ -40,10 +40,14 @@ abstract class BaseBookmark extends MyBaseRecord
              'notnull' => true,
              'length' => 4,
              ));
-        $this->hasColumn('object_type', 'integer', 4, array(
-             'type' => 'integer',
+        $this->hasColumn('object_type', 'enum', null, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'clause',
+              1 => 'document',
+             ),
              'notnull' => true,
-             'length' => 4,
              ));
         $this->hasColumn('object_id', 'integer', 4, array(
              'type' => 'integer',

@@ -10,11 +10,10 @@
         <?php endif; ?>
         (<?php echo $orgs['main'].' '.$orgs['current'].' '.$orgs['sub']; ?>)
         <ul class="bookmarks">
-            <?php $ordering = explode(',',$document->getClauseOrdering()); ?>
-            <?php foreach($ordering as $clause_id): ?>
-            <?php if (isset($clause_ids[$clause_id])): ?>
+            <?php foreach($document->Clauses as $clause): ?>
+            <?php if (isset($clause_ids[$clause->getId()])): ?>
             <li>
-                -> <?php echo link_to($document->Clauses[$clause_id]->getClauseNumber(), 'clause', array('id' => $document->Clauses[$clause_id])); ?>
+                -> <?php echo link_to($clause->getClauseNumber(), 'clause', array('id' => $clause->getSlug())); ?>
             </li>
             <?php endif; ?>
             <?php endforeach; ?>

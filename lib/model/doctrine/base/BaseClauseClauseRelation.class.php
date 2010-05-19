@@ -46,7 +46,7 @@ abstract class BaseClauseClauseRelation extends MyBaseRecord
              'values' => 
              array(
               0 => 'recalls',
-              1 => 'closely_related',
+              1 => 'closely related',
              ),
              'notnull' => true,
              ));

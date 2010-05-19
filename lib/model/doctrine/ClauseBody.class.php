@@ -138,4 +138,12 @@ class ClauseBody extends BaseClauseBody
         $operative_phrase = (string)$this->_get('ClauseOperativePhrase');
         return preg_replace('#\b('.preg_quote($operative_phrase, '#').')\b#i', '<em>$1</em>', $this->_get('content'));
     }
+
+    public function __toString() {
+        $clause = $this->setLatestAdoptedClause();
+        if (empty($clause)) {
+            return null;
+        }
+        return (string)$clause;
+    }
 }

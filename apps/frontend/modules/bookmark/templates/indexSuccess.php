@@ -4,9 +4,9 @@
     <li>
         <?php $orgs = $document->getStructuredOrganisation(); ?>
         <?php if (isset($document_ids[$document->getId()])): ?>
-            <?php echo link_to($document->getName(), 'document', array('id' => $document->getSlug())); ?>
+            <?php echo link_to($document, 'document', array('id' => $document->getSlug())); ?>
         <?php else: ?>
-        <?php echo $document->getName(); ?>
+        <?php echo $document->getTitle(); ?>
         <?php endif; ?>
         (<?php echo $orgs['main'].' '.$orgs['current'].' '.$orgs['sub']; ?>)
         <ul class="bookmarks">

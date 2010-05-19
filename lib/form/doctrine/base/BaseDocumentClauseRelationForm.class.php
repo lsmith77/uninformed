@@ -16,6 +16,7 @@ abstract class BaseDocumentClauseRelationForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                     => new sfWidgetFormInputHidden(),
+      'type'                   => new sfWidgetFormChoice(array('choices' => array('closely related' => 'closely related'))),
       'document_id'            => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Document'), 'add_empty' => false)),
       'related_clause_body_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseRelated'), 'add_empty' => false)),
       'created_at'             => new sfWidgetFormDateTime(),
@@ -25,6 +26,7 @@ abstract class BaseDocumentClauseRelationForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                     => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'type'                   => new sfValidatorChoice(array('choices' => array(0 => 'closely related'))),
       'document_id'            => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Document'))),
       'related_clause_body_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseRelated'))),
       'created_at'             => new sfValidatorDateTime(),
@@ -33,7 +35,7 @@ abstract class BaseDocumentClauseRelationForm extends BaseFormDoctrine
     ));
 
     $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'DocumentClauseRelation', 'column' => array('document_id', 'related_clause_body_id')))
+      new sfValidatorDoctrineUnique(array('model' => 'DocumentClauseRelation', 'column' => array('document_id', 'related_clause_body_id', 'type')))
     );
 
     $this->widgetSchema->setNameFormat('document_clause_relation[%s]');

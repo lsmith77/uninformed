@@ -187,7 +187,7 @@ Document:
       type: integer(4)
       primary: true
       autoincrement: true
-    name:
+    title:
       type: string(1000)
       notnull: true
     slug:
@@ -252,7 +252,7 @@ DocumentDocumentRelation:
       autoincrement: true
     type:
       type: enum
-      values: [recalls, closely_related]
+      values: [recalls, closely related]
       notnull: true
     document_id:
       type: integer(4)
@@ -279,6 +279,10 @@ DocumentClauseRelation:
       type: integer(4)
       primary: true
       autoincrement: true
+    type:
+      type: enum
+      values: [closely related]
+      notnull: true
     document_id:
       type: integer(4)
       notnull: true
@@ -295,7 +299,7 @@ DocumentClauseRelation:
       foreign: id
   indexes:
     mapping:
-      fields: [document_id, related_clause_body_id]
+      fields: [document_id, related_clause_body_id, type]
       type: unique
 
 DocumentReservation:
@@ -332,7 +336,7 @@ ClauseClauseRelation:
       autoincrement: true
     type:
       type: enum
-      values: [recalls, closely_related]
+      values: [recalls, closely related]
       notnull: true
     clause_id:
       type: integer(4)

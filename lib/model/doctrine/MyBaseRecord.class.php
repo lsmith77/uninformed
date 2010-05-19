@@ -11,8 +11,8 @@ abstract class MyBaseRecord extends sfDoctrineRecord
 
     public function __toString() {
         $string = parent::__toString();
-        if (strlen($string) > 100) {
-            $string = substr($string, 0, 100).' ..';
+        if (strlen($string) > 30) {
+            $string = substr($string, 0, 30).' ..';
         }
         return $string;
     }

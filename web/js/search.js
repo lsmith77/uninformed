@@ -38,7 +38,7 @@ $(function(){
     },
     // toggle all checkboxes when the "all" one is used
     toggleFilterGroupCheckboxes = function(e) {
-        $(this).closest('.filterGroup').find(':checkbox:not(.selectAll)')
+        $(this).closest('.filterGroup').find(':checkbox:not(.selectAll):not(:disabled)')
             .attr('checked', $(this).attr('checked')) // un|check all
             .first().trigger('change'); // trigger the result reloading
     },

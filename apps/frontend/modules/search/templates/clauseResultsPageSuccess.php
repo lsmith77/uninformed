@@ -31,7 +31,7 @@
             <% } %>
             <% for (item in f) { %>
             <% item = f[item]; %>
-            <label><input type="checkbox" name="f[<%= fId %>][]" value="<%= item.id %>" checked="checked" <%= (item.count == this.totalResults ? 'disabled="disabled"':'') %> />
+            <label><input type="checkbox" name="f[<%= $.htmlencode(fId) %>][]" value="<%= item.id %>" checked="checked" <%= (item.count == this.totalResults ? 'disabled="disabled"':'') %> />
             <%= item.name %> <span class="count">(<%= item.count %>)</span></label>
             <% } %>
         </div>

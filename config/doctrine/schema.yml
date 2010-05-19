@@ -568,7 +568,8 @@ Bookmark:
       type: integer(4)
       notnull: true
     object_type:
-      type: integer(4)
+      type: enum
+      values: [clause, document]
       notnull: true
     object_id:
       type: integer(4)

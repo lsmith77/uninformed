@@ -17,7 +17,7 @@ abstract class BaseBookmarkForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'          => new sfWidgetFormInputHidden(),
       'user_id'     => new sfWidgetFormInputText(),
-      'object_type' => new sfWidgetFormInputText(),
+      'object_type' => new sfWidgetFormChoice(array('choices' => array('clause' => 'clause', 'document' => 'document'))),
       'object_id'   => new sfWidgetFormInputText(),
       'created_at'  => new sfWidgetFormDateTime(),
       'updated_at'  => new sfWidgetFormDateTime(),
@@ -26,7 +26,7 @@ abstract class BaseBookmarkForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'          => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'user_id'     => new sfValidatorInteger(),
-      'object_type' => new sfValidatorInteger(),
+      'object_type' => new sfValidatorChoice(array('choices' => array(0 => 'clause', 1 => 'document'))),
       'object_id'   => new sfValidatorInteger(),
       'created_at'  => new sfValidatorDateTime(),
       'updated_at'  => new sfValidatorDateTime(),

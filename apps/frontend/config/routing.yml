@@ -60,7 +60,7 @@ bookmark_action:
   url:     /bookmark/:action/:type/:id
   param:   { module: bookmark }
   requirements:
-    type: \d+-?.*
+    type: document|clause
     id: \d+-?.*
 
 clause:

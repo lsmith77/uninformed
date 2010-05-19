@@ -13,7 +13,7 @@
             <?php foreach($document->Clauses as $clause): ?>
             <?php if (isset($clause_ids[$clause->getId()])): ?>
             <li>
-                -> <?php echo link_to($clause->getClauseNumber(), 'clause', array('id' => $clause->getSlug())); ?>
+                -> <?php echo link_to((string)$clause, 'clause', array('id' => $clause->getSlug())); ?>
             </li>
             <?php endif; ?>
             <?php endforeach; ?>

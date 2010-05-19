@@ -227,9 +227,7 @@ table td, table th {
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
-.homesearch #tags #taglist {
-    display: none;
-}
+
 /* SEARCH PAGE */
 div.search {
     width: 230px;
@@ -260,12 +258,27 @@ div.search {
 .search .tags input, .search .query input {
     width: 220px;
 }
+.search #taglist {
+    padding: 10px;
+    margin: 10px 0;
+    background: #eee;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    position: relative;
+}
+.search #taglist img {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
 .filters .fold {
     width: 16px;
     height: 16px;
     cursor: pointer;
     display: block;
     float: left;
+    margin: 0 5px 0 0;
     background: url(/images/hide.gif) no-repeat;
 }
 .filters .fold.folded {
@@ -288,9 +301,8 @@ div.search {
 }
 
 .filters h3 {
-    margin: 0 0 .4em;
+    margin: 0 0 10px 0;
 }
-
 .filterGroup {
     margin: 0 0 .4em;
 }
@@ -327,6 +339,7 @@ div.search {
 }
 div.results {
     margin-left: 280px;
+    margin-bottom: 80px;
     padding: 10px;
 }
 .results a {
@@ -393,14 +406,14 @@ div.results {
     color: #444;
 }
 .scresolutions {/* blue */
-    border-left: 5px solid #0058bc;
+    border-right: 5px solid #0058bc;
 }
 .ratlegal {/* red */
-    border-left: 5px solid #bc0000;
+    border-right: 5px solid #bc0000;
     
 }
 .nonratlegal {/* lighter red */
-    border-left: 5px solid #f37879;
+    border-right: 5px solid #f37879;
     
 }
 .nonlegal {/* green */

@@ -45,18 +45,30 @@ class searchActions extends sfActions
         return is_numeric(implode('', $array));
     }
 
-    public function executeIndex(sfWebRequest $request)
+    protected function readParameters(sfWebRequest $request)
     {
         $this->query = $request->getGetParameter('q', '');
         $this->tagMatch = $request->getGetParameter('tm', 'any');
         $this->tags = (array) $request->getGetParameter('t');
         $this->latestClauseOnly = $request->getGetParameter('l');
         $this->page = (int) $request->getGetParameter('p', 0);
+        $this->showHelp = true;
+    }
+
+    public function executeIndex(sfWebRequest $request)
+    {
+        $this->readParameters($request);
+        $this->showHelp = true;
+    }
+
+    public function executeAboutus(sfWebRequest $request)
+    {
     }
 
     public function executeClauseResultsPage(sfWebRequest $request)
     {
-        $this->executeIndex($request);
+        $this->readParameters($request);
+        $this->showHelp = false;
     }
 
     public function executeSearchTags(sfWebRequest $request)
@@ -74,7 +86,8 @@ class searchActions extends sfActions
 
     public function executeResults(sfWebRequest $request)
     {
-        $this->executeIndex($request);
+        $this->readParameters($request);
+        $this->showHelp = false;
 
         $tags = array_keys($this->tags);
         $this->filters = (array) $request->getGetParameter('f');

@@ -293,13 +293,13 @@ class searchActions extends sfActions
                     $root_clause_body_id = isset($clause['ClauseBody']['root_clause_body_id'])
                         ? $clause['ClauseBody']['root_clause_body_id']
                         : $clause['ClauseBody']['id'];
-                    // TODO: bug!
                     $q = Doctrine_Query::create()
                         ->select('COUNT(c.id)')
                         ->from('Clause c')
                         ->innerJoin('c.ClauseBody cb')
                         ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id));
-                    $data[$key]['clauseHistory'] = (bool)$q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+                    $data[$key]['clauseHistory'] = $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+                    $data[$key]['clauseHistory'] = $data[$key]['clauseHistory'] > 1 ? 1 : 0;
                     $documents[] = $data[$key]['document_id'];
                     $data[$key]['score'] = $clauses[$clause['id']]['score'];
                     $data[$key]['title'] = $clauses[$clause['id']]['title'];

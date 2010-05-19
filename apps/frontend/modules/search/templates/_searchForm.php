@@ -3,7 +3,7 @@
     <label for="query">Containing</label><br />
     <input type="text" name="q" id="query" value="<?php echo $query ?>" />
     <?php if (!empty($showHelp)): ?>
-    <span class="helptext">The text entered will we searched in the document title and the clause content.</span>
+	<span class="helptext">The text entered will we searched in the document title and the clause content.</span>
     <?php endif; ?>
 </p>
 <div class="tags">
@@ -19,9 +19,9 @@
             echo '<li style="display: none"></li>';
         }
     ?>
-    </ul>
+	</ul>
     <?php if (!empty($showHelp)): ?>
-    <span class="helptext">The text entered will we searched in the list of available tags. Please select a tag to be included in the search or remove after adding.</span>
+	<span class="helptext">The text entered will we searched in the list of available tags. Please select a tag to be included in the search or remove after adding.</span>
     <?php endif; ?>
 </div>
 <p class="tagMatch">

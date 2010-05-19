@@ -39,10 +39,12 @@ table {
 }
 
 /* GENERAL */
+html {overflow-y: scroll;}
 body {
     font: 13px/18px Arial, Verdana, Helvetica, sans-serif;
     text-align: center; /* IE */
     border-top: 3px solid #951c00;
+    color: #333;
 }
 #wrap {
     width: 960px;
@@ -57,13 +59,15 @@ body {
     margin: 2em;
 }
 
-a, a:visited, a:link, a:active {
-    color: #88f;
+a {
+    color: #000;
     font-weight: bold;
-    text-decoration: none;
+    text-decoration: underline;
     cursor: pointer;
 }
-
+a:hover {
+    color: #951c00;
+}
 h1 {
     font-size: 16px;
     font-weight: bold;
@@ -73,14 +77,14 @@ h1 {
 }
 
 h2 {
-    font-size: 14px;
+    font-size: 15px;
     margin-bottom: 20px;
 }
-
+h2 a {text-decoration: none;}
 h3 {
-    margin: .4em 0;
+    font-size: 14px;
+    margin: 0 0 20px 0;
 }
-
 input[type=text] {
     margin: .5em 0;
 }
@@ -90,22 +94,23 @@ input[type=checkbox] {
 }
 
 p {
-    margin-bottom: .5em;
+    margin-bottom: 18px;
 }
 
 table {
     margin-bottom: 1em;
+    width: 100%;
 }
 
 table thead {
     color: #333;
+    background: #e2e2e2 url(/images/gradient.png) repeat-x top left;
 }
 
 table td, table th {
-    padding: 5px;
-    border: 1px solid #999;
+    padding: 5px 8px;
+    border: 1px solid #ccc;
 }
-
 /* HEADER & NAV */
 .header {
     position: absolute;
@@ -152,6 +157,7 @@ table td, table th {
     border-left: 1px solid #f4f4f4;
     font-weight: normal;
     letter-spacing: 1px;
+    text-decoration: none;
 }
 .nav a:hover {
     color: #000;
@@ -164,13 +170,66 @@ table td, table th {
     border-bottom: 3px solid #951c00;
     
 }
-/* SEARCH HOME */
-div.homesearch {
-    width: 240px;
-    padding: 5px;
-    background: #eee;
+/* HOME SEARCH */
+.homesearch {
+    width: 920px;
+    padding: 20px 20px 54px 20px;
+    background: #e2e2e2 url(/images/gradient.png) repeat-x top left;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+.homesearch .query, .homesearch .tags {
+    float: left;
+    width: 230px;
+    margin: 0 20px 0 0;
 }
 
+.homesearch .query input, .homesearch .tags input {
+    width: 225px;
+}
+.homesearch .tagMatch {
+    padding: 26px 0 0 500px;
+}
+.homesearch .tagMatch input {
+    margin: 0 0 10px 0;
+}
+.homesearch .latestClauseOnly {
+    padding: 0 0 0 500px;
+}
+.homesearch .latestClauseOnly input {
+    margin: 0 0 5px 0;
+}
+.homesearch #search {
+    float: right;
+    width: 230px;
+    padding: 0 10px;
+    background: #951c00 url(/images/gradient-red.png) repeat-x top left;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #721500;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 34px;
+    height: 34px;
+    cursor: pointer;
+}
+.homesearch .helptext {
+    display: block;
+    color: #666;
+    padding: 10px;
+    margin: 10px 0;
+    background: #eee;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.homesearch #tags #taglist {
+    display: none;
+}
 /* SEARCH PAGE */
 div.search {
     width: 230px;
@@ -181,8 +240,26 @@ div.search {
     border-radius: 4px;
     border: 1px solid #ccc;
     float: left;
+    margin: 0 0 30px 0;
 }
-
+.search #search {
+    width: 225px;
+    padding: 0 10px;
+    background: #951c00 url(/images/gradient-red.png) repeat-x top left;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #721500;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 34px;
+    height: 34px;
+    cursor: pointer;
+}
+.search .tags input, .search .query input {
+    width: 220px;
+}
 .filters .fold {
     width: 16px;
     height: 16px;
@@ -202,6 +279,8 @@ div.search {
 
 .filters label {
     display: block;
+    font-size: 12px;
+    padding: 0 10px;
 }
 
 .filterGroup.folded {
@@ -215,8 +294,7 @@ div.search {
 .filterGroup {
     margin: 0 0 .4em;
 }
-
-/* CLAUSES/DOCUMENTS DETAILVIEW */
+/* SEARCH RESULTS & CLAUSES/DOCUMENTS DETAILVIEW */
 .clauseList li {
     position: relative;
     padding: 5px 50px 5px 10px;
@@ -231,21 +309,72 @@ div.search {
     color: #333;
 }
 
-#tags {
-    margin-bottom: 1.5em;
-}
-
 #tags a {
     text-decoration: underline;
     color: #333;
+    padding: 0 4px 0 5px;
+    border-left: 3px solid #ccc;
+    font-weight: normal;
 }
-
+#clauseContent {
+    padding: 0 0 20px 0;
+}
+#clauseHistory a {
+    text-decoration: none;
+}
+#clauseHistory .highlighted {
+    background: #f0f0f0;
+}
 div.results {
     margin-left: 280px;
     padding: 10px;
 }
+.results a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.results a:hover {
+    color: #951c00;
+    
+}
+.results h2 {
+    float: left;
+    height: 30px;
+}
+.result h2 {
+    font-size: 15px;
+    line-height: 20px;
+    height: auto;
+    margin: 0;
+    float: none;
+}
 .results h2 a {
     color: #000;
+    text-decoration: none;
+}
+.result h3 {
+    font-size: 11px;
+    margin: 5px 0;
+    text-transform: uppercase;
+}
+.prevnext {
+    float: right;
+    height: 30px;
+}
+.results .prevPage, .results .nextPage, .addbookmark, .removebookmark {
+    padding: 5px 10px;
+    background: #e2e2e2 url(/images/gradient.png) repeat-x top left;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: normal;
+    border: 1px solid #ccc;
+}
+.addbookmark, .removebookmark {
+    float: right;
 }
 .colorcoding {
     position: absolute;
@@ -259,7 +388,7 @@ div.results {
     border-width: 12px;
 }
 .result {
-    margin: 0 0 30px 0;
+    margin: 50px 0 25px 0;
     padding: 0 20px 0 0;
     color: #444;
 }
@@ -271,7 +400,7 @@ div.results {
     
 }
 .nonratlegal {/* lighter red */
-    border-left: 5px solid #e30000;
+    border-left: 5px solid #f37879;
     
 }
 .nonlegal {/* green */
@@ -288,7 +417,7 @@ div.results {
     
 }
 .colorcoding span.nonratlegal {/* lighter red */
-    border-left: 12px solid #e30000;
+    border-left: 12px solid #f37879;
     border-right: 0;
     
 }
@@ -296,8 +425,96 @@ div.results {
     border-left: 12px solid #0b7900;
     border-right: 0;
 }
+/* FORM & COMMENT */
+div.form-comment {
+    background: #f0f0f0;
+    padding: 10px;
+}
+div.form-comment td, div.form-comment th {
+    border: 0;
+    vertical-align: top;
+}
+div.form-comment input, div.form-comment textarea{
+    margin-top:10px;
+    width:350px;
+}
 
+div.form-comment tr#tr_reply_author, div.form-comment tr#tr_reply_author_delete{
+    display: none;
+}
 
+div.form-comment input:readonly{
+    background-color: transparent;
+    border:none;
+    color: #444444;
+    margin-top:2px;
+    font-weight:bold;
+}
+
+div.form-comment a.delete_reply{
+  font-size: smaller;
+  color:#444444;
+  font-style: italic;
+}
+
+div.form-comment #notlogged{
+  text-align: center;
+  color: #ff0000;
+  font-weight: bold;
+}
+div.form-comment fieldset{
+  border: 0;
+}
+
+div.form-comment legend{
+  font-weight:bold;
+  font-size:large;
+}
+
+div.form-comment label, div.form-comment span.help{
+  color:#444444;
+  text-transform: uppercase;
+}
+
+div.form-comment input, div.form-comment textarea, div.form-comment input.submit:hover{
+  border-top: 1px solid #aaa;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #aaa;
+}
+
+div.form-comment span.help{
+  font-style: italic;
+  font-size: smaller;
+}
+
+div.form-comment label.error, div.form-comment ul.error_list li{
+  color:#ff0000;
+}
+
+div.form-comment ul.error_list{
+  margin:20px 0 0 0;
+  list-style-image: url('../images/arrow-down.png');
+}
+
+div.form-comment input.error, div.form-comment textarea.error{
+  border-color: #ff0000;
+  background-color:#f6d1d1;
+}
+
+div.form-comment td.submit{
+  text-align:center;
+  margin:0 auto;
+}
+
+div.form-comment input.submit{
+  width:100px;
+}
+
+div.form-comment input.submit:hover{
+  background-color:#aaaaaa;
+  border-color: #000000;
+}
 
 /* FRONTEND JQUERY COLLAPSING */
 a.toggleCol {

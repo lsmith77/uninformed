@@ -19,6 +19,9 @@ abstract class MyBaseRecord extends sfDoctrineRecord
 
     protected function convertTags2Ids($tags)
     {
+        if (empty($tags)) {
+            return array();
+        }
         if (is_string($tags)) {
             $sep = ',';
             $tagNames = explode($sep, $tags);
@@ -31,7 +34,7 @@ abstract class MyBaseRecord extends sfDoctrineRecord
             }
 
             $tagsList = array();
-            if ( ! empty($tagNames)) {
+            if (!empty($tagNames)) {
                 $existingTags = Doctrine_Query::create()
                     ->from('Tag t')
                     ->whereIn('t.name', array_keys($newTagNames))
@@ -69,7 +72,9 @@ abstract class MyBaseRecord extends sfDoctrineRecord
         // TODO: only allow for ClauseBody/Document
         $tagIds = $this->convertTags2Ids($tags);
         $this->unlink('Tags');
-        $this->link('Tags', $tagIds);
+        if (count($tagIds)) {
+            $this->link('Tags', $tagIds);
+        }
     }
 
     public function getTagIds() {

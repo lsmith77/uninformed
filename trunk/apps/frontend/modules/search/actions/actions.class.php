@@ -74,10 +74,13 @@ class searchActions extends sfActions
     {
         $term = $request->getGetParameter('term');
 
+        // TODO: for now only shwo tags that are associated with a clause body
         $q = Doctrine_Query::create()
-            ->select('id, name AS label')
+            ->select('t.id, t.name AS label')
             ->from('Tag t')
-            ->where('t.name LIKE ?', "%$term%");
+            ->innerJoin('t.ClauseBodyTag cbt')
+            ->where('t.name LIKE ?', "%$term%")
+            ->groupBy('t.id, t.name');
         $tags = $q->fetchArray();
 
         return $this->returnJson($tags);

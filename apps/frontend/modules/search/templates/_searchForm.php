@@ -35,7 +35,7 @@
 </p>
 <p class="latestClauseOnly">
     <input type="checkbox" name="l" id="latestClauseOnly" value="1" <?php echo $latestClauseOnly ? 'checked="checked"':'' ?>  />
-    <label for="latestClauseOnly">Latest clause version only÷</label>
+    <label for="latestClauseOnly">Latest clause version only</label>
     <?php if (!empty($showHelp)): ?>
     <span class="helptext">Enable this checkbox to search only for the latest version of follow-up documents.</span>
     <?php endif; ?>

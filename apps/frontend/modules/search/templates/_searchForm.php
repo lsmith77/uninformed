@@ -36,7 +36,7 @@
     <input type="checkbox" name="l" id="latestClauseOnly" value="1" <?php echo $latestClauseOnly ? 'checked="checked"':'' ?>  />
     <label for="latestClauseOnly">Only latest clause version</label>
     <?php if (!empty($showHelp)): ?>
-    <span class="helptext">Often newer versions of clauses contain very similar content, to reduce the number of redudant results enable this checkbox</span>
+    <span class="helptext">Often newer versions of clauses contain very similar content, to reduce the number of redundant results enable this checkbox.</span>
     <?php endif; ?>
 </p>
 <p>

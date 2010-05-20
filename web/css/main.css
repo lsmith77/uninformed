@@ -143,15 +143,15 @@ input[type=submit] {
 }
 
 /* SUBSCRIPTION & LOGIN */
-#sf_apply_apply_form label, #signin_form th {
+#sf_apply_apply_form label, #sf_apply_reset_request label, #signin_form th {
     width: 300px;
     float: left;
     font-weight: bold;
 }
-#sf_apply_apply_form input, #signin_form input {
+#sf_apply_apply_form input, #sf_apply_reset_request input, #signin_form input {
     margin: 0;
 }
-#sf_apply_apply_form li {
+#sf_apply_apply_form li, #sf_apply_reset_request li {
     margin: 5px 0;
     clear: both;
 }

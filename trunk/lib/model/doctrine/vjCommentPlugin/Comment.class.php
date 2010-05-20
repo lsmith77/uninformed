@@ -21,5 +21,15 @@ class Comment extends PluginComment
             $newReport->setReferer($request->getReferer()."#".$request->getParameter('num'));
             $this->CommentReport[] = $newReport;
         }
+
+        $fullname = '';
+        $context = sfContext::getInstance();
+        if ($context) {
+            $user = $context->getUser();
+            if ($user && $user->isAuthenticated()) {
+                $fullname = $user->getGuardUser()->Profile->_get('fullname');
+            }
+        }
+        $this->_set('author_name', $fullname);
     }
 }

@@ -266,7 +266,7 @@ class excelSpreadsheetImport
       $newDocument = new Document();
 
       $title = $documentTitle;
-      if (preg_match('/^(.*)#\d+$/', $title, $matches)) {
+      if (preg_match('/^(.*)#\d*$/', $title, $matches)) {
         $title = trim($matches[1]);
       }
       $newDocument->set('title', $title);

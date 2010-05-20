@@ -11,3 +11,4 @@
         <?php echo link_to($tag->getName(), 'clauseSearch', array('t['.$tag->getId().']' => $tag->getName())); ?>
     <?php endforeach; ?>
 </div>
+<br />

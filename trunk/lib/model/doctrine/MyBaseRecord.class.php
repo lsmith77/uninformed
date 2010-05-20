@@ -20,7 +20,7 @@ abstract class MyBaseRecord extends sfDoctrineRecord
     protected function convertTags2Ids($tags)
     {
         if (is_string($tags)) {
-            $sep = strpos($tags, ',') !== false ? ',' : ' ';
+            $sep = ',';
             $tagNames = explode($sep, $tags);
             $newTagNames = array();
             foreach ($tagNames as $key => $tagName) {

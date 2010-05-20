@@ -170,6 +170,11 @@ table td, table th {
     border-bottom: 3px solid #951c00;
     
 }
+#flash_notice {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
 /* HOME SEARCH */
 .homesearch {
     width: 920px;
@@ -408,14 +413,14 @@ div.results {
     color: #444;
 }
 .scresolutions {/* blue */
-    border-right: 5px solid #0058bc;
+    border-right: 3px solid #0058bc;
 }
 .ratlegal {/* red */
-    border-right: 5px solid #bc0000;
+    border-right: 3px solid #bc0000;
     
 }
 .nonratlegal {/* lighter red */
-    border-right: 5px solid #f37879;
+    border-right: 3px solid #f37879;
     
 }
 .nonlegal {/* green */

@@ -319,7 +319,7 @@ class searchActions extends sfActions
                     $q = Doctrine_Query::create()
                         ->select('so.name, so.parent_id, mo.name, mo.parent_id')
                         ->from('Organisation so')
-                        ->innerJoin('so.OrganisationParent mo')
+                        ->leftJoin('so.OrganisationParent mo')
                         ->where('so.id = ?', array($document['organisation_id']));
                     $suborgan = $q->fetchArray();
                     $suborgan = reset($suborgan);

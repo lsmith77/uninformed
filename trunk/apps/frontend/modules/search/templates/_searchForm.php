@@ -27,8 +27,8 @@
 </div>
 <p class="tagMatch">
     Matching
-    <input type="radio" name="tm" id="anytag" value="any" <?php echo $tagMatch !== 'all' ? 'checked="checked"':'' ?> /><label for="anytag">Any tag</label>
-    <input type="radio" name="tm" id="alltags" value="all" <?php echo $tagMatch === 'all' ? 'checked="checked"':'' ?>  /><label for="alltags">All tags</label>
+    <input type="radio" name="tm" id="anytag" value="any" <?php echo $tagMatch !== 'all' ? 'checked="checked"':'' ?> />&nbsp;<label for="anytag">Any tag</label>
+    <input type="radio" name="tm" id="alltags" value="all" <?php echo $tagMatch === 'all' ? 'checked="checked"':'' ?>  />&nbsp;<label for="alltags">All tags</label>
     <?php if (!empty($showHelp)): ?>
     <span class="helptext">Determine if the search should match at least one or all of the above tags.</span>
     <?php endif; ?>

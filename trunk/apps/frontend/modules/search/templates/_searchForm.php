@@ -21,7 +21,7 @@
     ?>
 	</ul>
     <?php if (!empty($showHelp)): ?>
-	<span class="helptext">The text entered will we searched in the list of available tags. Please select a tag to be included in the search or remove after adding.</span>
+	<span class="helptext">The text entered will be searched in the list of available tags. Please select a tag to be included in the search or remove after adding.</span>
     <?php endif; ?>
 </div>
 <p class="tagMatch">

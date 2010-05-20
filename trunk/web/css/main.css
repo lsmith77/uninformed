@@ -399,6 +399,12 @@ div.search {
 #clauseHistory .highlighted {
     background: #f0f0f0;
 }
+#documentHistory a {
+    text-decoration: none;
+}
+#documentHistory .highlighted {
+    background: #f0f0f0;
+}
 div.results {
     margin-left: 280px;
     margin-bottom: 80px;

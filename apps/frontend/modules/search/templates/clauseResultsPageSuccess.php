@@ -51,9 +51,9 @@
         <span class="nonlegal">non-legally binding</span>
     </div>
     <% if (this.totalResults) { %>
-     <h2><%= this.totalResults %> Results (Page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
+     <h2><%= this.totalResults %> results (page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
     <% } else { %>
-    <h2>No Results</h2>
+    <h2>no matches</h2>
     <% } %>
 	<div class="prevnext">
     <%

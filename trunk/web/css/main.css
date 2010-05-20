@@ -367,6 +367,7 @@ div.search {
 .filterGroup {
     margin: 0 0 .4em;
 }
+
 /* SEARCH RESULTS & CLAUSES/DOCUMENTS DETAILVIEW */
 .clauseList li {
     position: relative;
@@ -494,6 +495,7 @@ div.results {
     border-left: 12px solid #0b7900;
     border-right: 0;
 }
+
 /* FORM & COMMENT */
 div.form-comment {
     background: #f0f0f0;
@@ -583,6 +585,12 @@ div.form-comment input.submit{
 div.form-comment input.submit:hover{
   background-color:#aaaaaa;
   border-color: #000000;
+}
+
+/* BOOKMARK PAGE */
+ul.bookmark ul {
+    list-style: disc;
+    margin-left: 20px;
 }
 
 /* FRONTEND JQUERY COLLAPSING */

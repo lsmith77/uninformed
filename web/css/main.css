@@ -55,8 +55,12 @@ body {
 }
 .noscript {
     padding: 1em;
-    background: #ffff7d;
-    margin: 2em;
+    border: 1px solid #ccc;
+    background: #ffffce;
+    margin: 2em 0;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
 }
 
 a {
@@ -108,9 +112,56 @@ table thead {
 }
 
 table td, table th {
+    text-align: left;
     padding: 5px 8px;
     border: 1px solid #ccc;
 }
+
+form table td, form table th {
+    border: 0;
+    padding: 0;
+}
+
+input[type=submit] {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background:url(/images/gradient-red.png) repeat-x scroll left top #951C00;
+    border:1px solid #721500;
+    color:#FFFFFF;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:bold;
+    height:28px;
+    line-height:28px;
+    padding:0 6px;
+}
+
+.error_list {
+    color: #951C00;
+    float: right;
+}
+
+/* SUBSCRIPTION & LOGIN */
+#sf_apply_apply_form label, #signin_form th {
+    width: 300px;
+    float: left;
+    font-weight: bold;
+}
+#sf_apply_apply_form input, #signin_form input {
+    margin: 0;
+}
+#sf_apply_apply_form li {
+    margin: 5px 0;
+    clear: both;
+}
+#signin_form th, #signin_form td {
+    padding-top: 5px;
+}
+#signin_form td {
+    width: 100%;
+}
+
 /* HEADER & NAV */
 .header {
     position: absolute;
@@ -168,15 +219,15 @@ table td, table th {
 .nav .current a {
     height: 31px;
     border-bottom: 3px solid #951c00;
-    
 }
+
 #flash_notice {
     position: absolute;
     top: 30px;
     left: 30px;
 }
 /* HOME SEARCH */
-.homesearch {
+.homesearch, .contentBlock {
     width: 920px;
     padding: 20px 20px 54px 20px;
     background: #e2e2e2 url(/images/gradient.png) repeat-x top left;
@@ -184,6 +235,9 @@ table td, table th {
     -moz-border-radius: 4px;
     border-radius: 4px;
     border: 1px solid #ccc;
+}
+.contentBlock {
+    padding-bottom: 20px;
 }
 .homesearch .query, .homesearch .tags {
     float: left;
@@ -357,7 +411,6 @@ div.results {
 
 .results a:hover {
     color: #951c00;
-    
 }
 .results h2 {
     float: left;
@@ -417,11 +470,9 @@ div.results {
 }
 .ratlegal {/* red */
     border-right: 3px solid #bc0000;
-    
 }
 .nonratlegal {/* lighter red */
     border-right: 3px solid #f37879;
-    
 }
 .nonlegal {/* green */
     border-right: 3px solid #0b7900;
@@ -434,12 +485,10 @@ div.results {
 .colorcoding span.ratlegal {/* red */
     border-left: 12px solid #bc0000;
     border-right: 0;
-    
 }
 .colorcoding span.nonratlegal {/* lighter red */
     border-left: 12px solid #f37879;
     border-right: 0;
-    
 }
 .colorcoding span.nonlegal {/* green */
     border-left: 12px solid #0b7900;
@@ -544,4 +593,29 @@ a.toggleCol {
 }
 a.toggleCol.closed {
     background: url(../images/collapse.gif) no-repeat;
+}
+
+/* FOOTER */
+.support {
+    width: 100%;
+    clear: both;
+    text-align: right;
+    margin-top: 20px;
+    line-height: 67px;
+}
+
+.support .liip {
+    background: url(../images/liip.png) no-repeat;
+    width: 152px;
+    height: 63px;
+    display: block;
+    float: right;
+    line-height: 50px;
+    margin-left: 10px;
+}
+
+.support .liip span {
+    position: absolute;
+    top: -5000px;
+    left: -2000px;
 }

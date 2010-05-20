@@ -51,8 +51,9 @@ s.parentNode.insertBefore(ga, s);
     <?php if($sf_user->hasFlash('notice')): ?>
       <div id="flash_notice"><b>Notice:</b> <?php echo $sf_user->getFlash('notice'); ?></div>
     <?php endif; ?>
-    <noscript><p class="noscript">This site runs *much* better with javascript enabled</p></noscript>
     <?php echo $sf_content ?>
+    <noscript><p class="noscript">This site runs *much* better with javascript enabled</p></noscript>
+    <p class="support">Supported by <a href="http://liip.ch/" class="liip"><span>Liip AG - Agile web development - Zurich, Fribourg, Bern</span></a></p>
     </div>
   </body>
 </html>

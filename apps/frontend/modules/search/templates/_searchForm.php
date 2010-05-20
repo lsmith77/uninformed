@@ -3,9 +3,10 @@
     <label for="query">Containing</label><br />
     <input type="text" name="q" id="query" value="<?php echo $query ?>" />
     <?php if (!empty($showHelp)): ?>
-	<span class="helptext">The text entered will we searched in the document title and the clause content.</span>
+    <span class="helptext">Enter text to search document title and clause content.</span>
     <?php endif; ?>
 </p>
+
 <div class="tags">
     <label for="tags">Tagged with</label><br />
     <input type="text" name="" id="tags" />
@@ -19,9 +20,9 @@
             echo '<li style="display: none"></li>';
         }
     ?>
-	</ul>
+    </ul>
     <?php if (!empty($showHelp)): ?>
-	<span class="helptext">The text entered will be searched in the list of available tags. Please select a tag to be included in the search or remove after adding.</span>
+    <span class="helptext">Enter text to see list of available tags and choose one or several tags.</span>
     <?php endif; ?>
 </div>
 <p class="tagMatch">
@@ -34,9 +35,9 @@
 </p>
 <p class="latestClauseOnly">
     <input type="checkbox" name="l" id="latestClauseOnly" value="1" <?php echo $latestClauseOnly ? 'checked="checked"':'' ?>  />
-    <label for="latestClauseOnly">Only latest clause version</label>
+    <label for="latestClauseOnly">Latest clause version only</label>
     <?php if (!empty($showHelp)): ?>
-    <span class="helptext">Often newer versions of clauses contain very similar content, to reduce the number of redundant results enable this checkbox.</span>
+    <span class="helptext">Enable this checkbox to search only for the latest version of follow-up documents.</span>
     <?php endif; ?>
 </p>
 <p>

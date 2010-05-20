@@ -588,6 +588,9 @@ div.form-comment input.submit:hover{
 }
 
 /* BOOKMARK PAGE */
+ul.bookmarks {
+    margin-bottom: 10px;
+}
 ul.bookmarks ul {
     list-style: disc;
     margin-left: 20px;

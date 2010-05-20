@@ -186,11 +186,7 @@ class searchActions extends sfActions
                     $output = array('status' => 'error', 'message' => "unsupported filter '$filter'");
                     return $this->returnJson($output);
                 }
-                if ($facets[$filter] === true) {
-                    foreach ($ids as $key => $id) {
-                        $ids[$key] = sfLuceneCriteria::sanitize($id);
-                    }
-                } else {
+                if ($facets[$filter] !== true) {
                     if (!$this->checkArrayOfInteger($ids)) {
                         $output = array('status' => 'error', 'message' => "parameter 'f' for key '$filter' to be an array of integer");
                         return $this->returnJson($output);

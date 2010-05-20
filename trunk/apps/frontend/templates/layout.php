@@ -26,32 +26,33 @@ s.parentNode.insertBefore(ga, s);
  })();
 
 </script>
+    <?php $route = sfContext::getInstance()->getRouting()->getCurrentRouteName(); ?>
     <div class="header">
       <span>un-informed.org - making commitments matter</span>
     </div>
-	<div class="nav">
+    <div class="nav">
     <ul class="mnav">
-      <li class="current"><?php echo link_to('Search', 'search'); ?></li>
+      <li class="<?php if ($route === 'search' || $route === 'clauseSearch' || $route === 'homepage') { echo 'current'; } ?>"><?php echo link_to('Search', 'search'); ?></li>
       <li><?php echo link_to('UN-i.org', 'http://www.un-i.org'); ?></li>
-      <li><?php echo link_to('About', 'about'); ?></li>
-	</ul>
-	<ul class="snav">
-<?php if ($sf_user->isAuthenticated()): ?>
-      <li><?php echo link_to('Bookmarks', 'bookmark'); ?></li>
-      <li><?php echo link_to('Settings', 'settings'); ?></li>
-      <li><?php echo link_to('Logout', 'sf_guard_signout'); ?></li>
-<?php else: ?>
-      <li><?php echo link_to('Login', 'sf_guard_signin'); ?></li>
-      <li><?php echo link_to('Register', 'apply'); ?></li>
-<?php endif; ?>
-        <li><?php echo mail_to('info@un-informed.org', 'Feedback', 'encode=true', array('subject' => '[un-informed.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?></li>
+      <li><?php echo link_to('About', 'http://www.un-informed.org'); ?></li>
     </ul>
-	</div>
+    <ul class="snav">
+<?php if ($sf_user->isAuthenticated()): ?>
+      <li class="<?php if ($route === 'bookmark') { echo 'current'; } ?>"><?php echo link_to('Bookmarks', 'bookmark'); ?></li>
+      <li class="<?php if ($route === 'settings') { echo 'current'; } ?>"><?php echo link_to('Settings', 'settings'); ?></li>
+      <li class="<?php if ($route === 'sf_guard_signout') { echo 'current'; } ?>"><?php echo link_to('Logout', 'sf_guard_signout'); ?></li>
+<?php else: ?>
+      <li class="<?php if ($route === 'sf_guard_signin') { echo 'current'; } ?>"><?php echo link_to('Login', 'sf_guard_signin'); ?></li>
+      <li class="<?php if ($route === 'apply') { echo 'current'; } ?>"><?php echo link_to('Register', 'apply'); ?></li>
+<?php endif; ?>
+        <li><?php echo mail_to('feedback@un-informed.org', 'Feedback', 'encode=true', array('subject' => '[un-informed.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?></li>
+    </ul>
+    </div>
     <?php if($sf_user->hasFlash('notice')): ?>
       <div id="flash_notice"><b>Notice:</b> <?php echo $sf_user->getFlash('notice'); ?></div>
     <?php endif; ?>
     <noscript><p class="noscript">This site runs *much* better with javascript enabled</p></noscript>
     <?php echo $sf_content ?>
-	</div>
+    </div>
   </body>
 </html>

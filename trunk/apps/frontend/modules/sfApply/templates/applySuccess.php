@@ -12,8 +12,6 @@
 <li class="sf_apply_submit_row">
 <label></label>
 <input type="submit" value="<?php echo "Create My Account" ?>" />
-<?php echo "or " ?>
-<?php echo link_to("Cancel", sfConfig::get('app_sfApplyPlugin_after', '@homepage')) ?>
 </li>
 </ul>
 </form>

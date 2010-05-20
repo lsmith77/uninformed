@@ -94,12 +94,17 @@ class Clause extends BaseClause
 
     public function getClausesByRoot() {
         $root_clause_body_id = $this->ClauseBody->root_clause_body_id;
-        $query = Doctrine_Query::create()
-            ->from('Clause c INDEXBY c.document_id')
-            ->innerJoin('c.ClauseBody cb')
-            ->innerJoin('c.Document d')
-            ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id))
-            ->orderBy('d.adoption_date');
+        try {
+            $query = Doctrine_Query::create()
+                ->from('Clause c INDEXBY c.document_id')
+                ->innerJoin('c.ClauseBody cb')
+                ->innerJoin('c.Document d')
+                ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id))
+                ->orderBy('d.adoption_date');
+        } catch (Exception $e) {
+            // TODO: we cannot handle splits
+            return array();
+        }
 
         return $query->execute();
     }

@@ -17,7 +17,7 @@ $rootdocuments = $document->getDocumentsByRoot();
     </thead>
     <tbody>
         <?php foreach($rootdocuments as $rootdoc): ?>
-        <tr<?php if ($rootdoc->getId() == $document->getId()) { echo ' style="background-color: grey"'; } ?>>
+        <tr<?php if ($rootdoc->getId() == $document->getId()) { echo ' class="highlighted"'; } ?>>
             <td>
                 <?php echo link_to((string)$rootdoc, 'document', array('id' => $rootdoc->getSlug())); ?>
             </td>

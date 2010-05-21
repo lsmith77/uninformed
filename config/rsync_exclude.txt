@@ -3,8 +3,11 @@
 /log/*
 /web/*_dev.php
 /web/uploads/*
-/data/solr_index/frontend_prod.pid
 
+/data/solr_index/frontend_prod.pid
+/web/.htaccess
+
+Thumbs.db
 .DS_Store
 
 # SCM files

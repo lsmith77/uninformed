@@ -3,7 +3,6 @@
 
 prod:
   .settings:
-    no_script_name:         false
     logging_enabled:        false
 
 dev:
@@ -19,11 +18,13 @@ test:
     error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
     cache:                  false
     web_debug:              false
-    no_script_name:         false
     etag:                   false
 
 all:
   .settings:
+    no_script_name:         true
+    check_lock:    true
+
     i18n: on
 
     # Form security secret (CSRF protection)

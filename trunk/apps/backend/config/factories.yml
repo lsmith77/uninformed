@@ -34,6 +34,11 @@ dev:
       delivery_strategy: none
 
 all:
+  storage:
+    class: sfSessionStorage
+    param:
+      session_name: UN-informed.org
+
   routing:
     class: sfPatternRouting
     param:

@@ -42,14 +42,10 @@ all:
       routes_register: false
 
     sf_guard_extra_plugin:
-      from:   noreply@UN-informed.org
+      from:   from@domain.de
 
     login_module:           sfGuardAuth
     login_action:           signin
 
     secure_module:          sfGuardAuth
     secure_action:          secure
-
-  .actions:
-    error_404_module: default   # To be called when a 404 error is raised
-    error_404_action: error404   # Or when the requested URL doesn't match any route

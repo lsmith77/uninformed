@@ -60,6 +60,10 @@ class searchActions extends sfActions
         $this->showHelp = true;
     }
 
+    public function executeAboutus(sfWebRequest $request)
+    {
+    }
+
     public function executeClauseResultsPage(sfWebRequest $request)
     {
         $this->readParameters($request);

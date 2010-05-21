@@ -10,5 +10,5 @@ all:
     restricted: true
   sfApplyPlugin:
     from:
-      email: "noreply@UN-informed.org"
+      email: "noreply@un-informed.org"
       fullname: "UN-informed.org"

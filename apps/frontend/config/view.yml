@@ -6,11 +6,11 @@ default:
     content-type: text/html
 
   metas:
-    title: UN-informed.org
-    description:  UN-informed.org is a project of MCM, providing a structured database for UN resolutions
-    keywords:     UN, resolutions
-    language:     en
-    robots:       index, follow
+    #title:        symfony project
+    #description:  symfony project
+    #keywords:     symfony, project
+    #language:     en
+    #robots:       index, follow
 
   stylesheets:    ["main.css", "smoothness/jquery-ui-1.8.custom.css"]
 

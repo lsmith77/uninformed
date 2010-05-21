@@ -9,7 +9,7 @@
     <?php include_javascripts() ?>
   </head>
   <body>
-    <div id="wrap">
+	<div id="wrap">
 <script type="text/javascript">
 
  var _gaq = _gaq || [];
@@ -28,13 +28,13 @@ s.parentNode.insertBefore(ga, s);
 </script>
     <?php $route = sfContext::getInstance()->getRouting()->getCurrentRouteName(); ?>
     <div class="header">
-      <span>UN-informed.org - making commitments matter</span>
+      <span>un-informed.org - making commitments matter</span>
     </div>
     <div class="nav">
     <ul class="mnav">
       <li class="<?php if ($route === 'search' || $route === 'clauseSearch' || $route === 'homepage') { echo 'current'; } ?>"><?php echo link_to('Search', 'search'); ?></li>
-      <li><?php echo link_to('UN-i.org', 'http://www.UN-i.org'); ?></li>
-      <li><?php echo link_to('About', 'http://www.UN-informed.org'); ?></li>
+      <li><?php echo link_to('UN-i.org', 'http://www.un-i.org'); ?></li>
+      <li><?php echo link_to('About', 'http://www.un-informed.org'); ?></li>
     </ul>
     <ul class="snav">
 <?php if ($sf_user->isAuthenticated()): ?>
@@ -45,7 +45,7 @@ s.parentNode.insertBefore(ga, s);
       <li class="<?php if ($route === 'sf_guard_signin') { echo 'current'; } ?>"><?php echo link_to('Login', 'sf_guard_signin'); ?></li>
       <li class="<?php if ($route === 'apply') { echo 'current'; } ?>"><?php echo link_to('Register', 'apply'); ?></li>
 <?php endif; ?>
-        <li><?php echo mail_to('feedback@UN-informed.org', 'Feedback', 'encode=true', array('subject' => '[UN-informed.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?></li>
+        <li><?php echo mail_to('feedback@un-informed.org', 'Feedback', 'encode=true', array('subject' => '[un-informed.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?></li>
     </ul>
     </div>
     <?php if($sf_user->hasFlash('notice')): ?>

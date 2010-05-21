@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<solr persistent="false">
+  <cores adminPath="/admin/cores">
+    <core name='ClauseBody_en' instanceDir='ClauseBody_en'></core>
+  </cores>
+</solr>

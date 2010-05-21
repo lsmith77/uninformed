@@ -1,0 +1,701 @@
+actAs: &actAs
+  Timestampable: ~
+  Blameable: &Blameable
+    default: null
+    blameVar: id
+    listener: BlameableCustomListener
+    columns:
+      created:
+        name: author_id
+        length: 4
+        options:
+          notnull: false
+      updated:
+        disabled: true
+    relations:
+      created:
+        class: sfGuardUser
+        disabled: false
+        name: Author
+#  Versionable:
+#    listener: Doctrine_AuditLog_Listener_Microtime
+#    actAs:
+#      Blameable:
+#        <<: *Blameable
+
+# apply this to the sfDoctrineGuard schema as well
+options:
+  collation: utf8_general_ci
+  charset: utf8
+  type: InnoDB
+
+sfGuardGroup:
+  actAs:
+    Timestampable: ~
+
+sfGuardPermission:
+  actAs:
+    Timestampable: ~
+
+sfGuardGroupPermission:
+  actAs:
+    Timestampable: ~
+
+sfGuardUser:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+    Blameable:
+      <<: *Blameable
+
+sfGuardUserPermission:
+  actAs:
+    Timestampable: ~
+
+sfGuardUserGroup:
+  actAs:
+    Timestampable: ~
+
+sfGuardRememberKey:
+  actAs:
+    Timestampable: ~
+
+sfGuardUserProfile:
+  tableName: sf_guard_user_profile
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    user_id:
+      type: integer(4)
+      notnull: true
+    email:
+      type: string(80)
+    fullname:
+      type: string(80)
+    validate:
+      type: string(17)
+  relations:
+    User:
+      class: sfGuardUser
+      foreign: id
+      local: user_id
+      type: one
+      onDelete: cascade
+      foreignType: one
+      foreignAlias: Profile
+
+Import:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+    Blameable:
+      <<: *Blameable
+  inheritance:
+    type:          column_aggregation
+    extends:       sfGuardUser
+  columns:
+    excel_file_id:
+      type: integer(4)
+      notnull: false
+  relations:
+    ExcelFile:
+      class: ExcelFile
+      local: excel_file_id
+      foreign: id
+
+ExcelFile:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    file:
+      type: string(255)
+      notnull: true
+    is_imported:
+      type: boolean
+      notnull: true
+      default: false
+  relations:
+    sfGuardUser:
+      class: sfGuardUser
+      local: author_id
+      foreign: id
+
+Addressee:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+  relations:
+    ClauseBodies:
+      class: ClauseBody
+      local: addressee_id
+      foreign: clause_body_id
+      refClass: ClauseAddressee
+
+Organisation:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    slug:
+      type: string(255)
+    parent_id:
+      type: integer(4)
+  relations:
+    OrganisationParent:
+      class: Organisation
+      local: parent_id
+      foreign: id
+      foreignAlias: Suborganisations
+
+DocumentType:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+    rank_priority:
+      type: integer(4)
+    legal_value:
+      type: string(30)
+      notnull: true
+
+Document:
+  actAs:
+    <<: *actAs
+    MyCommentable: ~
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    title:
+      type: string(1000)
+      notnull: true
+    slug:
+      type: string(50)
+    enforcement_date:
+      type: date
+    adoption_date:
+      type: date
+      notnull: true
+    code:
+      type: string(255)
+    min_ratification_count:
+      type: integer(4)
+    is_ratified:
+      type: boolean
+    vote_url:
+      type: string(500)
+    private_comment:
+      type: clob
+    public_comment:
+      type: clob
+    parent_document_id:
+      type: integer(4)
+    root_document_id:
+      type: integer(4)
+    organisation_id:
+      type: integer(4)
+    documenttype_id:
+      type: integer(4)
+    document_url:
+      type: string(500)
+    status:
+      type: enum
+      values: [draft, review, reviewed, inactive, active]
+      default: draft
+      notnull: true
+  relations:
+    DocumentParent:
+      class: Document
+      local: parent_document_id
+      foreign: id
+      foreignAlias: Subdocuments
+    Organisation:
+      local: organisation_id
+      foreign: id
+      foreignAlias: Organisations
+    DocumentType:
+      local: documenttype_id
+      foreign: id
+      foreignAlias: Documents
+    Tags:
+      class: Tag
+      local: document_id
+      foreign: tag_id
+      refClass: DocumentTag
+
+DocumentDocumentRelation:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    type:
+      type: enum
+      values: [recalls, closely related]
+      notnull: true
+    document_id:
+      type: integer(4)
+      notnull: true
+    related_document_id:
+      type: integer(4)
+      notnull: true
+  relations:
+    Document:
+      local: document_id
+      foreign: id
+    DocumentRelated:
+      class: Document
+      local: related_document_id
+      foreign: id
+  indexes:
+    mapping:
+      fields: [document_id, related_document_id, type]
+      type: unique
+
+DocumentClauseRelation:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    type:
+      type: enum
+      values: [closely related]
+      notnull: true
+    document_id:
+      type: integer(4)
+      notnull: true
+    related_clause_body_id:
+      type: integer(4)
+      notnull: true
+  relations:
+    Document:
+      local: document_id
+      foreign: id
+    ClauseRelated:
+      class: ClauseBody
+      local: related_clause_body_id
+      foreign: id
+  indexes:
+    mapping:
+      fields: [document_id, related_clause_body_id, type]
+      type: unique
+
+DocumentReservation:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    document_id:
+      type: integer(4)
+    country_id:
+      type: integer(4)
+    reservation:
+      type: clob
+  relations:
+    Document:
+      class: Document
+      local: document_id
+      foreign: id
+    Country:
+      local: country_id
+      foreign: id
+      foreignAlias: Countries
+  indexes:
+    mapping:
+      fields: [document_id, country_id]
+      type: unique
+
+ClauseClauseRelation:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    type:
+      type: enum
+      values: [recalls, closely related]
+      notnull: true
+    clause_id:
+      type: integer(4)
+      notnull: true
+    related_clause_id:
+      type: integer(4)
+      notnull: true
+  relations:
+    Clause:
+      local: clause_id
+      foreign: id
+    ClauseRelated:
+      class: Clause
+      local: related_clause_id
+      foreign: id
+  indexes:
+    mapping:
+      fields: [clause_id, related_clause_id, type]
+      type: unique
+
+Clause:
+  actAs:
+    <<: *actAs
+    MyCommentable: ~
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    document_id:
+      type: integer(4)
+      notnull: true
+    clause_body_id:
+      type: integer(4)
+      notnull: true
+    clause_number:
+      type: integer(4)
+      notnull: true
+    clause_number_information:
+      type: string(255)
+    clause_number_subparagraph:
+      type: string(255)
+    private_comment:
+      type: clob
+    slug:
+      type: string(50)
+  relations:
+    Document:
+      local: document_id
+      foreign: id
+      foreignAlias: Clauses
+    ClauseBody:
+      local: clause_body_id
+      foreign: id
+  indexes:
+    mapping:
+      fields: [document_id, clause_body_id]
+      type: unique
+
+ClauseBody:
+#  actAs:
+#    <<: *actAs
+#    sfLuceneDoctrineTemplate: ~
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    content:
+      type: clob
+    information_type_id:
+      type: integer(4)
+    operative_phrase_id:
+      type: integer(4)
+    public_comment:
+      type: clob
+    parent_clause_body_id:
+      type: integer(4)
+    root_clause_body_id:
+      type: integer(4)
+    is_latest_clause_body:
+      type: boolean
+      default: true
+    status:
+      type: enum
+      values: [draft, review, reviewed, inactive, active]
+      default: draft
+      notnull: true
+  relations:
+    Addressees:
+      class: Addressee
+      local: clause_body_id
+      foreign: addressee_id
+      refClass: ClauseAddressee
+    ClauseBodyRoot:
+      class: ClauseBody
+      local: root_clause_body_id
+      foreign: id
+      foreignAlias: Rootclause
+    ClauseBodyParent:
+      class: ClauseBody
+      local: parent_clause_body_id
+      foreign: id
+      foreignAlias: Subclauses
+    ClauseInformationType:
+      local: information_type_id
+      foreign: id
+      foreignAlias: Clauses
+    ClauseOperativePhrase:
+      local: operative_phrase_id
+      foreign: id
+      foreignAlias: Clauses
+    Tags:
+      class: Tag
+      local: clause_body_id
+      foreign: tag_id
+      refClass: ClauseBodyTag
+
+ClauseReservation:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    clause_body_id:
+      type: integer(4)
+    country_id:
+      type: integer(4)
+    reservation:
+      type: clob
+  relations:
+    Clause:
+      class: ClauseBody
+      local: clause_body_id
+      foreign: id
+    Country:
+      local: country_id
+      foreign: id
+      foreignAlias: Countries
+  indexes:
+    mapping:
+      fields: [clause_body_id, country_id]
+      type: unique
+
+ClauseOperativePhrase:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+
+ClauseInformationType:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+
+Tag:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    name:
+      type: string(255)
+      notnull: true
+  relations:
+    Documents:
+      class: Document
+      local: tag_id
+      foreign: document_id
+      refClass: DocumentTag
+    ClauseBodies:
+      class: ClauseBody
+      local: tag_id
+      foreign: clause_body_id
+      refClass: ClauseBodyTag
+  indexes:
+    name:
+      fields: [name]
+      type: unique
+
+TagImplication:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    implication_type:
+      type: enum
+      values: ['implies', 'suggests']
+      notnull: true
+    tag_id:
+      type: integer(4)
+      notnull: true
+    implied_tag_id:
+      type: integer(4)
+      notnull: true
+  relations:
+    Tag:
+      class: Tag
+      local: tag_id
+      foreign: id
+    ImpliedTag:
+      class: Tag
+      local: implied_tag_id
+      foreign: id
+  indexes:
+    mapping:
+      fields: [tag_id, implied_tag_id]
+      type: unique
+
+Bookmark:
+  actAs:
+    Timestampable: ~
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    user_id:
+      type: integer(4)
+      notnull: true
+    object_type:
+      type: enum
+      values: [clause, document]
+      notnull: true
+    object_id:
+      type: integer(4)
+      notnull: true
+  indexes:
+    mapping:
+      fields: [user_id, object_type, object_id]
+      type: unique
+
+Country:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    iso:
+      type: string(3)
+      notnull: true
+    name:
+      type: string(255)
+      notnull: true
+
+CountryOrganisation:
+  actAs:
+    <<: *actAs
+    Temporal:
+      unique_fields: [country_id, organisation_id]
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    country_id:
+      type: integer(4)
+      notnull: true
+    organisation_id:
+      type: integer(4)
+      notnull: true
+  relations:
+    Country:
+      local: country_id
+      foreign: id
+      foreignAlias: Organisations
+    Organisation:
+      local: organisation_id
+      foreign: id
+      foreignAlias: Countries
+
+Vote:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    type:
+      type: enum
+      values: ['adopted without a vote','yes','no','abstention','not present','signed','ratified']
+    vote_date:
+      type: datetime
+    document_id:
+      type: integer(4)
+      notnull: true
+    country_id:
+      type: integer(4)
+      notnull: true
+  relations:
+    Document:
+      local: document_id
+      foreign: id
+      foreignAlias: Votes
+    Country:
+      local: country_id
+      foreign: id
+      foreignAlias: Votes
+  indexes:
+    mapping:
+      fields: [document_id, country_id]
+      type: unique
+
+ClauseAddressee:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    clause_body_id:
+      type: integer(4)
+      notnull: true
+    addressee_id:
+      type: integer(4)
+      notnull: true
+  indexes:
+    mapping:
+      fields: [clause_body_id, addressee_id]
+      type: unique
+
+DocumentTag:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    document_id:
+      type: integer(4)
+      notnull: true
+    tag_id:
+      type: integer(4)
+      notnull: true
+  indexes:
+    mapping:
+      fields: [document_id, tag_id]
+      type: unique
+
+ClauseBodyTag:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    clause_body_id:
+      type: integer(4)
+      notnull: true
+    tag_id:
+      type: integer(4)
+      notnull: true
+  indexes:
+    mapping:
+      fields: [clause_body_id, tag_id]
+      type: unique

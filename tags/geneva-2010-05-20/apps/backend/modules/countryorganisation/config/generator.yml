@@ -1,0 +1,22 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           CountryOrganisation
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              countryorganisation
+    plural:                countryorganisations
+    route_prefix:          country_organisation
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        display: [country, organisation, eff_date, exp_date]
+      filter:  ~
+      form:    ~
+      edit:    ~
+      new:     ~

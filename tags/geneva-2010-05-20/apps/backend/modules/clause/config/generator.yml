@@ -1,0 +1,23 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Clause
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              clause
+    plural:                clauses
+    route_prefix:          clause
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        display: [_clause_number, _tags, _status, _process, _information_type, _operative_phrase, _addressees, author]
+      filter:
+        display: ["quick edit search", author_id]
+      form:    ~
+      edit:    ~
+      new:     ~

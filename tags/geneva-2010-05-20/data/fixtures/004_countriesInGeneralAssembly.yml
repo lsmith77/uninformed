@@ -1,0 +1,1038 @@
+CountryOrganisation:
+  001:
+      Country: AFGHANISTAN
+      Organisation: GA
+      eff_date: "1946-11-19"
+      exp_date: "2100-01-01"
+  002:
+      Country: ALBANIA
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+  003:
+      Country: ALGERIA
+      Organisation: GA
+      eff_date: "1962-10-08"
+      exp_date: "2100-01-01"
+  004:
+      Country: ANDORRA
+      Organisation: GA
+      eff_date: "1993-07-28"
+      exp_date: "2100-01-01"
+  005:
+      Country: ANGOLA
+      Organisation: GA
+      eff_date: "1976-12-01"
+      exp_date: "2100-01-01"
+  006:
+      Country: ANTIGUA AND BARBUDA
+      Organisation: GA
+      eff_date: "1981-11-11"
+      exp_date: "2100-01-01"
+  007:
+      Country: ARGENTINA
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  008:
+      Country: ARMENIA
+      Organisation: GA
+      eff_date: "1992-03-02"
+      exp_date: "2100-01-01"
+
+  009:
+      Country: AUSTRALIA
+      Organisation: GA
+      eff_date: "1945-11-01"
+      exp_date: "2100-01-01"
+
+  010:
+      Country: AUSTRIA
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+
+  011:
+      Country: AZERBAIJAN
+      Organisation: GA
+      eff_date: "1992-03-02"
+      exp_date: "2100-01-01"
+
+  012:
+      Country: BAHAMAS
+      Organisation: GA
+      eff_date: "1973-09-18"
+      exp_date: "2100-01-01"
+
+  013:
+      Country: BAHRAIN
+      Organisation: GA
+      eff_date: "1971-09-21"
+      exp_date: "2100-01-01"
+
+  014:
+      Country: BANGLADESH
+      Organisation: GA
+      eff_date: "1974-09-17"
+      exp_date: "2100-01-01"
+
+  015:
+      Country: BARBADOS
+      Organisation: GA
+      eff_date: "1966-12-09"
+      exp_date: "2100-01-01"
+
+  016:
+      Country: BELARUS
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  017:
+      Country: BELGIUM
+      Organisation: GA
+      eff_date: "1945-12-27"
+      exp_date: "2100-01-01"
+
+  018:
+      Country: BELIZE
+      Organisation: GA
+      eff_date: "1981-09-25"
+      exp_date: "2100-01-01"
+  019:
+      Country: BENIN
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+  020:
+      Country: BHUTAN
+      Organisation: GA
+      eff_date: "1971-09-21"
+      exp_date: "2100-01-01"
+  021:
+      Country: BOLIVIA
+      Organisation: GA
+      eff_date: "1945-11-14"
+      exp_date: "2100-01-01"
+  022:
+      Country: BOSNIA AND HERZEGOVINA
+      Organisation: GA
+      eff_date: "1992-05-22"
+      exp_date: "2100-01-01"
+  023:
+      Country: BOTSWANA
+      Organisation: GA
+      eff_date: "1966-10-17"
+      exp_date: "2100-01-01"
+
+  024:
+      Country: BRAZIL
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  025:
+      Country: BRUNEI DARUSSALAM
+      Organisation: GA
+      eff_date: "1984-09-21"
+      exp_date: "2100-01-01"
+
+  026:
+      Country: BULGARIA
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+  027:
+      Country: BURKINA FASO
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+
+  028:
+      Country: BURUNDI
+      Organisation: GA
+      eff_date: "1962-09-18"
+      exp_date: "2100-01-01"
+  029:
+      Country: CAMBODIA
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+
+  030:
+      Country: CAMEROON
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+
+  031:
+      Country: CANADA
+      Organisation: GA
+      eff_date: "1945-11-09"
+      exp_date: "2100-01-01"
+  032:
+      Country: CAPE VERDE
+      Organisation: GA
+      eff_date: "1975-09-16"
+      exp_date: "2100-01-01"
+  033:
+      Country: CENTRAL AFRICAN REPUBLIC
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+  034:
+      Country: CHAD
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+  035:
+      Country: CHILE
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  036:
+      Country: CHINA
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  037:
+      Country: COLOMBIA
+      Organisation: GA
+      eff_date: "1945-11-05"
+      exp_date: "2100-01-01"
+
+  038:
+      Country: COMOROS
+      Organisation: GA
+      eff_date: "1975-11-12"
+      exp_date: "2100-01-01"
+  039:
+      Country: CONGO
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+  040:
+      Country: COSTA RICA
+      Organisation: GA
+      eff_date: "1945-11-02"
+      exp_date: "2100-01-01"
+  041:
+      Country: COTE D'IVOIRE
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+  042:
+      Country: CROATIA
+      Organisation: GA
+      eff_date: "1992-05-22"
+      exp_date: "2100-01-01"
+  043:
+      Country: CUBA
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  044:
+      Country: CYPRUS
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+  045:
+      Country: CZECH REPUBLIC
+      Organisation: GA
+      eff_date: "1993-01-19"
+      exp_date: "2100-01-01"
+  046:
+      Country: KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF
+      Organisation: GA
+      eff_date: "1991-09-17"
+      exp_date: "2100-01-01"
+
+  047:
+      Country: CONGO, DEMOCRATIC REPUBLIC OF THE
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+  048:
+      Country: DENMARK
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  049:
+      Country: DJIBOUTI
+      Organisation: GA
+      eff_date: "1977-09-20"
+      exp_date: "2100-01-01"
+
+  050:
+      Country: DOMINICA
+      Organisation: GA
+      eff_date: "1978-12-18"
+      exp_date: "2100-01-01"
+
+  051:
+      Country: DOMINICAN REPUBLIC
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  052:
+      Country: ECUADOR
+      Organisation: GA
+      eff_date: "1945-12-21"
+      exp_date: "2100-01-01"
+
+  053:
+      Country: EGYPT
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  054:
+      Country: EL SALVADOR
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  055:
+      Country: EQUATORIAL GUINEA
+      Organisation: GA
+      eff_date: "1968-11-12"
+      exp_date: "2100-01-01"
+
+  056:
+      Country: ERITREA
+      Organisation: GA
+      eff_date: "1993-05-28"
+      exp_date: "2100-01-01"
+  057:
+      Country: ESTONIA
+      Organisation: GA
+      eff_date: "1991-09-17"
+      exp_date: "2100-01-01"
+  058:
+      Country: ETHIOPIA
+      Organisation: GA
+      eff_date: "1945-11-13"
+      exp_date: "2100-01-01"
+
+  059:
+      Country: FIJI
+      Organisation: GA
+      eff_date: "1970-10-13"
+      exp_date: "2100-01-01"
+
+  060:
+      Country: FINLAND
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+
+  061:
+      Country: FRANCE
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  062:
+      Country: GABON
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+
+  063:
+      Country: GAMBIA
+      Organisation: GA
+      eff_date: "1965-09-21"
+      exp_date: "2100-01-01"
+  064:
+      Country: GEORGIA
+      Organisation: GA
+      eff_date: "1992-07-31"
+      exp_date: "2100-01-01"
+  065:
+      Country: GERMANY
+      Organisation: GA
+      eff_date: "1973-09-18"
+      exp_date: "2100-01-01"
+
+  066:
+      Country: GHANA
+      Organisation: GA
+      eff_date: "1957-03-08"
+      exp_date: "2100-01-01"
+  067:
+      Country: GREECE
+      Organisation: GA
+      eff_date: "1945-10-25"
+      exp_date: "2100-01-01"
+  068:
+      Country: GRENADA
+      Organisation: GA
+      eff_date: "1974-09-17"
+      exp_date: "2100-01-01"
+
+  069:
+      Country: GUATEMALA
+      Organisation: GA
+      eff_date: "1945-11-21"
+      exp_date: "2100-01-01"
+  070:
+      Country: GUINEA
+      Organisation: GA
+      eff_date: "1958-12-12"
+      exp_date: "2100-01-01"
+
+  071:
+      Country: GUINEA-BISSAU
+      Organisation: GA
+      eff_date: "1974-09-17"
+      exp_date: "2100-01-01"
+  072:
+      Country: GUYANA
+      Organisation: GA
+      eff_date: "1966-09-20"
+      exp_date: "2100-01-01"
+  073:
+      Country: HAITI
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  074:
+      Country: HONDURAS
+      Organisation: GA
+      eff_date: "1945-12-17"
+      exp_date: "2100-01-01"
+
+  075:
+      Country: HUNGARY
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+
+  076:
+      Country: ICELAND
+      Organisation: GA
+      eff_date: "1946-11-19"
+      exp_date: "2100-01-01"
+
+  077:
+      Country: INDIA
+      Organisation: GA
+      eff_date: "1945-10-30"
+      exp_date: "2100-01-01"
+  078:
+      Country: INDONESIA
+      Organisation: GA
+      eff_date: "1950-09-28"
+      exp_date: "2100-01-01"
+
+  079:
+      Country: IRAN, ISLAMIC REPUBLIC OF
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  080:
+      Country: IRAQ
+      Organisation: GA
+      eff_date: "1945-12-21"
+      exp_date: "2100-01-01"
+  081:
+      Country: IRELAND
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+
+  082:
+      Country: ISRAEL
+      Organisation: GA
+      eff_date: "1949-05-11"
+      exp_date: "2100-01-01"
+
+  083:
+      Country: ITALY
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+
+  084:
+      Country: JAMAICA
+      Organisation: GA
+      eff_date: "1962-09-18"
+      exp_date: "2100-01-01"
+  085:
+      Country: JAPAN
+      Organisation: GA
+      eff_date: "1956-12-18"
+      exp_date: "2100-01-01"
+
+  086:
+      Country: JORDAN
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+
+  087:
+      Country: KAZAKHSTAN
+      Organisation: GA
+      eff_date: "1992-03-02"
+      exp_date: "2100-01-01"
+
+  088:
+      Country: KENYA
+      Organisation: GA
+      eff_date: "1963-12-16"
+      exp_date: "2100-01-01"
+
+  089:
+      Country: KIRIBATI
+      Organisation: GA
+      eff_date: "1999-09-14"
+      exp_date: "2100-01-01"
+
+  090:
+      Country: KUWAIT
+      Organisation: GA
+      eff_date: "1963-05-14"
+      exp_date: "2100-01-01"
+
+  091:
+      Country: KYRGYZSTAN
+      Organisation: GA
+      eff_date: "1992-03-02"
+      exp_date: "2100-01-01"
+
+  092:
+      Country: LAO PEOPLE'S DEMOCRATIC REPUBLIC
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+
+  093:
+      Country: LATVIA
+      Organisation: GA
+      eff_date: "1991-09-17"
+      exp_date: "2100-01-01"
+  094:
+      Country: LEBANON
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  095:
+      Country: LESOTHO
+      Organisation: GA
+      eff_date: "1966-10-17"
+      exp_date: "2100-01-01"
+  096:
+      Country: LIBERIA
+      Organisation: GA
+      eff_date: "1945-11-02"
+      exp_date: "2100-01-01"
+  097:
+      Country: LIBYAN ARAB JAMAHIRIYA
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+
+  098:
+      Country: LIECHTENSTEIN
+      Organisation: GA
+      eff_date: "1990-09-18"
+      exp_date: "2100-01-01"
+  099:
+      Country: LITHUANIA
+      Organisation: GA
+      eff_date: "1991-09-17"
+      exp_date: "2100-01-01"
+  100:
+      Country: LUXEMBOURG
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  101:
+      Country: MADAGASCAR
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+  102:
+      Country: MALAWI
+      Organisation: GA
+      eff_date: "1964-12-01"
+      exp_date: "2100-01-01"
+  103:
+      Country: MALAYSIA
+      Organisation: GA
+      eff_date: "1957-09-17"
+      exp_date: "2100-01-01"
+  104:
+      Country: MALDIVES
+      Organisation: GA
+      eff_date: "1965-09-21"
+      exp_date: "2100-01-01"
+  105:
+      Country: MALI
+      Organisation: GA
+      eff_date: "1960-09-28"
+      exp_date: "2100-01-01"
+  106:
+      Country: MALTA
+      Organisation: GA
+      eff_date: "1964-12-01"
+      exp_date: "2100-01-01"
+  107:
+      Country: MARSHALL ISLANDS
+      Organisation: GA
+      eff_date: "1991-09-17"
+      exp_date: "2100-01-01"
+  108:
+      Country: MAURITANIA
+      Organisation: GA
+      eff_date: "1961-10-27"
+      exp_date: "2100-01-01"
+  109:
+      Country: MAURITIUS
+      Organisation: GA
+      eff_date: "1968-04-24"
+      exp_date: "2100-01-01"
+  110:
+      Country: MEXICO
+      Organisation: GA
+      eff_date: "1945-11-07"
+      exp_date: "2100-01-01"
+  111:
+      Country: MICRONESIA, FEDERATED STATES OF
+      Organisation: GA
+      eff_date: "1991-09-17"
+      exp_date: "2100-01-01"
+  112:
+      Country: MONACO
+      Organisation: GA
+      eff_date: "1993-05-28"
+      exp_date: "2100-01-01"
+  113:
+      Country: MONGOLIA
+      Organisation: GA
+      eff_date: "1961-10-27"
+      exp_date: "2100-01-01"
+  114:
+      Country: MONTENEGRO
+      Organisation: GA
+      eff_date: "2006-06-28"
+      exp_date: "2100-01-01"
+  115:
+      Country: MOROCCO
+      Organisation: GA
+      eff_date: "1956-11-12"
+      exp_date: "2100-01-01"
+  116:
+      Country: MOZAMBIQUE
+      Organisation: GA
+      eff_date: "1975-09-16"
+      exp_date: "2100-01-01"
+  117:
+      Country: MYANMAR
+      Organisation: GA
+      eff_date: "1948-04-19"
+      exp_date: "2100-01-01"
+
+  118:
+      Country: NAMIBIA
+      Organisation: GA
+      eff_date: "1990-04-23"
+      exp_date: "2100-01-01"
+
+  119:
+      Country: NAURU
+      Organisation: GA
+      eff_date: "1999-09-14"
+      exp_date: "2100-01-01"
+
+  120:
+      Country: NEPAL
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+  121:
+      Country: NETHERLANDS
+      Organisation: GA
+      eff_date: "1945-12-10"
+      exp_date: "2100-01-01"
+  122:
+      Country: NEW ZEALAND
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  123:
+      Country: NICARAGUA
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  124:
+      Country: NIGER
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+
+  125:
+      Country: NIGERIA
+      Organisation: GA
+      eff_date: "1960-10-07"
+      exp_date: "2100-01-01"
+  126:
+      Country: NORWAY
+      Organisation: GA
+      eff_date: "1945-11-27"
+      exp_date: "2100-01-01"
+  127:
+      Country: OMAN
+      Organisation: GA
+      eff_date: "1971-10-07"
+      exp_date: "2100-01-01"
+  128:
+      Country: PAKISTAN
+      Organisation: GA
+      eff_date: "1947-09-30"
+      exp_date: "2100-01-01"
+  129:
+      Country: PALAU
+      Organisation: GA
+      eff_date: "1994-12-15"
+      exp_date: "2100-01-01"
+  130:
+      Country: PANAMA
+      Organisation: GA
+      eff_date: "1945-11-13"
+      exp_date: "2100-01-01"
+  131:
+      Country: PAPUA NEW GUINEA
+      Organisation: GA
+      eff_date: "1975-10-10"
+      exp_date: "2100-01-01"
+  132:
+      Country: PARAGUAY
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  133:
+      Country: PERU
+      Organisation: GA
+      eff_date: "1945-10-31"
+      exp_date: "2100-01-01"
+  134:
+      Country: PHILIPPINES
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  135:
+      Country: POLAND
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  136:
+      Country: PORTUGAL
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+
+  137:
+      Country: QATAR
+      Organisation: GA
+      eff_date: "1971-09-21"
+      exp_date: "2100-01-01"
+
+  138:
+      Country: KOREA, REPUBLIC OF
+      Organisation: GA
+      eff_date: "1991-09-17"
+      exp_date: "2100-01-01"
+
+  139:
+      Country: MOLDOVA
+      Organisation: GA
+      eff_date: "1992-03-02"
+      exp_date: "2100-01-01"
+
+  140:
+      Country: ROMANIA
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+
+
+  141:
+      Country: RUSSIAN FEDERATION
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  142:
+      Country: RWANDA
+      Organisation: GA
+      eff_date: "1962-09-18"
+      exp_date: "2100-01-01"
+  143:
+      Country: SAINT KITTS AND NEVIS
+      Organisation: GA
+      eff_date: "1983-09-23"
+      exp_date: "2100-01-01"
+  144:
+      Country: SAINT LUCIA
+      Organisation: GA
+      eff_date: "1979-09-18"
+      exp_date: "2100-01-01"
+
+  145:
+      Country: SAINT VINCENT AND THE GRENADINES
+      Organisation: GA
+      eff_date: "1980-09-16"
+      exp_date: "2100-01-01"
+
+  146:
+      Country: SAMOA
+      Organisation: GA
+      eff_date: "1976-12-15"
+      exp_date: "2100-01-01"
+
+  147:
+      Country: SAN MARINO
+      Organisation: GA
+      eff_date: "1992-03-02"
+      exp_date: "2100-01-01"
+
+  148:
+      Country: SAO TOME AND PRINCIPE
+      Organisation: GA
+      eff_date: "1975-09-16"
+      exp_date: "2100-01-01"
+
+  149:
+      Country: SAUDI ARABIA
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  150:
+      Country: SENEGAL
+      Organisation: GA
+      eff_date: "1960-09-28"
+      exp_date: "2100-01-01"
+
+  151:
+      Country: SERBIA
+      Organisation: GA
+      eff_date: "2000-11-01"
+      exp_date: "2100-01-01"
+
+  152:
+      Country: SEYCHELLES
+      Organisation: GA
+      eff_date: "1976-09-21"
+      exp_date: "2100-01-01"
+
+  153:
+      Country: SIERRA LEONE
+      Organisation: GA
+      eff_date: "1961-09-27"
+      exp_date: "2100-01-01"
+
+  154:
+      Country: SINGAPORE
+      Organisation: GA
+      eff_date: "1965-09-21"
+      exp_date: "2100-01-01"
+  155:
+      Country: SLOVAKIA
+      Organisation: GA
+      eff_date: "1993-01-19"
+      exp_date: "2100-01-01"
+  156:
+      Country: SLOVENIA
+      Organisation: GA
+      eff_date: "1992-05-22"
+      exp_date: "2100-01-01"
+  157:
+      Country: SOLOMON ISLANDS
+      Organisation: GA
+      eff_date: "1978-09-19"
+      exp_date: "2100-01-01"
+  158:
+      Country: SOMALIA
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+  159:
+      Country: SOUTH AFRICA
+      Organisation: GA
+      eff_date: "1945-11-07"
+      exp_date: "2100-01-01"
+  160:
+      Country: SPAIN
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+  161:
+      Country: SRI LANKA
+      Organisation: GA
+      eff_date: "1955-12-14"
+      exp_date: "2100-01-01"
+  162:
+      Country: SUDAN
+      Organisation: GA
+      eff_date: "1956-11-12"
+      exp_date: "2100-01-01"
+  163:
+      Country: SURINAME
+      Organisation: GA
+      eff_date: "1975-12-04"
+      exp_date: "2100-01-01"
+  164:
+      Country: SWAZILAND
+      Organisation: GA
+      eff_date: "1968-09-24"
+      exp_date: "2100-01-01"
+  165:
+      Country: SWEDEN
+      Organisation: GA
+      eff_date: "1946-11-19"
+      exp_date: "2100-01-01"
+  166:
+      Country: SWITZERLAND
+      Organisation: GA
+      eff_date: "2002-09-10"
+      exp_date: "2100-01-01"
+  167:
+      Country: SYRIAN ARAB REPUBLIC
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  168:
+      Country: TAJIKISTAN
+      Organisation: GA
+      eff_date: "1992-03-02"
+      exp_date: "2100-01-01"
+  169:
+      Country: THAILAND
+      Organisation: GA
+      eff_date: "1946-12-16"
+      exp_date: "2100-01-01"
+  170:
+      Country: MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF
+      Organisation: GA
+      eff_date: "1993-04-08"
+      exp_date: "2100-01-01"
+  171:
+      Country: TIMOR-LESTE (EAST TIMOR)
+      Organisation: GA
+      eff_date: "2002-09-27"
+      exp_date: "2100-01-01"
+  172:
+      Country: TOGO
+      Organisation: GA
+      eff_date: "1960-09-20"
+      exp_date: "2100-01-01"
+  173:
+      Country: TONGA
+      Organisation: GA
+      eff_date: "1999-09-14"
+      exp_date: "2100-01-01"
+  174:
+      Country: TRINIDAD AND TOBAGO
+      Organisation: GA
+      eff_date: "1962-09-18"
+      exp_date: "2100-01-01"
+  175:
+      Country: TUNISIA
+      Organisation: GA
+      eff_date: "1956-11-12"
+      exp_date: "2100-01-01"
+  176:
+      Country: TURKEY
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  177:
+      Country: TURKMENISTAN
+      Organisation: GA
+      eff_date: "1992-03-02"
+      exp_date: "2100-01-01"
+
+  178:
+      Country: TUVALU
+      Organisation: GA
+      eff_date: "2000-09-05"
+      exp_date: "2100-01-01"
+
+  179:
+      Country: UGANDA
+      Organisation: GA
+      eff_date: "1962-10-25"
+      exp_date: "2100-01-01"
+
+  180:
+      Country: UKRAINE
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+
+  181:
+      Country: UNITED ARAB EMIRATES
+      Organisation: GA
+      eff_date: "1971-12-09"
+      exp_date: "2100-01-01"
+  182:
+      Country: UNITED KINGDOM
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  183:
+      Country: TANZANIA, UNITED REPUBLIC OF
+      Organisation: GA
+      eff_date: "1961-12-14"
+      exp_date: "2100-01-01"
+  184:
+      Country: UNITED STATES OF AMERICA
+      Organisation: GA
+      eff_date: "1945-10-24"
+      exp_date: "2100-01-01"
+  185:
+      Country: URUGUAY
+      Organisation: GA
+      eff_date: "1945-12-18"
+      exp_date: "2100-01-01"
+  186:
+      Country: UZBEKISTAN
+      Organisation: GA
+      eff_date: "1992-03-02"
+      exp_date: "2100-01-01"
+  187:
+      Country: VANUATU
+      Organisation: GA
+      eff_date: "1981-09-15"
+      exp_date: "2100-01-01"
+  188:
+      Country: VENEZUELA, BOLIVARIAN REPUBLIC OF
+      Organisation: GA
+      eff_date: "1945-11-15"
+      exp_date: "2100-01-01"
+  189:
+      Country: VIETNAM
+      Organisation: GA
+      eff_date: "1977-09-20"
+      exp_date: "2100-01-01"
+  190:
+      Country: YEMEN
+      Organisation: GA
+      eff_date: "1947-09-30"
+      exp_date: "2100-01-01"
+
+  191:
+      Country: ZAMBIA
+      Organisation: GA
+      eff_date: "1964-12-01"
+      exp_date: "2100-01-01"
+
+  192:
+      Country: ZIMBABWE
+      Organisation: GA
+      eff_date: "1980-08-25"
+      exp_date: "2100-01-01"

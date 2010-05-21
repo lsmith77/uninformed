@@ -1,0 +1,32 @@
+See: http://code.google.com/p/uninformed
+
+Install just like any standard symfony application:
+
+<VirtualHost *:80>
+  ServerName uninformed.lo
+  DocumentRoot "/foo/uninformed/trunk/web"
+  DirectoryIndex index.php
+  <Directory "/foo/uninformed/trunk/web">
+    AllowOverride All
+    Allow from All
+  </Directory>
+
+  Alias /sf /foo/uninformed/trunk/lib/vendor/symfony/data/web/sf
+  <Directory "/foo/uninformed/trunk/lib/vendor/symfony/data/web/sf">
+    AllowOverride All
+    Allow from All
+  </Directory>
+</VirtualHost>
+
+php symfony doctrine:build --all --and-load
+
+In order to get the search going you need to start solr
+See: http://svn.symfony-project.com/plugins/sfSolrPlugin/branches/sf1.2/README
+
+php symfony lucene:create-solr-config frontend
+php symfony lucene:service frontend start (for windows see the sfSolrPlugin README)
+php symfony lucene:update-model-system --model=ClauseBody --delete=true frontend ClauseBody en
+
+To deploy to the server:
+
+php symfony project:deploy production --go

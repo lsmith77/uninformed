@@ -1,0 +1,19 @@
+# Project files
+/cache/*
+/log/*
+/web/*_dev.php
+/web/uploads/*
+/data/solr_index/frontend_prod.pid
+
+.DS_Store
+
+# SCM files
+.arch-params
+.bzr
+_darcs
+.git
+.hg
+.monotone
+.svn
+CVS
+

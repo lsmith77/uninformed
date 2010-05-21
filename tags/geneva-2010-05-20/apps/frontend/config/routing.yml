@@ -1,0 +1,90 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: search, action: index }
+
+search:
+  url:   /
+  param: { module: search, action: index }
+
+aboutus:
+  url:   /aboutus
+  param: { module: search, action: aboutus }
+
+clauseSearch:
+  url:   /search/:action
+  param: { module: search, action: clauseResultsPage }
+
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+apply:
+  url:  /apply
+  param: { module: sfApply, action: apply }
+
+reset:
+  url: /reset
+  param: { module: sfApply, action: reset }
+
+resetRequest:
+  url: /reset-request
+  param: { module: sfApply, action: resetRequest }
+
+validate:
+  url: /confirm/:validate
+  param: { module: sfApply, action: confirm }
+
+settings:
+  url: /settings
+  param: { module: sfApply, action: settings }
+
+sf_guard_password:
+  url: /reset-request
+  param: { module: sfApply, action: resetRequest }
+
+bookmark:
+  url:     /bookmark
+  class: sfDoctrineRoute
+  options: { model: Bookmark, type: object }
+  param: { module: bookmark, action: index }
+
+bookmark_action:
+  url:     /bookmark/:action/:type/:id
+  param:   { module: bookmark }
+  requirements:
+    type: document|clause
+    id: \d+-?.*
+
+clause:
+  url:     /clause/:id/*
+  class:   sfDoctrineRoute
+  options: { model: Clause, type: object }
+  param:   { module: clause, action: index }
+  requirements:
+    id: \d+-?.*
+    sf_method: [get, post]
+
+document:
+  url:     /document/:id/*
+  class:   sfDoctrineRoute
+  options: { model: Document, type: object }
+  param:   { module: document, action: index }
+  requirements:
+    id: \d+-?.*
+    sf_method: [get, post]
+
+un_i_info:
+  url:     /un-i.org
+  param: { module: un_i, action: index }
+
+about:
+  url:     /about
+  param: { module: about, action: index }

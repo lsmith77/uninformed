@@ -16,7 +16,6 @@ class defaultActions extends sfActions
      */
     public function executeError404()
     {
-//throw new sfException('Testing the 500 error');
     }
 
 #    public function executeAboutus(sfWebRequest $request)

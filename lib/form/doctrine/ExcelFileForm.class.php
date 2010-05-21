@@ -16,8 +16,9 @@ class ExcelFileForm extends BaseExcelFileForm
       'file', new sfWidgetFormInputFile()
     );
 
-    $this->setValidator(
-      'file', new sfValidatorFile()
-    );
+    $this->validatorSchema['file'] = new sfValidatorFile(array(
+      'mime_types' => array('application/excel', 'application/vnd.ms-excel', 'application/x-excel', 'application/x-msexcel', 'application/vnd.ms-office'),
+      'path'       => sfConfig::get('sf_data_dir').'/files/excel',
+    ));
   }
 }

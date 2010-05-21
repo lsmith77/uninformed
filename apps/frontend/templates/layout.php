@@ -10,6 +10,7 @@
   </head>
   <body>
     <div id="wrap">
+<?php if (strpos($sf_context->getRequest()->getUri(), 'http://search.un-informed.org') === 0): ?>
 <script type="text/javascript">
 
  var _gaq = _gaq || [];
@@ -26,6 +27,7 @@ s.parentNode.insertBefore(ga, s);
  })();
 
 </script>
+<?php endif; ?>
     <?php $route = sfContext::getInstance()->getRouting()->getCurrentRouteName(); ?>
     <div class="header">
       <span>UN-informed.org - making commitments matter</span>

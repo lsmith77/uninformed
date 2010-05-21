@@ -10,9 +10,9 @@ search:
   url:   /
   param: { module: search, action: index }
 
-aboutus:
-  url:   /aboutus
-  param: { module: search, action: aboutus }
+#aboutus:
+#  url:   /aboutus
+#  param: { module: default, action: aboutus }
 
 clauseSearch:
   url:   /search/:action

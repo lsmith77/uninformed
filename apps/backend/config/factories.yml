@@ -12,6 +12,11 @@ prod:
           param:
             level: err
             file: %SF_LOG_DIR%/%SF_APP%_%SF_ENVIRONMENT%.log
+  storage:
+    class: sfSessionStorage
+    param:
+      session_name: UNinformedorg
+      session_cookie_domain: .un-informed.org
 
 test:
   storage:
@@ -34,11 +39,6 @@ dev:
       delivery_strategy: none
 
 all:
-  storage:
-    class: sfSessionStorage
-    param:
-      session_name: UNinformedorg
-
   routing:
     class: sfPatternRouting
     param:

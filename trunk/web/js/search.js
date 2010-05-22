@@ -3,7 +3,7 @@ $(function(){
     var
     // adds a tag when picked in the autocomplete dropdown
     addTag = function(item) {
-        var tpl = '<li><a><img src="/images/close.gif" /></a><%= this.label %>'+
+        var tpl = '<li><a><img src="/images/close.gif" /></a>&nbsp;<%= this.label %>'+
         '<input type="hidden" name="t[<%= this.id %>]" value="<%= this.label %>" /></li>';
         $('#taglist').jqoteapp(tpl, item);
     },

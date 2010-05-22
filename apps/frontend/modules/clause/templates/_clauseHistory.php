@@ -20,7 +20,7 @@ $rawrootclauses = $rootclauses->getRawValue();
         </tr>
     </thead>
     <tbody>
-        <?php $introduced = null; ?>
+        <?php $introduced = null; $content = null; ?>
         <?php foreach($rootdocuments as $i => $rootdoc): ?>
         <?php $current = (isset($rootclauses[$rootdoc->getId()])) ? $rootclauses[$rootdoc->getId()] : null; ?>
         <tr<?php if ($rootclauses[$rootdoc->getId()]->getId() == $clause->getId()) { echo ' class="highlighted"'; } ?>>
@@ -57,7 +57,13 @@ $rawrootclauses = $rootclauses->getRawValue();
             <td>
                 <?php if (isset($current)): ?>
                     <?php echo link_to($current->getClauseNumber(), 'clause', array('id' => $current->getSlug())); ?>:
-                    <?php echo $rawrootclauses[$rootdoc->getId()]->ClauseBody->getContent(); ?>
+                    <?php $new_content = $rawrootclauses[$rootdoc->getId()]->ClauseBody->getContent(); ?>
+                     <?php if (isset($content)): ?>
+                        <?php echo textdiff::htmlDiff($content, $new_content); ?>
+                     <?php else: ?>
+                        <?php echo $new_content; ?>
+                     <?php endif; ?>
+                    <?php $content = $new_content; ?>
                 <?php endif; ?>
                 </td>
         </tr>

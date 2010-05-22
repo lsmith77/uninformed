@@ -43,7 +43,7 @@ all:
       routes_register: false
 
     sf_guard_extra_plugin:
-      from:   from@domain.de
+      from:   noreply@UN-informed.org
 
     login_module:           sfGuardAuth
     login_action:           signin

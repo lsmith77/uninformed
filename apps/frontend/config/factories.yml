@@ -37,7 +37,7 @@ all:
   storage:
     class: sfSessionStorage
     param:
-      session_name: UN-informed.org
+      session_name: UNinformedorg
 
   routing:
     class: sfPatternRouting

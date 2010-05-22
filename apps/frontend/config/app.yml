@@ -13,4 +13,4 @@ all:
       email: "noreply@UN-informed.org"
       fullname: "UN-informed.org"
   sf_guard_plugin:
-    remember_cookie_name:   UN-informed.org-RememberMe
+    remember_cookie_name:   UNinformedorgRememberMe

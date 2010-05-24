@@ -19,5 +19,6 @@ generator:
       filter:
         display: ["quick edit search", author_id]
       form:    ~
-      edit:    ~
+      edit:
+        display: [name, author_id, created_at, updated_at]
       new:     ~

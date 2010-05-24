@@ -21,4 +21,5 @@ generator:
       form:    ~
       edit:
         display: [name, author_id, created_at, updated_at]
-      new:     ~
+      new:
+        display: [name, author_id]

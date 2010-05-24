@@ -12,11 +12,23 @@ default:
     language:     en
     robots:       index, follow
 
-  stylesheets:    ["main.css", "smoothness/jquery-ui-1.8.custom.css"]
+  stylesheets:
+    - "main.css"
+    - "smoothness/jquery-ui-1.8.custom.css"
+
+  stylesheets:
+    - "main.css"
+    - http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css
 
   javascripts:
     - jquery-1.4.2.min.js
     - jquery-ui-1.8.custom.min.js
+    - jquery.jqote2.js
+    - main.js
+
+  javascripts:
+    - http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js
+    - http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js
     - jquery.jqote2.js
     - main.js
 

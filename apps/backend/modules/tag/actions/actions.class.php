@@ -13,4 +13,8 @@ require_once dirname(__FILE__).'/../lib/tagGeneratorHelper.class.php';
  */
 class tagActions extends autoTagActions
 {
+    public function executeAutocomplete($request)
+    {
+      return autocompleteHelper::executeAutocomplete($this, $request, 'Tag', 'id', 'name');
+    }
 }

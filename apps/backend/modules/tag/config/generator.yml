@@ -14,8 +14,10 @@ generator:
     config:
       actions: ~
       fields:  ~
-      list:    ~
-      filter:  ~
+      list:
+        display: [name, author]
+      filter:
+        display: ["quick edit search", author_id]
       form:    ~
       edit:    ~
       new:     ~

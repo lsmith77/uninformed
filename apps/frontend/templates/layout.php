@@ -6,7 +6,6 @@
     <?php include_title() ?>
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php include_stylesheets() ?>
-    <?php include_javascripts() ?>
   </head>
   <body>
     <div id="wrap">
@@ -57,5 +56,6 @@ s.parentNode.insertBefore(ga, s);
     <noscript><p class="noscript">This site runs *much* better with javascript enabled</p></noscript>
     <p class="support">Supported by <a href="http://liip.ch/" class="liip"><span>Liip AG - Agile web development - Zurich, Fribourg, Bern</span></a></p>
     </div>
+<?php include_javascripts() ?>
   </body>
 </html>

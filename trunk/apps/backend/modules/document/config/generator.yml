@@ -17,7 +17,7 @@ generator:
         enforcement_date:     {date_format: yyyy/MM/dd}
         adoption_date:       {date_format: yyyy/MM/dd}
       list:
-        display: [=code, _parent, _documenttype, _organisation, _tags, adoption_date, is_ratified, status, author]
+        display: [=code, _parent, _documenttype, _organisation, adoption_date, is_ratified, status, author]
       filter:
         display: ["quick edit search", parent_document_id, documenttype_id, organisation_id, author_id, enforcement_date, adoption_date, is_ratified, status, tags_list]
       form:    ~

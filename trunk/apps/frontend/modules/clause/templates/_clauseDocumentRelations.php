@@ -1,4 +1,4 @@
-<table id="documentDocumentRelations" class="collapsed">
+<table id="clauseDocumentRelations" class="collapsed">
     <thead>
         <tr>
             <th>Document Code</th>
@@ -10,10 +10,10 @@
         <?php foreach($related_documents as $relation): ?>
         <tr>
             <td>
-                <?php echo link_to((string)$relation->DocumentRelated, 'document', array('id' => $relation->DocumentRelated->getSlug())); ?>
+                <?php echo link_to((string)$relation->Document, 'document', array('id' => $relation->Document->getSlug())); ?>
             </td>
             <td>
-                <?php echo date('Y',strtotime($relation->DocumentRelated->getAdoptionDate())); ?>
+                <?php echo date('Y',strtotime($relation->Document->getAdoptionDate())); ?>
             </td>
             <td>
                 <?php echo $relation->getType(); ?>

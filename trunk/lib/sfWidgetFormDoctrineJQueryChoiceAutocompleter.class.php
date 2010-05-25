@@ -135,7 +135,7 @@ class sfWidgetFormDoctrineJQueryChoiceAutocompleter extends sfWidgetFormDoctrine
         );
     }
 
-    return $autocompleter.$html;
+    return '<strong>Search</strong>: '.$autocompleter.$html;
   }
 
   /**

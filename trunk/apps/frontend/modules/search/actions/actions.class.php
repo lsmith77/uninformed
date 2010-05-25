@@ -137,7 +137,7 @@ class searchActions extends sfActions
         );
 
         foreach ($facets as $facet => $model) {
-            $criteria->addFacetField('{!ex=dt}'.$facet);
+            $criteria->addFacetField("{!ex=dt}$facet");
         }
 
         $criteria->setLimit($limit+1);
@@ -182,18 +182,20 @@ class searchActions extends sfActions
                     $output = array('status' => 'error', 'message' => "unsupported filter '$filter'");
                     return $this->returnJson($output);
                 }
-                if ($facets[$filter] !== true) {
-                    if (!$this->checkArrayOfInteger($ids)) {
-                        $output = array('status' => 'error', 'message' => "parameter 'f' for key '$filter' to be an array of integer");
-                        return $this->returnJson($output);
+                if ($facets[$filter] === true) {
+                    foreach ($ids as $key => $id) {
+                        $ids[$key] = sfLuceneCriteria::sanitize($id);
                     }
+                } elseif (!$this->checkArrayOfInteger($ids)) {
+                    $output = array('status' => 'error', 'message' => "parameter 'f' for key '$filter' to be an array of integer");
+                    return $this->returnJson($output);
                 }
-                $fq = isset($fq) ? "$fq AND " : '';
-                $fq.= '{!tag=dt}'.$filter.':(-"'.implode('" -"', $ids).'")';
+                $fq = isset($fq) ? "$fq OR " : '';
+                $fq.= "$filter:(".implode(' ', $ids).')';
             }
         }
-
         if (isset($fq)) {
+            $fq = "{!tag=dt}!($fq)";
             $criteria->addParam('fq', $fq);
         }
 

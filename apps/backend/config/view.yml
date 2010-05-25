@@ -14,9 +14,11 @@ default:
 
   stylesheets:
     - "smoothness/jquery-ui-1.8.custom.css"
+    - admin.css
 
   stylesheets:
     - http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css
+    - admin.css
 
   javascripts:
     - jquery-1.4.2.min.js

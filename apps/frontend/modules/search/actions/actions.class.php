@@ -75,7 +75,7 @@ class searchActions extends sfActions
             ->select('t.id, t.name AS label')
             ->from('Tag t')
             ->innerJoin('t.ClauseBodyTag cbt')
-            ->where('t.name LIKE ?', "%$term%")
+            ->where('t.name LIKE ? OR t.name LIKE ?', array("$term%", "% $term%"))
             ->groupBy('t.id, t.name');
         $tags = $q->fetchArray();
 

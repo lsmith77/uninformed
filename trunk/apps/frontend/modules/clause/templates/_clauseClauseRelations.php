@@ -8,7 +8,7 @@
     </thead>
     <tbody>
         <?php foreach($related_clauses as $relation): ?>
-        <?php $clause = $relation->ClauseBody->setLatestAdoptedClause(); ?>
+        <?php $clause = $relation->ClauseBodyRelated->setLatestAdoptedClause(); ?>
         <tr>
             <td>
                 <?php echo link_to((string)$clause, 'document', array('id' => $clause->getSlug())); ?>

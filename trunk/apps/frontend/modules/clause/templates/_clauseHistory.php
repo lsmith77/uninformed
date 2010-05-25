@@ -56,7 +56,7 @@ $rawrootclauses = $rootclauses->getRawValue();
             </td>
             <td>
                 <?php if (isset($current)): ?>
-                    <?php echo link_to($current->getClauseNumber(), 'clause', array('id' => $current->getSlug())); ?>:
+                    <?php echo link_to($current->getFullClauseNumber(), 'clause', array('id' => $current->getSlug())); ?>:
                     <?php $new_content = $rawrootclauses[$rootdoc->getId()]->ClauseBody->getContent(); ?>
                      <?php if (isset($content)): ?>
                         <?php echo textdiff::htmlDiff($content, $new_content); ?>

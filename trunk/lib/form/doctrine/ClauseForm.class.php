@@ -19,4 +19,18 @@ class ClauseForm extends BaseClauseForm
             $this->setWidget('slug', new sfWidgetFormPlain(array('value'=>$this->getObject()->slug)));
         }
     }
+    public function configure() {
+        $this->widgetSchema['document_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
+          array(
+            'model' => 'Document',
+            'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=document&action=autocomplete'),
+          )
+        );
+        $this->widgetSchema['clause_body_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
+          array(
+            'model' => 'ClauseBody',
+            'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=organisation&action=autocomplete'),
+          )
+        );
+    }
 }

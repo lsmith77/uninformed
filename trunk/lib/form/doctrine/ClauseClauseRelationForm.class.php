@@ -12,5 +12,17 @@ class ClauseClauseRelationForm extends BaseClauseClauseRelationForm
 {
   public function configure()
   {
+      $this->widgetSchema['clause_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
+        array(
+          'model' => 'ClauseBody',
+          'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=clause&id=clause_body_id&action=autocomplete'),
+        )
+      );
+      $this->widgetSchema['related_clause_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
+        array(
+          'model' => 'ClauseBody',
+          'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=clause&id=clause_body_id&action=autocomplete'),
+        )
+      );
   }
 }

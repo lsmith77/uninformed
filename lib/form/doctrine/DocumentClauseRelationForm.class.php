@@ -18,7 +18,7 @@ class DocumentClauseRelationForm extends BaseDocumentClauseRelationForm
           'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=document&action=autocomplete'),
         )
       );
-      $this->widgetSchema['related_clause_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
+      $this->widgetSchema['related_clause_body_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
         array(
           'model' => 'ClauseBody',
           'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=clause&id=clause_body_id&action=autocomplete'),

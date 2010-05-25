@@ -10,13 +10,13 @@
  */
 
 /**
- * sfWidgetFormDoctrineChoice represents a choice widget for a model.
+ * sfWidgetFormDoctrineJQueryChoiceAutocompleter represents a choice widget for a model that is optimized for large choice lists.
  *
  * @package    symfony
  * @subpackage doctrine
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @author     Jonathan H. Wage <jonwage@gmail.com>
- * @version    SVN: $Id: sfWidgetFormDoctrineChoice.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ * @author     Lukas Kahwe Smith <smith@pooteeweet.org>
  */
 class sfWidgetFormDoctrineJQueryChoiceAutocompleter extends sfWidgetFormDoctrineChoice
 {

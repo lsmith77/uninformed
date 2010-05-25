@@ -18,6 +18,11 @@ class clauseActions extends autoClauseActions
     $this->getResponse()->setContentType('application/json');
 
     $limit = min((int)$request->getParameter('limit', 10), 10);
+    $id = $request->getParameter('id', 'id');
+    if (!in_array($id, array('id', 'clause_body_id'))) {
+        return $action->renderText(json_encode(false));
+    }
+
     $q = $request->getParameter('q');
 
     if (preg_match('/^([^ ]*) +#(\d*)( +[^ ]+)?( +[^ ]+)?(.*)?$/', $q, $matches)) {
@@ -53,14 +58,14 @@ class clauseActions extends autoClauseActions
         }
     } else {
         $query = Doctrine_Query::create()
-            ->select("d.code, c.clause_number, c.clause_number_information, c.clause_number_subparagraph")
+            ->select("c.$id, d.code, c.clause_number, c.clause_number_information, c.clause_number_subparagraph")
             ->from("clause c")
             ->innerJoin('c.Document d')
             ->where("d.code = ?", array($document))
             ->limit($limit)
             ->orderBy("d.code, c.clause_number, c.clause_number_information, c.clause_number_subparagraph");
         if (!empty($clause_number)) {
-            $query->andWhere("c.clause_number = ?", array($clause_number));
+            $query->andWhere("c.clause_number LIKE ?", array($clause_number.'%'));
             if (!empty($clause_additional)) {
                 $query->innerJoin('c.ClauseBody cb')
                         ->innerJoin('cb.ClauseInformationType cit');
@@ -79,13 +84,11 @@ class clauseActions extends autoClauseActions
                     break;
                 }
             }
-        } else {
-            $query->andWhere("c.clause_number LIKE ?", array($clause_number.'%'));
         }
 
         $results = $query->execute();
         foreach ($results as $i => $result) {
-            $values[$result->id] = (string)$result;
+            $values[$result->{$id}] = (string)$result;
         }
     }
 

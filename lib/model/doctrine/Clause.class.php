@@ -18,7 +18,7 @@ class Clause extends BaseClause
 
     public function __toString() {
         $identifier = (string)$this->_get('Document');
-        $identifier.= $this->getClauseNumber();
+        $identifier.= $this->getFullClauseNumber();
         if ($this->_get('ClauseBody')->_get('ClauseInformationType')) {
             $identifier.= ' '.$this->_get('ClauseBody')->_get('ClauseInformationType')->_get('name');
         }
@@ -60,7 +60,7 @@ class Clause extends BaseClause
         return $this->_get('Document')->_get('title');
     }
 
-    public function getClauseNumber() {
+    public function getFullClauseNumber() {
         $number = ' #'.$this->_get('clause_number');
         if ($this->_get('clause_number_information')) {
             $number.= ' '.$this->_get('clause_number_information');

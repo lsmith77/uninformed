@@ -10,10 +10,10 @@
         <?php foreach($related_documents as $relation): ?>
         <tr>
             <td>
-                <?php echo link_to((string)$relation->Document, 'document', array('id' => $relation->Document->getSlug())); ?>
+                <?php echo link_to((string)$relation->DocumentRelated, 'document', array('id' => $relation->DocumentRelated->getSlug())); ?>
             </td>
             <td>
-                <?php echo date('Y',strtotime($relation->Document->getAdoptionDate())); ?>
+                <?php echo date('Y',strtotime($relation->DocumentRelated->getAdoptionDate())); ?>
             </td>
             <td>
                 <?php echo $relation->getType(); ?>

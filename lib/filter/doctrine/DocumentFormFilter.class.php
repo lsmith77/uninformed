@@ -39,5 +39,12 @@ class DocumentFormFilter extends BaseDocumentFormFilter
       )
     );
     $this->validatorSchema['organisation_id'] = new sfValidatorPass ();
+    $this->widgetSchema['tags_list'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
+      array(
+        'model' => 'Tag',
+        'multiple' => true,
+        'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=tag&action=autocomplete'),
+      )
+    );
   }
 }

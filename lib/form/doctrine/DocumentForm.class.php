@@ -19,4 +19,26 @@ class DocumentForm extends BaseDocumentForm
       $this->setWidget('slug', new sfWidgetFormPlain(array('value'=>$this->getObject()->slug)));
     }
   }
+    public function configure() {
+        $this->widgetSchema['parent_document_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
+          array(
+            'model' => 'Document',
+            'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=document&action=autocomplete'),
+          )
+        );
+        $this->widgetSchema['organisation_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
+          array(
+            'model' => 'Organisation',
+            'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=organisation&action=autocomplete'),
+          )
+        );
+        $this->widgetSchema['tags_list'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
+          array(
+            'renderer_class' => 'sfWidgetFormSelectDoubleList',
+            'model' => 'Tag',
+            'multiple' => true,
+            'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=tag&action=autocomplete'),
+          )
+        );
+    }
 }

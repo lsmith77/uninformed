@@ -133,13 +133,21 @@ class ClauseBody extends BaseClauseBody
         }
         return $clause->getDocumentTitle();
     }
-    
+
     public function getAdoptionDate() {
         $clause = $this->setLatestAdoptedClause();
         if (empty($clause)) {
             return null;
         }
         return $clause->getAdoptionDate();
+    }
+
+    public function getAdoptionYear() {
+        $clause = $this->setLatestAdoptedClause();
+        if (empty($clause)) {
+            return null;
+        }
+        return $clause->getAdoptionYear();
     }
 
     public function getContent() {

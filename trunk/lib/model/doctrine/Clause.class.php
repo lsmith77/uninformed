@@ -83,6 +83,10 @@ class Clause extends BaseClause
         return $this->_get('Document')->getLegalValue();
     }
 
+    public function getAdoptionYear() {
+        return $this->_get('Document')->getAdoptionYear();
+    }
+
     public function getAdoptionDate() {
         $adoption_date = $this->_get('Document')->_get('adoption_date');
         return date('Y-m-d\TH:i:s\Z', strtotime($adoption_date));

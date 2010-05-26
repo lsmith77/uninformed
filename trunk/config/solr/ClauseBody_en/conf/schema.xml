@@ -250,6 +250,7 @@
   <field name='is_latest_clause_body' type='boolean' stored='false' multiValued='false' required='true'  />
   <field name='title' type='text' stored='true' multiValued='false' required='false'  />
   <field name='adoption_date' type='tdate' stored='false' multiValued='false' required='false'  />
+  <field name='adoption_year' type='int' stored='false' multiValued='false' required='false'  />
   <field name='tag_ids' type='int' stored='false' multiValued='true' required='false' omitNorms='false' />
   <field name='addressee_ids' type='int' stored='false' multiValued='true' required='false'  />
   <field name='content' type='text' stored='true' multiValued='false' required='false'  />
@@ -278,6 +279,7 @@
   <copyField source='is_latest_clause_body' dest='sfl_all' />
   <copyField source='title' dest='sfl_all' />
   <copyField source='adoption_date' dest='sfl_all' />
+  <copyField source='adoption_year' dest='sfl_all' />
   <copyField source='tag_ids' dest='sfl_all' />
   <copyField source='addressee_ids' dest='sfl_all' />
   <copyField source='content' dest='sfl_all' />

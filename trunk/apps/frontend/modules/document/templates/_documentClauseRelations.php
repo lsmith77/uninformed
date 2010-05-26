@@ -14,7 +14,7 @@
                 <?php echo link_to((string)$clause, 'clause', array('id' => $clause->getSlug())); ?>
             </td>
             <td>
-                <?php echo date('Y',strtotime($clause->Document->getAdoptionDate())); ?>
+                <?php echo $clause->Document->getAdoptionYear(); ?>
             </td>
             <td>
                 <?php echo $relation->getType(); ?>

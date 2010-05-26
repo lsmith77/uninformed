@@ -22,7 +22,7 @@
     <% for (fId in this.filterLabels) {
         f = this.filters[fId];
         if (f && f.length) { %>
-        <% if (fId === 'operative_phrase_id' || fId === 'addressee_ids' || fId === 'legal_value') folded = ' folded';
+        <% if (fId === 'operative_phrase_id' || fId === 'addressee_ids' || fId === 'legal_value' || fId === 'adoption_year') folded = ' folded';
            else folded = ''; %>
         <h3><span class="fold<%= folded %>"><span>Collapse/Expand</span></span><%= this.filterLabels[fId] %></h3>
         <div class="filterGroup<%= folded %>">

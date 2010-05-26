@@ -13,7 +13,7 @@
                 <?php echo link_to((string)$relation->DocumentRelated, 'document', array('id' => $relation->DocumentRelated->getSlug())); ?>
             </td>
             <td>
-                <?php echo date('Y',strtotime($relation->DocumentRelated->getAdoptionDate())); ?>
+                <?php echo $relation->DocumentRelated->getAdoptionYear(); ?>
             </td>
             <td>
                 <?php echo $relation->getType(); ?>

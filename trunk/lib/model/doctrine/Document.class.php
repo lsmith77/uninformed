@@ -114,6 +114,10 @@ class Document extends BaseDocument
         return $s;
     }
 
+    public function getAdoptionYear() {
+        return date('Y', strtotime($this->_get('adoption_date')));
+    }
+
     public function getLegalValue() {
         return $this->_get('DocumentType')->_get('legal_value');
     }

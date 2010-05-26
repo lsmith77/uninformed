@@ -117,18 +117,13 @@ class searchActions extends sfActions
             'documenttype_id' => 'DocumentType',
             'information_type_id' => 'ClauseInformationType',
             'legal_value' => true,
-/*
-            'adopted_date' => array(
-                'model' => 'Document',
-                'values' => 'range',
-            ),
-*/
+            'adoption_year' => true,
         );
 
         // use to define the order of the filters in the view
         $labels = array(
-            'adoption_date' => 'Adopted Date Range',
             'legal_value' => 'Legal Value',
+            'adoption_year' => 'Adoption Year',
             'organisation_id' => 'Organisation',
             'addressee_ids' => 'Addressee',
             'information_type_id' => 'Clause Information Type',

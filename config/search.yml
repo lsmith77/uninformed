@@ -32,6 +32,10 @@ ClauseBody:
           type: tdate
           stored: false
           alias: getAdoptionDate
+        adoption_year:
+          type: int
+          stored: false
+          alias: getAdoptionYear
         tag_ids:
           type: int
           stored: false

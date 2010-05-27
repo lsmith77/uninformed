@@ -131,9 +131,12 @@ class searchActions extends sfActions
             'tag_ids' => 'Tag',
         );
 
-        foreach ($facets as $facet => $model) {
-            $criteria->addFacetField("{!ex=dt}$facet");
-        }
+        $defaultFolded = array(
+            'operative_phrase_id' => true,
+            'addressee_ids' => true,
+            'legal_value' => true,
+            'adoption_year' => true,
+        );
 
         $criteria->setLimit($limit+1);
         $criteria->setOffset($this->page*$limit);
@@ -194,18 +197,32 @@ class searchActions extends sfActions
             $criteria->addParam('fq', $fq);
         }
 
-        $results = $lucene->friendlyFind($criteria);
+        $all_filters = array();
+        foreach ($facets as $facet => $model) {
+            $all_filters[$facet] = empty($this->filters[$facet]);
+            $criteria->addFacetField("{!ex=dt key=orig_$facet}$facet");
+            if (isset($fq)) {
+                $criteria->addFacetField("$facet");
+            }
+        }
 
+        $results = $lucene->friendlyFind($criteria);
         $filters = array();
         foreach ($facets as $facet => $model) {
-            $solr = $results->getFacetField($facet);
+            $solr = $results->getFacetField('orig_'.$facet);
+            $solr_filtered = $results->getFacetField($facet);
             $filters[$facet] = array();
             if (!empty($solr)) {
                 if ($model === true) {
                     ksort($solr);
                     foreach ($solr as $id => $count) {
                         if ($count) {
-                            $filters[$facet][] = array('id' => $id, 'name' => $id, 'count' => $count);
+                            $array = array('id' => $id, 'name' => $id, 'count' => $count);
+                            if (isset($solr_filtered[$id]) && $count !== $solr_filtered[$id]) {
+                                $array['filteredCount'] = $solr_filtered[$id];
+                            }
+                            $array['isChecked'] = empty($this->filters[$facet]) || !in_array($id, $this->filters[$facet]);
+                            $filters[$facet][] = $array;
                         }
                     }
                 } else {
@@ -221,15 +238,20 @@ class searchActions extends sfActions
                     $values = $q->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
                     foreach ($values as $id => $name) {
                         if (!empty($solr[$id])) {
-                            $filters[$facet][] = array('id' => $id, 'name' => $name['name'], 'count' => $solr[$id]);
+                            $array = array('id' => $id, 'name' => $name['name'], 'count' => $solr[$id]);
+                            if (isset($solr_filtered[$id]) && $solr[$id] !== $solr_filtered[$id]) {
+                                $array['filteredCount'] = $solr_filtered[$id];
+                            }
+                            $array['isChecked'] = empty($this->filters[$facet]) || !in_array($id, $this->filters[$facet]);
+                            $filters[$facet][] = $array;
                         }
                     }
                 }
             }
         }
 
-        $data = $results->toArray();
         // extract the data out of the result objects
+        $data = $results->toArray();
         if ($data) {
             $maxScore = $results->getRawResult()->response->maxScore;
 
@@ -349,7 +371,9 @@ class searchActions extends sfActions
         $output = array(
             'data' => $data,
             'filters' => $filters,
+            'filtersChecked' => $all_filters,
             'filterLabels' => $labels,
+            'defaultFolded' => $defaultFolded,
             'totalResults' => (int)$results->getRawResult()->response->numFound,
             'page' => $this->page,
             'limit' => $limit,

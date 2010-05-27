@@ -26,6 +26,7 @@ $(function(){
         });
         url += '&p=' + page;
         $.getJSON(url, null, function(data, status) {
+            $('.filters').jqotesub($('#filtersTpl'), data);
             $('.results').jqotesub($('#resultsTpl'), data);
         });
     },

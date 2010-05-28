@@ -6,7 +6,7 @@
  * @package    symfony
  * @subpackage filter
  * @author     Your name here
- * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 29570 2010-05-21 14:49:47Z Kris.Wallsmith $
  */
 abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
 {
@@ -14,6 +14,7 @@ abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'document_id'                => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Document'), 'add_empty' => true)),
+      'is_latest_clause'           => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'clause_body_id'             => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseBody'), 'add_empty' => true)),
       'clause_number'              => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'clause_number_information'  => new sfWidgetFormFilterInput(),
@@ -27,6 +28,7 @@ abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
 
     $this->setValidators(array(
       'document_id'                => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Document'), 'column' => 'id')),
+      'is_latest_clause'           => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'clause_body_id'             => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('ClauseBody'), 'column' => 'id')),
       'clause_number'              => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'clause_number_information'  => new sfValidatorPass(array('required' => false)),
@@ -57,6 +59,7 @@ abstract class BaseClauseFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'                         => 'Number',
       'document_id'                => 'ForeignKey',
+      'is_latest_clause'           => 'Boolean',
       'clause_body_id'             => 'ForeignKey',
       'clause_number'              => 'Number',
       'clause_number_information'  => 'Text',

@@ -12,7 +12,6 @@
  * @property clob $public_comment
  * @property integer $parent_clause_body_id
  * @property integer $root_clause_body_id
- * @property boolean $is_latest_clause_body
  * @property enum $status
  * @property Doctrine_Collection $Addressees
  * @property ClauseBody $ClauseBodyRoot
@@ -33,7 +32,6 @@
  * @method clob                  getPublicComment()          Returns the current record's "public_comment" value
  * @method integer               getParentClauseBodyId()     Returns the current record's "parent_clause_body_id" value
  * @method integer               getRootClauseBodyId()       Returns the current record's "root_clause_body_id" value
- * @method boolean               getIsLatestClauseBody()     Returns the current record's "is_latest_clause_body" value
  * @method enum                  getStatus()                 Returns the current record's "status" value
  * @method Doctrine_Collection   getAddressees()             Returns the current record's "Addressees" collection
  * @method ClauseBody            getClauseBodyRoot()         Returns the current record's "ClauseBodyRoot" value
@@ -53,7 +51,6 @@
  * @method ClauseBody            setPublicComment()          Sets the current record's "public_comment" value
  * @method ClauseBody            setParentClauseBodyId()     Sets the current record's "parent_clause_body_id" value
  * @method ClauseBody            setRootClauseBodyId()       Sets the current record's "root_clause_body_id" value
- * @method ClauseBody            setIsLatestClauseBody()     Sets the current record's "is_latest_clause_body" value
  * @method ClauseBody            setStatus()                 Sets the current record's "status" value
  * @method ClauseBody            setAddressees()             Sets the current record's "Addressees" collection
  * @method ClauseBody            setClauseBodyRoot()         Sets the current record's "ClauseBodyRoot" value
@@ -104,10 +101,6 @@ abstract class BaseClauseBody extends MyBaseRecord
         $this->hasColumn('root_clause_body_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             ));
-        $this->hasColumn('is_latest_clause_body', 'boolean', null, array(
-             'type' => 'boolean',
-             'default' => true,
              ));
         $this->hasColumn('status', 'enum', null, array(
              'type' => 'enum',

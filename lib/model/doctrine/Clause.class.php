@@ -16,6 +16,8 @@ class Clause extends BaseClause
         'slug' => true,
     );
 
+    public $adoptionDateChange = false;
+
     public function __toString() {
         $identifier = (string)$this->_get('Document');
         $identifier.= $this->getFullClauseNumber();
@@ -26,30 +28,94 @@ class Clause extends BaseClause
     }
 
     public function preSave($event) {
+        $invoker = $event->getInvoker();
         if (!$this->exists()) {
-            $invoker = $event->getInvoker();
-
             $slug = (string)$invoker;
             $slug = substr(Doctrine_Inflector::urlize($slug), 0, 30);
             $invoker->_set('slug', $slug);
+            $this->adoptionDateChange = true;
+        } else {
+            $modified = $invoker->getModified();
+            if (array_key_exists('document_id', $modified)) {
+                $this->forceIsLatestClauseUpdate();
+            }
         }
     }
 
     public function postSave($event) {
+        if (!$this->adoptionDateChange) {
+            return;
+        }
+
+        $this->adoptionDateChange = false;
+
         $invoker = $event->getInvoker();
         if ($invoker->ClauseBody) {
-            $root_clause_body_id = $invoker->ClauseBody->root_clause_body_id;
+            $root_clause_body_id = $invoker->ClauseBody->_get('root_clause_body_id');
+            if (!empty($root_clause_body_id)) {
+                return;
+            }
 
-            $clause = $invoker->ClauseBody->setLatestAdoptedClause();
-            $clause = empty($clause) ? $invoker : $clause;
-            $latest_clause_body_id = $clause->_get('clause_body_id');
+            $root_clause_body_id = $invoker->_get('clause_body_id');
+
+            $clause = $invoker->getLatestAdoptedClause();
+            if (empty($clause)) {
+                return;
+            }
+
+            $latest_clause_id = $clause->getId();
 
             $q = Doctrine_Query::create()
-                ->update('ClauseBody')
-                ->set('is_latest_clause_body', "CASE WHEN id = $latest_clause_body_id THEN 1 ELSE 0 END")
-                ->where('root_clause_body_id = ? OR id = ?', array($root_clause_body_id, $root_clause_body_id));
-            $q->execute();
+                ->from('Clause c')
+                ->innerJoin('c.ClauseBody cb')
+                ->where('cb.root_clause_body_id = ? OR cb.id = ?', array($root_clause_body_id, $root_clause_body_id));
+            $clauses = $q->execute(array(), Doctrine_Core::HYDRATE_ON_DEMAND);
+
+            foreach ($clauses as $clause) {
+                $is_latest_clause = $clause->getId() == $latest_clause_id;
+                if ($clause->getIsLatestClause() != $is_latest_clause) {
+                    $clause->setIsLatestClause($is_latest_clause);
+                    $clause->save();
+                }
+            }
         }
+    }
+
+    public function forceIsLatestClauseUpdate() {
+        if (empty($this->ClauseBody)) {
+            return;
+        }
+        $root_clause_body_id = $this->ClauseBody->root_clause_body_id;
+
+        $q = Doctrine_Query::create()
+            ->from('Clause c')
+            ->innerJoin('c.ClauseBody cb')
+            ->where('cb.id = ?', array($root_clause_body_id));
+        $clause = $q->fetchOne();
+        if (empty($clause)) {
+            return;
+        }
+
+        $clause->adoptionDateChange = true;
+        $clause->save();
+    }
+
+    public function getLatestAdoptedClause() {
+        $root_clause_body_id = $this->ClauseBody->root_clause_body_id;
+        $max_adoption_date = Doctrine_Query::create()
+            ->select('MAX(adoption_date)')
+            ->from('Document d')
+            ->innerJoin('d.Clauses c')
+            ->innerJoin('c.ClauseBody cb')
+            ->where('cb.root_clause_body_id = ? OR cb.id = ?', array($root_clause_body_id, $root_clause_body_id))
+            ->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+
+        return Doctrine_Query::create()
+            ->from('Clause c')
+            ->innerJoin('c.Document d')
+            ->innerJoin('c.ClauseBody cb')
+            ->where('(cb.root_clause_body_id = ? OR cb.id = ?) AND d.adoption_date = ?', array($root_clause_body_id, $root_clause_body_id, $max_adoption_date))
+            ->fetchOne();
     }
 
     public function getTitle() {
@@ -69,6 +135,34 @@ class Clause extends BaseClause
             $number.= ' '.$this->_get('clause_number_subparagraph');
         }
         return $number;
+    }
+
+    public function getOperativePhraseId() {
+        return $this->_get('ClauseBody')->_get('operative_phrase_id');
+    }
+
+    public function getInformationTypeId() {
+        return $this->_get('ClauseBody')->_get('information_type_id');
+    }
+
+    public function getContent() {
+        return $this->_get('ClauseBody')->getContent();
+    }
+
+    public function getTagIds() {
+        return $this->_get('ClauseBody')->getTagIds();
+    }
+
+    public function getAddresseeIds() {
+        $ids = Doctrine_Query::create()
+            ->select('addressee_id')
+            ->from('ClauseAddressee')
+            ->where('clause_body_id = ?', $this->_get('clause_body_id'))
+            ->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
+        foreach ($ids as $key => $id) {
+            $ids[$key] = reset($id);
+        }
+        return $ids;
     }
 
     public function getDocumenttypeId() {

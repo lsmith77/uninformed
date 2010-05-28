@@ -12,8 +12,6 @@
  */
 class ClauseBody extends BaseClauseBody
 {
-    protected $latestAdoptedClause;
-
     public function setUp()
     {
         parent::setUp();
@@ -36,130 +34,21 @@ class ClauseBody extends BaseClauseBody
         }
     }
 
-    public function setLatestAdoptedClause() {
-        if (!empty($this->latestAdoptedClause)) {
-            return $this->latestAdoptedClause;
-        }
-
-        $max_adoption_date = Doctrine_Query::create()
-            ->select('MAX(adoption_date)')
-            ->from('Document d')
-            ->innerJoin('d.Clauses c')
-            ->where('c.clause_body_id = ?', $this->_get('id'))
-            ->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
-
-        $this->latestAdoptedClause = Doctrine_Query::create()
-            ->from('Clause c')
-            ->innerJoin('c.Document d')
-            ->where('c.clause_body_id = ? AND d.adoption_date = ?', array($this->_get('id'), $max_adoption_date))
-            ->fetchOne();
-
-        return $this->latestAdoptedClause;
-    }
-
-    public function getAddresseeIds() {
-        $ids = Doctrine_Query::create()
-            ->select('addressee_id')
-            ->from('ClauseAddressee')
-            ->where('clause_body_id = ?', $this->_get('id'))
-            ->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
-        foreach ($ids as $key => $id) {
-            $ids[$key] = reset($id);
-        }
-        return $ids;
-    }
-
-    public function getClauseId() {
-        $clause = $this->setLatestAdoptedClause();
-        if (empty($clause)) {
-            return null;
-        }
-        return $clause->id;
-    }
-
-    public function isIndexable() {
-        $clause = $this->setLatestAdoptedClause();
-        return !empty($clause);
-    }
-
-    public function getDocumentId() {
-        $clause = $this->setLatestAdoptedClause();
-        if (empty($clause)) {
-            return null;
-        }
-        return $clause->getDocumentId();
-    }
-
-    public function getOrganisationId() {
-        $clause = $this->setLatestAdoptedClause();
-        if (empty($clause)) {
-            return null;
-        }
-        return $clause->getOrganisationId();
-    }
-
-    public function getIsLatestClauseBodySolr() {
-        return $this->_get('is_latest_clause_body') ? 'true' : 'false';
-    }
-
-    public function getLegalValue() {
-        $clause = $this->setLatestAdoptedClause();
-        if (empty($clause)) {
-            return null;
-        }
-        return $clause->getLegalValue();
-    }
-
-    public function getDocumenttypeId() {
-        $clause = $this->setLatestAdoptedClause();
-        if (empty($clause)) {
-            return null;
-        }
-        return $clause->getDocumenttypeId();
-    }
-
-    public function getTitle() {
-        $clause = $this->setLatestAdoptedClause();
-        if (empty($clause)) {
-            return null;
-        }
-        return $clause->getTitle();
-    }
-
-    public function getDocumentTitle() {
-        $clause = $this->setLatestAdoptedClause();
-        if (empty($clause)) {
-            return null;
-        }
-        return $clause->getDocumentTitle();
-    }
-
-    public function getAdoptionDate() {
-        $clause = $this->setLatestAdoptedClause();
-        if (empty($clause)) {
-            return null;
-        }
-        return $clause->getAdoptionDate();
-    }
-
-    public function getAdoptionYear() {
-        $clause = $this->setLatestAdoptedClause();
-        if (empty($clause)) {
-            return null;
-        }
-        return $clause->getAdoptionYear();
-    }
-
     public function getContent() {
         $operative_phrase = (string)$this->_get('ClauseOperativePhrase');
         return preg_replace('#\b('.preg_quote($operative_phrase, '#').')\b#i', '<em>$1</em>', $this->_get('content'));
     }
 
     public function __toString() {
-        $clause = $this->setLatestAdoptedClause();
+        $clause = Doctrine_Query::create()
+            ->from('Clause c')
+            ->where('c.clause_body_id = ?', array($this->_get('id')))
+            ->fetchOne();
+
         if (empty($clause)) {
             return null;
         }
-        return (string)$clause;
+
+        return (string)$clause->getLatestAdoptedClause();
     }
 }

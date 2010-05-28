@@ -13,6 +13,7 @@
 class Document extends BaseDocument
 {
     protected $titleChange = false;
+    protected $adoptionDateChange = false;
 
     protected static $autoCompletable = array(
         'code' => true,
@@ -40,6 +41,9 @@ class Document extends BaseDocument
         if (array_key_exists('title', $modified)) {
             $this->titleChange = true;
         }
+        if (array_key_exists('adoption_date', $modified)) {
+            $this->adoptionDateChange = true;
+        }
 
         $root_document_id = $invoker->_get('root_document_id');
         $parent_document_id = $invoker->_get('parent_document_id');
@@ -50,19 +54,26 @@ class Document extends BaseDocument
     }
 
     public function postSave($event) {
-        if (!$this->titleChange) {
-            return;
+        if ($this->titleChange) {
+            $this->titleChange = false;
+
+            $invoker = $event->getInvoker();
+            $clauses = $invoker->getClauses();
+            foreach ($clauses as $clause) {
+                $slug = (string)$clause;
+                $slug = substr(Doctrine_Inflector::urlize($slug), 0, 30);
+                $clause->_set('slug', $slug);
+                $clause->save();
+            }
         }
+        if ($this->adoptionDateChange) {
+            $this->adoptionDateChange = false;
 
-        $this->titleChange = false;
-
-        $invoker = $event->getInvoker();
-        $clauses = $invoker->getClauses();
-        foreach ($clauses as $clause) {
-            $slug = (string)$clause;
-            $slug = substr(Doctrine_Inflector::urlize($slug), 0, 30);
-            $clause->_set('slug', $slug);
-            $clause->save();
+            $invoker = $event->getInvoker();
+            $clauses = $invoker->getClauses();
+            foreach ($clauses as $clause) {
+                $clause->forceIsLatestClauseUpdate();
+            }
         }
     }
 

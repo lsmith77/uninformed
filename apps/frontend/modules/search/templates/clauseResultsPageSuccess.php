@@ -80,7 +80,7 @@
 	</div>
     <div class="result <%= itemclass %>">
         <h2>
-            <?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.title %>', 'clause', array('id' => 'XXX'))) ?>
+            <?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.documentTitle %>', 'clause', array('id' => 'XXX'))) ?>
         </h2>
         <h3>
             <span class="docdetails"><%= res.Document.code %> (<%= res.Document.adoption_date %>)</span> |

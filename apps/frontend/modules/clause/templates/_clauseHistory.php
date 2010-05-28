@@ -28,7 +28,7 @@ $rawrootclauses = $rootclauses->getRawValue();
             <?php echo link_to((string)$rootdoc, 'document', array('id' => $rootdoc->getSlug())); ?>
             </td>
             <td>
-                <?php echo date('Y',strtotime($rootdoc->getAdoptionDate())); ?>
+                <?php echo $rootdoc->getAdoptionYear(); ?>
             </td>
             <td>
                 <ul>

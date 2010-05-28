@@ -8,7 +8,7 @@
  * @package    symfony
  * @subpackage form
  * @author     Your name here
- * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
  */
 abstract class BaseClauseForm extends BaseFormDoctrine
 {
@@ -17,6 +17,7 @@ abstract class BaseClauseForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'                         => new sfWidgetFormInputHidden(),
       'document_id'                => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Document'), 'add_empty' => false)),
+      'is_latest_clause'           => new sfWidgetFormInputCheckbox(),
       'clause_body_id'             => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseBody'), 'add_empty' => false)),
       'clause_number'              => new sfWidgetFormInputText(),
       'clause_number_information'  => new sfWidgetFormInputText(),
@@ -31,6 +32,7 @@ abstract class BaseClauseForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'                         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'document_id'                => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Document'))),
+      'is_latest_clause'           => new sfValidatorBoolean(array('required' => false)),
       'clause_body_id'             => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseBody'))),
       'clause_number'              => new sfValidatorInteger(),
       'clause_number_information'  => new sfValidatorString(array('max_length' => 255, 'required' => false)),

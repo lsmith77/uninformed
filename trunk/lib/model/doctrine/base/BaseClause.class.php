@@ -7,6 +7,7 @@
  * 
  * @property integer $id
  * @property integer $document_id
+ * @property boolean $is_latest_clause
  * @property integer $clause_body_id
  * @property integer $clause_number
  * @property string $clause_number_information
@@ -19,6 +20,7 @@
  * 
  * @method integer             getId()                         Returns the current record's "id" value
  * @method integer             getDocumentId()                 Returns the current record's "document_id" value
+ * @method boolean             getIsLatestClause()             Returns the current record's "is_latest_clause" value
  * @method integer             getClauseBodyId()               Returns the current record's "clause_body_id" value
  * @method integer             getClauseNumber()               Returns the current record's "clause_number" value
  * @method string              getClauseNumberInformation()    Returns the current record's "clause_number_information" value
@@ -30,6 +32,7 @@
  * @method Doctrine_Collection getClauseClauseRelation()       Returns the current record's "ClauseClauseRelation" collection
  * @method Clause              setId()                         Sets the current record's "id" value
  * @method Clause              setDocumentId()                 Sets the current record's "document_id" value
+ * @method Clause              setIsLatestClause()             Sets the current record's "is_latest_clause" value
  * @method Clause              setClauseBodyId()               Sets the current record's "clause_body_id" value
  * @method Clause              setClauseNumber()               Sets the current record's "clause_number" value
  * @method Clause              setClauseNumberInformation()    Sets the current record's "clause_number_information" value
@@ -60,6 +63,10 @@ abstract class BaseClause extends MyBaseRecord
              'type' => 'integer',
              'notnull' => true,
              'length' => 4,
+             ));
+        $this->hasColumn('is_latest_clause', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => true,
              ));
         $this->hasColumn('clause_body_id', 'integer', 4, array(
              'type' => 'integer',
@@ -148,8 +155,10 @@ abstract class BaseClause extends MyBaseRecord
              ),
              ));
         $mycommentable0 = new Doctrine_Template_MyCommentable();
+        $sflucenedoctrinetemplate0 = new sfLuceneDoctrineTemplate();
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
         $this->actAs($mycommentable0);
+        $this->actAs($sflucenedoctrinetemplate0);
     }
 }

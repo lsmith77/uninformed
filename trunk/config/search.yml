@@ -1,4 +1,4 @@
-ClauseBody:
+Clause:
   index:
     cultures: [en]
     encoding: UTF-8
@@ -6,68 +6,38 @@ ClauseBody:
     port: 8983
     base_url: "/solr"
   models:
-    ClauseBody:
-      validator: isIndexable
+    Clause:
       fields:
         id:
           type: int
           indexed: false
           stored: true
           required: true
-          alias: getId
-        clause_id:
-          type: int
-          required: true
-          stored: true
-          alias: getClauseId
-        is_latest_clause_body:
+        is_latest_clause:
           type: boolean
           required: true
-          alias: getIsLatestClauseBodySolr
-        title:
+        document_title:
           type: text
-          alias: getDocumentTitle
           stored: true
-        adoption_date:
-          type: tdate
-          stored: false
-          alias: getAdoptionDate
         adoption_year:
           type: int
-          stored: false
-          alias: getAdoptionYear
         tag_ids:
           type: int
-          stored: false
           multiValued: true
-          alias: getTagIds
           boost: 2
         addressee_ids:
           type: int
-          stored: false
           multiValued: true
-          alias: getAddresseeIds
         content:
           type: text
           stored: true
-          alias: getContent
         documenttype_id:
           type: int
-          stored: false
-          alias: getDocumenttypeId
         operative_phrase_id:
           type: int
-          stored: false
-          alias: getOperativePhraseId
         information_type_id:
           type: int
-          stored: false
-          alias: getInformationTypeId
         organisation_id:
           type: int
-          stored: false
-          alias: getOrganisationId
         legal_value:
           type: string
-          stored: false
-          alias: getLegalValue

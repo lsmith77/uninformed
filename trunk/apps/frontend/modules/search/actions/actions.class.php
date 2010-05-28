@@ -105,7 +105,7 @@ class searchActions extends sfActions
             return $this->returnJson($output);
         }
 
-        $lucene = sfLucene::getInstance('ClauseBody', null);
+        $lucene = sfLucene::getInstance('Clause', null);
 
         $criteria = new sfLuceneFacetsCriteria;
 
@@ -167,12 +167,12 @@ class searchActions extends sfActions
         }
 
         if ($this->latestClauseOnly) {
-            $criteria->addFieldSane('is_latest_clause_body', 'true', 'AND');
+            $criteria->addFieldSane('is_latest_clause', 'true', 'AND');
         }
 
         if (!empty($this->query)) {
             $subcritieria = new sfLuceneCriteria;
-            $subcritieria->addFieldSane('title', $this->query);
+            $subcritieria->addFieldSane('document_title', $this->query);
             $subcritieria->addFieldSane('content', $this->query, 'OR');
             $criteria->add($subcritieria);
 
@@ -280,15 +280,15 @@ class searchActions extends sfActions
 
             $clauses = array();
             foreach ($data as $item) {
-                $clause = $item->getField('clause_id');
+                $clause = $item->getField('id');
                 if (!empty($clause)) {
                     $sfl_guid = $item->getField('sfl_guid');
                     $score = $item->getField('score');
-                    if (isset($highlighting[$sfl_guid['value']]['title'])) {
-                        $title = $highlighting[$sfl_guid['value']]['title'];
+                    if (isset($highlighting[$sfl_guid['value']]['document_title'])) {
+                        $documentTitle = $highlighting[$sfl_guid['value']]['document_title'];
                     } else {
-                        $title = $item->getField('title');
-                        $title = $title['value'];
+                        $documentTitle = $item->getField('document_title');
+                        $documentTitle = $documentTitle['value'];
                     }
                     if (isset($highlighting[$sfl_guid['value']]['content'])) {
                         $content = $highlighting[$sfl_guid['value']]['content'];
@@ -297,7 +297,7 @@ class searchActions extends sfActions
                         $content = $content['value'];
                     }
                     $clauses[$clause['value']] = array(
-                        'title' => $title,
+                        'documentTitle' => $documentTitle,
                         'content' => $content,
                         'score' => number_format(100*$score['value']/$maxScore, 2),
                     );
@@ -333,7 +333,7 @@ class searchActions extends sfActions
                     }
                     $documents[] = $data[$key]['document_id'];
                     $data[$key]['score'] = $clauses[$clause['id']]['score'];
-                    $data[$key]['title'] = $clauses[$clause['id']]['title'];
+                    $data[$key]['documentTitle'] = $clauses[$clause['id']]['documentTitle'];
                     $data[$key]['content'] = $clauses[$clause['id']]['content'];
                 }
 

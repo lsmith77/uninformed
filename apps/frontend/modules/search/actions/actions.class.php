@@ -95,7 +95,7 @@ class searchActions extends sfActions
             $output = array(
                 'data' => array(),
                 'filters' => array(),
-                'filterLabels' => array(),
+                'facets' => array(),
                 'totalResults' => 0,
                 'page' => $this->page,
                 'limit' => $limit,
@@ -110,32 +110,44 @@ class searchActions extends sfActions
         $criteria = new sfLuceneFacetsCriteria;
 
         $facets = array(
-            'organisation_id' => 'Organisation',
-            'tag_ids' => 'Tag',
-            'addressee_ids' => 'Addressee',
-            'operative_phrase_id' => 'ClauseOperativePhrase',
-            'documenttype_id' => 'DocumentType',
-            'information_type_id' => 'ClauseInformationType',
-            'legal_value' => true,
-            'adoption_year' => true,
-        );
-
-        // use to define the order of the filters in the view
-        $labels = array(
-            'legal_value' => 'Legal Value',
-            'adoption_year' => 'Adoption Year',
-            'organisation_id' => 'Organisation',
-            'addressee_ids' => 'Addressee',
-            'information_type_id' => 'Clause Information Type',
-            'operative_phrase_id' => 'Clause Operative Phrase',
-            'tag_ids' => 'Tag',
-        );
-
-        $defaultFolded = array(
-            'operative_phrase_id' => true,
-            'addressee_ids' => true,
-            'legal_value' => true,
-            'adoption_year' => true,
+            'legal_value' => array(
+                'unfolded' => false,
+                'label' => 'Organisation',
+             ),
+            'adoption_year' => array(
+                'unfolded' => false,
+                'label' => 'Legal Value',
+             ),
+            'organisation_id' => array(
+                'model' => 'Organisation',
+                'unfolded' => true,
+                'label' => 'Organisation',
+             ),
+            'addressee_ids' => array(
+                'model' => 'Addressee',
+                'unfolded' => false,
+                'label' => 'Addressees',
+             ),
+            'documenttype_id' => array(
+                'model' => 'DocumentType',
+                'unfolded' => false,
+                'label' => 'Document Type',
+             ),
+            'information_type_id' => array(
+                'model' => 'ClauseInformationType',
+                'unfolded' => true,
+                'label' => 'Clause Information Type',
+             ),
+            'operative_phrase_id' => array(
+                'model' => 'ClauseOperativePhrase',
+                'unfolded' => false,
+                'label' => 'Clause Operative Phrase',
+             ),
+            'tag_ids' => array(
+                'model' => 'Tag',
+                'unfolded' => true,
+                'label' => 'Tags',
+             ),
         );
 
         $criteria->setLimit($limit+1);
@@ -180,7 +192,7 @@ class searchActions extends sfActions
                     $output = array('status' => 'error', 'message' => "unsupported filter '$filter'");
                     return $this->returnJson($output);
                 }
-                if ($facets[$filter] === true) {
+                if (empty($facets[$filter]['model'])) {
                     foreach ($ids as $key => $id) {
                         $ids[$key] = sfLuceneCriteria::sanitize($id);
                     }
@@ -197,9 +209,9 @@ class searchActions extends sfActions
             $criteria->addParam('fq', $fq);
         }
 
-        $all_filters = array();
-        foreach ($facets as $facet => $model) {
-            $all_filters[$facet] = empty($this->filters[$facet]);
+        foreach ($facets as $facet => $configuration) {
+            $facets[$facet]['unfolded'] = !empty($facets[$facet]['unfolded']) || !empty($this->filters[$facet]);
+            $facets[$facet]['allChecked'] = empty($this->filters[$facet]);
             $criteria->addFacetField("{!ex=dt key=orig_$facet}$facet");
             if (isset($fq)) {
                 $criteria->addFacetField("$facet");
@@ -208,12 +220,12 @@ class searchActions extends sfActions
 
         $results = $lucene->friendlyFind($criteria);
         $filters = array();
-        foreach ($facets as $facet => $model) {
+        foreach ($facets as $facet => $configuration) {
             $solr = $results->getFacetField('orig_'.$facet);
             $solr_filtered = $results->getFacetField($facet);
             $filters[$facet] = array();
             if (!empty($solr)) {
-                if ($model === true) {
+                if (empty($configuration['model'])) {
                     ksort($solr);
                     foreach ($solr as $id => $count) {
                         if ($count) {
@@ -226,6 +238,7 @@ class searchActions extends sfActions
                         }
                     }
                 } else {
+                    $model = $configuration['model'];
                     $q = Doctrine_Query::create()
                         ->select("$model.name")
                         ->from("$model INDEXBY $model.id")
@@ -371,9 +384,7 @@ class searchActions extends sfActions
         $output = array(
             'data' => $data,
             'filters' => $filters,
-            'filtersChecked' => $all_filters,
-            'filterLabels' => $labels,
-            'defaultFolded' => $defaultFolded,
+            'facets' => $facets,
             'totalResults' => (int)$results->getRawResult()->response->numFound,
             'page' => $this->page,
             'limit' => $limit,

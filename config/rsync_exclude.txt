@@ -4,7 +4,7 @@
 /web/*_dev.php
 /web/uploads/*
 
-/data/solr_index/frontend_prod.pid
+/data/solr_index/*
 /web/.htaccess
 
 /apps/frontend/config/settings.yml

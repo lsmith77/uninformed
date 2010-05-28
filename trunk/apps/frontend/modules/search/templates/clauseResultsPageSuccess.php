@@ -16,25 +16,22 @@
 
 <script type="text/x-jqote-template" id="filtersTpl">
     <![CDATA[
-    <%
-       var f, fId, item, folded;
-    %>
     <h2>Search filters</h2>
     <form id="filtersForm">
-    <% for (fId in this.filterLabels) {
+    <% var f, fId, item, folded; %>
+    <% for (fId in this.facets) {
         f = this.filters[fId];
         if (f && f.length) { %>
-        <% if ((this.defaultFolded[fId] != undefined && this.filtersChecked[fId])) folded = ' folded';
-           else folded = ''; %>
-        <h3><span class="fold<%= folded %>"><span>Collapse/Expand</span></span><%= this.filterLabels[fId] %></h3>
+        <% if (!this.facets[fId]['unfolded']) folded = ' folded'; else folded = ''; %>
+        <h3><span class="fold<%= folded %>"><span>Collapse/Expand</span></span><%= this.facets[fId]['label'] %></h3>
         <div class="filterGroup<%= folded %>">
             <% if (f.length > 3) { %>
-            <label><input class="selectAll" type="checkbox"<% if(this.filtersChecked[fId]) { %><%= 'checked="checked" ' %><% } %>/> All</label>
+              <label><input class="selectAll" type="checkbox"<% if(this.facets[fId]['allChecked']) { %><%= 'checked="checked" ' %><% } %>/>All</label>
             <% } %>
             <% for (item in f) { %>
-            <% item = f[item]; %>
-            <label><input type="checkbox" name="f[<%= $.htmlencode(fId) %>][]" value="<%= item.id %>" <% if(item.isChecked) { %><%= 'checked="checked" ' %><% } %><%= (item.count == this.totalResults ? 'disabled="disabled"':'') %> />
-            <%= item.name %> <span class="count">(<% if(item.filteredCount != undefined) { %><%= item.filteredCount %>/<% } %><%= item.count %>)</span></label>
+              <% item = f[item]; %>
+              <label><input type="checkbox" name="f[<%= $.htmlencode(fId) %>][]" value="<%= item.id %>" <% if(item.isChecked) { %><%= 'checked="checked" ' %><% } %><%= (item.count == this.totalResults ? 'disabled="disabled"':'') %> />
+              <%= item.name %> <span class="count">(<% if(item.filteredCount != undefined) { %><%= item.filteredCount %>/<% } %><%= item.count %>)</span></label>
             <% } %>
         </div>
     <%  }

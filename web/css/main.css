@@ -410,12 +410,14 @@ div.results {
     margin-bottom: 80px;
     padding: 10px;
 }
+.results strong {
+    text-decoration: underline;
+}
 .results a {
     color: #000;
     font-weight: bold;
     text-decoration: underline;
 }
-
 .results a:hover {
     color: #951c00;
 }

@@ -37,6 +37,7 @@ class Version1 extends Doctrine_Migration_Base
     public function postUp()
     {
         $q = Doctrine_Query::create()
+            ->select('c.*, cb.id, cb.root_clause_body_id')
             ->from('Clause c')
             ->innerJoin('c.ClauseBody cb')
             ->where('cb.root_clause_body_id IS NULL');

@@ -66,11 +66,29 @@ class searchActions extends sfActions
         $this->showHelp = false;
     }
 
+    public function executeSearchDocumentCode(sfWebRequest $request)
+    {
+        $term = $request->getGetParameter('term');
+
+        $q = Doctrine_Query::create()
+            ->select("CONCAT(d.id, '-', d.slug) AS url, d.code AS label")
+            ->from('Document d')
+            ->where('d.code LIKE ?', array("$term%"))
+            ->limit(20);
+        $documents = $q->fetchArray();
+
+        foreach ($documents as $key => $document) {
+            $documents[$key]['url'] = sfContext::getInstance()->getController()->genUrl('@document?id='.$document['url']);
+        }
+
+        return $this->returnJson($documents);
+    }
+
     public function executeSearchTags(sfWebRequest $request)
     {
         $term = $request->getGetParameter('term');
 
-        // TODO: for now only shwo tags that are associated with a clause body
+        // TODO: for now only show tags that are associated with a clause body
         $q = Doctrine_Query::create()
             ->select('t.id, t.name AS label')
             ->from('Tag t')

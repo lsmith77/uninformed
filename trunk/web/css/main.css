@@ -227,9 +227,22 @@ input[type=submit] {
     left: 30px;
 }
 /* HOME SEARCH */
+.homesearch fieldset{
+    border:2px solid #951c00;
+    padding: 10px 10px 10px 10px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.homesearch legend{
+    font-weight:bold;
+    padding: 2px 2px 2px 2px;
+}
+
 .homesearch, .contentBlock {
     width: 920px;
-    padding: 20px 20px 54px 20px;
+    padding: 20px 20px 14px 20px;
     background: #e2e2e2 url(/images/gradient.png) repeat-x top left;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -239,15 +252,23 @@ input[type=submit] {
 .contentBlock {
     padding-bottom: 20px;
 }
-.homesearch .query, .homesearch .tags {
+
+.homesearch .documentCodeText {
+    float: left;
+    width: 320px;
+    margin: 0 20px 0 0;
+}
+
+.homesearch .documentCode, .homesearch .query, .homesearch .tags {
     float: left;
     width: 230px;
     margin: 0 20px 0 0;
 }
 
-.homesearch .query input, .homesearch .tags input {
+.homesearch .documentCode input, .homesearch .query input, .homesearch .tags input {
     width: 225px;
 }
+
 .homesearch .tagMatch {
     padding: 26px 0 0 500px;
 }
@@ -289,7 +310,7 @@ input[type=submit] {
 
 /* SEARCH PAGE */
 div.search {
-    width: 230px;
+    width: 2300px;
     padding: 10px;
     background: #e2e2e2 url(/images/gradient.png) repeat-x top left;
     -webkit-border-radius: 4px;
@@ -314,8 +335,8 @@ div.search {
     height: 34px;
     cursor: pointer;
 }
-.search .tags input, .search .query input {
-    width: 220px;
+.search .tags input, .search .documentCode input, .search .query input {
+    width: 180px;
 }
 .search #taglist {
     padding: 10px 10px 10px 15px;
@@ -390,6 +411,15 @@ div.search {
     border-left: 3px solid #ccc;
     font-weight: normal;
 }
+
+#documentCode a {
+    text-decoration: underline;
+    color: #333;
+    padding: 0 4px 0 5px;
+    border-left: 3px solid #ccc;
+    font-weight: normal;
+}
+
 #clauseContent {
     padding: 0 0 20px 0;
 }

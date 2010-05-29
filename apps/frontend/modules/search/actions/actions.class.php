@@ -70,11 +70,14 @@ class searchActions extends sfActions
     {
         $term = $request->getGetParameter('term');
 
+        // TODO: hide the fact that some code's are used multiple times
         $q = Doctrine_Query::create()
             ->select("CONCAT(d.id, '-', d.slug) AS url, d.code AS label")
             ->from('Document d')
             ->where('d.code LIKE ?', array("$term%"))
-            ->limit(20);
+            ->limit(20)
+            ->orderBy('d.code')
+            ->groupBy('d.code');
         $documents = $q->fetchArray();
 
         foreach ($documents as $key => $document) {

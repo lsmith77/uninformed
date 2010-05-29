@@ -10,6 +10,17 @@ class Version1 extends Doctrine_Migration_Base
         $this->addColumn('clause', 'is_latest_clause', 'boolean', '1', array(
              'default' => '1',
              ));
+        $this->addIndex('clause_body', 'root_clause_body', array(
+             'fields' =>
+             array(
+              'id' =>
+              array(
+              ),
+              'root_clause_body_id' =>
+              array(
+              ),
+             ),
+             ));
     }
 
     public function postUp()
@@ -30,6 +41,17 @@ class Version1 extends Doctrine_Migration_Base
              'default' => '1',
              ));
         $this->removeColumn('clause', 'is_latest_clause');
+        $this->removeIndex('clause_body', 'root_clause_body', array(
+             'fields' =>
+             array(
+              'id' =>
+              array(
+              ),
+              'root_clause_body_id' =>
+              array(
+              ),
+             ),
+             ));
     }
 
     public function postDown()

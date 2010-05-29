@@ -1,11 +1,10 @@
 <form action="<?php echo url_for('clauseSearch'); ?>" method="GET" id="searchForm">
 <p class="query">
     <label for="query">
-        <span class="tooltip">Containing
+        Containing
         <?php if (empty($showHelp)): ?>
-            <span>Enter text to search document title and clause content.</span>
+        <span class="tooltip">?<span>Enter text to search document title and clause content.</span></span>
         <?php endif; ?>
-        </span>
     </label>
     <br />
     <input type="text" name="q" id="query" value="<?php echo $query ?>" />
@@ -16,11 +15,10 @@
 
 <div class="tags">
     <label for="tags">
-        <span class="tooltip">Tagged with
-            <?php if (empty($showHelp)): ?>
-            <span>Enter text to see list of available tags and choose one or several tags.</span>
-            <?php endif; ?>
-        </span>
+        Tagged with
+        <?php if (empty($showHelp)): ?>
+        <span class="tooltip">?<span>Enter text to see list of available tags and choose one or several tags.</span></span>
+        <?php endif; ?>
     </label>
     <br />
     <input type="text" name="" id="tags" />
@@ -40,11 +38,10 @@
     <?php endif; ?>
 </div>
 <p class="tagMatch">
-<span class="tooltip">Matching
-    <?php if (empty($showHelp)): ?>
-    <span>Determine whether search results must match any of the entered tags or all.</span>
-    <?php endif; ?>
-</span>
+Matching
+<?php if (empty($showHelp)): ?>
+<span class="tooltip">?<span>Determine whether search results must match any of the entered tags or all.</span></span>
+<?php endif; ?>
     <input type="radio" name="tm" id="anytag" value="any" <?php echo $tagMatch !== 'all' ? 'checked="checked"':'' ?> />&nbsp;<label for="anytag">Any tag</label>
     <input type="radio" name="tm" id="alltags" value="all" <?php echo $tagMatch === 'all' ? 'checked="checked"':'' ?>  />&nbsp;<label for="alltags">All tags</label>
     <?php if (!empty($showHelp)): ?>
@@ -54,11 +51,10 @@
 <p class="latestClauseOnly">
     <input type="checkbox" name="l" id="latestClauseOnly" value="1" <?php echo $latestClauseOnly ? 'checked="checked"':'' ?> />
     <label for="latestClauseOnly">
-        <span class="tooltip">Latest clause version only
-            <?php if (empty($showHelp)): ?>
-            <span>Enable this checkbox to search only for the latest version of follow-up documents.</span>
-            <?php endif; ?>
-        </span>
+        Latest clause version only
+        <?php if (empty($showHelp)): ?>
+        <span class="tooltip">?<span>Enable this checkbox to search only for the latest version of follow-up documents.</span></span>
+        <?php endif; ?>
     </label>
     <?php if (!empty($showHelp)): ?>
     <span class="helptext">Enable this checkbox to search only for the latest version of follow-up documents.</span>

@@ -573,7 +573,7 @@ div.form-comment label.error, div.form-comment ul.error_list li{
 
 div.form-comment ul.error_list{
   margin:20px 0 0 0;
-  list-style-image: url('../images/arrow-down.png');
+  list-style-image: url('/images/arrow-down.png');
 }
 
 div.form-comment input.error, div.form-comment textarea.error{
@@ -608,10 +608,10 @@ ul.bookmarks ul {
 a.toggleCol {
     color: #000;
     padding-left: 20px;
-    background: url(../images/hide.gif) no-repeat;
+    background: url(/images/hide.gif) no-repeat;
 }
 a.toggleCol.closed {
-    background: url(../images/collapse.gif) no-repeat;
+    background: url(/images/collapse.gif) no-repeat;
 }
 
 /* FOOTER */
@@ -624,7 +624,7 @@ a.toggleCol.closed {
 }
 
 .support .liip {
-    background: url(../images/liip.png) no-repeat;
+    background: url(/images/liip.png) no-repeat;
     width: 154px;
     height: 68px;
     display: block;
@@ -642,9 +642,19 @@ a.toggleCol.closed {
 span.tooltip{
     position:relative; /*this is the key*/
     z-index:24;
-    color:#000;
-    text-decoration:none;
-    font-weight:normal;
+    width: 10px;
+    padding: 0 2px;
+    padding-right: 3px;
+    bottom:2px;
+    background: #951c00 url(/images/gradient-red.png) repeat-x top left;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid #721500;
+    font-weight: bold;
+    font-size:9px;
+    color: #fff;
+    cursor: help;
 }
 
 span.tooltip:hover{z-index:25;}
@@ -657,5 +667,7 @@ span.tooltip:hover span{ /*the span will display just on :hover state*/
     top:2em; left:2em; width:15em;
     border:1px solid #000;
     background-color:#fff; color:#000;
-    text-align: center
+    text-align: center;
+    font-weight: normal;
+    font-size: 12px;
 }

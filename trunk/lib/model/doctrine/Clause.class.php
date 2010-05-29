@@ -63,6 +63,7 @@ class Clause extends BaseClause
 
             $root_clause_body_id = $invoker->_get('clause_body_id');
             $q = Doctrine_Query::create()
+                ->select('c.*')
                 ->from('Clause c')
                 ->innerJoin('c.ClauseBody cb')
                 ->where('cb.root_clause_body_id = ? OR cb.id = ?', array($root_clause_body_id, $root_clause_body_id));

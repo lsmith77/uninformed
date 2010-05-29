@@ -423,6 +423,11 @@ ClauseBody:
       values: [draft, review, reviewed, inactive, active]
       default: draft
       notnull: true
+  indexes:
+    root_clause_body:
+      fields:
+        id: []
+        root_clause_body_id: []
   relations:
     Addressees:
       class: Addressee

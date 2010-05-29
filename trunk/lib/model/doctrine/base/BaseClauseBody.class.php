@@ -116,6 +116,18 @@ abstract class BaseClauseBody extends MyBaseRecord
              'notnull' => true,
              ));
 
+
+        $this->index('root_clause_body', array(
+             'fields' => 
+             array(
+              'id' => 
+              array(
+              ),
+              'root_clause_body_id' => 
+              array(
+              ),
+             ),
+             ));
         $this->option('collation', 'utf8_general_ci');
         $this->option('charset', 'utf8');
         $this->option('type', 'InnoDB');

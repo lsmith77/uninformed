@@ -6,9 +6,9 @@ default:
     content-type: text/html
 
   metas:
-    title: UN-informed.org
-    description:  UN-informed.org is a project of MCM, providing a structured database for UN resolutions
-    keywords:     UN, resolutions
+    title: UN-informed.org Beta - The Search Engine for UN Agreements
+    description:  UN-informed.org is a search engine that lets you find the relevant contents of UN Agreements on Clean Drinking Water, Malaria, Small Arms and Light Weapons and Women and Education in a fast and user-friendly way. More thematic areas will follow soon.
+    keywords:     United Nations, UN, Resolution, Convention, UN Agreement, UN System, Malaria, Roll Back Malaria, Water, Clean Drinking Water, SALW, Small Arms, Light Weapons, Women, Education, Women's Rights
     language:     en
     robots:       index, follow
 

@@ -21,6 +21,17 @@ class Version1 extends Doctrine_Migration_Base
               ),
              ),
              ));
+        $this->addIndex('document', 'root_document', array(
+             'fields' =>
+             array(
+              'id' =>
+              array(
+              ),
+              'root_document_id' =>
+              array(
+              ),
+             ),
+             ));
     }
 
     public function postUp()
@@ -48,6 +59,17 @@ class Version1 extends Doctrine_Migration_Base
               array(
               ),
               'root_clause_body_id' =>
+              array(
+              ),
+             ),
+             ));
+        $this->removeIndex('dociment', 'root_document', array(
+             'fields' =>
+             array(
+              'id' =>
+              array(
+              ),
+              'root_document_id' =>
               array(
               ),
              ),

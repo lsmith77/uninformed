@@ -22,8 +22,8 @@
             <td><?php echo $document->getLegalValue(); ?></td>
             <td><?php echo $document->DocumentType; ?></td>
             <td>
-                <?php if ($document->getVoteUrl()) { echo link_to('Votes', $document->getVoteUrl()); if ($document->getDocumentUrl()) {echo ', ';}} ?>
-                <?php if ($document->getDocumentUrl()) { echo link_to('Source', $document->getDocumentUrl());} ?>
+                <?php if ($document->getVoteUrl()) { echo link_to('Votes', $document->getVoteUrl(), array('target' => '_blank')); if ($document->getDocumentUrl()) {echo ', ';}} ?>
+                <?php if ($document->getDocumentUrl()) { echo link_to('Source', $document->getDocumentUrl(), array('target' => '_blank'));} ?>
             </td>
         </tr>
     </tbody>

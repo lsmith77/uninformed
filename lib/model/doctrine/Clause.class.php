@@ -87,10 +87,9 @@ class Clause extends BaseClause
         $root_clause_body_id = $this->ClauseBody->_get('root_clause_body_id');
         if (is_null($root_clause_body_id)) {
             $q = Doctrine_Query::create()
-                ->select('c.id')
-                ->from('Clause c')
-                ->innerJoin('c.ClauseBody cb')
-                ->where('cb.root_clause_body_id = ?', array($root_clause_body_id))
+                ->select('cb.id')
+                ->from('ClauseBody cb')
+                ->where('cb.root_clause_body_id = ?', array($this->_get('clause_body_id')))
                 ->limit(1);
             $clause = $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
             if (empty($clause)) {

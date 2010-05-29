@@ -40,12 +40,12 @@
 <p class="tagMatch">
 Matching
 <?php if (empty($showHelp)): ?>
-<span class="tooltip">?<span>Determine whether search results must match any of the entered tags or all.</span></span>
+<span class="tooltip">?<span>Determine whether search results must match any of the selected tags or all.</span></span>
 <?php endif; ?>
     <input type="radio" name="tm" id="anytag" value="any" <?php echo $tagMatch !== 'all' ? 'checked="checked"':'' ?> />&nbsp;<label for="anytag">Any tag</label>
     <input type="radio" name="tm" id="alltags" value="all" <?php echo $tagMatch === 'all' ? 'checked="checked"':'' ?>  />&nbsp;<label for="alltags">All tags</label>
     <?php if (!empty($showHelp)): ?>
-    <span class="helptext">Determine whether search results must match any of the entered tags or all.</span>
+    <span class="helptext">Determine whether search results must match any of the selected tags or all.</span>
     <?php endif; ?>
 </p>
 <p class="latestClauseOnly">

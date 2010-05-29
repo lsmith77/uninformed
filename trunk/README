@@ -30,3 +30,10 @@ php symfony lucene:update-model-system --model=Clause --delete=true frontend Cla
 To deploy to the server:
 
 php symfony project:deploy production --go
+
+On the server:
+cd /var/www/un-informed.org
+php symfony cc
+php symfony project:disable prod
+php symfony doctrine:migrate
+php symfony project:enable prod

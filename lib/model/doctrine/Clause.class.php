@@ -83,15 +83,33 @@ class Clause extends BaseClause
         if (empty($this->ClauseBody)) {
             return;
         }
-        $root_clause_body_id = $this->ClauseBody->root_clause_body_id;
 
-        $q = Doctrine_Query::create()
-            ->from('Clause c')
-            ->innerJoin('c.ClauseBody cb')
-            ->where('cb.id = ?', array($root_clause_body_id));
-        $clause = $q->fetchOne();
-        if (empty($clause)) {
-            return;
+        $root_clause_body_id = $this->ClauseBody->_get('root_clause_body_id');
+        if (is_null($root_clause_body_id)) {
+            $q = Doctrine_Query::create()
+                ->select('c.id')
+                ->from('Clause c')
+                ->innerJoin('c.ClauseBody cb')
+                ->where('cb.root_clause_body_id = ?', array($root_clause_body_id))
+                ->limit(1);
+            $clause = $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+            if (empty($clause)) {
+                if (!$this->getIsLatestClause()) {
+                    $this->setIsLatestClause(true);
+                    $this->save();
+                }
+                return;
+            }
+            $clause = $this;
+        } else {
+            $q = Doctrine_Query::create()
+                ->from('Clause c')
+                ->innerJoin('c.ClauseBody cb')
+                ->where('cb.id = ?', array($root_clause_body_id));
+            $clause = $q->fetchOne();
+            if (empty($clause)) {
+                return;
+            }
         }
 
         $clause->adoptionDateChange = true;

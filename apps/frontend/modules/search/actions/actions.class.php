@@ -112,11 +112,11 @@ class searchActions extends sfActions
         $facets = array(
             'legal_value' => array(
                 'unfolded' => false,
-                'label' => 'Organisation',
+                'label' => 'Legal Value',
              ),
             'adoption_year' => array(
                 'unfolded' => false,
-                'label' => 'Legal Value',
+                'label' => 'Adoption Year',
              ),
             'organisation_id' => array(
                 'model' => 'Organisation',
@@ -229,7 +229,7 @@ class searchActions extends sfActions
                     ksort($solr);
                     foreach ($solr as $id => $count) {
                         if ($count) {
-                            $array = array('id' => $id, 'name' => $id, 'count' => $count);
+                            $array = array('id' => $id, 'name' => ($id ? $id : 'none'), 'count' => $count);
                             if (isset($solr_filtered[$id]) && $count !== $solr_filtered[$id]) {
                                 $array['filteredCount'] = $solr_filtered[$id];
                             }

@@ -76,6 +76,15 @@ $(function(){
         }
     });
 
+    // autocomplete
+    $('#documentCode').autocomplete({
+        source: '/search/searchDocumentCode',
+        select: function(e, ui) {
+            e.preventDefault();
+            if (ui.item.url.replace(/ /, '') !== '') { location.href = ui.item.url; }
+        }
+    });
+
     // results page only
     if ($('.results').length) {
         loadResultsPage();

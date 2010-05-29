@@ -56,21 +56,19 @@ class Clause extends BaseClause
                 return;
             }
 
-            $root_clause_body_id = $invoker->_get('clause_body_id');
-
             $clause = $invoker->getLatestAdoptedClause();
             if (empty($clause)) {
                 return;
             }
 
-            $latest_clause_id = $clause->getId();
-
+            $root_clause_body_id = $invoker->_get('clause_body_id');
             $q = Doctrine_Query::create()
                 ->from('Clause c')
                 ->innerJoin('c.ClauseBody cb')
                 ->where('cb.root_clause_body_id = ? OR cb.id = ?', array($root_clause_body_id, $root_clause_body_id));
             $clauses = $q->execute(array(), Doctrine_Core::HYDRATE_ON_DEMAND);
 
+            $latest_clause_id = $clause->getId();
             foreach ($clauses as $clause) {
                 $is_latest_clause = $clause->getId() == $latest_clause_id;
                 if ($clause->getIsLatestClause() != $is_latest_clause) {
@@ -102,19 +100,26 @@ class Clause extends BaseClause
 
     public function getLatestAdoptedClause() {
         $root_clause_body_id = $this->ClauseBody->root_clause_body_id;
-        $max_adoption_date = Doctrine_Query::create()
-            ->select('MAX(adoption_date)')
-            ->from('Document d')
-            ->innerJoin('d.Clauses c')
-            ->innerJoin('c.ClauseBody cb')
+        $clause_body_ids = Doctrine_Query::create()
+            ->select('cb.id')
+            ->from('ClauseBody cb INDEXBY cb.id')
             ->where('cb.root_clause_body_id = ? OR cb.id = ?', array($root_clause_body_id, $root_clause_body_id))
-            ->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+            ->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
+        if (empty($clause_body_ids)) {
+            return null;
+        }
+
+        if (count($clause_body_ids) === 1) {
+            return $this;
+        }
+
+        $clause_body_ids = array_keys($clause_body_ids);
 
         return Doctrine_Query::create()
             ->from('Clause c')
             ->innerJoin('c.Document d')
-            ->innerJoin('c.ClauseBody cb')
-            ->where('(cb.root_clause_body_id = ? OR cb.id = ?) AND d.adoption_date = ?', array($root_clause_body_id, $root_clause_body_id, $max_adoption_date))
+            ->whereIn('c.clause_body_id', $clause_body_ids)
+            ->orderBy('d.adoption_date DESC')
             ->fetchOne();
     }
 

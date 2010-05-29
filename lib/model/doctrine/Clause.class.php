@@ -103,6 +103,7 @@ class Clause extends BaseClause
             $clause = $this;
         } else {
             $q = Doctrine_Query::create()
+                ->select('c.*, cb.id, cb.root_clause_body_id')
                 ->from('Clause c')
                 ->innerJoin('c.ClauseBody cb')
                 ->where('cb.id = ?', array($root_clause_body_id));
@@ -134,6 +135,7 @@ class Clause extends BaseClause
         $clause_body_ids = array_keys($clause_body_ids);
 
         return Doctrine_Query::create()
+            ->select('c.*')
             ->from('Clause c')
             ->innerJoin('c.Document d')
             ->whereIn('c.clause_body_id', $clause_body_ids)

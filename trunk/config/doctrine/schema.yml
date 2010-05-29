@@ -224,6 +224,11 @@ Document:
       values: [draft, review, reviewed, inactive, active]
       default: draft
       notnull: true
+  indexes:
+    root_document:
+      fields:
+        id: []
+        root_document_id: []
   relations:
     DocumentParent:
       class: Document

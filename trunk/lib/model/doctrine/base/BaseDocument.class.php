@@ -175,6 +175,18 @@ abstract class BaseDocument extends MyBaseRecord
              'notnull' => true,
              ));
 
+
+        $this->index('root_document', array(
+             'fields' => 
+             array(
+              'id' => 
+              array(
+              ),
+              'root_document_id' => 
+              array(
+              ),
+             ),
+             ));
         $this->option('collation', 'utf8_general_ci');
         $this->option('charset', 'utf8');
         $this->option('type', 'InnoDB');

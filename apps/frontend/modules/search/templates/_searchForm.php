@@ -42,13 +42,13 @@
 <p class="tagMatch">
 <span class="tooltip">Matching
     <?php if (empty($showHelp)): ?>
-    <span>Determine if the clauses in the result list need to match only one or all of the selected tags.</span>
+    <span>Determine whether search results must match any of the entered tags or all.</span>
     <?php endif; ?>
 </span>
-    <input type="radio" name="tm" id="anytag" value="any" <?php echo $tagMatch !== 'all' ? 'checked="checked"':'' ?> />&nbsp;<label for="anytag">At least 1 tag</label>
+    <input type="radio" name="tm" id="anytag" value="any" <?php echo $tagMatch !== 'all' ? 'checked="checked"':'' ?> />&nbsp;<label for="anytag">Any tag</label>
     <input type="radio" name="tm" id="alltags" value="all" <?php echo $tagMatch === 'all' ? 'checked="checked"':'' ?>  />&nbsp;<label for="alltags">All tags</label>
     <?php if (!empty($showHelp)): ?>
-    <span class="helptext">Determine if the clauses in the result list need to match only one or all of the selected tags.</span>
+    <span class="helptext">Determine whether search results must match any of the entered tags or all.</span>
     <?php endif; ?>
 </p>
 <p class="latestClauseOnly">

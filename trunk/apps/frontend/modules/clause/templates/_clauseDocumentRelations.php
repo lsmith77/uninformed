@@ -1,4 +1,4 @@
-<table id="clauseDocumentRelations" class="collapsed closed">
+<table id="clauseDocumentRelations" class="collapsed">
     <thead>
         <tr>
             <th>Document Code</th>

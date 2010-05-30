@@ -24,7 +24,7 @@
     </thead>
     <tbody>
         <tr>
-            <td><?php echo $clause->clause_number; ?></td>
+            <td><?php echo $clause->getFullClauseNumber(); ?></td>
             <td><?php echo $clauseBody->ClauseOperativePhrase; ?></td>
             <td><?php echo $clauseBody->ClauseInformationType; ?></td>
             <td>

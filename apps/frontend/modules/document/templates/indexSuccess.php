@@ -29,10 +29,14 @@ if ($related_clauses->count()) { ?>
 <?php include_partial('documentClauseRelations', array('related_clauses' => $related_clauses)); ?>
 <?php } ?>
 
+<?php
+$clauses = $document->getClauseList();
+if ($clauses->count()) { ?>
 <h2><a href="#" class="toggleCol" target="clauses">Clauses in this Document</a></h2>
 <div id="clauses">
-    <?php include_partial('clauseListOfDocument', array('clauses' => $document->getClauseList())) ?>
+    <?php include_partial('clauseListOfDocument', array('clauses' => $clauses)) ?>
 </div>
+<?php } ?>
 
 <h2><a href="#" class="toggleCol" target="documentHistory">History of this document</a></h2>
 <?php include_partial('documentHistory', array('document'=>$document)); ?>

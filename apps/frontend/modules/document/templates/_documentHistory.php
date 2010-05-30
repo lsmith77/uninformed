@@ -12,7 +12,7 @@ $rootdocuments = $document->getDocumentsByRoot();
         <tr>
             <th>Document Code</th>
             <th>Year</th>
-            <th>Content</th>
+            <th>Title</th>
         </tr>
     </thead>
     <tbody>

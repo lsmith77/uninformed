@@ -16,6 +16,4 @@
     </li>
     <?php endforeach; ?>
 </ul>
-<?php else: ?>
-<div>No clauses found!</div>
 <?php endif; ?>

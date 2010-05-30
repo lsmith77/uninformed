@@ -7,7 +7,7 @@
  */
 $rootdocuments = $document->getDocumentsByRoot();
 ?>
-<table id="documentHistory" class="collapsed">
+<table id="documentHistory" class="collapsed closed">
     <thead>
         <tr>
             <th>Document Code</th>

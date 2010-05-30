@@ -1,4 +1,4 @@
-<table id="clauseClauseRelations" class="collapsed">
+<table id="clauseClauseRelations" class="collapsed closed">
     <thead>
         <tr>
             <th>Clause Code</th>

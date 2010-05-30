@@ -228,7 +228,7 @@ input[type=submit] {
 }
 /* HOME SEARCH */
 .homesearch fieldset{
-    border:2px solid #951c00;
+    border:2px solid #fff;
     padding: 10px 10px 10px 10px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;

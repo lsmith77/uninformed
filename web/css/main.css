@@ -310,7 +310,7 @@ input[type=submit] {
 
 /* SEARCH PAGE */
 div.search {
-    width: 2300px;
+    width: 230px;
     padding: 10px;
     background: #e2e2e2 url(/images/gradient.png) repeat-x top left;
     -webkit-border-radius: 4px;

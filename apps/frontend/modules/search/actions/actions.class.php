@@ -384,7 +384,7 @@ class searchActions extends sfActions
                         $organisation =  $suborgan['OrganisationParent']['name'];
                     }
 
-                    if ($documents[$key]['DocumentType']['name'] == 'Resolution'
+                    if ($documents[$key]['DocumentType']['name'] == 'resolution'
                         && $main_organ == 'SC'
                         && $organisation == 'UNO'
                     ) {

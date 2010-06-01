@@ -165,9 +165,9 @@ input[type=submit] {
 /* HEADER & NAV */
 .header {
     position: absolute;
-    background: url(/images/logo.gif) no-repeat;
-    width: 283px;
-    height: 53px;
+    background: url(/images/fouricons.gif) no-repeat;
+    width: 331px;
+    height: 66px;
     right: 10px;
     top: 30px;
 }

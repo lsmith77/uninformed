@@ -2,19 +2,6 @@
 
 <?php if (!empty($showHelp)): ?>
 <fieldset>
-<legend>Search documents</legend>
-<p class="documentCode">
-    <label for="documentCode">Document code</label><br />
-    <input type="text" name="" id="documentCode" />
-</p>
-<p class="documentCodeText">
-    <span class="helptext">Enter text to search document code, select to load.</span>
-</p>
-</fieldset>
-<?php endif; ?>
-
-<?php if (!empty($showHelp)): ?>
-<fieldset>
 <legend>Search clauses</legend>
 <?php endif; ?>
 <p class="query">
@@ -89,4 +76,17 @@ Matching
 </fieldset>
 <?php endif; ?>
 
+<?php if (!empty($showHelp)): ?>
+<fieldset>
+<legend>Search documents</legend>
+<p class="documentCode">
+    <label for="documentCode">Document code</label><br />
+    <input type="text" name="" id="documentCode" />
+</p>
+<p class="documentCodeText">
+    <span class="helptext">Enter text to search document code, select to load.</span>
+</p>
+</fieldset>
+<?php endif; ?>
+    
 </form>

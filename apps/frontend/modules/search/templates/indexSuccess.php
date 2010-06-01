@@ -1,7 +1,7 @@
 <?php
     use_javascript('search');
 ?>
-<h1>Search clauses and documents of UN resolutions and conventions</h1>
+<h1>Search UN resolutions and conventions clause by clause.</h1>
 
 <div class="homesearch">
     <?php include_partial('search/searchForm', $sf_data); ?>

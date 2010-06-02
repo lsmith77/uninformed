@@ -10,8 +10,8 @@ all:
     restricted: true
   sfApplyPlugin:
     from:
-      email: "noreply@UN-informed.org"
-      fullname: "UN-informed.org"
+      email: "noreply@resolutionfinder.org"
+      fullname: "resolutionfinder.org"
   sf_guard_plugin:
     remember_cookie_name:   UNinformedorgRememberMe
   sf_admin_dash:
@@ -19,7 +19,7 @@ all:
     image_dir:                    /sfAdminDashPlugin/images/icons/
     default_image:                config.png
     resize_mode:                  thumbnail
-    site:                         UN-informed.org
+    site:                         resolutionfinder.org
     include_path:                 true
     include_jquery_no_conflict:   true
     logout:                       true

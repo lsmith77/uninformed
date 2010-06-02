@@ -77,6 +77,9 @@ Matching
 <?php endif; ?>
 
 <?php if (!empty($showHelp)): ?>
+
+<br />
+
 <fieldset>
 <legend>Search documents</legend>
 <p class="documentCode">
@@ -88,5 +91,5 @@ Matching
 </p>
 </fieldset>
 <?php endif; ?>
-    
+
 </form>

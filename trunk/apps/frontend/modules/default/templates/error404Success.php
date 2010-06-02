@@ -14,12 +14,12 @@
 
   <p>
     <dt>Did you follow a link from somewhere else at this site?</dt>
-    <dd>If you reached this page from another part of this site, please <?php echo mail_to('feedback@UN-informed.org', 'email us', 'encode=true', array('subject' => '[UN-informed.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?> so we can correct our mistake.</dd>
+    <dd>If you reached this page from another part of this site, please <?php echo mail_to('feedback@resolutionfinder.org', 'email us', 'encode=true', array('subject' => '[resolutionfinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?> so we can correct our mistake.</dd>
   </p>
 
   <p>
     <dt>Did you follow a link from another site?</dt>
-    <dd>Links from other sites can sometimes be outdated or misspelled. Please <?php echo mail_to('feedback@UN-informed.org', 'email us', 'encode=true', array('subject' => '[UN-informed.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?> where you came from and we can try to contact the other site in order to fix the problem.</dd>
+    <dd>Links from other sites can sometimes be outdated or misspelled. Please <?php echo mail_to('feedback@resolutionfinder.org', 'email us', 'encode=true', array('subject' => '[resolutionfinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?> where you came from and we can try to contact the other site in order to fix the problem.</dd>
   </p>
 
   <p>

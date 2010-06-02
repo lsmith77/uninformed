@@ -16,7 +16,7 @@ prod:
     class: sfSessionStorage
     param:
       session_name: UNinformedorg
-      session_cookie_domain: .un-informed.org
+      session_cookie_domain: .resolutionfinder.org
 
 test:
   storage:

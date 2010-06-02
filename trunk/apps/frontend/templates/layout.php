@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="wrap">
-<?php if (strpos($sf_context->getRequest()->getUri(), 'http://search.un-informed.org') === 0): ?>
+<?php if (strpos($sf_context->getRequest()->getUri(), 'http://resolutionfinder.org') === 0): ?>
 <script type="text/javascript">
 
  var _gaq = _gaq || [];
@@ -29,7 +29,7 @@ s.parentNode.insertBefore(ga, s);
 <?php endif; ?>
     <?php $route = sfContext::getInstance()->getRouting()->getCurrentRouteName(); ?>
     <div class="header">
-      <span>UN-informed.org - making commitments matter</span>
+      <span>resolutionfinder.org</span>
     </div>
     <div class="nav">
     <ul class="mnav">
@@ -46,7 +46,7 @@ s.parentNode.insertBefore(ga, s);
       <li class="<?php if ($route === 'sf_guard_signin') { echo 'current'; } ?>"><?php echo link_to('Login', 'sf_guard_signin'); ?></li>
       <li class="<?php if ($route === 'apply') { echo 'current'; } ?>"><?php echo link_to('Register', 'apply'); ?></li>
 <?php endif; ?>
-        <li><?php echo mail_to('feedback@UN-informed.org', 'Feedback', 'encode=true', array('subject' => '[UN-informed.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?></li>
+        <li><?php echo mail_to('feedback@resolutionfinder.org', 'Feedback', 'encode=true', array('subject' => '[resolutionfinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?></li>
     </ul>
     </div>
     <?php if($sf_user->hasFlash('notice')): ?>

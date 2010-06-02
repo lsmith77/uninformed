@@ -10,7 +10,7 @@ all:
     restricted: true
   sfApplyPlugin:
     from:
-      email: "noreply@UN-informed.org"
-      fullname: "UN-informed.org"
+      email: "noreply@resolutionfinder.org"
+      fullname: "resolutionfinder.org"
   sf_guard_plugin:
-    remember_cookie_name:   UNinformedorgRememberMe
+    remember_cookie_name:   resolutionfinderorgRememberMe

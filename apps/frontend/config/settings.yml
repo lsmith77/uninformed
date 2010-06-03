@@ -4,9 +4,11 @@
 prod:
   .settings:
     logging_enabled:        true
+    no_script_name:         true
 
 dev:
   .settings:
+    no_script_name:         false
     error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
     web_debug:              true
     cache:                  false
@@ -21,7 +23,7 @@ test:
 
 all:
   .settings:
-    no_script_name:         true
+    no_script_name:         false
     check_lock:    true
 
     i18n: on

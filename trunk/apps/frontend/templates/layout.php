@@ -33,7 +33,7 @@
     <ul class="mnav">
       <li class="<?php if ($route === 'search' || $route === 'clauseSearch' || $route === 'homepage') { echo 'current'; } ?>"><?php echo link_to('Search', 'search'); ?></li>
       <li><?php echo link_to('UN-i.org', 'http://www.UN-i.org'); ?></li>
-      <li><?php echo link_to('About', 'http://www.UN-informed.org'); ?></li>
+      <li><?php echo link_to('About', '@aboutus'); ?></li>
     </ul>
     <ul class="snav">
 <?php if ($sf_user->isAuthenticated()): ?>

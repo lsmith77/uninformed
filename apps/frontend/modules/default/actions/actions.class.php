@@ -18,7 +18,7 @@ class defaultActions extends sfActions
     {
     }
 
-#    public function executeAboutus(sfWebRequest $request)
-#    {
-#    }
+    public function executeAboutus(sfWebRequest $request)
+    {
+    }
 }

@@ -18,7 +18,12 @@ class documentActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
       $this->document = $this->getRoute()->getObject();
+      $this->document = $this->getRoute()->getObject();
       $this->forward404Unless($this->document);
+      $objectSlug = $request->getParameter('id');
+      if ($objectSlug !== $this->document->getSlug()) {
+          $this->redirect('document', array('id' => $this->document->getSlug()));
+      }
 
       $user = $this->getUser();
       if ($user->isAuthenticated()) {

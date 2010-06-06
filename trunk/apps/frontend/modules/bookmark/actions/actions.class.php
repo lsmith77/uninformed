@@ -53,9 +53,10 @@ class bookmarkActions extends sfActions
         $this->forward404Unless($this->getUser()->isAuthenticated());
         $userId = $this->getUser()->getGuardUser()->getId();
         $objectType = $request->getParameter('type');
-        $objectId = $request->getParameter('id');
+        $objectSlug = $request->getParameter('id');
+        $objectId = (int)$objectSlug;
 
-        $this->forward404Unless($objectType=='clause'||$objectType=='document');
+        $this->forward404Unless($objectType=='clause' || $objectType=='document');
 
         $bookmark = new Bookmark();
         $bookmark->setObjectType($objectType);
@@ -64,11 +65,11 @@ class bookmarkActions extends sfActions
         try {
             $bookmark->save();
         } catch (Exception $e) {
-            // page allready bookmarked..
+            // page already bookmarked..
         }
 
         $this->getUser()->setFlash('notice', 'Bookmark successfully added');
-        $this->redirect($objectType, array('id'=>$objectId));
+        $this->redirect($objectType, array('id' => $objectSlug));
     }
 
     public function executeRemove(sfWebRequest $request)
@@ -76,9 +77,10 @@ class bookmarkActions extends sfActions
         $this->forward404Unless($this->getUser()->isAuthenticated());
         $userId = $this->getUser()->getGuardUser()->getId();
         $objectType = $request->getParameter('type');
-        $objectId = $request->getParameter('id');
+        $objectSlug = $request->getParameter('id');
+        $objectId = (int)$objectSlug;
 
-        $this->forward404Unless($objectType=='clause'||$objectType=='document');
+        $this->forward404Unless($objectType=='clause' || $objectType=='document');
 
         $q = Doctrine_Query::create()
             ->from('Bookmark')
@@ -89,6 +91,6 @@ class bookmarkActions extends sfActions
         }
 
         $this->getUser()->setFlash('notice', 'Bookmark successfully removed');
-        $this->redirect($objectType, array('id'=>$objectId));
+        $this->redirect($objectType, array('id' => $objectSlug));
     }
 }

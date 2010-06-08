@@ -10,7 +10,7 @@ class backendConfiguration extends sfApplicationConfiguration
 
   public function generateFrontendUrl($name, $parameters = array())
   {
-    $host = 'http://'.$_SERVER['HTTP_HOST'];
+    $host = 'http://'.str_replace('admin.', '', $_SERVER['HTTP_HOST']);
     if (sfConfig::get('sf_web_debug')) {
         $host.= '/frontend_dev.php';
     }

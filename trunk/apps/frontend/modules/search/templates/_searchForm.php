@@ -87,7 +87,7 @@ Matching
     <input type="text" name="" id="documentCode" />
 </p>
 <p class="documentCodeText">
-    <span class="helptext">Enter text to search document code, select to load.</span>
+    <span class="helptext">Enter text to search document code, select to load the given document.</span>
 </p>
 </fieldset>
 <?php endif; ?>

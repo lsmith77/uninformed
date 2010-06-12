@@ -136,6 +136,8 @@ Addressee:
     name:
       type: string(255)
       notnull: true
+    description:
+      type: clob
   relations:
     ClauseBodies:
       class: ClauseBody
@@ -177,6 +179,8 @@ DocumentType:
     legal_value:
       type: string(30)
       notnull: true
+    description:
+      type: clob
 
 Document:
   actAs:
@@ -498,6 +502,8 @@ ClauseOperativePhrase:
     name:
       type: string(255)
       notnull: true
+    description:
+      type: clob
 
 ClauseInformationType:
   columns:
@@ -508,6 +514,8 @@ ClauseInformationType:
     name:
       type: string(255)
       notnull: true
+    description:
+      type: clob
 
 Tag:
   columns:
@@ -518,6 +526,8 @@ Tag:
     name:
       type: string(255)
       notnull: true
+    description:
+      type: clob
   relations:
     Documents:
       class: Document

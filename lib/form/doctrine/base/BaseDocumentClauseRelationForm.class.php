@@ -25,7 +25,7 @@ abstract class BaseDocumentClauseRelationForm extends BaseFormDoctrine
     ));
 
     $this->setValidators(array(
-      'id'                     => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'id'                     => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'type'                   => new sfValidatorChoice(array('choices' => array(0 => 'closely related'))),
       'document_id'            => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Document'))),
       'related_clause_body_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseRelated'))),

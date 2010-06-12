@@ -26,7 +26,7 @@ abstract class BaseVoteForm extends BaseFormDoctrine
     ));
 
     $this->setValidators(array(
-      'id'          => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'type'        => new sfValidatorChoice(array('choices' => array(0 => 'adopted without a vote', 1 => 'yes', 2 => 'no', 3 => 'abstention', 4 => 'not present', 5 => 'signed', 6 => 'ratified'), 'required' => false)),
       'vote_date'   => new sfValidatorPass(array('required' => false)),
       'document_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Document'))),

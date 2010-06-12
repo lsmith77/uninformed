@@ -24,7 +24,7 @@ abstract class BaseBookmarkForm extends BaseFormDoctrine
     ));
 
     $this->setValidators(array(
-      'id'          => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'user_id'     => new sfValidatorInteger(),
       'object_type' => new sfValidatorChoice(array('choices' => array(0 => 'clause', 1 => 'document'))),
       'object_id'   => new sfValidatorInteger(),

@@ -9,17 +9,20 @@
  * @property string $name
  * @property integer $rank_priority
  * @property string $legal_value
+ * @property clob $description
  * @property Doctrine_Collection $Documents
  * 
  * @method integer             getId()            Returns the current record's "id" value
  * @method string              getName()          Returns the current record's "name" value
  * @method integer             getRankPriority()  Returns the current record's "rank_priority" value
  * @method string              getLegalValue()    Returns the current record's "legal_value" value
+ * @method clob                getDescription()   Returns the current record's "description" value
  * @method Doctrine_Collection getDocuments()     Returns the current record's "Documents" collection
  * @method DocumentType        setId()            Sets the current record's "id" value
  * @method DocumentType        setName()          Sets the current record's "name" value
  * @method DocumentType        setRankPriority()  Sets the current record's "rank_priority" value
  * @method DocumentType        setLegalValue()    Sets the current record's "legal_value" value
+ * @method DocumentType        setDescription()   Sets the current record's "description" value
  * @method DocumentType        setDocuments()     Sets the current record's "Documents" collection
  * 
  * @package    symfony
@@ -51,6 +54,9 @@ abstract class BaseDocumentType extends MyBaseRecord
              'type' => 'string',
              'notnull' => true,
              'length' => 30,
+             ));
+        $this->hasColumn('description', 'clob', null, array(
+             'type' => 'clob',
              ));
 
         $this->option('collation', 'utf8_general_ci');

@@ -31,7 +31,7 @@ abstract class BaseClauseBodyForm extends BaseFormDoctrine
     ));
 
     $this->setValidators(array(
-      'id'                    => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'id'                    => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'content'               => new sfValidatorString(array('required' => false)),
       'information_type_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseInformationType'), 'required' => false)),
       'operative_phrase_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ClauseOperativePhrase'), 'required' => false)),

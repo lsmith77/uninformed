@@ -7,14 +7,17 @@
  * 
  * @property integer $id
  * @property string $name
+ * @property clob $description
  * @property Doctrine_Collection $Clauses
  * 
- * @method integer               getId()      Returns the current record's "id" value
- * @method string                getName()    Returns the current record's "name" value
- * @method Doctrine_Collection   getClauses() Returns the current record's "Clauses" collection
- * @method ClauseInformationType setId()      Sets the current record's "id" value
- * @method ClauseInformationType setName()    Sets the current record's "name" value
- * @method ClauseInformationType setClauses() Sets the current record's "Clauses" collection
+ * @method integer               getId()          Returns the current record's "id" value
+ * @method string                getName()        Returns the current record's "name" value
+ * @method clob                  getDescription() Returns the current record's "description" value
+ * @method Doctrine_Collection   getClauses()     Returns the current record's "Clauses" collection
+ * @method ClauseInformationType setId()          Sets the current record's "id" value
+ * @method ClauseInformationType setName()        Sets the current record's "name" value
+ * @method ClauseInformationType setDescription() Sets the current record's "description" value
+ * @method ClauseInformationType setClauses()     Sets the current record's "Clauses" collection
  * 
  * @package    symfony
  * @subpackage model
@@ -36,6 +39,9 @@ abstract class BaseClauseInformationType extends MyBaseRecord
              'type' => 'string',
              'notnull' => true,
              'length' => 255,
+             ));
+        $this->hasColumn('description', 'clob', null, array(
+             'type' => 'clob',
              ));
 
         $this->option('collation', 'utf8_general_ci');

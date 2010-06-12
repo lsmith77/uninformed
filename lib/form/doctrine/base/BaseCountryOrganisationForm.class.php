@@ -26,7 +26,7 @@ abstract class BaseCountryOrganisationForm extends BaseFormDoctrine
     ));
 
     $this->setValidators(array(
-      'id'              => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'id'              => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'country_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Country'))),
       'organisation_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Organisation'))),
       'created_at'      => new sfValidatorDateTime(),

@@ -25,7 +25,7 @@ abstract class BaseCommentReportForm extends BaseFormDoctrine
     ));
 
     $this->setValidators(array(
-      'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'reason'     => new sfValidatorString(),
       'referer'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'state'      => new sfValidatorChoice(array('choices' => array(0 => 'valid', 1 => 'invalid', 2 => 'untreated'), 'required' => false)),

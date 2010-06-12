@@ -24,7 +24,7 @@ abstract class BaseCountryForm extends BaseFormDoctrine
     ));
 
     $this->setValidators(array(
-      'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'iso'        => new sfValidatorString(array('max_length' => 3)),
       'name'       => new sfValidatorString(array('max_length' => 255)),
       'created_at' => new sfValidatorDateTime(),

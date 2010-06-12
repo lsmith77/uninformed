@@ -7,17 +7,20 @@
  * 
  * @property integer $id
  * @property string $name
+ * @property clob $description
  * @property Doctrine_Collection $Documents
  * @property Doctrine_Collection $ClauseBodies
  * @property Doctrine_Collection $TagImplication
  * 
  * @method integer             getId()             Returns the current record's "id" value
  * @method string              getName()           Returns the current record's "name" value
+ * @method clob                getDescription()    Returns the current record's "description" value
  * @method Doctrine_Collection getDocuments()      Returns the current record's "Documents" collection
  * @method Doctrine_Collection getClauseBodies()   Returns the current record's "ClauseBodies" collection
  * @method Doctrine_Collection getTagImplication() Returns the current record's "TagImplication" collection
  * @method Tag                 setId()             Sets the current record's "id" value
  * @method Tag                 setName()           Sets the current record's "name" value
+ * @method Tag                 setDescription()    Sets the current record's "description" value
  * @method Tag                 setDocuments()      Sets the current record's "Documents" collection
  * @method Tag                 setClauseBodies()   Sets the current record's "ClauseBodies" collection
  * @method Tag                 setTagImplication() Sets the current record's "TagImplication" collection
@@ -42,6 +45,9 @@ abstract class BaseTag extends MyBaseRecord
              'type' => 'string',
              'notnull' => true,
              'length' => 255,
+             ));
+        $this->hasColumn('description', 'clob', null, array(
+             'type' => 'clob',
              ));
 
 

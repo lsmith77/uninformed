@@ -25,7 +25,7 @@ abstract class BaseClauseReservationForm extends BaseFormDoctrine
     ));
 
     $this->setValidators(array(
-      'id'             => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'id'             => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'clause_body_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Clause'), 'required' => false)),
       'country_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Country'), 'required' => false)),
       'reservation'    => new sfValidatorString(array('required' => false)),

@@ -18,7 +18,7 @@
     <![CDATA[
     <h2>Search filters</h2>
     <form id="filtersForm">
-    <% var f, fId, item, folded; %>
+    <% var f, fId, item, folded, count; %>
     <% for (fId in this.facets) {
         f = this.filters[fId];
         if (f && f.length) { %>
@@ -30,7 +30,8 @@
             <% } %>
             <% for (item in f) { %>
               <% item = f[item]; %>
-              <label><input type="checkbox" name="f[<%= $.htmlencode(fId) %>][]" value="<%= item.id %>" <% if(item.isChecked) { %><%= 'checked="checked" ' %><% } %><%= (item.count == this.totalResults ? 'disabled="disabled"':'') %> />
+              <% count = item.filteredCount != undefined ? item.filteredCount : item.count; %>
+              <label><input type="checkbox" name="f[<%= $.htmlencode(fId) %>][]" value="<%= item.id %>" <% if(item.isChecked) { %><%= 'checked="checked" ' %><% } %><%= ((item.isChecked && count == this.totalResults) ? 'disabled="disabled"':'') %> />
               <%= item.name %> <span class="count">(<% if(item.filteredCount != undefined) { %><%= item.filteredCount %> of <% } %><%= item.count %>)</span></label>
             <% } %>
         </div>

@@ -39,5 +39,6 @@ Clause:
           type: int
         organisation_id:
           type: int
+          alias: getOrganisationIdSolr
         legal_value:
           type: string

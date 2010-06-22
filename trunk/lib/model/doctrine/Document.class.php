@@ -101,11 +101,17 @@ class Document extends BaseDocument
     public function getStructuredOrganisation() {
         $s = array('main' => '', 'current' => '', 'sub' => '', );
 
+        $organisationId = $this->getOrganisationId();
+        if (empty($organisationId)) {
+            $s['main'] = 'Other';
+            return $s;
+        }
+
         $q = Doctrine_Query::create()
             ->select('so.name, so.parent_id, mo.name, mo.parent_id')
             ->from('Organisation so')
             ->innerJoin('so.OrganisationParent mo')
-            ->where('so.id = ?', array($this->getOrganisationId()));
+            ->where('so.id = ?', array($organisationId));
         $suborgan = $q->fetchArray();
         if (!empty($suborgan)) {
             $suborgan = reset($suborgan);

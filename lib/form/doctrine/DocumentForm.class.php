@@ -20,6 +20,10 @@ class DocumentForm extends BaseDocumentForm
     }
   }
     public function configure() {
+        $years = range(1900, date('Y'));
+        $dateWidget = new sfWidgetFormDate(array('years' => array_combine($years, $years)));
+        $this->widgetSchema['enforcement_date'] = new sfWidgetFormJQueryDate(array('date_widget' => $dateWidget));
+        $this->widgetSchema['adoption_date'] = new sfWidgetFormJQueryDate(array('date_widget' => $dateWidget));
         $this->widgetSchema['parent_document_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
           array(
             'model' => 'Document',

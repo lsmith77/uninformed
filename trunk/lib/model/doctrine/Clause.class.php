@@ -198,6 +198,10 @@ class Clause extends BaseClause
         return $this->_get('Document')->_get('organisation_id');
     }
 
+    public function getOrganisationIdSolr() {
+        return (int)$this->getOrganisationId();
+    }
+
     public function getLegalValue() {
         return $this->_get('Document')->getLegalValue();
     }

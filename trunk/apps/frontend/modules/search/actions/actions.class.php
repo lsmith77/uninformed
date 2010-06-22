@@ -244,6 +244,7 @@ class searchActions extends sfActions
         foreach ($facets as $facet => $configuration) {
             $solr = $results->getFacetField('orig_'.$facet);
             $solr_filtered = $results->getFacetField($facet);
+
             $filters[$facet] = array();
             if (!empty($solr)) {
                 if (empty($configuration['model'])) {
@@ -266,8 +267,8 @@ class searchActions extends sfActions
                         ->whereIn("$model.id", array_keys($solr))
                         ->orderBy("name");
                     if ($model == 'Organisation') {
-                        $q->innerJoin("$model.OrganisationParent op")
-                            ->select("$model.id, CONCAT(op.name, ' ', $model.name) AS name");
+                        $q->leftJoin("$model.OrganisationParent op")
+                            ->select("$model.id, TRIM(CONCAT(COALESCE(op.name, ''), ' ', $model.name)) AS name");
                     }
                     $values = $q->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
                     foreach ($values as $id => $name) {
@@ -279,6 +280,14 @@ class searchActions extends sfActions
                             $array['isChecked'] = empty($this->filters[$facet]) || !in_array($id, $this->filters[$facet]);
                             $filters[$facet][] = $array;
                         }
+                    }
+                    if (!empty($solr[0])) {
+                        $array = array('id' => 0, 'name' => 'Other', 'count' => $solr[0]);
+                        if (isset($solr_filtered[$id]) && $solr[0] !== $solr_filtered[0]) {
+                            $array['filteredCount'] = $solr_filtered[$id];
+                        }
+                        $array['isChecked'] = empty($this->filters[$facet]) || !in_array(0, $this->filters[$facet]);
+                        $filters[$facet][] = $array;
                     }
                 }
             }
@@ -365,6 +374,13 @@ class searchActions extends sfActions
                     ->whereIn('d.id', $documents);
                 $documents = $q->fetchArray();
                 foreach ($documents as $key => $document) {
+                    $documents[$key]['slug'] = $documents[$key]['id'].'-'.$documents[$key]['slug'];
+                    if (empty($document['organisation_id'])) {
+                        $documents[$key]['Organisation']['name'] = "Other";
+                        $documents[$key]['isSCResolution'] = false;
+                        continue;
+                    }
+
                     $q = Doctrine_Query::create()
                         ->select('so.name, so.parent_id, mo.name, mo.parent_id')
                         ->from('Organisation so')
@@ -393,7 +409,6 @@ class searchActions extends sfActions
                         $documents[$key]['isSCResolution'] = false;
                     }
                     $documents[$key]['Organisation']['name'] = "$organisation $main_organ";
-                    $documents[$key]['slug'] = $documents[$key]['id'].'-'.$documents[$key]['slug'];
                 }
 
                 foreach ($data as $key => $clause) {

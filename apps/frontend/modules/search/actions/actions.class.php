@@ -193,9 +193,9 @@ class searchActions extends sfActions
 
         if (!empty($this->query)) {
             $subcritieria = new sfLuceneCriteria;
-            $subcritieria->addFieldSane('document_title', $this->query);
-            $subcritieria->addFieldSane('content', $this->query, 'OR');
+            $subcritieria->add('_query_:"{!dismax qf=\'content document_title\' pf=\'content document_title\' v=$qq}"', 'AND', true);
             $criteria->add($subcritieria);
+            $criteria->addParam('qq', $this->query);
 
             $criteria->addParam('hl', 'true');
             $criteria->addParam('hl.fl', '*');

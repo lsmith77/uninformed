@@ -56,7 +56,7 @@ class solrQueryParser
         $tokenArray = preg_split('@(\s)|(["+():-])@', $searchQuery, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
         foreach ($tokenArray as $token) {
             if (isset($map[strtolower( $token )])) {
-                $tokens[] = new solrQueryParserToken($map[strtolower( $token )], $token);
+                $tokens[] = new solrQueryParserToken($map[strtolower($token)], $token);
             } else {
                 $tokens[] = new solrQueryParserToken(solrQueryParserToken::STRING, $token);
             }
@@ -87,7 +87,7 @@ class solrQueryParser
 
                 case solrQueryParserToken::LOGICAL_OR:
                     if ( $this->stackType[$this->stackLevel] === 'and' ) {
-                        throw new Exception( 'You can not mix AND and OR without using "(" and ")".' );
+                        throw new Exception('You can not mix AND and OR without using "(" and ")".');
                     } else {
                         $this->stackType[$this->stackLevel] = 'or';
                     }
@@ -95,7 +95,7 @@ class solrQueryParser
 
                 case solrQueryParserToken::LOGICAL_AND:
                     if ( $this->stackType[$this->stackLevel] === 'or' ) {
-                        throw new Exception( 'You can not mix OR and AND without using "(" and ")".' );
+                        throw new Exception('You can not mix OR and AND without using "(" and ")".');
                     } else {
                         $this->stackType[$this->stackLevel] = 'and';
                     }
@@ -108,7 +108,7 @@ class solrQueryParser
 
                 case solrQueryParserToken::BRACE_CLOSE:
                     $this->stackLevel--;
-                    if ( $this->stackType[$this->stackLevel + 1] == 'and' || $this->stackType[$this->stackLevel + 1] == 'default' ) {
+                    if ($this->stackType[$this->stackLevel + 1] == 'and' || $this->stackType[$this->stackLevel + 1] == 'default') {
                         $this->stack[$this->stackLevel + 1]['op'] = 'and';
                         $this->stack[$this->stackLevel][] = $this->stack[$this->stackLevel + 1];
                     } else {
@@ -175,7 +175,7 @@ class solrQueryParser
 
         }
         if ($this->state == 'in-quotes') {
-            throw new Exception( 'Unterminated quotes in query string.' );
+            throw new Exception('Unterminated quotes in query string.');
         }
 
         return $this->stack[0];
@@ -200,7 +200,7 @@ class solrQueryParserToken
 
     public $token;
 
-    public function __construct( $type, $token )
+    public function __construct($type, $token)
     {
         $this->type = $type;
         $this->token = $token;

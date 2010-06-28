@@ -17,6 +17,8 @@ So basically 3 things would be nice: merge/split tool, automatically remove docu
 == Merge ==
 From the tag list, the user can drag and drop a tag into the "merge" field. Adding a second one ore more joins the single tags into one. The order within the "merge" field can be changed by dragging a tag into its desired position.
 
+Alternatively the user can add the desired tags by using the auto complete search field.
+
 == Split ==
 From the tag list, the user can drag and drop a tag into the "split" field. The drop event will automatically split the tag into its components, identifying them through the seperator " " (space). Each identified tag can then be deleted when necessary. The user confirms his selection using a "submit" button. The tags are created when not already existing in the database.
 

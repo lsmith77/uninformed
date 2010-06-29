@@ -11,6 +11,8 @@ class solrQueryParser
 {
     private $state;
 
+    private $preEscapeState;
+
     private $stack;
 
     private $stackLevel;
@@ -29,6 +31,7 @@ class solrQueryParser
     public function reset()
     {
         $this->state = 'normal';
+        $this->preEscapeState = 'normal';
         $this->stackLevel = 0;
         $this->stack = array();
         $this->stack[$this->stackLevel] = array();
@@ -61,28 +64,44 @@ class solrQueryParser
     {
         $tokens = $this->parse($q);
 
+        $string = '';
         foreach ($tokens as $token) {
             switch ($this->state) {
             case 'normal':
                 switch ($token->type) {
                 case solrQueryParserToken::SPACE:
-                    /* ignore */
+                    if ($string !== '') {
+                        $this->stack[$this->stackLevel][] = $string;
+                        $string = '';
+                    }
                     break;
 
                 case solrQueryParserToken::STRING:
-                    $pieces = explode(':', $token->token);
+                    $string .= $token->token;
+                    if (substr($string, -1, 1) === '\\') {
+                        $this->preEscapeState = $this->state;
+                        $this->state = 'in-escape';
+                        break;
+                    }
+                    $pieces = explode(':', $string);
                     $count = count($pieces);
                     if ($count > 2) {
                         throw new Exception('String may only contain a single colon');
                     } elseif ($count == 1) {
-                        $this->stack[$this->stackLevel][] = $token->token;
+                        $this->stack[$this->stackLevel][] = $string;
                     } elseif (empty($pieces[1])) {
                         throw new Exception('Filter may not be empty');
                     } else {
                         $this->stack[$this->stackLevel][] = array('field' => $pieces[0], 'criteria' => $pieces[1]);
                     }
+                    $string = '';
                     break;
 
+                case solrQueryParserToken::ESCAPE:
+                    $string = $token->token;
+                    $this->preEscapeState = $this->state;
+                    $this->state = 'in-escape';
+                    break;
                 case solrQueryParserToken::QUOTE:
                     $this->state = 'in-quotes';
                     $string = '';
@@ -91,18 +110,12 @@ class solrQueryParser
                 break;
             case 'in-escape':
                 switch ($token->type) {
-                case solrQueryParserToken::ESCAPE:
-                    $string .= $token->token;
-                    $this->state = 'normal';
-                    break;
-                case solrQueryParserToken::QUOTE:
-                    $string .= $token->token;
-                    $this->state = 'in-quotes';
-                    break;
-
                 case solrQueryParserToken::STRING:
                 case solrQueryParserToken::SPACE:
+                case solrQueryParserToken::QUOTE:
                     $string .= $token->token;
+                case solrQueryParserToken::ESCAPE:
+                    $this->state = $this->preEscapeState;
                     break;
                 }
                 break;
@@ -110,6 +123,7 @@ class solrQueryParser
                 switch ($token->type) {
                 case solrQueryParserToken::ESCAPE:
                     $string .= $token->token;
+                    $this->preEscapeState = $this->state;
                     $this->state = 'in-escape';
                     break;
                 case solrQueryParserToken::QUOTE:
@@ -118,6 +132,7 @@ class solrQueryParser
                         throw new Exception('Filter may not be empty');
                     }
                     $this->stack[$this->stackLevel][] = $string;
+                    $string = '';
                     $this->state = 'normal';
                     break;
 
@@ -128,8 +143,13 @@ class solrQueryParser
                 }
                 break;
             }
-
         }
+
+        if ($string !== '') {
+            $this->stack[$this->stackLevel][] = $string;
+            $string = '';
+        }
+
         if ($this->state == 'in-quotes') {
             throw new Exception('Unterminated quotes in query string.');
         }

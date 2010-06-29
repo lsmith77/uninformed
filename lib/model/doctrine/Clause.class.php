@@ -151,6 +151,10 @@ class Clause extends BaseClause
         return $this->_get('Document')->_get('title');
     }
 
+    public function getDocumentCode() {
+        return $this->_get('Document')->_get('code');
+    }
+
     public function getFullClauseNumber() {
         $number = ' #'.$this->_get('clause_number');
         if ($this->_get('clause_number_information')) {

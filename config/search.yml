@@ -19,6 +19,8 @@ Clause:
         document_title:
           type: text
           stored: true
+        document_code:
+          type: lcstring
         adoption_year:
           type: int
         tag_ids:

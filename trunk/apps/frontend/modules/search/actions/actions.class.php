@@ -54,6 +54,21 @@ class searchActions extends sfActions
         $this->page = (int) $request->getGetParameter('p', 0);
     }
 
+
+    protected function searchFailure() {
+        $output = array(
+            'data' => array(),
+            'filters' => array(),
+            'facets' => array(),
+            'totalResults' => 0,
+            'page' => $this->page,
+            'limit' => $limit,
+            'status' => 'success',
+            'message' => 'ok'
+        );
+        return $this->returnJson($output);
+    }
+
     public function executeIndex(sfWebRequest $request)
     {
         $this->readParameters($request);
@@ -112,23 +127,54 @@ class searchActions extends sfActions
         $this->filters = (array) $request->getGetParameter('f');
         $limit = 20;
 
-        if (empty($this->query) && empty($this->tags)) {
-            $output = array(
-                'data' => array(),
-                'filters' => array(),
-                'facets' => array(),
-                'totalResults' => 0,
-                'page' => $this->page,
-                'limit' => $limit,
-                'status' => 'success',
-                'message' => 'ok'
-            );
-            return $this->returnJson($output);
+        if (empty($this->query)) {
+            return $this->searchFailure();
         }
 
         $lucene = sfLucene::getInstance('Clause', null);
 
         $criteria = new sfLuceneFacetsCriteria;
+
+        $query = array();
+        $queried = false;
+        try {
+            $parser = new solrQueryParser();
+            $terms = $parser->buildQueryTerms($this->query);
+            foreach ($terms as $term) {
+                if (is_array($term)) {
+                    if (preg_match('/^(\+|-)?tag/', $term['field'])) {
+                        $tag = $term['criteria'];
+                        $q = Doctrine_Query::create()
+                            ->select('t.id')
+                            ->from('Tag t')
+                            ->where('t.name = ?', array($tag));
+                        $tag = $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+                        if (!empty($tag)) {
+                            $criteria->addField($term['field'].'_ids', $tag, 'AND');
+                            $queried = true;
+                        }
+                    } elseif(preg_match('/^(\+|-)?code/', $term['field'], $match)) {
+                        $field = substr($term['criteria'], -1, 1) === '*' ? 'document_code_prefix' : 'document_code';
+                        $code = $field === 'document_code_prefix' ? substr($term['criteria'], 0, -1) : $term['criteria'];
+                        $field = $match[1].$field;
+                        $criteria->addField($field, $code, 'AND');
+                        $queried = true;
+                    } else {
+                        return $this->searchFailure();
+                    }
+                } else {
+                    $query[] = $term;
+                }
+            }
+
+            $query = implode(' ', $query);
+        } catch (Exception $e) {
+            $query = $this->query;
+        }
+
+        if (empty($query) && empty($tags) && empty($queried)) {
+            return $this->searchFailure();
+        }
 
         $facets = array(
             'legal_value' => array(
@@ -179,7 +225,7 @@ class searchActions extends sfActions
                 $output = array('status' => 'error', 'message' => "parameter 't' needs to be an array of integer");
                 return $this->returnJson($output);
             }
-            $op = ($this->tagMatch == 'all') ? ' AND ' : ' OR ';
+            $op = ($this->tagMatch == 'all') ? 'AND' : 'OR';
             $subcritieria = new sfLuceneCriteria;
             foreach ($tags as $tag) {
                 $subcritieria->addFieldSane('tag_ids', $tag, $op);
@@ -188,14 +234,14 @@ class searchActions extends sfActions
         }
 
         if ($this->latestClauseOnly) {
-            $criteria->addFieldSane('is_latest_clause', 'true', 'AND');
+            $criteria->addField('+is_latest_clause', 'true', 'AND');
         }
 
-        if (!empty($this->query)) {
+        if (!empty($query)) {
             $subcritieria = new sfLuceneCriteria;
-            $subcritieria->add('_query_:"{!dismax qf=\'content document_title\' pf=\'content document_title\' v=$qq}"', 'AND', true);
-            $criteria->add($subcritieria);
-            $criteria->addParam('qq', $this->query);
+            $subcritieria->add('_query_:"{!dismax qf=\'content document_title\' pf=\'content document_title\' mm=0 v=$qq}"', 'AND', true);
+            $criteria->add($subcritieria, 'AND');
+            $criteria->addParam('qq', $query);
 
             $criteria->addParam('hl', 'true');
             $criteria->addParam('hl.fl', '*');
@@ -427,6 +473,7 @@ class searchActions extends sfActions
             'status' => 'success',
             'message' => 'ok'
         );
+
         return $this->returnJson($output);
     }
 }

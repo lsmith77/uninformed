@@ -40,20 +40,13 @@ class solrQueryParser
     protected function tokenize($searchQuery)
     {
         $map = array(
-            ' '  => solrQueryParserToken::SPACE,
+            ' ' => solrQueryParserToken::SPACE,
             '\t' => solrQueryParserToken::SPACE,
-            '"'  => solrQueryParserToken::QUOTE,
-            '+'  => solrQueryParserToken::PLUS,
-            '-'  => solrQueryParserToken::MINUS,
-            '('  => solrQueryParserToken::BRACE_OPEN,
-            ')'  => solrQueryParserToken::BRACE_CLOSE,
-            'and' => solrQueryParserToken::LOGICAL_AND,
-            'or'  => solrQueryParserToken::LOGICAL_OR,
-            ':'   => solrQueryParserToken::COLON,
-            '\\'   => solrQueryParserToken::ESCAPE,
+            '"' => solrQueryParserToken::QUOTE,
+            '\\' => solrQueryParserToken::ESCAPE,
         );
         $tokens = array();
-        $tokenArray = preg_split('@(\s)|(["+():-])@', $searchQuery, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        $tokenArray = preg_split('@(\s)|(["])@', $searchQuery, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
         foreach ($tokenArray as $token) {
             if (isset($map[strtolower( $token )])) {
                 $tokens[] = new solrQueryParserToken($map[strtolower($token)], $token);
@@ -77,49 +70,22 @@ class solrQueryParser
                     break;
 
                 case solrQueryParserToken::STRING:
-                    $this->stack[$this->stackLevel][] = $token->token;
+                    $pieces = explode(':', $token->token);
+                    $count = count($pieces);
+                    if ($count > 2) {
+                        throw new Exception('String may only contain a single colon');
+                    } elseif ($count == 1) {
+                        $this->stack[$this->stackLevel][] = $token->token;
+                    } elseif (empty($pieces[1])) {
+                        throw new Exception('Filter may not be empty');
+                    } else {
+                        $this->stack[$this->stackLevel][] = array('field' => $pieces[0], 'criteria' => $pieces[1]);
+                    }
                     break;
 
                 case solrQueryParserToken::QUOTE:
                     $this->state = 'in-quotes';
                     $string = '';
-                    break;
-
-                case solrQueryParserToken::LOGICAL_OR:
-                    if ( $this->stackType[$this->stackLevel] === 'and' ) {
-                        throw new Exception('You can not mix AND and OR without using "(" and ")".');
-                    } else {
-                        $this->stackType[$this->stackLevel] = 'or';
-                    }
-                    break;
-
-                case solrQueryParserToken::LOGICAL_AND:
-                    if ( $this->stackType[$this->stackLevel] === 'or' ) {
-                        throw new Exception('You can not mix OR and AND without using "(" and ")".');
-                    } else {
-                        $this->stackType[$this->stackLevel] = 'and';
-                    }
-                    break;
-
-                case solrQueryParserToken::BRACE_OPEN:
-                    $this->stackLevel++;
-                    $this->stackType[$this->stackLevel] = 'default';
-                    break;
-
-                case solrQueryParserToken::BRACE_CLOSE:
-                    $this->stackLevel--;
-                    if ($this->stackType[$this->stackLevel + 1] == 'and' || $this->stackType[$this->stackLevel + 1] == 'default') {
-                        $this->stack[$this->stackLevel + 1]['op'] = 'and';
-                        $this->stack[$this->stackLevel][] = $this->stack[$this->stackLevel + 1];
-                    } else {
-                        $this->stack[$this->stackLevel + 1]['op'] = 'or';
-                        $this->stack[$this->stackLevel][] = $this->stack[$this->stackLevel + 1];
-                    }
-                    break;
-
-                case solrQueryParserToken::PLUS:
-                case solrQueryParserToken::MINUS:
-                    $this->prefix = $token->type;
                     break;
                 }
                 break;
@@ -135,14 +101,7 @@ class solrQueryParser
                     break;
 
                 case solrQueryParserToken::STRING:
-                case solrQueryParserToken::COLON:
                 case solrQueryParserToken::SPACE:
-                case solrQueryParserToken::LOGICAL_AND:
-                case solrQueryParserToken::LOGICAL_OR:
-                case solrQueryParserToken::PLUS:
-                case solrQueryParserToken::MINUS:
-                case solrQueryParserToken::BRACE_OPEN:
-                case solrQueryParserToken::BRACE_CLOSE:
                     $string .= $token->token;
                     break;
                 }
@@ -154,19 +113,16 @@ class solrQueryParser
                     $this->state = 'in-escape';
                     break;
                 case solrQueryParserToken::QUOTE:
+                    $string = trim($string);
+                    if (empty($string)) {
+                        throw new Exception('Filter may not be empty');
+                    }
                     $this->stack[$this->stackLevel][] = $string;
                     $this->state = 'normal';
                     break;
 
                 case solrQueryParserToken::STRING:
-                case solrQueryParserToken::COLON:
                 case solrQueryParserToken::SPACE:
-                case solrQueryParserToken::LOGICAL_AND:
-                case solrQueryParserToken::LOGICAL_OR:
-                case solrQueryParserToken::PLUS:
-                case solrQueryParserToken::MINUS:
-                case solrQueryParserToken::BRACE_OPEN:
-                case solrQueryParserToken::BRACE_CLOSE:
                     $string .= $token->token;
                     break;
                 }
@@ -187,14 +143,7 @@ class solrQueryParserToken
     const STRING = 1;
     const SPACE  = 2;
     const QUOTE  = 3;
-    const PLUS   = 4;
-    const MINUS  = 5;
-    const BRACE_OPEN  = 6;
-    const BRACE_CLOSE = 7;
-    const LOGICAL_AND = 8;
-    const LOGICAL_OR  = 9;
-    const COLON  = 10;
-    const ESCAPE  = 11;
+    const ESCAPE  = 4;
 
     public $type;
 

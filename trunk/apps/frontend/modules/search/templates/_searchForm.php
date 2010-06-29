@@ -8,13 +8,17 @@
     <label for="query">
         Containing
         <?php if (empty($showHelp)): ?>
-        <span class="tooltip">?<span>Enter text to search document title and clause content.</span></span>
+        <span class="tooltip">?<span>Enter text to search document title and clause content. Phrases may be enclosed in double
+        quotes, exclude terms by prefixing with - and make terms mandatory by prefixing with +. For example:
+        <?php echo link_to('"security council" -africa +region', '@search?q="security council" -africa +region'); ?></span></span>
         <?php endif; ?>
     </label>
     <br />
     <input type="text" name="q" id="query" value="<?php echo $query ?>" />
     <?php if (!empty($showHelp)): ?>
-    <span class="helptext">Enter text to search document title and clause content.</span>
+    <span class="helptext">Enter text to search document title and clause content. Phrases may be enclosed in double
+        quotes, exclude terms by prefixing with - and make terms mandatory by prefixing with +. For example:
+        <?php echo link_to('"security council" -africa +region', '@search?q="security council" -africa +region'); ?></span>
     <?php endif; ?>
 </p>
 

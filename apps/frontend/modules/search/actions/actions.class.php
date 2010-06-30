@@ -136,14 +136,13 @@ class searchActions extends sfActions
         $criteria = new sfLuceneFacetsCriteria;
 
         try {
-            $factory = function() { return new solrQueryParserTerm(); };
-            $parser = new solrQueryParser($factory);
+            $factory = function() { return new phpSolrQueryTerm(); };
+            $parser = new phpSolrQueryParser($factory);
 
-            $stack = array(new solrQueryParserTermCustom('AND', $criteria));
+            $stack = array(new phpSolrQueryTermResolutionFinder('AND', $criteria));
             $tokens = $parser->parse($this->query, $stack);
-
-            $terms = $parser->buildQueryTerms($tokens);
-            $terms->implodeTerms();
+            $terms = $parser->processTerms($tokens);
+            $terms->serialize();
         } catch (Exception $e) {
             $query = $this->query;
         }

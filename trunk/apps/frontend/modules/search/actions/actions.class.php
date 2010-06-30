@@ -62,7 +62,7 @@ class searchActions extends sfActions
             'facets' => array(),
             'totalResults' => 0,
             'page' => $this->page,
-            'limit' => $limit,
+            'limit' => 0,
             'status' => 'success',
             'message' => 'ok'
         );

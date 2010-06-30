@@ -421,6 +421,8 @@ class solrQueryParserTermCustom extends solrQueryParserTerm {
         $prefix = $term->prefix;
         $field = $term->field;
         $term = (string)$term;
+        $op = $this->op;
+        $op = rtrim(" $op ").' ';
         if (!empty($field)) {
             switch ($field) {
             case 'code':
@@ -438,11 +440,11 @@ class solrQueryParserTermCustom extends solrQueryParserTerm {
             default:
                 throw new Exception('Unsupported field: '.$field);
             }
+            $this->criteria->addField($prefix.$field, $term, $op);
+            return;
         }
-
-        $op = $this->op;
-        $op = rtrim(" $op ").' ';
-        $this->criteria->addField($prefix.$field, $term, $op);
+        $term = parent::processTerm($term);
+        return $prefix.$term;
     }
 
     public function implodeTerms()
@@ -453,9 +455,11 @@ class solrQueryParserTermCustom extends solrQueryParserTerm {
         $dismax = array();
         foreach ($terms as $key => $term) {
             if ($term instanceOf solrQueryParserTerm) {
-                $this->processTerm($term);
+                $term = $this->processTerm($term);
+                if (!is_null($term)) {
+                    $dismax[] = $term;
+                }
             } else {
-                unset($terms[$key]);
                 $dismax[] = parent::processTerm($term);
             }
         }

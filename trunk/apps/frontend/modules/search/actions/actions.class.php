@@ -135,44 +135,20 @@ class searchActions extends sfActions
 
         $criteria = new sfLuceneFacetsCriteria;
 
-        $query = array();
-        $queried = false;
         try {
-            $parser = new solrQueryParser();
-            $terms = $parser->buildQueryTerms($this->query);
-            foreach ($terms as $term) {
-                if (is_array($term)) {
-                    if (preg_match('/^(\+|-)?tag/', $term['field'])) {
-                        $tag = $term['criteria'];
-                        $q = Doctrine_Query::create()
-                            ->select('t.id')
-                            ->from('Tag t')
-                            ->where('t.name = ?', array($tag));
-                        $tag = $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
-                        if (!empty($tag)) {
-                            $criteria->addField($term['field'].'_ids', $tag, 'AND');
-                            $queried = true;
-                        }
-                    } elseif(preg_match('/^(\+|-)?code/', $term['field'], $match)) {
-                        $field = substr($term['criteria'], -1, 1) === '*' ? 'document_code_prefix' : 'document_code';
-                        $code = $field === 'document_code_prefix' ? substr($term['criteria'], 0, -1) : $term['criteria'];
-                        $field = $match[1].$field;
-                        $criteria->addField($field, $code, 'AND');
-                        $queried = true;
-                    } else {
-                        return $this->searchFailure();
-                    }
-                } else {
-                    $query[] = $term;
-                }
-            }
+            $factory = function() { return new solrQueryParserTerm(); };
+            $parser = new solrQueryParser($factory);
 
-            $query = implode(' ', $query);
+            $stack = array(new solrQueryParserTermCustom('AND', $criteria));
+            $tokens = $parser->parse($this->query, $stack);
+
+            $terms = $parser->buildQueryTerms($tokens);
+            $terms->implodeTerms();
         } catch (Exception $e) {
             $query = $this->query;
         }
 
-        if (empty($query) && empty($tags) && empty($queried)) {
+        if (empty($query) && empty($terms) && empty($tags)) {
             return $this->searchFailure();
         }
 

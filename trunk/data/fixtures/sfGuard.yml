@@ -23,3 +23,11 @@ sfGuardUserGroup:
   sgug_admin:
     sfGuardGroup:       sgg_admin
     sfGuardUser:        sgu_admin
+
+ExcelFile:
+  ExcelFile_1:
+    name: foo
+    file: ./uploads/uploaded_86fedf2f3a2560ca7ce00c0a7e05ef183b1f2308.xls
+    created_at: '2010-01-24 17:37:14'
+    updated_at: '2010-01-24 17:37:14'
+    sfGuardUser: sgu_admin

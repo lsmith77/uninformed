@@ -33,7 +33,7 @@ class phpSolrQueryTermResolutionFinder extends phpSolrQueryTerm
             default:
                 throw new Exception('Unsupported field: '.$field);
             }
-            $this->criteria->addField($prefix.$field, $term, $op);
+            $this->criteria->addField($prefix.$field, $term, $op, true);
             return;
         }
         $term = parent::processTerm($term);

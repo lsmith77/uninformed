@@ -84,6 +84,7 @@ class searchActions extends sfActions
     public function executeSearchDocumentCode(sfWebRequest $request)
     {
         $term = $request->getGetParameter('term');
+        $addprefix = $request->getGetParameter('addprefix', false);
 
         // TODO: hide the fact that some code's are used multiple times
         $q = Doctrine_Query::create()
@@ -99,7 +100,33 @@ class searchActions extends sfActions
             $documents[$key]['url'] = sfContext::getInstance()->getController()->genUrl('@document?id='.$document['url']);
         }
 
+        if ($addprefix) {
+            array_unshift($documents, array('url' => '', 'label' => $term.'*'));
+        }
+
         return $this->returnJson($documents);
+    }
+
+    public function executeSearchTerm(sfWebRequest $request)
+    {
+        $term = $request->getGetParameter('term');
+
+        $lucene = sfLucene::getInstance('Clause', null);
+
+        $criteria = new sfLuceneFacetsCriteria;
+
+        $criteria->addFacetField('autosuggest');
+        $criteria->add('*:*', 'AND', true);
+        $criteria->addParam('rows', '1');
+        $criteria->addParam('facet.prefix', $term);
+        $criteria->addParam('facet.mincount', 10);
+        $criteria->addParam('facet.maxcount', 500);
+        $criteria->addParam('facet.limit', 10);
+        $criteria->addParam('facet.sort', true);
+
+        $results = $lucene->friendlyFind($criteria);
+        $terms = $results->getFacetField('autosuggest');
+        return $this->returnJson($terms);
     }
 
     public function executeSearchTags(sfWebRequest $request)
@@ -256,7 +283,7 @@ class searchActions extends sfActions
             $facets[$facet]['allChecked'] = empty($this->filters[$facet]);
             $criteria->addFacetField("{!ex=dt key=orig_$facet}$facet");
             if (isset($fq)) {
-                $criteria->addFacetField("$facet");
+                $criteria->addFacetField($facet);
             }
         }
 

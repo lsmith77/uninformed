@@ -1,3 +1,11 @@
+<?php
+
+slot('title', 'About resolutionfinder.org');
+slot('description', 'Information about resolutionfinder.org');
+slot('robots', 'INDEX, FOLLOW');
+
+?>
+
 <?php use_javascript('frontend/accordionBoxes.js'); ?>
 <?php use_javascript('frontend/collapseBoxes.js'); ?>
 

@@ -1,3 +1,29 @@
+<?php
+
+slot('title', (string)$document->getTitle());
+
+$clauses = $document->getClauseList();
+$description = '';
+if (!empty($clauses)) {
+    foreach($clauses as $key => $clause) {
+        $description = $clause->ClauseBody->getContent(true);
+        break;
+    }
+}
+
+slot('description', $description);
+
+$keywords = '';
+foreach($document->Tags as $tag) {
+    $keywords[] = $tag->getName();
+}
+$keywords = implode(', ', $keywords);
+
+slot('keywords', $keywords);
+slot('robots', 'INDEX, FOLLOW');
+
+?>
+
 <?php use_javascript('frontend/collapseBoxes.js'); ?>
 <?php if ($sf_user->isAuthenticated()): ?>
     <?php if (empty($bookmark)): ?>
@@ -30,7 +56,6 @@ if ($related_clauses->count()) { ?>
 <?php } ?>
 
 <?php
-$clauses = $document->getClauseList();
 if ($clauses->count()) { ?>
 <h2><a href="#" class="toggleCol" target="clauses">Clauses in this Document</a></h2>
 <div id="clauses">

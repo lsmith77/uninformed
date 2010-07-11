@@ -14,6 +14,7 @@ class ProjectConfiguration extends sfProjectConfiguration
     set_include_path(sfConfig::get('sf_lib_dir') . '/vendor' . PATH_SEPARATOR . get_include_path());
 
     $this->enablePlugins(
+      'isicsSitemapXMLPlugin',
       'sfDoctrinePlugin',
       'sfDoctrineGuardPlugin',
       'sfDoctrineApplyPlugin',

@@ -16,7 +16,7 @@ class clauseActions extends sfActions
     $this->forward404Unless($this->clause);
     $objectSlug = $request->getParameter('id');
     if ($objectSlug !== $this->clause->getSlug()) {
-        $this->redirect('clause', array('id' => $this->clause->getSlug()));
+        $this->redirect('clause', array('id' => $this->clause->getSlug()), 301);
     }
 
     $this->clauseBody = $this->clause->ClauseBody;

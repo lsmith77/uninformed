@@ -1,3 +1,18 @@
+<?php
+
+slot('title', (string)$clause);
+slot('description', $clauseBody->getContent(true));
+
+$keywords = '';
+foreach($clauseBody->Tags as $tag) {
+    $keywords[] = $tag->getName();
+}
+$keywords = implode(', ', $keywords);
+
+slot('keywords', $keywords);
+
+?>
+
 <?php use_javascript('frontend/collapseBoxes.js'); ?>
 <?php if ($sf_user->isAuthenticated()): ?>
     <?php if (empty($bookmark)): ?>

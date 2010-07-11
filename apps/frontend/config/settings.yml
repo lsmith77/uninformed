@@ -38,7 +38,7 @@ all:
     # Enable the database manager
     use_database:           true
 
-    enabled_modules:      [default, sfGuardAuth, sfApply, sfLucene, comment]
+    enabled_modules:      [default, sfGuardAuth, sfApply, sfLucene, comment, isicsSitemapXML]
 
     sf_guard_plugin:
       routes_register: false

@@ -34,7 +34,10 @@ class ClauseBody extends BaseClauseBody
         }
     }
 
-    public function getContent() {
+    public function getContent($original = false) {
+        if ($original) {
+            return $this->_get('content');
+        }
         $operative_phrase = (string)$this->_get('ClauseOperativePhrase');
         return preg_replace('#\b('.preg_quote($operative_phrase, '#').')\b#i', '<em>$1</em>', $this->_get('content'));
     }

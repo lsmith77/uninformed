@@ -152,4 +152,17 @@ class Document extends BaseDocument
         }
         return (string)substr($this->_get('title'), 0, 20).'..';
     }
+
+    public static function filterUrls(sfEvent $event, $urls)
+    {
+        $q = Doctrine_Query::create()
+            ->select('id, slug, title, updated_at')
+            ->from('Document');
+        $documents = $q->fetcharray();
+        foreach ($documents as $document) {
+            $urls[] = new isicsSitemapURL('@document?id='.$document['id'].'-'.$document['slug'], $document['updated_at']);
+        }
+
+        return $urls;
+    }
 }

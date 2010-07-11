@@ -2,8 +2,16 @@
 <html>
   <head>
     <?php include_http_metas() ?>
-    <?php include_metas() ?>
-    <?php include_title() ?>
+
+    <title><?php if (include_slot('title')): ?> - <?php endif ?>resolutionfinder.org - beta - The Search Engine for UN Agreements</title>
+
+    <meta name="title" content="<?php include_slot('title', ' resolutionfinder.org - beta - The Search Engine for UN Agreements') ?>" />
+    <meta name="description" content="<?php if (!include_slot('description')): ?>resolutionfinder.org is a search engine that lets you find the relevant contents of UN Agreements on Clean Drinking Water, Malaria, Small Arms and Light Weapons and Women and Education in a fast and user-friendly way. More thematic areas will follow soon.<?php endif ?>" />
+    <meta name="keywords" content="<?php if (!include_slot('keywords')): ?>United Nations, UN, Resolution, Convention, UN Agreement, UN System, Malaria, Roll Back Malaria, Water, Clean Drinking Water, SALW, Small Arms, Light Weapons, Women, Education, Women&#039;s Rights<?php endif ?>" />
+    <meta name="robots" content="<?php if (!include_slot('robots')): ?>NOINDEX; NOFOLLOW<?php endif ?>" />
+    <meta name="language" content="en" />
+    <meta name="google-site-verification" content="jgkRbNeGBKhvpBxmaLRenWNQ2ZD5nhaq6xTe3CjQ8EI" />
+
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php include_stylesheets() ?>
   </head>

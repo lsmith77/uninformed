@@ -22,7 +22,7 @@ class documentActions extends sfActions
       $this->forward404Unless($this->document);
       $objectSlug = $request->getParameter('id');
       if ($objectSlug !== $this->document->getSlug()) {
-          $this->redirect('document', array('id' => $this->document->getSlug()));
+          $this->redirect('document', array('id' => $this->document->getSlug()), 301);
       }
 
       $user = $this->getUser();

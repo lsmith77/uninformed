@@ -1,4 +1,11 @@
 <?php
+
+slot('title', 'Search');
+slot('description', 'Search UN resolutions and conventions clause by clause.');
+slot('robots', 'INDEX, NOFOLLOW');
+
+?>
+<?php
     use_javascript('search');
 ?>
 <h1>Search UN resolutions and conventions clause by clause.</h1>

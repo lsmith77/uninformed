@@ -160,7 +160,7 @@ class Document extends BaseDocument
             ->from('Document');
         $documents = $q->fetcharray();
         foreach ($documents as $document) {
-            $urls[] = new isicsSitemapURL('@document?id='.$document['id'].'-'.$document['slug'], $document['updated_at']);
+            $urls[] = new isicsSitemapURL('@document?id='.$document['id'].'-'.$document['slug'], date(DateTime::ATOM , strtotime($document['updated_at'])));
         }
 
         return $urls;

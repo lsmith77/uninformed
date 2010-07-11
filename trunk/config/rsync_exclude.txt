@@ -7,9 +7,6 @@
 /data/solr_index/*
 /web/.htaccess
 
-/apps/frontend/config/settings.yml
-/apps/backend/config/settings.yml
-
 /config/databases.yml
 /data/sql/schema.sql
 

@@ -34,6 +34,10 @@ reset:
   url: /reset
   param: { module: sfApply, action: reset }
 
+resetCancel:
+  url: /resetCancel
+  param: { module: sfApply, action: resetCancel }
+
 resetRequest:
   url: /reset-request
   param: { module: sfApply, action: resetRequest }
@@ -80,10 +84,6 @@ document:
   requirements:
     id: \d+-?.*
     sf_method: [get, post]
-
-un_i_info:
-  url:     /un-i.org
-  param: { module: un_i, action: index }
 
 about:
   url:     /about

@@ -141,7 +141,7 @@ input[type=submit] {
     font-size:13px;
     font-weight:bold;
     height:28px;
-    line-height:28px;
+    line-height:26px;
     padding:0 6px;
 }
 
@@ -152,16 +152,34 @@ input[type=submit] {
 
 /* SUBSCRIPTION & LOGIN */
 #sf_apply_apply_form label, #sf_apply_reset_request label, #signin_form th {
-    width: 300px;
+    width: 160px;
     float: left;
     font-weight: bold;
+    line-height: 25px;
+    min-height: 5px;
 }
 #sf_apply_apply_form input, #sf_apply_reset_request input, #signin_form input {
     margin: 0;
+    width: 230px;
+    padding: 3px 2px 4px;
+    font: 13px Arial, Verdana, Helvetica, sans-serif;
 }
 #sf_apply_apply_form li, #sf_apply_reset_request li {
-    margin: 5px 0;
+    margin: 5px 0 8px;
     clear: both;
+}
+#sf_apply_apply_form li.sf_apply_submit_row {
+    margin-top: 25px;
+}
+#sf_apply_apply_form li.sf_apply_submit_row input,
+#signin_form input[type=submit] {
+    width: auto;
+    padding: 0 9px;
+    font-weight: bold;
+}
+#signin_form input[type=submit] {
+	margin-left: 160px;
+	margin-right: 5px;
 }
 #signin_form th, #signin_form td {
     padding-top: 5px;
@@ -301,7 +319,7 @@ input[type=submit] {
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    line-height: 34px;
+    line-height: 32px;
     height: 34px;
     cursor: pointer;
 }
@@ -339,7 +357,7 @@ div.search {
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    line-height: 34px;
+    line-height: 30px;
     height: 34px;
     cursor: pointer;
 }
@@ -702,10 +720,15 @@ span.tooltip span{display: none}
 span.tooltip:hover span{ /*the span will display just on :hover state*/
     display:block;
     position:absolute;
-    top:2em; left:2em; width:15em;
-    border:1px solid #000;
-    background-color:#fff; color:#000;
-    text-align: center;
+    top: 14px; left: -2px; width:15em;
+    border: 1px solid #bbb;
+    background: white;
+    color: #333;
+    -webkit-box-shadow: 1px 1px 1px #999;
+    -moz-box-shadow: 1px 1px 1px #999;
+    box-shadow: 1px 1px 1px #999;
+    text-align: left;
+    padding: 6px 8px;
     font-weight: normal;
     font-size: 12px;
 }

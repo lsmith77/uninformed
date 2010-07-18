@@ -2,6 +2,7 @@
 
 slot('title', (string)$clause);
 slot('description', $clauseBody->getContent(true));
+slot('canonical', url_for('document', array('id' => $document->getSlug()), true));
 
 $keywords = '';
 foreach($clauseBody->Tags as $tag) {

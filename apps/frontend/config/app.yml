@@ -14,3 +14,6 @@ all:
       fullname: "resolutionfinder.org"
   sf_guard_plugin:
     remember_cookie_name:   resolutionfinderorgRememberMe
+  swToolbox:
+    swCombine:
+      version: 1

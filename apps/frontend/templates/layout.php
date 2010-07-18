@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <?php use_helper('swCombine') ?>
     <?php include_http_metas() ?>
 
     <title><?php if (include_slot('title')): ?> - <?php endif ?>resolutionfinder.org - beta - The Search Engine for UN Agreements</title>
@@ -15,7 +16,7 @@
         <link rel="canonical" href="<?php include_slot('canonical') ?>" />
     <?php } ?>
     <link rel="shortcut icon" href="/favicon.ico" />
-    <?php include_stylesheets() ?>
+    <?php sw_include_stylesheets() ?>
   </head>
   <body>
     <div id="wrap">
@@ -64,6 +65,6 @@
     <noscript><p class="noscript">This site runs *much* better with javascript enabled</p></noscript>
     <p class="support">Supported by <a href="http://liip.ch/" class="liip"><span>Liip AG - Agile web development - Zurich, Fribourg, Bern</span></a></p>
     </div>
-<?php include_javascripts() ?>
+<?php sw_include_javascripts() ?>
   </body>
 </html>

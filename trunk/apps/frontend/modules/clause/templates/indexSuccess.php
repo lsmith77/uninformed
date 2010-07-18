@@ -14,7 +14,6 @@ slot('keywords', $keywords);
 
 ?>
 
-<?php use_javascript('frontend/collapseBoxes.js'); ?>
 <?php if ($sf_user->isAuthenticated()): ?>
     <?php if (empty($bookmark)): ?>
         <?php echo link_to('Add Bookmark', 'bookmark_action', array('action' => 'add', 'type' => 'clause', 'id' => $clause->getSlug()), array('class' => 'addbookmark')); ?>

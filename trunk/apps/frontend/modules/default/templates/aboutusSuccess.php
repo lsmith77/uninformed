@@ -6,9 +6,6 @@ slot('robots', 'INDEX, FOLLOW');
 
 ?>
 
-<?php use_javascript('frontend/accordionBoxes.js'); ?>
-<?php use_javascript('frontend/collapseBoxes.js'); ?>
-
 <h1>About resolutionfinder.org</h1>
 
 <div class="aboutus">

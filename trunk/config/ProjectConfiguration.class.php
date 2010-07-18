@@ -3,6 +3,8 @@
 require_once dirname(__FILE__).'/../lib/vendor/symfony/lib/autoload/sfCoreAutoload.class.php';
 sfCoreAutoload::register();
 
+require_once dirname(__FILE__).'/../plugins/swCombinePlugin/lib/config/swCombineViewConfigHandler.class.php';
+
 class ProjectConfiguration extends sfProjectConfiguration
 {
   public function setup()
@@ -14,6 +16,7 @@ class ProjectConfiguration extends sfProjectConfiguration
     set_include_path(sfConfig::get('sf_lib_dir') . '/vendor' . PATH_SEPARATOR . get_include_path());
 
     $this->enablePlugins(
+      'swCombinePlugin',
       'isicsSitemapXMLPlugin',
       'sfDoctrinePlugin',
       'sfDoctrineGuardPlugin',

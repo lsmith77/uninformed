@@ -11,7 +11,9 @@
     <meta name="robots" content="<?php if (!include_slot('robots')): ?>NOINDEX; NOFOLLOW<?php endif ?>" />
     <meta name="language" content="en" />
     <meta name="google-site-verification" content="jgkRbNeGBKhvpBxmaLRenWNQ2ZD5nhaq6xTe3CjQ8EI" />
-
+    <?php if (has_slot('canonical')) { ?>
+        <link rel="canonical" href="<?php include_slot('canonical') ?>" />
+    <?php } ?>
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php include_stylesheets() ?>
   </head>

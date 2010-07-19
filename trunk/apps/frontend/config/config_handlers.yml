@@ -9,7 +9,7 @@ modules/*/config/view.yml:
        public_path:  /sw-combine
        combine:  swCombineJavascript
        driver:   swDriverJSMinPlus
-       filename: %s.js                         # %s will by replace by the combined name
+       filename: sw-%s.js                         # %s will by replace by the combined name
        exclude:
        packages:
 
@@ -17,6 +17,6 @@ modules/*/config/view.yml:
        public_path:  /sw-combine
        combine:  swCombineStylesheet
        driver:   swDriverCssmin
-       filename: %s.css                        # %s will by replace by the combined name
+       filename: sw-%s.css                        # %s will by replace by the combined name
        exclude:                                # this will include the package on ALL pages
        packages:

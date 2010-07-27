@@ -154,23 +154,23 @@ class searchActions extends sfActions
         $this->filters = (array) $request->getGetParameter('f');
         $limit = 20;
 
-        if (empty($this->query)) {
-            return $this->searchFailure();
-        }
-
         $lucene = sfLucene::getInstance('Clause', null);
 
         $criteria = new sfLuceneFacetsCriteria;
 
-        try {
-            $factory = function() { return new phpSolrQueryTerm(); };
-            $parser = new phpSolrQueryParser($factory);
+        if (!empty($this->query)) {
+            try {
+                $factory = function() { return new phpSolrQueryTerm(); };
+                $parser = new phpSolrQueryParser($factory);
 
-            $stack = array(new phpSolrQueryTermResolutionFinder('AND', $criteria));
-            $tokens = $parser->parse($this->query, $stack);
-            $terms = $parser->processTerms($tokens);
-            $terms->serialize();
-        } catch (Exception $e) {
+                $stack = array(new phpSolrQueryTermResolutionFinder('AND', $criteria));
+                $tokens = $parser->parse($this->query, $stack);
+                $terms = $parser->processTerms($tokens);
+                $terms->serialize();
+            } catch (Exception $e) {
+                $query = $this->query;
+            }
+        } else {
             $query = $this->query;
         }
 

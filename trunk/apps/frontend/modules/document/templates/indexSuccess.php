@@ -1,6 +1,6 @@
 <?php
 
-slot('title', (string)$document->getTitle());
+slot('title', 'UN Resolution: '.(string)$document->getTitle());
 
 $clauses = $document->getClauseList();
 $description = '';

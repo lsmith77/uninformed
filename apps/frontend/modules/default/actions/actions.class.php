@@ -21,4 +21,8 @@ class defaultActions extends sfActions
     public function executeAboutus(sfWebRequest $request)
     {
     }
+
+    public function executeNews(sfWebRequest $request)
+    {
+    }
 }

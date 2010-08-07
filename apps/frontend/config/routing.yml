@@ -14,6 +14,10 @@ aboutus:
   url:   /aboutus
   param: { module: default, action: aboutus }
 
+news:
+  url:   /news
+  param: { module: default, action: news }
+
 clauseSearch:
   url:   /search/:action
   param: { module: search, action: clauseResultsPage }

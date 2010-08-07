@@ -28,7 +28,7 @@
             <% for (item in f) { %>
               <% item = f[item]; %>
               <% count = item.filteredCount != undefined ? item.filteredCount : item.count; %>
-              <label><input type="checkbox" name="f[<%= $.htmlencode(fId) %>][]" value="<%= item.id %>" <% if(item.isChecked) { %><%= 'checked="checked" ' %><% } %><%= ((item.isChecked && count == this.totalResults) ? 'disabled="disabled"':'') %> />
+              <label><input type="checkbox" name="f[<%= $.htmlencode(fId) %>][]" value="<%= item.id %>" <% if(item.isChecked) { %><%= 'checked="checked" ' %><% } %><%= ((item.isChecked && (count == this.totalResults || count == 0)) ? 'disabled="disabled"':'') %> />
               <%= item.name %> <span class="count">(<% if(item.filteredCount != undefined) { %><%= item.filteredCount %> of <% } %><%= item.count %>)</span></label>
             <% } %>
         </div>

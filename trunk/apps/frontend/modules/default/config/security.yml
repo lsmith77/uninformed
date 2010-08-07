@@ -1,0 +1,6 @@
+news:
+  is_secure: true
+  credentials: admin
+
+all:
+  is_secure: false

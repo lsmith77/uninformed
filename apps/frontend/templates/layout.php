@@ -43,9 +43,7 @@
     <div class="nav">
     <ul class="mnav">
       <li class="<?php if ($route === 'search' || $route === 'clauseSearch' || $route === 'homepage') { echo 'current'; } ?>"><?php echo link_to('Search', 'search'); ?></li>
-<?php if ($sf_user->isAuthenticated() && $sf_user->hasCredential('admin')): ?>
       <li class="<?php if ($route === 'news') { echo 'current'; } ?>"><?php echo link_to('News', '@news'); ?></li>
-    <?php endif; ?>
       <li class="<?php if ($route === 'aboutus') { echo 'current'; } ?>"><?php echo link_to('About', '@aboutus'); ?></li>
       <li><?php echo link_to('UN-i.org', 'http://www.UN-i.org'); ?></li>
     </ul>

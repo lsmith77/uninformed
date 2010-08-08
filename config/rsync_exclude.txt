@@ -1,6 +1,6 @@
 # Project files
-/cache/*
-/log/*
+/cache
+/log
 /web/*_dev.php
 /web/uploads/*
 

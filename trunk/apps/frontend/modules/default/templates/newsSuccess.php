@@ -25,7 +25,6 @@ slot('robots', 'INDEX, FOLLOW');
     the most recent UN documents in the field and we're also working on redesigning the interface. If you have any comments
     or suggestions regarding the content of the research or the website, contact us at
     <?php echo mail_to('feedback@resolutionfinder.org', 'feedback@resolutionfinder.org', 'encode=true', array('subject' => '[resolutionfinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?>.</p>
-
 </div>
 
 <br />
@@ -47,9 +46,6 @@ slot('robots', 'INDEX, FOLLOW');
     <p>Here you can <?php echo link_to('download', 'http://'.$sf_request->getHost().'/downloads/A_64_L.63_Rev.1.pdf'); ?>
     the draft resolution on "The human right to water and sanitation". The clauses of the resolution shall also be
     published on ResolutionFinder.org once the final version of the text is publicly available.</p>
-
-    <p>Read more on <?php echo link_to('UN-i.org', 'http://www.UN-i.org'); ?></p>
-
 </div>
 
 <br />

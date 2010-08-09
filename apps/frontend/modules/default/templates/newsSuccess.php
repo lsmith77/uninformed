@@ -12,6 +12,21 @@ slot('robots', 'INDEX, FOLLOW');
 
 <div class="contentBlock">
 
+    <h2>Help us improve Resolutionfinder.org</h2>
+
+    <p>To make the documents in our database even better accessible we would like your help!
+    What is the best starting point for your search? Which filter options are crucial
+    to give you the best results on ResolutionFinder? Let us know your opinion: test the database
+    and take five minutes to fill out a <?php echo link_to('short survey', 'http://www.surveymonkey.com/s/B7BWBQ6') ?>.</p>
+
+    <p>For comments and questions don't hesitate to contact us at
+    <?php echo mail_to('feedback@resolutionfinder.org', 'feedback@resolutionfinder.org', 'encode=true', array('subject' => '[resolutionfinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?>.</p>
+</div>
+
+<br />
+
+<div class="contentBlock">
+
     <h2>Coming soon: Most important UN documents on Desertification and Drought and Nuclear Proliferation</h2>
 
     <p>Resolutionfinder.org is expanding! After we brought you the most relevant operative clauses from the areas of

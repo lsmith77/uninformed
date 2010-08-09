@@ -20,6 +20,8 @@ Install just like any standard symfony application:
 
 php symfony doctrine:build --all --and-load
 
+By loading data/sql/example.sql the DB can be populated with some example data.
+
 In order to get the search going you need to start solr
 See: http://svn.symfony-project.com/plugins/sfSolrPlugin/branches/sf1.2/README
 

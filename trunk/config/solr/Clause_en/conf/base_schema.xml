@@ -13,12 +13,12 @@
       </analyzer>
     </fieldType>
 
-      <fieldType name="lcstring" class="solr.TextField" sortMissingLast="true" omitNorms="true">
-        <analyzer>
-          <tokenizer class="solr.KeywordTokenizerFactory" />
-          <filter class="solr.LowerCaseFilterFactory" />
-        </analyzer>
-      </fieldType>
+    <fieldType name="lcstring" class="solr.TextField" sortMissingLast="true" omitNorms="true">
+      <analyzer>
+        <tokenizer class="solr.KeywordTokenizerFactory" />
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
 
     <fieldType name="text" class="solr.TextField" positionIncrementGap="100">
       <analyzer type="index">

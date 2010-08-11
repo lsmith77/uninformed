@@ -3177,13 +3177,6 @@ INSERT INTO `excel_file` (`id`, `name`, `file`, `is_imported`, `created_at`, `up
 (3, 'foo', '5152e14ad3d70d5141d7a675a568093b3fbce78f.xls', 0, '2010-05-21 23:56:30', '2010-05-21 23:56:30', 1);
 
 --
--- Dumping data for table `migration_version`
---
-
-INSERT INTO `migration_version` (`version`) VALUES
-(2);
-
---
 -- Dumping data for table `sf_guard_user`
 --
 

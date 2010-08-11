@@ -1,5 +1,7 @@
 See: http://code.google.com/p/uninformed
 
+Requires PHP 5.3.x and Apache with mod_rewrite.
+
 Install just like any standard symfony application:
 
 <VirtualHost *:80>

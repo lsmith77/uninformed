@@ -154,6 +154,8 @@ Organisation:
     name:
       type: string(255)
       notnull: true
+    description:
+      type: clob
     slug:
       type: string(255)
     parent_id:

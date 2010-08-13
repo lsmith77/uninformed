@@ -7,6 +7,7 @@
  * 
  * @property integer $id
  * @property string $name
+ * @property clob $description
  * @property string $slug
  * @property integer $parent_id
  * @property Organisation $OrganisationParent
@@ -16,6 +17,7 @@
  * 
  * @method integer             getId()                 Returns the current record's "id" value
  * @method string              getName()               Returns the current record's "name" value
+ * @method clob                getDescription()        Returns the current record's "description" value
  * @method string              getSlug()               Returns the current record's "slug" value
  * @method integer             getParentId()           Returns the current record's "parent_id" value
  * @method Organisation        getOrganisationParent() Returns the current record's "OrganisationParent" value
@@ -24,6 +26,7 @@
  * @method Doctrine_Collection getCountries()          Returns the current record's "Countries" collection
  * @method Organisation        setId()                 Sets the current record's "id" value
  * @method Organisation        setName()               Sets the current record's "name" value
+ * @method Organisation        setDescription()        Sets the current record's "description" value
  * @method Organisation        setSlug()               Sets the current record's "slug" value
  * @method Organisation        setParentId()           Sets the current record's "parent_id" value
  * @method Organisation        setOrganisationParent() Sets the current record's "OrganisationParent" value
@@ -51,6 +54,9 @@ abstract class BaseOrganisation extends MyBaseRecord
              'type' => 'string',
              'notnull' => true,
              'length' => 255,
+             ));
+        $this->hasColumn('description', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('slug', 'string', 255, array(
              'type' => 'string',

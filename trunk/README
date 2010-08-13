@@ -31,6 +31,15 @@ php symfony lucene:create-solr-config frontend
 php symfony lucene:service frontend start (for windows see the sfSolrPlugin README)
 php symfony lucene:update-model-system --model=Clause --delete=true frontend Clause en
 
+Changes to images/css:
+php symfony sw:combine frontend
+
+#increase the version in app.yml
+  swToolbox:
+    swCombine:
+      version: 2
+
+
 To deploy to the server:
 
 php symfony project:deploy production --go

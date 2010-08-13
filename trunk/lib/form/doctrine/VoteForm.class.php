@@ -10,7 +10,12 @@
  */
 class VoteForm extends BaseVoteForm
 {
-  public function configure()
-  {
-  }
+    public function configure() {
+        $this->widgetSchema['document_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
+          array(
+            'model' => 'Document',
+            'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=document&action=autocomplete'),
+          )
+        );
+    }
 }

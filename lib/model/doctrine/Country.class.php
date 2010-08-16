@@ -12,4 +12,7 @@
  */
 class Country extends BaseCountry
 {
+    protected static $autoCompletable = array(
+        'name' => true,
+    );
 }

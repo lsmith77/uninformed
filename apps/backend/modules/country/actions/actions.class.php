@@ -10,6 +10,12 @@
  */
 class countryActions extends sfActions
 {
+    public function executeAutocomplete($request)
+    {
+      // TODO: caution, code may be empty
+      return autocompleteHelper::executeAutocomplete($this, $request, 'Country', 'id', 'name');
+    }
+
   public function executeImport()
   {
   	$countryExcel = new spreadsheetExcelReader('uploads/isoCountry.xls');

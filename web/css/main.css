@@ -191,10 +191,10 @@ input[type=submit] {
 /* HEADER & NAV */
 .header {
     position: absolute;
-    background: url(/images/fouricons.gif) no-repeat;
-    width: 331px;
+    background: url(/images/logo.png) no-repeat;
+    width: 180px;
     height: 66px;
-    right: 10px;
+    right: 0px;
     top: 30px;
 }
 .header span {

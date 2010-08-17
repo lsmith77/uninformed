@@ -13,7 +13,7 @@
 <div id="header">
 <h1>
   <a href="<?php echo url_for('@homepage') ?>">
-    <img src="/images/logo.gif" alt="resolutionfinder.org" />
+    <img src="/images/logo.png" alt="resolutionfinder.org" />
   </a>
 </h1>
 </div>

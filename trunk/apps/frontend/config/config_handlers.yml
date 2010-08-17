@@ -7,6 +7,7 @@ modules/*/config/view.yml:
    configuration:
      javascript:
        public_path:  /sw-combine
+       private_path: %SF_WEB_DIR%/sw-combine
        combine:  swCombineJavascript
        driver:   swDriverJSMinPlus
        filename: sw-%s.js                         # %s will by replace by the combined name
@@ -15,6 +16,7 @@ modules/*/config/view.yml:
 
      stylesheet:
        public_path:  /sw-combine
+       private_path: %SF_WEB_DIR%/sw-combine
        combine:  swCombineStylesheet
        driver:   swDriverCssmin
        filename: sw-%s.css                        # %s will by replace by the combined name

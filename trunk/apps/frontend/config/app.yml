@@ -16,4 +16,4 @@ all:
     remember_cookie_name:   resolutionfinderorgRememberMe
   swToolbox:
     swCombine:
-      version: 1
+      version: 2

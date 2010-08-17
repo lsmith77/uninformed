@@ -12,6 +12,10 @@
  */
 class ClauseBody extends BaseClauseBody
 {
+    protected static $autoCompletable = array(
+        'content' => true,
+    );
+
     public function setUp()
     {
         parent::setUp();
@@ -43,15 +47,10 @@ class ClauseBody extends BaseClauseBody
     }
 
     public function __toString() {
-        $clause = Doctrine_Query::create()
-            ->from('Clause c')
-            ->where('c.clause_body_id = ?', array($this->_get('id')))
-            ->fetchOne();
-
-        if (empty($clause)) {
-            return null;
+        $content = $this->_get('content');
+        if (strlen($content) > 30) {
+            $content = substr($content, 0, 27).' ..';
         }
-
-        return (string)$clause->getLatestAdoptedClause();
+        return $content;
     }
 }

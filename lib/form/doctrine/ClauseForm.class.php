@@ -29,7 +29,7 @@ class ClauseForm extends BaseClauseForm
         $this->widgetSchema['clause_body_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
           array(
             'model' => 'ClauseBody',
-            'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=organisation&action=autocomplete'),
+            'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=clause&action=autocompleteClauseBody'),
           )
         );
     }

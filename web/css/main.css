@@ -87,7 +87,7 @@ h1 {
 
 h2  {
     font-size: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 h2 a {text-decoration: none;}
@@ -335,6 +335,27 @@ input[type=submit] {
 }
 
 /* SEARCH PAGE */
+#searchIndicator {
+    width: 100%;
+    position: fixed; 
+    margin: 0 auto; 
+    top: 0;
+}
+#searchIndicator span {
+    display: inline-block;
+    padding: 7px 30px;
+    line-height: 1;
+    font-weight: 600;
+    color: #fff;
+    background-color: #951C00;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+}
+
 div.search {
     width: 230px;
     padding: 10px;
@@ -438,6 +459,12 @@ div.search {
     font-weight: normal;
 }
 
+span.tags {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 90%;
+}
+
 #documentCode a {
     text-decoration: underline;
     color: #333;
@@ -497,6 +524,12 @@ div.results {
     margin: 5px 0;
     text-transform: uppercase;
 }
+
+.highlight strong {
+   color: #951C00; 
+   text-decoration: none;
+}
+
 .prevnext {
     float: right;
     height: 30px;
@@ -526,7 +559,7 @@ div.results {
     border-width: 12px;
 }
 .result {
-    margin: 50px 0 25px 0;
+    margin: 40px 0 25px 0;
     padding: 0 20px 0 0;
     color: #444;
 }
@@ -697,7 +730,6 @@ a.toggleCol.closed {
 
 span.tooltip{
     position:relative; /*this is the key*/
-    z-index:24;
     width: 10px;
     padding: 0 2px;
     padding-right: 3px;

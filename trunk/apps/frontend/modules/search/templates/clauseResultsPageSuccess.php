@@ -77,7 +77,7 @@
         %>
     </div>
     <div class="result <%= itemclass %>">
-        <h2>
+        <h2 class="doctitle highlight">
             <?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.documentTitle %>', 'clause', array('id' => 'XXX'), array('target' => '_blank'))) ?>
         </h2>
         <h3>
@@ -86,8 +86,17 @@
             <span class="doctype"><%= res.Document.DocumentType.name %></span> |
             <span class="infotype"><%= res.ClauseBody.ClauseInformationType.name %></span>
         </h3>
-        <h3>
-            <span class="tags">Tags:
+        <p class="content highlight">
+            <%= ("#"+res.clause_number) %>
+            <% if (res.content) { %>
+            <%= (": "+res.content) %>
+            <% } %>
+            <% if (res.clauseHistory) { %>
+            <span class="clauseHistory"><?php echo str_replace('XXX', '<%= res.slug %>#clauseHistory', link_to('Clause History', 'clause', array('id' => 'XXX'))) ?></span>
+            <% } %>
+        </p>
+        <p>
+            <span class="tags highlight">Tags:
             <%
                 for (j = 0; j < res.Tags.length; j++) {
                     var tag = res.Tags[j].name;
@@ -101,16 +110,7 @@
                 }
             %>
             </span>
-        </h3>
         <p>
-            <%= ("#"+res.clause_number) %>
-            <% if (res.content) { %>
-            <%= (": "+res.content) %>
-            <% } %>
-            <% if (res.clauseHistory) { %>
-            <span class="clauseHistory"><?php echo str_replace('XXX', '<%= res.slug %>#clauseHistory', link_to('Clause History', 'clause', array('id' => 'XXX'))) ?></span>
-            <% } %>
-        </p>
     </div>
     <% } %>
     <div class="prevnext">

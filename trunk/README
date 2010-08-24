@@ -20,6 +20,9 @@ Install just like any standard symfony application:
   </Directory>
 </VirtualHost>
 
+Remember to also update your hosts file!
+
+Load the database schema (ensure that the credentials in config/databases.yml are correct):
 php symfony doctrine:build --all --and-load
 
 By loading data/sql/example.sql the DB can be populated with some example data.

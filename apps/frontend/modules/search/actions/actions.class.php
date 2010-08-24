@@ -126,6 +126,8 @@ class searchActions extends sfActions
 
         $results = $lucene->friendlyFind($criteria);
         $terms = $results->getFacetField('autosuggest');
+        asort($terms);
+        $terms = array_reverse($terms, true);
         $response = array();
         foreach ($terms as $term => $count) {
             $response[] = array(

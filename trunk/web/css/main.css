@@ -43,7 +43,7 @@ html {overflow-y: scroll;}
 body {
     font: 13px/18px Arial, Verdana, Helvetica, sans-serif;
     text-align: center; /* IE */
-    border-top: 3px solid #951c00;
+    border-top: 3px solid #AC2000;
     color: #333;
 }
 #wrap {
@@ -70,7 +70,7 @@ a {
     cursor: pointer;
 }
 a:hover {
-    color: #951c00;
+    color: #AC2000;
 }
 
 h1 {
@@ -134,7 +134,7 @@ input[type=submit] {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    background:url(/images/gradient-red.png) repeat-x scroll left top #951C00;
+    background:url(/images/gradient-red.png) repeat-x scroll left top #AC2000;
     border:1px solid #721500;
     color:#FFFFFF;
     cursor:pointer;
@@ -146,7 +146,7 @@ input[type=submit] {
 }
 
 .error_list {
-    color: #951C00;
+    color: #AC2000;
     float: right;
 }
 
@@ -191,7 +191,6 @@ input[type=submit] {
 /* HEADER & NAV */
 .header {
     position: absolute;
-    background: url(/images/logo.png) no-repeat;
     width: 180px;
     height: 66px;
     right: 0px;
@@ -244,7 +243,7 @@ input[type=submit] {
 }
 .nav .current a {
     height: 31px;
-    border-bottom: 3px solid #951c00;
+    border-bottom: 3px solid #AC2000;
 }
 
 #flash_notice {
@@ -311,7 +310,7 @@ input[type=submit] {
     float: right;
     width: 230px;
     padding: 0 10px;
-    background: #951c00 url(/images/gradient-red.png) repeat-x top left;
+    background: #AC2000 url(/images/gradient-red.png) repeat-x top left;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -349,7 +348,7 @@ input[type=submit] {
     line-height: 1;
     font-weight: 600;
     color: #fff;
-    background-color: #951C00;
+    background-color: #AC2000;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     -moz-border-radius-bottomright: 5px;
@@ -372,7 +371,7 @@ div.search {
 .search #search {
     width: 225px;
     padding: 0 10px;
-    background: #951c00 url(/images/gradient-red.png) repeat-x top left;
+    background: #AC2000 url(/images/gradient-red.png) repeat-x top left;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -504,7 +503,7 @@ div.results {
     text-decoration: underline;
 }
 .results a:hover {
-    color: #951c00;
+    color: #AC2000;
 }
 .results h2 {
     float: left;
@@ -528,7 +527,7 @@ div.results {
 }
 
 .highlight strong {
-   color: #951C00; 
+   color: #AC2000;
    text-decoration: none;
 }
 
@@ -736,7 +735,7 @@ span.tooltip{
     padding: 0 2px;
     padding-right: 3px;
     bottom:2px;
-    background: #951c00 url(/images/gradient-red.png) repeat-x top left;
+    background: #AC2000 url(/images/gradient-red.png) repeat-x top left;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;

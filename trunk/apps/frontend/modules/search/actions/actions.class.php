@@ -413,6 +413,17 @@ class searchActions extends sfActions
                     $data[$key]['score'] = $clauses[$clause['id']]['score'];
                     $data[$key]['documentTitle'] = $clauses[$clause['id']]['documentTitle'];
                     $data[$key]['content'] = $clauses[$clause['id']]['content'];
+
+                    $q = Doctrine_Query::create()
+                        ->select('t.name')
+                        ->from('Tag t')
+                        ->innerJoin('t.ClauseBodyTag cbt')
+                        ->where('cbt.clause_body_id = ?', array($clause['ClauseBody']['id']));
+
+                    $data[$key]['Tags'] = $q->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
+                    foreach ($data[$key]['Tags'] as $tagkey => $tag) {
+                        $data[$key]['Tags'][$tagkey]['highlight'] = in_array($tag['id'], $tags);
+                    }
                 }
 
                 $q = Doctrine_Query::create()

@@ -17,7 +17,8 @@ $(function(){
     },
     // refreshes the results, accounting for paging and all filters
     refreshResults = function(e, page) {
-        $("body").append('<div id="searchIndicator"><span>Updating results..</span></div>');
+        $("#searchIndicator").html('<span>Updating results..</span>');
+        $("#searchIndicator").show();
 
         page = page || 0;
         var url = '/search/results?' + $('#searchForm').serialize();
@@ -31,9 +32,11 @@ $(function(){
             $('.filters').jqotesub($('#filtersTpl'), data);
             $('.results').jqotesub($('#resultsTpl'), data);
             
-            $('#searchIndicator').fadeOut('slow', function() {
-                $(this).remove();
-            });
+            $("#searchIndicator").html('<span>'+data.totalResults+' results (page '+(data.page+1)+' of '+(Math.ceil(data.totalResults/data.limit))+')</span>');
+
+            setTimeout(function() {
+                $('#searchIndicator').fadeOut('slow');
+            }, 2000);
         });
     },
     // folds a filter group when clicked

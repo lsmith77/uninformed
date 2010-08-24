@@ -336,10 +336,12 @@ input[type=submit] {
 
 /* SEARCH PAGE */
 #searchIndicator {
-    width: 100%;
-    position: fixed; 
+    text-align: center;
+    width: 70%;
+    position: fixed;
     margin: 0 auto; 
     top: 0;
+    display: none;
 }
 #searchIndicator span {
     display: inline-block;

@@ -1,5 +1,7 @@
 <h1>Search for clauses</h1>
 
+<div id="searchIndicator"><span>Updating results..</span></div>
+
 <div class="search">
     <div class="form">
         <h2>Update your search</h2>
@@ -8,6 +10,7 @@
     <div class="filters">
     </div>
 </div>
+
 <div class="results">
 </div>
 

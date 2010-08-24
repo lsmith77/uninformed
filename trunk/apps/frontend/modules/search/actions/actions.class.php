@@ -119,7 +119,7 @@ class searchActions extends sfActions
         $criteria->add('*:*', 'AND', true);
         $criteria->addParam('rows', '1');
         $criteria->addParam('facet.prefix', $term);
-        $criteria->addParam('facet.mincount', 10);
+        $criteria->addParam('facet.mincount', 5);
         $criteria->addParam('facet.maxcount', 500);
         $criteria->addParam('facet.limit', 10);
         $criteria->addParam('facet.sort', true);

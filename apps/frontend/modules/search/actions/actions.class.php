@@ -126,7 +126,14 @@ class searchActions extends sfActions
 
         $results = $lucene->friendlyFind($criteria);
         $terms = $results->getFacetField('autosuggest');
-        return $this->returnJson($terms);
+        $response = array();
+        foreach ($terms as $term => $count) {
+            $response[] = array(
+                'label' => $term,
+                'count' => $count,
+            );
+        }
+        return $this->returnJson($response);
     }
 
     public function executeSearchTags(sfWebRequest $request)

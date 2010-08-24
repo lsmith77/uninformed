@@ -296,7 +296,9 @@ class searchActions extends sfActions
             $filters[$facet] = array();
             if (!empty($solr)) {
                 if (empty($configuration['model'])) {
-                    ksort($solr);
+                    if ($facet == 'adoption_year') {
+                        ksort($solr);
+                    }
                     foreach ($solr as $id => $count) {
                         if ($count) {
                             $array = array('id' => $id, 'name' => ($id ? $id : 'none'), 'count' => $count);
@@ -312,17 +314,16 @@ class searchActions extends sfActions
                     $q = Doctrine_Query::create()
                         ->select("$model.name")
                         ->from("$model INDEXBY $model.id")
-                        ->whereIn("$model.id", array_keys($solr))
-                        ->orderBy("name");
+                        ->whereIn("$model.id", array_keys($solr));
                     if ($model == 'Organisation') {
                         $q->leftJoin("$model.OrganisationParent op")
                             ->select("$model.id, TRIM(CONCAT(COALESCE(op.name, ''), ' ', $model.name)) AS name");
                     }
                     $values = $q->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
-                    foreach ($values as $id => $name) {
-                        if (!empty($solr[$id])) {
-                            $array = array('id' => $id, 'name' => $name['name'], 'count' => $solr[$id]);
-                            if (isset($solr_filtered[$id]) && $solr[$id] !== $solr_filtered[$id]) {
+                    foreach ($solr as $id => $count) {
+                        if (!empty($count)) {
+                            $array = array('id' => $id, 'name' => $values[$id]['name'], 'count' => $count);
+                            if (isset($solr_filtered[$id]) && $count !== $solr_filtered[$id]) {
                                 $array['filteredCount'] = $solr_filtered[$id];
                             }
                             $array['isChecked'] = empty($this->filters[$facet]) || !in_array($id, $this->filters[$facet]);

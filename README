@@ -22,6 +22,10 @@ Install just like any standard symfony application:
 
 Remember to also update your hosts file!
 
+Make the cache and log directories writeable for both apache and the command line:
+php symfony project:permissions
+php symfony plugin:publish-assets
+
 Load the database schema (ensure that the credentials in config/databases.yml are correct):
 php symfony doctrine:build --all --and-load
 
@@ -34,14 +38,13 @@ php symfony lucene:create-solr-config frontend
 php symfony lucene:service frontend start (for windows see the sfSolrPlugin README)
 php symfony lucene:update-model-system --model=Clause --delete=true frontend Clause en
 
-Changes to images/css:
+Changes to images/css (this might require increasing the memory limit to 128M or 256M):
 php symfony sw:combine frontend
 
 #increase the version in app.yml
   swToolbox:
     swCombine:
       version: 2
-
 
 To deploy to the server:
 

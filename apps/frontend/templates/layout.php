@@ -38,7 +38,7 @@
 <?php endif; ?>
     <?php $route = sfContext::getInstance()->getRouting()->getCurrentRouteName(); ?>
     <div class="header">
-      <span>resolutionfinder.org</span>
+      <img alt="resolutionfinder.org" src="/images/logo.png" />
     </div>
     <div class="nav">
     <ul class="mnav">

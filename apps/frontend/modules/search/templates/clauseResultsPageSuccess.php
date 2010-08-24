@@ -52,7 +52,7 @@
     <% } else { %>
     <h2>no matches</h2>
     <% } %>
-	<div class="prevnext">
+    <div class="prevnext">
     <%
         $('.results').data('page', this.page);
         if (this.page > 0) { %>
@@ -75,7 +75,7 @@
             }
         }
         %>
-	</div>
+    </div>
     <div class="result <%= itemclass %>">
         <h2>
             <?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.documentTitle %>', 'clause', array('id' => 'XXX'), array('target' => '_blank'))) ?>
@@ -85,6 +85,22 @@
             <span class="organisation"><%= res.Document.Organisation.name %></span> |
             <span class="doctype"><%= res.Document.DocumentType.name %></span> |
             <span class="infotype"><%= res.ClauseBody.ClauseInformationType.name %></span>
+        </h3>
+        <h3>
+            <span class="tags">Tags:
+            <%
+                for (j = 0; j < res.Tags.length; j++) {
+                    var tag = res.Tags[j].name;
+                    if (res.Tags[j].highlight) {
+                        tag = '<strong>'+tag+'</strong>';
+                    }
+                    if (j > 0) {
+                        tag = ', '+tag;
+                    }
+            %><%= tag %><%
+                }
+            %>
+            </span>
         </h3>
         <p>
             <%= ("#"+res.clause_number) %>
@@ -97,7 +113,7 @@
         </p>
     </div>
     <% } %>
-	<div class="prevnext">
+    <div class="prevnext">
     <%
         $('.results').data('page', this.page);
         if (this.page > 0) { %>
@@ -107,6 +123,6 @@
     if (cnt > this.limit) { cnt = this.limit; %>
         <a class="nextPage">next</a>
     <% } %>
-	</div>
+    </div>
     ]]>
 </script>

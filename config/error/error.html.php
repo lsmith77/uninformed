@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>resolutionfinder.org</title>
+        <title>ResolutionFinder.org</title>
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-        <meta name="title" content="resolutionfinder.org" />
-        <meta name="description" content="resolutionfinder.org is a search engine that lets you find the relevant contents of UN Agreements on Clean Drinking Water, Malaria, Small Arms and Light Weapons and Women and Education in a fast and user-friendly way. More thematic areas will follow soon." />
+        <meta name="title" content="ResolutionFinder.org" />
+        <meta name="description" content="ResolutionFinder.org is a search engine that lets you find the relevant contents of UN Agreements on Clean Drinking Water, Malaria, Small Arms and Light Weapons and Women and Education in a fast and user-friendly way. More thematic areas will follow soon." />
         <meta name="keywords" content="United Nations, UN, Resolution, Convention, UN Agreement, UN System, Malaria, Roll Back Malaria, Water, Clean Drinking Water, SALW, Small Arms, Light Weapons, Women, Education, Women's Rights" />
         <meta name="language" content="en" />
         <meta name="robots" content="index, follow" />

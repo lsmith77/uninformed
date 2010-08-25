@@ -1,18 +1,18 @@
 <?php
 
-slot('title', 'News on resolutionfinder.org');
-slot('description', 'News about resolutionfinder.org');
+slot('title', 'News on ResolutionFinder.org');
+slot('description', 'News about ResolutionFinder.org');
 slot('robots', 'INDEX, FOLLOW');
 
 ?>
 
-<h1>News on resolutionfinder.org</h1>
+<h1>News on ResolutionFinder.org</h1>
 
 <div class="news">
 
 <div class="contentBlock">
 
-    <h2>Help us improve Resolutionfinder.org</h2>
+    <h2>Help us improve ResolutionFinder.org</h2>
 
     <p>To make the documents in our database even better accessible we would like your help!
     What is the best starting point for your search? Which filter options are crucial
@@ -20,7 +20,7 @@ slot('robots', 'INDEX, FOLLOW');
     and take five minutes to fill out a <?php echo link_to('short survey', 'http://www.surveymonkey.com/s/B7BWBQ6') ?>.</p>
 
     <p>For comments and questions don't hesitate to contact us at
-    <?php echo mail_to('feedback@resolutionfinder.org', 'feedback@resolutionfinder.org', 'encode=true', array('subject' => '[resolutionfinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?>.</p>
+    <?php echo mail_to('feedback@resolutionfinder.org', 'feedback@resolutionfinder.org', 'encode=true', array('subject' => '[ResolutionFinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?>.</p>
 </div>
 
 <br />
@@ -29,7 +29,7 @@ slot('robots', 'INDEX, FOLLOW');
 
     <h2>Coming soon: Most important UN documents on Desertification and Drought and Nuclear Proliferation</h2>
 
-    <p>Resolutionfinder.org is expanding! After we brought you the most relevant operative clauses from the areas of
+    <p>ResolutionFinder.org is expanding! After we brought you the most relevant operative clauses from the areas of
     Clean Drinking Water, Malaria, Small Arms and Light Weapons, and Women and Education, we decided it's high time we
     developed a couple more "hot topics".</p>
 
@@ -39,7 +39,7 @@ slot('robots', 'INDEX, FOLLOW');
     <p>Until then, stay tuned, we're in the middle of an updating process of the current thematic areas with the clauses from
     the most recent UN documents in the field and we're also working on redesigning the interface. If you have any comments
     or suggestions regarding the content of the research or the website, contact us at
-    <?php echo mail_to('feedback@resolutionfinder.org', 'feedback@resolutionfinder.org', 'encode=true', array('subject' => '[resolutionfinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?>.</p>
+    <?php echo mail_to('feedback@resolutionfinder.org', 'feedback@resolutionfinder.org', 'encode=true', array('subject' => '[ResolutionFinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?>.</p>
 </div>
 
 <br />

@@ -4,10 +4,10 @@
     <?php use_helper('swCombine') ?>
     <?php include_http_metas() ?>
 
-    <title><?php if (include_slot('title')): ?> - <?php endif ?>resolutionfinder.org - beta - The Search Engine for UN Agreements</title>
+    <title><?php if (include_slot('title')): ?> - <?php endif ?>ResolutionFinder.org - beta - The Search Engine for UN Agreements</title>
 
-    <meta name="title" content="<?php include_slot('title', ' resolutionfinder.org - beta - The Search Engine for UN Agreements') ?>" />
-    <meta name="description" content="<?php if (!include_slot('description')): ?>resolutionfinder.org is a search engine that lets you find the relevant contents of UN Agreements on Clean Drinking Water, Malaria, Small Arms and Light Weapons and Women and Education in a fast and user-friendly way. More thematic areas will follow soon.<?php endif ?>" />
+    <meta name="title" content="<?php include_slot('title', ' ResolutionFinder.org - beta - The Search Engine for UN Agreements') ?>" />
+    <meta name="description" content="<?php if (!include_slot('description')): ?>ResolutionFinder.org is a search engine that lets you find the relevant contents of UN Agreements on Clean Drinking Water, Malaria, Small Arms and Light Weapons and Women and Education in a fast and user-friendly way. More thematic areas will follow soon.<?php endif ?>" />
     <meta name="keywords" content="<?php if (!include_slot('keywords')): ?>United Nations, UN, Resolution, Convention, UN Agreement, UN System, Malaria, Roll Back Malaria, Water, Clean Drinking Water, SALW, Small Arms, Light Weapons, Women, Education, Women&#039;s Rights<?php endif ?>" />
     <meta name="robots" content="<?php if (!include_slot('robots')): ?>NOINDEX; NOFOLLOW<?php endif ?>" />
     <meta name="language" content="en" />
@@ -38,7 +38,8 @@
 <?php endif; ?>
     <?php $route = sfContext::getInstance()->getRouting()->getCurrentRouteName(); ?>
     <div class="header">
-      <img alt="resolutionfinder.org" src="/images/logo.png" />
+      <span>ResolutionFinder.org</span>
+      <img alt="ResolutionFinder.org" src="/images/logo.png" />
     </div>
     <div class="nav">
     <ul class="mnav">
@@ -56,7 +57,7 @@
       <li class="<?php if ($route === 'sf_guard_signin') { echo 'current'; } ?>"><?php echo link_to('Login', 'sf_guard_signin'); ?></li>
       <li class="<?php if ($route === 'apply') { echo 'current'; } ?>"><?php echo link_to('Register', 'apply'); ?></li>
 <?php endif; ?>
-        <li><?php echo mail_to('feedback@resolutionfinder.org', 'Feedback', 'encode=true', array('subject' => '[resolutionfinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?></li>
+        <li><?php echo mail_to('feedback@resolutionfinder.org', 'Feedback', 'encode=true', array('subject' => '[ResolutionFinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?></li>
     </ul>
     </div>
     <?php if($sf_user->hasFlash('notice')): ?>

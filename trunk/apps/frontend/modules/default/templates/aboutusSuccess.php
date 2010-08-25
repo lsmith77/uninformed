@@ -1,27 +1,27 @@
 <?php
 
-slot('title', 'About resolutionfinder.org');
-slot('description', 'Information about resolutionfinder.org');
+slot('title', 'About ResolutionFinder.org');
+slot('description', 'Information about ResolutionFinder.org');
 slot('robots', 'INDEX, FOLLOW');
 
 ?>
 
-<h1>About resolutionfinder.org</h1>
+<h1>About ResolutionFinder.org</h1>
 
 <div class="aboutus">
 
 <div id="accordion">
 
-<h3><a href="#">What is resolutionfinder.org?</a></h3>
+<h3><a href="#">What is ResolutionFinder.org?</a></h3>
 <div>
-    The resolutionfinder.org application is a database concept which was developed across four thematic issues chosen
+    The ResolutionFinder.org application is a database concept which was developed across four thematic issues chosen
     from the UN agenda. These four thematic issues are: 1) clean drinking water 2) women and education 3) malaria 4)
     small arms and light weapons. After testing the viability of our search options and filters, we will expand the
-    content of resolutionfinder.org to include further issues. Our long-term goal is to ultimately cover all thematic
+    content of ResolutionFinder.org to include further issues. Our long-term goal is to ultimately cover all thematic
     areas of the UN and contain information on several tens of thousands of different documents.
 </div>
 
-<h3><a href="#">Who is behind resolutionfinder.org?</a></h3>
+<h3><a href="#">Who is behind ResolutionFinder.org?</a></h3>
 <div>
     Making Commitments Matter (MCM) is an international research and development initiative composed of graduate and
     undergraduate students as well as young professionals. Our goal is to improve the national implementation of
@@ -29,7 +29,7 @@ slot('robots', 'INDEX, FOLLOW');
     more accessible.
 </div>
 
-<h3><a href="#">Which documents can I find on resolutionfinder.org?</a></h3>
+<h3><a href="#">Which documents can I find on ResolutionFinder.org?</a></h3>
 <div>
     <h4>UN agreements</h4>
 

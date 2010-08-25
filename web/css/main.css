@@ -178,8 +178,8 @@ input[type=submit] {
     font-weight: bold;
 }
 #signin_form input[type=submit] {
-	margin-left: 160px;
-	margin-right: 5px;
+    margin-left: 160px;
+    margin-right: 5px;
 }
 #signin_form th, #signin_form td {
     padding-top: 5px;
@@ -191,9 +191,7 @@ input[type=submit] {
 /* HEADER & NAV */
 .header {
     position: absolute;
-    width: 180px;
     height: 66px;
-    right: 0px;
     top: 30px;
 }
 .header span {

@@ -46,7 +46,6 @@
       <li class="<?php if ($route === 'search' || $route === 'clauseSearch' || $route === 'homepage') { echo 'current'; } ?>"><?php echo link_to('Search', 'search'); ?></li>
       <li class="<?php if ($route === 'news') { echo 'current'; } ?>"><?php echo link_to('News', '@news'); ?></li>
       <li class="<?php if ($route === 'aboutus') { echo 'current'; } ?>"><?php echo link_to('About', '@aboutus'); ?></li>
-      <li><?php echo link_to('UN-i.org', 'http://www.UN-i.org'); ?></li>
     </ul>
     <ul class="snav">
 <?php if ($sf_user->isAuthenticated()): ?>
@@ -65,7 +64,10 @@
     <?php endif; ?>
     <?php echo $sf_content ?>
     <noscript><p class="noscript">This site runs *much* better with javascript enabled</p></noscript>
-    <p class="support">Supported by <a href="http://liip.ch/" class="liip"><span>Liip AG - Agile web development - Zurich, Fribourg, Bern</span></a></p>
+    <p class="support">
+        <a href="http://jngldrm.org/" class="jngldrm"><span>jungle drum</span></a>
+        <a href="http://liip.ch/" class="liip"><span>Liip AG - Agile web development - Zurich, Fribourg, Bern</span></a>
+    </p>
     </div>
 <?php sw_include_javascripts() ?>
   </body>

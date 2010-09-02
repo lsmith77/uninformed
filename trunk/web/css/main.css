@@ -727,6 +727,22 @@ a.toggleCol.closed {
     left: -2000px;
 }
 
+.support .jngldrm {
+    background: url(/images/jngldrm.gif) no-repeat;
+    width: 272px;
+    height: 70px;
+    display: block;
+    float: left;
+    line-height: 50px;
+    margin-left: 10px;
+}
+
+.support .jngldrm span {
+    position: absolute;
+    top: -5000px;
+    left: -2000px;
+}
+
 span.tooltip{
     position:relative; /*this is the key*/
     width: 10px;

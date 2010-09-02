@@ -23,10 +23,9 @@ slot('robots', 'INDEX, FOLLOW');
 
 <h3><a href="#">Who is behind ResolutionFinder.org?</a></h3>
 <div>
-    Making Commitments Matter (MCM) is an international research and development initiative composed of graduate and
-    undergraduate students as well as young professionals. Our goal is to improve the national implementation of
-    resolutions and conventions issued by the United Nations and its Specialised Agencies by making relevant information
-    more accessible.
+    Jungle Drum is a not-for-profit information technology provider and communications consultant. Our goal is to
+    contribute and advocate for solutions that boost international cooperation on global challenges to the forefront
+    of future ICT and web development.
 </div>
 
 <h3><a href="#">Which documents can I find on ResolutionFinder.org?</a></h3>
@@ -38,7 +37,7 @@ slot('robots', 'INDEX, FOLLOW');
 
     <h4><a href="#" class="toggleCol" target="which_binding">legally binding agreement</a></h4>
 
-    <div id="which_binding" class="collapsed">In terms of legally binding agreements, Making Commitments Matter has considered multilateral conventions of
+    <div id="which_binding" class="collapsed">In terms of legally binding agreements, Jungle Drum has considered multilateral conventions of
     potential universal adherence registered with the UN in accordance with Art. 102 of the UN Charter or deposited
     with the Secretary-General of the UN.</div>
 
@@ -55,12 +54,12 @@ slot('robots', 'INDEX, FOLLOW');
 
     <div id="which_sc" class="collapsed">Security Council resolutions are left out of the above classification into legally binding or non legally binding
     documents. While they constitute UN agreements, they cannot be classified into a category merely by their form.
-    Therefore, Making Commitments Matter has refrained from assigning them a legal value, and provisions from Security
+    Therefore, Jungle Drum has refrained from assigning them a legal value, and provisions from Security
     Council resolutions are marked differently, so as to make the specific nature of these agreements visible.</div>
 
     <h4><a href="#" class="toggleCol" target="which_not">agreements not negotiated within the UN system</a></h4>
 
-    <div id="which_not" class="collapsed">As a general rule, Making Commitments Matter does not consider international agreements from outside the UN
+    <div id="which_not" class="collapsed">As a general rule, Jungle Drum does not consider international agreements from outside the UN
     system. However, evaluation of the research showed that there are certain agreements not issued within the UN system
     that are nevertheless connected to the UN. These are documents that are negotiated by states, and additionally are
     either global in nature (i.e. negotiated in a multilateral forum outside of the UN system) or have been recalled in
@@ -71,7 +70,7 @@ slot('robots', 'INDEX, FOLLOW');
 
 <h3><a href="#">What are information types?</a></h3>
 <div>
-    <div>In line with Making Commitments Matter's main underlying assumption that easier access to relevant information
+    <div>In line with Jungle Drum's main underlying assumption that easier access to relevant information
     will enhance national implementation of these agreements, research focused on identifying such information, based on
     formal linguistic criteria, and classifying it into what we call "information type"</div>
 

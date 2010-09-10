@@ -1,0 +1,24 @@
+modules/*/config/view.yml:
+  class: swCombineViewConfigHandler
+  # put sfViewConfigHandler to restore the default symfony config handler
+  # class: sfViewConfigHandler
+  param:
+   private_path: %SF_WEB_DIR%/sw-combine
+   configuration:
+     javascript:
+       public_path:  /sw-combine
+       private_path: %SF_WEB_DIR%/sw-combine
+       combine:  swCombineJavascript
+       driver:   swDriverJSMinPlus
+       filename: sw-%s.js                         # %s will by replace by the combined name
+       exclude:
+       packages:
+
+     stylesheet:
+       public_path:  /sw-combine
+       private_path: %SF_WEB_DIR%/sw-combine
+       combine:  swCombineStylesheet
+       driver:   swDriverCssmin
+       filename: sw-%s.css                        # %s will by replace by the combined name
+       exclude:                                # this will include the package on ALL pages
+       packages:

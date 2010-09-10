@@ -1,0 +1,169 @@
+document_document_relation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DocumentDocumentRelation
+    module:               document_document_relation
+    prefix_path:          /document_document_relation
+    column:               id
+    with_wildcard_routes: true
+
+document_clause_relation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DocumentClauseRelation
+    module:               document_clause_relation
+    prefix_path:          /document_clause_relation
+    column:               id
+    with_wildcard_routes: true
+
+clause_clause_relation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ClauseClauseRelation
+    module:               clause_clause_relation
+    prefix_path:          /clause_clause_relation
+    column:               id
+    with_wildcard_routes: true
+
+tag:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Tag
+    module:               tag
+    prefix_path:          /tag
+    column:               id
+    with_wildcard_routes: true
+
+country_organisation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                CountryOrganisation
+    module:               countryorganisation
+    prefix_path:          /countryorganisations
+    column:               id
+    with_wildcard_routes: true
+
+legal_value:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                LegalValue
+    module:               legalvalue
+    prefix_path:          /legalvalues
+    column:               id
+    with_wildcard_routes: true
+
+clause_reservation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ClauseReservation
+    module:               clausereservation
+    prefix_path:          /clausereservations
+    column:               id
+    with_wildcard_routes: true
+
+vote:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Vote
+    module:               vote
+    prefix_path:          /votes
+    column:               id
+    with_wildcard_routes: true
+
+document_reservation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                DocumentReservation
+    module:               documentreservation
+    prefix_path:          /documentreservations
+    column:               id
+    with_wildcard_routes: true
+
+document:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Document
+    module:               document
+    prefix_path:          /document
+    column:               id
+    with_wildcard_routes: true
+
+clause:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Clause
+    module:               clause
+    prefix_path:          /clause
+    column:               id
+    with_wildcard_routes: true
+
+addressee:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Addressee
+    module:               addressee
+    prefix_path:          /addressee
+    column:               id
+    with_wildcard_routes: true
+
+organisation:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Organisation
+    module:               organisation
+    prefix_path:          /organisation
+    column:               id
+    with_wildcard_routes: true
+
+excel_file:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ExcelFile
+    module:               excelfile
+    prefix_path:          /excelfile
+    column:               id
+    with_wildcard_routes: true
+
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: sfAdminDash, action: dashboard }
+
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardAuth, action: password }
+
+sf_guard_user:
+  url:   /sfGuardUser
+  param: { module: sfGuardUser, action: index }
+
+sf_guard_group:
+  url:   /sfGuardGroup
+  param: { module: sfGuardGroup, action: index }
+
+sf_guard_perm:
+  url:   /sfGuardPermission
+  param: { module: sfGuardPermission, action: index }
+
+default_edit:
+  url:   /:module/:id/:action
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

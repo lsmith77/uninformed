@@ -1,0 +1,32 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title: resolutionfinder.org - beta - The Search Engine for UN Agreements
+    description:  resolutionfinder.org is a search engine that lets you find the relevant contents of UN Agreements on Clean Drinking Water, Malaria, Small Arms and Light Weapons and Women and Education in a fast and user-friendly way. More thematic areas will follow soon.
+    keywords:     United Nations, UN, Resolution, Convention, UN Agreement, UN System, Malaria, Roll Back Malaria, Water, Clean Drinking Water, SALW, Small Arms, Light Weapons, Women, Education, Women's Rights
+    language:     en
+    robots:       index, nofollow
+
+  stylesheets:
+    - "smoothness/jquery-ui-1.8.custom.css"
+    - admin.css
+
+  stylesheets:
+    - http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css
+    - admin.css
+
+  javascripts:
+    - jquery-1.4.2.min.js
+    - jquery-ui-1.8.custom.min.js
+
+  javascripts:
+    - http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js
+    - http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js
+
+  has_layout:     true
+  layout:         layout

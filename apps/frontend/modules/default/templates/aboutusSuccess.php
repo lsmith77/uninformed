@@ -64,8 +64,8 @@ slot('robots', 'INDEX, FOLLOW');
     that are nevertheless connected to the UN. These are documents that are negotiated by states, and additionally are
     either global in nature (i.e. negotiated in a multilateral forum outside of the UN system) or have been recalled in
     a UN agreement (i.e. they have been processed to the UN by the relevant regional authority by way of an annex to a
-    letter, and have been assigned a UN document number). These documents were also included into Making Commitments
-    Matter's UN Agreements research.</div>
+    letter, and have been assigned a UN document number). These documents were also included into Jungle Drum's UN
+    Agreements research.</div>
 </div>
 
 <h3><a href="#">What are information types?</a></h3>

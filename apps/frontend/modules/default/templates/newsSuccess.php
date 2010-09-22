@@ -12,6 +12,34 @@ slot('robots', 'INDEX, FOLLOW');
 
 <div class="contentBlock">
 
+    <h2>Jungle Drum and ISN announce cooperation to further develop ResolutionFinder.org</h2>
+
+    <p><?php echo link_to('Jungle Drum', 'http://jngldrm.org'); ?> and the Swiss-based
+    <?php echo link_to('International Relations and Security Network (ISN)', 'http://www.isn.ethz.ch'); ?> have started
+    to discuss the terms of a cooperation for the improvement and development of the ResolutionFinder.org database.</p>
+
+    <p>After two years of hard work during which Jungle Drum managed to elaborate a methodology and have a beta version
+    of the database up and running, it was high time to speed up the development process and take things to a new level.</p>
+
+    <p>Representatives from Jungle Drum and the ISN met in Berlin in mid-September for a first round of discussions about
+    the cooperation and the developments over the next two years. Over this period they will work on building an
+    intelligent text mining tool (iTMT) to automatize a significant amount of work that is currently done manually.
+    The aim is to acquire this iTMT within one year and dedicate the next year to the development of 16 new thematic
+    issues for the database. The issues will be selected from the four areas that are currently in the beta version -
+    security, health, human rights and environment. The first phase of the partnership is expected to be concluded
+    before the end of the year with the official cooperation commencing in 2011.</p>
+
+    <p>The International Relations and Security Network (ISN) is an online project of the Center for Security Studies
+    (CSS), at the Swiss Federal Institute of Technology (ETH Zurich). It provides the world's leading open access
+    information service for international relations and security professionals and has been working towards the
+    promotion of greater knowledge sharing, learning and collaboration for 16 years now. For more information, see
+    the <?php echo link_to('ISN website', 'http://www.isn.ethz.ch/isn/About-Us/Who-we-are'); ?>.</p>
+</div>
+
+<br />
+
+<div class="contentBlock">
+
     <h2>Help us improve ResolutionFinder.org</h2>
 
     <p>To make the documents in our database even better accessible we would like your help!

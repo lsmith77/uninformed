@@ -33,7 +33,7 @@
         <h3>
             <span class="fold<%= folded %>"><span>Collapse/Expand</span></span><%= this.facets[fId]['label'] %>
             <% if (help[fId]) { %>
-            <span class="tooltip"><?php echo str_replace('XXX', '<%= help[fId] %>', link_to('?', '@help#XXX', array('target' => '_new'))) ?></span>
+            <span class="tooltip"><?php echo str_replace('XXX', '<%= help[fId] %>', link_to('?', '@help#XXX', array('target' => 'XXX'))) ?></span>
             <% } %>
         </h3>
         <div class="filterGroup<%= folded %>">

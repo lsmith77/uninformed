@@ -19,11 +19,23 @@
     <h2>Search filters</h2>
     <form id="filtersForm">
     <% var f, fId, item, folded, count; %>
+    <% var help = new Array;
+        help.legal_value = 'legal-values';
+        help.addressee_ids = 'addressees';
+        help.documenttype_id = 'document-types';
+        help.information_type_id = 'information-types';
+        help.tag_ids = 'tags';
+    %>
     <% for (fId in this.facets) {
         f = this.filters[fId];
         if (f && f.length) { %>
         <% if (!this.facets[fId]['unfolded']) folded = ' folded'; else folded = ''; %>
-        <h3><span class="fold<%= folded %>"><span>Collapse/Expand</span></span><%= this.facets[fId]['label'] %></h3>
+        <h3>
+            <span class="fold<%= folded %>"><span>Collapse/Expand</span></span><%= this.facets[fId]['label'] %>
+            <% if (help[fId]) { %>
+            <span class="tooltip"><?php echo str_replace('XXX', '<%= help[fId] %>', link_to('?', '@help#XXX', array('target' => '_new'))) ?></span>
+            <% } %>
+        </h3>
         <div class="filterGroup<%= folded %>">
             <% if (f.length > 3) { %>
               <label><input class="selectAll" type="checkbox"<% if(this.facets[fId]['allChecked']) { %><%= 'checked="checked" ' %><% } %>/>All</label>

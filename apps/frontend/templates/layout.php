@@ -39,12 +39,13 @@
     <?php $route = sfContext::getInstance()->getRouting()->getCurrentRouteName(); ?>
     <div class="header">
       <span>ResolutionFinder.org</span>
-      <img alt="ResolutionFinder.org" src="/images/logo.png" />
+      <?php echo link_to(image_tag('/images/logo.png', array('alt' => 'ResolutionFinder.org')), 'search'); ?>
     </div>
     <div class="nav">
     <ul class="mnav">
       <li class="<?php if ($route === 'search' || $route === 'clauseSearch' || $route === 'homepage') { echo 'current'; } ?>"><?php echo link_to('Search', 'search'); ?></li>
       <li class="<?php if ($route === 'news') { echo 'current'; } ?>"><?php echo link_to('News', '@news'); ?></li>
+      <li class="<?php if ($route === 'help') { echo 'current'; } ?>"><?php echo link_to('Help', '@help'); ?></li>
       <li class="<?php if ($route === 'aboutus') { echo 'current'; } ?>"><?php echo link_to('About', '@aboutus'); ?></li>
     </ul>
     <ul class="snav">
@@ -69,6 +70,6 @@
         <a href="http://liip.ch/" class="liip"><span>Liip AG - Agile web development - Zurich, Fribourg, Bern</span></a>
     </p>
     </div>
-<?php sw_include_javascripts() ?>
+    <?php sw_include_javascripts() ?>
   </body>
 </html>

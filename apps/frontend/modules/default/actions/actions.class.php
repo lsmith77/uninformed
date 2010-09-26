@@ -22,6 +22,10 @@ class defaultActions extends sfActions
     {
     }
 
+    public function executeHelp(sfWebRequest $request)
+    {
+    }
+
     public function executeNews(sfWebRequest $request)
     {
     }

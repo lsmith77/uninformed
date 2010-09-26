@@ -10,6 +10,10 @@ search:
   url:   /
   param: { module: search, action: index }
 
+help:
+  url:   /help
+  param: { module: default, action: help }
+
 aboutus:
   url:   /aboutus
   param: { module: default, action: aboutus }

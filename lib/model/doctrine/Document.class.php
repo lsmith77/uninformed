@@ -155,10 +155,17 @@ class Document extends BaseDocument
 
     public static function filterUrls(sfEvent $event, $urls)
     {
+        $urls = array('aboutus', 'news', 'help');
+        foreach ($urls as $key => $route) {
+            $urls[$key] = new isicsSitemapURL('@'.$route, date(DateTime::ATOM , strtotime(__DIR__.'../../../apps/frontend/modules/default/templates/'.$route.'Success.php')));
+        }
+
         $q = Doctrine_Query::create()
             ->select('id, slug, title, updated_at')
             ->from('Document');
         $documents = $q->fetcharray();
+
+        $urls = array();
         foreach ($documents as $document) {
             $urls[] = new isicsSitemapURL('@document?id='.$document['id'].'-'.$document['slug'], date(DateTime::ATOM , strtotime($document['updated_at'])));
         }

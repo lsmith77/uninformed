@@ -157,7 +157,7 @@ class Document extends BaseDocument
     {
         $urls = array('aboutus', 'news', 'help');
         foreach ($urls as $key => $route) {
-            $urls[$key] = new isicsSitemapURL('@'.$route, date(DateTime::ATOM , strtotime(__DIR__.'../../../apps/frontend/modules/default/templates/'.$route.'Success.php')));
+            $urls[$key] = new isicsSitemapURL('@'.$route, date(DateTime::ATOM , filemtime(__DIR__.'/../../../apps/frontend/modules/default/templates/'.$route.'Success.php')));
         }
 
         $q = Doctrine_Query::create()

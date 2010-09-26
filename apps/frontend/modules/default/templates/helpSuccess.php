@@ -29,12 +29,12 @@ slot('robots', 'INDEX, FOLLOW');
                 search will yield a significant number of results which can then be narrowed down using the filters
                 provided by ResolutionFinder.org.</p>
 
-            <p>The complex query allows users to specify their search preferences in the search box, by asking
-                deliberately to include/exclude particular information from the results or to look for specific
+            <p>Support for complex queries allows users to specify their search preferences in the search box, by asking
+                deliberately including/excluding particular information from the results or to look for specific
                 phrases. Phrases are enclosed in double quotes ('"'), inclusion is made prefixing with plus sign ("+"),
                 exclusion is made prefixing with a minus sign ("-"). For instance the following search will list all the
                 results containing the phrase "security council" and the word "region", but which do not include the
-                word "africa": "security council" - africa  + region </p>
+                word "africa": "security council" -africa  +region </p>
 
             <p>While the main focus of ResolutionFinder.org is that of the clause search, the database also provides a
                 document search based on document code.</p>

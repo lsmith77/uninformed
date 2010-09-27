@@ -9,8 +9,7 @@
         Containing
         <?php if (empty($showHelp)): ?>
         <span class="tooltip">?<span>Enter text to search document title and clause content. Phrases may be enclosed in double
-        quotes, exclude terms by prefixing with - and make terms mandatory by prefixing with +. For example:
-        <?php echo link_to('"security council" -africa +region', '@search?q='.urlencode('"security council" -africa +region')); ?></span></span>
+        quotes, exclude terms by prefixing with a minus sign ("-") and make terms mandatory by prefixing with a plus sign ("+").</span></span>
         <?php endif; ?>
     </label>
     <br />

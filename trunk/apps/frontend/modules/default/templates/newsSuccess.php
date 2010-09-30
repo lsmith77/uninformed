@@ -10,10 +10,10 @@ slot('robots', 'INDEX, FOLLOW');
 
 <div class="news">
 
-<div class="contentBlock">
+<div id="accordion">
 
-    <h2>Jungle Drum and ISN announce cooperation to further develop ResolutionFinder.org</h2>
-
+<h3><a href="#">Jungle Drum and ISN announce cooperation to further develop ResolutionFinder.org</a></h3>
+<div>
     <p><?php echo link_to('Jungle Drum', 'http://jngldrm.org'); ?> and the Swiss-based
     <?php echo link_to('International Relations and Security Network (ISN)', 'http://www.isn.ethz.ch'); ?> have started
     to discuss the terms of a cooperation for the improvement and development of the ResolutionFinder.org database.</p>
@@ -36,12 +36,8 @@ slot('robots', 'INDEX, FOLLOW');
     the <?php echo link_to('ISN website', 'http://www.isn.ethz.ch/isn/About-Us/Who-we-are'); ?>.</p>
 </div>
 
-<br />
-
-<div class="contentBlock">
-
-    <h2>Help us improve ResolutionFinder.org</h2>
-
+<h3><a href="#">Help us improve ResolutionFinder.org</a></h3>
+<div>
     <p>To make the documents in our database even better accessible we would like your help!
     What is the best starting point for your search? Which filter options are crucial
     to give you the best results on ResolutionFinder? Let us know your opinion: test the database
@@ -51,12 +47,8 @@ slot('robots', 'INDEX, FOLLOW');
     <?php echo mail_to('feedback@resolutionfinder.org', 'feedback@resolutionfinder.org', 'encode=true', array('subject' => '[ResolutionFinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?>.</p>
 </div>
 
-<br />
-
-<div class="contentBlock">
-
-    <h2>Coming soon: Most important UN documents on Desertification and Drought and Nuclear Proliferation</h2>
-
+<h3><a href="#">Coming soon: Most important UN documents on Desertification and Drought and Nuclear Proliferation</a></h3>
+<div>
     <p>ResolutionFinder.org is expanding! After we brought you the most relevant operative clauses from the areas of
     Clean Drinking Water, Malaria, Small Arms and Light Weapons, and Women and Education, we decided it's high time we
     developed a couple more "hot topics".</p>
@@ -70,12 +62,8 @@ slot('robots', 'INDEX, FOLLOW');
     <?php echo mail_to('feedback@resolutionfinder.org', 'feedback@resolutionfinder.org', 'encode=true', array('subject' => '[ResolutionFinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?>.</p>
 </div>
 
-<br />
-
-<div class="contentBlock">
-
-    <h2>Access to Clean Water and Sanitation is Acknowledged as a Human Right by the General Assembly</h2>
-
+<h3><a href="#">Access to Clean Water and Sanitation is Acknowledged as a Human Right by the General Assembly</a></h3>
+<div>
     <p>The United Nations General Assembly declared on July 28th that access to safe and clean drinking water and sanitation
     represents a fundamental human right for the attainment of adequate living standards.</p>
 
@@ -91,9 +79,11 @@ slot('robots', 'INDEX, FOLLOW');
     published on ResolutionFinder.org once the final version of the text is publicly available.</p>
 </div>
 
-<br />
+</div>
 
 </div>
+
+<br />
 
 <div>
     <h4>For current information follow us on twitter:</h4>

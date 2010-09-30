@@ -21,7 +21,12 @@ slot('robots', 'INDEX, FOLLOW');
             <li><a href="#document-types">Document Types</a></li>
         </ul>
         <div id="tags">
-            <p>Tags are keywords we have applied to a given document and/or clause.</p>
+            <p>Tags are non-hierarchical keywords or terms assigned to documents and clauses. This kind of metadata
+                helps describe the information available on ResolutionFinder.org and it allows it to be found again by
+                browsing. The tagging list has been open so far and the choice to assign particular tags to each clause
+                and document has been done by the researchers who completed the process of extracting and classifying
+                the clauses. All the tags currently available on ResolutionFinder.org are part of the UN lingo (i.e.
+                words and expressions from UN documents in their initial form).</p>
         </div>
         <div id="search">
             <p>The clause search allows for both a free search as well as a tag search. The tag search is meant to help

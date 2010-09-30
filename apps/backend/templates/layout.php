@@ -12,9 +12,7 @@
 <div id="container">
 <div id="header">
 <h1>
-  <a href="<?php echo url_for('@homepage') ?>">
-    <img src="/images/logo.png" alt="resolutionfinder.org" />
-  </a>
+  <?php echo link_to(image_tag('/images/logo.gif', array('alt' => 'ResolutionFinder.org')), '@homepage'); ?>
 </h1>
 </div>
 

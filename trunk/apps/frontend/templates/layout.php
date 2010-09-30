@@ -39,7 +39,7 @@
     <?php $route = sfContext::getInstance()->getRouting()->getCurrentRouteName(); ?>
     <div class="header">
       <span>ResolutionFinder.org</span>
-      <?php echo link_to(image_tag('/images/logo.png', array('alt' => 'ResolutionFinder.org')), 'search'); ?>
+      <?php echo link_to(image_tag('/images/logo.gif', array('alt' => 'ResolutionFinder.org')), 'search'); ?>
     </div>
     <div class="nav">
     <ul class="mnav">

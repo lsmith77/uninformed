@@ -85,6 +85,12 @@ h1 {
     margin-bottom: 20px;
 }
 
+.aboutus ol {
+    list-style-type: decimal;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
 h2  {
     font-size: 15px;
     margin-bottom: 10px;

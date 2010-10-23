@@ -1,0 +1,20 @@
+#summary The first major redesign of the search interface, making it more compact
+
+= Search UI Redesign =
+
+Must have:
+ * The dedicated search by code field on the front page disappears and instead the search field is moved into the main form and extended to always also suggest prefix search
+ * The radio field to decide if all or any of the tags disappears (only "all tags" from now on supported)
+ * The labels are moved into the input fields (shown as grey text that disappears when one clicks into the field)
+ * In the tags field when a tag is selected its added as a "separate bubble" into the tags field (see http://code.drewwilson.com/entry/autosuggest-jquery-plugin)
+ * On the search result page the input fields are shown at the top
+ * In the filters we should at most 5 (configurable for each type) number of filters with a show more to show the rest
+ * There is quote-aware autosuggest inside the fulltext search field
+ * There is a button to enable help-mode and only in this help mode the ? buttons are shown with links to the help page opening in a new window
+
+Nice to have
+ * There are two search buttons "Search for Clauses" and "Search for Documents"
+ * "Search for Documents" shows the results grouped by Documents
+ * Clause content when searching for Documents is shown folded if there is nothing highlighted in the content
+ * Clause content is reduced to only show with sections containing highlighted text
+ * Add a button to generate a short link for the current search results

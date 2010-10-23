@@ -12,9 +12,13 @@ class clauseActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->clause = $this->getRoute()->getObject();
-    $this->forward404Unless($this->clause);
     $objectSlug = $request->getParameter('id');
+    $this->clause = Doctrine::getTable('Clause')->find($objectSlug);
+    if (empty($this->clause)) {
+      $this->clause = Doctrine::getTable('Clause')->findOneBySlug(preg_replace('/^\d+-/', '', $objectSlug));
+    }
+
+    $this->forward404Unless($this->clause);
     if ($objectSlug !== $this->clause->getSlug()) {
         $this->redirect('clause', array('id' => $this->clause->getSlug()), 301);
     }

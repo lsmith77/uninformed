@@ -17,10 +17,13 @@ class documentActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-      $this->document = $this->getRoute()->getObject();
-      $this->document = $this->getRoute()->getObject();
-      $this->forward404Unless($this->document);
       $objectSlug = $request->getParameter('id');
+      $this->document = Doctrine::getTable('Document')->find($objectSlug);
+      if (empty($this->document)) {
+          $this->document = Doctrine::getTable('Document')->findOneBySlug(preg_replace('/^\d+-/', '', $objectSlug));
+      }
+
+      $this->forward404Unless($this->document);
       if ($objectSlug !== $this->document->getSlug()) {
           $this->redirect('document', array('id' => $this->document->getSlug()), 301);
       }

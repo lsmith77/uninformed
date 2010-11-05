@@ -52,7 +52,7 @@ http://dl.dropbox.com/u/268634/Un-Informed/NewSearchUI.png
 === to execute a document search ===
 
  * url: http://resolutionfinder.org/search/documents?q=%22security+council%22+-africa+%2Bregion&t%5B225%5D=war&tm=all
- * note yet implemented
+ * note yet implemented, unfortunately solr 1.4.x doesnt have field collapsing yet, however it will soon and until then we can just do it in userland in the backend.
 
 === to execute a clause search ===
 

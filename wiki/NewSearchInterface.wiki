@@ -6,7 +6,7 @@ Must have:
  * The dedicated search by code field on the front page disappears and instead the search field is moved into the main form and extended to always also suggest prefix search
  * The radio field to decide if all or any of the tags disappears (only "all tags" from now on supported)
  * The labels are moved into the input fields (shown as grey text that disappears when one clicks into the field)
- * In the tags field when a tag is selected its added as a "separate bubble" into the tags field (see http://code.drewwilson.com/entry/autosuggest-jquery-plugin, note that the tags need to send as integer id's, so the plugin does not work out of the box)
+ * In the tags field when a tag is selected its added as a "separate bubble" into the tags field (see http://code.drewwilson.com/entry/autosuggest-jquery-plugin)
  * On the search result page the input fields are shown at the top, allowing the filters to be moved up
  * In the filters we should for each filter type show at most 5 (configurable for each type) number of filters with a show more to show the rest
  * There is quote-aware autosuggest inside the fulltext search field
@@ -54,6 +54,7 @@ Nice to have
 ===to execute a clause search===
 
  * url: http://resolutionfinder.org/search/results?q=%22security+council%22+-africa+%2Bregion&t%5B225%5D=war&tm=all
+ * note the `t[255]=war`, the relevant bit is the 255, which is the id of the tag "war". the above mentioned jquery autosuggest plugin does not support storing a different key for a tag value out of the box.
  * example reply:
 {{{
 {

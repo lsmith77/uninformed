@@ -1,4 +1,4 @@
-#summary The first major redesign of the search interface on resolutionfinder.org, making it more compact
+#summary The first major redesign of the search interface on http://resolutionfinder.org, making it more compact
 
 = Search UI Redesign =
 

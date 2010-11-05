@@ -8,7 +8,7 @@ Must have:
  * The labels are moved into the input fields (shown as grey text that disappears when one clicks into the field)
  * In the tags field when a tag is selected its added as a "separate bubble" into the tags field (see http://code.drewwilson.com/entry/autosuggest-jquery-plugin)
  * On the search result page the input fields are shown at the top, allowing the filters to be moved up
- * In the filters we should for each filter type show at most 5 (configurable for each type) number of filters with a show more to show the rest
+ * In the filters we should for each filter type show at most 5 (configurable for each type) number of filters with a show more to show the rest (handled entirely client side)
  * There is quote-aware autosuggest inside the fulltext search field
  * There is a button to enable help-mode and only in this help mode the ? buttons are shown with links to the help page opening in a new window
 

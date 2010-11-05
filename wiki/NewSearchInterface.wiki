@@ -2,7 +2,10 @@
 
 = Search UI Redesign =
 
-Must have:
+== Mockup ==
+http://dl.dropbox.com/u/268634/Un-Informed/NewSearchUI.png
+
+== Must have ==
  * The dedicated search by code field on the front page disappears and instead the search field is moved into the main form and extended to always also suggest prefix search
  * The radio field to decide if all or any of the tags disappears (only "all tags" from now on supported)
  * The labels are moved into the input fields (shown as grey text that disappears when one clicks into the field)
@@ -11,18 +14,18 @@ Must have:
  * In the filters we should for each filter type show at most 5 (configurable for each type) number of filters with a show more to show the rest (handled entirely client side)
  * There is quote-aware (aka `"security co` will be send to the server as one term) autosuggest inside the fulltext search field
  * There is a button to enable help-mode and only in this help mode the ? buttons are shown with links to the help page opening in a new window
-
-Nice to have
  * There are two search buttons: "Search for Clauses" and "Search for Documents"
  * "Search for Documents"
     * Shows the results grouped by Documents
     * Clause content is shown folded if there is nothing highlighted in the content
+
+== Nice to have ==
  * Clause content is reduced to only show with sections containing highlighted text
  * Add a button to generate a short link for the current search results
 
-==API calls==
+== API calls ==
 
-===to autocomplete a tag===
+=== to autocomplete a tag ===
 
  * url: http://resolutionfinder.org/search/searchTags?term=war
  * example reply:
@@ -30,7 +33,7 @@ Nice to have
 [{"id":"225","label":"war"},{"id":"234","label":"war prevention"}]
 }}}
 
-===to autocomplete a document code===
+=== to autocomplete a document code ===
 
  * url: http://resolutionfinder.org/search/searchDocumentCode?term=a/res/40&addprefix=1
  * example reply:
@@ -38,7 +41,7 @@ Nice to have
 [{"url":","label":"A\/RES\/40*"}{"url":"\/document\/255-international-drinking-water-s","label":"A\/RES\/40\/171"}]
 }}}
 
-===to autocomplete a fulltext search term===
+=== to autocomplete a fulltext search term ===
 
  * url: http://resolutionfinder.org/search/searchTerm?term=secr
  * example reply:
@@ -46,12 +49,12 @@ Nice to have
 [{"label":"secretary","count":381},{"label":"secretariat","count":30}]
 }}}
 
-===to execute a document search ===
+=== to execute a document search ===
 
  * url: http://resolutionfinder.org/search/documents?q=%22security+council%22+-africa+%2Bregion&t%5B225%5D=war&tm=all
  * note yet implemented
 
-===to execute a clause search===
+=== to execute a clause search ===
 
  * url: http://resolutionfinder.org/search/results?q=%22security+council%22+-africa+%2Bregion&t%5B225%5D=war&tm=all
  * note the `t[255]=war`, the relevant bit is the 255, which is the id of the tag "war". the above mentioned jquery autosuggest plugin does not support storing a different key for a tag value out of the box.

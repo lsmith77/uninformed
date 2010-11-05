@@ -19,3 +19,42 @@ Nice to have
     * Clause content is shown folded if there is nothing highlighted in the content
  * Clause content is reduced to only show with sections containing highlighted text
  * Add a button to generate a short link for the current search results
+
+==API calls==
+
+===to autocomplete a tag===
+
+ * url: http://resolutionfinder.org/search/searchTags?term=war
+ * example reply:
+{{{
+[{"id":"225","label":"war"},{"id":"234","label":"war prevention"}]
+}}}
+
+===to autocomplete a document code===
+
+ * url: http://resolutionfinder.org/search/searchDocumentCode?term=a/res/40&addprefix=1
+ * example reply:
+{{{
+[{"url":","label":"A\/RES\/40*"}{"url":"\/document\/255-international-drinking-water-s","label":"A\/RES\/40\/171"}]
+}}}
+
+===to autocomplete a fulltext search term===
+
+ * url: http://resolutionfinder.org/search/searchTerm?term=secr
+ * example reply:
+{{{
+[{"label":"secretary","count":381},{"label":"secretariat","count":30}]
+}}}
+
+===to execute a document search ===
+
+ * url: http://resolutionfinder.org/search/documents?q=%22security+council%22+-africa+%2Bregion&t%5B225%5D=war&tm=all
+ * note yet implemented
+
+===to execute a clause search===
+
+ * url: http://resolutionfinder.org/search/results?q=%22security+council%22+-africa+%2Bregion&t%5B225%5D=war&tm=all
+ * example reply:
+{{{
+{"data":[{"id":"948","document_id":"115","slug":"948-s-res-1467-2003-13-recommendat","clause_number":"13","ClauseBody":{"id":"948","root_clause_body_id":null,"ClauseInformationType":{"id":"8","name":"Recommendation to actors other than states"}},"clauseHistory":0,"score":"100.00","documentTitle":"Resolution 1467 (2003) Adopted by the <strong>Security<\/strong> <strong>Council<\/strong> at its 4720th meeting on 18 March 2003","content":"The <strong>Security<\/strong> <strong>Council<\/strong> reiterates its call to <strong>regional<\/strong> and subregional organizations to develop policies, activities and advocacy for the benefit of waraffected children in their <strong>regions<\/strong>. In this regard, the Council welcomes the Accra Declaration and Programme of Action on war-affected children and the subsequent establishment of a Child Protection Unit at the ECOWAS secretariat.","Tags":[{"id":"68","name":"disarmament","highlight":false},{"id":"73","name":"africa","highlight":false},{"id":"100","name":"ecowas","highlight":false},{"id":"120","name":"regional and subregional measures","highlight":false},{"id":"142","name":"children in armed conflicts","highlight":false},{"id":"225","name":"war","highlight":true}],"Document":{"id":"115","code":"S\/RES\/1467(2003)","organisation_id":"1","is_ratified":false,"adoption_date":"2003-03-18","slug":"115-115-resolution-1467-2003-adopted-b","DocumentType":{"id":"10","name":"resolution","legal_value":"no legal value assigned"},"isSCResolution":true,"Organisation":{"name":"UNO SC"}}}],"filters":{"legal_value":[{"id":"no legal value assigned","name":"no legal value assigned","count":1,"isChecked":true}],"adoption_year":[{"id":2003,"name":2003,"count":1,"isChecked":true}],"organisation_id":[{"id":1,"name":"UNO SC","count":1,"isChecked":true}],"addressee_ids":[{"id":13,"name":"Regional Organizations","count":1,"isChecked":true}],"documenttype_id":[{"id":10,"name":"resolution","count":1,"isChecked":true}],"information_type_id":[{"id":8,"name":"Recommendation to actors other than states","count":1,"isChecked":true}],"operative_phrase_id":[{"id":15,"name":"Calls","count":1,"isChecked":true}],"tag_ids":[{"id":68,"name":"disarmament","count":1,"isChecked":true},{"id":73,"name":"africa","count":1,"isChecked":true},{"id":100,"name":"ecowas","count":1,"isChecked":true},{"id":120,"name":"regional and subregional measures","count":1,"isChecked":true},{"id":142,"name":"children in armed conflicts","count":1,"isChecked":true},{"id":225,"name":"war","count":1,"isChecked":true}]},"facets":{"legal_value":{"unfolded":false,"label":"Legal Value","allChecked":true},"adoption_year":{"unfolded":false,"label":"Adoption Year","allChecked":true},"organisation_id":{"model":"Organisation","unfolded":true,"label":"Organisation","allChecked":true},"addressee_ids":{"model":"Addressee","unfolded":false,"label":"Addressees","allChecked":true},"documenttype_id":{"model":"DocumentType","unfolded":false,"label":"Document Type","allChecked":true},"information_type_id":{"model":"ClauseInformationType","unfolded":true,"label":"Clause Information Type","allChecked":true},"operative_phrase_id":{"model":"ClauseOperativePhrase","unfolded":false,"label":"Clause Operative Phrase","allChecked":true},"tag_ids":{"model":"Tag","unfolded":true,"label":"Tags","allChecked":true}},"totalResults":1,"page":0,"limit":20,"status":"success","message":"ok"}
+}}}

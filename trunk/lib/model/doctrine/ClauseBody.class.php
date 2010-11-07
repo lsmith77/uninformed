@@ -53,4 +53,30 @@ class ClauseBody extends BaseClauseBody
         }
         return $content;
     }
+
+    public function getLatestAdoptedClause() {
+        $root_clause_body_id = $this->root_clause_body_id;
+        $clause_body_ids = Doctrine_Query::create()
+            ->select('cb.id')
+            ->from('ClauseBody cb INDEXBY cb.id')
+            ->where('cb.root_clause_body_id = ? OR cb.id = ?', array($root_clause_body_id, $root_clause_body_id))
+            ->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
+        if (empty($clause_body_ids)) {
+            return null;
+        }
+
+        if (count($clause_body_ids) === 1) {
+            return $this;
+        }
+
+        $clause_body_ids = array_keys($clause_body_ids);
+
+        return Doctrine_Query::create()
+            ->select('c.*')
+            ->from('Clause c')
+            ->innerJoin('c.Document d')
+            ->whereIn('c.clause_body_id', $clause_body_ids)
+            ->orderBy('d.adoption_date DESC')
+            ->fetchOne();
+    }
 }

@@ -10,6 +10,14 @@ search:
   url:   /
   param: { module: search, action: index }
 
+unified:
+  url:   /unified
+  param: { module: search, action: unifiedResultsPage }
+
+searchOldIndex:
+  url:   /oldindex
+  param: { module: search, action: index }
+
 help:
   url:   /help
   param: { module: default, action: help }
@@ -21,6 +29,10 @@ aboutus:
 news:
   url:   /news
   param: { module: default, action: news }
+
+unifiedSearch:
+  url:   /search/unifiedResults
+  param: { module: search, action: unifiedResultsPage }
 
 clauseSearch:
   url:   /search/:action

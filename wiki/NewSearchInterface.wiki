@@ -2,6 +2,15 @@
 
 = Search UI Redesign =
 
+== Backend Test page ==
+http://resolutionfinder.org/search/unifiedResults
+
+ * Currently hardcoded to do document searches
+ * Filters list numbers for clauses and not for the documents
+ * Clause content not yet shown
+ * Issues/missing autocomplete
+ * Layout incorrect
+
 == Mockup ==
 http://dl.dropbox.com/u/268634/Un-Informed/NewSearchUI.png
 

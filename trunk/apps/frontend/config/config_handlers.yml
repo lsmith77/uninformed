@@ -1,7 +1,7 @@
 modules/*/config/view.yml:
   class: swCombineViewConfigHandler
   # put sfViewConfigHandler to restore the default symfony config handler
-  # class: sfViewConfigHandler
+  class: sfViewConfigHandler
   param:
    private_path: %SF_WEB_DIR%/sw-combine
    configuration:

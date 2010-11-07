@@ -66,10 +66,1213 @@ http://dl.dropbox.com/u/268634/Un-Informed/NewSearchUI.png
 === to execute a document search ===
 
  * url: http://resolutionfinder.org/search/results?q=africa&t%5B22%5D=medication&dc=&st=document
+ * note the `t[22]=medication`, the relevant bit is the 22, which is the id of the tag "medication". the above mentioned jquery autosuggest plugin does not support storing a different key for a tag value out of the box.
  * note filters counts denote the number of clauses matched inside the listed documents
  * example reply:
 {{{
-{"searchType":"document","data":[{"id":"4","code":"","organisation_id":"6","is_ratified":null,"adoption_date":"2000-04-25","slug":"4-the-abuja-declaration-on-roll-","DocumentType":{"id":"3","name":"declaration","legal_value":"non-legally binding"},"isSCResolution":false,"Organisation":{"name":" African Summit on Roll Back Malaria"},"Tags":[{"id":"4","name":"prevention","highlight":false},{"id":"8","name":"access to medication","highlight":false},{"id":"15","name":"health care","highlight":false},{"id":"22","name":"medication","highlight":false},{"id":"23","name":"malaria","highlight":false},{"id":"46","name":"roll back malaria (rbm)","highlight":false}],"Clauses":[{"id":"35","document_id":"4","slug":"35-the-abuja-declaratio-1-commitm","clause_number":"1","ClauseBody":{"id":"35","root_clause_body_id":null,"ClauseInformationType":{"id":"5","name":"Commitment made by states (national action)"}},"clauseHistory":0,"score":"100.00","documentTitle":"The Abuja Declaration on Roll Back Malaria in <strong>Africa<\/strong>","content":"<em><\/em>REDEDICATE<em><\/em> <em><\/em>OURSELVES<em><\/em> <em><\/em>TO<em><\/em>: <em><\/em>The<em><\/em> <em><\/em>principles<em><\/em> <em><\/em>and<em><\/em> <em><\/em>targets<em><\/em> <em><\/em>of<em><\/em> <em><\/em>the<em><\/em> <em><\/em>Harare<em><\/em> <em><\/em>Declaration<em><\/em> <em><\/em>of<em><\/em> <em><\/em>1997<em><\/em>","Tags":[{"id":"23","name":"malaria","highlight":false}]},{"id":"36","document_id":"4","slug":"36-the-abuja-declaratio-2-commitm","clause_number":"2","ClauseBody":{"id":"36","root_clause_body_id":null,"ClauseInformationType":{"id":"5","name":"Commitment made by states (national action)"}},"clauseHistory":0,"score":"100.00","documentTitle":"The Abuja Declaration on Roll Back Malaria in <strong>Africa<\/strong>","content":"i. <em>COMMIT<\/em> OURSELVES TO AN INTENSIVE EFFORT TO: Halve the malaria mortality for <strong>Africa's<\/strong> people by 2010, through implementing the strategies and actions for Roll Back Malaria, agreed at the summit.","Tags":[{"id":"23","name":"malaria","highlight":false},{"id":"45","name":"mortality","highlight":false},{"id":"46","name":"roll back malaria (rbm)","highlight":false}]},{"id":"37","document_id":"4","slug":"37-the-abuja-declaratio-2-commitm","clause_number":"2","ClauseBody":{"id":"37","root_clause_body_id":null,"ClauseInformationType":{"id":"5","name":"Commitment made by states (national action)"}},"clauseHistory":0,"score":"100.00","documentTitle":"The Abuja Declaration on Roll Back Malaria in <strong>Africa<\/strong>","content":"ii. <em>COMMIT<\/em> OURSELVES TO AN INTENSIVE EFFORT TO: Initiate actions at country level to provide resources to facilitate realization of RBM objectives.","Tags":[{"id":"23","name":"malaria","highlight":false},{"id":"46","name":"roll back malaria (rbm)","highlight":false}]},{"id":"38","document_id":"4","slug":"38-the-abuja-declaratio-2-commitm","clause_number":"2","ClauseBody":{"id":"38","root_clause_body_id":null,"ClauseInformationType":{"id":"5","name":"Commitment made by states (national action)"}},"clauseHistory":0,"score":"100.00","documentTitle":"The Abuja Declaration on Roll Back Malaria in <strong>Africa<\/strong>","content":"iii. <em>COMMIT<\/em> OURSELVES TO AN INTENSIVE EFFORT TO: Work with our partners in malaria-affected countries towards stated targets, ensuring the\nallocation of necessary resources from private and public sectors and from non-governmental organizations.","Tags":[{"id":"23","name":"malaria","highlight":false},{"id":"36","name":"financial resources","highlight":false}]},{"id":"39","document_id":"4","slug":"39-the-abuja-declaratio-2-commitm","clause_number":"2","ClauseBody":{"id":"39","root_clause_body_id":null,"ClauseInformationType":{"id":"5","name":"Commitment made by states (national action)"}},"clauseHistory":0,"score":"100.00","documentTitle":"The Abuja Declaration on Roll Back Malaria in <strong>Africa<\/strong>","content":"iv. <em>COMMIT<\/em> OURSELVES TO AN INTENSIVE EFFORT TO: Create an enabling environment in our countries which will permit increased participation of\ninternational partners in our malaria control actions.","Tags":[{"id":"23","name":"malaria","highlight":false}]},{"id":"40","document_id":"4","slug":"40-the-abuja-declaratio-3-commitm","clause_number":"3","ClauseBody":{"id":"40","root_clause_body_id":null,"ClauseInformationType":{"id":"5","name":"Commitment made by states (national action)"}},"clauseHistory":0,"score":"100.00","documentTitle":"The Abuja Declaration on Roll Back Malaria in <strong>Africa<\/strong>","content":"RESOLVE TO: Initiate appropriate and sustainable action to strengthen the health systems to ensure that by the year 2005, At least 60% of those suffering from malaria have prompt access to and are able to use correct, \naffordable and appropriate treatment within eight hours of the onset of symptoms.","Tags":[{"id":"3","name":"treatment","highlight":false},{"id":"9","name":"national health system","highlight":false},{"id":"23","name":"malaria","highlight":false},{"id":"47","name":"access to treatment","highlight":false}]},{"id":"41","document_id":"4","slug":"41-the-abuja-declaratio-3-commitm","clause_number":"3","ClauseBody":{"id":"41","root_clause_body_id":null,"ClauseInformationType":{"id":"5","name":"Commitment made by states (national action)"}},"clauseHistory":0,"score":"100.00","documentTitle":"The Abuja Declaration on Roll Back Malaria in <strong>Africa<\/strong>","content":"<em>RESOLVE<\/em> TO: Initiate appropriate and sustainable action to strengthen the health systems to ensure that by the year 2005, At least 60% of those at risk of malaria particularly pregnant women and children under five years of age, benefit from the most suitable combination of personal and community protective measures such as insecticide treated mosquito nets and other materials to prevent infection and suffering.","Tags":[{"id":"4","name":"prevention","highlight":false},{"id":"9","name":"national health system","highlight":false},{"id":"23","name":"malaria","highlight":false},{"id":"29","name":"combination treatment","highlight":false},{"id":"30","name":"insecticide","highlight":false},{"id":"31","name":"pregnancy","highlight":false},{"id":"32","name":"nets","highlight":false}]},{"id":"42","document_id":"4","slug":"42-the-abuja-declaratio-3-commitm","clause_number":"3","ClauseBody":{"id":"42","root_clause_body_id":null,"ClauseInformationType":{"id":"5","name":"Commitment made by states (national action)"}},"clauseHistory":0,"score":"100.00","documentTitle":"The Abuja Declaration on Roll Back Malaria in <strong>Africa<\/strong>","content":"<em>RESOLVE<\/em> TO: Initiate appropriate and sustainable action to strengthen the health systems to ensure that by the year 2005, At least 60% of all pregnant women who are at risk of malaria, especially those in their first pregnancies, have access to chemoprophylaxis or presumptive intermittent treatment.","Tags":[{"id":"3","name":"treatment","highlight":false},{"id":"9","name":"national health system","highlight":false},{"id":"23","name":"malaria","highlight":false},{"id":"31","name":"pregnancy","highlight":false},{"id":"47","name":"access to treatment","highlight":false}]},{"id":"43","document_id":"4","slug":"43-the-abuja-declaratio-4-commitm","clause_number":"4","ClauseBody":{"id":"43","root_clause_body_id":null,"ClauseInformationType":{"id":"5","name":"Commitment made by states (national action)"}},"clauseHistory":0,"score":"100.00","documentTitle":"The Abuja Declaration on Roll Back Malaria in <strong>Africa<\/strong>","content":"<em>CALL UPON<\/em>: All member states to undertake health systems reforms which will, Promote community participation in joint ownership and control of Roll Back Malaria actions to\nenhance their sustainability.","Tags":[{"id":"9","name":"national health system","highlight":false},{"id":"23","name":"malaria","highlight":false},{"id":"27","name":"local strategies","highlight":false},{"id":"46","name":"roll back malaria (rbm)","highlight":false}]},{"id":"44","document_id":"4","slug":"44-the-abuja-declaratio-4-commitm","clause_number":"4","ClauseBody":{"id":"44","root_clause_body_id":null,"ClauseInformationType":{"id":"5","name":"Commitment made by states (national action)"}},"clauseHistory":0,"score":"100.00","documentTitle":"The Abuja Declaration on Roll Back Malaria in <strong>Africa<\/strong>","content":"<em>CALL UPON<\/em>: All member states to undertake health systems reforms which will, Make diagnosis and treatment of malaria available as far peripherally as possible including home treatment.","Tags":[{"id":"3","name":"treatment","highlight":false},{"id":"9","name":"national health system","highlight":false},{"id":"23","name":"malaria","highlight":false}]}],"documentTitle":"The Abuja Declaration on Roll Back Malaria in <strong>Africa<\/strong>"}],"filters":{"legal_value":[{"id":"non-legally binding","name":"non-legally binding","count":307,"isChecked":true},{"id":"no legal value assigned","name":"no legal value assigned","count":18,"isChecked":true}],"adoption_year":[{"id":1994,"name":1994,"count":2,"isChecked":true},{"id":1995,"name":1995,"count":7,"isChecked":true},{"id":1996,"name":1996,"count":4,"isChecked":true},{"id":1997,"name":1997,"count":2,"isChecked":true},{"id":1998,"name":1998,"count":18,"isChecked":true},{"id":1999,"name":1999,"count":4,"isChecked":true},{"id":2000,"name":2000,"count":45,"isChecked":true},{"id":2001,"name":2001,"count":18,"isChecked":true},{"id":2002,"name":2002,"count":21,"isChecked":true},{"id":2003,"name":2003,"count":31,"isChecked":true},{"id":2004,"name":2004,"count":22,"isChecked":true},{"id":2005,"name":2005,"count":26,"isChecked":true},{"id":2006,"name":2006,"count":35,"isChecked":true},{"id":2007,"name":2007,"count":26,"isChecked":true},{"id":2008,"name":2008,"count":31,"isChecked":true},{"id":2009,"name":2009,"count":32,"isChecked":true},{"id":2010,"name":2010,"count":1,"isChecked":true}],"organisation_id":[{"id":2,"name":"UNO GA","count":245,"isChecked":true},{"id":11,"name":"OAU","count":29,"isChecked":true},{"id":1,"name":"UNO SC","count":18,"isChecked":true},{"id":6,"name":"African Summit on Roll Back Malaria","count":17,"isChecked":true},{"id":7,"name":"UNO ECOSOC","count":5,"isChecked":true},{"id":9,"name":"AU AU Assembly","count":4,"isChecked":true},{"id":0,"name":null,"count":2,"isChecked":true},{"id":3,"name":"UNO","count":2,"isChecked":true},{"id":25,"name":"ECOSOC Commission on Sustainable Development","count":2,"isChecked":true},{"id":14,"name":"World Water Forum","count":1,"isChecked":true},{"id":0,"name":"Other","count":2,"isChecked":true}],"addressee_ids":[{"id":6,"name":"International Community","count":72,"isChecked":true},{"id":1,"name":"Group of States","count":69,"isChecked":true},{"id":2,"name":"All Member States","count":52,"isChecked":true},{"id":9,"name":"UN Organ","count":52,"isChecked":true},{"id":11,"name":"UN Secretary General","count":45,"isChecked":true},{"id":5,"name":"Other","count":26,"isChecked":true},{"id":7,"name":"Private sector","count":16,"isChecked":true},{"id":4,"name":"Multilateral Organizations","count":13,"isChecked":true},{"id":13,"name":"Regional Organizations","count":13,"isChecked":true},{"id":3,"name":"WHO Director-General","count":8,"isChecked":true},{"id":8,"name":"civil society","count":8,"isChecked":true},{"id":14,"name":"Organizations","count":8,"isChecked":true},{"id":30,"name":"Executive Secretary of ECOWAS","count":1,"isChecked":true}],"documenttype_id":[{"id":2,"name":"GA resolution","count":250,"isChecked":true},{"id":3,"name":"declaration","count":53,"isChecked":true},{"id":10,"name":"resolution","count":18,"isChecked":true},{"id":8,"name":"plan of action (negotiated)","count":2,"isChecked":true},{"id":11,"name":"decision","count":2,"isChecked":true}],"information_type_id":[{"id":2,"name":"Request to UN institution","count":80,"isChecked":true},{"id":6,"name":"Commitment made by states (international action)","count":72,"isChecked":true},{"id":4,"name":"Other important information","count":67,"isChecked":true},{"id":5,"name":"Commitment made by states (national action)","count":60,"isChecked":true},{"id":7,"name":"Further recommendation for implementation","count":20,"isChecked":true},{"id":3,"name":"Request to actors other than states","count":17,"isChecked":true},{"id":8,"name":"Recommendation to actors other than states","count":8,"isChecked":true},{"id":1,"name":"Commitment made by states","count":1,"isChecked":true}],"operative_phrase_id":[{"id":9,"name":"Calls upon","count":59,"isChecked":true},{"id":16,"name":"Encourages","count":46,"isChecked":true},{"id":3,"name":"Requests","count":44,"isChecked":true},{"id":2,"name":"Urges","count":40,"isChecked":true},{"id":17,"name":"Appeals","count":28,"isChecked":true},{"id":35,"name":"Stresses","count":11,"isChecked":true},{"id":12,"name":"Welcomes","count":10,"isChecked":true},{"id":22,"name":"Recognizes","count":8,"isChecked":true},{"id":15,"name":"Calls","count":7,"isChecked":true},{"id":8,"name":"Pledge to","count":6,"isChecked":true},{"id":11,"name":"Takes note of","count":6,"isChecked":true},{"id":1,"name":"","count":5,"isChecked":true},{"id":4,"name":"Resolves","count":5,"isChecked":true},{"id":5,"name":"Commit","count":4,"isChecked":true},{"id":27,"name":"We request","count":4,"isChecked":true},{"id":29,"name":"Notes","count":4,"isChecked":true},{"id":33,"name":"Expresses","count":4,"isChecked":true},{"id":107,"name":"We express","count":4,"isChecked":true},{"id":108,"name":"We agree","count":4,"isChecked":true},{"id":111,"name":"We call","count":4,"isChecked":true},{"id":7,"name":"Call upon","count":3,"isChecked":true},{"id":21,"name":"Reaffirms","count":3,"isChecked":true},{"id":6,"name":"Resolve","count":2,"isChecked":true},{"id":13,"name":"Invites","count":2,"isChecked":true},{"id":20,"name":"Reiterates","count":2,"isChecked":true},{"id":24,"name":"We Urge","count":2,"isChecked":true},{"id":26,"name":"We commit","count":2,"isChecked":true},{"id":10,"name":"Calls attention","count":1,"isChecked":true},{"id":14,"name":"Decides","count":1,"isChecked":true},{"id":19,"name":"Proclaims","count":1,"isChecked":true},{"id":65,"name":"Will","count":1,"isChecked":true},{"id":119,"name":"Declare","count":1,"isChecked":true},{"id":120,"name":"Instruct","count":1,"isChecked":true}],"tag_ids":[{"id":23,"name":"malaria","count":183,"isChecked":true},{"id":68,"name":"disarmament","count":122,"isChecked":true},{"id":73,"name":"africa","count":114,"isChecked":true},{"id":39,"name":"malaria control","count":86,"isChecked":true},{"id":86,"name":"small arms and light weapons","count":84,"isChecked":true},{"id":65,"name":"international cooperation","count":57,"isChecked":true},{"id":37,"name":"funding","count":56,"isChecked":true},{"id":36,"name":"financial resources","count":55,"isChecked":true},{"id":30,"name":"insecticide","count":53,"isChecked":true},{"id":87,"name":"illicit trade","count":50,"isChecked":true},{"id":4,"name":"prevention","count":49,"isChecked":true},{"id":46,"name":"roll back malaria (rbm)","count":41,"isChecked":true},{"id":32,"name":"nets","count":40,"isChecked":true},{"id":3,"name":"treatment","count":39,"isChecked":true},{"id":25,"name":"national strategies","count":33,"isChecked":true},{"id":69,"name":"development","count":32,"isChecked":true},{"id":120,"name":"regional and subregional measures","count":32,"isChecked":true},{"id":29,"name":"combination treatment","count":31,"isChecked":true},{"id":123,"name":"implementation of measures","count":30,"isChecked":true},{"id":295,"name":"un regional centre","count":30,"isChecked":true},{"id":66,"name":"peace","count":29,"isChecked":true},{"id":9,"name":"national health system","count":28,"isChecked":true},{"id":89,"name":"international cooperation and assistance","count":26,"isChecked":true},{"id":99,"name":"african union ( au )","count":26,"isChecked":true},{"id":106,"name":"traffic of arms","count":23,"isChecked":true},{"id":113,"name":"moratorium","count":23,"isChecked":true},{"id":100,"name":"ecowas","count":21,"isChecked":true},{"id":19,"name":"drug pricing","count":19,"isChecked":true},{"id":47,"name":"access to treatment","count":19,"isChecked":true},{"id":56,"name":"national health policies","count":19,"isChecked":true},{"id":8,"name":"access to medication","count":18,"isChecked":true},{"id":31,"name":"pregnancy","count":18,"isChecked":true},{"id":40,"name":"technical support","count":18,"isChecked":true},{"id":62,"name":"global fund to fight aids","count":18,"isChecked":true},{"id":63,"name":"tuberculosis and malaria","count":18,"isChecked":true},{"id":114,"name":"manufacture of arms","count":18,"isChecked":true},{"id":22,"name":"medication","count":17,"isChecked":true},{"id":91,"name":"exports of arms","count":17,"isChecked":true},{"id":85,"name":"conventional arms","count":16,"isChecked":true},{"id":88,"name":"import of arms","count":16,"isChecked":true},{"id":20,"name":"differential pricing","count":15,"isChecked":true},{"id":160,"name":"proliferation of arms","count":15,"isChecked":true},{"id":18,"name":"international trade","count":14,"isChecked":true},{"id":24,"name":"monitoring","count":14,"isChecked":true},{"id":49,"name":"research","count":14,"isChecked":true},{"id":34,"name":"vector management","count":12,"isChecked":true},{"id":67,"name":"security","count":12,"isChecked":true},{"id":107,"name":"programme of action","count":12,"isChecked":true},{"id":108,"name":"collection of arms","count":12,"isChecked":true},{"id":27,"name":"local strategies","count":10,"isChecked":true},{"id":57,"name":"pharmaceuticals","count":10,"isChecked":true},{"id":78,"name":"therapy","count":10,"isChecked":true},{"id":50,"name":"vaccination","count":9,"isChecked":true},{"id":79,"name":"education","count":9,"isChecked":true},{"id":82,"name":"agriculture","count":9,"isChecked":true},{"id":150,"name":"destruction of arms","count":9,"isChecked":true},{"id":11,"name":"national drug policy","count":8,"isChecked":true},{"id":48,"name":"capacity-building","count":8,"isChecked":true},{"id":59,"name":"hiv\/aids","count":7,"isChecked":true},{"id":77,"name":"public-private partnership","count":7,"isChecked":true},{"id":140,"name":"conflict","count":7,"isChecked":true},{"id":15,"name":"health care","count":6,"isChecked":true},{"id":16,"name":"trips","count":6,"isChecked":true},{"id":17,"name":"agreement on the trade-related aspects of intellectual property","count":6,"isChecked":true},{"id":33,"name":"legislation","count":6,"isChecked":true},{"id":76,"name":"presumptive intermittent treatment","count":6,"isChecked":true},{"id":95,"name":"terrorism","count":6,"isChecked":true},{"id":112,"name":"illicit circulation of arms","count":6,"isChecked":true},{"id":5,"name":"human rights","count":5,"isChecked":true},{"id":10,"name":"national health care","count":5,"isChecked":true},{"id":80,"name":"economic development","count":5,"isChecked":true},{"id":81,"name":"environment","count":5,"isChecked":true},{"id":191,"name":"public awareness","count":5,"isChecked":true},{"id":221,"name":"humanitarian law","count":5,"isChecked":true},{"id":254,"name":"illegal exploitation of national resources","count":5,"isChecked":true},{"id":21,"name":"public health care","count":4,"isChecked":true},{"id":28,"name":"oral artemisinin monotherapy","count":4,"isChecked":true},{"id":55,"name":"tse tse flies","count":4,"isChecked":true},{"id":60,"name":"health","count":4,"isChecked":true},{"id":61,"name":"tuberculosis","count":4,"isChecked":true},{"id":71,"name":"democracy","count":4,"isChecked":true},{"id":84,"name":"gender equality","count":4,"isChecked":true},{"id":92,"name":"transfer of arms","count":4,"isChecked":true},{"id":119,"name":"west africa","count":4,"isChecked":true},{"id":131,"name":"coordination of measures","count":4,"isChecked":true},{"id":143,"name":"demobilization and reintegration","count":4,"isChecked":true},{"id":234,"name":"war prevention","count":4,"isChecked":true},{"id":255,"name":"traffic in high-value commodities","count":4,"isChecked":true},{"id":267,"name":"women","count":4,"isChecked":true},{"id":268,"name":"children","count":4,"isChecked":true},{"id":369,"name":"refugees","count":4,"isChecked":true},{"id":380,"name":"south africa","count":4,"isChecked":true},{"id":381,"name":"mozambique","count":4,"isChecked":true},{"id":382,"name":"united nations regional centre for peace and disarmament","count":4,"isChecked":true},{"id":384,"name":"south african states","count":4,"isChecked":true},{"id":524,"name":"access to education","count":4,"isChecked":true},{"id":54,"name":"trypanosomiasis","count":3,"isChecked":true},{"id":83,"name":"sanitation","count":3,"isChecked":true},{"id":97,"name":"information exchange","count":3,"isChecked":true},{"id":118,"name":"stability","count":3,"isChecked":true}]},"facets":{"legal_value":{"unfolded":false,"label":"Legal Value","allChecked":true},"adoption_year":{"unfolded":false,"label":"Adoption Year","allChecked":true},"organisation_id":{"model":"Organisation","unfolded":true,"label":"Organisation","allChecked":true},"addressee_ids":{"model":"Addressee","unfolded":false,"label":"Addressees","allChecked":true},"documenttype_id":{"model":"DocumentType","unfolded":false,"label":"Document Type","allChecked":true},"information_type_id":{"model":"ClauseInformationType","unfolded":true,"label":"Clause Information Type","allChecked":true},"operative_phrase_id":{"model":"ClauseOperativePhrase","unfolded":false,"label":"Clause Operative Phrase","allChecked":true},"tag_ids":{"model":"Tag","unfolded":true,"label":"Tags","allChecked":true}},"totalResults":1,"page":1,"limit":false,"status":"success","message":"ok"}
+{
+  "searchType": "document",
+  "data": [
+    {
+      "id": "25",
+      "code": "A/RES/58/237",
+      "organisation_id": "2",
+      "is_ratified": null,
+      "adoption_date": "2003-12-23",
+      "slug": "25-2-aa-2-aa-decade-to-roll-back-",
+      "DocumentType": {
+        "id": "2",
+        "name": "GA resolution",
+        "legal_value": "non-legally binding"
+      },
+     "isSCResolution": false,
+      "Organisation": {
+        "name": "UNO GA"
+      },
+     "Tags": [
+        {
+          "id": "15",
+          "name": "health care",
+          "highlight": false
+        },
+       {
+          "id": "22",
+          "name": "medication",
+          "highlight": true
+        },
+       {
+          "id": "23",
+          "name": "malaria",
+          "highlight": false
+        },
+       {
+          "id": "46",
+          "name": "roll back malaria (rbm)",
+          "highlight": false
+        },
+       {
+          "id": "60",
+          "name": "health",
+          "highlight": false
+        },
+       {
+          "id": "73",
+          "name": "africa",
+          "highlight": false
+        }
+     ],
+     "Clauses": [
+        {
+          "id": "184",
+          "document_id": "25",
+          "slug": "184-a-res-58-237-7-other-important",
+          "clause_number": "7",
+          "ClauseBody": {
+            "id": "184",
+            "root_clause_body_id": null,
+            "ClauseInformationType": {
+              "id": "4",
+              "name": "Other important information"
+            }
+         },
+         "clauseHistory": 0,
+          "score": "100.00",
+          "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>",
+          "content": "<em>Recognizes</em> the importance of the development of effective vaccines and \nnew medicines to prevent and treat malaria, and the need for further research, including through effective global partnerships such as the various malaria vaccine initiatives and the Medicines for Malaria Venture, in securing their development",
+          "Tags": [
+            {
+              "id": "3",
+              "name": "treatment",
+              "highlight": false
+            },
+           {
+              "id": "4",
+              "name": "prevention",
+              "highlight": false
+            },
+           {
+              "id": "22",
+              "name": "medication",
+              "highlight": true
+            },
+           {
+              "id": "23",
+              "name": "malaria",
+              "highlight": false
+            },
+           {
+              "id": "39",
+              "name": "malaria control",
+              "highlight": false
+            },
+           {
+              "id": "50",
+              "name": "vaccination",
+              "highlight": false
+            },
+           {
+              "id": "65",
+              "name": "international cooperation",
+              "highlight": false
+            }
+         ]
+       },
+       {
+          "id": "186",
+          "document_id": "25",
+          "slug": "186-a-res-58-237-9-request-to-acto",
+          "clause_number": "9",
+          "ClauseBody": {
+            "id": "186",
+            "root_clause_body_id": null,
+            "ClauseInformationType": {
+              "id": "3",
+              "name": "Request to actors other than states"
+            }
+         },
+         "clauseHistory": 0,
+          "score": "100.00",
+          "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>",
+          "content": "<em>Urges</em> the pharmaceutical industry to take note of the increasing need for \neffective combination treatment for malaria, particularly in <strong>Africa</strong>, and to form additional alliances and partnerships to help to ensure that all people at risk have access to prompt, affordable and quality treatment;",
+          "Tags": [
+            {
+              "id": "3",
+              "name": "treatment",
+              "highlight": false
+            },
+           {
+              "id": "22",
+              "name": "medication",
+              "highlight": true
+            },
+           {
+              "id": "23",
+              "name": "malaria",
+              "highlight": false
+            },
+           {
+              "id": "29",
+              "name": "combination treatment",
+              "highlight": false
+            },
+           {
+              "id": "47",
+              "name": "access to treatment",
+              "highlight": false
+            },
+           {
+              "id": "57",
+              "name": "pharmaceuticals",
+              "highlight": false
+            },
+           {
+              "id": "65",
+              "name": "international cooperation",
+              "highlight": false
+            }
+         ]
+       }
+     ],
+     "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>"
+    },
+   {
+      "id": "26",
+      "code": "A/RES/59/256",
+      "organisation_id": "2",
+      "is_ratified": null,
+      "adoption_date": "2004-12-23",
+      "slug": "26-2-aa-2-aa-decade-to-roll-back-",
+      "DocumentType": {
+        "id": "2",
+        "name": "GA resolution",
+        "legal_value": "non-legally binding"
+      },
+     "isSCResolution": false,
+      "Organisation": {
+        "name": "UNO GA"
+      },
+     "Tags": [
+        {
+          "id": "15",
+          "name": "health care",
+          "highlight": false
+        },
+       {
+          "id": "23",
+          "name": "malaria",
+          "highlight": false
+        },
+       {
+          "id": "46",
+          "name": "roll back malaria (rbm)",
+          "highlight": false
+        },
+       {
+          "id": "60",
+          "name": "health",
+          "highlight": false
+        },
+       {
+          "id": "73",
+          "name": "africa",
+          "highlight": false
+        }
+     ],
+     "Clauses": [
+        {
+          "id": "197",
+          "document_id": "26",
+          "slug": "197-a-res-59-256-11-commitment-mad",
+          "clause_number": "11",
+          "ClauseBody": {
+            "id": "197",
+            "root_clause_body_id": null,
+            "ClauseInformationType": {
+              "id": "6",
+              "name": "Commitment made by states (international action)"
+            }
+         },
+         "clauseHistory": 0,
+          "score": "100.00",
+          "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>",
+          "content": "<em>Calls upon</em> the international community to support investment in the \ndevelopment of new anti-malarial medicines and insecticides for the effective control of malaria in view of the challenging resistance of the parasite to anti-malarial medicines and the resistance of mosquitoes to insecticides",
+          "Tags": [
+            {
+              "id": "22",
+              "name": "medication",
+              "highlight": true
+            },
+           {
+              "id": "23",
+              "name": "malaria",
+              "highlight": false
+            },
+           {
+              "id": "30",
+              "name": "insecticide",
+              "highlight": false
+            },
+           {
+              "id": "39",
+              "name": "malaria control",
+              "highlight": false
+            },
+           {
+              "id": "49",
+              "name": "research",
+              "highlight": false
+            },
+           {
+              "id": "57",
+              "name": "pharmaceuticals",
+              "highlight": false
+            }
+         ]
+       },
+       {
+          "id": "195",
+          "document_id": "26",
+          "slug": "195-a-res-59-256-9-other-important",
+          "clause_number": "9",
+          "ClauseBody": {
+            "id": "195",
+            "root_clause_body_id": "184",
+            "ClauseInformationType": {
+              "id": "4",
+              "name": "Other important information"
+            }
+         },
+         "clauseHistory": 0,
+          "score": "86.42",
+          "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>",
+          "content": "<em>Recognizes</em> the importance of the development of effective vaccines and new medicines to prevent and treat malaria and the need for further and accelerated research, including through effective global partnerships such as the various malaria vaccine initiatives and the Medicines for Malaria Venture, where necessary stimulated by new incentives to secure their development",
+          "Tags": [
+            {
+              "id": "3",
+              "name": "treatment",
+              "highlight": false
+            },
+           {
+              "id": "4",
+              "name": "prevention",
+              "highlight": false
+            },
+           {
+              "id": "22",
+              "name": "medication",
+              "highlight": true
+            },
+           {
+              "id": "23",
+              "name": "malaria",
+              "highlight": false
+            },
+           {
+              "id": "37",
+              "name": "funding",
+              "highlight": false
+            },
+           {
+              "id": "39",
+              "name": "malaria control",
+              "highlight": false
+            },
+           {
+              "id": "50",
+              "name": "vaccination",
+              "highlight": false
+            },
+           {
+              "id": "65",
+              "name": "international cooperation",
+              "highlight": false
+            }
+         ]
+       }
+     ],
+     "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>"
+    },
+   {
+      "id": "27",
+      "code": "A/RES/60/221",
+      "organisation_id": "2",
+      "is_ratified": null,
+      "adoption_date": "2005-12-23",
+      "slug": "27-2-aa-2-aa-decade-to-roll-back-",
+      "DocumentType": {
+        "id": "2",
+        "name": "GA resolution",
+        "legal_value": "non-legally binding"
+      },
+     "isSCResolution": false,
+      "Organisation": {
+        "name": "UNO GA"
+      },
+     "Tags": [
+        {
+          "id": "15",
+          "name": "health care",
+          "highlight": false
+        },
+       {
+          "id": "23",
+          "name": "malaria",
+          "highlight": false
+        },
+       {
+          "id": "46",
+          "name": "roll back malaria (rbm)",
+          "highlight": false
+        },
+       {
+          "id": "60",
+          "name": "health",
+          "highlight": false
+        },
+       {
+          "id": "73",
+          "name": "africa",
+          "highlight": false
+        }
+     ],
+     "Clauses": [
+        {
+          "id": "211",
+          "document_id": "27",
+          "slug": "211-a-res-60-221-13-other-importan",
+          "clause_number": "13",
+          "ClauseBody": {
+            "id": "211",
+            "root_clause_body_id": "184",
+            "ClauseInformationType": {
+              "id": "4",
+              "name": "Other important information"
+            }
+         },
+         "clauseHistory": 0,
+          "score": "86.42",
+          "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>",
+          "content": "<em>Recognizes</em> the importance of the development of effective vaccines and \nnew medicines to prevent and treat malaria and the need for further and accelerated research, including by providing support to the United Nations Childrenâ€™s Fund/United Nations Development Programme/World Bank/World Health Organization Special Programme for Research and Training in Tropical Diseases and through effective global partnerships such as the various malaria vaccine initiatives and the Medicines for Malaria Venture, where necessary stimulated by new incentives to secure their development",
+          "Tags": [
+            {
+              "id": "3",
+              "name": "treatment",
+              "highlight": false
+            },
+           {
+              "id": "4",
+              "name": "prevention",
+              "highlight": false
+            },
+           {
+              "id": "22",
+              "name": "medication",
+              "highlight": true
+            },
+           {
+              "id": "23",
+              "name": "malaria",
+              "highlight": false
+            },
+           {
+              "id": "37",
+              "name": "funding",
+              "highlight": false
+            },
+           {
+              "id": "39",
+              "name": "malaria control",
+              "highlight": false
+            },
+           {
+              "id": "50",
+              "name": "vaccination",
+              "highlight": false
+            },
+           {
+              "id": "65",
+              "name": "international cooperation",
+              "highlight": false
+            }
+         ]
+       },
+       {
+          "id": "212",
+          "document_id": "27",
+          "slug": "212-a-res-60-221-14-commitment-mad",
+          "clause_number": "14",
+          "ClauseBody": {
+            "id": "212",
+            "root_clause_body_id": "197",
+            "ClauseInformationType": {
+              "id": "6",
+              "name": "Commitment made by states (international action)"
+            }
+         },
+         "clauseHistory": 0,
+          "score": "86.42",
+          "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>",
+          "content": "<em>Calls upon</em> the international community to support investment in the \ndevelopment of new medicines to prevent and treat malaria, especially for children and pregnant women, sensitive and specific diagnostic tests, effective vaccines, and new insecticides and delivery modes in order to enhance effectiveness and delay the onset of resistance, including through existing partnerships",
+          "Tags": [
+            {
+              "id": "3",
+              "name": "treatment",
+              "highlight": false
+            },
+           {
+              "id": "4",
+              "name": "prevention",
+              "highlight": false
+            },
+           {
+              "id": "22",
+              "name": "medication",
+              "highlight": true
+            },
+           {
+              "id": "23",
+              "name": "malaria",
+              "highlight": false
+            },
+           {
+              "id": "30",
+              "name": "insecticide",
+              "highlight": false
+            },
+           {
+              "id": "31",
+              "name": "pregnancy",
+              "highlight": false
+            },
+           {
+              "id": "39",
+              "name": "malaria control",
+              "highlight": false
+            },
+           {
+              "id": "49",
+              "name": "research",
+              "highlight": false
+            },
+           {
+              "id": "57",
+              "name": "pharmaceuticals",
+              "highlight": false
+            }
+         ]
+       }
+     ],
+     "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>"
+    },
+   {
+      "id": "28",
+      "code": "A/RES/61/228",
+      "organisation_id": "2",
+      "is_ratified": null,
+      "adoption_date": "2006-12-22",
+      "slug": "28-2-aa-2-aa-decade-to-roll-back-",
+      "DocumentType": {
+        "id": "2",
+        "name": "GA resolution",
+        "legal_value": "non-legally binding"
+      },
+     "isSCResolution": false,
+      "Organisation": {
+        "name": "UNO GA"
+      },
+     "Tags": [
+        {
+          "id": "15",
+          "name": "health care",
+          "highlight": false
+        },
+       {
+          "id": "23",
+          "name": "malaria",
+          "highlight": false
+        },
+       {
+          "id": "46",
+          "name": "roll back malaria (rbm)",
+          "highlight": false
+        },
+       {
+          "id": "60",
+          "name": "health",
+          "highlight": false
+        },
+       {
+          "id": "73",
+          "name": "africa",
+          "highlight": false
+        }
+     ],
+     "Clauses": [
+        {
+          "id": "228",
+          "document_id": "28",
+          "slug": "228-a-res-61-228-14-other-importan",
+          "clause_number": "14",
+          "ClauseBody": {
+            "id": "228",
+            "root_clause_body_id": "184",
+            "ClauseInformationType": {
+              "id": "4",
+              "name": "Other important information"
+            }
+         },
+         "clauseHistory": 0,
+          "score": "86.42",
+          "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>",
+          "content": "<em>Recognizes</em> the importance of the development of safe and cost-effective \nvaccines and new medicines to prevent and treat malaria and the need for further and accelerated research, including into safe, effective and high-quality traditional therapies, using rigorous standards, including by providing support to the Special Programme for Research and Training in Tropical Diseases and through effective global partnerships such as the various malaria vaccine initiatives and the Medicines for Malaria Venture, where necessary stimulated by new incentives to secure their development",
+          "Tags": [
+            {
+              "id": "3",
+              "name": "treatment",
+              "highlight": false
+            },
+           {
+              "id": "4",
+              "name": "prevention",
+              "highlight": false
+            },
+           {
+              "id": "22",
+              "name": "medication",
+              "highlight": true
+            },
+           {
+              "id": "23",
+              "name": "malaria",
+              "highlight": false
+            },
+           {
+              "id": "37",
+              "name": "funding",
+              "highlight": false
+            },
+           {
+              "id": "39",
+              "name": "malaria control",
+              "highlight": false
+            },
+           {
+              "id": "50",
+              "name": "vaccination",
+              "highlight": false
+            },
+           {
+              "id": "65",
+              "name": "international cooperation",
+              "highlight": false
+            }
+         ]
+       }
+     ],
+     "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>"
+    },
+   {
+      "id": "29",
+      "code": "A/RES/62/180",
+      "organisation_id": "2",
+      "is_ratified": null,
+      "adoption_date": "2007-12-19",
+      "slug": "29-2-aa-2-aa-decade-to-roll-back-",
+      "DocumentType": {
+        "id": "2",
+        "name": "GA resolution",
+        "legal_value": "non-legally binding"
+      },
+     "isSCResolution": false,
+      "Organisation": {
+        "name": "UNO GA"
+      },
+     "Tags": [
+        {
+          "id": "15",
+          "name": "health care",
+          "highlight": false
+        },
+       {
+          "id": "23",
+          "name": "malaria",
+          "highlight": false
+        },
+       {
+          "id": "46",
+          "name": "roll back malaria (rbm)",
+          "highlight": false
+        },
+       {
+          "id": "60",
+          "name": "health",
+          "highlight": false
+        },
+       {
+          "id": "73",
+          "name": "africa",
+          "highlight": false
+        }
+     ],
+     "Clauses": [
+        {
+          "id": "249",
+          "document_id": "29",
+          "slug": "249-a-res-62-180-13-commitment-mad",
+          "clause_number": "13",
+          "ClauseBody": {
+            "id": "249",
+            "root_clause_body_id": "226",
+            "ClauseInformationType": {
+              "id": "5",
+              "name": "Commitment made by states (national action)"
+            }
+         },
+         "clauseHistory": 0,
+          "score": "100.00",
+          "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>",
+          "content": "Expresses its concern about the increase in resistant strains of malaria in \nseveral regions of the world, and <em>calls upon</em> Member States, with support from the World Health Organization, to strengthen surveillance systems for drug and insecticide resistance and for the World Health Organization to coordinate a network for the monitoring of drug and insecticide resistance",
+          "Tags": [
+            {
+              "id": "11",
+              "name": "national drug policy",
+              "highlight": false
+            },
+           {
+              "id": "22",
+              "name": "medication",
+              "highlight": true
+            },
+           {
+              "id": "23",
+              "name": "malaria",
+              "highlight": false
+            },
+           {
+              "id": "24",
+              "name": "monitoring",
+              "highlight": false
+            },
+           {
+              "id": "30",
+              "name": "insecticide",
+              "highlight": false
+            },
+           {
+              "id": "65",
+              "name": "international cooperation",
+              "highlight": false
+            }
+         ]
+       }
+     ],
+     "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>"
+    },
+   {
+      "id": "30",
+      "code": "A/RES/63/234",
+      "organisation_id": "2",
+      "is_ratified": null,
+      "adoption_date": "2008-12-22",
+      "slug": "30-2-aa-2-aa-decade-to-roll-back-",
+      "DocumentType": {
+        "id": "2",
+        "name": "GA resolution",
+        "legal_value": "non-legally binding"
+      },
+     "isSCResolution": false,
+      "Organisation": {
+        "name": "UNO GA"
+      },
+     "Tags": [
+        {
+          "id": "15",
+          "name": "health care",
+          "highlight": false
+        },
+       {
+          "id": "23",
+          "name": "malaria",
+          "highlight": false
+        },
+       {
+          "id": "46",
+          "name": "roll back malaria (rbm)",
+          "highlight": false
+        },
+       {
+          "id": "60",
+          "name": "health",
+          "highlight": false
+        },
+       {
+          "id": "73",
+          "name": "africa",
+          "highlight": false
+        }
+     ],
+     "Clauses": [
+        {
+          "id": "278",
+          "document_id": "30",
+          "slug": "278-a-res-63-234-22-commitment-mad",
+          "clause_number": "22",
+          "ClauseBody": {
+            "id": "278",
+            "root_clause_body_id": "226",
+            "ClauseInformationType": {
+              "id": "5",
+              "name": "Commitment made by states (national action)"
+            }
+         },
+         "clauseHistory": 0,
+          "score": "100.00",
+          "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>",
+          "content": "Expresses its concern about the increase in resistant strains of malaria in \nseveral regions of the world, and <em>calls upon</em> Member States, with support from the World Health Organization and other partners, to strengthen surveillance systems for drug and insecticide resistance and upon the World Health Organization to coordinate a global network for the monitoring of drug and insecticide resistance and to ensure that drug and insecticide testing is fully operational in order to enhance the use of current insecticide- and artemisinin-based combination therapies",
+          "Tags": [
+            {
+              "id": "11",
+              "name": "national drug policy",
+              "highlight": false
+            },
+           {
+              "id": "22",
+              "name": "medication",
+              "highlight": true
+            },
+           {
+              "id": "23",
+              "name": "malaria",
+              "highlight": false
+            },
+           {
+              "id": "24",
+              "name": "monitoring",
+              "highlight": false
+            },
+           {
+              "id": "29",
+              "name": "combination treatment",
+              "highlight": false
+            },
+           {
+              "id": "30",
+              "name": "insecticide",
+              "highlight": false
+            },
+           {
+              "id": "65",
+              "name": "international cooperation",
+              "highlight": false
+            }
+         ]
+       }
+     ],
+     "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>"
+    },
+   {
+      "id": "31",
+      "code": "A/RES/64/79",
+      "organisation_id": "2",
+      "is_ratified": null,
+      "adoption_date": "2009-12-07",
+      "slug": "31-2-aa-2-aa-decade-to-roll-back-",
+      "DocumentType": {
+        "id": "2",
+        "name": "GA resolution",
+        "legal_value": "non-legally binding"
+      },
+     "isSCResolution": false,
+      "Organisation": {
+        "name": "UNO GA"
+      },
+     "Tags": [
+        {
+          "id": "15",
+          "name": "health care",
+          "highlight": false
+        },
+       {
+          "id": "23",
+          "name": "malaria",
+          "highlight": false
+        },
+       {
+          "id": "46",
+          "name": "roll back malaria (rbm)",
+          "highlight": false
+        },
+       {
+          "id": "60",
+          "name": "health",
+          "highlight": false
+        },
+       {
+          "id": "73",
+          "name": "africa",
+          "highlight": false
+        }
+     ],
+     "Clauses": [
+        {
+          "id": "308",
+          "document_id": "31",
+          "slug": "308-a-res-64-79-19-commitment-made",
+          "clause_number": "19",
+          "ClauseBody": {
+            "id": "308",
+            "root_clause_body_id": "226",
+            "ClauseInformationType": {
+              "id": "5",
+              "name": "Commitment made by states (national action)"
+            }
+         },
+         "clauseHistory": 0,
+          "score": "100.00",
+          "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>",
+          "content": "Expresses its concern about the increase in resistant strains of malaria in \nseveral regions of the world, and <em>calls upon</em> Member States, with support from the World Health Organization and other partners, to strengthen surveillance systems for drug and insecticide resistance and upon the World Health Organization to coordinate a global network for the monitoring of drug and insecticide resistance and to ensure that drug and insecticide testing is fully operational in order to enhance the use of current insecticide-and artemisinin-based combination therapies",
+          "Tags": [
+            {
+              "id": "11",
+              "name": "national drug policy",
+              "highlight": false
+            },
+           {
+              "id": "22",
+              "name": "medication",
+              "highlight": true
+            },
+           {
+              "id": "23",
+              "name": "malaria",
+              "highlight": false
+            },
+           {
+              "id": "24",
+              "name": "monitoring",
+              "highlight": false
+            },
+           {
+              "id": "29",
+              "name": "combination treatment",
+              "highlight": false
+            },
+           {
+              "id": "30",
+              "name": "insecticide",
+              "highlight": false
+            },
+           {
+              "id": "65",
+              "name": "international cooperation",
+              "highlight": false
+            }
+         ]
+       }
+     ],
+     "documentTitle": "2001â€“2010: Decade to Roll Back Malaria in Developing Countries, Particularly in <strong>Africa</strong>"
+    }
+ ],
+ "filters": {
+    "legal_value": [
+      {
+        "id": "non-legally binding",
+        "name": "non-legally binding",
+        "count": 17,
+        "isChecked": true
+      }
+   ],
+   "adoption_year": [
+      {
+        "id": 2003,
+        "name": 2003,
+        "count": 2,
+        "isChecked": true
+      },
+     {
+        "id": 2004,
+        "name": 2004,
+        "count": 2,
+        "isChecked": true
+      },
+     {
+        "id": 2005,
+        "name": 2005,
+        "count": 2,
+        "isChecked": true
+      },
+     {
+        "id": 2006,
+        "name": 2006,
+        "count": 2,
+        "isChecked": true
+      },
+     {
+        "id": 2007,
+        "name": 2007,
+        "count": 3,
+        "isChecked": true
+      },
+     {
+        "id": 2008,
+        "name": 2008,
+        "count": 3,
+        "isChecked": true
+      },
+     {
+        "id": 2009,
+        "name": 2009,
+        "count": 3,
+        "isChecked": true
+      }
+   ],
+   "organisation_id": [
+      {
+        "id": 2,
+        "name": "UNO GA",
+        "count": 17,
+        "isChecked": true
+      }
+   ],
+   "addressee_ids": [
+      {
+        "id": 6,
+        "name": "International Community",
+        "count": 6,
+        "isChecked": true
+      },
+     {
+        "id": 2,
+        "name": "All Member States",
+        "count": 3,
+        "isChecked": true
+      },
+     {
+        "id": 9,
+        "name": "UN Organ",
+        "count": 3,
+        "isChecked": true
+      },
+     {
+        "id": 7,
+        "name": "Private sector",
+        "count": 1,
+        "isChecked": true
+      }
+   ],
+   "documenttype_id": [
+      {
+        "id": 2,
+        "name": "GA resolution",
+        "count": 17,
+        "isChecked": true
+      }
+   ],
+   "information_type_id": [
+      {
+        "id": 4,
+        "name": "Other important information",
+        "count": 7,
+        "isChecked": true
+      },
+     {
+        "id": 6,
+        "name": "Commitment made by states (international action)",
+        "count": 6,
+        "isChecked": true
+      },
+     {
+        "id": 5,
+        "name": "Commitment made by states (national action)",
+        "count": 3,
+        "isChecked": true
+      },
+     {
+        "id": 3,
+        "name": "Request to actors other than states",
+        "count": 1,
+        "isChecked": true
+      }
+   ],
+   "operative_phrase_id": [
+      {
+        "id": 9,
+        "name": "Calls upon",
+        "count": 9,
+        "isChecked": true
+      },
+     {
+        "id": 22,
+        "name": "Recognizes",
+        "count": 7,
+        "isChecked": true
+      },
+     {
+        "id": 2,
+        "name": "Urges",
+        "count": 1,
+        "isChecked": true
+      }
+   ],
+   "tag_ids": [
+      {
+        "id": 22,
+        "name": "medication",
+        "count": 17,
+        "isChecked": true
+      },
+     {
+        "id": 23,
+        "name": "malaria",
+        "count": 17,
+        "isChecked": true
+      },
+     {
+        "id": 3,
+        "name": "treatment",
+        "count": 13,
+        "isChecked": true
+      },
+     {
+        "id": 39,
+        "name": "malaria control",
+        "count": 13,
+        "isChecked": true
+      },
+     {
+        "id": 4,
+        "name": "prevention",
+        "count": 12,
+        "isChecked": true
+      },
+     {
+        "id": 65,
+        "name": "international cooperation",
+        "count": 11,
+        "isChecked": true
+      },
+     {
+        "id": 30,
+        "name": "insecticide",
+        "count": 9,
+        "isChecked": true
+      },
+     {
+        "id": 49,
+        "name": "research",
+        "count": 9,
+        "isChecked": true
+      },
+     {
+        "id": 50,
+        "name": "vaccination",
+        "count": 7,
+        "isChecked": true
+      },
+     {
+        "id": 57,
+        "name": "pharmaceuticals",
+        "count": 7,
+        "isChecked": true
+      },
+     {
+        "id": 29,
+        "name": "combination treatment",
+        "count": 6,
+        "isChecked": true
+      },
+     {
+        "id": 37,
+        "name": "funding",
+        "count": 6,
+        "isChecked": true
+      },
+     {
+        "id": 31,
+        "name": "pregnancy",
+        "count": 5,
+        "isChecked": true
+      },
+     {
+        "id": 19,
+        "name": "drug pricing",
+        "count": 4,
+        "isChecked": true
+      },
+     {
+        "id": 11,
+        "name": "national drug policy",
+        "count": 3,
+        "isChecked": true
+      },
+     {
+        "id": 24,
+        "name": "monitoring",
+        "count": 3,
+        "isChecked": true
+      },
+     {
+        "id": 47,
+        "name": "access to treatment",
+        "count": 1,
+        "isChecked": true
+      }
+   ]
+ },
+ "facets": {
+    "legal_value": {
+      "unfolded": false,
+      "label": "Legal Value",
+      "allChecked": true
+    },
+   "adoption_year": {
+      "unfolded": false,
+      "label": "Adoption Year",
+      "allChecked": true
+    },
+   "organisation_id": {
+      "model": "Organisation",
+      "unfolded": true,
+      "label": "Organisation",
+      "allChecked": true
+    },
+   "addressee_ids": {
+      "model": "Addressee",
+      "unfolded": false,
+      "label": "Addressees",
+      "allChecked": true
+    },
+   "documenttype_id": {
+      "model": "DocumentType",
+      "unfolded": false,
+      "label": "Document Type",
+      "allChecked": true
+    },
+   "information_type_id": {
+      "model": "ClauseInformationType",
+      "unfolded": true,
+      "label": "Clause Information Type",
+      "allChecked": true
+    },
+   "operative_phrase_id": {
+      "model": "ClauseOperativePhrase",
+      "unfolded": false,
+      "label": "Clause Operative Phrase",
+      "allChecked": true
+    },
+   "tag_ids": {
+      "model": "Tag",
+      "unfolded": true,
+      "label": "Tags",
+      "allChecked": true
+    }
+ },
+  "totalResults": 7,
+  "page": 1,
+  "limit": false,
+  "status": "success",
+  "message": "ok"
+}
 }}}
 
 === to execute a clause search ===

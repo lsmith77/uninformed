@@ -15,6 +15,47 @@
  */
 class searchActions extends sfActions
 {
+    protected $facetConfig = array(
+        'legal_value' => array(
+            'unfolded' => false,
+            'label' => 'Legal Value',
+         ),
+        'adoption_year' => array(
+            'unfolded' => false,
+            'label' => 'Adoption Year',
+         ),
+        'organisation_id' => array(
+            'model' => 'Organisation',
+            'unfolded' => true,
+            'label' => 'Organisation',
+         ),
+        'addressee_ids' => array(
+            'model' => 'Addressee',
+            'unfolded' => false,
+            'label' => 'Addressees',
+         ),
+        'documenttype_id' => array(
+            'model' => 'DocumentType',
+            'unfolded' => false,
+            'label' => 'Document Type',
+         ),
+        'information_type_id' => array(
+            'model' => 'ClauseInformationType',
+            'unfolded' => true,
+            'label' => 'Clause Information Type',
+         ),
+        'operative_phrase_id' => array(
+            'model' => 'ClauseOperativePhrase',
+            'unfolded' => false,
+            'label' => 'Clause Operative Phrase',
+         ),
+        'tag_ids' => array(
+            'model' => 'Tag',
+            'unfolded' => true,
+            'label' => 'Tags',
+         ),
+    );
+
     protected function ensureXmlHttpRequest($request)
     {
         if (!sfConfig::get('sf_web_debug')
@@ -48,25 +89,13 @@ class searchActions extends sfActions
     protected function readParameters(sfWebRequest $request)
     {
         $this->query = $request->getGetParameter('q', '');
-        $this->tagMatch = $request->getGetParameter('tm', 'any');
+        $this->tagMatch = $request->getGetParameter('tm', 'all');
         $this->tags = (array) $request->getGetParameter('t');
         $this->latestClauseOnly = $request->getGetParameter('l');
         $this->page = (int) $request->getGetParameter('p', 0);
-    }
-
-
-    protected function searchFailure() {
-        $output = array(
-            'data' => array(),
-            'filters' => array(),
-            'facets' => array(),
-            'totalResults' => 0,
-            'page' => $this->page,
-            'limit' => 0,
-            'status' => 'success',
-            'message' => 'ok'
-        );
-        return $this->returnJson($output);
+        $this->documentCode = $request->getGetParameter('dc');     
+        $this->searchType = $request->getGetParameter('st');
+        $this->filters = (array) $request->getGetParameter('f');
     }
 
     public function executeIndex(sfWebRequest $request)
@@ -81,10 +110,32 @@ class searchActions extends sfActions
         $this->showHelp = false;
     }
 
+    public function executeUnifiedResultsPage(sfWebRequest $request)
+    {
+        $this->readParameters($request);
+    }
+
     public function executeSearchDocumentCode(sfWebRequest $request)
     {
         $term = $request->getGetParameter('term');
-        $addprefix = $request->getGetParameter('addprefix', false);
+
+        // TODO: hide the fact that some code's are used multiple times
+        $q = Doctrine_Query::create()
+            ->select("d.code AS label")
+            ->from('Document d')
+            ->where('d.code LIKE ?', array("$term%"))
+            ->limit(20)
+            ->orderBy('d.code')
+            ->groupBy('d.code');
+        $documents = $q->fetchArray();
+        array_unshift($documents, array('url' => '', 'label' => $term.'*'));
+
+        return $this->returnJson($documents);
+    }
+
+    public function executeSearchDocumentCodeOld(sfWebRequest $request)
+    {
+        $term = $request->getGetParameter('term');
 
         // TODO: hide the fact that some code's are used multiple times
         $q = Doctrine_Query::create()
@@ -98,10 +149,6 @@ class searchActions extends sfActions
 
         foreach ($documents as $key => $document) {
             $documents[$key]['url'] = sfContext::getInstance()->getController()->genUrl('@document?id='.$document['url']);
-        }
-
-        if ($addprefix) {
-            array_unshift($documents, array('url' => '', 'label' => $term.'*'));
         }
 
         return $this->returnJson($documents);
@@ -157,10 +204,14 @@ class searchActions extends sfActions
     public function executeResults(sfWebRequest $request)
     {
         $this->readParameters($request);
+        if (!isset($this->searchType)) {
+            return $this->generateOutput();
+        }
+
         $this->showHelp = false;
 
         $tags = array_keys($this->tags);
-        $this->filters = (array) $request->getGetParameter('f');
+        $documentCode = $this->documentCode;
         $limit = 20;
 
         $lucene = sfLucene::getInstance('Clause', null);
@@ -183,53 +234,19 @@ class searchActions extends sfActions
             $query = $this->query;
         }
 
-        if (empty($query) && empty($terms) && empty($tags)) {
-            return $this->searchFailure();
+        if (empty($query) && empty($terms) && empty($tags) && empty($documentCode)) {
+            return $this->generateOutput($this->searchType);
         }
 
-        $facets = array(
-            'legal_value' => array(
-                'unfolded' => false,
-                'label' => 'Legal Value',
-             ),
-            'adoption_year' => array(
-                'unfolded' => false,
-                'label' => 'Adoption Year',
-             ),
-            'organisation_id' => array(
-                'model' => 'Organisation',
-                'unfolded' => true,
-                'label' => 'Organisation',
-             ),
-            'addressee_ids' => array(
-                'model' => 'Addressee',
-                'unfolded' => false,
-                'label' => 'Addressees',
-             ),
-            'documenttype_id' => array(
-                'model' => 'DocumentType',
-                'unfolded' => false,
-                'label' => 'Document Type',
-             ),
-            'information_type_id' => array(
-                'model' => 'ClauseInformationType',
-                'unfolded' => true,
-                'label' => 'Clause Information Type',
-             ),
-            'operative_phrase_id' => array(
-                'model' => 'ClauseOperativePhrase',
-                'unfolded' => false,
-                'label' => 'Clause Operative Phrase',
-             ),
-            'tag_ids' => array(
-                'model' => 'Tag',
-                'unfolded' => true,
-                'label' => 'Tags',
-             ),
-        );
+        $facets = $this->facetConfig;
 
-        $criteria->setLimit($limit+1);
-        $criteria->setOffset($this->page*$limit);
+        if ($this->searchType === 'document') {
+            $this->page = 1;
+            $limit = false;
+        } else {
+            $criteria->setLimit($limit+1);
+            $criteria->setOffset($this->page*$limit);
+        }
 
         if (!empty($tags)) {
             if (!$this->checkArrayOfInteger($tags)) {
@@ -246,6 +263,14 @@ class searchActions extends sfActions
 
         if ($this->latestClauseOnly) {
             $criteria->addField('+is_latest_clause', 'true', 'AND');
+        }
+
+        if (!empty($documentCode)) {
+            if (substr($documentCode, -1, 1) === '*') {
+                $criteria->addField('+document_code_prefix', substr($documentCode, 0, -1), 'AND');
+            } else {
+                $criteria->addField('+document_code', $documentCode, 'AND');
+            }
         }
 
         if (!empty($query)) {
@@ -351,6 +376,7 @@ class searchActions extends sfActions
             }
         }
 
+        $numFound = 0;
         // extract the data out of the result objects
         $data = $results->toArray();
         if ($data) {
@@ -403,7 +429,7 @@ class searchActions extends sfActions
                     ->orderBY('FIELD(c.id, '.implode(',', array_keys($clauses)).')');
                 $data = $q->fetchArray();
 
-                $documents = array();
+                $document_ids = array();
                 foreach ($data as $key => $clause) {
                     $root_clause_body_id = isset($clause['ClauseBody']['root_clause_body_id'])
                         ? $clause['ClauseBody']['root_clause_body_id']
@@ -419,7 +445,7 @@ class searchActions extends sfActions
                     } else {
                         $data[$key]['clauseHistory'] = 0;
                     }
-                    $documents[] = $data[$key]['document_id'];
+                    $document_ids[] = $data[$key]['document_id'];
                     $data[$key]['score'] = $clauses[$clause['id']]['score'];
                     $data[$key]['documentTitle'] = $clauses[$clause['id']]['documentTitle'];
                     $data[$key]['content'] = $clauses[$clause['id']]['content'];
@@ -430,7 +456,7 @@ class searchActions extends sfActions
                         ->innerJoin('t.ClauseBodyTag cbt')
                         ->where('cbt.clause_body_id = ?', array($clause['ClauseBody']['id']));
 
-                    $data[$key]['Tags'] = $q->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
+                    $data[$key]['Tags'] = $q->fetchArray();;
                     foreach ($data[$key]['Tags'] as $tagkey => $tag) {
                         $data[$key]['Tags'][$tagkey]['highlight'] = in_array($tag['id'], $tags);
                     }
@@ -440,10 +466,10 @@ class searchActions extends sfActions
                     ->select("CONCAT(d.id, '-', d.slug) AS slug, d.code, d.organisation_id, d.is_ratified, d.adoption_date, dt.name, dt.legal_value")
                     ->from('Document d INDEXBY d.id')
                     ->innerJoin('d.DocumentType dt')
-                    ->whereIn('d.id', $documents);
+                    ->whereIn('d.id', $document_ids);
                 $documents = $q->fetchArray();
+
                 foreach ($documents as $key => $document) {
-                    $documents[$key]['slug'] = $documents[$key]['id'].'-'.$documents[$key]['slug'];
                     if (empty($document['organisation_id'])) {
                         $documents[$key]['Organisation']['name'] = "Other";
                         $documents[$key]['isSCResolution'] = false;
@@ -478,25 +504,55 @@ class searchActions extends sfActions
                         $documents[$key]['isSCResolution'] = false;
                     }
                     $documents[$key]['Organisation']['name'] = "$organisation $main_organ";
+
+
+                    if ($this->searchType === 'document') {
+                        $q = Doctrine_Query::create()
+                            ->select('t.name')
+                            ->from('Tag t')
+                            ->innerJoin('t.DocumentTag dt')
+                            ->where('dt.document_id = ?', $key);
+                        $documents[$key]['Tags'] = $q->fetchArray();
+                        foreach ($documents[$key]['Tags'] as $tagkey => $tag) {
+                            $documents[$key]['Tags'][$tagkey]['highlight'] = in_array($tag['id'], $tags);
+                        }
+                    }
                 }
 
-                foreach ($data as $key => $clause) {
-                    $data[$key]['Document'] = $documents[$clause['document_id']];
+                if ($this->searchType === 'document') {
+                    foreach ($data as $key => $clause) {
+                        $documents[$clause['document_id']]['Clauses'][] = $data[$key];
+                        $documents[$clause['document_id']]['documentTitle'] = $data[$key]['documentTitle'];
+                    }
+
+                    $data = array_values($documents);
+                    $numFound = count($documents);                    
+                    // TODO: how to recompute the filter counts?
+                } else {
+                    foreach ($data as $key => $clause) {
+                        $data[$key]['Document'] = $documents[$clause['document_id']];
+                    }
+                    $numFound = (int)$results->getRawResult()->response->numFound;
                 }
             }
         }
 
+        return $this->generateOutput($this->searchType, $data, $filters, $facets, $numFound, $limit);
+    }
+
+    protected function generateOutput($searchType = false, $data = array(), $filters = array(), $facets = array(), $numFound = 0, $limit = null)
+    {
         $output = array(
+            'searchType' => $searchType,
             'data' => $data,
             'filters' => $filters,
             'facets' => $facets,
-            'totalResults' => (int)$results->getRawResult()->response->numFound,
+            'totalResults' => (int)$numFound,
             'page' => $this->page,
             'limit' => $limit,
             'status' => 'success',
             'message' => 'ok'
         );
-
         return $this->returnJson($output);
     }
 }

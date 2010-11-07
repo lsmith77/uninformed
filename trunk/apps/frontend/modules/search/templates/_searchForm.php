@@ -86,8 +86,8 @@ Matching
 <fieldset>
 <legend>Search documents</legend>
 <p class="documentCode">
-    <label for="documentCode">Document code</label><br />
-    <input type="text" name="" id="documentCode" />
+    <label for="documentCodeOld">Document code</label><br />
+    <input type="text" name="" id="documentCodeOld" />
 </p>
 <p class="documentCodeText">
     <span class="helptext">Enter text to search document code, select to load the given document.</span>

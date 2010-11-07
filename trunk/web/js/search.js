@@ -90,6 +90,15 @@ $(function(){
         source: '/search/searchDocumentCode',
         select: function(e, ui) {
             e.preventDefault();
+            $('#documentCode').attr.('value', ui.item.label);
+        }
+    });
+
+    // autocomplete
+    $('#documentCodeOld').autocomplete({
+        source: '/search/searchDocumentCodeOld',
+        select: function(e, ui) {
+            e.preventDefault();
             if (ui.item.url.replace(/ /, '') !== '') { location.href = ui.item.url; }
         }
     });

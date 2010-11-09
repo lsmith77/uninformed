@@ -128,7 +128,9 @@ class searchActions extends sfActions
             ->orderBy('d.code')
             ->groupBy('d.code');
         $documents = $q->fetchArray();
-        array_unshift($documents, array('url' => '', 'label' => $term.'*'));
+        if (!empty($documents)) {
+            array_unshift($documents, array('url' => '', 'label' => $term.'*'));
+        }
 
         return $this->returnJson($documents);
     }

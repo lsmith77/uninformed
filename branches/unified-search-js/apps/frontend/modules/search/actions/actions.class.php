@@ -164,7 +164,8 @@ class searchActions extends sfActions
 
         $criteria = new sfLuceneFacetsCriteria;
 
-        $criteria->addFacetField('autosuggest');
+        $facet_field = strpos($term, ' ') === false ? 'autosuggest' : 'autosuggest_shingle';
+        $criteria->addFacetField($facet_field);
         $criteria->add('*:*', 'AND', true);
         $criteria->addParam('rows', '1');
         $criteria->addParam('facet.prefix', $term);
@@ -174,7 +175,7 @@ class searchActions extends sfActions
         $criteria->addParam('facet.sort', true);
 
         $results = $lucene->friendlyFind($criteria);
-        $terms = $results->getFacetField('autosuggest');
+        $terms = $results->getFacetField($facet_field);
         asort($terms);
         $terms = array_reverse($terms, true);
         $response = array();

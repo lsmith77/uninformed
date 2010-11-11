@@ -1,0 +1,21 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           ClauseReservation
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              clausereservation
+    plural:                clausereservations
+    route_prefix:          clause_reservation
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    ~
+      filter:  ~
+      form:    ~
+      edit:    ~
+      new:     ~

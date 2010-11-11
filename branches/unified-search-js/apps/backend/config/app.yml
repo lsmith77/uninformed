@@ -1,0 +1,71 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+all:
+  commentAdmin:
+    max_length:     50
+  vjCommentPlugin:
+    guardbind: true
+    restricted: true
+  sfApplyPlugin:
+    from:
+      email: "noreply@resolutionfinder.org"
+      fullname: "resolutionfinder.org"
+  sf_guard_plugin:
+    remember_cookie_name:   UNinformedorgRememberMe
+  sf_admin_dash:
+    web_dir:                      /sfAdminDashPlugin
+    image_dir:                    /sfAdminDashPlugin/images/icons/
+    default_image:                config.png
+    resize_mode:                  thumbnail
+    site:                         resolutionfinder.org
+    include_path:                 true
+    include_jquery_no_conflict:   true
+    logout:                       true
+    login_route:                  @sf_guard_signin
+    logout_route:                 @sf_guard_signout
+    categories:
+      "Documents & Clauses":
+        credentials:      [admin]
+        items:
+          Documents:
+            url:    document
+          Clauses:
+            url:    clause
+          "Document Reservation":
+            url:    document_reservation
+          "Clauses Reservation":
+            url:    clause_reservation
+          "Document Doc. Relations":
+            url:    document_document_relation
+          "Document Clause Relations":
+            url:    document_clause_relation
+          "Clause Clause Relations":
+            url:    clause_clause_relation
+          "Document Votes":
+            url:    vote
+          "Excelfile Upload":
+            url:    excel_file
+      "Meta Data":
+        credentials:      [admin]
+        items:
+          Comments:
+            url:    commentAdmin
+          "Comment Moderation":
+            url:    commentReportAdmin
+          Addressees:
+            url:    addressee
+          Organisations:
+            url:    organisation
+          Tags:
+            url:    tag
+      "User Management":
+        credentials:      [superadmin]
+        items:
+          User:
+            url:    sf_guard_user
+          Groups:
+            url:    sf_guard_group
+          Permissions:
+            url:    sf_guard_perm

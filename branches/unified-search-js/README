@@ -1,0 +1,58 @@
+See: http://code.google.com/p/uninformed
+
+Requires PHP 5.3.x and Apache with mod_rewrite.
+
+Install just like any standard symfony application:
+
+<VirtualHost *:80>
+  ServerName uninformed.lo
+  DocumentRoot "/foo/uninformed/trunk/web"
+  DirectoryIndex index.php
+  <Directory "/foo/uninformed/trunk/web">
+    AllowOverride All
+    Allow from All
+  </Directory>
+
+  Alias /sf /foo/uninformed/trunk/lib/vendor/symfony/data/web/sf
+  <Directory "/foo/uninformed/trunk/lib/vendor/symfony/data/web/sf">
+    AllowOverride All
+    Allow from All
+  </Directory>
+</VirtualHost>
+
+Remember to also update your hosts file!
+
+Make the cache and log directories writeable for both apache and the command line:
+php symfony project:permissions
+php symfony plugin:publish-assets
+
+Load the database schema (ensure that the credentials in config/databases.yml are correct):
+php symfony doctrine:build --all --and-load
+
+By loading data/sql/example.sql the DB can be populated with some example data.
+
+In order to get the search going you need to start solr
+See: http://svn.symfony-project.com/plugins/sfSolrPlugin/branches/sf1.2/README
+
+php symfony lucene:create-solr-config frontend
+php symfony lucene:service frontend start (for windows see the sfSolrPlugin README)
+php symfony lucene:update-model-system --model=Clause --delete=true frontend Clause en
+
+Changes to images/css (this might require increasing the memory limit to 128M or 256M):
+php symfony sw:combine frontend
+
+#increase the version in app.yml
+  swToolbox:
+    swCombine:
+      version: 2
+
+To deploy to the server:
+
+php symfony project:deploy production --go
+
+On the server:
+cd /var/www/un-informed.org
+php symfony cc
+php symfony project:disable prod
+php symfony doctrine:migrate
+php symfony project:enable prod

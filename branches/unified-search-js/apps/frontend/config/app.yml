@@ -1,0 +1,19 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+all:
+  gravatar:
+    enabled:        false
+  vjCommentPlugin:
+    guardbind: true
+    restricted: true
+  sfApplyPlugin:
+    from:
+      email: "noreply@resolutionfinder.org"
+      fullname: "resolutionfinder.org"
+  sf_guard_plugin:
+    remember_cookie_name:   resolutionfinderorgRememberMe
+  swToolbox:
+    swCombine:
+      version: 11

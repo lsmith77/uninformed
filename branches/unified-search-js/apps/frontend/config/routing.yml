@@ -1,0 +1,104 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: search, action: index }
+
+search:
+  url:   /
+  param: { module: search, action: index }
+
+unified:
+  url:   /unified
+  param: { module: search, action: unifiedResultsPage }
+
+searchOldIndex:
+  url:   /oldindex
+  param: { module: search, action: index }
+
+help:
+  url:   /help
+  param: { module: default, action: help }
+
+aboutus:
+  url:   /aboutus
+  param: { module: default, action: aboutus }
+
+news:
+  url:   /news
+  param: { module: default, action: news }
+
+unifiedSearch:
+  url:   /search/unifiedResults
+  param: { module: search, action: unifiedResultsPage }
+
+clauseSearch:
+  url:   /search/:action
+  param: { module: search, action: clauseResultsPage }
+
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+apply:
+  url:  /apply
+  param: { module: sfApply, action: apply }
+
+reset:
+  url: /reset
+  param: { module: sfApply, action: reset }
+
+resetCancel:
+  url: /resetCancel
+  param: { module: sfApply, action: resetCancel }
+
+resetRequest:
+  url: /reset-request
+  param: { module: sfApply, action: resetRequest }
+
+validate:
+  url: /confirm/:validate
+  param: { module: sfApply, action: confirm }
+
+settings:
+  url: /settings
+  param: { module: sfApply, action: settings }
+
+sf_guard_password:
+  url: /reset-request
+  param: { module: sfApply, action: resetRequest }
+
+bookmark:
+  url:     /bookmark
+  class: sfDoctrineRoute
+  options: { model: Bookmark, type: object }
+  param: { module: bookmark, action: index }
+
+bookmark_action:
+  url:     /bookmark/:action/:type/:id
+  param:   { module: bookmark }
+  requirements:
+    type: document|clause
+    id: \d+-?.*
+
+clause:
+  url:     /clause/:id/*
+  param:   { module: clause, action: index }
+  requirements:
+    sf_method: [get, post]
+
+document:
+  url:     /document/:id/*
+  param:   { module: document, action: index }
+  requirements:
+    sf_method: [get, post]
+
+about:
+  url:     /about
+  param: { module: about, action: index }

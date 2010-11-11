@@ -1,0 +1,25 @@
+# Project files
+/cache
+/log
+/web/*_dev.php
+/web/uploads/*
+
+/data/solr_index/*
+/web/.htaccess
+
+/config/databases.yml
+/data/sql/schema.sql
+
+Thumbs.db
+.DS_Store
+
+# SCM files
+.arch-params
+.bzr
+_darcs
+.git
+.hg
+.monotone
+.svn
+CVS
+

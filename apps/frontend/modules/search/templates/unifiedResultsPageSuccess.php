@@ -1,14 +1,22 @@
+<?php use_stylesheet('/css/jquery.autoSuggest.css'); ?>
+<?php use_stylesheet('/css/unifiedSearchForm.css'); ?>
+
+<?php use_javascript('/js/jquery.autoSuggest.js'); ?>
+<?php use_javascript('/js/jquery.placeholder.js'); ?>
+<?php use_javascript('/js/unifiedSearchForm.js'); ?>
+
 <h1>Search for clauses</h1>
 
 <div id="searchIndicator"><span>Updating results..</span></div>
 
 <div class="search">
-    <div class="form">
-        <h2>Update your search</h2>
-        <?php include_partial('search/unifiedSearchForm', $sf_data); ?>
-    </div>
     <div class="filters">
     </div>
+</div>
+
+<div style="margin-left:280px; padding: 10px;">
+    <h2>Update your search</h2>
+    <?php include_partial('search/unifiedSearchForm', $sf_data); ?>
 </div>
 
 <div class="results">

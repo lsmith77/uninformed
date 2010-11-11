@@ -1,0 +1,52 @@
+div.query {
+    width: 660px;
+}
+
+div.query #us_query {
+    width: 652px;
+}
+
+div.tags {
+    float: left;
+    width: 330px;
+}
+
+div.documentCode {
+    float: left;
+    padding-left: 10px;
+    width: 120px;
+}
+
+div.documentCode #us_documentCode {
+    width: 112px;
+}
+
+div.searchButtons {
+    float: left;
+    padding-left: 10px;
+    width: 190px;
+}
+
+/* show/hide tooltips depending on body class */
+
+body .tooltip {
+    display: none;
+}
+
+body.us_help .tooltip {
+    display: inline;
+}
+
+/* jquery.autoSuggest.js */
+
+ul.as-selections li.as-selection-item a.as-close {
+    text-decoration: none;
+}
+
+/* jquery.placeholder.js */
+
+.placeholder {color: #999;}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #999999;
+}

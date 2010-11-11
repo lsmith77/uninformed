@@ -250,6 +250,17 @@
       </analyzer>
     </fieldType>
 
+
+    <fieldType name="shingle" class="solr.TextField" positionIncrementGap="100" stored="false" multiValued="true">
+      <analyzer>
+        <tokenizer class="solr.StandardTokenizerFactory" />
+        <filter class="solr.LowerCaseFilterFactory" />
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+        <filter class="solr.ShingleFilterFactory"
+          maxShingleSize="3" outputUnigrams="true" outputUnigramIfNoNgram="false" />
+      </analyzer>
+    </fieldType>
+
     <fieldType name="text_lc" class="solr.TextField" positionIncrementGap="100">
       <analyzer>
         <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -286,6 +297,7 @@
   <field name="sfl_all"      type="text"   indexed="true"  stored="false"  multiValued="true" required="false"/>
 
   <field name="autosuggest"      type="text_lc"   indexed="true"  stored="false"  multiValued="true" required="false"/>
+  <field name="autosuggest_shingle" type="shingle"   indexed="true"  stored="false"  multiValued="true" required="false"/>
   <field name='document_code_prefix' type='ngramstring' stored='false' multiValued='false' required='false'  />
 
   <!-- merged model information into one document -->
@@ -309,5 +321,7 @@
   <copyField source="document_code" dest="document_code_prefix"/>
   <copyField source="document_title" dest="autosuggest"/>
   <copyField source="content" dest="autosuggest"/>
+  <copyField source="document_title" dest="autosuggest_shingle"/>
+  <copyField source="content" dest="autosuggest_shingle"/>
 
 </schema>

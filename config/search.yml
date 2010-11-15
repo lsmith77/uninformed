@@ -13,6 +13,11 @@ Clause:
           indexed: false
           stored: true
           required: true
+        document_id:
+          type: int
+          indexed: true
+          stored: true
+          required: true
         is_latest_clause:
           type: boolean
           required: true

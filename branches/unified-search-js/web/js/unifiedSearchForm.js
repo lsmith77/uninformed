@@ -53,7 +53,8 @@
             select: function(e, ui) {
                 e.preventDefault();
                 var lastTermIndex = indexOfLastTerm(this.value);
-                this.value = this.value.substring(0, lastTermIndex) + ui.item.value + ' ';
+                var isQuoted = this.value.charAt(Math.max(lastTermIndex - 1, 0)) == '"';
+                this.value = this.value.substring(0, lastTermIndex) + ui.item.value + (isQuoted ? '" ' : ' ');
             },
             source: function(request, response) {
                 var term = extractLastTerm(request.term);

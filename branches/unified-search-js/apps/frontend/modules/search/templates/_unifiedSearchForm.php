@@ -10,17 +10,11 @@
 <div class="tags">
     <input type="text" name="" id="us_tags" />
     <span class="tooltip">?<span>Enter text to see list of available tags and choose one or several tags.</span></span>
-    <?php
-        /*
-        foreach ($tags as $id => $tag) {
-            echo '<li><a><img src="/images/close.gif" /></a> '.$tag.'
-            <input type="hidden" name="t['.$id.']" value="'.$tag.'" /></li>';
-        }
-        if (!count($tags)) {
-            echo '<li style="display: none"></li>';
-        }
-        */
-    ?>
+    <div id="us_tags_input_container" style="display:none;">
+        <?php foreach ($tags as $value => $name): ?>
+            <input type="hidden" name="t[<?php echo escape_once($value); ?>]" value="<?php echo escape_once($name); ?>" />
+        <?php endforeach; ?>
+    </div>
 </div>
 <div class="documentCode">
     <input type="text" name="dc" id="us_documentCode" value="<?php echo $documentCode ?>" placeholder="Document Code" />

@@ -8,15 +8,65 @@
     toggleBodyHelpClass();
 
     // Enable autosuggest plugin for tags
-    $('#us_tags').autoSuggest('/search/searchTags', {
-        asHtmlID: 'us_tags',
-        minChars: 2,
-        queryParam: 'term',
-        searchObjProps: 'label',
-        selectedItemProp: 'label',
-        selectedValuesProp: 'id',
-        startText: 'Tags'
-    });
+    (function() {
+        var $tagsContainer = $('#us_tags_input_container');
+
+        function getPrefillData() {
+            var prefillTags = [];
+            $('input:hidden', $tagsContainer).each(function(){
+                var tagId = this.name.slice(2, -1);
+                if (tagId) {
+                    prefillTags.push({ value: tagId, name: this.value });
+                }
+            });
+            return prefillTags;
+        }
+
+        function getTagIdForSelectionItem(selectionItem) {
+            var index = selectionItem.index();
+            if (index != -1) {
+                return $('#as-values-us_tags').val().split(',')[index + 1];
+            }
+        }
+
+        function getTagNameForSelectionItem(selectionItem) {
+            return selectionItem[0].lastChild.textContent;
+        }
+
+        function selectionAdded(elem) {
+            var tagId = getTagIdForSelectionItem(elem);
+            if (typeof(tagId) == 'string' && tagId.match(/^\d+$/)) {
+                $('<input type="hidden" />')
+                    .attr('name', 't['+tagId+']')
+                    .attr('value', getTagNameForSelectionItem(elem))
+                    .appendTo($tagsContainer);
+                elem.data('tag-id', tagId);
+            }
+        }
+
+        function selectionRemoved(elem) {
+            var tagId = elem.data('tag-id');
+            if (tagId) {
+                $('input[name="t['+tagId+']"]', $tagsContainer).remove();
+            }
+            elem.remove();
+        }
+
+        $('#us_tags').autoSuggest('/search/searchTags', {
+            asHtmlID: 'us_tags',
+            minChars: 2,
+            neverSubmit: true,
+            preFill: getPrefillData(),
+            queryParam: 'term',
+            searchObjProps: 'label',
+            selectedItemProp: 'label',
+            selectedValuesProp: 'id',
+            selectionAdded: selectionAdded,
+            selectionRemoved: selectionRemoved,
+            startText: 'Tags',
+            usePlaceholder: true
+        });
+    })();
 
     // Enable autocomplete for query
     (function() {

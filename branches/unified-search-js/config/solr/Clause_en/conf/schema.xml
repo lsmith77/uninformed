@@ -250,6 +250,7 @@
       </analyzer>
     </fieldType>
 
+
     <fieldType name="shingle" class="solr.TextField" positionIncrementGap="100" stored="false" multiValued="true">
       <analyzer>
         <tokenizer class="solr.StandardTokenizerFactory" />
@@ -300,20 +301,22 @@
   <field name='document_code_prefix' type='ngramstring' stored='false' multiValued='false' required='false'  />
 
   <!-- merged model information into one document -->
-  <field name='id' type='int' stored='true' multiValued='false' required='true'  />
-  <field name='document_id' type='int' stored='true' multiValued='false' required='true'  />
-  <field name='is_latest_clause' type='boolean' stored='false' multiValued='false' required='true'  />
-  <field name='document_title' type='text' stored='true' multiValued='false' required='false'  />
-  <field name='document_code' type='lcstring' stored='false' multiValued='false' required='false'  />
-  <field name='adoption_year' type='int' stored='false' multiValued='false' required='false'  />
-  <field name='tag_ids' type='int' stored='false' multiValued='true' required='false' omitNorms='false' />
-  <field name='addressee_ids' type='int' stored='false' multiValued='true' required='false'  />
-  <field name='content' type='text' stored='true' multiValued='false' required='false'  />
-  <field name='documenttype_id' type='int' stored='false' multiValued='false' required='false'  />
-  <field name='operative_phrase_id' type='int' stored='false' multiValued='false' required='false'  />
-  <field name='information_type_id' type='int' stored='false' multiValued='false' required='false'  />
-  <field name='organisation_id' type='int' stored='false' multiValued='false' required='false'  />
-  <field name='legal_value' type='string' stored='false' multiValued='false' required='false'  />
+  <field name="id" type="int" stored="true" multiValued="false" required="true"/>
+  <field name="is_latest_clause" type="boolean" stored="false" multiValued="false" required="true"/>
+  <field name="document_title" type="text" stored="true" multiValued="false" required="false"/>
+  <field name="document_code" type="lcstring" stored="false" multiValued="false" required="false"/>
+  <field name="adoption_year" type="int" stored="false" multiValued="false" required="false"/>
+  <field name="tag_ids" type="int" stored="false" multiValued="true" required="false" omitNorms="false"/>
+  <field name="addressee_ids" type="int" stored="false" multiValued="true" required="false"/>
+  <field name="content" type="text" stored="true" multiValued="false" required="false"/>
+  <field name="documenttype_id" type="int" stored="false" multiValued="false" required="false"/>
+  <field name="operative_phrase_id" type="int" stored="false" multiValued="false" required="false"/>
+  <field name="information_type_id" type="int" stored="false" multiValued="false" required="false"/>
+  <field name="organisation_id" type="int" stored="false" multiValued="false" required="false"/>
+  <field name="legal_value" type="string" stored="false" multiValued="false" required="false"/>
+
+  
+
  </fields>
 
  <!-- field to use to determine and enforce document uniqueness. -->
@@ -329,20 +332,19 @@
  -->
   <solrQueryParser defaultOperator="OR"/>
 
-  <copyField source='id' dest='sfl_all' />
-  <copyField source='document_id' dest='sfl_all' />
-  <copyField source='is_latest_clause' dest='sfl_all' />
-  <copyField source='document_title' dest='sfl_all' />
-  <copyField source='document_code' dest='sfl_all' />
-  <copyField source='adoption_year' dest='sfl_all' />
-  <copyField source='tag_ids' dest='sfl_all' />
-  <copyField source='addressee_ids' dest='sfl_all' />
-  <copyField source='content' dest='sfl_all' />
-  <copyField source='documenttype_id' dest='sfl_all' />
-  <copyField source='operative_phrase_id' dest='sfl_all' />
-  <copyField source='information_type_id' dest='sfl_all' />
-  <copyField source='organisation_id' dest='sfl_all' />
-  <copyField source='legal_value' dest='sfl_all' />
+  <copyField source="id" dest="sfl_all"/>
+  <copyField source="is_latest_clause" dest="sfl_all"/>
+  <copyField source="document_title" dest="sfl_all"/>
+  <copyField source="document_code" dest="sfl_all"/>
+  <copyField source="adoption_year" dest="sfl_all"/>
+  <copyField source="tag_ids" dest="sfl_all"/>
+  <copyField source="addressee_ids" dest="sfl_all"/>
+  <copyField source="content" dest="sfl_all"/>
+  <copyField source="documenttype_id" dest="sfl_all"/>
+  <copyField source="operative_phrase_id" dest="sfl_all"/>
+  <copyField source="information_type_id" dest="sfl_all"/>
+  <copyField source="organisation_id" dest="sfl_all"/>
+  <copyField source="legal_value" dest="sfl_all"/>
   <copyField source="document_code" dest="document_code_prefix"/>
   <copyField source="document_title" dest="autosuggest"/>
   <copyField source="content" dest="autosuggest"/>

@@ -203,7 +203,7 @@ class Clause extends BaseClause
     }
 
     public function getOrganisationIdSolr() {
-        return (int)$this->getOrganisationId();
+        return $this->_get('Document')->getOrganisationIdSolr();
     }
 
     public function getLegalValue() {

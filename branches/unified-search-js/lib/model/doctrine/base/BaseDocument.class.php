@@ -21,6 +21,7 @@
  * @property integer $organisation_id
  * @property integer $documenttype_id
  * @property string $document_url
+ * @property boolean $is_latest_document
  * @property enum $status
  * @property Document $DocumentParent
  * @property Organisation $Organisation
@@ -49,6 +50,7 @@
  * @method integer             getOrganisationId()           Returns the current record's "organisation_id" value
  * @method integer             getDocumenttypeId()           Returns the current record's "documenttype_id" value
  * @method string              getDocumentUrl()              Returns the current record's "document_url" value
+ * @method boolean             getIsLatestDocument()         Returns the current record's "is_latest_document" value
  * @method enum                getStatus()                   Returns the current record's "status" value
  * @method Document            getDocumentParent()           Returns the current record's "DocumentParent" value
  * @method Organisation        getOrganisation()             Returns the current record's "Organisation" value
@@ -76,6 +78,7 @@
  * @method Document            setOrganisationId()           Sets the current record's "organisation_id" value
  * @method Document            setDocumenttypeId()           Sets the current record's "documenttype_id" value
  * @method Document            setDocumentUrl()              Sets the current record's "document_url" value
+ * @method Document            setIsLatestDocument()         Sets the current record's "is_latest_document" value
  * @method Document            setStatus()                   Sets the current record's "status" value
  * @method Document            setDocumentParent()           Sets the current record's "DocumentParent" value
  * @method Document            setOrganisation()             Sets the current record's "Organisation" value
@@ -160,6 +163,10 @@ abstract class BaseDocument extends MyBaseRecord
         $this->hasColumn('document_url', 'string', 500, array(
              'type' => 'string',
              'length' => 500,
+             ));
+        $this->hasColumn('is_latest_document', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => true,
              ));
         $this->hasColumn('status', 'enum', null, array(
              'type' => 'enum',

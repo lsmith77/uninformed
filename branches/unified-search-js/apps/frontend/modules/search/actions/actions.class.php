@@ -56,6 +56,26 @@ class searchActions extends sfActions
          ),
     );
 
+    protected $facets = array(
+        'document' => array(
+            'legal_value',
+            'adoption_year',
+            'organisation_id',
+            'documenttype_id',
+            'tag_ids',
+        ),
+        'clause' => array(
+            'legal_value',
+            'adoption_year',
+            'organisation_id',
+            'addressee_ids',
+            'documenttype_id',
+            'information_type_id',
+            'operative_phrase_id',
+            'tag_ids',
+        ),
+    );
+
     protected function ensureXmlHttpRequest($request)
     {
         if (!sfConfig::get('sf_web_debug')
@@ -94,7 +114,7 @@ class searchActions extends sfActions
         $this->latestClauseOnly = $request->getGetParameter('l');
         $this->page = (int) $request->getGetParameter('p', 0);
         $this->documentCode = $request->getGetParameter('dc');     
-        $this->searchType = $request->getGetParameter('st');
+        $this->searchType = $request->getGetParameter('st', 'clause');
         $this->filters = (array) $request->getGetParameter('f');
     }
 
@@ -207,7 +227,7 @@ class searchActions extends sfActions
     public function executeResults(sfWebRequest $request)
     {
         $this->readParameters($request);
-        if (!isset($this->searchType)) {
+        if (!isset($this->searchType) && !in_array($this->searchType, array('clause', 'document'))) {
             return $this->generateOutput();
         }
 
@@ -217,7 +237,7 @@ class searchActions extends sfActions
         $documentCode = $this->documentCode;
         $limit = 20;
 
-        $lucene = sfLucene::getInstance('Clause', null);
+        $lucene = sfLucene::getInstance(ucfirst($this->searchType), null);
 
         $criteria = new sfLuceneFacetsCriteria;
 
@@ -241,15 +261,13 @@ class searchActions extends sfActions
             return $this->generateOutput($this->searchType);
         }
 
-        $facets = $this->facetConfig;
-
-        if ($this->searchType === 'document') {
-            $this->page = 1;
-            $limit = false;
-        } else {
-            $criteria->setLimit($limit+1);
-            $criteria->setOffset($this->page*$limit);
+        $facets = array();
+        foreach ($this->facets[$this->searchType] as $facet) {
+            $facets[$facet] = $this->facetConfig[$facet];
         }
+
+        $criteria->setLimit($limit+1);
+        $criteria->setOffset($this->page*$limit);
 
         if (!empty($tags)) {
             if (!$this->checkArrayOfInteger($tags)) {
@@ -395,10 +413,10 @@ class searchActions extends sfActions
                 }
             }
 
-            $clauses = array();
+            $metadata = array();
             foreach ($data as $item) {
-                $clause = $item->getField('id');
-                if (!empty($clause)) {
+                $id = $item->getField('id');
+                if (!empty($id)) {
                     $sfl_guid = $item->getField('sfl_guid');
                     $score = $item->getField('score');
                     if (isset($highlighting[$sfl_guid['value']]['document_title'])) {
@@ -413,7 +431,7 @@ class searchActions extends sfActions
                         $content = $item->getField('content');
                         $content = $content['value'];
                     }
-                    $clauses[$clause['value']] = array(
+                    $metadata[$id['value']] = array(
                         'documentTitle' => $documentTitle,
                         'content' => $content,
                         'score' => number_format(100*$score['value']/$maxScore, 2),
@@ -422,46 +440,50 @@ class searchActions extends sfActions
             }
 
             $data = array();
-            if (!empty($clauses)) {
-                $q = Doctrine_Query::create()
-                    ->select("CONCAT(c.id, '-', c.slug) AS slug, c.document_id, TRIM(CONCAT(c.clause_number, ' ', COALESCE(c.clause_number_information, ''), ' ', COALESCE(c.clause_number_subparagraph, ''))) AS clause_number, cb.id, cb.root_clause_body_id, cit.name")
-                    ->from('clause c')
-                    ->innerJoin('c.ClauseBody cb')
-                    ->leftJoin('cb.ClauseInformationType cit')
-                    ->whereIn('c.id', array_keys($clauses))
-                    ->orderBY('FIELD(c.id, '.implode(',', array_keys($clauses)).')');
-                $data = $q->fetchArray();
-
-                $document_ids = array();
-                foreach ($data as $key => $clause) {
-                    $root_clause_body_id = isset($clause['ClauseBody']['root_clause_body_id'])
-                        ? $clause['ClauseBody']['root_clause_body_id']
-                        : $clause['ClauseBody']['id'];
-                    if ($this->latestClauseOnly) {
-                        $q = Doctrine_Query::create()
-                            ->select('COUNT(c.id)')
-                            ->from('Clause c')
-                            ->innerJoin('c.ClauseBody cb')
-                            ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id));
-                        $data[$key]['clauseHistory'] = $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
-                        $data[$key]['clauseHistory'] = $data[$key]['clauseHistory'] > 1 ? 1 : 0;
-                    } else {
-                        $data[$key]['clauseHistory'] = 0;
-                    }
-                    $document_ids[] = $data[$key]['document_id'];
-                    $data[$key]['score'] = $clauses[$clause['id']]['score'];
-                    $data[$key]['documentTitle'] = $clauses[$clause['id']]['documentTitle'];
-                    $data[$key]['content'] = $clauses[$clause['id']]['content'];
-
+            if (!empty($metadata)) {
+                if ($this->searchType === 'document') {
+                    $document_ids = array_keys($metadata);
+                } else {
                     $q = Doctrine_Query::create()
-                        ->select('t.name')
-                        ->from('Tag t')
-                        ->innerJoin('t.ClauseBodyTag cbt')
-                        ->where('cbt.clause_body_id = ?', array($clause['ClauseBody']['id']));
+                        ->select("CONCAT(c.id, '-', c.slug) AS slug, c.document_id, TRIM(CONCAT(c.clause_number, ' ', COALESCE(c.clause_number_information, ''), ' ', COALESCE(c.clause_number_subparagraph, ''))) AS clause_number, cb.id, cb.root_clause_body_id, cit.name")
+                        ->from('clause c')
+                        ->innerJoin('c.ClauseBody cb')
+                        ->leftJoin('cb.ClauseInformationType cit')
+                        ->whereIn('c.id', array_keys($metadata))
+                        ->orderBY('FIELD(c.id, '.implode(',', array_keys($metadata)).')');
+                    $clauses = $q->fetchArray();
 
-                    $data[$key]['Tags'] = $q->fetchArray();;
-                    foreach ($data[$key]['Tags'] as $tagkey => $tag) {
-                        $data[$key]['Tags'][$tagkey]['highlight'] = in_array($tag['id'], $tags);
+                    $document_ids = array();
+                    foreach ($clauses as $key => $clause) {
+                        $root_clause_body_id = isset($clause['ClauseBody']['root_clause_body_id'])
+                            ? $clause['ClauseBody']['root_clause_body_id']
+                            : $clause['ClauseBody']['id'];
+                        if ($this->latestClauseOnly) {
+                            $q = Doctrine_Query::create()
+                                ->select('COUNT(c.id)')
+                                ->from('Clause c')
+                                ->innerJoin('c.ClauseBody cb')
+                                ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id));
+                            $clauses[$key]['clauseHistory'] = $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+                            $clauses[$key]['clauseHistory'] = $clauses[$key]['clauseHistory'] > 1 ? 1 : 0;
+                        } else {
+                            $clauses[$key]['clauseHistory'] = 0;
+                        }
+                        $document_ids[] = $clauses[$key]['document_id'];
+                        $clauses[$key]['score'] = $metadata[$clause['id']]['score'];
+                        $clauses[$key]['documentTitle'] = $metadata[$clause['id']]['documentTitle'];
+                        $clauses[$key]['content'] = $metadata[$clause['id']]['content'];
+
+                        $q = Doctrine_Query::create()
+                            ->select('t.name')
+                            ->from('Tag t')
+                            ->innerJoin('t.ClauseBodyTag cbt')
+                            ->where('cbt.clause_body_id = ?', array($clause['ClauseBody']['id']));
+
+                        $clauses[$key]['Tags'] = $q->fetchArray();;
+                        foreach ($clauses[$key]['Tags'] as $tagkey => $tag) {
+                            $clauses[$key]['Tags'][$tagkey]['highlight'] = in_array($tag['id'], $tags);
+                        }
                     }
                 }
 
@@ -507,9 +529,14 @@ class searchActions extends sfActions
                         $documents[$key]['isSCResolution'] = false;
                     }
                     $documents[$key]['Organisation']['name'] = "$organisation $main_organ";
+                }
 
+                if ($this->searchType === 'document') {
+                    foreach ($documents as $key => $document) {
+                        $documents[$key]['score'] = $metadata[$document['id']]['score'];
+                        $documents[$key]['documentTitle'] = $metadata[$document['id']]['documentTitle'];
+                        $documents[$key]['content'] = $metadata[$document['id']]['content'];
 
-                    if ($this->searchType === 'document') {
                         $q = Doctrine_Query::create()
                             ->select('t.name')
                             ->from('Tag t')
@@ -520,23 +547,16 @@ class searchActions extends sfActions
                             $documents[$key]['Tags'][$tagkey]['highlight'] = in_array($tag['id'], $tags);
                         }
                     }
-                }
-
-                if ($this->searchType === 'document') {
-                    foreach ($data as $key => $clause) {
-                        $documents[$clause['document_id']]['Clauses'][] = $data[$key];
-                        $documents[$clause['document_id']]['documentTitle'] = $data[$key]['documentTitle'];
-                    }
 
                     $data = array_values($documents);
-                    $numFound = count($documents);                    
-                    // TODO: how to recompute the filter counts?
                 } else {
-                    foreach ($data as $key => $clause) {
-                        $data[$key]['Document'] = $documents[$clause['document_id']];
+                    foreach ($clauses as $key => $clause) {
+                        $clauses[$key]['Document'] = $documents[$clause['document_id']];
                     }
-                    $numFound = (int)$results->getRawResult()->response->numFound;
+
+                    $data = array_values($clauses);
                 }
+                $numFound = (int)$results->getRawResult()->response->numFound;
             }
         }
 

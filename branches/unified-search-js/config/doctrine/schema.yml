@@ -225,6 +225,9 @@ Document:
       type: integer(4)
     document_url:
       type: string(500)
+    is_latest_document:
+      type: boolean
+      default: true
     status:
       type: enum
       values: [draft, review, reviewed, inactive, active]

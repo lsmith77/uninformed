@@ -75,6 +75,36 @@ class Document extends BaseDocument
                 $clause->forceIsLatestClauseUpdate();
             }
         }
+
+        $root_document_id = $invoker->geId();
+        $document = $invoker->getLatestAdoptedDocument();
+        if (empty($document)) {
+            return;
+        }
+
+        $q = Doctrine_Query::create()
+            ->from('Document d')
+            ->where('d.root_document_id = ? OR d.id = ?', array($root_document_id, $root_document_id));
+        $documents = $q->execute(array(), Doctrine_Core::HYDRATE_ON_DEMAND);
+
+        $latest_document_id = $document->getId();
+        foreach ($documents as $document) {
+            $is_latest_document = $document->getId() == $latest_document_id;
+            if ($document->getIsLatestDocument() != $is_latest_document) {
+                $document->setIsLatestDocument($is_latest_document);
+                $document->save();
+            }
+        }
+    }
+
+    public function getLatestAdoptedDocument() {
+        $root_document_id = $this->root_document_id;
+
+        return Doctrine_Query::create()
+            ->from('Document d')
+            ->where('d.root_document_id = ? OR d.id = ?', array($root_document_id, $root_document_id))
+            ->orderBy('d.adoption_date DESC')
+            ->fetchOne();
     }
 
     public function getDocumentsByRoot() {
@@ -141,6 +171,23 @@ class Document extends BaseDocument
 
     public function getSlug() {
         return $this->_get('id').'-'.$this->_get('slug');
+    }
+
+    public function getOrganisationIdSolr() {
+        return (int)$this->getOrganisationId();
+    }
+
+    public function getContent() {
+        $clauses = $this->getClauseList();
+        if (empty($clauses)) {
+            return '';
+        }
+
+        $content = '';
+        foreach ($clauses as $clause) {
+            $content.= $clause->getContent()."\n";
+        }
+        return $content;
     }
 
     public function __toString() {

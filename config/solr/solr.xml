@@ -2,5 +2,6 @@
 <solr persistent="false">
   <cores adminPath="/admin/cores">
     <core name='Clause_en' instanceDir='Clause_en'></core>
+    <core name='Document_en' instanceDir='Document_en'></core>
   </cores>
 </solr>

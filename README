@@ -37,6 +37,7 @@ See: http://svn.symfony-project.com/plugins/sfSolrPlugin/branches/sf1.2/README
 php symfony lucene:create-solr-config frontend
 php symfony lucene:service frontend start (for windows see the sfSolrPlugin README)
 php symfony lucene:update-model-system --model=Clause --delete=true frontend Clause en
+php symfony lucene:update-model-system --model=Document --delete=true frontend Document en
 
 Changes to images/css (this might require increasing the memory limit to 128M or 256M):
 php symfony sw:combine frontend

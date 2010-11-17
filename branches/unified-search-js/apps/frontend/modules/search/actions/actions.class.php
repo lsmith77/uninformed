@@ -470,9 +470,6 @@ class searchActions extends sfActions
                             $clauses[$key]['clauseHistory'] = 0;
                         }
                         $document_ids[] = $clauses[$key]['document_id'];
-                        $clauses[$key]['score'] = $metadata[$clause['id']]['score'];
-                        $clauses[$key]['documentTitle'] = $metadata[$clause['id']]['documentTitle'];
-                        $clauses[$key]['content'] = $metadata[$clause['id']]['content'];
 
                         $q = Doctrine_Query::create()
                             ->select('t.name')
@@ -533,10 +530,6 @@ class searchActions extends sfActions
 
                 if ($this->searchType === 'document') {
                     foreach ($documents as $key => $document) {
-                        $documents[$key]['score'] = $metadata[$document['id']]['score'];
-                        $documents[$key]['documentTitle'] = $metadata[$document['id']]['documentTitle'];
-                        $documents[$key]['content'] = $metadata[$document['id']]['content'];
-
                         $q = Doctrine_Query::create()
                             ->select('t.name')
                             ->from('Tag t')
@@ -556,6 +549,13 @@ class searchActions extends sfActions
 
                     $data = array_values($clauses);
                 }
+
+                foreach ($data as $key => $value) {
+                    $data[$key]['score'] = $metadata[$value['id']]['score'];
+                    $data[$key]['documentTitle'] = $metadata[$value['id']]['documentTitle'];
+                    $data[$key]['content'] = $metadata[$value['id']]['content'];
+                }
+
                 $numFound = (int)$results->getRawResult()->response->numFound;
             }
         }

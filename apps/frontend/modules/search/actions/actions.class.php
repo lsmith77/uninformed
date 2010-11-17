@@ -469,64 +469,12 @@ class searchActions extends sfActions
                         } else {
                             $clauses[$key]['clauseHistory'] = 0;
                         }
+
                         $document_ids[] = $clauses[$key]['document_id'];
-
-                        $q = Doctrine_Query::create()
-                            ->select('t.name')
-                            ->from('Tag t')
-                            ->innerJoin('t.ClauseBodyTag cbt')
-                            ->where('cbt.clause_body_id = ?', array($clause['ClauseBody']['id']));
-
-                        $clauses[$key]['Tags'] = $q->fetchArray();;
-                        foreach ($clauses[$key]['Tags'] as $tagkey => $tag) {
-                            $clauses[$key]['Tags'][$tagkey]['highlight'] = in_array($tag['id'], $tags);
-                        }
                     }
                 }
 
-                $q = Doctrine_Query::create()
-                    ->select("CONCAT(d.id, '-', d.slug) AS slug, d.code, d.organisation_id, d.is_ratified, d.adoption_date, dt.name, dt.legal_value")
-                    ->from('Document d INDEXBY d.id')
-                    ->innerJoin('d.DocumentType dt')
-                    ->whereIn('d.id', $document_ids);
-                $documents = $q->fetchArray();
-
-                foreach ($documents as $key => $document) {
-                    if (empty($document['organisation_id'])) {
-                        $documents[$key]['Organisation']['name'] = "Other";
-                        $documents[$key]['isSCResolution'] = false;
-                        continue;
-                    }
-
-                    $q = Doctrine_Query::create()
-                        ->select('so.name, so.parent_id, mo.name, mo.parent_id')
-                        ->from('Organisation so')
-                        ->leftJoin('so.OrganisationParent mo')
-                        ->where('so.id = ?', array($document['organisation_id']));
-                    $suborgan = $q->fetchArray();
-                    $suborgan = reset($suborgan);
-                    if ($suborgan['OrganisationParent']['parent_id']) {
-                        $main_organ = $suborgan['OrganisationParent']['name'];
-                        $q = Doctrine_Query::create()
-                            ->select('o.name')
-                            ->from('Organisation o')
-                            ->where('o.id = ?', array($suborgan['OrganisationParent']['parent_id']));
-                        $organisation =  $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);;
-                    } else {
-                        $main_organ = $suborgan['name'];
-                        $organisation =  $suborgan['OrganisationParent']['name'];
-                    }
-
-                    if ($documents[$key]['DocumentType']['name'] == 'resolution'
-                        && $main_organ == 'SC'
-                        && $organisation == 'UNO'
-                    ) {
-                        $documents[$key]['isSCResolution'] = true;
-                    } else {
-                        $documents[$key]['isSCResolution'] = false;
-                    }
-                    $documents[$key]['Organisation']['name'] = "$organisation $main_organ";
-                }
+                $documents = $this->getDocuments($document_ids);
 
                 if ($this->searchType === 'document') {
                     foreach ($documents as $key => $document) {
@@ -544,6 +492,17 @@ class searchActions extends sfActions
                     $data = array_values($documents);
                 } else {
                     foreach ($clauses as $key => $clause) {
+                        $q = Doctrine_Query::create()
+                            ->select('t.name')
+                            ->from('Tag t')
+                            ->innerJoin('t.ClauseBodyTag cbt')
+                            ->where('cbt.clause_body_id = ?', array($clause['ClauseBody']['id']));
+
+                        $clauses[$key]['Tags'] = $q->fetchArray();
+                        foreach ($clauses[$key]['Tags'] as $tagkey => $tag) {
+                            $clauses[$key]['Tags'][$tagkey]['highlight'] = in_array($tag['id'], $tags);
+                        }
+
                         $clauses[$key]['Document'] = $documents[$clause['document_id']];
                     }
 
@@ -561,6 +520,55 @@ class searchActions extends sfActions
         }
 
         return $this->generateOutput($this->searchType, $data, $filters, $facets, $numFound, $limit);
+    }
+
+    protected function getDocuments($document_ids)
+    {
+        $q = Doctrine_Query::create()
+            ->select("CONCAT(d.id, '-', d.slug) AS slug, d.code, d.organisation_id, d.is_ratified, d.adoption_date, dt.name, dt.legal_value")
+            ->from('Document d INDEXBY d.id')
+            ->innerJoin('d.DocumentType dt')
+            ->whereIn('d.id', $document_ids);
+        $documents = $q->fetchArray();
+
+        foreach ($documents as $key => $document) {
+            if (empty($document['organisation_id'])) {
+                $documents[$key]['Organisation']['name'] = "Other";
+                $documents[$key]['isSCResolution'] = false;
+                continue;
+            }
+
+            $q = Doctrine_Query::create()
+                ->select('so.name, so.parent_id, mo.name, mo.parent_id')
+                ->from('Organisation so')
+                ->leftJoin('so.OrganisationParent mo')
+                ->where('so.id = ?', array($document['organisation_id']));
+            $suborgan = $q->fetchArray();
+            $suborgan = reset($suborgan);
+            if ($suborgan['OrganisationParent']['parent_id']) {
+                $main_organ = $suborgan['OrganisationParent']['name'];
+                $q = Doctrine_Query::create()
+                    ->select('o.name')
+                    ->from('Organisation o')
+                    ->where('o.id = ?', array($suborgan['OrganisationParent']['parent_id']));
+                $organisation =  $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);;
+            } else {
+                $main_organ = $suborgan['name'];
+                $organisation =  $suborgan['OrganisationParent']['name'];
+            }
+
+            if ($documents[$key]['DocumentType']['name'] == 'resolution'
+                && $main_organ == 'SC'
+                && $organisation == 'UNO'
+            ) {
+                $documents[$key]['isSCResolution'] = true;
+            } else {
+                $documents[$key]['isSCResolution'] = false;
+            }
+            $documents[$key]['Organisation']['name'] = "$organisation $main_organ";
+        }
+
+        return $documents;
     }
 
     protected function generateOutput($searchType = false, $data = array(), $filters = array(), $facets = array(), $numFound = 0, $limit = null)

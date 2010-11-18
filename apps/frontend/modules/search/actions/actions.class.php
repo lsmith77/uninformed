@@ -385,16 +385,18 @@ class searchActions extends sfActions
                             }
                             $array['isChecked'] = empty($this->filters[$facet]) || !in_array($id, $this->filters[$facet]);
                             $filters[$facet][] = $array;
-                            $add_other = true;
+                            if ($add_other !== false) {
+                                $add_other = $id;
+                            }
                         }
                     }
 
-                    if ($add_other) {
-                        $array = array('id' => 0, 'name' => 'Other', 'count' => $solr[0]);
-                        if (isset($solr_filtered[$id]) && $solr[0] !== $solr_filtered[0]) {
+                    if ($add_other !== false) {
+                        $array = array('id' => $add_other, 'name' => 'Other', 'count' => $solr[$add_other]);
+                        if (isset($solr_filtered[$id]) && $solr[$add_other] !== $solr_filtered[$add_other]) {
                             $array['filteredCount'] = $solr_filtered[$id];
                         }
-                        $array['isChecked'] = empty($this->filters[$facet]) || !in_array(0, $this->filters[$facet]);
+                        $array['isChecked'] = empty($this->filters[$facet]) || !in_array($add_other, $this->filters[$facet]);
                         $filters[$facet][] = $array;
                     }
                 }

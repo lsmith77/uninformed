@@ -1,4 +1,4 @@
-<form action="<?php echo url_for('unifiedSearch'); ?>" method="GET" id="searchForm">
+<form action="<?php echo url_for('unifiedSearch'); ?>" method="GET" id="us_form" data-ajaxAction="<?php echo url_for('@clauseSearch?action=results'); ?>">
 
 <label for="us_help"><input type="checkbox" id="us_help"> Show Help</label>
 
@@ -21,8 +21,8 @@
     <span class="tooltip">?<span>Enter text to search document code, select to load the given document</span></span>
 </div>
 <div class="searchButtons">
-    <input type="submit" name="st" value="clause" id="searchClauses" />
-    <input type="submit" name="st" value="document" id="searchDocuments" />
+    <input type="button" value="Clause" data-searchType="clause" />
+    <input type="button" value="Document" data-searchType="document" />
 </div>
 
 <div style="clear:both"></div>

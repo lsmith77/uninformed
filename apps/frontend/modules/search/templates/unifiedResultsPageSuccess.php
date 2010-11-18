@@ -1,7 +1,9 @@
 <?php use_stylesheet('/css/jquery.autoSuggest.css'); ?>
 <?php use_stylesheet('/css/unifiedSearchForm.css'); ?>
+<?php $sf_response->removeJavascript('/js/search.js'); ?>
 
 <?php use_javascript('/js/jquery.autoSuggest.js'); ?>
+<?php use_javascript('/js/jquery.form.js'); ?>
 <?php use_javascript('/js/jquery.placeholder.js'); ?>
 <?php use_javascript('/js/unifiedSearchForm.js'); ?>
 
@@ -10,7 +12,7 @@
 <div id="searchIndicator"><span>Updating results..</span></div>
 
 <div class="search">
-    <div class="filters">
+    <div id="us_filters" class="filters">
     </div>
 </div>
 
@@ -19,7 +21,7 @@
     <?php include_partial('search/unifiedSearchForm', $sf_data); ?>
 </div>
 
-<div class="results">
+<div id="us_results" class="results">
 </div>
 
 <script type="text/x-jqote-template" id="filtersTpl">

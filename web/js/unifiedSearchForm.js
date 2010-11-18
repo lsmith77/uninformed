@@ -1,4 +1,9 @@
 (function($) {
+    // Avoid processing this file unless we're on the results page
+    if (! $('#us_results').length) {
+        return;
+    }
+
     // Enable help-mode checkbox
     function toggleBodyHelpClass() {
         $('body').toggleClass('us_help', $('#us_help').is(':checked'));
@@ -150,4 +155,133 @@
 
     // Enable placeholder plugin
     $('input[placeholder], textarea[placeholder]').placeholder();
+
+    // Form submission
+    (function() {
+        function formBeforeSerialize($form, options) {
+            $('#filtersForm input:not(.selectAll)').each(function() {
+                if (!$(this).is(':checked')) {
+                    options.data[this.name] = this.value;
+                }
+            });
+        }
+
+        function formBeforeSubmit(arr, $form, options) {
+            $("#searchIndicator")
+                .html('<span>Updating results..</span>')
+                .show();
+        }
+
+        function formSuccess(response) {
+            $("#searchIndicator").html('<span>'+response.totalResults+' results (page '+(response.page+1)+' of '+(Math.ceil(response.totalResults/response.limit))+')</span>');
+
+            window.setTimeout(function() {
+                $('#searchIndicator').fadeOut('slow');
+            }, 2000);
+
+            $('#us_filters').jqotesub($('#filtersTpl'), response);
+            $('#us_results')
+                .data('searchType', response.searchType)
+                .data('page', response.page)
+                .jqotesub($('#resultsTpl'), response);
+        }
+
+        $('#us_form').submit(function(e, searchType, page) {
+            e.preventDefault();
+
+            var $form = $(this);
+            var data = {};
+
+            searchType = searchType || $('#us_results').data('searchType');
+            page = Math.max(page || 0, 0);
+
+            if (searchType) {
+                data.st = searchType;
+            }
+
+            if (page) {
+                data.page = page;
+            }
+
+            $form.ajaxSubmit({
+                data: data,
+                dataType: 'json',
+                url: $form.data('ajaxAction'),
+                beforeSerialize: formBeforeSerialize,
+                beforeSubmit: formBeforeSubmit,
+                success: formSuccess
+            });
+        });
+
+        $('#us_form input:button').click(function(e) {
+            $('#us_form').trigger('submit', [ $(this).data('searchType') ]);
+        });
+    })();
+
+    // Live events for pagination and filters
+    (function() {
+        function reloadPage() {
+            $('#us_form').submit([ null, $('#us_results').data('page') ]);
+        }
+
+        function loadNextPage(e) {
+            e.preventDefault();
+            $('#us_form').submit([ null, 1 + $('#us_results').data('page') ]);
+        }
+
+        function loadPrevPage(e) {
+            e.preventDefault();
+            $('#us_form').submit([ null, -1 + $('#us_results').data('page') ]);
+        }
+
+        function foldFilterGroup(e) {
+            e.preventDefault();
+            $(this)
+                .closest('h3').next('.filterGroup').toggle('fast').end().end()
+                .toggleClass('folded');
+        }
+
+        // Toggle other checkboxes when the "all" checkbox is changed
+        function toggleFilterGroupCheckboxes($allCheckbox) {
+            var $otherCheckboxes = $allCheckbox.closest('.filterGroup').find('input:checkbox:not(.selectAll):not(:disabled)');
+
+            if ($allCheckbox.is(':checked')) {
+                $otherCheckboxes.attr('checked', 'checked');
+            } else {
+                $otherCheckboxes.removeAttr('checked');
+            }
+        }
+
+        // Toggle the "all" checkbox depending on the state of the others
+        function toggleSelectAllCheckbox($checkbox) {
+            var $allCheckbox = $checkbox.closest('.filterGroup').find('input:checkbox.selectAll');
+            var $otherCheckboxes = $checkbox.closest('.filterGroup').find('input:checkbox:not(.selectAll)');
+
+            if ($otherCheckboxes.length === $otherCheckboxes.filter(':checked').length) {
+                $allCheckbox.attr('checked', 'checked');
+            } else {
+                $allCheckbox.removeAttr('checked');
+            }
+        }
+
+        // Handle checkbox group toggling and result reloading when checkboxes change
+        function filterCheckboxChanged(e) {
+            var $checkbox = $(e.target).filter('input:checkbox');
+
+            if ($checkbox.length) {
+                if ($checkbox.is('.selectAll')) {
+                    toggleFilterGroupCheckboxes($checkbox);
+                } else {
+                    toggleSelectAllCheckbox($checkbox);
+                }
+
+                reloadPage();
+            }
+        }
+
+        $('#us_results a.nextPage').live('click', loadNextPage);
+        $('#us_results a.prevPage').live('click', loadPrevPage);
+        $('#us_filters span.fold').live('click', foldFilterGroup);
+        $('#us_filters input:checkbox').live('change', filterCheckboxChanged);
+    })();
 })(jQuery);

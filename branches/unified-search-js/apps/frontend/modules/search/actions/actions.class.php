@@ -375,17 +375,21 @@ class searchActions extends sfActions
                             ->select("$model.id, TRIM(CONCAT(COALESCE(op.name, ''), ' ', $model.name)) AS name");
                     }
                     $values = $q->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
+
+                    $add_other = false;
                     foreach ($solr as $id => $count) {
-                        if (!empty($count)) {
+                        if (!empty($count) && isset($values[$id]['name'])) {
                             $array = array('id' => $id, 'name' => $values[$id]['name'], 'count' => $count);
                             if (isset($solr_filtered[$id]) && $count !== $solr_filtered[$id]) {
                                 $array['filteredCount'] = $solr_filtered[$id];
                             }
                             $array['isChecked'] = empty($this->filters[$facet]) || !in_array($id, $this->filters[$facet]);
                             $filters[$facet][] = $array;
+                            $add_other = true;
                         }
                     }
-                    if (!empty($solr[0])) {
+
+                    if ($add_other) {
                         $array = array('id' => 0, 'name' => 'Other', 'count' => $solr[0]);
                         if (isset($solr_filtered[$id]) && $solr[0] !== $solr_filtered[0]) {
                             $array['filteredCount'] = $solr_filtered[$id];

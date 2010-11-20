@@ -71,6 +71,9 @@
             startText: 'Tags',
             usePlaceholder: true
         });
+
+        // Disable the autoSuggest plugin's own hidden input field
+        $('#as-values-us_tags').removeAttr('name');
     })();
 
     // Enable autocomplete for query
@@ -167,6 +170,9 @@
         }
 
         function formBeforeSubmit(arr, $form, options) {
+            // Have placeholder plugin check to restore placeholder text 
+            $('input[placeholder]').trigger('blur');
+
             $("#searchIndicator")
                 .html('<span>Updating results..</span>')
                 .show();
@@ -221,17 +227,17 @@
     // Live events for pagination and filters
     (function() {
         function reloadPage() {
-            $('#us_form').submit([ null, $('#us_results').data('page') ]);
+            $('#us_form').trigger('submit', [ null, $('#us_results').data('page') ]);
         }
 
         function loadNextPage(e) {
             e.preventDefault();
-            $('#us_form').submit([ null, 1 + $('#us_results').data('page') ]);
+            $('#us_form').trigger('submit', [ null, 1 + $('#us_results').data('page') ]);
         }
 
         function loadPrevPage(e) {
             e.preventDefault();
-            $('#us_form').submit([ null, -1 + $('#us_results').data('page') ]);
+            $('#us_form').trigger('submit', [ null, -1 + $('#us_results').data('page') ]);
         }
 
         function foldFilterGroup(e) {

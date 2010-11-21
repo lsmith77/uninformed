@@ -88,9 +88,9 @@ class searchActions extends sfActions
         return true;
     }
 
-    protected function returnJson($output)
+    protected function returnJson($request, $output)
     {
-        if (!sfConfig::get('sf_web_debug')) {
+        if (!sfConfig::get('sf_web_debug') || $request->isXmlHttpRequest()) {
             $response = sfContext::getInstance()->getResponse();
             $response->setContentType('application/json');
             $this->getResponse()->setContent(json_encode($output));
@@ -152,7 +152,7 @@ class searchActions extends sfActions
             array_unshift($documents, array('url' => '', 'label' => $term.'*'));
         }
 
-        return $this->returnJson($documents);
+        return $this->returnJson($request, $documents);
     }
 
     public function executeSearchDocumentCodeOld(sfWebRequest $request)
@@ -173,7 +173,7 @@ class searchActions extends sfActions
             $documents[$key]['url'] = sfContext::getInstance()->getController()->genUrl('@document?id='.$document['url']);
         }
 
-        return $this->returnJson($documents);
+        return $this->returnJson($request, $documents);
     }
 
     public function executeSearchTerm(sfWebRequest $request)
@@ -205,7 +205,7 @@ class searchActions extends sfActions
                 'count' => $count,
             );
         }
-        return $this->returnJson($response);
+        return $this->returnJson($request, $response);
     }
 
     public function executeSearchTags(sfWebRequest $request)
@@ -221,14 +221,14 @@ class searchActions extends sfActions
             ->groupBy('t.id, t.name');
         $tags = $q->fetchArray();
 
-        return $this->returnJson($tags);
+        return $this->returnJson($request, $tags);
     }
 
     public function executeResults(sfWebRequest $request)
     {
         $this->readParameters($request);
         if (!isset($this->searchType) && !in_array($this->searchType, array('clause', 'document'))) {
-            return $this->generateOutput();
+            return $this->generateOutput($request);
         }
 
         $this->showHelp = false;
@@ -258,7 +258,7 @@ class searchActions extends sfActions
         }
 
         if (empty($query) && empty($terms) && empty($tags) && empty($documentCode)) {
-            return $this->generateOutput($this->searchType);
+            return $this->generateOutput($request, $this->searchType);
         }
 
         $facets = array();
@@ -272,7 +272,7 @@ class searchActions extends sfActions
         if (!empty($tags)) {
             if (!$this->checkArrayOfInteger($tags)) {
                 $output = array('status' => 'error', 'message' => "parameter 't' needs to be an array of integer");
-                return $this->returnJson($output);
+                return $this->returnJson($request, $output);
             }
             $op = ($this->tagMatch == 'all') ? 'AND' : 'OR';
             $subcritieria = new sfLuceneCriteria;
@@ -314,7 +314,7 @@ class searchActions extends sfActions
                 }
                 if (empty($facets[$filter])) {
                     $output = array('status' => 'error', 'message' => "unsupported filter '$filter'");
-                    return $this->returnJson($output);
+                    return $this->returnJson($request, $output);
                 }
                 if (empty($facets[$filter]['model'])) {
                     foreach ($ids as $key => $id) {
@@ -322,7 +322,7 @@ class searchActions extends sfActions
                     }
                 } elseif (!$this->checkArrayOfInteger($ids)) {
                     $output = array('status' => 'error', 'message' => "parameter 'f' for key '$filter' to be an array of integer");
-                    return $this->returnJson($output);
+                    return $this->returnJson($request, $output);
                 }
                 $fq = isset($fq) ? "$fq OR " : '';
                 $fq.= "$filter:(".implode(' ', $ids).')';
@@ -525,7 +525,7 @@ class searchActions extends sfActions
             }
         }
 
-        return $this->generateOutput($this->searchType, $data, $filters, $facets, $numFound, $limit);
+        return $this->generateOutput($request, $this->searchType, $data, $filters, $facets, $numFound, $limit);
     }
 
     protected function getDocuments($document_ids)
@@ -577,7 +577,7 @@ class searchActions extends sfActions
         return $documents;
     }
 
-    protected function generateOutput($searchType = false, $data = array(), $filters = array(), $facets = array(), $numFound = 0, $limit = null)
+    protected function generateOutput($request, $searchType = false, $data = array(), $filters = array(), $facets = array(), $numFound = 0, $limit = null)
     {
         $output = array(
             'searchType' => $searchType,
@@ -590,6 +590,6 @@ class searchActions extends sfActions
             'status' => 'success',
             'message' => 'ok'
         );
-        return $this->returnJson($output);
+        return $this->returnJson($request, $output);
     }
 }

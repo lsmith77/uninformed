@@ -722,12 +722,29 @@ a.toggleCol.closed {
     width: 154px;
     height: 68px;
     display: block;
-    float: right;
+    float: left;
     line-height: 50px;
-    margin-left: 10px;
+    margin-left: 130px;
 }
 
 .support .liip span {
+    position: absolute;
+    top: -5000px;
+    left: -2000px;
+}
+
+.support .jfe {
+    background: url(/images/jfe.jpg) no-repeat;
+    width: 262px;
+    height: 44px;
+    display: block;
+    float: left;
+    line-height: 50px;
+    margin-top: 20px;
+    margin-left: 130px;
+}
+
+.support .jfe span {
     position: absolute;
     top: -5000px;
     left: -2000px;

@@ -740,18 +740,19 @@ a.toggleCol.closed {
     display: block;
     float: left;
     line-height: 50px;
-    margin-top: 20px;
-    margin-left: 50px;
+    margin-left: 84px;
+    margin-top: 15px;
 }
 
 .support .isn {
     background: url(/images/isn.gif) no-repeat;
-    width: 218px;
-    height: 127px;
+    width: 128px;
+    height: 60px;
     display: block;
     float: left;
     line-height: 50px;
-    margin-left: 50px;
+    margin-left: 84px;
+    margin-top: 5px;
 }
 
 .support .liip {
@@ -761,7 +762,7 @@ a.toggleCol.closed {
     display: block;
     float: left;
     line-height: 50px;
-    margin-left: 50px;
+    margin-left: 84px;
 }
 
 span.tooltip a {

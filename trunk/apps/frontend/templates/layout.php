@@ -67,6 +67,7 @@
     <noscript><p class="noscript">This site runs *much* better with javascript enabled</p></noscript>
     <p class="support">
         <a href="http://jngldrm.org/" class="jngldrm"><span>jungle drum</span></a>
+        <a href="http://www.jugendfuereuropa.de/" class="jfe"><span>jufend für europa</span></a>
         <a href="http://liip.ch/" class="liip"><span>Liip AG - Agile web development - Zurich, Fribourg, Bern</span></a>
     </p>
     </div>

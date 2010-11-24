@@ -717,34 +717,7 @@ a.toggleCol.closed {
     line-height: 67px;
 }
 
-.support .liip {
-    background: url(/images/liip.png) no-repeat;
-    width: 154px;
-    height: 68px;
-    display: block;
-    float: left;
-    line-height: 50px;
-    margin-left: 130px;
-}
-
-.support .liip span {
-    position: absolute;
-    top: -5000px;
-    left: -2000px;
-}
-
-.support .jfe {
-    background: url(/images/jfe.jpg) no-repeat;
-    width: 262px;
-    height: 44px;
-    display: block;
-    float: left;
-    line-height: 50px;
-    margin-top: 20px;
-    margin-left: 130px;
-}
-
-.support .jfe span {
+.support span {
     position: absolute;
     top: -5000px;
     left: -2000px;
@@ -760,10 +733,35 @@ a.toggleCol.closed {
     margin-left: 10px;
 }
 
-.support .jngldrm span {
-    position: absolute;
-    top: -5000px;
-    left: -2000px;
+.support .jfe {
+    background: url(/images/jfe.jpg) no-repeat;
+    width: 142px;
+    height: 44px;
+    display: block;
+    float: left;
+    line-height: 50px;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.support .isn {
+    background: url(/images/isn.gif) no-repeat;
+    width: 218px;
+    height: 127px;
+    display: block;
+    float: left;
+    line-height: 50px;
+    margin-left: 50px;
+}
+
+.support .liip {
+    background: url(/images/liip.png) no-repeat;
+    width: 154px;
+    height: 68px;
+    display: block;
+    float: left;
+    line-height: 50px;
+    margin-left: 50px;
 }
 
 span.tooltip a {

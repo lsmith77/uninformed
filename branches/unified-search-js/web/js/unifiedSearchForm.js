@@ -21,7 +21,7 @@
             $('input:hidden', $tagsContainer).each(function(){
                 var tagId = this.name.slice(2, -1);
                 if (tagId) {
-                    prefillTags.push({ value: tagId, name: this.value });
+                    prefillTags.push({ id: tagId, label: this.value });
                 }
             });
             return prefillTags;
@@ -38,8 +38,7 @@
             return selectionItem[0].lastChild.textContent;
         }
 
-        function selectionAdded(elem) {
-            var tagId = getTagIdForSelectionItem(elem);
+        function selectionAdded(elem, tagId) {
             if (typeof(tagId) == 'string' && tagId.match(/^\d+$/)) {
                 $('<input type="hidden" />')
                     .attr('name', 't['+tagId+']')

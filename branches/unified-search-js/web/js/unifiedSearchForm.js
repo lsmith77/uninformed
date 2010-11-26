@@ -228,17 +228,17 @@
     // Live events for pagination and filters
     (function() {
         function reloadPage() {
-            $('#us_form').trigger('submit', [ { page: $('#us_results').data('page') } ]);
+            $('#us_form').trigger('submit', [ { p: $('#us_results').data('page') } ]);
         }
 
         function loadNextPage(e) {
             e.preventDefault();
-            $('#us_form').trigger('submit', [ { page: 1 + $('#us_results').data('page') } ]);
+            $('#us_form').trigger('submit', [ { p: 1 + $('#us_results').data('page') } ]);
         }
 
         function loadPrevPage(e) {
             e.preventDefault();
-            $('#us_form').trigger('submit', [ { page: -1 + $('#us_results').data('page') } ]);
+            $('#us_form').trigger('submit', [ { p: -1 + $('#us_results').data('page') } ]);
         }
 
         function foldFilterGroup(e) {

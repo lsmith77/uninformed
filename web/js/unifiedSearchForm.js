@@ -39,7 +39,7 @@
         }
 
         function selectionAdded(elem, tagId) {
-            if (typeof(tagId) == 'string' && tagId.match(/^\d+$/)) {
+            if (typeof(tagId) == 'string' && /^\d+$/.test(tagId)) {
                 $('<input type="hidden" />')
                     .attr('name', 't['+tagId+']')
                     .attr('value', getTagNameForSelectionItem(elem))
@@ -194,22 +194,14 @@
                 .jqotesub($('#resultsTpl'), response);
         }
 
-        $('#us_form').submit(function(e, searchType, page) {
+        $('#us_form').submit(function(e, data) {
             e.preventDefault();
 
             var $form = $(this);
-            var data = {};
 
-            searchType = searchType || $('#us_results').data('searchType');
-            page = Math.max(page || 0, 0);
-
-            if (searchType) {
-                data.st = searchType;
-            }
-
-            if (page) {
-                data.page = page;
-            }
+            data = data || {};
+            data.st = data.st || $('#us_results').data('searchType');
+            data.page = Math.max(data.page || 0, 0);
 
             $form.ajaxSubmit({
                 data: data,
@@ -222,24 +214,24 @@
         });
 
         $('#us_form input:button').click(function(e) {
-            $('#us_form').trigger('submit', [ $(this).data('searchType') ]);
+            $('#us_form').trigger('submit', [ { st: $(this).data('searchType') } ]);
         });
     })();
 
     // Live events for pagination and filters
     (function() {
         function reloadPage() {
-            $('#us_form').trigger('submit', [ null, $('#us_results').data('page') ]);
+            $('#us_form').trigger('submit', [ { page: $('#us_results').data('page') } ]);
         }
 
         function loadNextPage(e) {
             e.preventDefault();
-            $('#us_form').trigger('submit', [ null, 1 + $('#us_results').data('page') ]);
+            $('#us_form').trigger('submit', [ { page: 1 + $('#us_results').data('page') } ]);
         }
 
         function loadPrevPage(e) {
             e.preventDefault();
-            $('#us_form').trigger('submit', [ null, -1 + $('#us_results').data('page') ]);
+            $('#us_form').trigger('submit', [ { page: -1 + $('#us_results').data('page') } ]);
         }
 
         function foldFilterGroup(e) {
@@ -291,5 +283,42 @@
         $('#us_results a.prevPage').live('click', loadPrevPage);
         $('#us_filters span.fold').live('click', foldFilterGroup);
         $('#us_filters input:checkbox').live('change', filterCheckboxChanged);
+    })();
+
+    // If query string contains a search query on page load, submit the form
+    (function() {
+        var params = {};
+
+        // See: http://stackoverflow.com/questions/901115/get-querystring-values-with-jquery/2880929#2880929
+        var e,
+            a = /\+/g, // Regex for replacing addition symbol with a space
+            r = /([^&;=]+)=?([^&;]*)/g,
+            d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
+            q = window.location.search.substring(1);
+
+        while (e = r.exec(q)) {
+            params[d(e[1])] = d(e[2]);
+        }
+
+        if (params.q) {
+            data = {};
+
+            if (params.st) {
+                data.st = params.st;
+            }
+
+            if (params.page) {
+                data.page = params.page;
+            }
+
+            // Check for excluded attributes ("f[group][]=id") within the query string
+            for (var name in params) {
+                if (/^f\[(\w+)\]\[\]$/.test(name) && /^\d+$/.test(params[name])) {
+                    data[name] = params[name];
+                }
+            }
+
+            $('#us_form').trigger('submit', [ data ]);
+        }
     })();
 })(jQuery);

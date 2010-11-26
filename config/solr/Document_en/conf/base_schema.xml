@@ -296,6 +296,8 @@
   <field name="sfl_model"      type="string"   indexed="true"  stored="true"  multiValued="false" required="false"/>
   <field name="sfl_all"      type="text"   indexed="true"  stored="false"  multiValued="true" required="false"/>
   
+  <field name='document_code_prefix' type='ngramstring' stored='false' multiValued='false' required='false'  />
+
   <!-- merged model information into one document -->
   %%MERGE_CONFIG%%
 
@@ -317,5 +319,6 @@
   <solrQueryParser defaultOperator="OR"/>
  
   %%COPY_FIELDS%%
-  
+  <copyField source="document_code" dest="document_code_prefix"/>
+
 </schema>

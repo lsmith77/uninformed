@@ -73,28 +73,22 @@
         <span class="nonlegal">non-legally binding</span>
     </div>
     <% if (this.totalResults) { %>
-        <h2><%= this.totalResults %> <%= this.searchType %>s found <% if (this.searchType == 'clause') { %>(page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)<% } %></h2>
+        <h2><%= this.totalResults %> <%= this.searchType %>s found (page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
     <% } else if (!this.searchType) { %>
         <h2>no matches</h2>
     <% } else { %>
         <h2>Please enter a search term</h2>
     <% }
-    var cnt;
-    if (this.searchType == 'clause') {
-        cnt = this.data.length;
-    } else {
-        cnt = this.totalResults;
-    };
-    if (this.searchType == 'clause') { %>
-        <div class="prevnext">
-        <%
-        $('.results').data('page', this.page);
-        if (this.page > 0) { %>
-            <a class="prevPage">prev</a>
-        <% }
-        if (cnt > this.limit) { cnt = this.limit; %>
-            <a class="nextPage">next</a>
-    <% } }
+    var cnt = this.data.length; %>
+    <div class="prevnext">
+    <%
+    $('.results').data('page', this.page);
+    if (this.page > 0) { %>
+        <a class="prevPage">prev</a>
+    <% }
+    if (cnt > this.limit) { cnt = this.limit; %>
+        <a class="nextPage">next</a>
+    <% }
     for (i = 0; i < cnt; i++) {
     var res = this.data[i];
     var itemclass = 'nonlegal';
@@ -117,7 +111,11 @@
     </div>
     <div class="result <%= itemclass %>">
         <h2 class="doctitle highlight">
-            <?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.documentTitle %>', $searchType, array('id' => 'XXX'), array('target' => '_blank'))) ?>
+            <% if (this.searchType == 'clause') { %>
+                <?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.documentTitle %>', 'clause', array('id' => 'XXX'), array('target' => '_blank'))) ?>
+            <% } else { %>
+                <?php echo str_replace('XXX', '<%= res.slug %>', link_to('<%= res.documentTitle %>', 'document', array('id' => 'XXX'), array('target' => '_blank'))) ?>
+            <% } %>
         </h2>
         <h3>
             <span class="docdetails"><%= document.code %> (<%= document.adoption_date %>)</span> |
@@ -156,17 +154,15 @@
         <p>
     </div>
     <% } %>
-    <% if (this.searchType == 'clause') { %>
-        <div class="prevnext">
-        <%
-            $('.results').data('page', this.page);
-            if (this.page > 0) { %>
-            <a class="prevPage">prev</a>
-        <% }
-        var cnt = this.data.length;
-        if (cnt > this.limit) { cnt = this.limit; %>
-            <a class="nextPage">next</a>
-        <% } %>
+    <div class="prevnext">
+    <%
+        $('.results').data('page', this.page);
+        if (this.page > 0) { %>
+        <a class="prevPage">prev</a>
+    <% }
+    var cnt = this.data.length;
+    if (cnt > this.limit) { cnt = this.limit; %>
+        <a class="nextPage">next</a>
     <% } %>
     </div>
     ]]>

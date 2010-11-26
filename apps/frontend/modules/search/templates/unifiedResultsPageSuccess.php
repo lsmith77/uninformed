@@ -11,7 +11,7 @@
 
 <div id="searchIndicator"><span>Updating results..</span></div>
 
-<div class="search">
+<div class="us_filters">
     <div id="us_filters" class="filters"></div>
 </div>
 
@@ -22,7 +22,7 @@
     <div id="us_results" class="results" style="margin: 0; padding: 0;"></div>
 </div>
 
-<div style="clear: both;"></div>
+<div style="clear: both; margin-bottom: 40px;"></div>
 
 <script type="text/x-jqote-template" id="filtersTpl">
     <![CDATA[

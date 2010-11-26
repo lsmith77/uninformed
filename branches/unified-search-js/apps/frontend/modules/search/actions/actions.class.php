@@ -108,13 +108,13 @@ class searchActions extends sfActions
 
     protected function readParameters(sfWebRequest $request)
     {
-        $this->query = $request->getGetParameter('q', '');
+        $this->query = (string) $request->getGetParameter('q', '');
         $this->tagMatch = $request->getGetParameter('tm', 'all');
         $this->tags = (array) $request->getGetParameter('t');
         $this->latestClauseOnly = $request->getGetParameter('l');
         $this->page = (int) $request->getGetParameter('p', 0);
-        $this->documentCode = $request->getGetParameter('dc');     
-        $this->searchType = $request->getGetParameter('st', 'clause');
+        $this->documentCode = (string) $request->getGetParameter('dc');
+        $this->searchType = (string) $request->getGetParameter('st', 'clause');
         $this->filters = (array) $request->getGetParameter('f');
     }
 

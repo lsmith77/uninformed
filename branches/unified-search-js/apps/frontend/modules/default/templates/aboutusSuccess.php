@@ -31,9 +31,14 @@ slot('robots', 'INDEX, FOLLOW');
 
 <h3><a href="#">Who is behind ResolutionFinder.org?</a></h3>
 <div>
-    Jungle Drum is a not-for-profit information technology provider and communications consultant. Our goal is to
-    contribute and advocate for solutions that boost international cooperation on global challenges to the forefront
-    of future ICT and web development.
+    <p><a href="http://jngldrm.org/">Jungle Drum</a> is a not-for-profit information technology provider and
+    communications consultant. Our goal is to contribute and advocate for solutions that boost international
+    cooperation on global challenges to the forefront of future ICT and web development.</p>
+
+    <p>The <a href="http://www.isn.ethz.ch/">International Relations and Security Network (ISN)</a> is the world's
+    foremost open access information service for international relations and security professionals. Its mission is to
+    promote greater knowledge sharing, learning and collaboration. The ISN is based at the Swiss Federal Institute of
+    Technology (ETH Zurich).</p>
 </div>
 
 </div>

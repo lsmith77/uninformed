@@ -7,16 +7,28 @@
 <?php use_javascript('/js/jquery.placeholder.js'); ?>
 <?php use_javascript('/js/unifiedSearchForm.js'); ?>
 
-<h1>Search for clauses</h1>
-
 <div id="searchIndicator"><span>Updating results..</span></div>
 
 <div class="search">
-    <div id="us_filters" class="filters"></div>
+    <div id="us_filters" class="filters">
+        <pre>
+    Enter search terms ..
+    More Instructions ..
+    Bla  ..
+    Bla  ..
+    Bla  ..
+    Bla  ..
+    Bla  ..
+    Bla  ..
+    Bla  ..
+    Bla  ..
+        </pre>
+    </div>
 </div>
 
 <div class="search_form_and_results">
-    <h2>Update your search</h2>
+    <h1>Search for clauses or document</h1>
+
     <?php include_partial('search/unifiedSearchForm', $sf_data); ?>
 
     <div id="us_results" class="results"></div>

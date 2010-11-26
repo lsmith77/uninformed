@@ -178,6 +178,13 @@
             $("#searchIndicator")
                 .html('<span>Updating results..</span>')
                 .show();
+
+            // Set the search results link's URL
+            var queryString = $.param(arr);
+            var baseUrl = $('#us_search_link').data('baseUrl');
+            $('#us_search_link')
+                .attr('href', baseUrl + '?' + queryString)
+                .show();
         }
 
         function formSuccess(response) {

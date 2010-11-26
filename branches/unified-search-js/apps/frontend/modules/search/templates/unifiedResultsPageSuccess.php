@@ -19,10 +19,10 @@
     <h2>Update your search</h2>
     <?php include_partial('search/unifiedSearchForm', $sf_data); ?>
 
-    <div id="us_results" class="results" style="margin: 0; padding: 0;"></div>
+    <div id="us_results" class="results"></div>
 </div>
 
-<div style="clear: both; margin-bottom: 40px;"></div>
+<div style="clear: both;"></div>
 
 <script type="text/x-jqote-template" id="filtersTpl">
     <![CDATA[

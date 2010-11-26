@@ -494,9 +494,8 @@ span.tags {
     background: #f0f0f0;
 }
 div.results {
-    margin-left: 280px;
-    margin-bottom: 80px;
-    padding: 10px;
+    margin: 20px 0 80px;
+    padding: 0;
 }
 .results strong {
     text-decoration: underline;
@@ -510,7 +509,6 @@ div.results {
     color: #AC2000;
 }
 .results h2 {
-    float: left;
     height: 30px;
 }
 .result h2 {

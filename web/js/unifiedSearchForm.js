@@ -208,7 +208,7 @@
 
             data = data || {};
             data.st = data.st || $('#us_results').data('searchType');
-            data.page = Math.max(data.page || 0, 0);
+            data.p = Math.max(data.p || 0, 0);
 
             $form.ajaxSubmit({
                 data: data,
@@ -314,8 +314,8 @@
                 data.st = params.st;
             }
 
-            if (params.page) {
-                data.page = params.page;
+            if (params.p) {
+                data.p = params.p;
             }
 
             // Check for excluded attributes ("f[group][]=id") within the query string

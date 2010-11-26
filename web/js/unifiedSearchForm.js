@@ -163,7 +163,10 @@
         function formBeforeSerialize($form, options) {
             $('#filtersForm input:not(.selectAll)').each(function() {
                 if (!$(this).is(':checked')) {
-                    options.data[this.name] = this.value;
+                    if (!$.isArray(options.data[this.name])) {
+                        options.data[this.name] = [];
+                    }
+                    options.data[this.name].push(this.value);
                 }
             });
         }

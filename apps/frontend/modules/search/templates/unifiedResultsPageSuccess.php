@@ -11,7 +11,7 @@
 
 <div id="searchIndicator"><span>Updating results..</span></div>
 
-<div class="us_filters">
+<div class="search">
     <div id="us_filters" class="filters"></div>
 </div>
 

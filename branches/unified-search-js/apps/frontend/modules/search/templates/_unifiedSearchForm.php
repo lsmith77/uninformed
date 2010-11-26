@@ -1,5 +1,6 @@
-<form action="<?php echo url_for('unifiedSearch'); ?>" method="GET" id="us_form" data-ajaxAction="<?php echo url_for('@clauseSearch?action=results'); ?>">
+<form action="<?php echo url_for('unifiedSearch'); ?>" method="GET" id="us_form" data-ajaxAction="<?php echo url_for('clauseSearch', array('action' => 'results')); ?>">
     <label for="us_help"><input type="checkbox" id="us_help"> Show Help</label>
+    <a id="us_search_link" data-baseUrl="<?php echo url_for('unifiedSearch', array(), true); ?>" style="display:none;">Link to this search</a>
 
     <div class="query">
         <input type="text" name="q" id="us_query" value="<?php echo $query ?>" placeholder="Containing Text" />

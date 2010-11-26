@@ -715,17 +715,7 @@ a.toggleCol.closed {
     line-height: 67px;
 }
 
-.support .liip {
-    background: url(/images/liip.png) no-repeat;
-    width: 154px;
-    height: 68px;
-    display: block;
-    float: right;
-    line-height: 50px;
-    margin-left: 10px;
-}
-
-.support .liip span {
+.support span {
     position: absolute;
     top: -5000px;
     left: -2000px;
@@ -741,10 +731,36 @@ a.toggleCol.closed {
     margin-left: 10px;
 }
 
-.support .jngldrm span {
-    position: absolute;
-    top: -5000px;
-    left: -2000px;
+.support .jfe {
+    background: url(/images/jfe.jpg) no-repeat;
+    width: 142px;
+    height: 44px;
+    display: block;
+    float: left;
+    line-height: 50px;
+    margin-left: 84px;
+    margin-top: 15px;
+}
+
+.support .isn {
+    background: url(/images/isn.gif) no-repeat;
+    width: 128px;
+    height: 60px;
+    display: block;
+    float: left;
+    line-height: 50px;
+    margin-left: 84px;
+    margin-top: 5px;
+}
+
+.support .liip {
+    background: url(/images/liip.png) no-repeat;
+    width: 154px;
+    height: 68px;
+    display: block;
+    float: left;
+    line-height: 50px;
+    margin-left: 84px;
 }
 
 span.tooltip a {

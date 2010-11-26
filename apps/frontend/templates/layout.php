@@ -66,7 +66,9 @@
     <?php echo $sf_content ?>
     <noscript><p class="noscript">This site runs *much* better with javascript enabled</p></noscript>
     <p class="support">
-        <a href="http://jngldrm.org/" class="jngldrm"><span>jungle drum</span></a>
+        <a href="http://jngldrm.org/" class="jngldrm"><span>Jungle Drum</span></a>
+        <a href="http://www.isn.ethz.ch/" class="isn"><span>International Relations and Security Network (ISN)</span></a>
+        <a href="http://www.jugendfuereuropa.de/" class="jfe"><span>Jugend für Europa</span></a>
         <a href="http://liip.ch/" class="liip"><span>Liip AG - Agile web development - Zurich, Fribourg, Bern</span></a>
     </p>
     </div>

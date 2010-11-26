@@ -184,7 +184,11 @@ class searchActions extends sfActions
 
         $criteria = new sfLuceneFacetsCriteria;
 
-        $facet_field = strpos($term, ' ') === false ? 'autosuggest' : 'autosuggest_shingle';
+        $facet_field = 'autosuggest';
+        if (strpos($term, '"') === 0) {
+            $term = substr($term, 1);
+            $facet_field = 'autosuggest_shingle';
+        }
         $criteria->addFacetField($facet_field);
         $criteria->add('*:*', 'AND', true);
         $criteria->addParam('rows', '1');

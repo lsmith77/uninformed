@@ -90,7 +90,7 @@
 
             if (numQuotes % 2) {
                 // Last term is an unclosed, quoted phrase
-                return lastQuoteIndex + 1;
+                return lastQuoteIndex;
             } else {
                 // Last term is a single word; do not include the leading quote/space
                 var pad = (lastQuoteIndex > 0 || lastSpaceIndex > 0 ? 1 : 0);

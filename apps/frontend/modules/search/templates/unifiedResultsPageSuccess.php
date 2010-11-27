@@ -15,7 +15,7 @@
 
         <p>Please use the form on the left to enter search criteria.</p>
 
-        <p>On the following page additional filters can be set to further narrow down the results shown.</p>
+        <p>Once a search has been triggered additional filters can be set to further narrow down the results shown.</p>
 
         <p>Searches are currently limited to the areas of small arms and light
         weapons, women and education, clean drinking water and malaria.</p>

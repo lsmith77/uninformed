@@ -11,23 +11,21 @@
 
 <div class="search">
     <div id="us_filters" class="filters">
-        <pre>
-    Enter search terms ..
-    More Instructions ..
-    Bla  ..
-    Bla  ..
-    Bla  ..
-    Bla  ..
-    Bla  ..
-    Bla  ..
-    Bla  ..
-    Bla  ..
-        </pre>
+        <h2>ResolutionFinder.org</h2>
+
+        <p>Please use the form on the left to enter search criteria.</p>
+
+        <p>On the following page additional filters can be set to further narrow down the results shown.</p>
+
+        <p>Searches are currently limited to the areas of small arms and light
+        weapons, women and education, clean drinking water and malaria.</p>
+
+        </p>At the moment, the database only contains clauses and documents negotiated by states.</p>
     </div>
 </div>
 
 <div class="search_form_and_results">
-    <h1>Search for clauses or document</h1>
+    <h1>Search for clauses or documents</h1>
 
     <?php include_partial('search/unifiedSearchForm', $sf_data); ?>
 

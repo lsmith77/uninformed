@@ -90,7 +90,7 @@ $(function(){
         source: '/search/searchDocumentCode',
         select: function(e, ui) {
             e.preventDefault();
-            $('#documentCode').attr.('value', ui.item.label);
+            $('#documentCode').attr('value', ui.item.label);
         }
     });
 

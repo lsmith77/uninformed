@@ -107,6 +107,16 @@
             focus: function(e) {
                 e.preventDefault();
             },
+            // Disable autocomplete if we know the user is not editing the last term
+            search: function(e) {
+                var selection = $(this).getSelection();
+                
+                if (selection) {
+                    return selection.start >= indexOfLastTerm(this.value);
+                } else {
+                    return true;
+                }
+            },
             select: function(e, ui) {
                 e.preventDefault();
                 var lastTermIndex = indexOfLastTerm(this.value);

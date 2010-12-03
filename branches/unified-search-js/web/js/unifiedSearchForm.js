@@ -27,13 +27,6 @@
             return prefillTags;
         }
 
-        function getTagIdForSelectionItem(selectionItem) {
-            var index = selectionItem.index();
-            if (index != -1) {
-                return $('#as-values-us_tags').val().split(',')[index + 1];
-            }
-        }
-
         function getTagNameForSelectionItem(selectionItem) {
             return selectionItem[0].lastChild.textContent;
         }

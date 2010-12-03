@@ -107,12 +107,19 @@
             focus: function(e) {
                 e.preventDefault();
             },
-            // Disable autocomplete if we know the user is not editing the last term
             search: function(e) {
+                var lastTermIndex = indexOfLastTerm(this.value);
+
+                // Disable autocomplete if the last term is empty
+                if (! $.trim(this.value.substr(lastTermIndex))) {
+                    return false;
+                }
+
                 var selection = $(this).getSelection();
-                
+
+                // Disable autocomplete if a term prior to the last is being edited
                 if (selection) {
-                    return selection.start >= indexOfLastTerm(this.value);
+                    return selection.start >= lastTermIndex;
                 } else {
                     return true;
                 }

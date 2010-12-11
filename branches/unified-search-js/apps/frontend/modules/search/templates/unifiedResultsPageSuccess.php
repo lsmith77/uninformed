@@ -3,7 +3,6 @@
 <?php $sf_response->removeJavascript('/js/search.js'); ?>
 
 <?php use_javascript('/js/jquery.autoSuggest.js'); ?>
-<?php use_javascript('/js/jquery.fieldselection.js'); ?>
 <?php use_javascript('/js/jquery.form.js'); ?>
 <?php use_javascript('/js/jquery.placeholder.js'); ?>
 <?php use_javascript('/js/unifiedSearchForm.js'); ?>
@@ -14,7 +13,7 @@
     <div id="us_filters" class="filters">
         <h2>ResolutionFinder.org</h2>
 
-        <p>Please use the form on the left to enter search criteria.</p>
+        <p>Please use the form on the right to enter search criteria.</p>
 
         <p>Once a search has been triggered additional filters can be set to further narrow down the results shown.</p>
 

@@ -30,12 +30,16 @@ news:
   url:   /news
   param: { module: default, action: news }
 
+searchResults:
+  url:   /search/results
+  param: { module: search, action: results }
+
 unifiedSearch:
   url:   /search/unifiedResults
   param: { module: search, action: unifiedResultsPage }
 
 clauseSearch:
-  url:   /search/:action
+  url:   /search/clauseResultsPage
   param: { module: search, action: clauseResultsPage }
 
 sf_guard_signin:

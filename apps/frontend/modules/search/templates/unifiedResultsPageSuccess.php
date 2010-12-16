@@ -25,11 +25,14 @@
 </div>
 
 <div class="search_form_and_results">
+	
+	<div id="search_form">
     <h1>Search for clauses or documents</h1>
-
     <?php include_partial('search/unifiedSearchForm', $sf_data); ?>
-
+	</div>
+	
     <div id="us_results" class="results"></div>
+
 </div>
 
 <div style="clear: both;"></div>
@@ -76,14 +79,14 @@
 <script type="text/x-jqote-template" id="resultsTpl">
     <![CDATA[
     <div class="colorcoding">
-        legend:
+        <strong>Legend:</strong>
         <span class="scresolutions">SC resolutions</span>
         <span class="ratlegal">legally binding (in force)</span>
         <span class="nonratlegal">legally binding (not in force)</span>
         <span class="nonlegal">non-legally binding</span>
     </div>
     <% if (this.totalResults) { %>
-        <h2><%= this.totalResults %> <%= this.searchType %>s found (page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
+        <h2 class="resultcount"><%= this.totalResults %> <%= this.searchType %>s found (page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
     <% } else if (!this.searchType) { %>
         <h2>no matches</h2>
     <% } else { %>
@@ -147,12 +150,12 @@
             </p>
         <% } %>
         <p>
-            <span class="tags highlight">Tags:
+            <span class="tags highlight"><strong>Tags:</strong>
             <%
                 for (j = 0; j < res.Tags.length; j++) {
                     var tag = res.Tags[j].name;
                     if (res.Tags[j].highlight) {
-                        tag = '<strong>'+tag+'</strong>';
+                        tag = '<span>'+tag+'</span>';
                     }
                     if (j > 0) {
                         tag = ', '+tag;
@@ -164,7 +167,7 @@
         <p>
     </div>
     <% } %>
-    <div class="prevnext">
+    <div class="prevnext prevnextbottom">
     <%
         $('.results').data('page', this.page);
         if (this.page > 0) { %>

@@ -96,7 +96,9 @@ h2  {
     margin-bottom: 10px;
 }
 
-h2 a {text-decoration: none;}
+h2 a {
+    text-decoration: none;
+}
 
 h3 {
     font-size: 14px;
@@ -136,21 +138,38 @@ form table td, form table th {
     padding: 0;
 }
 
-input[type=submit] {
+input[type=submit], .searchButtons input {
+    font-family: arial, sans-serif;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    background:url(/images/gradient-red.png) repeat-x scroll left top #951C00;
-    border:1px solid #721500;
-    color:#FFFFFF;
+    background:url(/images/gradient-red.png) repeat-x scroll left top #951c00;
+    border:1px solid #791700;
+    border-top: 1px solid #bd492f;
+    border-left: 1px solid #a7422b;
+    color:#f4f4f4;
     cursor:pointer;
     font-size:13px;
     font-weight:bold;
     height:28px;
-    line-height:26px;
-    padding:0 6px;
+    line-height:28px;
+    padding:0 6px 2px 6px;
+    text-shadow: -1px -1px 1px rgba(0,0,0,0.4);
+    -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+    -moz-box-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.4);
 }
-
+input[type=submit]:hover, .searchButtons input:hover {
+    background: #b12100;
+    border:1px solid #791700;
+    border-top: 1px solid #bd492f;
+    border-left: 1px solid #a7422b;
+    color:#fff;
+    text-shadow: -1px -1px 1px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+}
 .error_list {
     color: #AC2000;
     float: right;
@@ -440,7 +459,6 @@ div.search {
 .filterGroup {
     margin: 0 0 .4em;
 }
-
 /* SEARCH RESULTS & CLAUSES/DOCUMENTS DETAILVIEW */
 .clauseList li {
     position: relative;
@@ -465,9 +483,7 @@ div.search {
 }
 
 span.tags {
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 90%;
+    font-size: 12px;
 }
 
 #documentCode a {
@@ -494,11 +510,7 @@ span.tags {
     background: #f0f0f0;
 }
 div.results {
-    margin: 20px 0 80px;
-    padding: 0;
-}
-.results strong {
-    text-decoration: underline;
+    margin: 0 0 80px 0;
 }
 .results a {
     color: #000;
@@ -510,6 +522,15 @@ div.results {
 }
 .results h2 {
     height: 30px;
+}
+.results .resultcount {
+    font-size: 14px;
+    line-height: 27px;
+    font-weight: normal;
+    height: 27px;
+    padding: 2px 0 0px 10px;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
 }
 .result h2 {
     font-size: 15px;
@@ -523,19 +544,32 @@ div.results {
     text-decoration: none;
 }
 .result h3 {
-    font-size: 11px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
     margin: 5px 0;
     text-transform: uppercase;
 }
 
 .highlight strong {
-   color: #AC2000;
    text-decoration: none;
 }
-
+.highlight span {
+   text-decoration: none;
+   background: #ffffe6;
+   padding: 3px;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+}
 .prevnext {
     float: right;
     height: 30px;
+    position: relative;
+    top: -24px;
+    right: 3px;
+}
+.prevnextbottom {
+    top:6px;
 }
 .results .prevPage, .results .nextPage, .addbookmark, .removebookmark {
     padding: 5px 10px;
@@ -546,25 +580,51 @@ div.results {
     text-decoration: none;
     font-weight: normal;
     border: 1px solid #ccc;
+    color: #666;
+    text-shadow: 0 1px 1px #fff;
+}
+.results .prevPage:hover, .results .nextPage:hover, .addbookmark:hover, .removebookmark:hover {
+    background: #ececec url(/images/gradient-light.png) repeat-x top left;
+    border: 1px solid #ddd;
+    color: #333;
 }
 .addbookmark, .removebookmark {
     float: right;
 }
 .colorcoding {
-    position: absolute;
-    top: 168px;
-    right: 0;
+    text-align: right;
     font-size: 11px;
     color: #888;
+    background: #fafafa;
+    padding: 4px 0;
+    margin: 10px 0 0 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.colorcoding strong {
+    padding: 0 5px;
 }
 .colorcoding span {
     padding: 0 5px;
     border-width: 12px;
 }
 .result {
-    margin: 40px 0 25px 0;
-    padding: 0 20px 0 0;
+    margin: 0;
     color: #444;
+    padding: 20px 20px 20px 10px;
+    border-bottom: 1px solid #ddd;
+}
+.result:hover {
+    background: #fcfcfc;
+}
+.result:hover h2 a {
+    color: #AC2000;
+}
+.result p.content {
+    margin: 5px 0;
+}
+.result p {
+    margin-bottom: 0;
 }
 .scresolutions {/* blue */
     border-right: 3px solid #0058bc;
@@ -715,7 +775,16 @@ a.toggleCol.closed {
     margin-top: 20px;
     line-height: 67px;
 }
-
+.support a {
+    display: block;
+    float: left;
+    width: 200px;
+    height: 100px;
+    line-height: 100px;
+    position: relative;
+    left: 20px;
+    margin: 0 40px 0 0;
+}
 .support span {
     position: absolute;
     top: -5000px;
@@ -723,45 +792,19 @@ a.toggleCol.closed {
 }
 
 .support .jngldrm {
-    background: url(/images/jngldrm.gif) no-repeat;
-    width: 272px;
-    height: 70px;
-    display: block;
-    float: left;
-    line-height: 50px;
-    margin-left: 10px;
+    background: url(/images/logo-jungledrum.png) no-repeat;
 }
 
 .support .jfe {
-    background: url(/images/jfe.jpg) no-repeat;
-    width: 142px;
-    height: 44px;
-    display: block;
-    float: left;
-    line-height: 50px;
-    margin-left: 84px;
-    margin-top: 15px;
+    background: url(/images/logo-jfe.png) no-repeat;
 }
 
 .support .isn {
-    background: url(/images/isn.gif) no-repeat;
-    width: 128px;
-    height: 60px;
-    display: block;
-    float: left;
-    line-height: 50px;
-    margin-left: 84px;
-    margin-top: 5px;
+    background: url(/images/logo-isn.png) no-repeat;
 }
 
 .support .liip {
-    background: url(/images/liip.png) no-repeat;
-    width: 154px;
-    height: 68px;
-    display: block;
-    float: left;
-    line-height: 50px;
-    margin-left: 84px;
+    background: url(/images/logo-liip.png) no-repeat;
 }
 
 span.tooltip a {

@@ -3,6 +3,7 @@
 <?php $sf_response->removeJavascript('/js/search.js'); ?>
 
 <?php use_javascript('/js/jquery.autoSuggest.js'); ?>
+<?php use_javascript('/js/jquery.fieldselection.js'); ?>
 <?php use_javascript('/js/jquery.form.js'); ?>
 <?php use_javascript('/js/jquery.placeholder.js'); ?>
 <?php use_javascript('/js/unifiedSearchForm.js'); ?>
@@ -25,12 +26,12 @@
 </div>
 
 <div class="search_form_and_results">
-	
-	<div id="search_form">
+
+    <div id="search_form">
     <h1>Search for clauses or documents</h1>
     <?php include_partial('search/unifiedSearchForm', $sf_data); ?>
-	</div>
-	
+    </div>
+
     <div id="us_results" class="results"></div>
 
 </div>

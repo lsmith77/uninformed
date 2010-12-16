@@ -32,8 +32,15 @@
     <?php include_partial('search/unifiedSearchForm', $sf_data); ?>
     </div>
 
-    <div id="us_results" class="results"></div>
+    <div class="colorcoding">
+        <strong>Legend:</strong>
+        <span class="scresolutions">SC resolutions</span>
+        <span class="ratlegal">legally binding (in force)</span>
+        <span class="nonratlegal">legally binding (not in force)</span>
+        <span class="nonlegal">non-legally binding</span>
+    </div>
 
+    <div id="us_results" class="results"></div>
 </div>
 
 <div style="clear: both;"></div>
@@ -79,19 +86,11 @@
 
 <script type="text/x-jqote-template" id="resultsTpl">
     <![CDATA[
-    <div class="colorcoding">
-        <strong>Legend:</strong>
-        <span class="scresolutions">SC resolutions</span>
-        <span class="ratlegal">legally binding (in force)</span>
-        <span class="nonratlegal">legally binding (not in force)</span>
-        <span class="nonlegal">non-legally binding</span>
-    </div>
     <% if (this.totalResults) { %>
         <h2 class="resultcount"><%= this.totalResults %> <%= this.searchType %>s found (page <%= (this.page+1) %> of <%= Math.ceil(this.totalResults/this.limit) %>)</h2>
-    <% } else if (!this.searchType) { %>
-        <h2>no matches</h2>
     <% } else { %>
-        <h2>Please enter a search term</h2>
+        <br />
+        <h2 class="resultcount">Not matches found for the entered search terms.</h2>
     <% }
     var cnt = this.data.length; %>
     <div class="prevnext">
@@ -151,12 +150,12 @@
             </p>
         <% } %>
         <p>
-            <span class="tags highlight"><strong>Tags:</strong>
+            <span class="tags highlight">Tags:
             <%
                 for (j = 0; j < res.Tags.length; j++) {
                     var tag = res.Tags[j].name;
                     if (res.Tags[j].highlight) {
-                        tag = '<span>'+tag+'</span>';
+                        tag = '<strong>'+tag+'</strong>';
                     }
                     if (j > 0) {
                         tag = ', '+tag;

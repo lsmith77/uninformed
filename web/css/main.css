@@ -572,7 +572,7 @@ div.results {
     top:6px;
 }
 .results .prevPage, .results .nextPage, .addbookmark, .removebookmark {
-    padding: 5px 10px;
+    padding: 3px 7px;
     background: #e2e2e2 url(/images/gradient.png) repeat-x top left;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;

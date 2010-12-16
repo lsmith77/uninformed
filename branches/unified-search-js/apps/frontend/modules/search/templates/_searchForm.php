@@ -17,7 +17,7 @@
     <?php if (!empty($showHelp)): ?>
     <span class="helptext">Enter text to search document title and clause content. Phrases may be enclosed in double
         quotes, exclude terms by prefixing with - and make terms mandatory by prefixing with +. For example:
-        <?php echo link_to('"security council" -africa +region', '@search?q='.urlencode('"security council" -africa +region')); ?></span>
+        <?php echo link_to('"security council" -africa +region', '@'.sfContext::getInstance()->getRouting()->getCurrentRouteName().'?q='.urlencode('"security council" -africa +region')); ?></span>
     <?php endif; ?>
 </p>
 

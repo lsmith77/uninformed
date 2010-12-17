@@ -28,7 +28,7 @@
         }
 
         function getTagNameForSelectionItem(selectionItem) {
-            return selectionItem[0].lastChild.textContent;
+            return selectionItem[0].lastChild.nodeValue;
         }
 
         function selectionAdded(elem, tagId) {

@@ -6,7 +6,7 @@ $clauses = $document->getClauseList();
 $description = '';
 if (!empty($clauses)) {
     foreach($clauses as $key => $clause) {
-        $description = $clause->ClauseBody->getContent(true);
+        $description = $clause->ClauseBody->getContent();
         break;
     }
 }

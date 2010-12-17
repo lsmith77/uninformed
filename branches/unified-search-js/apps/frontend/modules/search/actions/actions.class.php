@@ -455,10 +455,11 @@ class searchActions extends sfActions
                     $document_ids = array_keys($metadata);
                 } else {
                     $q = Doctrine_Query::create()
-                        ->select("CONCAT(c.id, '-', c.slug) AS slug, c.document_id, TRIM(CONCAT(c.clause_number, ' ', COALESCE(c.clause_number_information, ''), ' ', COALESCE(c.clause_number_subparagraph, ''))) AS clause_number, cb.id, cb.root_clause_body_id, cit.name")
+                        ->select("CONCAT(c.id, '-', c.slug) AS slug, c.document_id, TRIM(CONCAT(c.clause_number, ' ', COALESCE(c.clause_number_information, ''), ' ', COALESCE(c.clause_number_subparagraph, ''))) AS clause_number, cop.name, c.id, cb.id, cb.root_clause_body_id, cit.name")
                         ->from('clause c')
                         ->innerJoin('c.ClauseBody cb')
                         ->leftJoin('cb.ClauseInformationType cit')
+                        ->leftJoin('cb.ClauseOperativePhrase cop')
                         ->whereIn('c.id', array_keys($metadata))
                         ->orderBY('FIELD(c.id, '.implode(',', array_keys($metadata)).')');
                     $clauses = $q->fetchArray();
@@ -475,12 +476,15 @@ class searchActions extends sfActions
                                 ->innerJoin('c.ClauseBody cb')
                                 ->where('cb.id = ? OR cb.root_clause_body_id = ?', array($root_clause_body_id, $root_clause_body_id));
                             $clauses[$key]['clauseHistory'] = $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
-                            $clauses[$key]['clauseHistory'] = $clauses[$key]['clauseHistory'] > 1 ? 1 : 0;
+                            $clauses[$key]['clauseHistory'] = $clause['clauseHistory'] > 1 ? 1 : 0;
                         } else {
                             $clauses[$key]['clauseHistory'] = 0;
                         }
 
-                        $document_ids[] = $clauses[$key]['document_id'];
+                        $document_ids[] = $clause['document_id'];
+                        if (!empty($clause['ClauseBody']['ClauseOperativePhrase']['name'])) {
+                            $metadata[$clause['id']]['content'] = ClauseBody::applyOperativePhraseToContent($metadata[$clause['id']]['content'], $clause['ClauseBody']['ClauseOperativePhrase']['name']);
+                        }
                     }
                 }
 

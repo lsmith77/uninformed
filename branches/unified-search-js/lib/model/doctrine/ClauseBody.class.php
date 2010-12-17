@@ -38,12 +38,21 @@ class ClauseBody extends BaseClauseBody
         }
     }
 
-    public function getContent($original = false) {
+    public static function applyOperativePhraseToContent($content, $operative_phrase)
+    {
+        return preg_replace('#\b('.preg_quote($operative_phrase, '#').')\b#i', '<em>$1</em>', $content);
+    }
+
+    public function getContent($original = true) {
+        $content = $this->_get('content');
         if ($original) {
-            return $this->_get('content');
+            return $content;
         }
-        $operative_phrase = (string)$this->_get('ClauseOperativePhrase');
-        return preg_replace('#\b('.preg_quote($operative_phrase, '#').')\b#i', '<em>$1</em>', $this->_get('content'));
+        $operative_phrase = trim($this->_get('ClauseOperativePhrase'));
+        if (empty($operative_phrase)) {
+            return $content;
+        }
+        return self::applyOperativePhraseToContent($content, $operative_phrase);
     }
 
     public function __toString() {

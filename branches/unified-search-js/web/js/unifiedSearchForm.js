@@ -198,7 +198,11 @@
         }
 
         function formSuccess(response) {
-            $("#searchIndicator").html('<span>'+response.totalResults+' results (page '+(response.page+1)+' of '+(Math.ceil(response.totalResults/response.limit))+')</span>');
+            if (response.totalResults) {
+                $("#searchIndicator").html('<span>'+response.totalResults+' results (page '+(response.page+1)+' of '+(Math.ceil(response.totalResults/response.limit))+')</span>');
+            } else {
+                $("#searchIndicator").html('<span>no results found</span>');
+            }
 
             window.setTimeout(function() {
                 $('#searchIndicator').fadeOut('slow');

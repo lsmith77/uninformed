@@ -31,8 +31,12 @@ $(function(){
         $.getJSON(url, null, function(data, status) {
             $('.filters').jqotesub($('#filtersTpl'), data);
             $('.results').jqotesub($('#resultsTpl'), data);
-            
-            $("#searchIndicator").html('<span>'+data.totalResults+' results (page '+(data.page+1)+' of '+(Math.ceil(data.totalResults/data.limit))+')</span>');
+
+            if (data.totalResults) {
+                $("#searchIndicator").html('<span>'+data.totalResults+' results (page '+(data.page+1)+' of '+(Math.ceil(data.totalResults/data.limit))+')</span>');
+            } else {
+                $("#searchIndicator").html('<span>no results found</span>');
+            }
 
             setTimeout(function() {
                 $('#searchIndicator').fadeOut('slow');

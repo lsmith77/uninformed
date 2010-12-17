@@ -101,7 +101,9 @@
     <% }
     if (cnt > this.limit) { cnt = this.limit; %>
         <a class="nextPage">next</a>
-    <% }
+    <% } %>
+    </div>
+    <%
     for (i = 0; i < cnt; i++) {
     var res = this.data[i];
     var itemclass = 'nonlegal';
@@ -121,7 +123,6 @@
         }
     }
     %>
-    </div>
     <div class="result <%= itemclass %>">
         <h2 class="doctitle highlight">
             <% if (this.searchType == 'clause') { %>

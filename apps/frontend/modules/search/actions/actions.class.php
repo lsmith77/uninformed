@@ -292,9 +292,9 @@ class searchActions extends sfActions
 
         if (!empty($documentCode)) {
             if (substr($documentCode, -1, 1) === '*') {
-                $criteria->addField('+document_code_prefix', substr($documentCode, 0, -1), 'AND');
+                $criteria->add('+document_code_prefix:'.sfLuceneService::escape(substr($documentCode, 0, -1)), 'AND', true);
             } else {
-                $criteria->addField('+document_code', $documentCode, 'AND');
+                $criteria->add('document_code:'.sfLuceneService::escape($documentCode), 'AND', true);
             }
         }
 

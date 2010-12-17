@@ -12,7 +12,7 @@
     <?php foreach($clauses as $key => $clause): ?>
     <li>
         <?php echo link_to($clause->getFullClauseNumber(), 'clause', array('id' => $clause->getSlug())); ?>:
-        <?php echo $contents[$key]->ClauseBody->getContent(); ?>
+        <?php echo $contents[$key]->ClauseBody->getContent(false); ?>
     </li>
     <?php endforeach; ?>
 </ul>

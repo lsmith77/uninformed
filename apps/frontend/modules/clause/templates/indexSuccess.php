@@ -1,7 +1,7 @@
 <?php
 
 slot('title', (string)$clause);
-slot('description', $clauseBody->getContent(true));
+slot('description', $clauseBody->getContent());
 slot('canonical', url_for('document', array('id' => $document->getSlug()), true));
 
 $keywords = '';
@@ -56,7 +56,7 @@ slot('keywords', $keywords);
 
 <h2><a href="#" class="toggleCol" target="clauseContent">Content</a></h2>
 <div id="clauseContent">
-    <?php echo $sf_data->getRaw('clauseBody')->getContent() ?>
+    <?php echo $sf_data->getRaw('clauseBody')->getContent(false) ?>
 </div>
 
 <?php

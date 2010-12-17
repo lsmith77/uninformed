@@ -4,14 +4,10 @@
 # default rules
 homepage:
   url:   /
-  param: { module: search, action: index }
+  param: { module: search, action: unifiedResultsPage }
 
 search:
   url:   /
-  param: { module: search, action: index }
-
-unified:
-  url:   /unified
   param: { module: search, action: unifiedResultsPage }
 
 searchOldIndex:

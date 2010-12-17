@@ -26,8 +26,8 @@ news:
   url:   /news
   param: { module: default, action: news }
 
-searchResults:
-  url:   /search/results
+searchActions:
+  url:   /search/:action
   param: { module: search, action: results }
 
 unifiedSearch:

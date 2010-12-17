@@ -2,7 +2,7 @@
 #search_form {
     margin: 0;
     padding: 10px;
-        background: #ececec url(/images/gradient-light.png) repeat-x top left;
+    background: #ececec url(/images/gradient-light.png) repeat-x top left;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -10,6 +10,28 @@
     border-top: 1px solid #e2e2e2;
     border-left: 1px solid #e2e2e2;
 }
+
+/* float clearing for IE6 */
+#search_form {
+  height: 1%;
+  overflow: visible;
+}
+
+/* float clearing for IE7 */
+#search_form {
+  min-height: 1%;
+}
+
+/* float clearing for everyone else */
+#search_form:after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+  font-size: 0;
+}
+
 #search_form h1 {
     float: left;
     font-size: 15px;

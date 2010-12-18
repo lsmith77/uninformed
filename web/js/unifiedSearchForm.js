@@ -242,7 +242,7 @@
     // Live events for pagination and filters
     (function() {
         function reloadPage() {
-            $('#us_form').trigger('submit', [ { p: $('#us_results').data('page') } ]);
+            $('#us_form').trigger('submit', [ { p: 0 } ]);
         }
 
         function loadNextPage(e) {

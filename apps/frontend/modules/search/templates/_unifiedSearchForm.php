@@ -25,9 +25,8 @@
     </div>
 
     <div class="searchButtons">
-        Search for
-        <input type="button" value="Clauses" data-searchType="clause" /> or
-        <input type="button" value="Documents" data-searchType="document" />
+        <input type="button" value="Search for Documents" data-searchType="document" />
+        <input type="button" value="Search for Clauses" data-searchType="clause" />
     </div>
 
     <div style="clear: left;"></div>

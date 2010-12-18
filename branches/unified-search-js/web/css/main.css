@@ -271,8 +271,8 @@ input[type=submit]:hover, .searchButtons input:hover {
 
 #flash_notice {
     position: absolute;
-    top: 30px;
-    left: 30px;
+    top: 85px;
+    left: 350px;
 }
 /* HOME SEARCH */
 .homesearch fieldset{

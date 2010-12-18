@@ -45,7 +45,14 @@
         <span class="nonlegal">non-legally binding</span>
     </div>
 
-    <div id="us_results" class="results"></div>
+    <div id="us_results" class="results">
+        <p class="support" style="margin-left: 120px;">
+            <a href="http://jngldrm.org/" class="jngldrm"><span>Jungle Drum</span></a>
+            <a href="http://www.isn.ethz.ch/" class="isn"><span>International Relations and Security Network (ISN)</span></a>
+            <a href="http://www.jugendfuereuropa.de/" class="jfe"><span>Jugend für Europa</span></a>
+            <a href="http://liip.ch/" class="liip"><span>Liip AG - Agile web development - Zurich, Fribourg, Bern</span></a>
+        </p>
+    </div>
 </div>
 
 <div style="clear: both;"></div>

@@ -58,9 +58,8 @@
 }
 div.search_form_and_results {
     float: left;
-    margin-left: 10px;
-    padding: 0 10px 0 10px;
-    width: 680px;
+    margin-left: 20px;
+    width: 690px;
 }
 
 div.query, div.documentCode {
@@ -70,7 +69,7 @@ div.query, div.documentCode {
 }
 
 div.query #us_query {
-    width: 310px;
+    width: 320px;
 }
 
 div.tags, div.searchButtons {
@@ -84,7 +83,7 @@ div.documentCode {
 }
 
 div.documentCode #us_documentCode {
-    width: 112px;
+    width: 320px;
 }
 
 div.searchButtons {

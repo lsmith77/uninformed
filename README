@@ -23,8 +23,8 @@ Install just like any standard symfony application:
 Remember to also update your hosts file!
 
 Make the cache and log directories writeable for both apache and the command line:
-php symfony project:permissions
 php symfony plugin:publish-assets
+php symfony project:permissions
 
 Load the database schema (ensure that the credentials in config/databases.yml are correct):
 php symfony doctrine:build --all --and-load

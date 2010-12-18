@@ -12,11 +12,16 @@
 
 <div class="search">
     <div id="us_filters" class="filters">
-        <h2>ResolutionFinder.org</h2>
+        <h2>Welcome!</h2>
 
-        <p>Please use the form on the right to enter search criteria.</p>
+        <p>Please use the form on the right to enter search criteria. Additional filters will appear in this area once
+        a search has been triggered to further narrow down the search results.</p>
 
-        <p>Once a search has been triggered additional filters can be set to further narrow down the results shown.</p>
+        <p>Please visit the <?php echo link_to('help', '@help', array('target' => '_new')); ?> section for further
+        instructions or the <?php echo link_to('about', '@aboutus', array('target' => '_new')); ?> section to find out
+        more about this project as well as partnership opportunities.</p>
+
+        <h3>Note:</h3>
 
         <p>Searches are currently limited to the areas of small arms and light
         weapons, women and education, clean drinking water and malaria.</p>
@@ -28,7 +33,7 @@
 <div class="search_form_and_results">
 
     <div id="search_form">
-    <h1>Search for clauses or documents</h1>
+    <h1>Search for UN documents and clauses</h1>
     <?php include_partial('search/unifiedSearchForm', $sf_data); ?>
     </div>
 

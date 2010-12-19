@@ -317,11 +317,20 @@
             d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
             q = window.location.search.substring(1);
 
+
+        var trigger = false;
+        var key, value = '';
+        var regexp = /^(q|dc|t\[)/;
         while (e = r.exec(q)) {
-            params[d(e[1])] = d(e[2]);
+            key = d(e[1]);
+            value = d(e[2]);
+            params[key] = value;
+            if (value && key.match(regexp)) {
+                trigger = true;
+            }
         }
 
-        if (params.q) {
+        if (trigger) {
             data = {};
 
             if (params.st) {
@@ -334,7 +343,8 @@
 
             // Check for excluded attributes ("f[group][]=id") within the query string
             for (var name in params) {
-                if (/^f\[(\w+)\]\[\]$/.test(name) && /^\d+$/.test(params[name])) {
+                if (/^f\[(\w+)\]\[\]$/.test(name)) {
+//                if (/^f\[(\w+)\]\[\]$/.test(name) && /^\d+$/.test(params[name])) {
                     data[name] = params[name];
                 }
             }

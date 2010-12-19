@@ -17,7 +17,7 @@
         <p>Please use the form on the right to enter search criteria. Additional filters will appear in this area once
         a search has been triggered to further narrow down the search results.</p>
 
-        <p>Please visit the <?php echo link_to('help', '@help', array('target' => '_new')); ?> section for further
+        <p>Please visit the <?php echo link_to('help', '@help#search', array('target' => '_new')); ?> section for further
         instructions or the <?php echo link_to('about', '@aboutus', array('target' => '_new')); ?> section to find out
         more about this project as well as partnership opportunities.</p>
 

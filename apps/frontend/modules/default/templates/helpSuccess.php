@@ -29,20 +29,27 @@ slot('robots', 'INDEX, FOLLOW');
                 words and expressions from UN documents in their initial form).</p>
         </div>
         <div id="search">
-            <p>The clause search allows for both a free search as well as a tag search. The tag search is meant to help
-                the user find the desired results by suggesting tags assigned to the clauses and documents. The clause
-                search will yield a significant number of results which can then be narrowed down using the filters
-                provided by ResolutionFinder.org.</p>
+            <p>The document and clause search allows for both a free search as well as a search by tag and document code.
+                The tag search is meant to help the user find the desired results by suggesting tags assigned to the
+                clauses and documents. Especially the search for clauses will usually yield a significant number of
+                results which can then be narrowed down using the filters provided by ResolutionFinder.org. Filtering
+                by document code is a very effective way for experts to filter out non related documents.</p>
 
             <p>Support for complex queries allows users to specify their search preferences in the search box, by asking
                 deliberately including/excluding particular information from the results or to look for specific
                 phrases. Phrases are enclosed in double quotes ('"'), inclusion is made prefixing with plus sign ("+"),
                 exclusion is made prefixing with a minus sign ("-"). For instance the following search will list all the
-                results containing the phrase "security council" and the word "region", but which do not include the
-                word "africa": "security council" -africa  +region </p>
+                results containing the phrase "security council" and the word "africa", but which do not include the
+                word "regional": "security council" +africa  -regional </p>
 
-            <p>While the main focus of ResolutionFinder.org is that of the clause search, the database also provides a
-                document search based on document code.</p>
+            <p>Here is an <?php echo link_to('example', '@search?q=%22security+council%22+%2Bafrica+-regional&t%5B23%5D=malaria&dc=A%2FRES*&st=clause&p=0'); ?>
+                search that searches for clauses:
+                <ul>
+                    <li>text containing: "security council" +africa  -regional</li>
+                    <li>tagged with: malaria</li>
+                    <li>document code starting with: A/RES
+                </ul>
+            </p>
         </div>
         <div id="clause-history">
             <p>The history of the clause aims to illustrate the evolution of clauses from within follow-up documents

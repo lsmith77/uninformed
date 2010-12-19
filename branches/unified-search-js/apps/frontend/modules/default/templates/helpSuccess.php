@@ -45,7 +45,7 @@ slot('robots', 'INDEX, FOLLOW');
             <p>Here is an <?php echo link_to('example', '@search?q=%22security+council%22+%2Bafrica+-regional&t%5B23%5D=malaria&dc=A%2FRES*&st=clause&p=0'); ?>
                 search that searches for clauses:
                 <ul>
-                    <li>text containing: "security council" +africa  -regional</li>
+                    <li>text matching: "security council" +africa  -regional</li>
                     <li>tagged with: malaria</li>
                     <li>document code starting with: A/RES
                 </ul>

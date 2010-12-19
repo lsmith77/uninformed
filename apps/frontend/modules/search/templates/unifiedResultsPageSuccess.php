@@ -61,18 +61,17 @@
     <![CDATA[
     <h2>Search filters</h2>
     <form id="filtersForm">
-    <% var f, fId, item, folded, count; %>
-    <% var help = new Array;
-        help.legal_value = 'legal-values';
-        help.addressee_ids = 'addressees';
-        help.documenttype_id = 'document-types';
-        help.information_type_id = 'information-types';
-        help.tag_ids = 'tags';
-    %>
-    <% for (fId in this.facets) {
+    <% var f, fId, item, folded, count;
+       var help = new Array;
+       help.legal_value = 'legal-values';
+       help.addressee_ids = 'addressees';
+       help.documenttype_id = 'document-types';
+       help.information_type_id = 'information-types';
+       help.tag_ids = 'tags';
+       for (fId in this.facets) {
         f = this.filters[fId];
-        if (f && f.length) { %>
-        <% if (!this.facets[fId]['unfolded']) folded = ' folded'; else folded = ''; %>
+        if (f && f.length) {
+           if (!this.facets[fId]['unfolded']) { folded = ' folded'; } else { folded = '';} %>
         <h3>
             <span class="fold<%= folded %>"><span>Collapse/Expand</span></span><%= this.facets[fId]['label'] %>
             <% if (help[fId]) { %>
@@ -82,10 +81,10 @@
         <div class="filterGroup<%= folded %>">
             <% if (f.length > 3) { %>
               <label><input class="selectAll" type="checkbox"<% if (this.facets[fId]['allChecked']) { %><%= 'checked="checked" ' %><% } %>/>All</label>
-            <% } %>
-            <% for (item in f) { %>
-              <% item = f[item]; %>
-              <% count = item.filteredCount != undefined ? item.filteredCount : item.count; %>
+            <% }
+               for (item in f) {
+                   item = f[item];
+                   count = item.filteredCount != undefined ? item.filteredCount : item.count; %>
               <label><input type="checkbox" name="f[<%= $.htmlencode(fId) %>][]" value="<%= item.id %>" <% if (item.isChecked) { %><%= 'checked="checked" ' %><% } %><%= ((item.isChecked && (count == this.totalResults || count == 0)) ? 'disabled="disabled"':'') %> />
               <%= item.name %> <span class="count">(<% if (item.filteredCount != undefined) { %><%= item.filteredCount %> of <% } %><%= item.count %>)</span></label>
             <% } %>

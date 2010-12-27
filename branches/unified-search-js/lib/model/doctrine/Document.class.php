@@ -202,7 +202,7 @@ class Document extends BaseDocument
 
     public static function filterUrls(sfEvent $event, $urls)
     {
-        $urls = array('aboutus', 'news', 'help');
+        $urls = array('homepage', 'aboutus', 'news', 'help');
         foreach ($urls as $key => $route) {
             $urls[$key] = new isicsSitemapURL('@'.$route, date(DateTime::ATOM , filemtime(__DIR__.'/../../../apps/frontend/modules/default/templates/'.$route.'Success.php')));
         }

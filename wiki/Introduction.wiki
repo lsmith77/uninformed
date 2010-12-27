@@ -1,4 +1,4 @@
-#labels Featured
+#labels Deprecated
 = Introduction =
 
 We currently have a reference implementation for the backend in the [http://code.google.com/p/uninformed/source/browse/#svn/branches/backend-prototype backend-prototype branch] that will not be developed further. Based on this reference implementation we are now in the process of implementing the a final version of the backend and frontend. During planning we had to address the fact that we weren't sure how many development resources we have available. So we created plan A and plan B in order to be able to provide a fully working solution either way:

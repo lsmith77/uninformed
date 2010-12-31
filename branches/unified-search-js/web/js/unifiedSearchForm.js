@@ -191,10 +191,14 @@
 
             // Set the search results link's URL
             var queryString = $.param(arr);
-            var baseUrl = $('#us_search_link').data('baseUrl');
-            $('#us_search_link')
-                .attr('href', baseUrl + '?' + queryString)
-                .show();
+            var url = $('#us_search_link').data('baseUrl') + '?' + queryString;
+            if (window.history.pushState) {
+                window.history.pushState({}, "Search for " + queryString, url);
+            } else {
+                $('#us_search_link')
+                    .attr('href', url)
+                    .show();
+            }
         }
 
         function formSuccess(response) {

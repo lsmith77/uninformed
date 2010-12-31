@@ -121,7 +121,7 @@
                 e.preventDefault();
                 var lastTermIndex = indexOfLastTerm(this.value);
                 var isQuoted = this.value.charAt(Math.max(lastTermIndex, 0)) == '"';
-                this.value = this.value.substring(0, lastTermIndex) + (isQuoted ? '"' : ' ') + ui.item.value + (isQuoted ? '" ' : ' ');
+                this.value = this.value.substring(0, lastTermIndex) + (isQuoted ? '"' : '') + ui.item.value + (isQuoted ? '" ' : ' ');
             },
             source: function(request, response) {
                 var term = extractLastTerm(request.term);
@@ -188,6 +188,13 @@
             $("#searchIndicator")
                 .html('<span>Updating results..</span>')
                 .show();
+
+            // trim q and dc values
+            for (var name in arr) {
+                if (arr[name].name == 'q' | arr[name].name == 'dc') {
+                    arr[name].value = $.trim(arr[name].value);
+                }
+            }
 
             // Set the search results link's URL
             var queryString = $.param(arr);
@@ -348,7 +355,6 @@
             // Check for excluded attributes ("f[group][]=id") within the query string
             for (var name in params) {
                 if (/^f\[(\w+)\]\[\]$/.test(name)) {
-//                if (/^f\[(\w+)\]\[\]$/.test(name) && /^\d+$/.test(params[name])) {
                     data[name] = params[name];
                 }
             }

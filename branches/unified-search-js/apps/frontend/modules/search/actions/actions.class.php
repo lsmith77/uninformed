@@ -19,40 +19,48 @@ class searchActions extends sfActions
         'legal_value' => array(
             'unfolded' => false,
             'label' => 'Legal Value',
+            'key' => 'legal',
          ),
         'adoption_year' => array(
             'unfolded' => false,
             'label' => 'Adoption Year',
+            'key' => 'year',
          ),
         'organisation_id' => array(
             'model' => 'Organisation',
             'unfolded' => true,
             'label' => 'Organisation',
+            'key' => 'org',
          ),
         'addressee_ids' => array(
             'model' => 'Addressee',
             'unfolded' => false,
             'label' => 'Addressees',
+            'key' => 'addressee',
          ),
         'documenttype_id' => array(
             'model' => 'DocumentType',
             'unfolded' => false,
             'label' => 'Document Type',
+            'key' => 'doc-type',
          ),
         'information_type_id' => array(
             'model' => 'ClauseInformationType',
             'unfolded' => true,
             'label' => 'Clause Information Type',
+            'key' => 'info-type',
          ),
         'operative_phrase_id' => array(
             'model' => 'ClauseOperativePhrase',
             'unfolded' => false,
             'label' => 'Clause Operative Phrase',
+            'key' => 'op-phrase',
          ),
         'tag_ids' => array(
             'model' => 'Tag',
             'unfolded' => true,
             'label' => 'Tags',
+            'key' => 'tag',
          ),
     );
 
@@ -115,7 +123,17 @@ class searchActions extends sfActions
         $this->page = (int) $request->getGetParameter('p', 0);
         $this->documentCode = (string) $request->getGetParameter('dc');
         $this->searchType = (string) $request->getGetParameter('st', 'clause');
-        $this->filters = (array) $request->getGetParameter('f');
+        $tmp = (array) $request->getGetParameter('f');
+        $filters = array();
+        foreach ($tmp as $key => $filter) {
+            foreach ($this->facetConfig as $facet => $config) {
+                if ($config['key'] === $key) {
+                    $filters[$facet] = array_values($filter);
+                    break;
+                }
+            }
+        }
+        $this->filters = $filters;
     }
 
     public function executeIndex(sfWebRequest $request)

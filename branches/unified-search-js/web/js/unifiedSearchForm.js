@@ -354,7 +354,7 @@
 
             // Check for excluded attributes ("f[group][]=id") within the query string
             for (var name in params) {
-                if (/^f\[(\w+)\]\[\]$/.test(name)) {
+                if (/^f\[[^\]]+\]\[[^\]]*\]$/.test(name)) {
                     data[name] = params[name];
                 }
             }

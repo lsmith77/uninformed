@@ -200,7 +200,7 @@
             var queryString = $.param(arr);
             var url = $('#us_search_link').data('baseUrl') + '?' + queryString;
             if (window.history.pushState) {
-                window.history.pushState({}, "Search for " + queryString, url);
+                window.history.pushState({}, window.title, decodeURIComponent(url));
             } else {
                 $('#us_search_link')
                     .attr('href', url)

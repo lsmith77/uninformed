@@ -85,7 +85,7 @@
                for (item in f) {
                    item = f[item];
                    count = item.filteredCount != undefined ? item.filteredCount : item.count; %>
-              <label><input type="checkbox" name="f[<%= $.htmlencode(fId) %>][]" value="<%= item.id %>" <% if (item.isChecked) { %><%= 'checked="checked" ' %><% } %><%= ((item.isChecked && (count == this.totalResults || count == 0)) ? 'disabled="disabled"':'') %> />
+              <label><input type="checkbox" name="f[<%= $.htmlencode(this.facets[fId]['key']) %>][<%= (item.name == item.id ? '' : $.htmlencode(item.name)) %>]" value="<%= item.id %>" <% if (item.isChecked) { %><%= 'checked="checked" ' %><% } %><%= ((item.isChecked && (count == this.totalResults || count == 0)) ? 'disabled="disabled"':'') %> />
               <%= item.name %> <span class="count">(<% if (item.filteredCount != undefined) { %><%= item.filteredCount %> of <% } %><%= item.count %>)</span></label>
             <% } %>
         </div>

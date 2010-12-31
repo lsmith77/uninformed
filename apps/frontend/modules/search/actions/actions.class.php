@@ -126,6 +126,10 @@ class searchActions extends sfActions
         $tmp = (array) $request->getGetParameter('f');
         $filters = array();
         foreach ($tmp as $key => $filter) {
+            if (isset($this->facetConfig[$key])) {
+                $filters[$key] = array_values($filter);
+                continue;
+            }
             foreach ($this->facetConfig as $facet => $config) {
                 if ($config['key'] === $key) {
                     $filters[$facet] = array_values($filter);

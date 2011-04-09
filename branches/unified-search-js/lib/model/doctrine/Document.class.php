@@ -54,10 +54,11 @@ class Document extends BaseDocument
     }
 
     public function postSave($event) {
+        $invoker = $event->getInvoker();
+
         if ($this->titleChange) {
             $this->titleChange = false;
 
-            $invoker = $event->getInvoker();
             $clauses = $invoker->getClauses();
             foreach ($clauses as $clause) {
                 $slug = (string)$clause;
@@ -76,7 +77,7 @@ class Document extends BaseDocument
             }
         }
 
-        $root_document_id = $invoker->geId();
+        $root_document_id = $invoker->getId();
         $document = $invoker->getLatestAdoptedDocument();
         if (empty($document)) {
             return;

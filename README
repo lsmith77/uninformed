@@ -54,6 +54,8 @@ php symfony project:deploy production --go
 On the server:
 cd /var/www/un-informed.org
 php symfony cc
+php symfony plugin:publish-assets
+php symfony project:permissions
 php symfony project:disable prod
 php symfony doctrine:migrate
 php symfony project:enable prod

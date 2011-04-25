@@ -1,0 +1,34 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           ClauseBody
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          clause_body
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:
+        new: { credentials: [superadmin] }
+        delete: { credentials: [superadmin] }
+        list: { credentials: [admin] }
+        edit: { credentials: [admin] }
+      fields:  ~
+      list:
+        display: [_content, _status, _information_type, _operative_phrase, _addressees, author]
+        object_actions:
+          _edit:      ~
+        batch_actions: []
+        actions: []
+      filter:
+        display: ["quick edit search", author_id]
+      form:    ~
+      edit:
+        title: Edit Clause content
+        actions:
+          _save: ~
+      new: ~

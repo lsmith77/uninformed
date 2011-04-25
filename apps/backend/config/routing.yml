@@ -1,3 +1,12 @@
+clause_body:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                ClauseBody
+    module:               clause_body
+    prefix_path:          /clause_body
+    column:               id
+    with_wildcard_routes: true
+
 document_document_relation:
   class: sfDoctrineRouteCollection
   options:

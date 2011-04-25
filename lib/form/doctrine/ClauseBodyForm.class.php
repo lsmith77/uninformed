@@ -12,5 +12,20 @@ class ClauseBodyForm extends BaseClauseBodyForm
 {
   public function configure()
   {
+      $this->widgetSchema['parent_clause_body_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
+        array(
+          'model' => 'ClauseBody',
+          'module' => 'clause_body',
+          'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=clause_body&action=autocomplete'),
+        )
+      );
+
+      $this->widgetSchema['root_clause_body_id'] = new sfWidgetFormDoctrineJQueryChoiceAutocompleter(
+        array(
+          'model' => 'ClauseBody',
+          'module' => 'clause_body',
+          'url'   => sfContext::getInstance()->getController()->genUrl('@default?module=clause_body&action=autocomplete'),
+        )
+      );
   }
 }

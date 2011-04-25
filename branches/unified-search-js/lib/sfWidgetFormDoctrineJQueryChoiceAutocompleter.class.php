@@ -25,6 +25,7 @@ class sfWidgetFormDoctrineJQueryChoiceAutocompleter extends sfWidgetFormDoctrine
     protected function configure($options = array(), $attributes = array())
     {
       $this->addRequiredOption('url');
+      $this->addOption('module');
 
       parent::configure($options, $attributes);
     }
@@ -111,6 +112,7 @@ class sfWidgetFormDoctrineJQueryChoiceAutocompleter extends sfWidgetFormDoctrine
       );
     $autocompleter = $autocompleter->render($name, $value);
 
+    $edit = '';
     if ($this->getOption('multiple'))
     {
         // fix trailing _ due to value being an empty string out of toString()
@@ -133,9 +135,15 @@ class sfWidgetFormDoctrineJQueryChoiceAutocompleter extends sfWidgetFormDoctrine
             'if (data[1] > 0) { var dest = document.getElementById("'.$this->generateId($name).'"); dest.options[dest.length] = new Option(data[0], data[1]); }',
             $autocompleter
         );
+    } elseif ($this->getOption('module')) {
+        $edit = '&nbsp;<a href="#" onclick="url = \''
+            .url_for($this->getOption('module').'_edit', array('id' => 'XXX'))
+            .'\'; window.open(url.replace(\'XXX\', jQuery(\'#'
+            .$this->generateId($name).'\').val())); return false;">'
+            .__('Edit', array(), 'sf_admin');
     }
 
-    return '<strong>Search</strong>: '.$autocompleter.$html;
+    return '<strong>Search</strong>: '.$autocompleter.$html.$edit;
   }
 
   /**

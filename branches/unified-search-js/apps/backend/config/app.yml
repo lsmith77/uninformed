@@ -33,6 +33,8 @@ all:
             url:    document
           Clauses:
             url:    clause
+          "Clauses Content":
+            url:    clause_body
           "Document Reservation":
             url:    document_reservation
           "Clauses Reservation":

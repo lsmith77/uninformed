@@ -13,12 +13,6 @@ require_once dirname(__FILE__).'/../lib/clauseGeneratorHelper.class.php';
  */
 class clauseActions extends autoClauseActions
 {
-    public function executeAutocompleteClauseBody($request)
-    {
-      // TODO: caution, code may be empty
-      return autocompleteHelper::executeAutocomplete($this, $request, 'ClauseBody', 'id', 'content');
-    }
-
   public function executeAutocomplete($request)
   {
     $this->getResponse()->setContentType('application/json');

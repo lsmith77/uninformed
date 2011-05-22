@@ -66,6 +66,10 @@
     <?php echo $sf_content ?>
     <noscript><p class="noscript">This site runs *much* better with javascript enabled</p></noscript>
     <?php if ($route !== 'search' && $route !== 'clauseSearch' && $route !== 'homepage'): ?>
+    <p>
+        <span style="position: absolute;">Operated by</span>
+        <span style="position: absolute; margin-left: 480px;">Made possible by</span>
+    </p>
     <p class="support">
         <a href="http://jngldrm.org/" class="jngldrm"><span>Jungle Drum</span></a>
         <a href="http://www.isn.ethz.ch/" class="isn"><span>International Relations and Security Network (ISN)</span></a>

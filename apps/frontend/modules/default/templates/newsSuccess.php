@@ -21,13 +21,9 @@ slot('robots', 'INDEX, FOLLOW');
     <p>After two years of hard work during which Jungle Drum managed to elaborate a methodology and have a beta version
     of the database up and running, it was high time to speed up the development process and take things to a new level.</p>
 
-    <p>Representatives from Jungle Drum and the ISN met in Berlin in mid-September for a first round of discussions about
-    the cooperation and the developments over the next two years. Over this period they will work on building an
-    intelligent text mining tool (iTMT) to automatize a significant amount of work that is currently done manually.
-    The aim is to acquire this iTMT within one year and dedicate the next year to the development of 16 new thematic
-    issues for the database. The issues will be selected from the four areas that are currently in the beta version -
-    security, health, human rights and environment. The first phase of the partnership is expected to be concluded
-    before the end of the year with the official cooperation commencing in 2011.</p>
+    <p>Representatives from Jungle Drum and the ISN have already met several times for discussions in Berlin and Zurich
+    and an official cooperation will commence in 2011. The focus of the partners for the next couple of years will
+    lie with a substantial IT development phase, which is mandatory for a sustainable content expansion in the future.</p>
 
     <p>The International Relations and Security Network (ISN) is an online project of the Center for Security Studies
     (CSS), at the Swiss Federal Institute of Technology (ETH Zurich). It provides the world's leading open access
@@ -44,21 +40,6 @@ slot('robots', 'INDEX, FOLLOW');
     and take five minutes to fill out a <?php echo link_to('short survey', 'http://www.surveymonkey.com/s/B7BWBQ6') ?>.</p>
 
     <p>For comments and questions don't hesitate to contact us at
-    <?php echo mail_to('feedback@resolutionfinder.org', 'feedback@resolutionfinder.org', 'encode=true', array('subject' => '[ResolutionFinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?>.</p>
-</div>
-
-<h3><a href="#">Coming soon: Most important UN documents on Desertification and Drought and Nuclear Proliferation</a></h3>
-<div>
-    <p>ResolutionFinder.org is expanding! After we brought you the most relevant operative clauses from the areas of
-    Clean Drinking Water, Malaria, Small Arms and Light Weapons, and Women and Education, we decided it's high time we
-    developed a couple more "hot topics".</p>
-
-    <p>This time we decided to tackle Nuclear Proliferation and Desertification and Drought - two very different, yet equally
-    controversial issues all around the world. You should be able to search for the relevant clauses by the end of the year!</p>
-
-    <p>Until then, stay tuned, we're in the middle of an updating process of the current thematic areas with the clauses from
-    the most recent UN documents in the field and we're also working on redesigning the interface. If you have any comments
-    or suggestions regarding the content of the research or the website, contact us at
     <?php echo mail_to('feedback@resolutionfinder.org', 'feedback@resolutionfinder.org', 'encode=true', array('subject' => '[ResolutionFinder.org]:', 'body' => "url:".$sf_context->getRequest()->getUri()."\n")); ?>.</p>
 </div>
 

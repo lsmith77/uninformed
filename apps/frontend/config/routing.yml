@@ -102,3 +102,7 @@ document:
 about:
   url:     /about
   param: { module: about, action: index }
+
+searchShortName:
+  url:   /:shortName
+  param: { module: search, action: shortName }

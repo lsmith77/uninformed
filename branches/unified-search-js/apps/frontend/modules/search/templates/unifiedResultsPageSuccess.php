@@ -46,9 +46,13 @@
     </div>
 
     <div id="us_results" class="results">
+        <span style="position: absolute; margin-left: 30px; margin-top: 20px;">Operated by</span>
         <p class="support" style="margin-left: 120px;">
             <a href="http://jngldrm.org/" class="jngldrm"><span>Jungle Drum</span></a>
             <a href="http://www.isn.ethz.ch/" class="isn"><span>International Relations and Security Network (ISN)</span></a>
+        </p>
+        <span style="position: absolute; margin-left: 30px; margin-top: 20px;">Made possible by</span>
+        <p class="support" style="margin-left: 120px;">
             <a href="http://www.jugendfuereuropa.de/" class="jfe"><span>Jugend für Europa</span></a>
             <a href="http://liip.ch/" class="liip"><span>Liip AG - Agile web development - Zurich, Fribourg, Bern</span></a>
         </p>

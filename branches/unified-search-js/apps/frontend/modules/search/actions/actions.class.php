@@ -146,6 +146,34 @@ class searchActions extends sfActions
         $this->showHelp = true;
     }
 
+    public function executeShortName(sfWebRequest $request)
+    {
+        $shortName = $request->getParameter('shortName');
+        $shortNameMap = array(
+            'salw' => 'small arms and light weapons',
+            'cdw' => 'access to clean drinking water',
+            'we' => 'gender equality',
+            'malaria' => 'malaria',
+        );
+
+        if (isset($shortNameMap[$shortName])) {
+            $q = Doctrine_Query::create()
+                ->select('t.id')
+                ->from('Tag t')
+                ->where('t.name = ?', array($shortNameMap[$shortName]));
+            $tag = $q->fetchOne();
+            if ($tag) {
+                $id = $tag->getId();
+            }
+        }
+
+        if (empty($id)) {
+            $this->redirect404();
+        }
+
+        $this->redirect('homepage', array("t[$id]" => $shortName, 'st' => 'document'), 301);
+    }
+
     public function executeClauseResultsPage(sfWebRequest $request)
     {
         $this->readParameters($request);

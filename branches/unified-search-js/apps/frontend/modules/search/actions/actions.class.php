@@ -171,7 +171,7 @@ class searchActions extends sfActions
             $this->redirect404();
         }
 
-        $this->redirect('homepage', array("t[$id]" => $shortName, 'st' => 'document'), 301);
+        $this->redirect('homepage', array("t[$id]" => $shortName, 'st' => 'clause'), 301);
     }
 
     public function executeClauseResultsPage(sfWebRequest $request)

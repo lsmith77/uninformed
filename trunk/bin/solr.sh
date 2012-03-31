@@ -18,13 +18,14 @@
 
 BASEDIR=/var/www/un-informed.org
 PIDFILE=$BASEDIR/data/solr_index/frontend_prod.pid
-PROGRAM1="solr"
+PROGRAM1="jetty"
 APPCHK=$(ps aux | grep $PROGRAM1 | grep -v "grep $PROGRAM1" | wc -l)
 
 do_start() {
-    if [ ! -f $PIDFILE ]; then
+    if [ -f $PIDFILE ]; then
         if [ $APPCHK = '0' ]; then
             rm $PIDFILE
+            echo "Removed pid file as Solr wasn't running"
         fi
     fi
 
